@@ -56,7 +56,6 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 </nav>
 
 <main class="page-content">
-	<div class="page-content__hero-bg" aria-hidden="true"></div>
 	<div class="container">
 		<?php if ( have_posts() ) : ?>
 			<?php
