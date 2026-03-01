@@ -24,7 +24,7 @@ $site_name        = get_bloginfo( 'name' );
 	<meta property="og:url" content="<?php echo esc_url( $page_url ); ?>">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( 'sitestaffr-page' ); ?>>
+<body <?php body_class( 'sitestaffr-page sitestaffr-page--default' ); ?>>
 <?php wp_body_open(); ?>
 
 <nav class="nav" id="nav">

@@ -25,8 +25,9 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_maintenance = is_page_template( 'page-maintenance.php' );
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
 	$is_page        = is_page();
+	$is_default     = is_home() || is_single() || is_archive() || is_search();
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_page ) {
+	if ( ! $is_landing && ! $is_maintenance && ! $is_page && ! $is_default ) {
 		return;
 	}
 
