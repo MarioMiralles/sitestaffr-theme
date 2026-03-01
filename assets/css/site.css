@@ -1998,6 +1998,96 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   color: rgba(240,250,250,0.5);
 }
 
+/* ========== DEFAULT PAGE TEMPLATE LAYOUT ========== */
+.sitestaffr-page--default {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sitestaffr-page--default .nav {
+  background: rgba(253, 251, 247, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+}
+
+.admin-bar.sitestaffr-page--default .nav {
+  top: 32px;
+}
+
+.sitestaffr-page--default .page-content {
+  position: relative;
+  flex: 1 0 auto;
+  padding-top: clamp(124px, 14vw, 160px);
+  padding-bottom: clamp(48px, 8vw, 92px);
+  overflow: hidden;
+}
+
+.admin-bar.sitestaffr-page--default .page-content {
+  padding-top: clamp(156px, 16vw, 192px);
+}
+
+.sitestaffr-page--default .page-content__hero-bg {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: clamp(280px, 36vw, 500px);
+  background:
+    linear-gradient(
+      90deg,
+      rgba(253, 251, 247, 1) 0%,
+      rgba(253, 251, 247, 0.97) 30%,
+      rgba(253, 251, 247, 0.78) 54%,
+      rgba(253, 251, 247, 0.22) 73%,
+      rgba(253, 251, 247, 0) 86%
+    ),
+    url('../images/hero-background.png') right top / cover no-repeat;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sitestaffr-page--default .page-content > .container {
+  position: relative;
+  z-index: 1;
+}
+
+.sitestaffr-page--default .page-content__article {
+  width: min(960px, 100%);
+  margin: 0 auto;
+  padding: clamp(24px, 4vw, 44px);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(232, 226, 216, 0.95);
+  border-radius: 24px;
+  box-shadow: var(--shadow-md);
+}
+
+.sitestaffr-page--default .page-content__title {
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+.sitestaffr-page--default .page-content__body {
+  color: var(--text-secondary);
+}
+
+.sitestaffr-page--default .page-content__body > * + * {
+  margin-top: 16px;
+}
+
+.sitestaffr-page--default .page-content__body ul,
+.sitestaffr-page--default .page-content__body ol {
+  padding-left: 20px;
+}
+
+.sitestaffr-page--default .page-content__body img {
+  border-radius: var(--radius-sm);
+  height: auto;
+}
+
+.sitestaffr-page--default .footer {
+  margin-top: auto;
+}
+
 /* ========== FOOTER ========== */
 .footer {
   padding: 40px 0;
@@ -2204,6 +2294,38 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   }
   .transcript-line__speaker {
     min-width: 48px;
+  }
+}
+
+@media (max-width: 782px) {
+  .admin-bar.sitestaffr-page--default .nav {
+    top: 46px;
+  }
+
+  .sitestaffr-page--default .page-content {
+    padding-top: 118px;
+  }
+
+  .admin-bar.sitestaffr-page--default .page-content {
+    padding-top: 164px;
+  }
+
+  .sitestaffr-page--default .page-content__hero-bg {
+    height: clamp(220px, 60vw, 360px);
+    background:
+      linear-gradient(
+        180deg,
+        rgba(253, 251, 247, 1) 0%,
+        rgba(253, 251, 247, 0.88) 56%,
+        rgba(253, 251, 247, 0.52) 80%,
+        rgba(253, 251, 247, 0) 100%
+      ),
+      url('../images/hero-background.png') 66% top / 220% auto no-repeat;
+  }
+
+  .sitestaffr-page--default .page-content__article {
+    border-radius: 18px;
+    padding: 20px 18px;
   }
 }
 

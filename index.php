@@ -35,7 +35,7 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 	<link rel="canonical" href="<?php echo esc_url( $page_url ); ?>">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( 'sitestaffr-page' ); ?>>
+<body <?php body_class( 'sitestaffr-page sitestaffr-page--default' ); ?>>
 <?php wp_body_open(); ?>
 
 <nav class="nav" id="nav">
@@ -56,6 +56,7 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 </nav>
 
 <main class="page-content">
+	<div class="page-content__hero-bg" aria-hidden="true"></div>
 	<div class="container">
 		<?php if ( have_posts() ) : ?>
 			<?php

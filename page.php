@@ -24,7 +24,7 @@ $site_name        = get_bloginfo( 'name' );
 	<meta property="og:url" content="<?php echo esc_url( $page_url ); ?>">
 	<?php wp_head(); ?>
 </head>
-<body <?php body_class( 'sitestaffr-page' ); ?>>
+<body <?php body_class( 'sitestaffr-page sitestaffr-page--default' ); ?>>
 <?php wp_body_open(); ?>
 
 <nav class="nav" id="nav">
@@ -45,6 +45,7 @@ $site_name        = get_bloginfo( 'name' );
 </nav>
 
 <main class="page-content">
+	<div class="page-content__hero-bg" aria-hidden="true"></div>
 	<div class="container">
 		<article class="page-content__article">
 			<h1 class="page-content__title"><?php echo esc_html( $page_title ); ?></h1>
