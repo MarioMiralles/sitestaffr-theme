@@ -3122,7 +3122,9 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* ========== SECTION 10: FINAL CTA ========== */
 .final-cta {
   padding: clamp(80px, 12vw, 140px) 0;
-  background: linear-gradient(135deg, var(--teal-deep) 0%, #005f6b 100%);
+  background:
+    linear-gradient(135deg, rgba(0, 131, 143, 0.9) 0%, rgba(0, 95, 107, 0.92) 100%),
+    url('../images/hero-background1.png') center center / cover no-repeat;
   color: white;
   text-align: center;
   position: relative;
@@ -3133,6 +3135,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   position: absolute;
   inset: 0;
   background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.55;
   pointer-events: none;
 }
 .final-cta .container { position: relative; z-index: 1; }
