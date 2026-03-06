@@ -12,16 +12,74 @@ document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
 // ========== NAVIGATION SCROLL ==========
 const nav = document.getElementById('nav');
-let lastScroll = 0;
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  if (scrollY > 60) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
+if (nav) {
+  const navMenu = document.getElementById('navPrimaryMenu');
+  const navToggle = document.getElementById('navToggle');
+  const mobileNavQuery = window.matchMedia('(max-width: 768px)');
+
+  function setMobileMenuState(isOpen) {
+    if (!navMenu || !navToggle) {
+      return;
+    }
+
+    const shouldOpen = Boolean(isOpen) && mobileNavQuery.matches;
+    nav.classList.toggle('menu-open', shouldOpen);
+    navMenu.classList.toggle('is-open', shouldOpen);
+    navToggle.classList.toggle('is-open', shouldOpen);
+    navToggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
   }
-  lastScroll = scrollY;
-}, { passive: true });
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    if (scrollY > 60) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  }, { passive: true });
+
+  if (navMenu && navToggle) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+      setMobileMenuState(!isOpen);
+    });
+
+    navMenu.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        setMobileMenuState(false);
+      });
+    });
+
+    document.addEventListener('click', (event) => {
+      if (!mobileNavQuery.matches) {
+        return;
+      }
+      if (!nav.contains(event.target)) {
+        setMobileMenuState(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setMobileMenuState(false);
+      }
+    });
+
+    const syncMenuForViewport = () => {
+      if (!mobileNavQuery.matches) {
+        setMobileMenuState(false);
+      }
+    };
+
+    if (typeof mobileNavQuery.addEventListener === 'function') {
+      mobileNavQuery.addEventListener('change', syncMenuForViewport);
+    } else {
+      mobileNavQuery.addListener(syncMenuForViewport);
+    }
+
+    setMobileMenuState(false);
+  }
+}
 
 // ========== AUDIO PLAYER ==========
 const playSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>';
@@ -521,7 +579,7 @@ if (featureLightbox) {
       caption: 'Real-time metrics: total conversations, answer rate, after-hours activity, spam filtering, and minute usage \u2014 updated every billing cycle.'
     },
     protection: {
-      caption: 'Ban visitors, filter spam, and report AI quality issues \u2014 all from the conversation detail page.'
+      caption: 'Ban abusive visitors by IP, filter spam, and report AI quality issues \u2014 all from the conversation detail page.'
     },
     'email-recaps': {
       caption: 'Automatic email after every conversation with caller details, AI summary, full transcript, and suggested follow-up action.'

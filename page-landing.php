@@ -28,9 +28,9 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
     $fallback_map = array(
         'dashboard'    => 'assets/images/features-dashboard.png',
         'email-recaps' => 'assets/images/placeholder-email-recap.svg',
-        'analytics'    => 'assets/images/placeholder-transcript.svg',
-        'ai-generator' => 'assets/images/placeholder-followup.svg',
-        'protection'   => 'assets/images/placeholder-followup.svg',
+        'analytics'    => 'assets/images/features-usage.png',
+        'ai-generator' => 'assets/images/features-description.png',
+        'protection'   => 'assets/images/features-conversation.png',
     );
 
     $fallback_relative = isset( $fallback_map[ $slug ] ) ? $fallback_map[ $slug ] : 'assets/images/placeholder-transcript.svg';
@@ -73,7 +73,7 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
           alt="SiteStaffr"
         >
       </a>
-      <ul class="nav__menu" aria-label="Primary">
+      <ul class="nav__menu" id="navPrimaryMenu" aria-label="Primary">
         <li><a class="nav__link" href="#hero-audio-demo">Demo</a></li>
         <li><a class="nav__link" href="#pricing-label">Pricing</a></li>
         <li><a class="nav__link" href="#faq-label">FAQ</a></li>
@@ -81,6 +81,18 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
       <div class="nav__cta">
         <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
       </div>
+      <button
+        class="nav__toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+        aria-controls="navPrimaryMenu"
+      >
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+        <span class="nav__toggle-line"></span>
+      </button>
     </div>
   </div>
 </nav>
@@ -435,7 +447,7 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
           </picture>
         </div>
         <h3 class="feature-card__title">Built-in Protection</h3>
-        <p class="feature-card__desc">Block abusive visitors by IP or phone number, filter spam automatically, and report AI issues with one click.</p>
+        <p class="feature-card__desc">Block abusive visitors by IP, filter spam automatically, and report AI issues with one click.</p>
       </div>
     </div>
   </div>
