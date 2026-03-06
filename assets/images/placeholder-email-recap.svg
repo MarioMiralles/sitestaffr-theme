@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="450" viewBox="0 0 600 450">
+  <rect width="600" height="450" fill="#f0ece4"/>
+  <rect x="60" y="60" width="480" height="330" rx="16" fill="#fff" stroke="#e8e2d8" stroke-width="2"/>
+  <rect x="60" y="60" width="480" height="56" rx="16" fill="#faf8f4"/>
+  <rect x="60" y="116" width="480" height="1" fill="#e8e2d8"/>
+  <circle cx="96" cy="88" r="16" fill="#00838F" opacity="0.2"/>
+  <rect x="124" y="78" width="120" height="10" rx="5" fill="#00838F" opacity="0.25"/>
+  <rect x="124" y="94" width="200" height="8" rx="4" fill="#e8e2d8"/>
+  <rect x="84" y="140" width="320" height="10" rx="5" fill="#1a2332" opacity="0.12"/>
+  <rect x="84" y="162" width="280" height="8" rx="4" fill="#1a2332" opacity="0.08"/>
+  <rect x="84" y="180" width="300" height="8" rx="4" fill="#1a2332" opacity="0.08"/>
+  <rect x="100" y="210" width="240" height="8" rx="4" fill="#1a2332" opacity="0.06"/>
+  <rect x="100" y="228" width="200" height="8" rx="4" fill="#1a2332" opacity="0.06"/>
+  <rect x="100" y="246" width="260" height="8" rx="4" fill="#1a2332" opacity="0.06"/>
+  <rect x="100" y="264" width="180" height="8" rx="4" fill="#1a2332" opacity="0.06"/>
+  <rect x="84" y="294" width="340" height="10" rx="5" fill="#00838F" opacity="0.15"/>
+  <rect x="84" y="314" width="280" height="8" rx="4" fill="#1a2332" opacity="0.08"/>
+  <text x="300" y="380" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#718096">Email Recap — screenshot placeholder</text>
+</svg>

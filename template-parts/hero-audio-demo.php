@@ -11,6 +11,8 @@ $extra_classes = isset( $component_args['extra_classes'] ) ? (string) $component
 $audio_label   = isset( $component_args['audio_label'] ) ? (string) $component_args['audio_label'] : 'Sample conversation &mdash; Plumbing business';
 $demo_kicker   = isset( $component_args['demo_kicker'] ) ? (string) $component_args['demo_kicker'] : '';
 $audio_src     = isset( $component_args['audio_src'] ) ? (string) $component_args['audio_src'] : sitestaffr_asset_url( 'assets/audio/demo-conversation.mp3' );
+$open_audio_src = isset( $component_args['open_audio_src'] ) ? (string) $component_args['open_audio_src'] : sitestaffr_asset_url( 'assets/audio/open.mp3' );
+$close_audio_src = isset( $component_args['close_audio_src'] ) ? (string) $component_args['close_audio_src'] : sitestaffr_asset_url( 'assets/audio/close.mp3' );
 $total_time    = isset( $component_args['total_time'] ) ? (string) $component_args['total_time'] : '0:45';
 
 $recap_image_src = isset( $component_args['recap_image_src'] ) ? (string) $component_args['recap_image_src'] : sitestaffr_asset_url( 'assets/images/conversation-recap.png' );
@@ -109,7 +111,7 @@ $transcript_entries = array(
 	),
 );
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" data-component="HeroAudioDemo" data-audio-demo data-audio-layout="<?php echo esc_attr( $layout ); ?>">
+<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" data-component="HeroAudioDemo" data-audio-demo data-audio-layout="<?php echo esc_attr( $layout ); ?>" data-audio-open-src="<?php echo esc_url( $open_audio_src ); ?>" data-audio-close-src="<?php echo esc_url( $close_audio_src ); ?>">
 	<div class="demo-layout__left">
 		<div class="audio-player">
 			<?php if ( '' !== trim( $demo_kicker ) ) : ?>

@@ -6,15 +6,36 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$landing_title = 'SiteStaffr | AI Voice Receptionist for WordPress';
-$landing_description = 'Turn your WordPress site into a 24/7 AI receptionist that answers visitor questions, captures lead details, and sends conversation summaries to your team.';
-$landing_keywords = 'AI receptionist, WordPress chatbot, voice assistant, lead capture, phone answering service, website assistant';
+$landing_title = 'SiteStaffr | AI Voice Agent for WordPress';
+$landing_description = 'An AI voice agent that works 24/7 on your WordPress site. Visitors talk, it listens, and you get every detail. Supports 57+ languages.';
+$landing_keywords = 'AI voice agent, WordPress voice assistant, lead capture, phone answering service, website assistant';
 $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
 $landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.png';
 $site_name = get_bloginfo( 'name' );
 $show_testimonials = false;
 $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
+$feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
+    $slug = (string) $slug;
+    $device = 'mobile' === $device ? 'mobile' : 'desktop';
+    $relative_path = 'assets/images/screenshots/' . $slug . '-' . $device . '.png';
+    $absolute_path = trailingslashit( get_stylesheet_directory() ) . $relative_path;
+
+    if ( file_exists( $absolute_path ) ) {
+        return trailingslashit( get_stylesheet_directory_uri() ) . $relative_path;
+    }
+
+    $fallback_map = array(
+        'dashboard'    => 'assets/images/features-dashboard.png',
+        'email-recaps' => 'assets/images/placeholder-email-recap.svg',
+        'analytics'    => 'assets/images/placeholder-transcript.svg',
+        'ai-generator' => 'assets/images/placeholder-followup.svg',
+        'protection'   => 'assets/images/placeholder-followup.svg',
+    );
+
+    $fallback_relative = isset( $fallback_map[ $slug ] ) ? $fallback_map[ $slug ] : 'assets/images/placeholder-transcript.svg';
+    return trailingslashit( get_stylesheet_directory_uri() ) . $fallback_relative;
+};
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -32,7 +53,7 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
     <meta property="og:description" content="<?php echo esc_attr( $landing_description ); ?>">
     <meta property="og:url" content="<?php echo esc_url( $landing_url ); ?>">
     <meta property="og:image" content="<?php echo esc_url( $landing_image_url ); ?>">
-    <meta property="og:image:alt" content="SiteStaffr AI receptionist preview">
+    <meta property="og:image:alt" content="SiteStaffr AI voice agent preview">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo esc_attr( $landing_title ); ?>">
     <meta name="twitter:description" content="<?php echo esc_attr( $landing_description ); ?>">
@@ -53,12 +74,12 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
         >
       </a>
       <ul class="nav__menu" aria-label="Primary">
-        <li><a class="nav__link" href="#demo-label">Demo</a></li>
+        <li><a class="nav__link" href="#hero-audio-demo">Demo</a></li>
         <li><a class="nav__link" href="#pricing-label">Pricing</a></li>
         <li><a class="nav__link" href="#faq-label">FAQ</a></li>
       </ul>
       <div class="nav__cta">
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Join Beta</a>
+        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
       </div>
     </div>
   </div>
@@ -69,23 +90,23 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
   <div class="container">
     <div class="hero__grid">
       <div class="hero__content reveal">
-        <span class="hero__tagline">AI Voice Receptionist for WordPress</span>
+        <span class="hero__tagline">AI Voice Agent for WordPress</span>
         <h1 class="hero__headline">
-          <span class="hero__headline-prefix">Capture More Website Leads</span>
-          <span class="hero__headline-focus">With an AI Voice Receptionist</span>
+          <span class="hero__headline-prefix">Your Website Visitors Have Questions.</span>
+          <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
-          SiteStaffr answers visitor questions instantly, helps capture qualified leads automatically, and works 24/7 on your WordPress site.
+          An AI voice agent that works 24/7 on your WordPress site. Visitors talk, it listens, and you get every detail. Supports 57+ languages.
         </p>
-        <span class="hero__no-cc">Join the beta &bull; Install in minutes &bull; No code required</span>
+        <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
           <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary btn--large" target="_blank" rel="noopener noreferrer">
-            Join the Beta
+            Get Early Access
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
       </div>
-      <div class="hero__visual reveal reveal-delay-2">
+      <div class="hero__visual reveal reveal-delay-2" id="hero-audio-demo">
         <?php
         get_template_part(
             'template-parts/hero-audio-demo',
@@ -93,39 +114,12 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
             array(
                 'layout'       => 'stacked',
                 'recap_variant' => 'card',
-                'demo_kicker'  => 'Hear the Demo',
+                'demo_kicker'  => 'Listen to a Live Conversation',
+                'audio_label'  => 'A plumber&rsquo;s website visitor reports a kitchen leak. Here&rsquo;s how SiteStaffr handles it.',
                 'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
             )
         );
         ?>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== SECTION 2: TRUST BAR ========== -->
-<section class="trust-bar">
-  <div class="container">
-    <div class="trust-bar__inner">
-      <div class="trust-bar__item">
-        <div class="trust-bar__icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div><span class="trust-bar__stat">Go live in minutes</span></div>
-      </div>
-      <span class="trust-bar__divider"></span>
-      <div class="trust-bar__item">
-        <div class="trust-bar__icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-        </div>
-        <div><span class="trust-bar__stat">Natural voice</span> experience for website visitors</div>
-      </div>
-      <span class="trust-bar__divider"></span>
-      <div class="trust-bar__item">
-        <div class="trust-bar__icon">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
-        <div><span class="trust-bar__stat">57+ languages &bull; English recap for you</span></div>
       </div>
     </div>
   </div>
@@ -187,7 +181,7 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
             SiteStaffr adds an AI voice receptionist to your WordPress website. Visitors ask questions by voice, get instant answers, and you get lead details and a conversation recap for follow-up.
           </p>
           <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary btn--large" target="_blank" rel="noopener noreferrer">
-            Join the Beta
+            Get Early Access
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -201,74 +195,57 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
   </section>
 <?php endif; ?>
 
-<!-- ========== SECTION 5: HEAR YOUR AI RECEPTIONIST ========== -->
-<section class="demo-section" id="demo">
+<!-- ========== WHAT YOU GET AFTER EVERY CONVERSATION ========== -->
+<section class="what-you-get" id="demo">
   <div class="container">
-    <span class="section-label reveal" id="demo-label">Hear it for yourself</span>
-    <h2 class="reveal">This is what your callers will experience</h2>
-    <p class="demo-section__subtitle reveal reveal-delay-1">
-      Press play. In 30 seconds, you'll hear how SiteStaffr handles real-world calls.
-    </p>
-    <?php
-    get_template_part(
-        'template-parts/hero-audio-demo',
-        null,
-        array(
-            'layout'       => 'split',
-            'recap_variant' => 'image',
-            'extra_classes' => 'reveal reveal-delay-2',
-        )
-    );
-    ?>
-  </div>
-</section>
-
-<!-- ========== SECTION 6: WHAT HAPPENS AFTER EVERY CALL ========== -->
-<section class="after-section">
-  <div class="container">
-    <div class="after-section__header reveal">
-      <span class="section-label">After every conversation</span>
-      <h2>Every call, fully captured</h2>
-      <p class="after-section__subtitle">
-        Check your phone after a job and know exactly who reached out, what they needed, and what to do next.
+    <div class="what-you-get__header reveal">
+      <span class="section-label" id="demo-label">After every conversation</span>
+      <h2>What You Get After Every Conversation</h2>
+      <p class="what-you-get__subtitle">
+        SiteStaffr doesn&rsquo;t just talk to your visitors &mdash; it tells you everything you need to follow up.
       </p>
     </div>
-    <div class="dashboard-showcase">
-      <div class="dashboard-card reveal">
-        <div class="dashboard-card__header">
-          <span class="dashboard-card__header-icon">📧</span>
-          <span class="dashboard-card__header-title">Email Summary</span>
-        </div>
-        <div class="email-preview">
-          <div class="email-preview__from">
-            <div class="email-preview__avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3"/></svg>
-            </div>
-            <div class="email-preview__meta">
-              <div class="email-preview__sender">SiteStaffr Assistant</div>
-              <div class="email-preview__subject">New conversation &mdash; Kitchen leak, needs estimate</div>
-            </div>
-          </div>
-          <div class="email-preview__body">
-            <p><strong>Sarah Mitchell</strong> called about a kitchen sink leak that's getting worse. She's available tomorrow morning for an estimate.</p>
-            <ul>
-              <li>Phone: (555) 234-5678</li>
-              <li>Issue: Leaking pipe under kitchen sink</li>
-              <li>Urgency: Getting worse, not yet an emergency</li>
-              <li>Availability: Tomorrow before noon</li>
-            </ul>
-            <p><strong>Suggested follow-up:</strong> Call back today to schedule a morning visit.</p>
-          </div>
-        </div>
-      </div>
-      <div class="dashboard-card reveal reveal-delay-1">
-        <div class="dashboard-card__media">
+    <div class="what-you-get__grid">
+      <div class="what-you-get__card what-you-get__card--email reveal">
+        <div class="what-you-get__card-image">
           <img
-            src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/business3.jpg' ); ?>"
-            alt="SiteStaffr business dashboard preview"
+            src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-email-recap.png' ); ?>"
+            alt="Screenshot of an email recap from SiteStaffr"
             loading="lazy"
             decoding="async"
           >
+        </div>
+        <div class="what-you-get__card-body">
+          <h3>Email Recap</h3>
+          <p>A summary hits your inbox the moment the conversation ends &mdash; who they are, what they need, and what to do next.</p>
+        </div>
+      </div>
+      <div class="what-you-get__card what-you-get__card--transcript reveal reveal-delay-1">
+        <div class="what-you-get__card-image">
+          <img
+            src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-transcript.png' ); ?>"
+            alt="Screenshot of a full conversation transcript"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div class="what-you-get__card-body">
+          <h3>Full Transcript</h3>
+          <p>Every word, turn by turn. Review exactly what was said so nothing gets lost.</p>
+        </div>
+      </div>
+      <div class="what-you-get__card what-you-get__card--followup reveal reveal-delay-2">
+        <div class="what-you-get__card-image">
+          <img
+            src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-followup.png' ); ?>"
+            alt="Screenshot of suggested follow-up actions"
+            loading="lazy"
+            decoding="async"
+          >
+        </div>
+        <div class="what-you-get__card-body">
+          <h3>Suggested Follow-Up</h3>
+          <p>SiteStaffr recommends your next step based on what the visitor asked for.</p>
         </div>
       </div>
     </div>
@@ -295,14 +272,10 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
     <span class="language-float">Sawubona</span>
     <span class="language-float">&#3626;&#3623;&#3633;&#3626;&#3604;&#3637;</span>
   </div>
-  <div class="language-section__side-images" aria-hidden="true">
-    <img class="language-section__side-image language-section__side-image--left reveal reveal-delay-1" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/language1.png' ); ?>" alt="" loading="lazy" decoding="async">
-    <img class="language-section__side-image language-section__side-image--right reveal reveal-delay-2" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/language2.png' ); ?>" alt="" loading="lazy" decoding="async">
-  </div>
   <div class="container">
     <div class="language-section__inner reveal">
-      <span class="section-label">Every language, one inbox</span>
-      <h2>Your receptionist speaks <span class="language-heading__phrase"><em>their</em> language</span></h2>
+      <span class="section-label">57+ languages, one inbox</span>
+      <h2>SiteStaffr speaks <span class="language-heading__phrase"><em>their</em> language</span></h2>
       <p class="language-section__desc">
         A customer visits your site and starts speaking Spanish. Or Mandarin. Or Portuguese. SiteStaffr understands them, responds naturally in their language, and delivers the full conversation summary to you &mdash; translated to English.
       </p>
@@ -312,7 +285,7 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </span>
           <div class="language-card__title">Converses naturally</div>
-          <p class="language-card__text">Your AI receptionist detects the visitor's language and responds fluently &mdash; no awkward translations or language menus.</p>
+          <p class="language-card__text">Your AI voice agent detects the visitor's language and responds fluently &mdash; no awkward translations or language menus.</p>
         </div>
         <div class="language-card reveal reveal-delay-2">
           <span class="language-card__icon">
@@ -332,12 +305,438 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
   </div>
 </section>
 
+<!-- ========== FEATURES SECTION ========== -->
+<section class="features-section">
+  <div class="container">
+    <div class="features-section__header reveal">
+      <span class="section-label">Features</span>
+      <h2>Everything You Need to Manage Your Conversations</h2>
+      <p class="features-section__subtitle">
+        SiteStaffr isn&rsquo;t just a voice widget &mdash; it&rsquo;s a complete conversation management system inside WordPress.
+      </p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card feature-card--half reveal" data-feature-lightbox="dashboard">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'desktop' ) ); ?>"
+              alt="Conversation Dashboard screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">Conversation Dashboard</h3>
+        <p class="feature-card__desc">Every conversation at a glance. See who talked, what they need, and what to do next &mdash; without leaving WordPress.</p>
+      </div>
+      <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="email-recaps">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'desktop' ) ); ?>"
+              alt="Email Recaps screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">Email Recaps</h3>
+        <p class="feature-card__desc">Get a summary after every conversation &mdash; visitor name, contact info, what they need, and a suggested next step.</p>
+      </div>
+
+      <!-- Voice Agent Showcase -->
+      <div class="voice-showcase voice-showcase--full reveal" id="voiceShowcase">
+        <div class="voice-showcase__header">
+          <h3 class="voice-showcase__title">Meet Your AI Voice Agent</h3>
+          <p class="voice-showcase__subtitle">
+            <span>Choose from 10 unique AI voices, each with their own personality.</span>
+            <span>Preview them right here.</span>
+          </p>
+        </div>
+        <div class="voice-showcase__display">
+          <div class="voice-showcase__portrait-area">
+            <button class="voice-showcase__arrow voice-showcase__arrow--prev" type="button" aria-label="Previous voice">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <div class="voice-showcase__portrait">
+              <img src="" alt="" id="showcasePortrait">
+            </div>
+            <button class="voice-showcase__arrow voice-showcase__arrow--next" type="button" aria-label="Next voice">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+          </div>
+          <div class="voice-showcase__info">
+            <div class="voice-showcase__name-row">
+              <h4 class="voice-showcase__name" id="showcaseName"></h4>
+              <span class="voice-showcase__plan-pill" id="showcasePlan"></span>
+              <span class="voice-showcase__recommended-pill" id="showcaseRecommended" hidden>
+                <span class="voice-showcase__recommended-icon" aria-hidden="true">★</span>
+                Recommended
+              </span>
+            </div>
+            <p class="voice-showcase__personality" id="showcasePersonality"></p>
+            <p class="voice-showcase__description" id="showcaseDescription"></p>
+            <div class="voice-showcase__best-for" id="showcaseBestFor"></div>
+          </div>
+          <div class="voice-showcase__play-area">
+            <button class="voice-showcase__play-btn" type="button" id="showcasePlayBtn" aria-label="Preview voice">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><polygon points="6,3 20,12 6,21"/></svg>
+            </button>
+            <span class="voice-showcase__play-label" id="showcasePlayLabel">Preview Voice</span>
+            <audio id="showcaseAudio" preload="none"></audio>
+          </div>
+        </div>
+        <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
+      </div>
+
+      <div class="feature-card feature-card--third reveal" data-feature-lightbox="analytics">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'desktop' ) ); ?>"
+              alt="Smart Analytics screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">Smart Analytics</h3>
+        <p class="feature-card__desc">Track your answer rate, after-hours conversations, minutes used, and spam filtered. Know exactly how your AI is performing.</p>
+      </div>
+      <div class="feature-card feature-card--third reveal reveal-delay-1" data-feature-lightbox="ai-generator">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'desktop' ) ); ?>"
+              alt="AI Description Generator screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">AI Description Generator</h3>
+        <p class="feature-card__desc">Not sure what to tell the AI about your business? It scans your website and writes the description for you.</p>
+      </div>
+      <div class="feature-card feature-card--third reveal reveal-delay-2" data-feature-lightbox="protection">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'protection', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'protection', 'desktop' ) ); ?>"
+              alt="Built-in Protection screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">Built-in Protection</h3>
+        <p class="feature-card__desc">Block abusive visitors by IP or phone number, filter spam automatically, and report AI issues with one click.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== WIDGET & BUTTON CUSTOMIZATION ========== -->
+<section class="customize-section" id="customize">
+  <div class="container">
+    <div class="customize-section__header reveal">
+      <span class="section-label">Widget and Button Customization</span>
+      <h2>Customize Your Widget and Button</h2>
+      <p class="customize-section__subtitle">
+        Match SiteStaffr to your brand with live controls for icon styles, colors, typography, borders, spacing, and hover effects.
+      </p>
+    </div>
+
+    <div class="customize-grid">
+      <article class="customize-panel reveal" id="customizeWidgetPanel">
+        <div class="customize-panel__header">
+          <h3>Floating Widget Preview</h3>
+        </div>
+
+        <div class="customize-preview customize-preview--widget">
+          <div class="customize-browser">
+            <div class="customize-browser__chrome">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="customize-browser__body customize-browser__body--widget">
+              <div class="customize-mock-site customize-mock-site--widget" aria-hidden="true">
+                <div class="customize-mock-chip-row">
+                  <span class="customize-mock-chip"></span>
+                  <span class="customize-mock-chip"></span>
+                </div>
+                <div class="customize-mock-hero">
+                  <span class="customize-mock-line customize-mock-line--lg"></span>
+                  <span class="customize-mock-line customize-mock-line--md"></span>
+                  <span class="customize-mock-line customize-mock-line--sm"></span>
+                </div>
+                <div class="customize-mock-columns">
+                  <div class="customize-mock-card">
+                    <span class="customize-mock-line customize-mock-line--md"></span>
+                    <span class="customize-mock-line customize-mock-line--sm"></span>
+                  </div>
+                  <div class="customize-mock-card">
+                    <span class="customize-mock-line customize-mock-line--sm"></span>
+                    <span class="customize-mock-line customize-mock-line--xs"></span>
+                  </div>
+                </div>
+              </div>
+              <div class="customize-widget-off" id="lpWidgetOffNotice" hidden>Widget hidden (auto-display off)</div>
+              <button type="button" class="customize-widget-btn" id="lpWidgetPreviewButton" aria-label="Talk to our AI voice agent"></button>
+            </div>
+          </div>
+        </div>
+
+        <details class="customize-controls-toggle">
+          <summary>Customize widget settings</summary>
+          <div class="customize-controls">
+            <div class="customize-control customize-control--switch">
+              <label for="lpWidgetAutoDisplay">Show on all pages</label>
+              <input id="lpWidgetAutoDisplay" type="checkbox" checked data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetIcon">Icon type</label>
+              <select id="lpWidgetIcon" data-widget-control>
+                <option value="sitestaffr">SiteStaffr</option>
+                <option value="phone">Phone</option>
+                <option value="microphone">Microphone</option>
+                <option value="chat">Chat</option>
+                <option value="headset">Headset</option>
+              </select>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetSize">Widget size <span id="lpWidgetSizeValue" class="customize-control__value">60px</span></label>
+              <input id="lpWidgetSize" type="range" min="46" max="80" value="60" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetIconSize">Icon size <span id="lpWidgetIconSizeValue" class="customize-control__value">40px</span></label>
+              <input id="lpWidgetIconSize" type="range" min="14" max="64" value="40" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetBg">Background</label>
+              <input id="lpWidgetBg" type="color" value="#10b981" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetHoverBg">Hover color</label>
+              <input id="lpWidgetHoverBg" type="color" value="#0ea572" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetIconColor">Icon color</label>
+              <input id="lpWidgetIconColor" type="color" value="#ffffff" data-widget-control>
+            </div>
+          </div>
+        </details>
+      </article>
+
+      <article class="customize-panel customize-panel--button reveal reveal-delay-1" id="customizeButtonPanel">
+        <div class="customize-panel__sticky">
+          <div class="customize-panel__header">
+            <h3>Inline Button Preview</h3>
+          </div>
+
+          <div class="customize-preview customize-preview--button">
+            <div class="customize-browser">
+              <div class="customize-browser__chrome">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="customize-browser__body customize-browser__body--button">
+                <div class="customize-mock-site customize-mock-site--button" aria-hidden="true">
+                  <div class="customize-mock-line customize-mock-line--lg"></div>
+                  <div class="customize-mock-line customize-mock-line--md"></div>
+                  <div class="customize-mock-line customize-mock-line--sm"></div>
+                </div>
+                <section class="customize-cta-block" aria-label="Example call to action placement">
+                  <h4 class="customize-cta-block__title">Need Assistance?</h4>
+                  <div class="customize-button-wrap customize-button-wrap--cta" id="lpButtonPreviewWrap">
+                    <button type="button" class="customize-button-preview" id="lpButtonPreviewButton" aria-label="Contact us button preview"></button>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <details class="customize-controls-toggle" id="customizeButtonControls">
+          <summary>Customize button settings</summary>
+          <div class="customize-controls">
+            <div class="customize-control customize-control--full">
+              <label for="lpButtonText">Button text</label>
+              <input id="lpButtonText" type="text" value="Contact Us" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonIcon">Icon type</label>
+              <select id="lpButtonIcon" data-button-control>
+                <option value="sitestaffr">SiteStaffr</option>
+                <option value="microphone">Microphone</option>
+                <option value="phone">Phone</option>
+                <option value="chat">Chat</option>
+                <option value="headset">Headset</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonIconPosition">Icon position</label>
+              <select id="lpButtonIconPosition" data-button-control>
+                <option value="left">Left</option>
+                <option value="right">Right</option>
+              </select>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonIconSize">Icon size <span id="lpButtonIconSizeValue" class="customize-control__value">32px</span></label>
+              <input id="lpButtonIconSize" type="range" min="12" max="48" value="32" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonFontSize">Font size <span id="lpButtonFontSizeValue" class="customize-control__value">16px</span></label>
+              <input id="lpButtonFontSize" type="range" min="13" max="22" value="16" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonFontWeight">Font weight</label>
+              <select id="lpButtonFontWeight" data-button-control>
+                <option value="400">Normal</option>
+                <option value="600" selected>Semi-Bold</option>
+                <option value="700">Bold</option>
+              </select>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonTextTransform">Text transform</label>
+              <select id="lpButtonTextTransform" data-button-control>
+                <option value="none" selected>None</option>
+                <option value="uppercase">UPPERCASE</option>
+                <option value="capitalize">Capitalize</option>
+              </select>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonTextColor">Text color</label>
+              <input id="lpButtonTextColor" type="color" value="#ffffff" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonIconColor">Icon color</label>
+              <input id="lpButtonIconColor" type="color" value="#ffffff" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonBg">Background</label>
+              <input id="lpButtonBg" type="color" value="#1fb6cc" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonHoverBg">Hover color</label>
+              <input id="lpButtonHoverBg" type="color" value="#17a2b8" data-button-control>
+            </div>
+          </div>
+
+          <div class="customize-controls__divider">Advanced controls</div>
+
+          <div class="customize-controls customize-controls--advanced">
+            <div class="customize-control customize-control--switch">
+              <label for="lpButtonGradient">Enable gradient</label>
+              <input id="lpButtonGradient" type="checkbox" checked data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonGradientEnd">Gradient end color</label>
+              <input id="lpButtonGradientEnd" type="color" value="#10b981" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonRadius">Border radius <span id="lpButtonRadiusValue" class="customize-control__value">100px</span></label>
+              <input id="lpButtonRadius" type="range" min="0" max="120" value="100" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonBorderWidth">Border width <span id="lpButtonBorderWidthValue" class="customize-control__value">0px</span></label>
+              <input id="lpButtonBorderWidth" type="range" min="0" max="8" value="0" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonBorderColor">Border color</label>
+              <input id="lpButtonBorderColor" type="color" value="#1fb6cc" data-button-control>
+            </div>
+
+            <div class="customize-control customize-control--switch">
+              <label for="lpButtonShadow">Enable shadow</label>
+              <input id="lpButtonShadow" type="checkbox" checked data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonShadowBlur">Shadow blur <span id="lpButtonShadowBlurValue" class="customize-control__value">10px</span></label>
+              <input id="lpButtonShadowBlur" type="range" min="0" max="28" value="10" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonShadowOffset">Shadow offset <span id="lpButtonShadowOffsetValue" class="customize-control__value">4px</span></label>
+              <input id="lpButtonShadowOffset" type="range" min="0" max="18" value="4" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonPaddingX">Horizontal padding <span id="lpButtonPaddingXValue" class="customize-control__value">24px</span></label>
+              <input id="lpButtonPaddingX" type="range" min="12" max="48" value="24" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonPaddingY">Vertical padding <span id="lpButtonPaddingYValue" class="customize-control__value">12px</span></label>
+              <input id="lpButtonPaddingY" type="range" min="8" max="24" value="12" data-button-control>
+            </div>
+
+            <div class="customize-control customize-control--switch">
+              <label for="lpButtonFullWidth">Full width button</label>
+              <input id="lpButtonFullWidth" type="checkbox" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonHoverAnimation">Hover animation</label>
+              <select id="lpButtonHoverAnimation" data-button-control>
+                <option value="none" selected>None</option>
+                <option value="scale">Scale</option>
+                <option value="glow">Glow</option>
+                <option value="pulse">Pulse</option>
+              </select>
+            </div>
+          </div>
+        </details>
+      </article>
+    </div>
+
+    <p class="customize-section__note reveal">Preview only. Your live settings are saved and managed inside the SiteStaffr plugin dashboard.</p>
+  </div>
+</section>
+
+<!-- Feature Lightbox Modal -->
+<div class="feature-lightbox" id="featureLightbox" aria-hidden="true" role="dialog" aria-modal="true">
+  <div class="feature-lightbox__backdrop"></div>
+  <div class="feature-lightbox__content">
+    <button class="feature-lightbox__close" type="button" aria-label="Close lightbox">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <img class="feature-lightbox__image" src="" alt="" loading="lazy">
+    <p class="feature-lightbox__caption"></p>
+  </div>
+</div>
+
 <!-- ========== SECTION 6: HOW IT WORKS ========== -->
 <section class="how-section">
   <div class="container">
     <div class="container--narrow reveal">
       <span class="section-label">Setup in minutes, not days</span>
-      <h2>Three steps to stop missing calls</h2>
+      <h2 class="how-section__title">Three steps to start capturing website leads</h2>
       <p class="how-section__subtitle">No developers needed. No API keys. No configuration headaches.</p>
     </div>
     <div class="steps">
@@ -355,8 +754,8 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
         <div class="step__number">
           <span class="step__number-icon">💬</span>
         </div>
-        <h3>Tell it about your business</h3>
-        <p class="step__desc">Enter your business name, services, hours, and common questions. The AI learns what your customers need to know.</p>
+        <h3>Add your business info</h3>
+        <p class="step__desc">Enter your business info during setup. After payment, select your business hours and either generate or write your business description.</p>
         <span class="step__time">~ 5 minutes</span>
       </div>
       <div class="step reveal reveal-delay-2">
@@ -364,8 +763,8 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
         <div class="step__number">
           <span class="step__number-icon">✨</span>
         </div>
-        <h3>Go live</h3>
-        <p class="step__desc">Place the voice button or widget on any page. Visitors click, talk, and you get a detailed summary of every conversation.</p>
+        <h3>Go live instantly</h3>
+        <p class="step__desc">Your widget is active by default after setup. Keep it as-is, toggle it off, or customize the widget and button anytime.</p>
         <span class="step__time">You're done</span>
       </div>
     </div>
@@ -380,33 +779,45 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
       <h2>Start free. Upgrade when you're ready.</h2>
       <p class="pricing-section__subtitle">No contracts. No hidden fees. No surprise charges.</p>
     </div>
-    <p class="pricing-section__compare reveal">Traditional answering services can cost <strong>hundreds per month</strong>. SiteStaffr starts at <strong>$10</strong>.</p>
+    <div class="pricing-includes reveal">
+      <p class="pricing-includes__title">All plans include:</p>
+      <ul class="pricing-includes__list">
+        <li>57+ languages with English translation</li>
+        <li>Conversation dashboard with full transcripts</li>
+        <li>Email recap after every conversation</li>
+        <li>Widget and button customization</li>
+        <li>Built-in spam and abuse protection</li>
+        <li>Add-on minutes available anytime</li>
+      </ul>
+    </div>
     <div class="pricing-grid">
       <div class="pricing-card reveal">
         <div class="pricing-card__name">Free Trial</div>
         <div class="pricing-card__price">$0</div>
         <div class="pricing-card__price-sub">for 30 days</div>
         <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">30 minutes included</div>
         <ul class="pricing-card__features">
-          <li>30 minutes included</li>
-          <li>2 AI voice options</li>
-          <li>57+ languages</li>
-          <li>Email summaries after every call</li>
+          <li>2 AI voices</li>
+          <li>AI description generations</li>
+          <li>No credit card required</li>
         </ul>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Join Beta</a>
+        <p class="pricing-card__best-for">Try SiteStaffr free for 30 days</p>
+        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Start Free Trial</a>
       </div>
       <div class="pricing-card reveal reveal-delay-1">
         <div class="pricing-card__name">Starter</div>
         <div class="pricing-card__price">$10</div>
         <div class="pricing-card__price-sub">per month</div>
         <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">60 minutes included</div>
         <ul class="pricing-card__features">
-          <li>60 minutes included</li>
           <li>2 AI voice options</li>
-          <li>57+ languages</li>
-          <li>Email summaries after every call</li>
+          <li>3 AI description generations per billing cycle</li>
+          <li>Great for steady weekly lead volume</li>
         </ul>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Join Beta</a>
+        <p class="pricing-card__best-for">Best for businesses getting started</p>
+        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Get Early Access</a>
       </div>
       <div class="pricing-card pricing-card--popular reveal reveal-delay-2">
         <div class="pricing-card__badge">Most Popular</div>
@@ -414,31 +825,35 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
         <div class="pricing-card__price">$50</div>
         <div class="pricing-card__price-sub">per month</div>
         <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">300 minutes included</div>
         <ul class="pricing-card__features">
-          <li>300 minutes included</li>
           <li>5 AI voice options</li>
-          <li>Custom greeting message</li>
-          <li>57+ languages</li>
+          <li>Custom greeting + 4 tone styles</li>
+          <li>5 AI description generations per billing cycle</li>
         </ul>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Join Beta</a>
+        <p class="pricing-card__best-for">Best for growing local businesses</p>
+        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
       </div>
       <div class="pricing-card reveal reveal-delay-3">
         <div class="pricing-card__name">Pro</div>
         <div class="pricing-card__price">$100</div>
         <div class="pricing-card__price-sub">per month</div>
         <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">700 minutes included</div>
         <ul class="pricing-card__features">
-          <li>700 minutes included</li>
           <li>All 10 AI voices</li>
-          <li>Custom greeting message</li>
-          <li>57+ languages</li>
+          <li>Custom greeting + 4 tone styles</li>
+          <li>20 AI description generations per billing cycle</li>
+          <li>Priority access to new features</li>
         </ul>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Join Beta</a>
+        <p class="pricing-card__best-for">Best for multi-location or high-traffic sites</p>
+        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Get Early Access</a>
       </div>
     </div>
-    <p class="pricing-addon reveal">
-      Need more minutes? <strong>$10 for 50 extra minutes</strong> &mdash; buy anytime, they never expire.
-    </p>
+    <div class="pricing-addon reveal">
+      <h3 class="pricing-addon__title">Run out of minutes? You stay in control.</h3>
+      <p class="pricing-addon__text">Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges.</p>
+    </div>
   </div>
 </section>
 
@@ -525,7 +940,7 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
         </button>
         <div class="faq-item__answer">
           <div class="faq-item__answer-inner">
-            Yes. SiteStaffr uses advanced AI voice technology designed to produce natural, conversational speech. The best way to evaluate it is to <a href="#demo-label" style="color: var(--teal-deep); text-decoration: underline;">listen to a sample conversation</a> above.
+            Yes. SiteStaffr uses advanced AI voice technology designed to produce natural, conversational speech. The best way to evaluate it is to <a href="#hero-audio-demo" style="color: var(--teal-deep); text-decoration: underline;">listen to a sample conversation</a> in the hero section.
           </div>
         </div>
       </div>
@@ -558,7 +973,7 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
         </button>
         <div class="faq-item__answer">
           <div class="faq-item__answer-inner">
-            Yes, the voice widget works on desktop, tablet, and modern mobile devices. Your website visitors can talk to your AI receptionist from wherever they are.
+            Yes. SiteStaffr runs in the visitor&rsquo;s browser, so the voice experience works across desktop, tablet, and modern mobile devices. As long as their browser supports microphone access, they can talk to your AI voice agent from any device.
           </div>
         </div>
       </div>
@@ -604,13 +1019,13 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
   <div class="container reveal">
     <h2>Your next customer is calling.<br>SiteStaffr answers while you're busy.</h2>
     <p class="final-cta__subtitle">
-      Stay focused on the work in front of you while SiteStaffr handles your website conversations 24/7.
+      Free for 30 days. No credit card required.<br>
+      <span class="final-cta__setup">Set up in under 10 minutes.</span>
     </p>
     <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--white btn--large" target="_blank" rel="noopener noreferrer">
-      Sign Up for Beta
+      Get Early Access
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
-    <p class="final-cta__note">Pre-launch beta &middot; Early access onboarding</p>
   </div>
 </section>
 
@@ -618,8 +1033,8 @@ $beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
 <footer class="footer">
   <div class="container">
     <div class="footer__links">
-      <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
-      <a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>">Terms of Service</a>
+      <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
+      <a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
       <a href="mailto:support@sitestaffr.com">Support</a>
     </div>
     <p>&copy; 2026 SiteStaffr. All rights reserved.</p>

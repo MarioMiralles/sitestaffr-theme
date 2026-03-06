@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $page_title       = 'Terms of Service';
 $page_description = 'Terms of Service for SiteStaffr, a product of PhoneEase LLC. Review the terms governing your use of our AI voice widget service.';
-$page_url         = get_permalink() ?: home_url( '/terms-of-service/' );
+$page_url         = get_permalink() ?: home_url( '/terms' );
 $site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -177,7 +177,7 @@ $site_name        = get_bloginfo( 'name' );
 
 			<section class="legal-section">
 				<h2>11. Data and Privacy</h2>
-				<p>Our collection and use of data is governed by our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>. By using the Service, you acknowledge that you have read and understood the Privacy Policy.</p>
+				<p>Our collection and use of data is governed by our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>. By using the Service, you acknowledge that you have read and understood the Privacy Policy.</p>
 				<p>Key points:</p>
 				<ul>
 					<li>SiteStaffr acts as a data processor for Visitor data on behalf of the Business (data controller).</li>
@@ -278,8 +278,8 @@ $site_name        = get_bloginfo( 'name' );
 <footer class="footer">
 	<div class="container">
 		<div class="footer__links">
-			<a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
-			<a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>">Terms of Service</a>
+			<a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
+			<a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
 			<a href="mailto:support@sitestaffr.com">Support</a>
 		</div>
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( $site_name ); ?>. All rights reserved.</p>

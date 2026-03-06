@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $page_title       = 'Privacy Policy';
 $page_description = 'Privacy Policy for SiteStaffr, a product of PhoneEase LLC. Learn how we collect, use, and protect your data.';
-$page_url         = get_permalink() ?: home_url( '/privacy-policy/' );
+$page_url         = get_permalink() ?: home_url( '/privacy' );
 $site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -265,8 +265,8 @@ $site_name        = get_bloginfo( 'name' );
 <footer class="footer">
 	<div class="container">
 		<div class="footer__links">
-			<a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>
-			<a href="<?php echo esc_url( home_url( '/terms-of-service/' ) ); ?>">Terms of Service</a>
+			<a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
+			<a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
 			<a href="mailto:support@sitestaffr.com">Support</a>
 		</div>
 		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( $site_name ); ?>. All rights reserved.</p>
