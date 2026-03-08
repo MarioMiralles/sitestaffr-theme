@@ -532,6 +532,31 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
               <input id="lpWidgetIconSize" type="range" min="14" max="64" value="40" data-widget-control>
             </div>
 
+            <div class="customize-control customize-control--switch">
+              <label for="lpWidgetRadiusLock">Lock border radius</label>
+              <input id="lpWidgetRadiusLock" type="checkbox" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetRadiusTop">Border radius top <span id="lpWidgetRadiusTopValue" class="customize-control__value">20px</span></label>
+              <input id="lpWidgetRadiusTop" type="range" min="0" max="80" value="20" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetRadiusRight">Border radius right <span id="lpWidgetRadiusRightValue" class="customize-control__value">20px</span></label>
+              <input id="lpWidgetRadiusRight" type="range" min="0" max="80" value="20" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetRadiusBottom">Border radius bottom <span id="lpWidgetRadiusBottomValue" class="customize-control__value">20px</span></label>
+              <input id="lpWidgetRadiusBottom" type="range" min="0" max="80" value="20" data-widget-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpWidgetRadiusLeft">Border radius left <span id="lpWidgetRadiusLeftValue" class="customize-control__value">0px</span></label>
+              <input id="lpWidgetRadiusLeft" type="range" min="0" max="80" value="0" data-widget-control>
+            </div>
+
             <div class="customize-control">
               <label for="lpWidgetBg">Background</label>
               <input id="lpWidgetBg" type="color" value="#10b981" data-widget-control>
@@ -668,9 +693,29 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
               <input id="lpButtonGradientEnd" type="color" value="#10b981" data-button-control>
             </div>
 
+            <div class="customize-control customize-control--switch">
+              <label for="lpButtonRadiusLock">Lock border radius</label>
+              <input id="lpButtonRadiusLock" type="checkbox" data-button-control>
+            </div>
+
             <div class="customize-control">
-              <label for="lpButtonRadius">Border radius <span id="lpButtonRadiusValue" class="customize-control__value">100px</span></label>
-              <input id="lpButtonRadius" type="range" min="0" max="120" value="100" data-button-control>
+              <label for="lpButtonRadiusTop">Border radius top <span id="lpButtonRadiusTopValue" class="customize-control__value">80px</span></label>
+              <input id="lpButtonRadiusTop" type="range" min="0" max="120" value="80" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonRadiusRight">Border radius right <span id="lpButtonRadiusRightValue" class="customize-control__value">0px</span></label>
+              <input id="lpButtonRadiusRight" type="range" min="0" max="120" value="0" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonRadiusBottom">Border radius bottom <span id="lpButtonRadiusBottomValue" class="customize-control__value">80px</span></label>
+              <input id="lpButtonRadiusBottom" type="range" min="0" max="120" value="80" data-button-control>
+            </div>
+
+            <div class="customize-control">
+              <label for="lpButtonRadiusLeft">Border radius left <span id="lpButtonRadiusLeftValue" class="customize-control__value">0px</span></label>
+              <input id="lpButtonRadiusLeft" type="range" min="0" max="120" value="0" data-button-control>
             </div>
 
             <div class="customize-control">

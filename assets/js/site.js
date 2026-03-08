@@ -775,9 +775,16 @@ function initCustomizationPreview() {
   const rangeLabelPairs = [
     ['lpWidgetSize', 'lpWidgetSizeValue'],
     ['lpWidgetIconSize', 'lpWidgetIconSizeValue'],
+    ['lpWidgetRadiusTop', 'lpWidgetRadiusTopValue'],
+    ['lpWidgetRadiusRight', 'lpWidgetRadiusRightValue'],
+    ['lpWidgetRadiusBottom', 'lpWidgetRadiusBottomValue'],
+    ['lpWidgetRadiusLeft', 'lpWidgetRadiusLeftValue'],
     ['lpButtonIconSize', 'lpButtonIconSizeValue'],
     ['lpButtonFontSize', 'lpButtonFontSizeValue'],
-    ['lpButtonRadius', 'lpButtonRadiusValue'],
+    ['lpButtonRadiusTop', 'lpButtonRadiusTopValue'],
+    ['lpButtonRadiusRight', 'lpButtonRadiusRightValue'],
+    ['lpButtonRadiusBottom', 'lpButtonRadiusBottomValue'],
+    ['lpButtonRadiusLeft', 'lpButtonRadiusLeftValue'],
     ['lpButtonBorderWidth', 'lpButtonBorderWidthValue'],
     ['lpButtonShadowBlur', 'lpButtonShadowBlurValue'],
     ['lpButtonShadowOffset', 'lpButtonShadowOffsetValue'],
@@ -792,6 +799,11 @@ function initCustomizationPreview() {
   const widgetBg = document.getElementById('lpWidgetBg');
   const widgetHoverBg = document.getElementById('lpWidgetHoverBg');
   const widgetIconColor = document.getElementById('lpWidgetIconColor');
+  const widgetRadiusLock = document.getElementById('lpWidgetRadiusLock');
+  const widgetRadiusTop = document.getElementById('lpWidgetRadiusTop');
+  const widgetRadiusRight = document.getElementById('lpWidgetRadiusRight');
+  const widgetRadiusBottom = document.getElementById('lpWidgetRadiusBottom');
+  const widgetRadiusLeft = document.getElementById('lpWidgetRadiusLeft');
   const widgetButton = document.getElementById('lpWidgetPreviewButton');
   const widgetOffNotice = document.getElementById('lpWidgetOffNotice');
 
@@ -808,7 +820,11 @@ function initCustomizationPreview() {
   const buttonHoverBg = document.getElementById('lpButtonHoverBg');
   const buttonGradient = document.getElementById('lpButtonGradient');
   const buttonGradientEnd = document.getElementById('lpButtonGradientEnd');
-  const buttonRadius = document.getElementById('lpButtonRadius');
+  const buttonRadiusLock = document.getElementById('lpButtonRadiusLock');
+  const buttonRadiusTop = document.getElementById('lpButtonRadiusTop');
+  const buttonRadiusRight = document.getElementById('lpButtonRadiusRight');
+  const buttonRadiusBottom = document.getElementById('lpButtonRadiusBottom');
+  const buttonRadiusLeft = document.getElementById('lpButtonRadiusLeft');
   const buttonBorderWidth = document.getElementById('lpButtonBorderWidth');
   const buttonBorderColor = document.getElementById('lpButtonBorderColor');
   const buttonShadow = document.getElementById('lpButtonShadow');
@@ -827,6 +843,9 @@ function initCustomizationPreview() {
     return;
   }
 
+  const widgetRadiusInputs = [widgetRadiusTop, widgetRadiusRight, widgetRadiusBottom, widgetRadiusLeft];
+  const buttonRadiusInputs = [buttonRadiusTop, buttonRadiusRight, buttonRadiusBottom, buttonRadiusLeft];
+
   function updateRangeLabels() {
     rangeLabelPairs.forEach(([inputId, labelId]) => {
       const input = document.getElementById(inputId);
@@ -838,8 +857,42 @@ function initCustomizationPreview() {
     });
   }
 
+  function parseRangeValue(input, fallback) {
+    const parsed = Number.parseInt(input ? input.value : '', 10);
+    return Number.isFinite(parsed) ? parsed : fallback;
+  }
+
+  function getRadiusString(inputs, fallbacks) {
+    return inputs
+      .map((input, index) => `${parseRangeValue(input, fallbacks[index])}px`)
+      .join(' ');
+  }
+
+  function syncLockedRadius(lockControl, radiusInputs, sourceInput) {
+    if (!lockControl || !lockControl.checked || !sourceInput) {
+      return;
+    }
+    radiusInputs.forEach((input) => {
+      if (!input || input === sourceInput) {
+        return;
+      }
+      input.value = sourceInput.value;
+    });
+  }
+
+  function updateRadiusInputState(lockControl, radiusInputs) {
+    const isLocked = !!(lockControl && lockControl.checked);
+    radiusInputs.forEach((input, index) => {
+      if (!input) {
+        return;
+      }
+      input.disabled = isLocked && index > 0;
+    });
+  }
+
   function updateWidgetPreview() {
     updateRangeLabels();
+    updateRadiusInputState(widgetRadiusLock, widgetRadiusInputs);
 
     const isVisible = !!(widgetAutoDisplay && widgetAutoDisplay.checked);
     widgetOffNotice.hidden = isVisible;
@@ -856,11 +909,13 @@ function initCustomizationPreview() {
     const baseBg = widgetBg.value || '#10b981';
     const hoverBg = widgetHoverBg.value || baseBg;
     const iconColor = widgetIconColor.value || '#ffffff';
+    const widgetRadius = getRadiusString(widgetRadiusInputs, [20, 20, 20, 0]);
 
     widgetButton.style.width = `${size}px`;
     widgetButton.style.height = `${size}px`;
     widgetButton.style.backgroundColor = baseBg;
     widgetButton.style.color = iconColor;
+    widgetButton.style.borderRadius = widgetRadius;
     widgetButton.innerHTML = getCustomizerIconSVG(widgetIcon.value || 'sitestaffr', iconSize, themeUrl);
 
     widgetButton.onmouseenter = () => {
@@ -889,7 +944,7 @@ function initCustomizationPreview() {
     const hoverBgValue = buttonHoverBg.value || '#17a2b8';
     const gradientEnabled = !!buttonGradient.checked;
     const gradientEndValue = buttonGradientEnd.value || '#10b981';
-    const radiusValue = Number.parseInt(buttonRadius.value, 10) || 100;
+    const buttonRadius = getRadiusString(buttonRadiusInputs, [80, 0, 80, 0]);
     const borderWidthValue = Number.parseInt(buttonBorderWidth.value, 10) || 0;
     const borderColorValue = buttonBorderColor.value || '#1fb6cc';
     const shadowEnabled = !!buttonShadow.checked;
@@ -912,6 +967,8 @@ function initCustomizationPreview() {
       ? `0 ${shadowOffsetValue}px ${shadowBlurValue}px rgba(0,0,0,0.2)`
       : 'none';
 
+    updateRadiusInputState(buttonRadiusLock, buttonRadiusInputs);
+
     const iconMarkup = icon === 'none'
       ? ''
       : `<span class="customize-button-icon" style="color: ${iconColorValue};">${getCustomizerIconSVG(icon, iconSizeValue, themeUrl)}</span>`;
@@ -927,7 +984,7 @@ function initCustomizationPreview() {
     buttonPreview.style.fontWeight = fontWeightValue;
     buttonPreview.style.textTransform = textTransformValue;
     buttonPreview.style.background = bgStyle;
-    buttonPreview.style.borderRadius = `${radiusValue}px`;
+    buttonPreview.style.borderRadius = buttonRadius;
     buttonPreview.style.border = borderStyle;
     buttonPreview.style.boxShadow = baseShadow;
     buttonPreview.style.padding = `${padYValue}px ${padXValue}px`;
@@ -951,6 +1008,42 @@ function initCustomizationPreview() {
       buttonPreview.style.boxShadow = baseShadow;
       buttonPreview.classList.remove('is-pulsing');
     };
+  }
+
+  widgetRadiusInputs.forEach((input) => {
+    if (!input) {
+      return;
+    }
+    input.addEventListener('input', (event) => {
+      syncLockedRadius(widgetRadiusLock, widgetRadiusInputs, event.target);
+    });
+    input.addEventListener('change', (event) => {
+      syncLockedRadius(widgetRadiusLock, widgetRadiusInputs, event.target);
+    });
+  });
+
+  if (widgetRadiusLock && widgetRadiusInputs[0]) {
+    widgetRadiusLock.addEventListener('change', () => {
+      syncLockedRadius(widgetRadiusLock, widgetRadiusInputs, widgetRadiusInputs[0]);
+    });
+  }
+
+  buttonRadiusInputs.forEach((input) => {
+    if (!input) {
+      return;
+    }
+    input.addEventListener('input', (event) => {
+      syncLockedRadius(buttonRadiusLock, buttonRadiusInputs, event.target);
+    });
+    input.addEventListener('change', (event) => {
+      syncLockedRadius(buttonRadiusLock, buttonRadiusInputs, event.target);
+    });
+  });
+
+  if (buttonRadiusLock && buttonRadiusInputs[0]) {
+    buttonRadiusLock.addEventListener('change', () => {
+      syncLockedRadius(buttonRadiusLock, buttonRadiusInputs, buttonRadiusInputs[0]);
+    });
   }
 
   section.querySelectorAll('[data-widget-control]').forEach((control) => {
