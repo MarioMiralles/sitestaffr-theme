@@ -31,9 +31,6 @@ add_action( 'wp_enqueue_scripts', function () {
 		return;
 	}
 
-	$theme   = wp_get_theme();
-	$version = $theme ? $theme->get( 'Version' ) : '0.2.0';
-
 	wp_enqueue_style(
 		'sitestaffr-website-fonts',
 		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap',
@@ -43,17 +40,17 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	wp_enqueue_style(
 		'sitestaffr-website-style',
-		get_stylesheet_directory_uri() . '/assets/css/site.css',
+		sitestaffr_asset_url( 'assets/css/site.css' ),
 		array( 'sitestaffr-website-fonts' ),
-		$version
+		null
 	);
 
 	if ( $is_landing ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
-			get_stylesheet_directory_uri() . '/assets/js/site.js',
+			sitestaffr_asset_url( 'assets/js/site.js' ),
 			array(),
-			$version,
+			null,
 			true
 		);
 	}
