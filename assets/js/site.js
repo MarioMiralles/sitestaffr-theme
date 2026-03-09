@@ -944,7 +944,7 @@ function initCustomizationPreview() {
     const hoverBgValue = buttonHoverBg.value || '#17a2b8';
     const gradientEnabled = !!buttonGradient.checked;
     const gradientEndValue = buttonGradientEnd.value || '#10b981';
-    const buttonRadius = getRadiusString(buttonRadiusInputs, [80, 0, 80, 0]);
+    const buttonRadius = getRadiusString(buttonRadiusInputs, [80, 80, 80, 80]);
     const borderWidthValue = Number.parseInt(buttonBorderWidth.value, 10) || 0;
     const borderColorValue = buttonBorderColor.value || '#1fb6cc';
     const shadowEnabled = !!buttonShadow.checked;
