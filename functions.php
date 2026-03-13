@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'SITESTAFFR_MIDDLEWARE_URL' ) ) {
-	define( 'SITESTAFFR_MIDDLEWARE_URL', '' );
+	define( 'SITESTAFFR_MIDDLEWARE_URL', 'https://phoneease-middleware-pr6tyivo4a-uc.a.run.app' );
 }
 
 if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
