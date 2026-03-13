@@ -433,10 +433,10 @@
       }
       html += '</div>';
     } else if (isCancelled) {
-      html += '<div class="hub__status-plan">' + escHtml(formatPlanLabel(account.plan_name) || 'Cancelled') + '</div>';
+      html += '<div class="hub__status-plan">SiteStaffr ' + escHtml(formatPlanLabel(account.plan_name) || 'Plan') + '</div>';
       html += '<div class="hub__status-warning">Your subscription is cancelled. It remains active until ' + formatDate(account.subscription_current_period_end) + '.</div>';
     } else {
-      html += '<div class="hub__status-plan">' + escHtml(formatPlanLabel(account.plan_name) || 'Active Plan') + '</div>';
+      html += '<div class="hub__status-plan">SiteStaffr ' + escHtml(formatPlanLabel(account.plan_name) || 'Plan') + '</div>';
       html += '<div class="hub__status-details">';
       var totalMinutes = combineMins(account.included_minutes_display, account.addon_minutes_display);
       html += statusDetail('Minutes remaining', totalMinutes);
