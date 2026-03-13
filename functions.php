@@ -3,6 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+if ( ! defined( 'SITESTAFFR_MIDDLEWARE_URL' ) ) {
+	define( 'SITESTAFFR_MIDDLEWARE_URL', '' );
+}
+
 if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 	/**
 	 * Build a theme asset URL with file modification time for cache busting.
@@ -24,10 +28,12 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_landing     = is_page_template( 'page-landing.php' );
 	$is_maintenance = is_page_template( 'page-maintenance.php' );
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
+	$is_get_started = is_page_template( 'page-get-started.php' );
+	$is_manage      = is_page_template( 'page-manage.php' );
 	$is_page        = is_page();
 	$is_default     = is_home() || is_single() || is_archive() || is_search();
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_page && ! $is_default ) {
+	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_page && ! $is_default ) {
 		return;
 	}
 
@@ -55,8 +61,21 @@ add_action( 'wp_enqueue_scripts', function () {
 		);
 	}
 
+	if ( $is_manage ) {
+		wp_enqueue_script(
+			'sitestaffr-manage-script',
+			sitestaffr_asset_url( 'assets/js/manage.js' ),
+			array(),
+			null,
+			true
+		);
+		wp_localize_script( 'sitestaffr-manage-script', 'sitestaffrHub', array(
+			'apiUrl' => SITESTAFFR_MIDDLEWARE_URL,
+		) );
+	}
+
 	// Remove WordPress block styles on self-contained templates.
-	if ( $is_landing || $is_maintenance || $is_legal ) {
+	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage ) {
 		wp_dequeue_style( 'wp-block-library' );
 		wp_dequeue_style( 'classic-theme-styles' );
 		wp_dequeue_style( 'global-styles' );
