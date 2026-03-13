@@ -659,35 +659,39 @@
     var modal = document.getElementById('hubEmailModal');
     var openBtn = document.getElementById('hubEmailUpdateBtn');
     var cancelBtn = document.getElementById('emailUpdateCancel');
-    var closeBtn = document.getElementById('emailUpdateClose');
     var form = document.getElementById('emailUpdateForm');
     var submitBtn = document.getElementById('emailUpdateSubmit');
     var messageEl = document.getElementById('emailUpdateMessage');
 
     if (!openBtn || !modal) return;
 
-    function closeEmailModal() {
-      modal.hidden = true;
-      form.reset();
-      messageEl.className = 'form-message';
-    }
-
     openBtn.addEventListener('click', function () {
       modal.hidden = false;
       document.getElementById('newEmail').focus();
     });
 
-    cancelBtn.addEventListener('click', closeEmailModal);
-    if (closeBtn) closeBtn.addEventListener('click', closeEmailModal);
+    cancelBtn.addEventListener('click', function () {
+      modal.hidden = true;
+      form.reset();
+      messageEl.className = 'form-message';
+    });
 
     /* Close on backdrop click */
     modal.addEventListener('click', function (e) {
-      if (e.target === modal) closeEmailModal();
+      if (e.target === modal) {
+        modal.hidden = true;
+        form.reset();
+        messageEl.className = 'form-message';
+      }
     });
 
     /* Close on Escape */
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !modal.hidden) closeEmailModal();
+      if (e.key === 'Escape' && !modal.hidden) {
+        modal.hidden = true;
+        form.reset();
+        messageEl.className = 'form-message';
+      }
     });
 
     form.addEventListener('submit', function (e) {
