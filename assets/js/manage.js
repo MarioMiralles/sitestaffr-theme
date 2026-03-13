@@ -79,7 +79,7 @@
     banner.textContent = 'Your session has expired. Request a new link to continue.';
     banner.hidden = false;
 
-    setView('unauthenticated', 'Manage Your Account');
+    setView('unauthenticated', 'Access your billing and subscription settings.');
 
     if (email) {
       var emailInput = document.getElementById('magicLinkEmail');
@@ -165,7 +165,7 @@
         if (err.message === 'session_expired') return;
         cleanUrl();
         if (err.message === 'invalid_or_expired_token') {
-          setView('unauthenticated', 'Manage Your Account');
+          setView('unauthenticated', 'Access your billing and subscription settings.');
           var banner = document.getElementById('hubBanner');
           banner.className = 'hub__banner hub__banner--expired';
           banner.textContent = 'This link has expired or already been used. Request a new one below.';
@@ -194,13 +194,13 @@
         if (session) {
           fetchAccountState();
         } else {
-          setView('unauthenticated', 'Manage Your Account');
+          setView('unauthenticated', 'Access your billing and subscription settings.');
         }
       })
       .catch(function (err) {
         if (err.message === 'session_expired') return;
         cleanUrl();
-        setView('unauthenticated', 'Manage Your Account');
+        setView('unauthenticated', 'Access your billing and subscription settings.');
         var banner = document.getElementById('hubBanner');
         banner.className = 'hub__banner hub__banner--expired';
         banner.textContent = 'This verification link has expired or already been used.';
@@ -552,7 +552,7 @@
     }
 
     /* No token, no session */
-    setView('unauthenticated', 'Manage Your Account');
+    setView('unauthenticated', 'Access your billing and subscription settings.');
   }
 
   init();
