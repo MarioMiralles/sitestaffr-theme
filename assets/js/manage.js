@@ -415,7 +415,7 @@
       badgeText = 'Cancelled';
     } else {
       badgeClass += 'hub__status-badge--active';
-      badgeText = account.plan_name || 'Active';
+      badgeText = 'Active';
     }
 
     /* Build status card HTML */
@@ -433,10 +433,10 @@
       }
       html += '</div>';
     } else if (isCancelled) {
-      html += '<div class="hub__status-plan">' + escHtml(account.plan_name || 'Cancelled') + '</div>';
+      html += '<div class="hub__status-plan">' + escHtml(formatPlanLabel(account.plan_name) || 'Cancelled') + '</div>';
       html += '<div class="hub__status-warning">Your subscription is cancelled. It remains active until ' + formatDate(account.subscription_current_period_end) + '.</div>';
     } else {
-      html += '<div class="hub__status-plan">' + escHtml(account.plan_name || 'Active Plan') + '</div>';
+      html += '<div class="hub__status-plan">' + escHtml(formatPlanLabel(account.plan_name) || 'Active Plan') + '</div>';
       html += '<div class="hub__status-details">';
       var totalMinutes = combineMins(account.included_minutes_display, account.addon_minutes_display);
       html += statusDetail('Minutes remaining', totalMinutes);
@@ -659,39 +659,35 @@
     var modal = document.getElementById('hubEmailModal');
     var openBtn = document.getElementById('hubEmailUpdateBtn');
     var cancelBtn = document.getElementById('emailUpdateCancel');
+    var closeBtn = document.getElementById('emailUpdateClose');
     var form = document.getElementById('emailUpdateForm');
     var submitBtn = document.getElementById('emailUpdateSubmit');
     var messageEl = document.getElementById('emailUpdateMessage');
 
     if (!openBtn || !modal) return;
 
+    function closeEmailModal() {
+      modal.hidden = true;
+      form.reset();
+      messageEl.className = 'form-message';
+    }
+
     openBtn.addEventListener('click', function () {
       modal.hidden = false;
       document.getElementById('newEmail').focus();
     });
 
-    cancelBtn.addEventListener('click', function () {
-      modal.hidden = true;
-      form.reset();
-      messageEl.className = 'form-message';
-    });
+    cancelBtn.addEventListener('click', closeEmailModal);
+    if (closeBtn) closeBtn.addEventListener('click', closeEmailModal);
 
     /* Close on backdrop click */
     modal.addEventListener('click', function (e) {
-      if (e.target === modal) {
-        modal.hidden = true;
-        form.reset();
-        messageEl.className = 'form-message';
-      }
+      if (e.target === modal) closeEmailModal();
     });
 
     /* Close on Escape */
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape' && !modal.hidden) {
-        modal.hidden = true;
-        form.reset();
-        messageEl.className = 'form-message';
-      }
+      if (e.key === 'Escape' && !modal.hidden) closeEmailModal();
     });
 
     form.addEventListener('submit', function (e) {

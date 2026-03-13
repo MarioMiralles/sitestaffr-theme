@@ -3483,6 +3483,39 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* Email update modal */
+.hub__email-modal {
+  max-width: 440px;
+  padding: 0;
+  overflow: hidden;
+}
+.hub__email-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid var(--border-light);
+  background: var(--cream);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.hub__email-modal-header h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: var(--teal-deep);
+}
+.hub__email-modal-body {
+  padding: 24px;
+}
+.hub__email-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-light);
+  background: #fafafa;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+}
+
 .hub__modal-backdrop {
   position: fixed;
   inset: 0;
@@ -3676,10 +3709,12 @@ body.sitestaffr-landing-page .hero__visual > * {
     transform: none;
     min-width: 0;
   }
-  .hub__buy-footer {
+  .hub__buy-footer,
+  .hub__email-modal-footer {
     flex-direction: column-reverse;
   }
-  .hub__buy-footer .btn {
+  .hub__buy-footer .btn,
+  .hub__email-modal-footer .btn {
     width: 100%;
     justify-content: center;
   }

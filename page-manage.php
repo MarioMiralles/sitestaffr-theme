@@ -203,18 +203,23 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 <!-- Email update modal -->
 <div class="hub__modal-backdrop" id="hubEmailModal" hidden>
-  <div class="hub__modal">
-    <h3>Update billing email</h3>
+  <div class="hub__modal hub__email-modal">
+    <div class="hub__email-modal-header">
+      <h3>Update billing email</h3>
+      <button type="button" class="hub__buy-close" id="emailUpdateClose" aria-label="Close">&times;</button>
+    </div>
     <form id="emailUpdateForm" novalidate>
-      <div class="form-message" id="emailUpdateMessage"></div>
-      <div class="form-group">
-        <label class="form-label" for="newEmail">New email address</label>
-        <input class="form-input" type="email" id="newEmail" name="new_email" required autocomplete="email" placeholder="newemail@example.com">
-        <span class="form-error">Please enter a valid email address.</span>
+      <div class="hub__email-modal-body">
+        <div class="form-message" id="emailUpdateMessage"></div>
+        <div class="form-group">
+          <label class="form-label" for="newEmail">New email address</label>
+          <input class="form-input" type="email" id="newEmail" name="new_email" required autocomplete="email" placeholder="newemail@example.com">
+          <span class="form-error">Please enter a valid email address.</span>
+        </div>
       </div>
-      <div style="display: flex; gap: 12px; margin-top: 8px;">
-        <button type="button" class="btn btn--outline" id="emailUpdateCancel" style="flex: 1;">Cancel</button>
-        <button type="submit" class="btn btn--primary" id="emailUpdateSubmit" style="flex: 1;">Send verification</button>
+      <div class="hub__email-modal-footer">
+        <button type="button" class="btn btn--outline" id="emailUpdateCancel">Cancel</button>
+        <button type="submit" class="btn btn--primary" id="emailUpdateSubmit">Send verification</button>
       </div>
     </form>
   </div>
