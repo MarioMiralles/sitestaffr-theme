@@ -50,6 +50,11 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
     </div>
 
+    <!-- VIEW: Site Picker (multi-site users) -->
+    <div class="hub__view hub__view--site-picker">
+      <div class="hub__sites-list" id="hubSitesList"></div>
+    </div>
+
     <!-- VIEW: Unauthenticated -->
     <div class="hub__view hub__view--unauthenticated">
       <div class="form-card">
@@ -77,6 +82,15 @@ get_template_part( 'template-parts/site-nav', null, array(
 
     <!-- VIEW: Authenticated -->
     <div class="hub__view hub__view--authenticated">
+      <!-- Site switcher (multi-site only, populated by JS) -->
+      <div class="hub__site-switcher" id="hubSiteSwitcher" hidden>
+        <button type="button" class="hub__site-switcher-btn" id="hubSiteSwitcherBtn">
+          <span class="hub__site-switcher-url" id="hubSiteSwitcherUrl"></span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="hub__site-switcher-dropdown" id="hubSiteSwitcherDropdown" hidden></div>
+      </div>
+
       <!-- Status card (populated by JS) -->
       <div class="hub__status-card" id="hubStatusCard"></div>
 
