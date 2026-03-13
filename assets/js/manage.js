@@ -8,7 +8,7 @@
  *     → neither?            → unauthenticated
  *
  * Views (toggled via data-view on #hub):
- *   loading | unauthenticated | authenticated | error
+ *   loading | site-picker | unauthenticated | authenticated | error
  */
 (function () {
   'use strict';
@@ -34,25 +34,56 @@
   function setSession(token) {
     sessionStorage.setItem('sitestaffr_session', token);
   }
+  function getInstallationId() {
+    return sessionStorage.getItem('sitestaffr_installation_id');
+  }
+  function setInstallationId(id) {
+    if (id) {
+      sessionStorage.setItem('sitestaffr_installation_id', id);
+      return;
+    }
+    sessionStorage.removeItem('sitestaffr_installation_id');
+  }
+  function getSites() {
+    try {
+      return JSON.parse(sessionStorage.getItem('sitestaffr_sites') || '[]');
+    } catch (error) {
+      return [];
+    }
+  }
+  function setSites(sites) {
+    sessionStorage.setItem('sitestaffr_sites', JSON.stringify(Array.isArray(sites) ? sites : []));
+  }
   function clearSession() {
     sessionStorage.removeItem('sitestaffr_session');
     sessionStorage.removeItem('sitestaffr_email');
+    sessionStorage.removeItem('sitestaffr_installation_id');
+    sessionStorage.removeItem('sitestaffr_sites');
   }
 
   function apiCall(path, body, useAuth) {
     var headers = { 'Content-Type': 'application/json' };
+    var requestBody = {};
+    Object.keys(body || {}).forEach(function (key) {
+      requestBody[key] = body[key];
+    });
+
     if (useAuth) {
       var token = getSession();
       if (token) headers['Authorization'] = 'Bearer ' + token;
+      var installationId = getInstallationId();
+      if (installationId) requestBody.installation_id = installationId;
     }
+
     return fetch(API_URL + path, {
       method: 'POST',
       headers: headers,
-      body: JSON.stringify(body),
+      body: JSON.stringify(requestBody),
     }).then(function (res) {
       if (res.status === 401) {
+        var previousEmail = sessionStorage.getItem('sitestaffr_email') || '';
         clearSession();
-        showSessionExpired();
+        showSessionExpired(previousEmail);
         throw new Error('session_expired');
       }
       return res.json().then(function (data) {
@@ -70,20 +101,32 @@
     window.history.replaceState({}, '', url.toString());
   }
 
+  function displaySiteUrl(siteUrl) {
+    return String(siteUrl || '')
+      .replace(/^https?:\/\//i, '')
+      .replace(/\/$/, '') || 'Untitled site';
+  }
+
+  function formatPlanLabel(planName) {
+    var normalized = String(planName || 'trial').replace(/[_-]+/g, ' ').trim();
+    if (!normalized) return 'Trial';
+    return normalized.charAt(0).toUpperCase() + normalized.slice(1);
+  }
+
   /* ---- Session expired ---- */
 
-  function showSessionExpired() {
+  function showSessionExpired(email) {
     var banner = document.getElementById('hubBanner');
-    var email = sessionStorage.getItem('sitestaffr_email') || '';
+    var emailValue = email || sessionStorage.getItem('sitestaffr_email') || '';
     banner.className = 'hub__banner hub__banner--expired';
     banner.textContent = 'Your session has expired. Request a new link to continue.';
     banner.hidden = false;
 
     setView('unauthenticated', 'Access your billing and subscription settings.');
 
-    if (email) {
+    if (emailValue) {
       var emailInput = document.getElementById('magicLinkEmail');
-      if (emailInput) emailInput.value = email;
+      if (emailInput) emailInput.value = emailValue;
     }
   }
 
@@ -155,11 +198,25 @@
     apiCall('/api/billing/verify-magic-link', { token: token })
       .then(function (data) {
         setSession(data.session_token);
-        if (data.account && data.account.email) {
-          sessionStorage.setItem('sitestaffr_email', data.account.email);
-        }
+        setInstallationId('');
+        setSites(data.sites || []);
         cleanUrl();
-        renderDashboard(data.account);
+
+        var sites = getSites();
+        if (sites.length === 0) {
+          setView('error', '');
+          var errorText = document.getElementById('hubErrorText');
+          if (errorText) errorText.textContent = 'No sites found for this email.';
+          return;
+        }
+
+        if (sites.length === 1) {
+          setInstallationId(sites[0].installation_id);
+          fetchAccountState();
+          return;
+        }
+
+        renderSitePicker(sites);
       })
       .catch(function (err) {
         if (err.message === 'session_expired') return;
@@ -220,6 +277,7 @@
             sessionStorage.setItem('sitestaffr_email', data.account.email);
           }
           renderDashboard(data.account);
+          renderSiteSwitcher(getSites(), getInstallationId());
         } else {
           setView('error', '');
         }
@@ -228,6 +286,96 @@
         if (err.message === 'session_expired') return;
         setView('error', '');
       });
+  }
+
+  /* ---- Site picker / switcher ---- */
+
+  function renderSitePicker(sites) {
+    var listEl = document.getElementById('hubSitesList');
+    if (!listEl) return;
+
+    var html = '';
+    sites.forEach(function (site) {
+      html += '<button type="button" class="hub__site-card" data-installation-id="' + escHtml(site.installation_id) + '">';
+      html += '<div>';
+      html += '<div class="hub__site-card-url">' + escHtml(displaySiteUrl(site.site_url)) + '</div>';
+      html += '</div>';
+      html += '<div class="hub__site-card-meta">';
+      html += '<span class="hub__site-card-plan">' + escHtml(formatPlanLabel(site.plan_name)) + '</span>';
+      html += '<span class="hub__site-card-arrow">\u203a</span>';
+      html += '</div>';
+      html += '</button>';
+    });
+    listEl.innerHTML = html;
+    listEl.onclick = function (e) {
+      var card = e.target.closest('[data-installation-id]');
+      if (!card) return;
+      setInstallationId(card.getAttribute('data-installation-id'));
+      fetchAccountState();
+    };
+
+    setView('site-picker', 'Select a site to manage');
+  }
+
+  function renderSiteSwitcher(sites, currentInstallationId) {
+    var switcherEl = document.getElementById('hubSiteSwitcher');
+    var btnEl = document.getElementById('hubSiteSwitcherBtn');
+    var urlEl = document.getElementById('hubSiteSwitcherUrl');
+    var dropdownEl = document.getElementById('hubSiteSwitcherDropdown');
+
+    if (!switcherEl || !btnEl || !urlEl || !dropdownEl) return;
+
+    if (!sites || sites.length <= 1) {
+      switcherEl.hidden = true;
+      dropdownEl.hidden = true;
+      dropdownEl.innerHTML = '';
+      return;
+    }
+
+    var current = null;
+    sites.forEach(function (site) {
+      if (site.installation_id === currentInstallationId) current = site;
+    });
+    if (!current) current = sites[0];
+
+    urlEl.textContent = displaySiteUrl(current.site_url);
+    switcherEl.hidden = false;
+
+    var html = '';
+    sites.forEach(function (site) {
+      var activeClass = site.installation_id === current.installation_id ? ' hub__site-switcher-item--active' : '';
+      html += '<button type="button" class="hub__site-switcher-item' + activeClass + '" data-switch-to="' + escHtml(site.installation_id) + '">';
+      html += escHtml(displaySiteUrl(site.site_url));
+      html += '</button>';
+    });
+    dropdownEl.innerHTML = html;
+    dropdownEl.hidden = true;
+
+    btnEl.onclick = function () {
+      dropdownEl.hidden = !dropdownEl.hidden;
+    };
+    dropdownEl.onclick = function (e) {
+      var item = e.target.closest('[data-switch-to]');
+      if (!item) return;
+      dropdownEl.hidden = true;
+
+      var nextInstallationId = item.getAttribute('data-switch-to');
+      if (nextInstallationId === current.installation_id) return;
+
+      setInstallationId(nextInstallationId);
+      fetchAccountState();
+    };
+  }
+
+  function initSiteSwitcherDismissal() {
+    document.addEventListener('click', function (e) {
+      var switcherEl = document.getElementById('hubSiteSwitcher');
+      var dropdownEl = document.getElementById('hubSiteSwitcherDropdown');
+      if (!switcherEl || !dropdownEl || switcherEl.hidden) return;
+      if (!switcherEl.contains(e.target)) {
+        dropdownEl.hidden = true;
+      }
+    });
   }
 
   /* ---- Render dashboard ---- */
@@ -368,9 +516,8 @@
       btn.textContent = 'Redirecting\u2026';
 
       apiCall('/api/hub/create-checkout-session', {
-        plan: plan,
-        success_url: window.location.origin + '/manage?checkout=success',
-        cancel_url: window.location.origin + '/manage?checkout=cancelled',
+        type: 'subscription',
+        plan_name: plan,
       }, true)
         .then(function (data) {
           if (data.checkout_url) {
@@ -397,9 +544,8 @@
         buyBtn.textContent = 'Redirecting\u2026';
 
         apiCall('/api/hub/create-checkout-session', {
-          type: 'addon_minutes',
-          success_url: window.location.origin + '/manage?checkout=success',
-          cancel_url: window.location.origin + '/manage?checkout=cancelled',
+          type: 'addon',
+          addon_type: 'minutes_50',
         }, true)
           .then(function (data) {
             if (data.checkout_url) {
@@ -526,6 +672,7 @@
     initMagicLinkForm();
     initPlanCardDelegation();
     initEmailUpdateModal();
+    initSiteSwitcherDismissal();
     handleCheckoutRedirect();
 
     var params = new URLSearchParams(window.location.search);
@@ -547,7 +694,36 @@
     /* Existing session */
     var session = getSession();
     if (session) {
-      fetchAccountState();
+      var installationId = getInstallationId();
+      if (installationId) {
+        fetchAccountState();
+        return;
+      }
+
+      apiCall('/api/hub/list-sites', {}, true)
+        .then(function (data) {
+          var sites = data.sites || [];
+          setSites(sites);
+
+          if (sites.length === 0) {
+            setView('error', '');
+            var errorText = document.getElementById('hubErrorText');
+            if (errorText) errorText.textContent = 'No sites found for this email.';
+            return;
+          }
+
+          if (sites.length === 1) {
+            setInstallationId(sites[0].installation_id);
+            fetchAccountState();
+            return;
+          }
+
+          renderSitePicker(sites);
+        })
+        .catch(function (err) {
+          if (err.message === 'session_expired') return;
+          setView('error', '');
+        });
       return;
     }
 
