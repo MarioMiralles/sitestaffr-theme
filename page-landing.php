@@ -63,39 +63,20 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
 <body <?php body_class( 'sitestaffr-landing-page' ); ?>>
 <?php wp_body_open(); ?>
 <!-- ========== NAVIGATION ========== -->
-<nav class="nav" id="nav">
-  <div class="container">
-    <div class="nav__inner">
-      <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav__logo" aria-label="SiteStaffr home">
-        <img
-          class="nav__logo-image"
-          src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.png' ) ); ?>"
-          alt="SiteStaffr"
-        >
-      </a>
-      <ul class="nav__menu" id="navPrimaryMenu" aria-label="Primary">
-        <li><a class="nav__link" href="#hero-audio-demo">Demo</a></li>
-        <li><a class="nav__link" href="#pricing-label">Pricing</a></li>
-        <li><a class="nav__link" href="#faq-label">FAQ</a></li>
-      </ul>
-      <div class="nav__cta">
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
-      </div>
-      <button
-        class="nav__toggle"
-        id="navToggle"
-        type="button"
-        aria-label="Toggle menu"
-        aria-expanded="false"
-        aria-controls="navPrimaryMenu"
-      >
-        <span class="nav__toggle-line"></span>
-        <span class="nav__toggle-line"></span>
-        <span class="nav__toggle-line"></span>
-      </button>
-    </div>
-  </div>
-</nav>
+<?php
+get_template_part( 'template-parts/site-nav', null, array(
+    'menu_items' => array(
+        array( 'label' => 'Demo', 'href' => '#hero-audio-demo' ),
+        array( 'label' => 'Pricing', 'href' => '#pricing-label' ),
+        array( 'label' => 'FAQ', 'href' => '#faq-label' ),
+    ),
+    'cta' => array(
+        'label'  => 'Get Early Access',
+        'href'   => $beta_signup_url,
+        'target' => '_blank',
+    ),
+) );
+?>
 
 <!-- ========== SECTION 1: HERO ========== -->
 <section class="hero">
@@ -1093,16 +1074,7 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
 </section>
 
 <!-- ========== FOOTER ========== -->
-<footer class="footer">
-  <div class="container">
-    <div class="footer__links">
-      <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
-      <a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
-      <a href="mailto:support@sitestaffr.com">Support</a>
-    </div>
-    <p>&copy; 2026 SiteStaffr. All rights reserved.</p>
-  </div>
-</footer>
+<?php get_template_part( 'template-parts/site-footer' ); ?>
 <?php wp_footer(); ?>
 </body>
 </html>
