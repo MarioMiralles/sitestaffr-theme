@@ -169,6 +169,38 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </main>
 
+<!-- Buy More Minutes modal -->
+<div class="hub__modal-backdrop" id="hubBuyModal" hidden>
+  <div class="hub__modal hub__buy-modal">
+    <div class="hub__buy-header">
+      <h3>Buy More Minutes</h3>
+      <button type="button" class="hub__buy-close" id="hubBuyClose" aria-label="Close">&times;</button>
+    </div>
+    <div class="hub__buy-body">
+      <div class="hub__buy-product">
+        <div class="hub__buy-product-name">Add-on Minutes Pack</div>
+        <div class="hub__buy-product-detail">50 minutes per pack &middot; Add-on minutes never expire</div>
+      </div>
+      <div class="hub__buy-stepper-row">
+        <span class="hub__buy-stepper-label">Quantity</span>
+        <div class="hub__buy-stepper">
+          <button type="button" class="hub__buy-stepper-btn" id="hubBuyMinus" disabled aria-label="Decrease quantity">&minus;</button>
+          <span class="hub__buy-stepper-value" id="hubBuyQty">1</span>
+          <button type="button" class="hub__buy-stepper-btn" id="hubBuyPlus" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+      <div class="hub__buy-summary">
+        <span class="hub__buy-summary-minutes" id="hubBuyMinutesDisplay">50 minutes</span>
+        <span class="hub__buy-summary-price" id="hubBuyPriceDisplay">$10</span>
+      </div>
+    </div>
+    <div class="hub__buy-footer">
+      <button type="button" class="btn btn--outline" id="hubBuyCancel">Cancel</button>
+      <button type="button" class="btn btn--primary" id="hubBuyConfirm">Confirm Purchase</button>
+    </div>
+  </div>
+</div>
+
 <!-- Email update modal -->
 <div class="hub__modal-backdrop" id="hubEmailModal" hidden>
   <div class="hub__modal">

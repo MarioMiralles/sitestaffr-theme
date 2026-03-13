@@ -533,32 +533,98 @@
     });
   }
 
+  /* ---- Buy More Minutes modal ---- */
+
+  var ADDON_MINUTES = 50;
+  var ADDON_PRICE = 10;
+  var MIN_QTY = 1;
+  var MAX_QTY = 10;
+  var buyModalQty = 1;
+
+  function updateBuyModal() {
+    var qtyEl = document.getElementById('hubBuyQty');
+    var minEl = document.getElementById('hubBuyMinutesDisplay');
+    var priceEl = document.getElementById('hubBuyPriceDisplay');
+    var minusBtn = document.getElementById('hubBuyMinus');
+    var plusBtn = document.getElementById('hubBuyPlus');
+    if (!qtyEl) return;
+    qtyEl.textContent = buyModalQty;
+    minEl.textContent = (buyModalQty * ADDON_MINUTES) + ' minutes';
+    priceEl.textContent = '$' + (buyModalQty * ADDON_PRICE);
+    minusBtn.disabled = buyModalQty <= MIN_QTY;
+    plusBtn.disabled = buyModalQty >= MAX_QTY;
+  }
+
+  function openBuyModal() {
+    var modal = document.getElementById('hubBuyModal');
+    if (!modal) return;
+    buyModalQty = 1;
+    updateBuyModal();
+    modal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeBuyModal() {
+    var modal = document.getElementById('hubBuyModal');
+    if (!modal) return;
+    modal.hidden = true;
+    document.body.style.overflow = '';
+  }
+
+  function initBuyModal() {
+    var modal = document.getElementById('hubBuyModal');
+    if (!modal) return;
+
+    document.getElementById('hubBuyMinus').addEventListener('click', function () {
+      if (buyModalQty > MIN_QTY) { buyModalQty--; updateBuyModal(); }
+    });
+    document.getElementById('hubBuyPlus').addEventListener('click', function () {
+      if (buyModalQty < MAX_QTY) { buyModalQty++; updateBuyModal(); }
+    });
+    document.getElementById('hubBuyCancel').addEventListener('click', closeBuyModal);
+    document.getElementById('hubBuyClose').addEventListener('click', closeBuyModal);
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeBuyModal();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !modal.hidden) closeBuyModal();
+    });
+
+    document.getElementById('hubBuyConfirm').addEventListener('click', function () {
+      var confirmBtn = document.getElementById('hubBuyConfirm');
+      confirmBtn.disabled = true;
+      confirmBtn.textContent = 'Redirecting\u2026';
+
+      apiCall('/api/hub/create-checkout-session', {
+        type: 'addon',
+        addon_type: 'minutes_50',
+        quantity: buyModalQty,
+      }, true)
+        .then(function (data) {
+          if (data.checkout_url) {
+            window.location.href = data.checkout_url;
+          }
+        })
+        .catch(function (err) {
+          if (err.message === 'session_expired') {
+            closeBuyModal();
+            return;
+          }
+          confirmBtn.disabled = false;
+          confirmBtn.textContent = 'Confirm Purchase';
+          alert('Something went wrong. Please try again.');
+        });
+    });
+  }
+
   /* ---- Action handlers (called per render — binds to dynamic buttons) ---- */
 
   function bindActions(account) {
-    /* Buy more minutes */
+    /* Buy more minutes — open modal */
     var buyBtn = document.getElementById('hubBuyMinutes');
     if (buyBtn) {
-      buyBtn.addEventListener('click', function () {
-        buyBtn.disabled = true;
-        buyBtn.textContent = 'Redirecting\u2026';
-
-        apiCall('/api/hub/create-checkout-session', {
-          type: 'addon',
-          addon_type: 'minutes_50',
-        }, true)
-          .then(function (data) {
-            if (data.checkout_url) {
-              window.location.href = data.checkout_url;
-            }
-          })
-          .catch(function (err) {
-            if (err.message === 'session_expired') return;
-            buyBtn.disabled = false;
-            buyBtn.textContent = 'Buy More Minutes';
-            alert('Something went wrong. Please try again.');
-          });
-      });
+      buyBtn.addEventListener('click', openBuyModal);
     }
 
     /* Manage subscription (Stripe portal) */
@@ -672,6 +738,7 @@
     initMagicLinkForm();
     initPlanCardDelegation();
     initEmailUpdateModal();
+    initBuyModal();
     initSiteSwitcherDismissal();
     handleCheckoutRedirect();
 
