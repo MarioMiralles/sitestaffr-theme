@@ -387,7 +387,7 @@
     var emailValue = document.getElementById('hubEmailValue');
 
     var status = account.subscription_status || 'trial';
-    var isTrial = status === 'trialing' || status === 'trial';
+    var isTrial = status === 'trialing' || status === 'trial' || status === 'trial_active';
     var isActive = status === 'active';
     var isPastDue = status === 'past_due';
     var isCancelled = status === 'canceled' || status === 'cancelled';
