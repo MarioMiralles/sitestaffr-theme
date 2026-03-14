@@ -110,6 +110,13 @@ get_template_part( 'template-parts/site-nav', null, array(
     messageEl.className = 'form-message';
     messageEl.textContent = '';
 
+    /* Normalize website URL — prepend https:// if missing */
+    var urlInput = document.getElementById('intakeWebsite');
+    var urlVal = urlInput.value.trim();
+    if (urlVal && !/^https?:\/\//i.test(urlVal)) {
+      urlInput.value = 'https://' + urlVal;
+    }
+
     /* Validate */
     var valid = true;
     form.querySelectorAll('[required]').forEach(function(input) {
