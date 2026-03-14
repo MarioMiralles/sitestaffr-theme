@@ -325,8 +325,18 @@
 
     if (!switcherEl || !btnEl || !urlEl || !dropdownEl) return;
 
-    if (!sites || sites.length <= 1) {
+    if (!sites || sites.length === 0) {
       switcherEl.hidden = true;
+      dropdownEl.hidden = true;
+      dropdownEl.innerHTML = '';
+      return;
+    }
+
+    if (sites.length === 1) {
+      urlEl.textContent = displaySiteUrl(sites[0].site_url);
+      switcherEl.hidden = false;
+      btnEl.style.cursor = 'default';
+      btnEl.querySelector('svg').style.display = 'none';
       dropdownEl.hidden = true;
       dropdownEl.innerHTML = '';
       return;
