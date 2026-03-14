@@ -14,7 +14,7 @@ $landing_url = $landing_url ? $landing_url : home_url( '/' );
 $landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.png';
 $site_name = get_bloginfo( 'name' );
 $show_testimonials = false;
-$beta_signup_url = 'https://forms.gle/AemK46VeXUXqerqU6';
+$get_started_url = home_url( '/get-started/' );
 $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
     $slug = (string) $slug;
     $device = 'mobile' === $device ? 'mobile' : 'desktop';
@@ -69,11 +69,11 @@ get_template_part( 'template-parts/site-nav', null, array(
         array( 'label' => 'Demo', 'href' => '#hero-audio-demo' ),
         array( 'label' => 'Pricing', 'href' => '#pricing-label' ),
         array( 'label' => 'FAQ', 'href' => '#faq-label' ),
+        array( 'label' => 'My Account', 'href' => home_url( '/manage/' ) ),
     ),
     'cta' => array(
-        'label'  => 'Get Early Access',
-        'href'   => $beta_signup_url,
-        'target' => '_blank',
+        'label' => 'Get Started',
+        'href'  => $get_started_url,
     ),
 ) );
 ?>
@@ -93,8 +93,8 @@ get_template_part( 'template-parts/site-nav', null, array(
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
-          <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary btn--large" target="_blank" rel="noopener noreferrer">
-            Get Early Access
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
+            Get Started
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -173,8 +173,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           <p class="solution-section__text">
             SiteStaffr adds an AI voice receptionist to your WordPress website. Visitors ask questions by voice, get instant answers, and you get lead details and a conversation recap for follow-up.
           </p>
-          <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary btn--large" target="_blank" rel="noopener noreferrer">
-            Get Early Access
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
+            Get Started
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
         </div>
@@ -847,7 +847,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <li>No credit card required</li>
         </ul>
         <p class="pricing-card__best-for">Try SiteStaffr free for 30 days</p>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Start Free Trial</a>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Start Free Trial</a>
       </div>
       <div class="pricing-card reveal reveal-delay-1">
         <div class="pricing-card__name">Starter</div>
@@ -861,7 +861,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <li>Great for steady weekly lead volume</li>
         </ul>
         <p class="pricing-card__best-for">Best for businesses getting started</p>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
       <div class="pricing-card pricing-card--popular reveal reveal-delay-2">
         <div class="pricing-card__badge">Most Popular</div>
@@ -876,7 +876,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <li>5 AI description generations per billing cycle</li>
         </ul>
         <p class="pricing-card__best-for">Best for growing local businesses</p>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--primary" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
       </div>
       <div class="pricing-card reveal reveal-delay-3">
         <div class="pricing-card__name">Pro</div>
@@ -891,7 +891,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <li>Priority access to new features</li>
         </ul>
         <p class="pricing-card__best-for">Best for multi-location or high-traffic sites</p>
-        <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--outline" target="_blank" rel="noopener noreferrer">Get Early Access</a>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
     </div>
     <div class="pricing-addon reveal">
@@ -1066,8 +1066,8 @@ get_template_part( 'template-parts/site-nav', null, array(
       Free for 30 days. No credit card required.<br>
       <span class="final-cta__setup">Set up in under 10 minutes.</span>
     </p>
-    <a href="<?php echo esc_url( $beta_signup_url ); ?>" class="btn btn--white btn--large" target="_blank" rel="noopener noreferrer">
-      Get Early Access
+    <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--white btn--large">
+      Get Started
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
     </a>
   </div>
