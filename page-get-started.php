@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $page_title       = 'Get Started with SiteStaffr | White-Glove AI Voice Agent Setup';
-$page_description = 'Let us install and configure your AI voice agent. Fill out the form and we\'ll handle everything.';
+$page_description = 'Let us set up your AI voice agent. Fill out the form and we\'ll reach out to get you started.';
 $page_url         = get_permalink() ? get_permalink() : home_url( '/get-started' );
 $site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
@@ -43,7 +43,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="intake__header">
       <span class="section-label">White-glove setup</span>
       <h1>Let us set up your AI voice agent</h1>
-      <p class="intake__subtitle">Fill out the form below and we'll handle the rest — plugin installation, configuration, and launch. No technical knowledge required.</p>
+      <p class="intake__subtitle">Fill out the form below and we'll reach out to get you set up — including plugin installation, configuration, and launch.</p>
     </div>
 
     <div class="form-card" id="intakeFormCard">
