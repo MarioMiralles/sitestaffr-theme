@@ -104,7 +104,7 @@ $site_name        = get_bloginfo( 'name' );
 }
 
 /* Hide global floating widget on get-started page */
-.sitestaffr-widget-container { display: none !important; }
+#sitestaffr-widget { display: none !important; }
     </style>
 </head>
 <body <?php body_class( 'sitestaffr-get-started-page' ); ?>>
@@ -318,9 +318,11 @@ get_template_part( 'template-parts/site-nav', null, array(
     setTimeout(function() { clearInterval(checkInterval); }, 10000);
 
     function submitOnboardingFields(fields) {
-        // Validate minimum required field
-        if (!fields.email) {
-            console.warn('SiteStaffr: Onboarding ended without email — skipping intake submission');
+        // Validate required fields (must match server-side validation)
+        if (!fields.email || !fields.phone || !fields.business_name) {
+            console.warn('SiteStaffr: Onboarding ended without required fields — showing form fallback');
+            var formCard = document.getElementById('intakeFormCard');
+            if (formCard) formCard.scrollIntoView({ behavior: 'smooth' });
             return;
         }
 
@@ -347,6 +349,11 @@ get_template_part( 'template-parts/site-nav', null, array(
         })
         .catch(function(err) {
             console.error('SiteStaffr: Intake submission error:', err);
+            // Show form as fallback so user can submit manually
+            var formCard = document.getElementById('intakeFormCard');
+            if (formCard) {
+                formCard.scrollIntoView({ behavior: 'smooth' });
+            }
         });
     }
 })();
