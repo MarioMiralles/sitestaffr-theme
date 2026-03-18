@@ -36,40 +36,6 @@ $site_name        = get_bloginfo( 'name' );
     margin-bottom: 24px;
 }
 
-/* Visual confirmation card */
-.onboarding-card {
-    max-width: 400px;
-    margin: 24px auto;
-    padding: 24px;
-    background: #E0F7FA;
-    border-radius: 12px;
-    border: 1px solid #1FB6CC;
-    text-align: left;
-}
-.onboarding-card h3 {
-    color: #00838F;
-    margin: 0 0 16px;
-    font-size: 18px;
-}
-.onboarding-card__field {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 0;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
-}
-.onboarding-card__field.is-filled {
-    opacity: 1;
-}
-.onboarding-card__label {
-    font-weight: 600;
-    color: #004D40;
-}
-.onboarding-card__value {
-    color: #00838F;
-}
-
 /* Privacy notice */
 .privacy-notice {
     font-size: 13px;
@@ -85,6 +51,8 @@ $site_name        = get_bloginfo( 'name' );
     text-align: center;
     margin: 32px 0;
     position: relative;
+    cursor: pointer;
+    user-select: none;
 }
 .section-divider::before {
     content: '';
@@ -97,10 +65,26 @@ $site_name        = get_bloginfo( 'name' );
 }
 .section-divider__text {
     position: relative;
-    background: #fff;
+    background: var(--cream, #FEFDFB);
     padding: 0 16px;
     color: #999;
     font-size: 14px;
+}
+.section-divider__chevron {
+    display: inline-block;
+    font-size: 10px;
+    transition: transform 0.3s ease;
+    margin-left: 4px;
+}
+.section-divider.is-open .section-divider__chevron {
+    transform: rotate(180deg);
+}
+
+/* Collapsible form wrapper */
+.form-collapse-wrapper {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
 }
 
 /* Hide global floating widget on get-started page */
@@ -128,40 +112,19 @@ get_template_part( 'template-parts/site-nav', null, array(
 
     <div class="voice-section">
         <div class="voice-section__cta">
-            <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Talk to Us" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="microphone"]' ); ?>
-        </div>
-
-        <div id="onboardingCard" class="onboarding-card" hidden>
-            <h3>Your Details</h3>
-            <div class="onboarding-card__field" data-field="name">
-                <span class="onboarding-card__label">Name</span>
-                <span class="onboarding-card__value">&mdash;</span>
-            </div>
-            <div class="onboarding-card__field" data-field="business_name">
-                <span class="onboarding-card__label">Business</span>
-                <span class="onboarding-card__value">&mdash;</span>
-            </div>
-            <div class="onboarding-card__field" data-field="website_url">
-                <span class="onboarding-card__label">Website</span>
-                <span class="onboarding-card__value">&mdash;</span>
-            </div>
-            <div class="onboarding-card__field" data-field="email">
-                <span class="onboarding-card__label">Email</span>
-                <span class="onboarding-card__value">&mdash;</span>
-            </div>
-            <div class="onboarding-card__field" data-field="phone">
-                <span class="onboarding-card__label">Phone</span>
-                <span class="onboarding-card__value">&mdash;</span>
-            </div>
+            <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" variant="hero" text="Talk to Us" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="microphone"]' ); ?>
         </div>
 
         <p class="privacy-notice">Your information will be used to set up your SiteStaffr voice agent. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
     </div>
 
-    <div class="section-divider">
-        <span class="section-divider__text">Prefer to type?</span>
+    <div class="section-divider" id="formToggle">
+        <span class="section-divider__text">
+            Prefer to type? <span class="section-divider__chevron">&#9660;</span>
+        </span>
     </div>
 
+    <div class="form-collapse-wrapper" id="formCollapseWrapper">
     <div class="form-card" id="intakeFormCard">
       <form id="intakeForm" novalidate>
         <div class="form-message" id="intakeMessage"></div>
@@ -203,6 +166,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <p class="form-success__text">Thanks for your interest in SiteStaffr. We'll reach out within one business day to get your AI voice agent set up.</p>
       </div>
     </div>
+    </div>
   </div>
 </main>
 
@@ -210,6 +174,21 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 <script>
 (function() {
+  /* Form collapse toggle */
+  var toggle = document.getElementById('formToggle');
+  var wrapper = document.getElementById('formCollapseWrapper');
+  if (toggle && wrapper) {
+    toggle.addEventListener('click', function() {
+      var isOpen = toggle.classList.toggle('is-open');
+      if (isOpen) {
+        wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+      } else {
+        wrapper.style.maxHeight = '0';
+      }
+    });
+  }
+
+  /* Typed form submission */
   var form = document.getElementById('intakeForm');
   var submitBtn = document.getElementById('intakeSubmit');
   var successEl = document.getElementById('intakeSuccess');
@@ -269,93 +248,6 @@ get_template_part( 'template-parts/site-nav', null, array(
       submitBtn.textContent = 'Send Request';
     });
   });
-})();
-</script>
-
-<script>
-(function() {
-    var card = document.getElementById('onboardingCard');
-    var voiceSection = document.querySelector('.voice-section');
-    if (!card || !voiceSection) return;
-
-    var apiUrl = '<?php echo esc_js( SITESTAFFR_MIDDLEWARE_URL ); ?>';
-
-    // Poll for widget initialization (button widget sets _sitestaffrWidget on container)
-    var checkInterval = setInterval(function() {
-        var container = document.querySelector('.sitestaffr-button-container[data-persona="onboarding"]');
-        if (!container || !container._sitestaffrWidget) return;
-
-        clearInterval(checkInterval);
-        var widget = container._sitestaffrWidget;
-        var core = widget.core;
-        if (!core) return;
-
-        // Inject onFieldUpdate callback
-        core.callbacks.onFieldUpdate = function(field, value) {
-            var fieldEl = card.querySelector('[data-field="' + field + '"]');
-            if (fieldEl) {
-                fieldEl.querySelector('.onboarding-card__value').textContent = value;
-                fieldEl.classList.add('is-filled');
-            }
-        };
-
-        // Show card when conversation starts
-        var origStart = core.callbacks.onConversationStart;
-        core.callbacks.onConversationStart = function() {
-            card.hidden = false;
-            if (origStart) origStart();
-        };
-
-        // Submit to intake endpoint when conversation ends
-        var origEnd = core.callbacks.onConversationEnd;
-        core.callbacks.onConversationEnd = function(reason) {
-            submitOnboardingFields(core.contactMemory);
-            if (origEnd) origEnd(reason);
-        };
-    }, 200);
-
-    // Stop polling after 10 seconds
-    setTimeout(function() { clearInterval(checkInterval); }, 10000);
-
-    function submitOnboardingFields(fields) {
-        // Validate required fields (must match server-side validation)
-        if (!fields.email || !fields.phone || !fields.business_name) {
-            console.warn('SiteStaffr: Onboarding ended without required fields — showing form fallback');
-            var formCard = document.getElementById('intakeFormCard');
-            if (formCard) formCard.scrollIntoView({ behavior: 'smooth' });
-            return;
-        }
-
-        fetch(apiUrl + '/api/onboarding/intake', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: fields.name || '',
-                business_name: fields.business_name || '',
-                website_url: fields.website_url || '',
-                email: fields.email || '',
-                phone: fields.phone || ''
-            })
-        })
-        .then(function(res) {
-            if (!res.ok) throw new Error('Intake submission failed');
-            // Show success message (same one used by typed form)
-            var formCard = document.getElementById('intakeFormCard');
-            var successEl = document.getElementById('intakeSuccess');
-            if (formCard) formCard.hidden = true;
-            if (successEl) successEl.hidden = false;
-            card.hidden = true;
-            voiceSection.hidden = true;
-        })
-        .catch(function(err) {
-            console.error('SiteStaffr: Intake submission error:', err);
-            // Show form as fallback so user can submit manually
-            var formCard = document.getElementById('intakeFormCard');
-            if (formCard) {
-                formCard.scrollIntoView({ behavior: 'smooth' });
-            }
-        });
-    }
 })();
 </script>
 
