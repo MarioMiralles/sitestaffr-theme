@@ -3151,16 +3151,23 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin: 0 auto 40px;
 }
 .intake__header h1 {
-  white-space: nowrap;
-}
-.intake__header h1 {
   color: var(--teal-deep);
   margin-bottom: 12px;
+  text-wrap: balance;
 }
 .intake__subtitle {
   color: var(--text-secondary);
   font-size: 1.05rem;
   line-height: 1.6;
+}
+
+@media (max-width: 640px) {
+  .intake__header h1 {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    font-size: clamp(1.9rem, 9vw, 2.3rem);
+    line-height: 1.12;
+  }
 }
 
 /* ============================
