@@ -394,8 +394,6 @@
     var statusCard = document.getElementById('hubStatusCard');
     var actionsEl = document.getElementById('hubActions');
     var plansEl = document.getElementById('hubPlans');
-    var emailValue = document.getElementById('hubEmailValue');
-
     var status = account.subscription_status || 'trial';
     var isTrial = status === 'trialing' || status === 'trial' || status === 'trial_active';
     var isActive = status === 'active';
@@ -472,8 +470,17 @@
     /* Show plan cards for trial or cancelled users */
     plansEl.hidden = !(isTrial || trialExpired || isCancelled);
 
-    /* Email */
-    emailValue.textContent = account.email || '';
+    /* Authorized emails */
+    var currentSites = getSites();
+    var currentInstallation = getInstallationId();
+    var currentSiteData = null;
+    currentSites.forEach(function (site) {
+      if (site.installation_id === currentInstallation) currentSiteData = site;
+    });
+    renderAuthEmails(
+      currentSiteData ? currentSiteData.authorized_emails : [],
+      account.email
+    );
 
     /* Set view */
     setView('authenticated', 'Welcome back');
@@ -509,6 +516,85 @@
     var div = document.createElement('div');
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
+  }
+
+  /* ---- Authorized emails card ---- */
+
+  function formatShortDate(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+
+  function renderAuthEmails(authorizedEmails, accountEmail) {
+    var container = document.getElementById('hub-auth-emails');
+    if (!container) return;
+
+    var sessionEmail = (sessionStorage.getItem('sitestaffr_email') || '').trim().toLowerCase();
+    var emails = Array.isArray(authorizedEmails) ? authorizedEmails : [];
+    var maxEmails = 5;
+
+    // Empty state: show simple billing email display with + Add
+    if (emails.length === 0 && accountEmail) {
+      emails = [{ email: accountEmail, is_invoice_recipient: true, _synthetic: true }];
+    }
+
+    var html = '<div class="hub__auth-emails-header">';
+    html += '<span class="hub__auth-emails-title">Billing Access</span>';
+    if (emails.length < maxEmails) {
+      html += '<button type="button" class="hub__auth-emails-add-btn" data-action="add-show">+ Add</button>';
+    }
+    html += '</div>';
+
+    html += '<div class="hub__auth-emails-list">';
+    emails.forEach(function (entry, idx) {
+      var email = (entry.email || '').trim().toLowerCase();
+      var isPrimary = idx === 0;
+      var isSelf = email === sessionEmail;
+
+      html += '<div class="hub__auth-email-row" data-email="' + escHtml(email) + '">';
+      html += '<div class="hub__auth-email-info">';
+      html += '<div class="hub__auth-email-address">' + escHtml(email) + '</div>';
+      html += '<div class="hub__auth-email-meta">';
+
+      if (isPrimary) {
+        html += '<span class="hub__auth-email-badge">Primary</span>';
+      } else if (entry.added_at) {
+        html += '<span class="hub__auth-email-badge">Added ' + escHtml(formatShortDate(entry.added_at)) + '</span>';
+      }
+
+      if (entry.is_invoice_recipient) {
+        html += '<span class="hub__auth-email-invoice">Receives invoices</span>';
+      } else if (!entry._synthetic) {
+        html += '<button type="button" class="hub__auth-email-action" data-action="set-invoice-recipient" data-email="' + escHtml(email) + '">Set as invoice recipient</button>';
+      }
+
+      html += '</div></div>';
+
+      // Actions
+      html += '<div class="hub__auth-email-actions">';
+      if (isPrimary) {
+        html += '<button type="button" class="hub__auth-email-action" data-action="update-email">Update</button>';
+      } else if (!isSelf) {
+        html += '<button type="button" class="hub__auth-email-action" data-action="remove-show" data-email="' + escHtml(email) + '">Remove</button>';
+      }
+      html += '</div>';
+
+      html += '</div>';
+    });
+    html += '</div>';
+
+    // Inline add form placeholder (hidden by default, shown on + Add click)
+    html += '<div class="hub__auth-email-add" id="authEmailAddForm" hidden>';
+    html += '<input type="email" id="authEmailAddInput" placeholder="email@example.com" autocomplete="email">';
+    html += '<button type="button" class="hub__auth-email-add-submit" data-action="add-submit">Send Invite</button>';
+    html += '<button type="button" class="hub__auth-email-add-cancel" data-action="add-cancel">Cancel</button>';
+    html += '</div>';
+
+    // Message area
+    html += '<div id="authEmailMessage"></div>';
+
+    container.innerHTML = html;
   }
 
   /* ---- Plan card delegation (called once from init) ---- */
