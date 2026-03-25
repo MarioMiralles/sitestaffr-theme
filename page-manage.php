@@ -147,14 +147,8 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
       </div>
 
-      <!-- Email section -->
-      <div class="hub__email-section" id="hubEmailSection">
-        <div>
-          <div class="hub__email-label">Billing email</div>
-          <div class="hub__email-value" id="hubEmailValue"></div>
-        </div>
-        <button type="button" class="hub__email-update" id="hubEmailUpdateBtn">Update</button>
-      </div>
+      <!-- Authorized emails section (rendered by JS) -->
+      <div class="hub__auth-emails" id="hub-auth-emails"></div>
     </div>
 
     <!-- VIEW: Error -->
