@@ -682,6 +682,173 @@
     });
   }
 
+  function clearAuthEmailMessage() {
+    var msgEl = document.getElementById('authEmailMessage');
+    if (msgEl) msgEl.innerHTML = '';
+  }
+
+  function showAuthEmailError(message) {
+    var msgEl = document.getElementById('authEmailMessage');
+    if (msgEl) {
+      msgEl.innerHTML = '<div class="hub__auth-email-error">' + escHtml(message) + '</div>';
+    }
+  }
+
+  function showAuthEmailSuccess(message) {
+    var msgEl = document.getElementById('authEmailMessage');
+    if (msgEl) {
+      msgEl.innerHTML = '<div class="hub__auth-email-success">' + escHtml(message) + '</div>';
+      setTimeout(function () {
+        var successEl = msgEl.querySelector('.hub__auth-email-success');
+        if (successEl) successEl.style.opacity = '0';
+      }, 3000);
+      setTimeout(function () { msgEl.innerHTML = ''; }, 3500);
+    }
+  }
+
+  function refetchSitesAndRerender() {
+    apiCall('/api/hub/list-sites', {}, true)
+      .then(function (data) {
+        var sites = data.sites || [];
+        setSites(sites);
+        var installationId = getInstallationId();
+        var siteData = null;
+        sites.forEach(function (s) { if (s.installation_id === installationId) siteData = s; });
+        renderAuthEmails(siteData ? siteData.authorized_emails : [], sessionStorage.getItem('sitestaffr_email') || '');
+      })
+      .catch(function () { fetchAccountState(); });
+  }
+
+  function handleAuthEmailError(err, fallbackMessage) {
+    if (err.message === 'session_expired') return;
+    var msg = fallbackMessage || 'Something went wrong. Please try again.';
+    if (err.message === 'already_authorized') msg = 'This email already has access.';
+    else if (err.message === 'max_emails_reached') msg = 'Maximum of 5 emails reached.';
+    else if (err.message === 'invalid_email') msg = 'Please enter a valid email address.';
+    else if (err.message === 'cannot_remove_self') msg = 'You cannot remove your own access.';
+    else if (err.message === 'cannot_remove_primary') msg = 'Cannot remove the primary email.';
+    else if (err.message === 'account_not_found') {
+      // Account gone — sign out
+      clearSession();
+      showSessionExpired('');
+      return;
+    } else if (err.message === 'email_not_found') {
+      // Stale list — re-fetch sites and re-render card
+      refetchSitesAndRerender();
+      return;
+    } else if (err.message === 'not_authorized' || err.message === 'site_not_found') {
+      // Lost access to this site — re-fetch sites, redirect to site picker
+      setInstallationId('');
+      apiCall('/api/hub/list-sites', {}, true)
+        .then(function (data) {
+          var sites = data.sites || [];
+          setSites(sites);
+          if (sites.length === 0) {
+            setView('error', '');
+            var errorText = document.getElementById('hubErrorText');
+            if (errorText) errorText.textContent = 'You no longer have access to any sites.';
+          } else if (sites.length === 1) {
+            setInstallationId(sites[0].installation_id);
+            fetchAccountState();
+          } else {
+            renderSitePicker(sites);
+          }
+        })
+        .catch(function () { clearSession(); showSessionExpired(''); });
+      return;
+    }
+    showAuthEmailError(msg);
+  }
+
+  function updateSiteAuthorizedEmails(authorizedEmails) {
+    var sites = getSites();
+    var installationId = getInstallationId();
+    sites.forEach(function (site) {
+      if (site.installation_id === installationId) {
+        site.authorized_emails = authorizedEmails;
+      }
+    });
+    setSites(sites);
+  }
+
+  function reRenderAuthEmails(authorizedEmails) {
+    updateSiteAuthorizedEmails(authorizedEmails);
+    renderAuthEmails(authorizedEmails, sessionStorage.getItem('sitestaffr_email') || '');
+  }
+
+  function handleAddAuthorizedEmail(btn) {
+    var input = document.getElementById('authEmailAddInput');
+    var email = input ? input.value.trim() : '';
+    if (!email) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Sending\u2026';
+    clearAuthEmailMessage();
+
+    apiCall('/api/hub/authorized-emails', { email: email }, true)
+      .then(function (data) {
+        reRenderAuthEmails(data.authorized_emails);
+        showAuthEmailSuccess('Access granted. Login link sent to ' + email + '.');
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Send Invite';
+        handleAuthEmailError(err);
+      });
+  }
+
+  function handleShowRemoveConfirm(btn) {
+    var email = btn.dataset.email;
+    var row = btn.closest('.hub__auth-email-row');
+    if (!row) return;
+
+    row.outerHTML = '<div class="hub__auth-email-confirm" data-email="' + escHtml(email) + '">'
+      + '<span class="hub__auth-email-confirm-text">Remove access for ' + escHtml(email) + '?</span>'
+      + '<div class="hub__auth-email-confirm-actions">'
+      + '<button type="button" class="hub__auth-email-confirm-btn" data-action="remove-cancel">Cancel</button>'
+      + '<button type="button" class="hub__auth-email-confirm-btn hub__auth-email-confirm-btn--danger" data-action="remove-confirm" data-email="' + escHtml(email) + '">Confirm</button>'
+      + '</div></div>';
+  }
+
+  function handleRemoveAuthorizedEmail(btn) {
+    var email = btn.dataset.email;
+    if (!email) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Removing\u2026';
+    clearAuthEmailMessage();
+
+    apiCall('/api/hub/authorized-emails/remove', { email: email }, true)
+      .then(function (data) {
+        reRenderAuthEmails(data.authorized_emails);
+        showAuthEmailSuccess(email + ' has been removed.');
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Confirm';
+        handleAuthEmailError(err);
+      });
+  }
+
+  function handleSetInvoiceRecipient(btn) {
+    var email = btn.dataset.email;
+    if (!email) return;
+
+    btn.disabled = true;
+    btn.textContent = 'Updating\u2026';
+    clearAuthEmailMessage();
+
+    apiCall('/api/hub/authorized-emails/invoice-recipient', { email: email }, true)
+      .then(function (data) {
+        reRenderAuthEmails(data.authorized_emails);
+      })
+      .catch(function (err) {
+        btn.disabled = false;
+        btn.textContent = 'Set as invoice recipient';
+        handleAuthEmailError(err);
+      });
+  }
+
   /* ---- Plan card delegation (called once from init) ---- */
 
   function initPlanCardDelegation() {
