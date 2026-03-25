@@ -597,6 +597,91 @@
     container.innerHTML = html;
   }
 
+  function initAuthEmailsDelegation() {
+    var container = document.getElementById('hub-auth-emails');
+    if (!container) return;
+
+    container.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-action]');
+      if (!btn || btn.disabled) return;
+
+      var action = btn.dataset.action;
+
+      if (action === 'update-email') {
+        var modal = document.getElementById('hubEmailModal');
+        if (modal) {
+          modal.hidden = false;
+          var input = document.getElementById('newEmail');
+          if (input) input.focus();
+        }
+        return;
+      }
+
+      if (action === 'add-show') {
+        var addForm = document.getElementById('authEmailAddForm');
+        if (addForm) {
+          addForm.hidden = false;
+          var addInput = document.getElementById('authEmailAddInput');
+          if (addInput) { addInput.value = ''; addInput.focus(); }
+        }
+        return;
+      }
+
+      if (action === 'add-cancel') {
+        var addForm = document.getElementById('authEmailAddForm');
+        if (addForm) addForm.hidden = true;
+        clearAuthEmailMessage();
+        return;
+      }
+
+      if (action === 'add-submit') {
+        handleAddAuthorizedEmail(btn);
+        return;
+      }
+
+      if (action === 'remove-show') {
+        handleShowRemoveConfirm(btn);
+        return;
+      }
+
+      if (action === 'remove-confirm') {
+        handleRemoveAuthorizedEmail(btn);
+        return;
+      }
+
+      if (action === 'remove-cancel') {
+        // Re-render to restore normal row
+        var currentSites = getSites();
+        var currentInstallation = getInstallationId();
+        var siteData = null;
+        currentSites.forEach(function (s) { if (s.installation_id === currentInstallation) siteData = s; });
+        renderAuthEmails(siteData ? siteData.authorized_emails : [], sessionStorage.getItem('sitestaffr_email') || '');
+        return;
+      }
+
+      if (action === 'set-invoice-recipient') {
+        handleSetInvoiceRecipient(btn);
+        return;
+      }
+    });
+
+    // Keyboard: Enter submits add form, Escape cancels
+    container.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' && e.target.id === 'authEmailAddInput') {
+        e.preventDefault();
+        var submitBtn = container.querySelector('[data-action="add-submit"]');
+        if (submitBtn && !submitBtn.disabled) handleAddAuthorizedEmail(submitBtn);
+      }
+      if (e.key === 'Escape') {
+        var addForm = document.getElementById('authEmailAddForm');
+        if (addForm && !addForm.hidden) {
+          addForm.hidden = true;
+          clearAuthEmailMessage();
+        }
+      }
+    });
+  }
+
   /* ---- Plan card delegation (called once from init) ---- */
 
   function initPlanCardDelegation() {
@@ -753,18 +838,15 @@
 
   function initEmailUpdateModal() {
     var modal = document.getElementById('hubEmailModal');
-    var openBtn = document.getElementById('hubEmailUpdateBtn');
+    var openBtn = null; // now opened via event delegation on #hub-auth-emails
     var cancelBtn = document.getElementById('emailUpdateCancel');
     var form = document.getElementById('emailUpdateForm');
     var submitBtn = document.getElementById('emailUpdateSubmit');
     var messageEl = document.getElementById('emailUpdateMessage');
 
-    if (!openBtn || !modal) return;
+    if (!modal) return;
 
-    openBtn.addEventListener('click', function () {
-      modal.hidden = false;
-      document.getElementById('newEmail').focus();
-    });
+    // Email update modal is now opened via delegation from the auth emails card
 
     cancelBtn.addEventListener('click', function () {
       modal.hidden = true;
@@ -834,6 +916,7 @@
     initMagicLinkForm();
     initPlanCardDelegation();
     initEmailUpdateModal();
+    initAuthEmailsDelegation();
     initBuyModal();
     initSiteSwitcherDismissal();
     handleCheckoutRedirect();
