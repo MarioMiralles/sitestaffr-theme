@@ -3478,6 +3478,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: 0 0 0 2px var(--teal-pale);
 }
 .hub__auth-email-add-submit {
+  flex-shrink: 0;
   padding: 8px 16px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -3494,6 +3495,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   cursor: default;
 }
 .hub__auth-email-add-cancel {
+  flex-shrink: 0;
   font-size: 0.85rem;
   color: var(--text-muted);
   text-decoration: underline;
