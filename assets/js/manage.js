@@ -541,9 +541,6 @@
 
     var html = '<div class="hub__auth-emails-header">';
     html += '<span class="hub__auth-emails-title">Billing Access</span>';
-    if (emails.length < maxEmails) {
-      html += '<button type="button" class="hub__auth-emails-add-btn" data-action="add-show">+ Add</button>';
-    }
     html += '</div>';
 
     html += '<div class="hub__auth-emails-list">';
@@ -574,7 +571,7 @@
       // Actions
       html += '<div class="hub__auth-email-actions">';
       if (isPrimary) {
-        html += '<button type="button" class="hub__auth-email-action" data-action="update-email">Update</button>';
+        html += '<button type="button" class="hub__auth-email-action" data-action="update-email">Change email</button>';
       } else if (!isSelf) {
         html += '<button type="button" class="hub__auth-email-action" data-action="remove-show" data-email="' + escHtml(email) + '">Remove</button>';
       }
@@ -584,7 +581,12 @@
     });
     html += '</div>';
 
-    // Inline add form placeholder (hidden by default, shown on + Add click)
+    // "+ Add" link below the list
+    if (emails.length < maxEmails) {
+      html += '<button type="button" class="hub__auth-emails-add-btn" data-action="add-show">+ Add email</button>';
+    }
+
+    // Inline add form (hidden by default, shown on + Add click)
     html += '<div class="hub__auth-email-add" id="authEmailAddForm" hidden>';
     html += '<input type="email" id="authEmailAddInput" placeholder="email@example.com" autocomplete="email">';
     html += '<button type="button" class="hub__auth-email-add-submit" data-action="add-submit">Send Invite</button>';

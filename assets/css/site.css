@@ -3346,6 +3346,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: none;
   border: none;
   font-family: inherit;
+  margin-top: 8px;
 }
 .hub__auth-emails-add-btn:disabled {
   opacity: 0.5;
@@ -3454,11 +3455,13 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 /* Inline add form */
 .hub__auth-email-add {
-  display: flex;
   align-items: center;
   gap: 8px;
   padding: 12px 0;
   flex-wrap: wrap;
+}
+.hub__auth-email-add:not([hidden]) {
+  display: flex;
 }
 .hub__auth-email-add input {
   flex: 1;
