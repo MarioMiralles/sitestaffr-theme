@@ -3339,14 +3339,18 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--text-primary);
 }
 .hub__auth-emails-add-btn {
+  display: inline-block;
   font-size: 0.85rem;
+  font-weight: 600;
   color: var(--teal-deep);
-  text-decoration: underline;
   cursor: pointer;
-  background: none;
-  border: none;
+  background: var(--teal-pale);
+  border: 1px dashed var(--teal-deep);
+  border-radius: 6px;
+  padding: 8px 16px;
   font-family: inherit;
-  margin-top: 8px;
+  margin-top: 12px;
+  text-decoration: none;
 }
 .hub__auth-emails-add-btn:disabled {
   opacity: 0.5;
