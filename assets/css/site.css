@@ -3464,8 +3464,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: flex;
 }
 .hub__auth-email-add input {
-  flex: 1;
-  min-width: 200px;
+  width: 280px;
   padding: 8px 12px;
   font-size: 0.9rem;
   border-radius: 6px;
