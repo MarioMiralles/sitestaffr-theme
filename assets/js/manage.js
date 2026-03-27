@@ -122,7 +122,7 @@
     banner.textContent = 'Your session has expired. Request a new link to continue.';
     banner.hidden = false;
 
-    setView('unauthenticated', 'Access your billing and subscription settings.');
+    setView('unauthenticated', 'Use your billing-access email to manage plans, minutes, and team access.');
 
     if (emailValue) {
       var emailInput = document.getElementById('magicLinkEmail');
@@ -222,7 +222,7 @@
         if (err.message === 'session_expired') return;
         cleanUrl();
         if (err.message === 'invalid_or_expired_token') {
-          setView('unauthenticated', 'Access your billing and subscription settings.');
+          setView('unauthenticated', 'Use your billing-access email to manage plans, minutes, and team access.');
           var banner = document.getElementById('hubBanner');
           banner.className = 'hub__banner hub__banner--expired';
           banner.textContent = 'This link has expired or already been used. Request a new one below.';
@@ -243,7 +243,7 @@
         cleanUrl();
         var banner = document.getElementById('hubBanner');
         banner.className = 'hub__banner hub__banner--success';
-        banner.textContent = 'Your billing email has been updated successfully.';
+        banner.textContent = 'Your primary billing email has been updated successfully.';
         banner.hidden = false;
 
         /* Try to load dashboard if session exists */
@@ -251,13 +251,13 @@
         if (session) {
           fetchAccountState();
         } else {
-          setView('unauthenticated', 'Access your billing and subscription settings.');
+          setView('unauthenticated', 'Use your billing-access email to manage plans, minutes, and team access.');
         }
       })
       .catch(function (err) {
         if (err.message === 'session_expired') return;
         cleanUrl();
-        setView('unauthenticated', 'Access your billing and subscription settings.');
+        setView('unauthenticated', 'Use your billing-access email to manage plans, minutes, and team access.');
         var banner = document.getElementById('hubBanner');
         banner.className = 'hub__banner hub__banner--expired';
         banner.textContent = 'This verification link has expired or already been used.';
@@ -268,7 +268,7 @@
   /* ---- Fetch account state ---- */
 
   function fetchAccountState() {
-    setView('loading', 'Loading your account...');
+    setView('loading', 'No WordPress login required. Loading your billing access...');
 
     apiCall('/api/hub/account-state', {}, true)
       .then(function (data) {
@@ -541,6 +541,7 @@
 
     var html = '<div class="hub__auth-emails-header">';
     html += '<span class="hub__auth-emails-title">Billing Access</span>';
+    html += '<p class="hub__auth-emails-subtitle">Invite teammates who should manage billing or receive invoices.</p>';
     html += '</div>';
 
     html += '<div class="hub__auth-emails-list">';
@@ -1143,7 +1144,7 @@
     }
 
     /* No token, no session */
-    setView('unauthenticated', 'Access your billing and subscription settings.');
+    setView('unauthenticated', 'Use your billing-access email to manage plans, minutes, and team access.');
   }
 
   init();

@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$landing_title = 'SiteStaffr | AI Voice Agent for WordPress';
-$landing_description = 'An AI voice agent that works 24/7 on your WordPress site. Visitors talk, it listens, and you get every detail. Supports 57+ languages.';
-$landing_keywords = 'AI voice agent, WordPress voice assistant, lead capture, phone answering service, website assistant';
+$landing_title = 'SiteStaffr | AI Website Assistant for WordPress';
+$landing_description = 'A voice-first AI website assistant for WordPress. Help visitors instantly, answer with better business context, and get clear follow-up after every conversation.';
+$landing_keywords = 'AI website assistant, AI voice agent, WordPress assistant, website lead capture, AI customer assistant';
 $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
 $landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.png';
@@ -53,7 +53,7 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
     <meta property="og:description" content="<?php echo esc_attr( $landing_description ); ?>">
     <meta property="og:url" content="<?php echo esc_url( $landing_url ); ?>">
     <meta property="og:image" content="<?php echo esc_url( $landing_image_url ); ?>">
-    <meta property="og:image:alt" content="SiteStaffr AI voice agent preview">
+    <meta property="og:image:alt" content="SiteStaffr AI website assistant preview">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo esc_attr( $landing_title ); ?>">
     <meta name="twitter:description" content="<?php echo esc_attr( $landing_description ); ?>">
@@ -83,13 +83,13 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="hero__grid">
       <div class="hero__content reveal">
-        <span class="hero__tagline">AI Voice Agent for WordPress</span>
+        <span class="hero__tagline">AI Website Assistant for WordPress</span>
         <h1 class="hero__headline">
           <span class="hero__headline-prefix">Your Website Visitors Have Questions.</span>
           <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
-          An AI voice agent that works 24/7 on your WordPress site. Visitors talk, it listens, and you get every detail. Supports 57+ languages.
+          A voice-first AI website assistant for WordPress. Visitors can talk to your site, get help faster, and leave you with clear next steps.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
@@ -278,7 +278,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
           </span>
           <div class="language-card__title">Converses naturally</div>
-          <p class="language-card__text">Your AI voice agent detects the visitor's language and responds fluently &mdash; no awkward translations or language menus.</p>
+          <p class="language-card__text">Your voice-first assistant detects the visitor&rsquo;s language and responds fluently &mdash; no awkward translations or language menus.</p>
         </div>
         <div class="language-card reveal reveal-delay-2">
           <span class="language-card__icon">
@@ -303,9 +303,9 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="features-section__header reveal">
       <span class="section-label">Features</span>
-      <h2>Everything You Need to Manage Your Conversations</h2>
+      <h2>A smarter assistant for your website, not just a widget</h2>
       <p class="features-section__subtitle">
-        SiteStaffr isn&rsquo;t just a voice widget &mdash; it&rsquo;s a complete conversation management system inside WordPress.
+        Voice leads the experience, but SiteStaffr also helps visitors chat, gets smarter with your business knowledge, and gives you clear follow-up after every conversation.
       </p>
     </div>
     <div class="features-grid">
@@ -322,7 +322,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </picture>
         </div>
         <h3 class="feature-card__title">Conversation Dashboard</h3>
-        <p class="feature-card__desc">Every conversation at a glance. See who talked, what they need, and what to do next &mdash; without leaving WordPress.</p>
+        <p class="feature-card__desc">Every conversation at a glance. See who reached out, what they needed, and what to do next without leaving WordPress.</p>
       </div>
       <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="email-recaps">
         <div class="feature-card__screenshot">
@@ -330,14 +330,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'desktop' ) ); ?>"
-              alt="Email Recaps screenshot"
+              alt="Email recaps and review links screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Email Recaps</h3>
-        <p class="feature-card__desc">Get a summary after every conversation &mdash; visitor name, contact info, what they need, and a suggested next step.</p>
+        <h3 class="feature-card__title">Email Recaps &amp; Review Links</h3>
+        <p class="feature-card__desc">Get a clear summary after every conversation, then review the details quickly when you need to follow up.</p>
       </div>
 
       <!-- Voice Agent Showcase -->
@@ -398,7 +398,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </picture>
         </div>
         <h3 class="feature-card__title">Smart Analytics</h3>
-        <p class="feature-card__desc">Track your answer rate, after-hours conversations, minutes used, and spam filtered. Know exactly how your AI is performing.</p>
+        <p class="feature-card__desc">Track minutes, trends, and conversation activity so you can see how your assistant is performing over time.</p>
       </div>
       <div class="feature-card feature-card--third reveal reveal-delay-1" data-feature-lightbox="ai-generator">
         <div class="feature-card__screenshot">
@@ -406,14 +406,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'desktop' ) ); ?>"
-              alt="AI Description Generator screenshot"
+              alt="AI Knowledge screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">AI Description Generator</h3>
-        <p class="feature-card__desc">Not sure what to tell the AI about your business? It scans your website and writes the description for you.</p>
+        <h3 class="feature-card__title">AI Knowledge</h3>
+        <p class="feature-card__desc">Sync your website content so SiteStaffr can answer with better business context instead of generic guesses.</p>
       </div>
       <div class="feature-card feature-card--third reveal reveal-delay-2" data-feature-lightbox="protection">
         <div class="feature-card__screenshot">
@@ -421,345 +421,16 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'protection', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'protection', 'desktop' ) ); ?>"
-              alt="Built-in Protection screenshot"
+              alt="Voice and text flexibility screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Built-in Protection</h3>
-        <p class="feature-card__desc">Block abusive visitors by IP, filter spam automatically, and report AI issues with one click.</p>
+        <h3 class="feature-card__title">Voice + Text Flexibility</h3>
+        <p class="feature-card__desc">Let visitors talk or type. SiteStaffr can meet them in the moment without forcing one interaction style.</p>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ========== WIDGET & BUTTON CUSTOMIZATION ========== -->
-<section class="customize-section" id="customize">
-  <div class="container">
-    <div class="customize-section__header reveal">
-      <span class="section-label">Widget and Button Customization</span>
-      <h2>Customize Your Widget and Button</h2>
-      <p class="customize-section__subtitle">
-        Match SiteStaffr to your brand with live controls for icon styles, colors, typography, borders, spacing, and hover effects.
-      </p>
-    </div>
-
-    <div class="customize-grid">
-      <article class="customize-panel reveal" id="customizeWidgetPanel">
-        <div class="customize-panel__header">
-          <h3>Floating Widget Preview</h3>
-        </div>
-
-        <div class="customize-preview customize-preview--widget">
-          <div class="customize-browser">
-            <div class="customize-browser__chrome">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="customize-browser__body customize-browser__body--widget">
-              <div class="customize-mock-site customize-mock-site--widget" aria-hidden="true">
-                <div class="customize-mock-chip-row">
-                  <span class="customize-mock-chip"></span>
-                  <span class="customize-mock-chip"></span>
-                </div>
-                <div class="customize-mock-hero">
-                  <span class="customize-mock-line customize-mock-line--lg"></span>
-                  <span class="customize-mock-line customize-mock-line--md"></span>
-                  <span class="customize-mock-line customize-mock-line--sm"></span>
-                </div>
-                <div class="customize-mock-columns">
-                  <div class="customize-mock-card">
-                    <span class="customize-mock-line customize-mock-line--md"></span>
-                    <span class="customize-mock-line customize-mock-line--sm"></span>
-                  </div>
-                  <div class="customize-mock-card">
-                    <span class="customize-mock-line customize-mock-line--sm"></span>
-                    <span class="customize-mock-line customize-mock-line--xs"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="customize-widget-off" id="lpWidgetOffNotice" hidden>Widget hidden (auto-display off)</div>
-              <button type="button" class="customize-widget-btn" id="lpWidgetPreviewButton" aria-label="Talk to our AI voice agent"></button>
-            </div>
-          </div>
-        </div>
-
-        <details class="customize-controls-toggle">
-          <summary>Customize widget settings</summary>
-          <div class="customize-controls">
-            <div class="customize-control customize-control--switch">
-              <label for="lpWidgetAutoDisplay">Show on all pages</label>
-              <input id="lpWidgetAutoDisplay" type="checkbox" checked data-widget-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpWidgetIcon">Icon type</label>
-              <select id="lpWidgetIcon" data-widget-control>
-                <option value="sitestaffr">SiteStaffr</option>
-                <option value="phone">Phone</option>
-                <option value="microphone">Microphone</option>
-                <option value="chat">Chat</option>
-                <option value="headset">Headset</option>
-              </select>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpWidgetSize">Widget size <span id="lpWidgetSizeValue" class="customize-control__value">60px</span></label>
-              <input id="lpWidgetSize" type="range" min="46" max="80" value="60" data-widget-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpWidgetIconSize">Icon size <span id="lpWidgetIconSizeValue" class="customize-control__value">40px</span></label>
-              <input id="lpWidgetIconSize" type="range" min="14" max="64" value="40" data-widget-control>
-            </div>
-
-            <div class="customize-control customize-control--full customize-radius-group">
-              <div class="customize-radius-group__header">
-                <p class="customize-radius-group__title">Border Radius</p>
-                <label class="customize-radius-group__lock" for="lpWidgetRadiusLock">
-                  <span>Lock all corners</span>
-                  <input id="lpWidgetRadiusLock" type="checkbox" data-widget-control>
-                </label>
-              </div>
-              <div class="customize-radius-group__grid">
-                <div class="customize-control customize-control--radius">
-                  <label for="lpWidgetRadiusTop">Top <span id="lpWidgetRadiusTopValue" class="customize-control__value">20px</span></label>
-                  <input id="lpWidgetRadiusTop" type="range" min="0" max="80" value="20" data-widget-control>
-                </div>
-                <div class="customize-control customize-control--radius">
-                  <label for="lpWidgetRadiusRight">Right <span id="lpWidgetRadiusRightValue" class="customize-control__value">20px</span></label>
-                  <input id="lpWidgetRadiusRight" type="range" min="0" max="80" value="20" data-widget-control>
-                </div>
-                <div class="customize-control customize-control--radius">
-                  <label for="lpWidgetRadiusBottom">Bottom <span id="lpWidgetRadiusBottomValue" class="customize-control__value">20px</span></label>
-                  <input id="lpWidgetRadiusBottom" type="range" min="0" max="80" value="20" data-widget-control>
-                </div>
-                <div class="customize-control customize-control--radius">
-                  <label for="lpWidgetRadiusLeft">Left <span id="lpWidgetRadiusLeftValue" class="customize-control__value">0px</span></label>
-                  <input id="lpWidgetRadiusLeft" type="range" min="0" max="80" value="0" data-widget-control>
-                </div>
-              </div>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpWidgetBg">Background</label>
-              <input id="lpWidgetBg" type="color" value="#10b981" data-widget-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpWidgetHoverBg">Hover color</label>
-              <input id="lpWidgetHoverBg" type="color" value="#0ea572" data-widget-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpWidgetIconColor">Icon color</label>
-              <input id="lpWidgetIconColor" type="color" value="#ffffff" data-widget-control>
-            </div>
-          </div>
-        </details>
-      </article>
-
-      <article class="customize-panel customize-panel--button reveal reveal-delay-1" id="customizeButtonPanel">
-        <div class="customize-panel__sticky">
-          <div class="customize-panel__header">
-            <h3>Inline Button Preview</h3>
-          </div>
-
-          <div class="customize-preview customize-preview--button">
-            <div class="customize-browser">
-              <div class="customize-browser__chrome">
-                <span></span><span></span><span></span>
-              </div>
-              <div class="customize-browser__body customize-browser__body--button">
-                <div class="customize-mock-site customize-mock-site--button" aria-hidden="true">
-                  <div class="customize-mock-line customize-mock-line--lg"></div>
-                  <div class="customize-mock-line customize-mock-line--md"></div>
-                  <div class="customize-mock-line customize-mock-line--sm"></div>
-                </div>
-                <section class="customize-cta-block" aria-label="Example call to action placement">
-                  <h4 class="customize-cta-block__title">Need Assistance?</h4>
-                  <div class="customize-button-wrap customize-button-wrap--cta" id="lpButtonPreviewWrap">
-                    <button type="button" class="customize-button-preview" id="lpButtonPreviewButton" aria-label="Contact us button preview"></button>
-                  </div>
-                </section>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <details class="customize-controls-toggle" id="customizeButtonControls">
-          <summary>Customize button settings</summary>
-          <div class="customize-controls">
-            <div class="customize-control customize-control--full">
-              <label for="lpButtonText">Button text</label>
-              <input id="lpButtonText" type="text" value="Contact Us" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonIcon">Icon type</label>
-              <select id="lpButtonIcon" data-button-control>
-                <option value="sitestaffr">SiteStaffr</option>
-                <option value="microphone">Microphone</option>
-                <option value="phone">Phone</option>
-                <option value="chat">Chat</option>
-                <option value="headset">Headset</option>
-                <option value="none">None</option>
-              </select>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonIconPosition">Icon position</label>
-              <select id="lpButtonIconPosition" data-button-control>
-                <option value="left">Left</option>
-                <option value="right">Right</option>
-              </select>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonIconSize">Icon size <span id="lpButtonIconSizeValue" class="customize-control__value">32px</span></label>
-              <input id="lpButtonIconSize" type="range" min="12" max="48" value="32" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonFontSize">Font size <span id="lpButtonFontSizeValue" class="customize-control__value">16px</span></label>
-              <input id="lpButtonFontSize" type="range" min="13" max="22" value="16" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonFontWeight">Font weight</label>
-              <select id="lpButtonFontWeight" data-button-control>
-                <option value="400">Normal</option>
-                <option value="600" selected>Semi-Bold</option>
-                <option value="700">Bold</option>
-              </select>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonTextTransform">Text transform</label>
-              <select id="lpButtonTextTransform" data-button-control>
-                <option value="none" selected>None</option>
-                <option value="uppercase">UPPERCASE</option>
-                <option value="capitalize">Capitalize</option>
-              </select>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonTextColor">Text color</label>
-              <input id="lpButtonTextColor" type="color" value="#ffffff" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonIconColor">Icon color</label>
-              <input id="lpButtonIconColor" type="color" value="#ffffff" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonBg">Background</label>
-              <input id="lpButtonBg" type="color" value="#1fb6cc" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonHoverBg">Hover color</label>
-              <input id="lpButtonHoverBg" type="color" value="#17a2b8" data-button-control>
-            </div>
-          </div>
-
-          <div class="customize-controls__divider">Advanced controls</div>
-
-          <div class="customize-controls customize-controls--advanced">
-            <div class="customize-control customize-control--switch">
-              <label for="lpButtonGradient">Enable gradient</label>
-              <input id="lpButtonGradient" type="checkbox" checked data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonGradientEnd">Gradient end color</label>
-              <input id="lpButtonGradientEnd" type="color" value="#10b981" data-button-control>
-            </div>
-
-            <div class="customize-control customize-control--full customize-radius-group">
-              <div class="customize-radius-group__header">
-                <p class="customize-radius-group__title">Border Radius</p>
-                <label class="customize-radius-group__lock" for="lpButtonRadiusLock">
-                  <span>Lock all corners</span>
-                  <input id="lpButtonRadiusLock" type="checkbox" data-button-control>
-                </label>
-              </div>
-              <div class="customize-radius-group__grid">
-                <div class="customize-control customize-control--radius">
-                  <label for="lpButtonRadiusTop">Top <span id="lpButtonRadiusTopValue" class="customize-control__value">80px</span></label>
-                  <input id="lpButtonRadiusTop" type="range" min="0" max="120" value="80" data-button-control>
-                </div>
-                <div class="customize-control customize-control--radius">
-                  <label for="lpButtonRadiusRight">Right <span id="lpButtonRadiusRightValue" class="customize-control__value">80px</span></label>
-                  <input id="lpButtonRadiusRight" type="range" min="0" max="120" value="80" data-button-control>
-                </div>
-                <div class="customize-control customize-control--radius">
-                  <label for="lpButtonRadiusBottom">Bottom <span id="lpButtonRadiusBottomValue" class="customize-control__value">80px</span></label>
-                  <input id="lpButtonRadiusBottom" type="range" min="0" max="120" value="80" data-button-control>
-                </div>
-                <div class="customize-control customize-control--radius">
-                  <label for="lpButtonRadiusLeft">Left <span id="lpButtonRadiusLeftValue" class="customize-control__value">80px</span></label>
-                  <input id="lpButtonRadiusLeft" type="range" min="0" max="120" value="80" data-button-control>
-                </div>
-              </div>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonBorderWidth">Border width <span id="lpButtonBorderWidthValue" class="customize-control__value">0px</span></label>
-              <input id="lpButtonBorderWidth" type="range" min="0" max="8" value="0" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonBorderColor">Border color</label>
-              <input id="lpButtonBorderColor" type="color" value="#1fb6cc" data-button-control>
-            </div>
-
-            <div class="customize-control customize-control--switch">
-              <label for="lpButtonShadow">Enable shadow</label>
-              <input id="lpButtonShadow" type="checkbox" checked data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonShadowBlur">Shadow blur <span id="lpButtonShadowBlurValue" class="customize-control__value">10px</span></label>
-              <input id="lpButtonShadowBlur" type="range" min="0" max="28" value="10" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonShadowOffset">Shadow offset <span id="lpButtonShadowOffsetValue" class="customize-control__value">4px</span></label>
-              <input id="lpButtonShadowOffset" type="range" min="0" max="18" value="4" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonPaddingX">Horizontal padding <span id="lpButtonPaddingXValue" class="customize-control__value">24px</span></label>
-              <input id="lpButtonPaddingX" type="range" min="12" max="48" value="24" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonPaddingY">Vertical padding <span id="lpButtonPaddingYValue" class="customize-control__value">12px</span></label>
-              <input id="lpButtonPaddingY" type="range" min="8" max="24" value="12" data-button-control>
-            </div>
-
-            <div class="customize-control customize-control--switch">
-              <label for="lpButtonFullWidth">Full width button</label>
-              <input id="lpButtonFullWidth" type="checkbox" data-button-control>
-            </div>
-
-            <div class="customize-control">
-              <label for="lpButtonHoverAnimation">Hover animation</label>
-              <select id="lpButtonHoverAnimation" data-button-control>
-                <option value="none" selected>None</option>
-                <option value="scale">Scale</option>
-                <option value="glow">Glow</option>
-                <option value="pulse">Pulse</option>
-              </select>
-            </div>
-          </div>
-        </details>
-      </article>
-    </div>
-
-    <p class="customize-section__note reveal">Preview only. Your live settings are saved and managed inside the SiteStaffr plugin dashboard.</p>
   </div>
 </section>
 
@@ -826,11 +497,11 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-includes reveal">
       <p class="pricing-includes__title">All plans include:</p>
       <ul class="pricing-includes__list">
-        <li>57+ languages with English translation</li>
-        <li>Conversation dashboard with full transcripts</li>
+        <li>Voice + text conversations for website visitors</li>
+        <li>AI Knowledge from your site content</li>
+        <li>Conversation dashboard with transcript review</li>
         <li>Email recap after every conversation</li>
-        <li>Widget and button customization</li>
-        <li>Built-in spam and abuse protection</li>
+        <li>57+ languages with English summaries</li>
         <li>Add-on minutes available anytime</li>
       </ul>
     </div>
@@ -995,7 +666,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </button>
         <div class="faq-item__answer">
           <div class="faq-item__answer-inner">
-            It handles it gracefully &mdash; just like a good receptionist would. It honestly says something like "I'm not sure about that, but let me take your details and have someone get back to you." No making things up, no awkward silences. It takes a message and you follow up on your terms.
+            SiteStaffr uses your website content and business knowledge first, then falls back gracefully when it needs help. If something still needs a human answer, it captures the visitor&rsquo;s details and gives you the context to follow up without guessing.
           </div>
         </div>
       </div>
@@ -1006,7 +677,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </button>
         <div class="faq-item__answer">
           <div class="faq-item__answer-inner">
-            Absolutely. You control your business name, services, hours, FAQs, and any specific details you want the AI to know. It uses this information to answer questions accurately and represent your business the way you want.
+            Absolutely. You can shape SiteStaffr with your website content, business details, services, FAQs, hours, and other important context so it reflects your business more accurately from the start.
           </div>
         </div>
       </div>
@@ -1017,7 +688,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </button>
         <div class="faq-item__answer">
           <div class="faq-item__answer-inner">
-            Yes. SiteStaffr runs in the visitor&rsquo;s browser, so the voice experience works across desktop, tablet, and modern mobile devices. As long as their browser supports microphone access, they can talk to your AI voice agent from any device.
+            Yes. SiteStaffr runs in the visitor&rsquo;s browser, so the website assistant experience works across desktop, tablet, and modern mobile devices. Visitors can talk when voice is available, and they can still engage from modern devices without feeling boxed into one interaction style.
           </div>
         </div>
       </div>

@@ -3160,6 +3160,61 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 1.05rem;
   line-height: 1.6;
 }
+.intake__next-steps {
+  max-width: 980px;
+  margin: 0 auto 32px;
+}
+.intake__next-steps-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f3fbfc 100%);
+  border: 1.5px solid #b6e2e8;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: clamp(24px, 4vw, 32px);
+}
+.intake__next-steps-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.intake__next-steps-header h2 {
+  color: var(--teal-deep);
+  font-size: clamp(1.35rem, 2.8vw, 1.8rem);
+  margin-bottom: 0;
+}
+.intake__next-steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.intake__next-step {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(31, 182, 204, 0.18);
+  border-radius: var(--radius-md);
+  padding: 18px;
+}
+.intake__next-step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--teal-deep);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.intake__next-step p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.intake__prep-note {
+  margin: 18px 0 0;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 0.95rem;
+}
 
 @media (max-width: 640px) {
   .intake__header h1 {
@@ -3167,6 +3222,9 @@ body.sitestaffr-landing-page .hero__visual > * {
     overflow-wrap: anywhere;
     font-size: clamp(1.9rem, 9vw, 2.3rem);
     line-height: 1.12;
+  }
+  .intake__next-steps-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -3329,14 +3387,21 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .hub__auth-emails-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
   margin-bottom: 16px;
 }
 .hub__auth-emails-title {
   font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-primary);
+}
+.hub__auth-emails-subtitle {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
 }
 .hub__auth-emails-add-btn {
   font-size: 0.85rem;

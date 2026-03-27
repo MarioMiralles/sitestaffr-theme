@@ -502,19 +502,19 @@ if (featureLightbox) {
 
   const lightboxData = {
     dashboard: {
-      caption: 'View all conversations with AI recaps, transcripts, read/unread status, search, and filtering \u2014 all inside your WordPress dashboard.'
+      caption: 'View every conversation with summaries, transcripts, and follow-up context so you can see who reached out and what they needed in one place.'
     },
     analytics: {
-      caption: 'Real-time metrics: total conversations, answer rate, after-hours activity, spam filtering, and minute usage \u2014 updated every billing cycle.'
+      caption: 'Track conversation volume, usage trends, and minute activity over time so you can understand how your assistant is performing.'
     },
     protection: {
-      caption: 'Ban abusive visitors by IP, filter spam, and report AI quality issues \u2014 all from the conversation detail page.'
+      caption: 'Give visitors the flexibility to start with voice or text so SiteStaffr can meet them in the moment instead of forcing one interaction style.'
     },
     'email-recaps': {
-      caption: 'Automatic email after every conversation with caller details, AI summary, full transcript, and suggested follow-up action.'
+      caption: 'Get an email recap after every conversation, then open a review link when you want the full transcript and follow-up details.'
     },
     'ai-generator': {
-      caption: 'One click to scan your website and generate a business description your AI voice agent uses to answer visitor questions accurately.'
+      caption: 'Sync your website content into AI Knowledge so SiteStaffr can answer with better business context instead of relying on generic guesses.'
     }
   };
 

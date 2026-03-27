@@ -6,8 +6,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$page_title       = 'Get Started with SiteStaffr | White-Glove AI Voice Agent Setup';
-$page_description = 'Let us set up your AI voice agent. Fill out the form and we\'ll reach out to get you started.';
+$page_title       = 'Get Started with SiteStaffr | Guided AI Website Assistant Setup';
+$page_description = 'Tell us about your business and we will help you get your SiteStaffr assistant ready to go live.';
 $page_url         = get_permalink() ? get_permalink() : home_url( '/get-started' );
 $site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
@@ -105,17 +105,41 @@ get_template_part( 'template-parts/site-nav', null, array(
 <main class="intake">
   <div class="container">
     <div class="intake__header">
-      <span class="section-label">White-glove setup</span>
-      <h1>Let us set up your AI voice agent</h1>
-      <p class="intake__subtitle">Talk to our AI voice agent to get started, or fill out the form below.</p>
+      <span class="section-label">Guided setup</span>
+      <h1>Let&rsquo;s get your SiteStaffr assistant ready to go live</h1>
+      <p class="intake__subtitle">Talk to our onboarding assistant to get started, or send your details below if you prefer to type.</p>
     </div>
+
+    <section class="intake__next-steps" aria-labelledby="intake-next-steps-title">
+      <div class="intake__next-steps-card">
+        <div class="intake__next-steps-header">
+          <span class="section-label">What happens next</span>
+          <h2 id="intake-next-steps-title">A quick setup flow that keeps things moving</h2>
+        </div>
+        <div class="intake__next-steps-grid">
+          <div class="intake__next-step">
+            <span class="intake__next-step-number">1</span>
+            <p>We review your site and business details.</p>
+          </div>
+          <div class="intake__next-step">
+            <span class="intake__next-step-number">2</span>
+            <p>We shape the assistant around your website content.</p>
+          </div>
+          <div class="intake__next-step">
+            <span class="intake__next-step-number">3</span>
+            <p>We help you get it live with the right setup.</p>
+          </div>
+        </div>
+        <p class="intake__prep-note">Have your website URL, primary business email, and business phone ready.</p>
+      </div>
+    </section>
 
     <div class="voice-section">
         <div class="voice-section__cta">
             <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" variant="hero" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr"]' ); ?>
         </div>
 
-        <p class="privacy-notice">Your information will be used to set up your SiteStaffr voice agent. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
+        <p class="privacy-notice">Your information will be used to set up your SiteStaffr assistant. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
     </div>
 
     <div class="section-divider" id="formToggle">
@@ -163,7 +187,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2 class="form-success__title">We'll be in touch!</h2>
-        <p class="form-success__text">Thanks for your interest in SiteStaffr. We'll reach out within one business day to get your AI voice agent set up.</p>
+        <p class="form-success__text">Thanks for your interest in SiteStaffr. We&rsquo;ll reach out within one business day to help get your assistant ready to go live.</p>
       </div>
     </div>
     </div>

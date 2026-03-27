@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $page_title       = 'Manage Your Account | SiteStaffr';
-$page_description = 'Manage your SiteStaffr subscription, billing, and account settings.';
+$page_description = 'Manage your SiteStaffr plan, add-on minutes, and billing access from a secure email link.';
 $page_url         = get_permalink() ? get_permalink() : home_url( '/manage' );
 $site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
@@ -36,7 +36,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="hub__header">
       <h1>Manage Your Account</h1>
-      <p id="hubSubtitle">Loading your account...</p>
+      <p id="hubSubtitle">No WordPress login required. Loading your billing access...</p>
     </div>
 
     <!-- Banner (checkout result, session expired) -->
@@ -58,7 +58,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     <!-- VIEW: Unauthenticated -->
     <div class="hub__view hub__view--unauthenticated">
       <div class="form-card">
-        <p style="color: var(--text-secondary); margin-bottom: 24px; text-align: center;">Enter your email to receive a secure login link.</p>
+        <p style="color: var(--text-secondary); margin-bottom: 24px; text-align: center;">Enter the email you use for billing access. We&rsquo;ll send a secure link so you can manage your plan, add-on minutes, and team billing access.</p>
         <form id="magicLinkForm" novalidate>
           <div class="form-message" id="magicLinkMessage"></div>
           <div class="form-group">
@@ -75,7 +75,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <h2 class="form-success__title">Check your email</h2>
-          <p class="form-success__text">If an account exists for that email, you'll receive a secure link to manage your billing. The link expires in 30 minutes.</p>
+          <p class="form-success__text">If an account exists for that email, you&rsquo;ll receive a secure link to manage your plan and billing access. The link expires in 30 minutes.</p>
         </div>
       </div>
     </div>
