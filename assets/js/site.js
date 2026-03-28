@@ -502,19 +502,19 @@ if (featureLightbox) {
 
   const lightboxData = {
     dashboard: {
-      caption: 'View every conversation with summaries, transcripts, and follow-up context so you can see who reached out and what they needed in one place.'
+      caption: 'See which conversations need your attention, what each visitor needed, and who deserves a callback once you have a moment.'
     },
     analytics: {
-      caption: 'Track conversation volume, usage trends, and minute activity over time so you can understand how your assistant is performing.'
+      caption: 'Track conversation activity and minute usage so you can see how much front-desk work SiteStaffr is handling in the background.'
     },
     protection: {
-      caption: 'Give visitors the flexibility to start with voice or text so SiteStaffr can meet them in the moment instead of forcing one interaction style.'
+      caption: 'Visitors can talk or type to get help whether you are on a job, with a customer, or away from the office.'
     },
     'email-recaps': {
-      caption: 'Get an email recap after every conversation, then open a review link when you want the full transcript and follow-up details.'
+      caption: 'SiteStaffr leaves you the recap instead of the interruption, with a quick summary first and the full review link when you need it.'
     },
     'ai-generator': {
-      caption: 'Sync your website content into AI Knowledge so SiteStaffr can answer with better business context instead of relying on generic guesses.'
+      caption: 'Feed SiteStaffr your website content so it learns the details once instead of making you repeat the same business information again and again.'
     }
   };
 

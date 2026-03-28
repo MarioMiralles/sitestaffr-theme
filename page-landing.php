@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $landing_title = 'SiteStaffr | AI Website Assistant for WordPress';
-$landing_description = 'A voice-first AI website assistant for WordPress. Help visitors instantly, answer with better business context, and get clear follow-up after every conversation.';
+$landing_description = 'A voice-first AI website assistant for WordPress that helps everyday businesses stay responsive, answer repeat questions, and follow up clearly without being glued to the front desk.';
 $landing_keywords = 'AI website assistant, AI voice agent, WordPress assistant, website lead capture, AI customer assistant';
 $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
@@ -302,10 +302,10 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="features-section">
   <div class="container">
     <div class="features-section__header reveal">
-      <span class="section-label">Features</span>
-      <h2>A smarter assistant for your website, not just a widget</h2>
+      <span class="section-label">While you&apos;re busy</span>
+      <h2>Your website can still help people without pulling you away from work</h2>
       <p class="features-section__subtitle">
-        Voice leads the experience, but SiteStaffr also helps visitors chat, gets smarter with your business knowledge, and gives you clear follow-up after every conversation.
+        SiteStaffr answers the repeat questions, helps visitors right away, and leaves you with the clear follow-up instead of making you play receptionist all day.
       </p>
     </div>
     <div class="features-grid">
@@ -315,14 +315,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'desktop' ) ); ?>"
-              alt="Conversation Dashboard screenshot"
+              alt="Conversation follow-up dashboard screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Conversation Dashboard</h3>
-        <p class="feature-card__desc">Every conversation at a glance. See who reached out, what they needed, and what to do next without leaving WordPress.</p>
+        <h3 class="feature-card__title">Shows you who actually needs a callback</h3>
+        <p class="feature-card__desc">See who reached out, what they needed, and which conversations deserve your attention once you finally have a minute.</p>
       </div>
       <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="email-recaps">
         <div class="feature-card__screenshot">
@@ -330,23 +330,23 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'desktop' ) ); ?>"
-              alt="Email recaps and review links screenshot"
+              alt="Email recap and transcript review screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Email Recaps &amp; Review Links</h3>
-        <p class="feature-card__desc">Get a clear summary after every conversation, then review the details quickly when you need to follow up.</p>
+        <h3 class="feature-card__title">Leaves you the recap, not the interruption</h3>
+        <p class="feature-card__desc">Instead of stopping what you&apos;re doing, you get a clear summary and a review link waiting for you after the conversation ends.</p>
       </div>
 
       <!-- Voice Agent Showcase -->
       <div class="voice-showcase voice-showcase--full reveal" id="voiceShowcase">
         <div class="voice-showcase__header">
-          <h3 class="voice-showcase__title">Meet Your AI Voice Agent</h3>
+          <h3 class="voice-showcase__title">Hear the voice your visitors will talk to</h3>
           <p class="voice-showcase__subtitle">
-            <span>Choose from 10 unique AI voices, each with their own personality.</span>
-            <span>Preview them right here.</span>
+            <span>Choose the personality that fits your business.</span>
+            <span>Preview how natural SiteStaffr can sound before you go live.</span>
           </p>
         </div>
         <div class="voice-showcase__display">
@@ -391,14 +391,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'desktop' ) ); ?>"
-              alt="Smart Analytics screenshot"
+              alt="Conversation activity analytics screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Smart Analytics</h3>
-        <p class="feature-card__desc">Track minutes, trends, and conversation activity so you can see how your assistant is performing over time.</p>
+        <h3 class="feature-card__title">Shows what it handled for you</h3>
+        <p class="feature-card__desc">Track conversation activity and minute usage so you can see how much front-desk work SiteStaffr is covering in the background.</p>
       </div>
       <div class="feature-card feature-card--third reveal reveal-delay-1" data-feature-lightbox="ai-generator">
         <div class="feature-card__screenshot">
@@ -406,14 +406,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'desktop' ) ); ?>"
-              alt="AI Knowledge screenshot"
+              alt="AI Knowledge sync screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">AI Knowledge</h3>
-        <p class="feature-card__desc">Sync your website content so SiteStaffr can answer with better business context instead of generic guesses.</p>
+        <h3 class="feature-card__title">Learns your business details</h3>
+        <p class="feature-card__desc">Use your website content so SiteStaffr can answer the common questions without you repeating the same business details all week.</p>
       </div>
       <div class="feature-card feature-card--third reveal reveal-delay-2" data-feature-lightbox="protection">
         <div class="feature-card__screenshot">
@@ -421,14 +421,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'protection', 'mobile' ) ); ?>">
             <img
               src="<?php echo esc_url( $feature_screenshot_url( 'protection', 'desktop' ) ); ?>"
-              alt="Voice and text flexibility screenshot"
+              alt="Voice and text conversation screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Voice + Text Flexibility</h3>
-        <p class="feature-card__desc">Let visitors talk or type. SiteStaffr can meet them in the moment without forcing one interaction style.</p>
+        <h3 class="feature-card__title">Helps visitors while you&apos;re busy</h3>
+        <p class="feature-card__desc">Whether you&apos;re on a job, with a customer, or done for the day, visitors can talk or type and still get help right away.</p>
       </div>
     </div>
   </div>
@@ -479,7 +479,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="step__number-icon">✨</span>
         </div>
         <h3>Go live instantly</h3>
-        <p class="step__desc">Your widget is active by default after setup. Keep it as-is, toggle it off, or customize the widget and button anytime.</p>
+        <p class="step__desc">Your website assistant is active by default after setup. We can fine-tune the details later, but the goal is to get you live fast.</p>
         <span class="step__time">You're done</span>
       </div>
     </div>
@@ -492,13 +492,13 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-section__header reveal">
       <span class="section-label" id="pricing-label">Simple, transparent pricing</span>
       <h2>Start free. Upgrade when you're ready.</h2>
-      <p class="pricing-section__subtitle">No contracts. No hidden fees. No surprise charges.</p>
+      <p class="pricing-section__subtitle">Practical pricing for everyday businesses. No contracts. No hidden fees. No surprise charges.</p>
     </div>
     <div class="pricing-includes reveal">
       <p class="pricing-includes__title">All plans include:</p>
       <ul class="pricing-includes__list">
-        <li>Voice + text conversations for website visitors</li>
-        <li>AI Knowledge from your site content</li>
+        <li>Visitors can talk or type to get help right away</li>
+        <li>Learns your business from your website content</li>
         <li>Conversation dashboard with transcript review</li>
         <li>Email recap after every conversation</li>
         <li>57+ languages with English summaries</li>
@@ -514,7 +514,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="pricing-card__minutes">30 minutes included</div>
         <ul class="pricing-card__features">
           <li>2 AI voices</li>
-          <li>AI description generations</li>
+          <li>AI description generator included</li>
           <li>No credit card required</li>
         </ul>
         <p class="pricing-card__best-for">Try SiteStaffr free for 30 days</p>
@@ -546,7 +546,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <li>Custom greeting + 4 tone styles</li>
           <li>5 AI description generations per billing cycle</li>
         </ul>
-        <p class="pricing-card__best-for">Best for growing local businesses</p>
+        <p class="pricing-card__best-for">Best for busy local businesses</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
       </div>
       <div class="pricing-card reveal reveal-delay-3">
@@ -558,10 +558,10 @@ get_template_part( 'template-parts/site-nav', null, array(
         <ul class="pricing-card__features">
           <li>All 10 AI voices</li>
           <li>Custom greeting + 4 tone styles</li>
-          <li>20 AI description generations per billing cycle</li>
+          <li>10 AI description generations per billing cycle</li>
           <li>Priority access to new features</li>
         </ul>
-        <p class="pricing-card__best-for">Best for multi-location or high-traffic sites</p>
+        <p class="pricing-card__best-for">Best for high-volume or multi-location businesses</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
     </div>
