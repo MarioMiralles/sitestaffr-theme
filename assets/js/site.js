@@ -502,19 +502,19 @@ if (featureLightbox) {
 
   const lightboxData = {
     dashboard: {
-      caption: 'See which conversations need your attention, what each visitor needed, and who deserves a callback once you have a moment.'
+      caption: 'See who reached out, what they asked, and who you may want to follow up with.'
     },
     analytics: {
-      caption: 'Track conversation activity and minute usage so you can see how much front-desk work SiteStaffr is handling in the background.'
+      caption: 'Track conversations and minutes so you can see how much visitor help SiteStaffr handled for you.'
     },
     protection: {
-      caption: 'Visitors can talk or type to get help whether you are on a job, with a customer, or away from the office.'
+      caption: 'Visitors can talk or type to get help right away, even when you are busy or away.'
     },
     'email-recaps': {
-      caption: 'SiteStaffr leaves you the recap instead of the interruption, with a quick summary first and the full review link when you need it.'
+      caption: 'Get a simple recap after every conversation, plus a review link when you want the full transcript.'
     },
     'ai-generator': {
-      caption: 'Feed SiteStaffr your website content so it learns the details once instead of making you repeat the same business information again and again.'
+      caption: 'Use your website content to teach SiteStaffr the key details about your business so it can answer more accurately.'
     }
   };
 

@@ -302,10 +302,10 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="features-section">
   <div class="container">
     <div class="features-section__header reveal">
-      <span class="section-label">While you&apos;re busy</span>
-      <h2>Your website can still help people without pulling you away from work</h2>
+      <span class="section-label">Always-on help</span>
+      <h2>Your website can answer visitors while you&apos;re busy</h2>
       <p class="features-section__subtitle">
-        SiteStaffr answers the repeat questions, helps visitors right away, and leaves you with the clear follow-up instead of making you play receptionist all day.
+        SiteStaffr answers common questions, helps visitors right away, and gives you a simple recap so you only step in when you need to.
       </p>
     </div>
     <div class="features-grid">
@@ -321,8 +321,8 @@ get_template_part( 'template-parts/site-nav', null, array(
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Shows you who actually needs a callback</h3>
-        <p class="feature-card__desc">See who reached out, what they needed, and which conversations deserve your attention once you finally have a minute.</p>
+        <h3 class="feature-card__title">See who reached out</h3>
+        <p class="feature-card__desc">Open the dashboard to see who contacted you, what they needed, and whether you should follow up.</p>
       </div>
       <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="email-recaps">
         <div class="feature-card__screenshot">
@@ -336,17 +336,17 @@ get_template_part( 'template-parts/site-nav', null, array(
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Leaves you the recap, not the interruption</h3>
-        <p class="feature-card__desc">Instead of stopping what you&apos;re doing, you get a clear summary and a review link waiting for you after the conversation ends.</p>
+        <h3 class="feature-card__title">Get a quick recap</h3>
+        <p class="feature-card__desc">After each conversation, SiteStaffr sends a simple summary and a review link so you can catch up fast.</p>
       </div>
 
       <!-- Voice Agent Showcase -->
       <div class="voice-showcase voice-showcase--full reveal" id="voiceShowcase">
         <div class="voice-showcase__header">
-          <h3 class="voice-showcase__title">Hear the voice your visitors will talk to</h3>
+          <h3 class="voice-showcase__title">Hear how SiteStaffr sounds</h3>
           <p class="voice-showcase__subtitle">
             <span>Choose the personality that fits your business.</span>
-            <span>Preview how natural SiteStaffr can sound before you go live.</span>
+            <span>Preview how natural it sounds before you go live.</span>
           </p>
         </div>
         <div class="voice-showcase__display">
@@ -397,8 +397,8 @@ get_template_part( 'template-parts/site-nav', null, array(
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Shows what it handled for you</h3>
-        <p class="feature-card__desc">Track conversation activity and minute usage so you can see how much front-desk work SiteStaffr is covering in the background.</p>
+        <h3 class="feature-card__title">See how much it handled</h3>
+        <p class="feature-card__desc">Track conversations and minutes so you can see how much visitor help SiteStaffr handled for you.</p>
       </div>
       <div class="feature-card feature-card--third reveal reveal-delay-1" data-feature-lightbox="ai-generator">
         <div class="feature-card__screenshot">
@@ -412,8 +412,8 @@ get_template_part( 'template-parts/site-nav', null, array(
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Learns your business details</h3>
-        <p class="feature-card__desc">Use your website content so SiteStaffr can answer the common questions without you repeating the same business details all week.</p>
+        <h3 class="feature-card__title">Uses your business info</h3>
+        <p class="feature-card__desc">SiteStaffr can learn from your website content so it answers with the details your visitors actually need.</p>
       </div>
       <div class="feature-card feature-card--third reveal reveal-delay-2" data-feature-lightbox="protection">
         <div class="feature-card__screenshot">
@@ -427,8 +427,8 @@ get_template_part( 'template-parts/site-nav', null, array(
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Helps visitors while you&apos;re busy</h3>
-        <p class="feature-card__desc">Whether you&apos;re on a job, with a customer, or done for the day, visitors can talk or type and still get help right away.</p>
+        <h3 class="feature-card__title">Help visitors right away</h3>
+        <p class="feature-card__desc">Visitors can talk or type to get help on the spot, even when you can&apos;t answer yourself.</p>
       </div>
     </div>
   </div>
