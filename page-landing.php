@@ -89,13 +89,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
-          A voice-first AI website assistant for WordPress that helps everyday businesses answer questions, stay responsive, and follow up without being glued to the front desk.
+          A voice-first AI website assistant for WordPress that answers common questions, helps visitors right away, and sends you a clear recap after every conversation.
         </p>
-        <div class="hero__proof" aria-label="Key benefits">
-          <span class="hero__proof-item">Answers common questions</span>
-          <span class="hero__proof-item">Sends a recap after every conversation</span>
-          <span class="hero__proof-item">Built for everyday businesses</span>
-        </div>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
           <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
@@ -406,27 +401,6 @@ get_template_part( 'template-parts/site-nav', null, array(
       <h2>Start free. Upgrade when you're ready.</h2>
       <p class="pricing-section__subtitle">Practical pricing for everyday businesses. No contracts. No hidden fees. No surprise charges.</p>
     </div>
-    <div class="pricing-value-band reveal">
-      <div class="pricing-value-band__intro">
-        <span class="section-label">Built for everyday businesses</span>
-        <h3>Enterprise-level AI without enterprise overhead</h3>
-        <p>SiteStaffr gives smaller businesses the kind of instant website help that used to require dedicated staff, custom systems, or bigger budgets.</p>
-      </div>
-      <div class="pricing-value-band__list">
-        <div class="pricing-value-band__item">
-          <strong>No receptionist payroll</strong>
-          <span>Keep your website responsive without hiring someone just to answer the same questions all day.</span>
-        </div>
-        <div class="pricing-value-band__item">
-          <strong>No long setup</strong>
-          <span>Install the plugin, add your business info, and get live quickly without a developer.</span>
-        </div>
-        <div class="pricing-value-band__item">
-          <strong>No long contracts</strong>
-          <span>Start free, upgrade when you&apos;re ready, and buy extra minutes only when you need them.</span>
-        </div>
-      </div>
-    </div>
     <div class="pricing-includes reveal">
       <p class="pricing-includes__title">All plans include:</p>
       <ul class="pricing-includes__list">
@@ -501,23 +475,6 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-addon reveal">
       <h3 class="pricing-addon__title">Run out of minutes? You stay in control.</h3>
       <p class="pricing-addon__text">Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges.</p>
-    </div>
-    <div class="pricing-language-band reveal">
-      <div class="pricing-language-band__copy">
-        <span class="section-label">57+ languages</span>
-        <h3>Help more visitors without changing how you work</h3>
-        <p>SiteStaffr can speak with visitors in their language and still send your conversation summary to you in English.</p>
-      </div>
-      <div class="pricing-language-band__points">
-        <div class="pricing-language-band__point">
-          <strong>Visitors get help in their language</strong>
-          <span>Including Spanish, Mandarin, Portuguese, Arabic, Hindi, and 50+ more.</span>
-        </div>
-        <div class="pricing-language-band__point">
-          <strong>Your recap still comes in English</strong>
-          <span>One inbox, one workflow, and clear follow-up no matter how the conversation starts.</span>
-        </div>
-      </div>
     </div>
   </div>
 </section>
