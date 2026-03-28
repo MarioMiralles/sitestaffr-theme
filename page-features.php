@@ -9,6 +9,15 @@ $page_url         = home_url( '/features/' );
 $site_name        = get_bloginfo( 'name' );
 $get_started_url  = home_url( '/get-started/' );
 $manage_url       = home_url( '/manage/' );
+$body_classes     = array(
+	'wp-theme-sitestaffr-website',
+	'sitestaffr-page--default',
+	'sitestaffr-features-page',
+);
+
+if ( is_admin_bar_showing() ) {
+	$body_classes[] = 'admin-bar';
+}
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -26,14 +35,15 @@ $manage_url       = home_url( '/manage/' );
     <meta property="og:url" content="<?php echo esc_url( $page_url ); ?>">
     <?php wp_head(); ?>
     <style>
-.features-page-main {
+.features-page-main.page-content {
+    padding-bottom: 0;
     background:
         radial-gradient(circle at 10% 0%, rgba(31,182,204,0.08) 0%, rgba(31,182,204,0) 24%),
         radial-gradient(circle at 100% 18%, rgba(16,185,129,0.08) 0%, rgba(16,185,129,0) 26%),
         linear-gradient(180deg, #fefdfb 0%, #f8f5ee 100%);
 }
 .features-page-hero {
-    padding: calc(var(--section-padding) - 24px) 0 48px;
+    padding: 0 0 56px;
 }
 .features-page-hero__header {
     max-width: 760px;
@@ -101,26 +111,108 @@ $manage_url       = home_url( '/manage/' );
     line-height: 1.7;
     font-size: 0.94rem;
 }
-.features-page-split {
+.features-page-chat {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
     gap: 28px;
-    align-items: start;
+    align-items: stretch;
 }
-.features-page-panel {
+.features-page-chat__content,
+.features-page-chat__mockup {
     background: white;
     border: 1.5px solid var(--border-light);
     border-radius: var(--radius-lg);
     padding: 30px;
     box-shadow: var(--shadow-sm);
 }
-.features-page-panel h2 {
+.features-page-chat__content {
+    background: linear-gradient(180deg, #ffffff 0%, #f7fbfc 100%);
+}
+.features-page-chat__content h2 {
     margin-bottom: 14px;
 }
-.features-page-panel p {
+.features-page-chat__content p {
     color: var(--text-secondary);
     line-height: 1.75;
     margin-bottom: 18px;
+}
+.features-page-chat__mockup {
+    background: linear-gradient(180deg, #f5fbfb 0%, #eef8f5 100%);
+}
+.features-page-chat__window {
+    height: 100%;
+    min-height: 100%;
+    background: white;
+    border: 1px solid rgba(0,131,143,0.1);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+}
+.features-page-chat__window-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px;
+    background: rgba(248,251,252,0.92);
+    border-bottom: 1px solid rgba(0,131,143,0.1);
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+.features-page-chat__window-title {
+    color: var(--text-primary);
+}
+.features-page-chat__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.features-page-chat__status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--emerald);
+    box-shadow: 0 0 0 6px rgba(16,185,129,0.14);
+}
+.features-page-chat__messages {
+    display: grid;
+    gap: 12px;
+    padding: 18px;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fcfc 100%);
+}
+.features-page-chat__message {
+    max-width: 85%;
+    padding: 12px 14px;
+    border-radius: 18px;
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+.features-page-chat__message--assistant {
+    color: var(--text-primary);
+    background: white;
+    border: 1px solid rgba(0,131,143,0.1);
+    border-top-left-radius: 6px;
+}
+.features-page-chat__message--user {
+    margin-left: auto;
+    color: white;
+    background: linear-gradient(135deg, var(--teal-deep), #0d8f9c);
+    border-top-right-radius: 6px;
+}
+.features-page-chat__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0 18px 18px;
+}
+.features-page-chat__chip {
+    padding: 8px 12px;
+    border-radius: 999px;
+    background: rgba(0,131,143,0.08);
+    color: var(--teal-deep);
+    font-size: 0.82rem;
+    font-weight: 600;
 }
 .features-page-bullets {
     list-style: none;
@@ -208,7 +300,7 @@ $manage_url       = home_url( '/manage/' );
     .features-page-media-grid {
         grid-template-columns: 1fr 1fr;
     }
-    .features-page-split {
+    .features-page-chat {
         grid-template-columns: 1fr;
     }
 }
@@ -217,17 +309,25 @@ $manage_url       = home_url( '/manage/' );
     .features-page-media-grid {
         grid-template-columns: 1fr;
     }
-    .features-page-panel,
+    .features-page-chat__content,
+    .features-page-chat__mockup,
     .features-page-card {
         padding: 22px 20px;
     }
     .features-page-media-card img {
         height: 200px;
     }
+    .features-page-chat__window-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .features-page-chat__message {
+        max-width: 92%;
+    }
 }
     </style>
 </head>
-<body <?php body_class( 'sitestaffr-features-page' ); ?>>
+<body class="<?php echo esc_attr( implode( ' ', $body_classes ) ); ?>">
 <?php wp_body_open(); ?>
 
 <?php
@@ -244,19 +344,58 @@ get_template_part( 'template-parts/site-nav', null, array(
 ) );
 ?>
 
-<main class="features-page-main">
+<main class="features-page-main page-content">
   <section class="features-page-hero">
     <div class="container">
       <div class="features-page-hero__header">
         <span class="section-label">Product overview</span>
         <h1>Everything SiteStaffr can handle on your website</h1>
-        <p class="features-page-hero__subtitle">Voice is the wow moment, but the product goes further than that. SiteStaffr can help visitors by voice or text, learn your business from your website content, send clear recaps after conversations, and make setup and account management easier.</p>
+        <p class="features-page-hero__subtitle">Voice is still the wow moment, but it is not the whole product. SiteStaffr can help visitors by voice or text, use your business information to answer more confidently, send clear follow-up after conversations, and make setup and account access easier.</p>
         <div class="features-page-hero__tags">
           <span class="features-page-hero__tag">Voice + text</span>
           <span class="features-page-hero__tag">AI Knowledge</span>
           <span class="features-page-hero__tag">Recaps + transcripts</span>
           <span class="features-page-hero__tag">Guided setup</span>
           <span class="features-page-hero__tag">Billing Hub</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-page-section">
+    <div class="container">
+      <div class="features-page-chat">
+        <div class="features-page-chat__content">
+          <span class="section-label">Text chat</span>
+          <h2>A real chatbot option for visitors who would rather type</h2>
+          <p>Text chat deserves its own spotlight because a lot of visitors are browsing at work, in public, or in moments where talking out loud is not ideal. SiteStaffr gives them a clean typing experience in the same assistant your voice experience uses.</p>
+          <ul class="features-page-bullets">
+            <li>Lives in the same widget as voice, so visitors can choose what feels natural</li>
+            <li>Uses the same AI Knowledge and business details that power voice answers</li>
+            <li>Helps people get answers quietly on mobile, at work, or anywhere they would rather type</li>
+            <li>Keeps the conversation and your follow-up context together instead of splitting it across tools</li>
+          </ul>
+        </div>
+        <div class="features-page-chat__mockup" aria-hidden="true">
+          <div class="features-page-chat__window">
+            <div class="features-page-chat__window-header">
+              <span class="features-page-chat__window-title">SiteStaffr chat</span>
+              <span class="features-page-chat__status"><span class="features-page-chat__status-dot"></span>Ready to help</span>
+            </div>
+            <div class="features-page-chat__messages">
+              <div class="features-page-chat__message features-page-chat__message--assistant">Hi there. I can help with hours, pricing, services, or pass along a message if you need a follow-up.</div>
+              <div class="features-page-chat__message features-page-chat__message--user">Do you handle Saturday appointments?</div>
+              <div class="features-page-chat__message features-page-chat__message--assistant">Yes. Saturday appointments are available from 9:00 AM to 1:00 PM. If you want, I can also collect your name and best callback number for the team.</div>
+              <div class="features-page-chat__message features-page-chat__message--user">Can someone call me about pricing?</div>
+              <div class="features-page-chat__message features-page-chat__message--assistant">Absolutely. Send your name and number, and I&apos;ll include it in the follow-up recap so nothing gets missed.</div>
+            </div>
+            <div class="features-page-chat__chips">
+              <span class="features-page-chat__chip">Hours</span>
+              <span class="features-page-chat__chip">Pricing</span>
+              <span class="features-page-chat__chip">Services</span>
+              <span class="features-page-chat__chip">Request follow-up</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -271,13 +410,6 @@ get_template_part( 'template-parts/site-nav', null, array(
           </span>
           <h3>Natural voice conversations</h3>
           <p>Visitors can talk to your website and hear SiteStaffr respond out loud, which is still the strongest first impression for the product.</p>
-        </article>
-        <article class="features-page-card">
-          <span class="features-page-card__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </span>
-          <h3>Text chatbot in the same widget</h3>
-          <p>Visitors can type instead of talk when that feels easier. Voice and text both use the same business context, so it feels like one assistant, not two different tools.</p>
         </article>
         <article class="features-page-card">
           <span class="features-page-card__icon" aria-hidden="true">
@@ -307,33 +439,13 @@ get_template_part( 'template-parts/site-nav', null, array(
           <h3>Billing Hub and self-service access</h3>
           <p>Customers can manage plans, add-on minutes, and team billing access from a secure email link without logging into WordPress.</p>
         </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="features-page-section">
-    <div class="container">
-      <div class="features-page-split">
-        <div class="features-page-panel">
-          <span class="section-label">Voice + text</span>
-          <h2>Let visitors choose how they want to reach out</h2>
-          <p>Some people would rather speak. Some would rather type. SiteStaffr supports both so your website can feel helpful in the moment instead of forcing one interaction style.</p>
-          <ul class="features-page-bullets">
-            <li>Voice conversations for the most futuristic, high-impact experience</li>
-            <li>Text chat for visitors who prefer typing or cannot talk at that moment</li>
-            <li>The same assistant can carry the conversation either way</li>
-          </ul>
-        </div>
-        <div class="features-page-panel">
-          <span class="section-label">Smarter answers</span>
-          <h2>Teach SiteStaffr your business once</h2>
-          <p>The assistant can use your website content, business details, and AI-generated business description to answer questions with more confidence and less guesswork.</p>
-          <ul class="features-page-bullets">
-            <li>Website content can be used to improve answers</li>
-            <li>Hours, services, and FAQs become easier to surface consistently</li>
-            <li>The same knowledge supports both voice and text conversations</li>
-          </ul>
-        </div>
+        <article class="features-page-card">
+          <span class="features-page-card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h18"/><path d="M7 3v8"/><path d="M17 13v8"/><path d="M3 17h18"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="7" r="2"/></svg>
+          </span>
+          <h3>Follow-up clarity after every conversation</h3>
+          <p>See who reached out, what they asked, and which conversations deserve your attention once you are ready to step in.</p>
+        </article>
       </div>
     </div>
   </section>
@@ -382,5 +494,6 @@ get_template_part( 'template-parts/site-nav', null, array(
 </main>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
+<?php wp_footer(); ?>
 </body>
 </html>
