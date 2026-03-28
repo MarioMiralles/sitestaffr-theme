@@ -15,6 +15,7 @@ $landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.png';
 $site_name = get_bloginfo( 'name' );
 $show_testimonials = false;
 $get_started_url = home_url( '/get-started/' );
+$features_url = home_url( '/features/' );
 $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
     $slug = (string) $slug;
     $device = 'mobile' === $device ? 'mobile' : 'desktop';
@@ -66,6 +67,7 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
 <?php
 get_template_part( 'template-parts/site-nav', null, array(
     'menu_items' => array(
+        array( 'label' => 'Features', 'href' => $features_url ),
         array( 'label' => 'Demo', 'href' => '#hero-audio-demo' ),
         array( 'label' => 'Pricing', 'href' => '#pricing-label' ),
         array( 'label' => 'FAQ', 'href' => '#faq-label' ),
@@ -377,6 +379,10 @@ get_template_part( 'template-parts/site-nav', null, array(
         <h3 class="feature-card__title">Help visitors right away</h3>
         <p class="feature-card__desc">Visitors can talk or type to get help on the spot, even when you can&apos;t answer yourself.</p>
       </div>
+    </div>
+    <div class="features-section__footer reveal">
+      <p>Want the full product story, including text chat, AI Knowledge, guided setup, and account tools?</p>
+      <a href="<?php echo esc_url( $features_url ); ?>" class="btn btn--outline">See All Features</a>
     </div>
   </div>
 </section>

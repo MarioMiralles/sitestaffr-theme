@@ -1541,6 +1541,16 @@ body.sitestaffr-landing-page .hero__visual > * {
   text-align: center;
   margin-bottom: 56px;
 }
+.features-section__footer {
+  margin-top: 34px;
+  text-align: center;
+}
+.features-section__footer p {
+  color: var(--text-secondary);
+  margin: 0 auto 14px;
+  max-width: 620px;
+  line-height: 1.7;
+}
 .features-section h2 { margin-bottom: 16px; }
 .features-section__subtitle {
   color: var(--text-secondary);

@@ -28,6 +28,7 @@ $site_name        = get_bloginfo( 'name' );
 get_template_part( 'template-parts/site-nav', null, array(
     'menu_items' => array(
         array( 'label' => 'Home', 'href' => home_url( '/' ) ),
+        array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
     ),
 ) );
 ?>
