@@ -89,8 +89,13 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
-          A voice-first AI website assistant for WordPress. Visitors can talk to your site, get help faster, and leave you with clear next steps.
+          A voice-first AI website assistant for WordPress that helps everyday businesses answer questions, stay responsive, and follow up without being glued to the front desk.
         </p>
+        <div class="hero__proof" aria-label="Key benefits">
+          <span class="hero__proof-item">Answers common questions</span>
+          <span class="hero__proof-item">Sends a recap after every conversation</span>
+          <span class="hero__proof-item">Built for everyday businesses</span>
+        </div>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
           <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
@@ -245,59 +250,6 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== LANGUAGE SECTION: 57+ LANGUAGES ========== -->
-<section class="language-section">
-  <div class="language-section__floaters">
-    <span class="language-float">Hola</span>
-    <span class="language-float">Bonjour</span>
-    <span class="language-float">&#20320;&#22909;</span>
-    <span class="language-float">&#1605;&#1585;&#1581;&#1576;&#1575;</span>
-    <span class="language-float">Ol&aacute;</span>
-    <span class="language-float">&#12371;&#12435;&#12395;&#12385;&#12399;</span>
-    <span class="language-float">&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;</span>
-    <span class="language-float">&#50504;&#45397;&#54616;&#49464;&#50836;</span>
-    <span class="language-float">Xin ch&agrave;o</span>
-    <span class="language-float">Ciao</span>
-    <span class="language-float">Hallo</span>
-    <span class="language-float">Namaste</span>
-    <span class="language-float">Merhaba</span>
-    <span class="language-float">Salut</span>
-    <span class="language-float">Sawubona</span>
-    <span class="language-float">&#3626;&#3623;&#3633;&#3626;&#3604;&#3637;</span>
-  </div>
-  <div class="container">
-    <div class="language-section__inner reveal">
-      <span class="section-label">57+ languages, one inbox</span>
-      <h2>SiteStaffr speaks <span class="language-heading__phrase"><em>their</em> language</span></h2>
-      <p class="language-section__desc">
-        A customer visits your site and starts speaking Spanish. Or Mandarin. Or Portuguese. SiteStaffr understands them, responds naturally in their language, and delivers the full conversation summary to you &mdash; translated to English.
-      </p>
-      <div class="language-section__cards">
-        <div class="language-card reveal reveal-delay-1">
-          <span class="language-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </span>
-          <div class="language-card__title">Converses naturally</div>
-          <p class="language-card__text">Your voice-first assistant detects the visitor&rsquo;s language and responds fluently &mdash; no awkward translations or language menus.</p>
-        </div>
-        <div class="language-card reveal reveal-delay-2">
-          <span class="language-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 12h2l2-4 2 8 2-4h2"/></svg>
-          </span>
-          <div class="language-card__title">English summary for you</div>
-          <p class="language-card__text">No matter what language the conversation happens in, your recap email arrives in English with every detail captured.</p>
-        </div>
-      </div>
-      <div class="language-section__stat reveal reveal-delay-3">
-        <span class="language-section__stat-globe">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </span>
-        <span>Including Spanish, French, Mandarin, Portuguese, Arabic, Hindi, and <strong>50+ more</strong></span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ========== FEATURES SECTION ========== -->
 <section class="features-section">
   <div class="container">
@@ -446,53 +398,34 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </div>
 
-<!-- ========== SECTION 6: HOW IT WORKS ========== -->
-<section class="how-section">
-  <div class="container">
-    <div class="container--narrow reveal">
-      <span class="section-label">Setup in minutes, not days</span>
-      <h2 class="how-section__title">Three steps to start capturing website leads</h2>
-      <p class="how-section__subtitle">No developers needed. No API keys. No configuration headaches.</p>
-    </div>
-    <div class="steps">
-      <div class="step reveal">
-        <div class="step__badge">1</div>
-        <div class="step__number">
-          <span class="step__number-icon">📦</span>
-        </div>
-        <h3>Install the plugin</h3>
-        <p class="step__desc">Upload SiteStaffr to your WordPress site just like any other plugin. Activate it with one click.</p>
-        <span class="step__time">~ 2 minutes</span>
-      </div>
-      <div class="step reveal reveal-delay-1">
-        <div class="step__badge">2</div>
-        <div class="step__number">
-          <span class="step__number-icon">💬</span>
-        </div>
-        <h3>Add your business info</h3>
-        <p class="step__desc">Enter your business info during setup. After payment, select your business hours and either generate or write your business description.</p>
-        <span class="step__time">~ 5 minutes</span>
-      </div>
-      <div class="step reveal reveal-delay-2">
-        <div class="step__badge">3</div>
-        <div class="step__number">
-          <span class="step__number-icon">✨</span>
-        </div>
-        <h3>Go live instantly</h3>
-        <p class="step__desc">Your website assistant is active by default after setup. We can fine-tune the details later, but the goal is to get you live fast.</p>
-        <span class="step__time">You're done</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== SECTION 7: PRICING ========== -->
+<!-- ========== SECTION 6: PRICING ========== -->
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="pricing-section__header reveal">
       <span class="section-label" id="pricing-label">Simple, transparent pricing</span>
       <h2>Start free. Upgrade when you're ready.</h2>
       <p class="pricing-section__subtitle">Practical pricing for everyday businesses. No contracts. No hidden fees. No surprise charges.</p>
+    </div>
+    <div class="pricing-value-band reveal">
+      <div class="pricing-value-band__intro">
+        <span class="section-label">Built for everyday businesses</span>
+        <h3>Enterprise-level AI without enterprise overhead</h3>
+        <p>SiteStaffr gives smaller businesses the kind of instant website help that used to require dedicated staff, custom systems, or bigger budgets.</p>
+      </div>
+      <div class="pricing-value-band__list">
+        <div class="pricing-value-band__item">
+          <strong>No receptionist payroll</strong>
+          <span>Keep your website responsive without hiring someone just to answer the same questions all day.</span>
+        </div>
+        <div class="pricing-value-band__item">
+          <strong>No long setup</strong>
+          <span>Install the plugin, add your business info, and get live quickly without a developer.</span>
+        </div>
+        <div class="pricing-value-band__item">
+          <strong>No long contracts</strong>
+          <span>Start free, upgrade when you&apos;re ready, and buy extra minutes only when you need them.</span>
+        </div>
+      </div>
     </div>
     <div class="pricing-includes reveal">
       <p class="pricing-includes__title">All plans include:</p>
@@ -568,6 +501,63 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-addon reveal">
       <h3 class="pricing-addon__title">Run out of minutes? You stay in control.</h3>
       <p class="pricing-addon__text">Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges.</p>
+    </div>
+    <div class="pricing-language-band reveal">
+      <div class="pricing-language-band__copy">
+        <span class="section-label">57+ languages</span>
+        <h3>Help more visitors without changing how you work</h3>
+        <p>SiteStaffr can speak with visitors in their language and still send your conversation summary to you in English.</p>
+      </div>
+      <div class="pricing-language-band__points">
+        <div class="pricing-language-band__point">
+          <strong>Visitors get help in their language</strong>
+          <span>Including Spanish, Mandarin, Portuguese, Arabic, Hindi, and 50+ more.</span>
+        </div>
+        <div class="pricing-language-band__point">
+          <strong>Your recap still comes in English</strong>
+          <span>One inbox, one workflow, and clear follow-up no matter how the conversation starts.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 7: HOW IT WORKS ========== -->
+<section class="how-section">
+  <div class="container">
+    <div class="container--narrow reveal">
+      <span class="section-label">Get live quickly</span>
+      <h2 class="how-section__title">Three steps to get SiteStaffr live on your website</h2>
+      <p class="how-section__subtitle">No developers needed. No API keys. No complicated setup.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step__badge">1</div>
+        <div class="step__number">
+          <span class="step__number-icon">📦</span>
+        </div>
+        <h3>Install the plugin</h3>
+        <p class="step__desc">Upload SiteStaffr to your WordPress site just like any other plugin. Activate it with one click.</p>
+        <span class="step__time">~ 2 minutes</span>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step__badge">2</div>
+        <div class="step__number">
+          <span class="step__number-icon">💬</span>
+        </div>
+        <h3>Add your business info</h3>
+        <p class="step__desc">Enter your business info during setup. After payment, select your business hours and either generate or write your business description.</p>
+        <span class="step__time">~ 5 minutes</span>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step__badge">3</div>
+        <div class="step__number">
+          <span class="step__number-icon">✨</span>
+        </div>
+        <h3>Go live instantly</h3>
+        <p class="step__desc">Your website assistant is active by default after setup. We can fine-tune the details later, but the goal is to get you live fast.</p>
+        <span class="step__time">You're done</span>
+      </div>
     </div>
   </div>
 </section>

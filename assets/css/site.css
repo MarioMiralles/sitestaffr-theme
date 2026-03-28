@@ -363,6 +363,35 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-bottom: 14px;
   line-height: 1.7;
 }
+.hero__proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  max-width: 620px;
+  margin-bottom: 18px;
+}
+.hero__proof-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.88);
+  border: 1px solid rgba(0,131,143,0.12);
+  box-shadow: var(--shadow-sm);
+  color: var(--text-secondary);
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.hero__proof-item::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--teal-deep), var(--emerald));
+  flex-shrink: 0;
+}
 .hero__actions {
   display: flex;
   align-items: center;
@@ -2845,6 +2874,57 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-width: 520px;
   margin: 0 auto 12px;
 }
+.pricing-value-band {
+  margin: 0 auto 30px;
+  padding: 28px 30px;
+  max-width: 1120px;
+  border-radius: var(--radius-lg);
+  border: 1.5px solid rgba(0,131,143,0.14);
+  background:
+    radial-gradient(circle at 0% 0%, rgba(31,182,204,0.14) 0%, rgba(31,182,204,0) 32%),
+    radial-gradient(circle at 100% 100%, rgba(16,185,129,0.14) 0%, rgba(16,185,129,0) 40%),
+    linear-gradient(135deg, #ffffff 0%, #f3fbfc 100%);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 22px 24px;
+  align-items: start;
+}
+.pricing-value-band__intro .section-label {
+  margin-bottom: 14px;
+}
+.pricing-value-band__intro h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.35rem, 2.6vw, 1.8rem);
+}
+.pricing-value-band__intro p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.pricing-value-band__list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+.pricing-value-band__item {
+  padding: 18px 16px;
+  border-radius: 18px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(0,131,143,0.1);
+}
+.pricing-value-band__item strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+.pricing-value-band__item span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
 .pricing-includes {
   background: white;
   border: 1.5px solid var(--border-light);
@@ -3013,6 +3093,79 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.7;
 }
 .pricing-addon strong { color: var(--text-primary); }
+.pricing-language-band {
+  max-width: 920px;
+  margin: 24px auto 0;
+  padding: 24px 28px;
+  background: white;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 18px 26px;
+  align-items: start;
+}
+.pricing-language-band__copy .section-label {
+  margin-bottom: 12px;
+}
+.pricing-language-band__copy h3 {
+  margin: 0 0 10px;
+  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+}
+.pricing-language-band__copy p {
+  margin: 0;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+.pricing-language-band__points {
+  display: grid;
+  gap: 12px;
+}
+.pricing-language-band__point {
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: #f8fbfb;
+  border: 1px solid rgba(0,131,143,0.1);
+}
+.pricing-language-band__point strong {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--text-primary);
+}
+.pricing-language-band__point span {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+@media (max-width: 1024px) {
+  .pricing-value-band,
+  .pricing-language-band {
+    grid-template-columns: 1fr;
+  }
+  .pricing-value-band__list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .hero__proof {
+    gap: 8px;
+  }
+  .hero__proof-item {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .pricing-value-band,
+  .pricing-language-band {
+    padding: 20px 18px;
+  }
+  .pricing-value-band__item,
+  .pricing-language-band__point {
+    padding: 15px 14px;
+  }
+}
 
 /* ============================
    FORMS (shared)
