@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 $landing_title = 'SiteStaffr | AI Website Assistant for WordPress';
-$landing_description = 'A voice-first AI website assistant for WordPress that helps everyday businesses stay responsive, answer repeat questions, and follow up clearly without being glued to the front desk.';
+$landing_description = 'An AI website assistant for WordPress that helps everyday businesses answer repeat questions, respond by voice or text, and follow up clearly without being glued to the front desk.';
 $landing_keywords = 'AI website assistant, AI voice agent, WordPress assistant, website lead capture, AI customer assistant';
 $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
@@ -91,7 +91,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
-          A voice-first AI website assistant for WordPress that answers common questions, helps visitors right away, and sends you a clear recap after every conversation.
+          An AI website assistant for WordPress that lets visitors speak or type to get answers right away, then sends you a clear recap after every conversation.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
@@ -254,41 +254,10 @@ get_template_part( 'template-parts/site-nav', null, array(
       <span class="section-label">Always-on help</span>
       <h2>Your website can answer visitors while you&apos;re busy</h2>
       <p class="features-section__subtitle">
-        SiteStaffr answers common questions, helps visitors right away, and gives you a simple recap so you only step in when you need to.
+        SiteStaffr can talk or chat with visitors, use your business information for better answers, and give you the follow-up context without pulling you away from work.
       </p>
     </div>
     <div class="features-grid">
-      <div class="feature-card feature-card--half reveal" data-feature-lightbox="dashboard">
-        <div class="feature-card__screenshot">
-          <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'mobile' ) ); ?>">
-            <img
-              src="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'desktop' ) ); ?>"
-              alt="Conversation follow-up dashboard screenshot"
-              loading="lazy"
-              decoding="async"
-            >
-          </picture>
-        </div>
-        <h3 class="feature-card__title">See who reached out</h3>
-        <p class="feature-card__desc">Open the dashboard to see who contacted you, what they needed, and whether you should follow up.</p>
-      </div>
-      <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="email-recaps">
-        <div class="feature-card__screenshot">
-          <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'mobile' ) ); ?>">
-            <img
-              src="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'desktop' ) ); ?>"
-              alt="Email recap and transcript review screenshot"
-              loading="lazy"
-              decoding="async"
-            >
-          </picture>
-        </div>
-        <h3 class="feature-card__title">Get a quick recap</h3>
-        <p class="feature-card__desc">After each conversation, SiteStaffr sends a simple summary and a review link so you can catch up fast.</p>
-      </div>
-
       <!-- Voice Agent Showcase -->
       <div class="voice-showcase voice-showcase--full reveal" id="voiceShowcase">
         <div class="voice-showcase__header">
@@ -334,22 +303,33 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
       </div>
 
-      <div class="feature-card feature-card--third reveal" data-feature-lightbox="analytics">
-        <div class="feature-card__screenshot">
+      <article class="feature-spotlight reveal reveal-delay-1" data-feature-lightbox="protection">
+        <div class="feature-spotlight__content">
+          <span class="section-label">Text chat</span>
+          <h3 class="feature-spotlight__title">Prefer to type instead? SiteStaffr can do that too.</h3>
+          <p class="feature-spotlight__desc">
+            Visitors can chat with your website when talking isn&apos;t ideal. The same assistant can help by voice or text, so people can get answers in the way that feels easiest.
+          </p>
+          <div class="feature-spotlight__points" aria-label="Text chat highlights">
+            <span class="feature-spotlight__point">Helpful for visitors at work</span>
+            <span class="feature-spotlight__point">Easy in public or quiet spaces</span>
+            <span class="feature-spotlight__point">Same assistant, same business info</span>
+          </div>
+        </div>
+        <div class="feature-card__screenshot feature-spotlight__media">
           <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'mobile' ) ); ?>">
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'protection', 'mobile' ) ); ?>">
             <img
-              src="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'desktop' ) ); ?>"
-              alt="Conversation activity analytics screenshot"
+              src="<?php echo esc_url( $feature_screenshot_url( 'protection', 'desktop' ) ); ?>"
+              alt="Voice and text conversation screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">See how much it handled</h3>
-        <p class="feature-card__desc">Track conversations and minutes so you can see how much visitor help SiteStaffr handled for you.</p>
-      </div>
-      <div class="feature-card feature-card--third reveal reveal-delay-1" data-feature-lightbox="ai-generator">
+      </article>
+
+      <div class="feature-card feature-card--half reveal" data-feature-lightbox="ai-generator">
         <div class="feature-card__screenshot">
           <picture>
             <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'mobile' ) ); ?>">
@@ -364,20 +344,50 @@ get_template_part( 'template-parts/site-nav', null, array(
         <h3 class="feature-card__title">Uses your business info</h3>
         <p class="feature-card__desc">SiteStaffr can learn from your website content so it answers with the details your visitors actually need.</p>
       </div>
-      <div class="feature-card feature-card--third reveal reveal-delay-2" data-feature-lightbox="protection">
+      <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="email-recaps">
         <div class="feature-card__screenshot">
           <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'protection', 'mobile' ) ); ?>">
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'mobile' ) ); ?>">
             <img
-              src="<?php echo esc_url( $feature_screenshot_url( 'protection', 'desktop' ) ); ?>"
-              alt="Voice and text conversation screenshot"
+              src="<?php echo esc_url( $feature_screenshot_url( 'email-recaps', 'desktop' ) ); ?>"
+              alt="Email recap and transcript review screenshot"
               loading="lazy"
               decoding="async"
             >
           </picture>
         </div>
-        <h3 class="feature-card__title">Help visitors right away</h3>
-        <p class="feature-card__desc">Visitors can talk or type to get help on the spot, even when you can&apos;t answer yourself.</p>
+        <h3 class="feature-card__title">Get a quick recap</h3>
+        <p class="feature-card__desc">After each conversation, SiteStaffr sends a simple summary and a review link so you can catch up fast.</p>
+      </div>
+      <div class="feature-card feature-card--half reveal" data-feature-lightbox="dashboard">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'dashboard', 'desktop' ) ); ?>"
+              alt="Conversation follow-up dashboard screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">See who reached out</h3>
+        <p class="feature-card__desc">Open the dashboard to see who contacted you, what they needed, and whether you should follow up.</p>
+      </div>
+      <div class="feature-card feature-card--half reveal reveal-delay-1" data-feature-lightbox="analytics">
+        <div class="feature-card__screenshot">
+          <picture>
+            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'mobile' ) ); ?>">
+            <img
+              src="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'desktop' ) ); ?>"
+              alt="Conversation activity analytics screenshot"
+              loading="lazy"
+              decoding="async"
+            >
+          </picture>
+        </div>
+        <h3 class="feature-card__title">See how much it handled</h3>
+        <p class="feature-card__desc">Track conversations and minutes so you can see how much visitor help SiteStaffr handled for you.</p>
       </div>
     </div>
     <div class="features-section__footer reveal">
@@ -685,7 +695,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 10: FINAL CTA ========== -->
 <section class="final-cta">
   <div class="container reveal">
-    <h2>Your next customer is calling.<br>SiteStaffr answers while you're busy.</h2>
+    <h2>Your website can keep helping people while you&apos;re busy.<br>Visitors get answers. You get the recap.</h2>
     <p class="final-cta__subtitle">
       Free for 30 days. No credit card required.<br>
       <span class="final-cta__setup">Set up in under 10 minutes.</span>
