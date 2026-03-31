@@ -51,12 +51,6 @@ if ( ! function_exists( 'sitestaffr_is_features_request' ) ) {
 	}
 }
 
-if ( ! function_exists( 'sitestaffr_is_how_it_works_request' ) ) {
-	function sitestaffr_is_how_it_works_request() {
-		return 'how-it-works' === sitestaffr_request_path();
-	}
-}
-
 if ( ! function_exists( 'sitestaffr_is_pricing_request' ) ) {
 	function sitestaffr_is_pricing_request() {
 		return 'pricing' === sitestaffr_request_path();
@@ -64,18 +58,17 @@ if ( ! function_exists( 'sitestaffr_is_pricing_request' ) ) {
 }
 
 add_action( 'wp_enqueue_scripts', function () {
-	$is_landing      = is_page_template( 'page-landing.php' );
-	$is_maintenance  = is_page_template( 'page-maintenance.php' );
-	$is_legal        = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
-	$is_get_started  = is_page_template( 'page-get-started.php' );
-	$is_manage       = is_page_template( 'page-manage.php' );
-	$is_features     = sitestaffr_is_features_request();
-	$is_how_it_works = sitestaffr_is_how_it_works_request();
-	$is_pricing      = sitestaffr_is_pricing_request();
-	$is_page         = is_page();
-	$is_default      = is_home() || is_single() || is_archive() || is_search();
+	$is_landing     = is_page_template( 'page-landing.php' );
+	$is_maintenance = is_page_template( 'page-maintenance.php' );
+	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
+	$is_get_started = is_page_template( 'page-get-started.php' );
+	$is_manage      = is_page_template( 'page-manage.php' );
+	$is_features    = sitestaffr_is_features_request();
+	$is_pricing     = sitestaffr_is_pricing_request();
+	$is_page        = is_page();
+	$is_default     = is_home() || is_single() || is_archive() || is_search();
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_features && ! $is_how_it_works && ! $is_pricing && ! $is_page && ! $is_default ) {
+	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_features && ! $is_pricing && ! $is_page && ! $is_default ) {
 		return;
 	}
 
@@ -86,7 +79,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		null
 	);
 
-	if ( $is_landing || $is_features || $is_how_it_works || $is_pricing ) {
+	if ( $is_landing || $is_features || $is_pricing ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),
@@ -109,7 +102,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		) );
 	}
 
-	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage || $is_features || $is_how_it_works || $is_pricing ) {
+	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage || $is_features || $is_pricing ) {
 		wp_dequeue_style( 'wp-block-library' );
 		wp_dequeue_style( 'classic-theme-styles' );
 		wp_dequeue_style( 'global-styles' );
@@ -122,9 +115,8 @@ add_action( 'template_redirect', function () {
 	}
 
 	$routes = array(
-		'sitestaffr_is_features_request'      => '/page-features.php',
-		'sitestaffr_is_how_it_works_request'   => '/page-how-it-works.php',
-		'sitestaffr_is_pricing_request'        => '/page-pricing.php',
+		'sitestaffr_is_features_request' => '/page-features.php',
+		'sitestaffr_is_pricing_request'  => '/page-pricing.php',
 	);
 
 	foreach ( $routes as $check_fn => $template ) {
