@@ -330,19 +330,7 @@ if ( is_admin_bar_showing() ) {
 <body class="<?php echo esc_attr( implode( ' ', $body_classes ) ); ?>">
 <?php wp_body_open(); ?>
 
-<?php
-get_template_part( 'template-parts/site-nav', null, array(
-	'menu_items' => array(
-		array( 'label' => 'Home', 'href' => home_url( '/' ) ),
-		array( 'label' => 'Get Started', 'href' => $get_started_url ),
-		array( 'label' => 'My Account', 'href' => $manage_url ),
-	),
-	'cta' => array(
-		'label' => 'Get Started',
-		'href'  => $get_started_url,
-	),
-) );
-?>
+<?php get_template_part( 'template-parts/site-nav' ); ?>
 
 <main class="features-page-main page-content">
   <section class="features-page-hero">

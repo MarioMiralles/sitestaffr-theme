@@ -63,22 +63,7 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
 </head>
 <body <?php body_class( 'sitestaffr-landing-page' ); ?>>
 <?php wp_body_open(); ?>
-<!-- ========== NAVIGATION ========== -->
-<?php
-get_template_part( 'template-parts/site-nav', null, array(
-    'menu_items' => array(
-        array( 'label' => 'Features', 'href' => $features_url ),
-        array( 'label' => 'Demo', 'href' => '#hero-audio-demo' ),
-        array( 'label' => 'Pricing', 'href' => '#pricing-label' ),
-        array( 'label' => 'FAQ', 'href' => '#faq-label' ),
-        array( 'label' => 'My Account', 'href' => home_url( '/manage/' ) ),
-    ),
-    'cta' => array(
-        'label' => 'Get Started',
-        'href'  => $get_started_url,
-    ),
-) );
-?>
+<?php get_template_part( 'template-parts/site-nav' ); ?>
 
 <!-- ========== SECTION 1: HERO ========== -->
 <section class="hero">

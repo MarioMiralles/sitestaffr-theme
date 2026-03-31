@@ -9,8 +9,17 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
-$menu_items = isset( $args['menu_items'] ) ? $args['menu_items'] : array();
-$cta        = isset( $args['cta'] ) ? $args['cta'] : null;
+$default_menu = array(
+    array( 'label' => 'How It Works', 'href' => home_url( '/how-it-works/' ) ),
+    array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
+    array( 'label' => 'Pricing', 'href' => home_url( '/pricing/' ) ),
+);
+$default_cta = array(
+    'label' => 'Get Started',
+    'href'  => home_url( '/get-started/' ),
+);
+$menu_items = isset( $args['menu_items'] ) ? $args['menu_items'] : $default_menu;
+$cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
 ?>
 <nav class="nav" id="nav">
   <div class="container">
