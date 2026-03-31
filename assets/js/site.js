@@ -1016,3 +1016,19 @@ document.querySelectorAll('.faq-item__question').forEach(btn => {
     }
   });
 });
+
+// ========== ONBOARDING AGENT BUTTON ==========
+var onboardBtn = document.getElementById('launchOnboardingAgent');
+if (onboardBtn) {
+  onboardBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    // Try to find and click the SiteStaffr floating widget button
+    var widgetBtn = document.querySelector('.sitestaffr-widget-button, .sitestaffr-text-chat-button, [class*="sitestaffr"][class*="button"]');
+    if (widgetBtn) {
+      widgetBtn.click();
+    } else {
+      // Fallback: go to get-started page
+      window.location.href = onboardBtn.closest('section').querySelector('.getstarted-card__fallback a').href;
+    }
+  });
+}

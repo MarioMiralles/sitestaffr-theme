@@ -5510,18 +5510,6 @@ body.sitestaffr-legal-page .legal-caps {
 .hero__headline-focus {
   display: block;
 }
-.hero__headline-prefix {
-  color: var(--text-secondary);
-  font-size: clamp(1.3rem, 2.8vw, 1.8rem);
-  font-weight: 400;
-  margin-bottom: 6px;
-}
-.hero__headline-focus {
-  color: var(--teal-deep);
-  font-size: clamp(2rem, 4.5vw, 3.2rem);
-  font-weight: 500;
-  line-height: 1.15;
-}
 .hero__no-cc {
   display: block;
   font-size: 0.88rem;
@@ -5559,6 +5547,13 @@ body.sitestaffr-landing-page .hero__actions {
 .voice-text-section__header h2 {
   max-width: 600px;
   margin: 0 auto;
+}
+.voice-text-section__desc {
+  max-width: 640px;
+  margin: 16px auto 0;
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
 }
 .voice-text-section__grid {
   display: grid;
@@ -5650,12 +5645,11 @@ body.sitestaffr-landing-page .hero__actions {
   text-align: center;
   margin-bottom: clamp(40px, 6vw, 64px);
 }
-.getstarted-section__grid {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
+.getstarted-section__stack {
+  display: flex;
+  flex-direction: column;
   gap: clamp(24px, 3vw, 36px);
-  align-items: stretch;
-  max-width: 960px;
+  max-width: 720px;
   margin: 0 auto;
 }
 
@@ -5766,14 +5760,10 @@ body.sitestaffr-landing-page .hero__actions {
   color: var(--teal-light);
 }
 
-@media (max-width: 768px) {
-  .getstarted-section__grid {
-    grid-template-columns: 1fr;
-  }
-  /* Onboarding card first on mobile */
-  .getstarted-card--onboarding {
-    order: -1;
-  }
+/* Onboarding card button */
+.getstarted-card__onboard-btn {
+  margin-top: 8px;
+  margin-bottom: 20px;
 }
 
 /* ========== SECTION 8: PRICING TEASER ========== */
@@ -5902,6 +5892,9 @@ body.sitestaffr-landing-page .hero__actions {
 .final-cta__content {
   position: relative;
   z-index: 1;
+}
+.final-cta__highlight {
+  color: #b9e991;
 }
 
 /* ========== HOMEPAGE V2: RESPONSIVE HERO GRID ========== */

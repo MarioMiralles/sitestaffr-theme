@@ -100,7 +100,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="cost-section__grid">
       <div class="reveal">
-        <span class="section-label">The hidden cost of lost website visitors</span>
+        <span class="section-label">The Hidden Cost of Lost Website Visitors</span>
         <h2>Busy Owners Miss Website Leads and Often Never Know It</h2>
         <p class="cost-section__text">
           You&rsquo;re on a job site. In a consultation. In the middle of a procedure. A visitor lands on your website ready to ask a question, request a quote, or book an appointment, and they want help now.
@@ -140,19 +140,20 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 3: VOICE & TEXT, TWO WAYS TO CONNECT ========== -->
+<!-- ========== SECTION 3: VOICE & CHAT ========== -->
 <section class="voice-text-section">
   <div class="container">
     <div class="voice-text-section__header reveal">
-      <span class="section-label">Two ways to connect</span>
-      <h2>Your visitors choose how they talk to you</h2>
+      <span class="section-label">Two Ways to Connect</span>
+      <h2>Voice &amp; Chat</h2>
+      <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer talking, others prefer typing &mdash; SiteStaffr handles both with the same AI and the same answers.</p>
     </div>
     <div class="voice-text-section__grid">
       <div class="voice-text-section__item reveal">
         <div class="voice-text-section__screenshot">
           <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/hero.png' ); ?>" alt="<?php echo esc_attr( 'SiteStaffr voice widget on a website' ); ?>" loading="lazy" decoding="async">
         </div>
-        <p class="voice-text-section__caption">Talk naturally with an AI voice agent</p>
+        <p class="voice-text-section__caption">Talk Naturally With an AI Voice Agent</p>
       </div>
       <div class="voice-text-section__divider reveal reveal-delay-1" aria-hidden="true">
         <span class="voice-text-section__or">or</span>
@@ -161,7 +162,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="voice-text-section__screenshot">
           <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-conversation.png' ); ?>" alt="<?php echo esc_attr( 'SiteStaffr text chat widget on a website' ); ?>" loading="lazy" decoding="async">
         </div>
-        <p class="voice-text-section__caption">Or type &mdash; same AI, same answers</p>
+        <p class="voice-text-section__caption">Or Type &mdash; Same AI, Same Answers</p>
       </div>
     </div>
   </div>
@@ -171,7 +172,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="what-you-get" id="demo">
   <div class="container">
     <div class="what-you-get__header reveal">
-      <span class="section-label" id="demo-label">After every conversation</span>
+      <span class="section-label" id="demo-label">After Every Conversation</span>
       <h2>What You Get After Every Conversation</h2>
       <p class="what-you-get__subtitle">
         SiteStaffr doesn&rsquo;t just talk to your visitors &mdash; it tells you everything you need to follow up.
@@ -231,8 +232,8 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
   <div class="container">
     <div class="language-section__inner reveal">
-      <span class="section-label">57+ languages, one inbox</span>
-      <h2>SiteStaffr speaks <span class="language-heading__phrase"><em>their</em> language</span></h2>
+      <span class="section-label">57+ Languages, One Inbox</span>
+      <h2>SiteStaffr Speaks <span class="language-heading__phrase"><em>Their</em> Language</span></h2>
       <p class="language-section__desc">
         A customer visits your site and starts speaking Spanish. Or Mandarin. Or Portuguese. SiteStaffr understands them, responds naturally in their language, and delivers the full conversation summary to you &mdash; translated to English.
       </p>
@@ -265,29 +266,37 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 6: VOICE SHOWCASE ========== -->
 <section class="voice-section">
   <div class="container">
-    <div class="voice-section__header reveal">
-      <span class="section-label">AI voices</span>
-      <h2>Choose the voice that represents your business</h2>
-    </div>
     <?php
     get_template_part( 'template-parts/voice-showcase', null, array(
         'id'          => 'voiceShowcase',
-        'show_header' => false,
+        'show_header' => true,
     ) );
     ?>
   </div>
 </section>
 
-<!-- ========== SECTION 7: GET STARTED, TWO PATHS ========== -->
+<!-- ========== SECTION 7: GET STARTED ========== -->
 <section class="getstarted-section">
   <div class="container">
     <div class="getstarted-section__header reveal">
-      <span class="section-label">Get started</span>
-      <h2>Get started your way</h2>
+      <span class="section-label">Get Started</span>
+      <h2>Get Started Your Way</h2>
     </div>
-    <div class="getstarted-section__grid">
-      <div class="getstarted-card getstarted-card--diy reveal">
-        <h3 class="getstarted-card__title">Set it up yourself</h3>
+    <div class="getstarted-section__stack">
+      <div class="getstarted-card getstarted-card--onboarding reveal">
+        <div class="getstarted-card__badge">Recommended</div>
+        <h3 class="getstarted-card__title">Let Us Help You Get Started</h3>
+        <p class="getstarted-card__subtitle">Talk to our onboarding agent &mdash; it&rsquo;ll walk you through everything.</p>
+        <a href="#" class="btn btn--primary btn--large getstarted-card__onboard-btn" id="launchOnboardingAgent" aria-label="Talk to our onboarding agent">
+          Talk to Our Onboarding Agent
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <p class="getstarted-card__fallback">
+          Or <a href="<?php echo esc_url( $get_started_url ); ?>">fill out a quick form</a> and we&rsquo;ll set it up for you.
+        </p>
+      </div>
+      <div class="getstarted-card getstarted-card--diy reveal reveal-delay-1">
+        <h3 class="getstarted-card__title">Or Set It Up Yourself</h3>
         <p class="getstarted-card__subtitle">Less than 10 minutes</p>
         <ol class="getstarted-card__steps">
           <li>Install the plugin</li>
@@ -296,64 +305,92 @@ get_template_part( 'template-parts/site-nav', null, array(
         </ol>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Install Plugin</a>
       </div>
-      <div class="getstarted-card getstarted-card--onboarding reveal reveal-delay-1">
-        <div class="getstarted-card__badge">Recommended</div>
-        <h3 class="getstarted-card__title">Let us help you get started</h3>
-        <p class="getstarted-card__subtitle">Talk to our onboarding agent</p>
-        <p class="getstarted-card__desc">
-          Click the chat button in the corner to talk to our onboarding agent. It&rsquo;ll walk you through everything.
-        </p>
-        <p class="getstarted-card__fallback">
-          Or <a href="<?php echo esc_url( $get_started_url ); ?>">fill out a quick form</a> and we&rsquo;ll set it up for you.
-        </p>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ========== SECTION 8: PRICING TEASER ========== -->
-<section class="pricing-teaser">
+<!-- ========== SECTION 8: PRICING ========== -->
+<section class="pricing-section" id="pricing">
   <div class="container">
-    <div class="pricing-teaser__header reveal">
-      <span class="section-label">Pricing</span>
-      <h2>Simple, transparent pricing</h2>
+    <div class="pricing-section__header reveal">
+      <span class="section-label" id="pricing-label">Simple, Transparent Pricing</span>
+      <h2>Start Free. Upgrade When You&rsquo;re Ready.</h2>
+      <p class="pricing-section__subtitle">No contracts. No hidden fees. No surprise charges.</p>
     </div>
-    <div class="pricing-teaser__grid reveal reveal-delay-1">
-      <div class="pricing-teaser__card">
-        <div class="pricing-teaser__plan">Free Trial</div>
-        <div class="pricing-teaser__price">$0</div>
-        <div class="pricing-teaser__term">for 30 days</div>
-        <div class="pricing-teaser__minutes">30 min</div>
-        <div class="pricing-teaser__best-for">Try it free</div>
+    <div class="pricing-includes reveal">
+      <p class="pricing-includes__title">All Plans Include:</p>
+      <ul class="pricing-includes__list">
+        <li>57+ languages with English translation</li>
+        <li>Conversation dashboard with full transcripts</li>
+        <li>Email recap after every conversation</li>
+        <li>Widget and button customization</li>
+        <li>Built-in spam and abuse protection</li>
+        <li>Add-on minutes available anytime</li>
+      </ul>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div class="pricing-card__name">Free Trial</div>
+        <div class="pricing-card__price">$0</div>
+        <div class="pricing-card__price-sub">for 30 days</div>
+        <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">30 minutes included</div>
+        <ul class="pricing-card__features">
+          <li>2 AI voices</li>
+          <li>AI description generations</li>
+          <li>No credit card required</li>
+        </ul>
+        <p class="pricing-card__best-for">Try SiteStaffr free for 30 days</p>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Start Free Trial</a>
       </div>
-      <div class="pricing-teaser__card">
-        <div class="pricing-teaser__plan">Starter</div>
-        <div class="pricing-teaser__price">$10</div>
-        <div class="pricing-teaser__term">/mo</div>
-        <div class="pricing-teaser__minutes">60 min</div>
-        <div class="pricing-teaser__best-for">Getting started</div>
+      <div class="pricing-card reveal reveal-delay-1">
+        <div class="pricing-card__name">Starter</div>
+        <div class="pricing-card__price">$10</div>
+        <div class="pricing-card__price-sub">per month</div>
+        <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">60 minutes included</div>
+        <ul class="pricing-card__features">
+          <li>2 AI voice options</li>
+          <li>3 AI description generations per billing cycle</li>
+          <li>Great for steady weekly lead volume</li>
+        </ul>
+        <p class="pricing-card__best-for">Best for businesses getting started</p>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
-      <div class="pricing-teaser__card pricing-teaser__card--popular">
-        <div class="pricing-teaser__popular-tag">Most popular</div>
-        <div class="pricing-teaser__plan">Business</div>
-        <div class="pricing-teaser__price">$50</div>
-        <div class="pricing-teaser__term">/mo</div>
-        <div class="pricing-teaser__minutes">300 min</div>
-        <div class="pricing-teaser__best-for">Growing businesses</div>
+      <div class="pricing-card pricing-card--popular reveal reveal-delay-2">
+        <div class="pricing-card__badge">Most Popular</div>
+        <div class="pricing-card__name">Business</div>
+        <div class="pricing-card__price">$50</div>
+        <div class="pricing-card__price-sub">per month</div>
+        <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">300 minutes included</div>
+        <ul class="pricing-card__features">
+          <li>5 AI voice options</li>
+          <li>Custom greeting + 4 tone styles</li>
+          <li>5 AI description generations per billing cycle</li>
+        </ul>
+        <p class="pricing-card__best-for">Best for growing local businesses</p>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
       </div>
-      <div class="pricing-teaser__card">
-        <div class="pricing-teaser__plan">Pro</div>
-        <div class="pricing-teaser__price">$100</div>
-        <div class="pricing-teaser__term">/mo</div>
-        <div class="pricing-teaser__minutes">700 min</div>
-        <div class="pricing-teaser__best-for">High-traffic sites</div>
+      <div class="pricing-card reveal reveal-delay-3">
+        <div class="pricing-card__name">Pro</div>
+        <div class="pricing-card__price">$100</div>
+        <div class="pricing-card__price-sub">per month</div>
+        <div class="pricing-card__divider"></div>
+        <div class="pricing-card__minutes">700 minutes included</div>
+        <ul class="pricing-card__features">
+          <li>All 10 AI voices</li>
+          <li>Custom greeting + 4 tone styles</li>
+          <li>20 AI description generations per billing cycle</li>
+          <li>Priority access to new features</li>
+        </ul>
+        <p class="pricing-card__best-for">Best for multi-location or high-traffic sites</p>
+        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
     </div>
-    <div class="pricing-teaser__footer reveal reveal-delay-2">
-      <a href="<?php echo esc_url( home_url( '/pricing/' ) ); ?>" class="pricing-teaser__link">
-        See all plans
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+    <div class="pricing-addon reveal">
+      <h3 class="pricing-addon__title">Run Out of Minutes? You Stay in Control.</h3>
+      <p class="pricing-addon__text">Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges.</p>
     </div>
   </div>
 </section>
@@ -363,7 +400,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="final-cta__decoration" aria-hidden="true"></div>
   <div class="container">
     <div class="final-cta__content reveal">
-      <h2>Your next visitor has a question. Will your website have an answer?</h2>
+      <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have an Answer?</span></h2>
       <p class="final-cta__subtitle">Let SiteStaffr take care of your visitors while you focus on running your business.</p>
       <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--white btn--large">
         Get Started
