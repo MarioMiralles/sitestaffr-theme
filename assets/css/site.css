@@ -620,6 +620,159 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   margin-bottom: 28px;
 }
 
+/* ========== FEATURES PAGE ========== */
+.feat-hero {
+  padding: clamp(140px, 18vw, 200px) 0 clamp(40px, 6vw, 60px);
+  text-align: center;
+  background:
+    radial-gradient(circle at 10% 0%, rgba(31,182,204,0.08) 0%, transparent 24%),
+    radial-gradient(circle at 100% 18%, rgba(16,185,129,0.08) 0%, transparent 26%),
+    var(--warm-white);
+}
+.feat-hero__content {
+  max-width: 760px;
+  margin: 0 auto;
+}
+.feat-hero h1 {
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.feat-hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.feat-section {
+  padding: var(--section-padding);
+}
+.feat-section--alt {
+  background: var(--cream);
+}
+.feat-section--voice {
+  background: var(--cream);
+}
+.feat-section__header {
+  text-align: center;
+  margin-bottom: 48px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.feat-section__header h2 {
+  color: var(--teal-deep);
+  margin-bottom: 12px;
+}
+.feat-section__subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 680px;
+  margin: 0 auto;
+}
+.feat-section__centered {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.feat-section__centered h2 {
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+
+/* Split layout: text + media side by side */
+.feat-section__split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.feat-section__split--reverse {
+  direction: rtl;
+}
+.feat-section__split--reverse > * {
+  direction: ltr;
+}
+.feat-section__text h2 {
+  color: var(--teal-deep);
+  margin-bottom: 12px;
+}
+.feat-section__text p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.feat-section__media img {
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+.feat-check-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.feat-check-list li {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.5;
+}
+.feat-check-list li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--teal-light);
+  font-weight: 700;
+}
+
+/* Cards row (recaps section) */
+.feat-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.feat-card {
+  background: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.feat-card__image {
+  background: var(--cream);
+  padding: 16px;
+}
+.feat-card__image img {
+  border-radius: var(--radius-sm);
+}
+.feat-card h3 {
+  font-size: 1.1rem;
+  padding: 20px 20px 8px;
+  color: var(--text-primary);
+}
+.feat-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  padding: 0 20px 20px;
+}
+
+/* CTA */
+.feat-cta {
+  padding: var(--section-padding);
+  text-align: center;
+}
+.feat-cta__actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 /* ========== SECTION 3: COST OF MISSED CALLS ========== */
 .cost-section {
   padding: var(--section-padding);
