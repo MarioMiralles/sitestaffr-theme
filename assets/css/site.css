@@ -468,6 +468,158 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   color: var(--teal-deep);
 }
 
+/* ========== HOW IT WORKS PAGE ========== */
+.hiw-hero {
+  padding: clamp(140px, 18vw, 200px) 0 clamp(40px, 6vw, 60px);
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(31,182,204,0.06) 0%, transparent 50%),
+    var(--warm-white);
+}
+.hiw-hero__content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.hiw-hero h1 {
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.hiw-hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+.hiw-paths {
+  padding: var(--section-padding);
+}
+.hiw-paths__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.hiw-path {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  box-shadow: var(--shadow-md);
+}
+.hiw-path__header {
+  margin-bottom: 28px;
+}
+.hiw-path__badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-deep);
+  background: var(--teal-pale);
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+.hiw-path__title {
+  font-size: clamp(1.3rem, 2.5vw, 1.6rem);
+  color: var(--text-primary);
+}
+.hiw-path__steps {
+  list-style: none;
+  counter-reset: step;
+  padding: 0;
+}
+.hiw-path__steps li {
+  counter-increment: step;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 16px 0 16px 44px;
+  position: relative;
+  border-bottom: 1px solid var(--border-light);
+}
+.hiw-path__steps li:last-child {
+  border-bottom: none;
+}
+.hiw-path__steps li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--teal-pale);
+  color: var(--teal-deep);
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hiw-path__steps strong {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.hiw-path__steps span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+.hiw-path__time {
+  font-weight: 600;
+  color: var(--teal-deep) !important;
+  font-size: 0.82rem !important;
+  margin-top: 4px;
+}
+.hiw-path__note {
+  margin-top: 20px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.hiw-after {
+  padding: var(--section-padding);
+  background: var(--cream);
+}
+.hiw-after__content {
+  max-width: 680px;
+  margin: 0 auto;
+}
+.hiw-after h2 {
+  color: var(--teal-deep);
+  margin-bottom: 32px;
+  text-align: center;
+}
+.hiw-after__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.hiw-after__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+.hiw-after__list svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+}
+
+.hiw-cta {
+  padding: var(--section-padding);
+  text-align: center;
+}
+.hiw-cta h2 {
+  color: var(--teal-deep);
+  margin-bottom: 28px;
+}
+
 /* ========== SECTION 3: COST OF MISSED CALLS ========== */
 .cost-section {
   padding: var(--section-padding);
