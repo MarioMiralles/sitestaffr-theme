@@ -3,8 +3,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$page_title       = 'SiteStaffr Features | Voice, Text Chat, AI Knowledge & More';
-$page_description = 'Explore SiteStaffr features: natural AI voice conversations, text chat, website-powered AI knowledge, email recaps, transcripts, 57+ languages, and self-service billing.';
+$page_title       = 'Features | SiteStaffr — AI Voice & Text Chat for WordPress';
+$page_description = 'Explore SiteStaffr\'s features: AI voice agent, text chat widget, email recaps, full transcripts, 57+ languages, and more.';
 $page_url         = home_url( '/features/' );
 $site_name        = get_bloginfo( 'name' );
 $get_started_url  = home_url( '/get-started/' );
@@ -13,28 +13,6 @@ $body_classes     = array( 'wp-theme-sitestaffr-website', 'sitestaffr-features-p
 if ( is_admin_bar_showing() ) {
     $body_classes[] = 'admin-bar';
 }
-
-$feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
-    $slug   = (string) $slug;
-    $device = 'mobile' === $device ? 'mobile' : 'desktop';
-    $relative_path = 'assets/images/screenshots/' . $slug . '-' . $device . '.png';
-    $absolute_path = trailingslashit( get_stylesheet_directory() ) . $relative_path;
-
-    if ( file_exists( $absolute_path ) ) {
-        return trailingslashit( get_stylesheet_directory_uri() ) . $relative_path;
-    }
-
-    $fallback_map = array(
-        'dashboard'    => 'assets/images/features-dashboard.png',
-        'email-recaps' => 'assets/images/placeholder-email-recap.svg',
-        'analytics'    => 'assets/images/features-usage.png',
-        'ai-generator' => 'assets/images/features-description.png',
-        'protection'   => 'assets/images/features-conversation.png',
-    );
-
-    $fallback_relative = isset( $fallback_map[ $slug ] ) ? $fallback_map[ $slug ] : 'assets/images/placeholder-transcript.svg';
-    return trailingslashit( get_stylesheet_directory_uri() ) . $fallback_relative;
-};
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -55,16 +33,28 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
 <body class="<?php echo esc_attr( implode( ' ', $body_classes ) ); ?>">
 <?php wp_body_open(); ?>
 
-<?php get_template_part( 'template-parts/site-nav' ); ?>
+<?php
+get_template_part( 'template-parts/site-nav', null, array(
+    'menu_items' => array(
+        array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
+        array( 'label' => 'Pricing', 'href' => home_url( '/pricing/' ) ),
+    ),
+    'cta' => array(
+        'label' => 'Get Started',
+        'href'  => $get_started_url,
+    ),
+) );
+?>
 
 <main class="features-page">
 
-  <!-- Section 1: Hero -->
+  <!-- Section 1: Features Hero -->
   <section class="feat-hero">
+    <div class="feat-hero__pattern" aria-hidden="true"></div>
     <div class="container">
       <div class="feat-hero__content reveal">
         <h1>Everything your website needs to help visitors and capture leads.</h1>
-        <p class="feat-hero__subtitle">Business-owner-friendly tools that work for you while you focus on your work.</p>
+        <p class="feat-hero__subtitle">Voice conversations, text chat, email recaps, full transcripts, and 57+ languages &mdash; all inside WordPress.</p>
       </div>
     </div>
   </section>
@@ -75,53 +65,13 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
       <div class="feat-section__header reveal">
         <span class="section-label">Voice conversations</span>
         <h2>A natural-sounding AI voice that represents your business</h2>
-        <p class="feat-section__subtitle">Visitors click and talk — no phone numbers, no hold times. Works on desktop and mobile browsers.</p>
       </div>
-      <div class="reveal reveal-delay-1">
-        <!-- Voice Showcase Carousel (reused from old homepage) -->
-        <div class="voice-showcase voice-showcase--full" id="voiceShowcase">
-          <div class="voice-showcase__header">
-            <h3 class="voice-showcase__title">Choose the personality that fits your business</h3>
-            <p class="voice-showcase__subtitle">
-              <span>Preview how natural it sounds before you go live.</span>
-            </p>
-          </div>
-          <div class="voice-showcase__display">
-            <div class="voice-showcase__portrait-area">
-              <button class="voice-showcase__arrow voice-showcase__arrow--prev" type="button" aria-label="Previous voice">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-              </button>
-              <div class="voice-showcase__portrait">
-                <img src="" alt="" id="showcasePortrait">
-              </div>
-              <button class="voice-showcase__arrow voice-showcase__arrow--next" type="button" aria-label="Next voice">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-              </button>
-            </div>
-            <div class="voice-showcase__info">
-              <div class="voice-showcase__name-row">
-                <h4 class="voice-showcase__name" id="showcaseName"></h4>
-                <span class="voice-showcase__plan-pill" id="showcasePlan"></span>
-                <span class="voice-showcase__recommended-pill" id="showcaseRecommended" hidden>
-                  <span class="voice-showcase__recommended-icon" aria-hidden="true">&#x2605;</span>
-                  Recommended
-                </span>
-              </div>
-              <p class="voice-showcase__personality" id="showcasePersonality"></p>
-              <p class="voice-showcase__description" id="showcaseDescription"></p>
-              <div class="voice-showcase__best-for" id="showcaseBestFor"></div>
-            </div>
-            <div class="voice-showcase__play-area">
-              <button class="voice-showcase__play-btn" type="button" id="showcasePlayBtn" aria-label="Preview voice">
-                <svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28"><polygon points="6,3 20,12 6,21"/></svg>
-              </button>
-              <span class="voice-showcase__play-label" id="showcasePlayLabel">Preview Voice</span>
-              <audio id="showcaseAudio" preload="none"></audio>
-            </div>
-          </div>
-          <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
-        </div>
-      </div>
+      <?php
+      get_template_part( 'template-parts/voice-showcase', null, array(
+          'id'          => 'voiceShowcase',
+          'show_header' => false,
+      ) );
+      ?>
     </div>
   </section>
 
@@ -132,18 +82,15 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
         <div class="feat-section__text">
           <span class="section-label">Text chat</span>
           <h2>For visitors who prefer typing</h2>
-          <p>In public, at work, on mobile with no earbuds — some visitors prefer to type. Same AI, same knowledge, same quality. Just a different interface.</p>
           <ul class="feat-check-list">
-            <li>Chat panel with greeting, conversation flow, contact capture</li>
-            <li>Same assistant powers both voice and text</li>
-            <li>Great for visitors who can&rsquo;t talk out loud</li>
+            <li>Real-time AI responses</li>
+            <li>Same AI knowledge as voice</li>
+            <li>Widget customization (colors, position)</li>
+            <li>Mobile-friendly</li>
           </ul>
         </div>
         <div class="feat-section__media">
-          <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'protection', 'mobile' ) ); ?>">
-            <img src="<?php echo esc_url( $feature_screenshot_url( 'protection', 'desktop' ) ); ?>" alt="Text chat conversation screenshot" loading="lazy" decoding="async">
-          </picture>
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-conversation.png' ); ?>" alt="Text chat conversation showing real-time AI responses" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -154,20 +101,21 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
     <div class="container">
       <div class="feat-section__split feat-section__split--reverse reveal">
         <div class="feat-section__text">
-          <span class="section-label">AI Knowledge</span>
+          <span class="section-label">AI knowledge</span>
           <h2>Your business info powers every answer</h2>
-          <p>No manual training, no spreadsheets, no prompt engineering. SiteStaffr pulls knowledge from your website content and gets smarter as you add more.</p>
-          <ul class="feat-check-list">
-            <li><strong>Search Mode</strong> &mdash; searches your site for answers</li>
-            <li><strong>Page Expert Mode</strong> &mdash; deep knowledge of specific pages</li>
-            <li>Gets smarter as you add content to your site</li>
-          </ul>
+          <div class="feat-subfeatures">
+            <div class="feat-subfeature">
+              <h3 class="feat-subfeature__title">Search Mode</h3>
+              <p class="feat-subfeature__desc">Your AI searches your website in real-time to find answers for visitors.</p>
+            </div>
+            <div class="feat-subfeature">
+              <h3 class="feat-subfeature__title">Page Expert Mode</h3>
+              <p class="feat-subfeature__desc">Train your AI on specific pages for deep, detailed responses about your products or services.</p>
+            </div>
+          </div>
         </div>
         <div class="feat-section__media">
-          <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'mobile' ) ); ?>">
-            <img src="<?php echo esc_url( $feature_screenshot_url( 'ai-generator', 'desktop' ) ); ?>" alt="AI Knowledge settings screenshot" loading="lazy" decoding="async">
-          </picture>
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-description.png' ); ?>" alt="AI knowledge settings showing Search Mode and Page Expert Mode" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -183,36 +131,37 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
       <div class="feat-cards-row reveal reveal-delay-1">
         <div class="feat-card">
           <div class="feat-card__image">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-email-recap.png' ); ?>" alt="Email recap screenshot" loading="lazy" decoding="async">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-email-recap.png' ); ?>" alt="Email recap showing visitor details and action items" loading="lazy" decoding="async">
           </div>
-          <h3>Email recap after every conversation</h3>
-          <p>Visitor contact info and action items hit your inbox the moment the conversation ends.</p>
+          <h3>Email Recap</h3>
+          <p>A summary hits your inbox the moment the conversation ends &mdash; who they are, what they need, and what to do next.</p>
         </div>
         <div class="feat-card">
           <div class="feat-card__image">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-transcript.png' ); ?>" alt="Transcript screenshot" loading="lazy" decoding="async">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-transcript.png' ); ?>" alt="Full conversation transcript with turn-by-turn detail" loading="lazy" decoding="async">
           </div>
-          <h3>Full transcripts in WordPress</h3>
-          <p>Every word, searchable and reviewable right in your dashboard.</p>
+          <h3>Full Transcript</h3>
+          <p>Every word, turn by turn. Review exactly what was said so nothing gets lost.</p>
         </div>
         <div class="feat-card">
           <div class="feat-card__image">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-followup.png' ); ?>" alt="Follow-up suggestions screenshot" loading="lazy" decoding="async">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-followup.png' ); ?>" alt="Suggested follow-up actions based on the conversation" loading="lazy" decoding="async">
           </div>
-          <h3>Suggested follow-ups</h3>
-          <p>See who reached out, what they needed, and what to do next.</p>
+          <h3>Suggested Follow-Up</h3>
+          <p>SiteStaffr recommends your next step based on what the visitor asked for.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 6: Languages -->
-  <section class="feat-section feat-section--alt">
+  <!-- Section 6: 57+ Languages -->
+  <section class="feat-section feat-section--languages">
+    <div class="feat-languages__accent" aria-hidden="true"></div>
     <div class="container">
       <div class="feat-section__centered reveal">
         <span class="section-label">57+ languages</span>
         <h2>Serve every visitor, in their language</h2>
-        <p class="feat-section__subtitle">SiteStaffr speaks and chats in 57+ languages automatically. No setup required — it detects the visitor&rsquo;s language and responds naturally. Summaries are always in English for you.</p>
+        <p class="feat-section__subtitle">SiteStaffr detects your visitor&rsquo;s language automatically and responds naturally &mdash; no menus, no awkward translations. Your recap arrives in English with every detail captured.</p>
       </div>
     </div>
   </section>
@@ -224,27 +173,106 @@ $feature_screenshot_url = static function( $slug, $device = 'desktop' ) {
         <div class="feat-section__text">
           <span class="section-label">Billing &amp; usage</span>
           <h2>Track your usage. Stay in control.</h2>
-          <p>Monitor minutes used, manage your plan, add minutes when you need them. Self-service billing portal lets you upgrade, downgrade, or cancel anytime. Transparent usage tracking right in your WordPress dashboard.</p>
+          <ul class="feat-check-list">
+            <li>See your minutes used and remaining at a glance</li>
+            <li>Review every conversation from your WordPress dashboard</li>
+            <li>Buy add-on minutes anytime &mdash; they never expire</li>
+          </ul>
         </div>
         <div class="feat-section__media">
-          <picture>
-            <source media="(max-width: 767px)" srcset="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'mobile' ) ); ?>">
-            <img src="<?php echo esc_url( $feature_screenshot_url( 'analytics', 'desktop' ) ); ?>" alt="Usage tracking dashboard screenshot" loading="lazy" decoding="async">
-          </picture>
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-dashboard.png' ); ?>" alt="WordPress dashboard showing usage tracking and billing" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Section 8: CTA -->
+  <!-- Section 8: FAQ -->
+  <section class="feat-faq">
+    <div class="container">
+      <div class="feat-faq__header reveal">
+        <h2>Frequently asked questions</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-item__question">
+            <?php echo esc_html( 'How does the AI know about my business?' ); ?>
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <?php echo esc_html( 'You provide your business name, services, hours, and a description during setup. SiteStaffr can also scan your website to generate this for you. The AI uses this information to answer questions accurately.' ); ?>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-item__question">
+            <?php echo esc_html( 'Can I customize the widget appearance?' ); ?>
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <?php echo esc_html( 'Yes. You control colors, icon style, size, position, and border radius for both the floating widget and inline button from your WordPress dashboard.' ); ?>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-1">
+          <button class="faq-item__question">
+            <?php echo esc_html( 'Does it work on mobile?' ); ?>
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <?php echo esc_html( 'Yes. SiteStaffr runs in the visitor\'s browser, so it works on desktop, tablet, and mobile. The text chat widget works everywhere; voice requires microphone access.' ); ?>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-item__question">
+            <?php echo esc_html( 'What happens if the AI can\'t answer a question?' ); ?>
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <?php echo esc_html( 'It handles it gracefully — like a good receptionist. It says something like "I\'m not sure about that, but let me take your details and have someone get back to you." No making things up.' ); ?>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-2">
+          <button class="faq-item__question">
+            <?php echo esc_html( 'Can I use both voice and text chat?' ); ?>
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <?php echo esc_html( 'Yes. Both are included in every plan. Visitors choose how they want to communicate — some prefer talking, others prefer typing.' ); ?>
+            </div>
+          </div>
+        </div>
+        <div class="faq-item reveal reveal-delay-3">
+          <button class="faq-item__question">
+            <?php echo esc_html( 'How do I update my business information?' ); ?>
+            <span class="faq-item__icon">+</span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner">
+              <?php echo esc_html( 'From the SiteStaffr settings page in your WordPress dashboard. Changes take effect on the next conversation — no restart needed.' ); ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 9: Final CTA -->
   <section class="feat-cta">
-    <div class="container reveal">
-      <div class="feat-cta__actions">
-        <a href="<?php echo esc_url( $pricing_url ); ?>" class="btn btn--outline btn--large">See Pricing</a>
-        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
-          Get Started
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+    <div class="feat-cta__pattern" aria-hidden="true"></div>
+    <div class="container">
+      <div class="feat-cta__content reveal">
+        <h2>Ready to see it in action?</h2>
+        <div class="feat-cta__buttons">
+          <a href="<?php echo esc_url( home_url( '/pricing/' ) ); ?>" class="btn btn--outline btn--large">See Pricing</a>
+          <a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>
+        </div>
       </div>
     </div>
   </section>
