@@ -773,6 +773,170 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   flex-wrap: wrap;
 }
 
+/* ========== PRICING PAGE ========== */
+.price-hero {
+  padding: clamp(140px, 18vw, 200px) 0 clamp(40px, 6vw, 60px);
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 20%, rgba(31,182,204,0.06) 0%, transparent 50%),
+    var(--warm-white);
+}
+.price-hero__content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.price-hero h1 {
+  color: var(--teal-deep);
+  margin-bottom: 12px;
+}
+.price-hero__subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.price-tiers {
+  padding: var(--section-padding);
+}
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.price-tier {
+  background: white;
+  border-radius: var(--radius-lg);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.price-tier--popular {
+  border: 2px solid var(--teal-light);
+  box-shadow: var(--shadow-md);
+  transform: scale(1.03);
+}
+.price-tier__badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--teal-light);
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 16px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.price-tier__name {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+  margin-bottom: 8px;
+}
+.price-tier__price {
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1;
+}
+.price-tier__period {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+.price-tier__divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 0 0 16px;
+}
+.price-tier__minutes {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.price-tier__features {
+  list-style: none;
+  padding: 0;
+  text-align: left;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+.price-tier__features li {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  padding: 6px 0 6px 22px;
+  position: relative;
+  line-height: 1.4;
+}
+.price-tier__features li::before {
+  content: '\2713';
+  position: absolute;
+  left: 0;
+  color: var(--emerald);
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+.price-tier .btn {
+  width: 100%;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.price-addon-section {
+  padding: 0 0 clamp(60px, 10vw, 120px);
+}
+.price-addon-card {
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--cream);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  text-align: center;
+}
+.price-addon-card h3 {
+  color: var(--teal-deep);
+  margin-bottom: 8px;
+}
+.price-addon-card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.price-faq {
+  padding: var(--section-padding);
+  background: var(--cream);
+}
+.price-faq__header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.price-faq__header h2 {
+  color: var(--teal-deep);
+}
+
+.price-final-cta {
+  padding: var(--section-padding);
+  text-align: center;
+}
+.price-final-cta h2 {
+  color: var(--teal-deep);
+  margin-bottom: 8px;
+}
+.price-final-cta p {
+  color: var(--text-secondary);
+  margin-bottom: 28px;
+}
+
 /* ========== SECTION 3: COST OF MISSED CALLS ========== */
 .cost-section {
   padding: var(--section-padding);
