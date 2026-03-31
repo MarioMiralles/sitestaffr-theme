@@ -1,3 +1,33 @@
+/* ========== SELF-HOSTED FONTS ========== */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/dm-sans-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Sans';
+  src: url('../fonts/dm-sans-italic-variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('../fonts/fraunces-variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fraunces';
+  src: url('../fonts/fraunces-italic-variable.woff2') format('woff2');
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 /* ========== RESET & VARIABLES ========== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

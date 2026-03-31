@@ -71,16 +71,9 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 
 	wp_enqueue_style(
-		'sitestaffr-website-fonts',
-		'https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap',
-		array(),
-		null
-	);
-
-	wp_enqueue_style(
 		'sitestaffr-website-style',
 		sitestaffr_asset_url( 'assets/css/site.css' ),
-		array( 'sitestaffr-website-fonts' ),
+		array(),
 		null
 	);
 
