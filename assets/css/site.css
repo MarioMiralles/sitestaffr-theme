@@ -2477,7 +2477,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .voice-showcase__thumbs {
   display: flex;
   justify-content: center;
-  gap: 4px;
+  gap: 10px;
   padding: 8px 0 4px;
   overflow: visible;
 }
