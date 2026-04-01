@@ -585,13 +585,27 @@ if (voiceShowcase) {
 
   selectVoice(0);
 
-  // Navigation arrows
+  // Navigation arrows (inside showcase card — used on mobile)
   voiceShowcase.querySelector('.voice-showcase__arrow--prev').addEventListener('click', function() {
     selectVoice((activeVoiceIndex - 1 + voices.length) % voices.length);
   });
   voiceShowcase.querySelector('.voice-showcase__arrow--next').addEventListener('click', function() {
     selectVoice((activeVoiceIndex + 1) % voices.length);
   });
+
+  // Section-level arrows (used on desktop — positioned at viewport edges)
+  var sectionPrev = document.querySelector('.voice-section__arrow--prev');
+  var sectionNext = document.querySelector('.voice-section__arrow--next');
+  if (sectionPrev) {
+    sectionPrev.addEventListener('click', function() {
+      selectVoice((activeVoiceIndex - 1 + voices.length) % voices.length);
+    });
+  }
+  if (sectionNext) {
+    sectionNext.addEventListener('click', function() {
+      selectVoice((activeVoiceIndex + 1) % voices.length);
+    });
+  }
 
   // Play button
   showcasePlayBtn.addEventListener('click', function() {
