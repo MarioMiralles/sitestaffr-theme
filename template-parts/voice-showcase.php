@@ -16,13 +16,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 $showcase_id     = isset( $args['id'] ) ? $args['id'] : 'voiceShowcase';
 $extra_classes   = isset( $args['extra_classes'] ) ? ' ' . $args['extra_classes'] : '';
 $show_header     = isset( $args['show_header'] ) ? (bool) $args['show_header'] : true;
+$header_label    = isset( $args['header_label'] ) ? $args['header_label'] : 'Hear the Difference';
 $header_title    = isset( $args['header_title'] ) ? $args['header_title'] : 'Meet Your AI Voice Agent';
 $header_subtitle = isset( $args['header_subtitle'] ) ? $args['header_subtitle'] : '<span>Choose from 10 unique AI voices, each with their own personality.</span> <span>Preview them right here.</span>';
 ?>
 <div class="voice-showcase voice-showcase--full<?php echo esc_attr( $extra_classes ); ?>" id="<?php echo esc_attr( $showcase_id ); ?>">
   <?php if ( $show_header ) : ?>
   <div class="voice-showcase__header">
-    <h3 class="voice-showcase__title"><?php echo esc_html( $header_title ); ?></h3>
+    <span class="section-label"><?php echo esc_html( $header_label ); ?></span>
+    <h2 class="voice-showcase__title"><?php echo esc_html( $header_title ); ?></h2>
     <p class="voice-showcase__subtitle"><?php echo wp_kses_post( $header_subtitle ); ?></p>
   </div>
   <?php endif; ?>
@@ -59,5 +61,13 @@ $header_subtitle = isset( $args['header_subtitle'] ) ? $args['header_subtitle'] 
       <audio id="showcaseAudio" preload="none"></audio>
     </div>
   </div>
-  <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
+  <div class="voice-showcase__thumbs-row">
+    <button class="voice-showcase__thumbs-arrow voice-showcase__thumbs-arrow--prev" type="button" aria-label="Previous voice">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
+    <button class="voice-showcase__thumbs-arrow voice-showcase__thumbs-arrow--next" type="button" aria-label="Next voice">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
 </div>

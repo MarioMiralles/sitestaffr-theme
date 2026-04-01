@@ -2275,6 +2275,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: 48px 40px 36px;
   box-shadow: var(--shadow-sm);
   width: 100%;
+  max-width: 720px;
   min-width: 0;
   position: relative;
   z-index: 1;
@@ -2543,6 +2544,31 @@ body.sitestaffr-landing-page .hero__visual > * {
 .voice-showcase__thumb-plan[data-plan="Pro"] {
   background: #ede9fe;
   color: #6d28d9;
+}
+/* Thumbs row with navigation arrows */
+.voice-showcase__thumbs-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.voice-showcase__thumbs-arrow {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--cream);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+}
+.voice-showcase__thumbs-arrow:hover {
+  background: var(--teal-pale);
+  color: var(--teal-deep);
 }
 @media (max-width: 1024px) {
   .voice-showcase {
@@ -4844,32 +4870,6 @@ body.sitestaffr-landing-page .hero__actions {
   overflow: hidden;
 }
 
-/* Section-level carousel arrows */
-.voice-section__arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-secondary);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
-  z-index: 2;
-  cursor: pointer;
-  border: none;
-  padding: 0;
-}
-.voice-section__arrow:hover {
-  background: var(--teal-pale);
-  color: var(--teal-deep);
-}
-.voice-section__arrow--prev { left: 24px; }
-.voice-section__arrow--next { right: 24px; }
 
 /* Background portrait — fills entire section */
 .voice-section__bg-portrait {
@@ -4895,7 +4895,6 @@ body.sitestaffr-landing-page .hero__actions {
 }
 @media (max-width: 900px) {
   .voice-section__bg-portrait { display: none; }
-  .voice-section__arrow { display: none; }
 }
 
 /* Hide small portrait area on desktop — large background portrait replaces it */

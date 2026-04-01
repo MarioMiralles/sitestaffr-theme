@@ -593,16 +593,16 @@ if (voiceShowcase) {
     selectVoice((activeVoiceIndex + 1) % voices.length);
   });
 
-  // Section-level arrows (used on desktop — positioned at viewport edges)
-  var sectionPrev = document.querySelector('.voice-section__arrow--prev');
-  var sectionNext = document.querySelector('.voice-section__arrow--next');
-  if (sectionPrev) {
-    sectionPrev.addEventListener('click', function() {
+  // Thumbs-row arrows (flanking the thumbnail strip)
+  var thumbsPrev = voiceShowcase.querySelector('.voice-showcase__thumbs-arrow--prev');
+  var thumbsNext = voiceShowcase.querySelector('.voice-showcase__thumbs-arrow--next');
+  if (thumbsPrev) {
+    thumbsPrev.addEventListener('click', function() {
       selectVoice((activeVoiceIndex - 1 + voices.length) % voices.length);
     });
   }
-  if (sectionNext) {
-    sectionNext.addEventListener('click', function() {
+  if (thumbsNext) {
+    thumbsNext.addEventListener('click', function() {
       selectVoice((activeVoiceIndex + 1) % voices.length);
     });
   }
