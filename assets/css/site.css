@@ -2476,13 +2476,13 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .voice-showcase__thumbs {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   overflow-x: auto;
   padding: 4px 0;
   scrollbar-width: none;
-  width: 100%;
-  max-width: 100%;
+  flex: 1;
+  min-width: 0;
 }
 .voice-showcase__thumbs::-webkit-scrollbar { display: none; }
 .voice-showcase__thumb {

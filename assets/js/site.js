@@ -513,6 +513,7 @@ if (voiceShowcase) {
   // Background portrait crossfade elements
   var bgCurrent = document.getElementById('voiceBgCurrent');
   var bgNext = document.getElementById('voiceBgNext');
+  var imgVersion = '?v=20260401';
 
   const voices = [
     { name: 'Marin', file: 'Marin', personality: 'Warm & Welcoming', description: 'Makes your callers feel right at home with a friendly, inviting tone that puts people at ease. Perfect for service businesses that prioritize customer comfort.', bestFor: 'Home Services | Hospitality | Customer Support', plan: 'Starter', recommended: true },
@@ -533,7 +534,7 @@ if (voiceShowcase) {
     activeVoiceIndex = index;
     const voice = voices[index];
 
-    showcasePortrait.src = themeUrl + '/assets/images/agents/' + voice.file + '_half-size.png';
+    showcasePortrait.src = themeUrl + '/assets/images/agents/' + voice.file + '_half-size.png' + imgVersion;
     showcasePortrait.alt = voice.name;
     showcaseName.textContent = voice.name;
     showcasePlan.textContent = voice.plan;
@@ -548,13 +549,19 @@ if (voiceShowcase) {
     showcasePlayBtn.classList.remove('playing');
     showcasePlayLabel.textContent = 'Preview Voice';
 
-    showcaseThumbs.querySelectorAll('.voice-showcase__thumb').forEach(function(thumb, i) {
+    var allThumbs = showcaseThumbs.querySelectorAll('.voice-showcase__thumb');
+    allThumbs.forEach(function(thumb, i) {
       thumb.classList.toggle('active', i === index);
     });
 
+    // Scroll active thumb into view within the strip
+    if (allThumbs[index]) {
+      allThumbs[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
     // Crossfade background portrait
     if (bgCurrent && bgNext) {
-      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png';
+      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png' + imgVersion;
       bgNext.src = newSrc;
       bgNext.classList.add('voice-section__bg-img--active');
       bgCurrent.classList.remove('voice-section__bg-img--active');
@@ -574,7 +581,7 @@ if (voiceShowcase) {
 
     thumb.innerHTML =
       '<div class="voice-showcase__thumb-img">' +
-        '<img src="' + themeUrl + '/assets/images/agents/' + voice.file + '_half-size.png" alt="' + voice.name + '" loading="lazy">' +
+        '<img src="' + themeUrl + '/assets/images/agents/' + voice.file + '_half-size.png' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
       '</div>' +
       '<span class="voice-showcase__thumb-name">' + voice.name + '</span>' +
       '<span class="voice-showcase__thumb-plan" data-plan="' + voice.plan + '">' + voice.plan + '</span>';
