@@ -2917,40 +2917,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-width: 520px;
   margin: 0 auto 12px;
 }
-.pricing-essentials {
-  text-align: center;
+/* Reuse price-includes component on homepage (no section padding) */
+.price-includes--homepage {
+  padding: 0;
   margin-bottom: 40px;
-}
-.pricing-essentials__label {
-  font-size: 0.78rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--teal-deep);
-  margin-bottom: 14px;
-}
-.pricing-essentials__items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-.pricing-essentials__pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: white;
-  border: 1px solid var(--border-light);
-  border-radius: 100px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-.pricing-essentials__pill svg {
-  color: var(--teal-deep);
-  flex-shrink: 0;
 }
 .pricing-section .price-grid {
   margin-bottom: 36px;
