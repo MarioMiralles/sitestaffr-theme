@@ -1497,24 +1497,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.7;
 }
 
-/* Pill badge */
-.what-you-get__pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0 auto 32px;
-  padding: 8px 20px;
-  background: white;
-  border: 1px solid var(--border-light);
-  border-radius: 999px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  box-shadow: var(--shadow-sm);
-}
-.what-you-get__pill svg {
-  color: var(--teal-light);
-}
 .what-you-get__showcase {
   text-align: center;
 }
@@ -1590,15 +1572,14 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   overflow: hidden;
-  cursor: pointer;
-  transform: rotateY(-3deg) rotateX(2deg);
+  transform: rotateX(4deg) rotateY(-6deg) rotateZ(1deg);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   font-size: 0.72rem;
   line-height: 1.5;
   text-align: left;
 }
 .what-you-get__doc:hover {
-  transform: rotateY(0deg) rotateX(0deg) scale(1.05);
+  transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg) scale(1.05);
   box-shadow: var(--shadow-xl);
 }
 
@@ -1610,15 +1591,35 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: 12px 20px;
   border-bottom: 1px solid var(--border-light);
 }
-.what-you-get__doc-logo {
+.what-you-get__doc-logo-img {
+  height: 28px;
+  width: auto;
+}
+.what-you-get__doc-print-btn {
+  display: inline-block;
+  padding: 4px 12px;
+  background: var(--teal-light);
+  color: white;
+  border-radius: 6px;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+/* Business name heading */
+.what-you-get__doc-business {
   font-family: var(--font-display);
   font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--teal-deep);
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  padding: 16px 20px 4px;
 }
-.what-you-get__doc-title {
-  font-size: 0.65rem;
-  color: var(--text-muted);
+
+/* Phone link in recap */
+.what-you-get__doc-link {
+  color: var(--teal-light);
+  text-decoration: underline;
+  pointer-events: none;
 }
 
 /* Document sections (recap, transcript) */
@@ -1761,95 +1762,6 @@ body.sitestaffr-landing-page .hero__visual > * {
     transform: none;
     box-shadow: var(--shadow-lg);
   }
-}
-
-/* ========== REPORT LIGHTBOX ========== */
-.report-lightbox {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-.report-lightbox[aria-hidden="false"] {
-  opacity: 1;
-  visibility: visible;
-}
-.report-lightbox__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-}
-.report-lightbox__content {
-  position: relative;
-  width: 90%;
-  max-width: 640px;
-  max-height: 85vh;
-  overflow-y: auto;
-  background: white;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-xl);
-  transform: scale(0.95) translateY(10px);
-  transition: transform 0.3s ease;
-}
-.report-lightbox[aria-hidden="false"] .report-lightbox__content {
-  transform: scale(1) translateY(0);
-}
-.report-lightbox__close {
-  position: sticky;
-  top: 0;
-  float: right;
-  margin: 12px 12px 0 0;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--cream);
-  border: 1px solid var(--border-light);
-  font-size: 1.3rem;
-  color: var(--text-secondary);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1;
-  transition: background 0.2s;
-}
-.report-lightbox__close:hover {
-  background: var(--cream-dark);
-}
-.report-lightbox__doc {
-  padding: 24px 32px 32px;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-/* Lightbox overrides for readable font sizes */
-.report-lightbox__doc .what-you-get__doc-section-header {
-  font-size: 1rem;
-}
-.report-lightbox__doc .what-you-get__doc-section-header span {
-  font-size: 0.8rem;
-}
-.report-lightbox__doc .what-you-get__doc-msg-meta {
-  font-size: 0.8rem;
-}
-.report-lightbox__doc .what-you-get__doc-logo {
-  font-size: 1.2rem;
-}
-.report-lightbox__doc .what-you-get__doc-title {
-  font-size: 0.85rem;
-}
-.report-lightbox__doc .what-you-get__doc-recap p,
-.report-lightbox__doc .what-you-get__doc-recap ul,
-.report-lightbox__doc .what-you-get__doc-msg p {
-  font-size: 0.9rem;
-}
-/* Hide lightbox on mobile */
-@media (max-width: 900px) {
-  .report-lightbox { display: none; }
-  .what-you-get__doc { cursor: default; }
 }
 
 /* ========== SECTION 4: AUDIO DEMO ========== */

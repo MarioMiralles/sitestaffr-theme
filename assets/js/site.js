@@ -627,39 +627,4 @@ document.querySelectorAll('.faq-item__question').forEach(btn => {
   });
 });
 
-// ========== REPORT LIGHTBOX ==========
-(function() {
-  var doc = document.querySelector('.what-you-get__doc');
-  var lightbox = document.getElementById('reportLightbox');
-  if (!doc || !lightbox) return;
-
-  var backdrop = lightbox.querySelector('.report-lightbox__backdrop');
-  var closeBtn = lightbox.querySelector('.report-lightbox__close');
-
-  function openLightbox() {
-    lightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    lightbox.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  doc.addEventListener('click', openLightbox);
-  doc.addEventListener('keydown', function(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openLightbox();
-    }
-  });
-
-  closeBtn.addEventListener('click', closeLightbox);
-  backdrop.addEventListener('click', closeLightbox);
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && lightbox.getAttribute('aria-hidden') === 'false') {
-      closeLightbox();
-    }
-  });
-})();
 

@@ -173,19 +173,13 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="what-you-get__header reveal">
       <span class="section-label" id="demo-label">After Every Conversation</span>
-      <h2>A complete report, delivered to your inbox</h2>
+      <h2>A Complete Report, Delivered to Your Inbox</h2>
       <p class="what-you-get__subtitle">
         Automatically capture visitor conversations, summaries, and transcripts &mdash; all in one clean, shareable document.
       </p>
     </div>
 
     <div class="what-you-get__showcase reveal">
-      <!-- Pill badge above the document -->
-      <div class="what-you-get__pill">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-        Generated Conversation Report
-      </div>
-
       <div class="what-you-get__layout">
         <!-- Left callouts -->
         <div class="what-you-get__callouts what-you-get__callouts--left">
@@ -207,67 +201,56 @@ get_template_part( 'template-parts/site-nav', null, array(
 
         <!-- The document -->
         <div class="what-you-get__doc-wrapper">
-          <div class="what-you-get__doc" role="button" tabindex="0" aria-label="View full conversation report">
+          <div class="what-you-get__doc">
 
             <!-- Document header -->
             <div class="what-you-get__doc-header">
-              <span class="what-you-get__doc-logo">&psi; SiteStaffr</span>
-              <span class="what-you-get__doc-title">SiteStaffr &mdash; Conversation Transcript</span>
+              <img class="what-you-get__doc-logo-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.png' ); ?>" alt="SiteStaffr">
+              <span class="what-you-get__doc-print-btn">Print / Download PDF</span>
             </div>
+
+            <!-- Business name heading -->
+            <div class="what-you-get__doc-business">Maggie&rsquo;s Cakes</div>
 
             <!-- Conversation Recap -->
             <div class="what-you-get__doc-section what-you-get__doc-recap">
               <div class="what-you-get__doc-section-header">
                 <strong>Conversation Recap</strong>
-                <span>March 27, 2026 11:39 AM EDT</span>
+                <span>March 27, 2026 11:40 AM EDT</span>
               </div>
-              <p><strong>A visitor</strong> reached out to ask about SiteStaffr, its setup process, language support, and mobile compatibility.</p>
-              <ul><li>Reason for contact: Inquiry about SiteStaffr features and setup</li></ul>
-              <p class="what-you-get__doc-followup"><strong>Suggested follow-up:</strong> Route this message to the team and follow up with A visitor about Inquiry about SiteStaffr features and setup.</p>
+              <p><strong>Sarah</strong> reached out to inquire about ordering a custom birthday cake for her daughter&rsquo;s 7th birthday party. She&rsquo;s looking for a two-tier unicorn theme cake for 25 guests.</p>
+              <ul>
+                <li>Name: Sarah Mitchell</li>
+                <li>Phone: <a class="what-you-get__doc-link" href="tel:+15551234567">(555) 123-4567</a></li>
+                <li>Reason for contact: Custom birthday cake order inquiry</li>
+              </ul>
+              <p class="what-you-get__doc-followup"><strong>Suggested follow-up:</strong> Call Sarah back to confirm cake design details, discuss pricing for a two-tier unicorn cake, and schedule the pickup date for April 12th.</p>
             </div>
 
             <!-- Conversation Transcript -->
             <div class="what-you-get__doc-section what-you-get__doc-transcript">
               <div class="what-you-get__doc-section-header">
                 <strong>Conversation Transcript</strong>
-                <span>1:08</span>
+                <span>2:14</span>
               </div>
 
               <div class="what-you-get__doc-messages">
-                <!-- AI message -->
                 <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:03 AM</div>
-                  <p>Hi! Thanks for reaching out to SiteStaffr. How can I help you today?</p>
+                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:40:03 AM</div>
+                  <p>Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?</p>
                 </div>
-                <!-- Visitor message -->
                 <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
                   <div class="what-you-get__doc-msg-avatar">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
                   </div>
                   <div class="what-you-get__doc-msg-body">
-                    <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:10 AM</div>
-                    <p>What is SiteStaffr?</p>
+                    <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:40:10 AM</div>
+                    <p>Hi! I need to order a birthday cake for my daughter. She&rsquo;s turning 7 and wants a unicorn theme.</p>
                   </div>
                 </div>
-                <!-- AI message -->
                 <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:12 AM</div>
-                  <p>SiteStaffr is an AI voice agent for WordPress that answers visitors&rsquo; questions 24/7, captures details, and helps businesses follow up. It supports multiple languages and provides full conversation transcripts. Would you like to know more?</p>
-                </div>
-                <!-- Visitor message -->
-                <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-                  <div class="what-you-get__doc-msg-avatar">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-                  </div>
-                  <div class="what-you-get__doc-msg-body">
-                    <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:29 AM</div>
-                    <p>How does setup work?</p>
-                  </div>
-                </div>
-                <!-- AI message -->
-                <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:31 AM</div>
-                  <p>Setting up is simple&mdash;you just install the plugin on your WordPress site, activate it with one click, and then add your business information. The whole setup takes around 5 minutes. Anything else you&rsquo;d like to know?</p>
+                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:40:12 AM</div>
+                  <p>That sounds wonderful! We&rsquo;d love to help with a unicorn cake. How many guests are you expecting? And do you have a date in mind?</p>
                 </div>
               </div>
             </div>
@@ -534,113 +517,6 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
-
-<!-- Conversation report lightbox -->
-<div class="report-lightbox" id="reportLightbox" aria-hidden="true">
-  <div class="report-lightbox__backdrop"></div>
-  <div class="report-lightbox__content">
-    <button class="report-lightbox__close" aria-label="Close">&times;</button>
-    <div class="report-lightbox__doc">
-      <!-- Document header -->
-      <div class="what-you-get__doc-header">
-        <span class="what-you-get__doc-logo">&psi; SiteStaffr</span>
-        <span class="what-you-get__doc-title">SiteStaffr &mdash; Conversation Transcript</span>
-      </div>
-
-      <!-- Conversation Recap -->
-      <div class="what-you-get__doc-section what-you-get__doc-recap">
-        <div class="what-you-get__doc-section-header">
-          <strong>Conversation Recap</strong>
-          <span>March 27, 2026 11:39 AM EDT</span>
-        </div>
-        <p><strong>A visitor</strong> reached out to ask about SiteStaffr, its setup process, language support, and mobile compatibility.</p>
-        <ul><li>Reason for contact: Inquiry about SiteStaffr features and setup</li></ul>
-        <p class="what-you-get__doc-followup"><strong>Suggested follow-up:</strong> Route this message to the team and follow up with A visitor about Inquiry about SiteStaffr features and setup.</p>
-      </div>
-
-      <!-- Conversation Transcript (full) -->
-      <div class="what-you-get__doc-section what-you-get__doc-transcript">
-        <div class="what-you-get__doc-section-header">
-          <strong>Conversation Transcript</strong>
-          <span>1:08</span>
-        </div>
-
-        <div class="what-you-get__doc-messages">
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:03 AM</div>
-            <p>Hi! Thanks for reaching out to SiteStaffr. How can I help you today?</p>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-            <div class="what-you-get__doc-msg-avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-            </div>
-            <div class="what-you-get__doc-msg-body">
-              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:10 AM</div>
-              <p>What is SiteStaffr?</p>
-            </div>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:12 AM</div>
-            <p>SiteStaffr is an AI voice agent for WordPress that answers visitors&rsquo; questions 24/7, captures details, and helps businesses follow up. It supports multiple languages and provides full conversation transcripts. Would you like to know more?</p>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-            <div class="what-you-get__doc-msg-avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-            </div>
-            <div class="what-you-get__doc-msg-body">
-              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:29 AM</div>
-              <p>How does setup work?</p>
-            </div>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:31 AM</div>
-            <p>Setting up is simple&mdash;you just install the plugin on your WordPress site, activate it with one click, and then add your business information. The whole setup takes around 5 minutes. Anything else you&rsquo;d like to know?</p>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-            <div class="what-you-get__doc-msg-avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-            </div>
-            <div class="what-you-get__doc-msg-body">
-              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:45 AM</div>
-              <p>How many languages?</p>
-            </div>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:45 AM</div>
-            <p>It supports 57+ languages. Would you like to know more about any specific language?</p>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-            <div class="what-you-get__doc-msg-avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-            </div>
-            <div class="what-you-get__doc-msg-body">
-              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:54 AM</div>
-              <p>Does this work on mobile?</p>
-            </div>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:55 AM</div>
-            <p>Yes, it works on mobile devices through the browser as long as it supports microphone access. Anything else you&rsquo;d like to ask?</p>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-            <div class="what-you-get__doc-msg-avatar">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-            </div>
-            <div class="what-you-get__doc-msg-body">
-              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:40:05 AM</div>
-              <p>That&rsquo;s all. Thank you.</p>
-            </div>
-          </div>
-          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:40:06 AM</div>
-            <p>You&rsquo;re welcome! Goodbye!</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <?php wp_footer(); ?>
 </body>
 </html>
