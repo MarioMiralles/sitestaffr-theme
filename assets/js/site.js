@@ -492,66 +492,6 @@ document.querySelectorAll('.js-audio-demo').forEach((demoLayout) => {
   initAudioDemo(demoLayout);
 });
 
-// ========== FEATURE LIGHTBOX ==========
-const featureLightbox = document.getElementById('featureLightbox');
-if (featureLightbox) {
-  const lightboxImage = featureLightbox.querySelector('.feature-lightbox__image');
-  const lightboxCaption = featureLightbox.querySelector('.feature-lightbox__caption');
-  const lightboxBackdrop = featureLightbox.querySelector('.feature-lightbox__backdrop');
-  const lightboxClose = featureLightbox.querySelector('.feature-lightbox__close');
-
-  const lightboxData = {
-    dashboard: {
-      caption: 'See who reached out, what they asked, and who you may want to follow up with.'
-    },
-    analytics: {
-      caption: 'Track conversations and minutes so you can see how much visitor help SiteStaffr handled for you.'
-    },
-    protection: {
-      caption: 'Visitors can talk or type to get help right away, even when you are busy or away.'
-    },
-    'email-recaps': {
-      caption: 'Get a simple recap after every conversation, plus a review link when you want the full transcript.'
-    },
-    'ai-generator': {
-      caption: 'Use your website content to teach SiteStaffr the key details about your business so it can answer more accurately.'
-    }
-  };
-
-  function openLightbox(card) {
-    if (!card) return;
-    const featureId = card.dataset.featureLightbox;
-    const data = lightboxData[featureId];
-    if (!data) return;
-    const previewImage = card.querySelector('.feature-card__screenshot img');
-    const imageSource = previewImage ? (previewImage.currentSrc || previewImage.src) : '';
-    if (imageSource) {
-      lightboxImage.src = imageSource;
-    }
-    lightboxImage.alt = data.caption;
-    lightboxCaption.textContent = data.caption;
-    featureLightbox.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function closeLightbox() {
-    featureLightbox.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-  }
-
-  document.querySelectorAll('[data-feature-lightbox]').forEach(card => {
-    card.addEventListener('click', () => openLightbox(card));
-  });
-
-  lightboxClose.addEventListener('click', closeLightbox);
-  lightboxBackdrop.addEventListener('click', closeLightbox);
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && featureLightbox.getAttribute('aria-hidden') === 'false') {
-      closeLightbox();
-    }
-  });
-}
-
 // ========== VOICE AGENT SHOWCASE ==========
 const voiceShowcase = document.getElementById('voiceShowcase');
 if (voiceShowcase) {
@@ -669,336 +609,6 @@ if (voiceShowcase) {
   });
 }
 
-function getCustomizerIconSVG(icon, size, themeUrl = '') {
-  const safeSize = Math.max(10, Number.parseInt(size, 10) || 18);
-  const common = `width="${safeSize}" height="${safeSize}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"`;
-
-  if (icon === 'none') {
-    return '';
-  }
-  if (icon === 'sitestaffr') {
-    const baseUrl = String(themeUrl || '').replace(/\/$/, '');
-    const iconUrl = `${baseUrl}/assets/images/sitestaffr-icon.svg`;
-    const safeIconUrl = iconUrl.replace(/'/g, "\\'");
-    return `<span class="customize-icon-mask" style="--customize-icon-size:${safeSize}px; --customize-icon-url:url('${safeIconUrl}');"></span>`;
-  }
-
-  const map = {
-    phone: `<svg ${common}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.8 12.8 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.8 12.8 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>`,
-    microphone: `<svg ${common}><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="23"></line><line x1="8" y1="23" x2="16" y2="23"></line></svg>`,
-    chat: `<svg ${common}><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>`,
-    headset: `<svg ${common}><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg>`
-  };
-
-  return map[icon] || map.phone;
-}
-
-function initCustomizationPreview() {
-  const section = document.getElementById('customize');
-  if (!section) {
-    return;
-  }
-  const stylesheetEl = document.querySelector('link[rel="stylesheet"][href*="site.css"]');
-  const themeUrl = stylesheetEl ? stylesheetEl.href.replace(/\/assets\/css\/site\.css.*$/, '') : '';
-
-  const rangeLabelPairs = [
-    ['lpWidgetSize', 'lpWidgetSizeValue'],
-    ['lpWidgetIconSize', 'lpWidgetIconSizeValue'],
-    ['lpWidgetRadiusTop', 'lpWidgetRadiusTopValue'],
-    ['lpWidgetRadiusRight', 'lpWidgetRadiusRightValue'],
-    ['lpWidgetRadiusBottom', 'lpWidgetRadiusBottomValue'],
-    ['lpWidgetRadiusLeft', 'lpWidgetRadiusLeftValue'],
-    ['lpButtonIconSize', 'lpButtonIconSizeValue'],
-    ['lpButtonFontSize', 'lpButtonFontSizeValue'],
-    ['lpButtonRadiusTop', 'lpButtonRadiusTopValue'],
-    ['lpButtonRadiusRight', 'lpButtonRadiusRightValue'],
-    ['lpButtonRadiusBottom', 'lpButtonRadiusBottomValue'],
-    ['lpButtonRadiusLeft', 'lpButtonRadiusLeftValue'],
-    ['lpButtonBorderWidth', 'lpButtonBorderWidthValue'],
-    ['lpButtonShadowBlur', 'lpButtonShadowBlurValue'],
-    ['lpButtonShadowOffset', 'lpButtonShadowOffsetValue'],
-    ['lpButtonPaddingX', 'lpButtonPaddingXValue'],
-    ['lpButtonPaddingY', 'lpButtonPaddingYValue']
-  ];
-
-  const widgetAutoDisplay = document.getElementById('lpWidgetAutoDisplay');
-  const widgetIcon = document.getElementById('lpWidgetIcon');
-  const widgetSize = document.getElementById('lpWidgetSize');
-  const widgetIconSize = document.getElementById('lpWidgetIconSize');
-  const widgetBg = document.getElementById('lpWidgetBg');
-  const widgetHoverBg = document.getElementById('lpWidgetHoverBg');
-  const widgetIconColor = document.getElementById('lpWidgetIconColor');
-  const widgetRadiusLock = document.getElementById('lpWidgetRadiusLock');
-  const widgetRadiusTop = document.getElementById('lpWidgetRadiusTop');
-  const widgetRadiusRight = document.getElementById('lpWidgetRadiusRight');
-  const widgetRadiusBottom = document.getElementById('lpWidgetRadiusBottom');
-  const widgetRadiusLeft = document.getElementById('lpWidgetRadiusLeft');
-  const widgetButton = document.getElementById('lpWidgetPreviewButton');
-  const widgetOffNotice = document.getElementById('lpWidgetOffNotice');
-
-  const buttonText = document.getElementById('lpButtonText');
-  const buttonIcon = document.getElementById('lpButtonIcon');
-  const buttonIconPosition = document.getElementById('lpButtonIconPosition');
-  const buttonIconSize = document.getElementById('lpButtonIconSize');
-  const buttonFontSize = document.getElementById('lpButtonFontSize');
-  const buttonFontWeight = document.getElementById('lpButtonFontWeight');
-  const buttonTextTransform = document.getElementById('lpButtonTextTransform');
-  const buttonTextColor = document.getElementById('lpButtonTextColor');
-  const buttonIconColor = document.getElementById('lpButtonIconColor');
-  const buttonBg = document.getElementById('lpButtonBg');
-  const buttonHoverBg = document.getElementById('lpButtonHoverBg');
-  const buttonGradient = document.getElementById('lpButtonGradient');
-  const buttonGradientEnd = document.getElementById('lpButtonGradientEnd');
-  const buttonRadiusLock = document.getElementById('lpButtonRadiusLock');
-  const buttonRadiusTop = document.getElementById('lpButtonRadiusTop');
-  const buttonRadiusRight = document.getElementById('lpButtonRadiusRight');
-  const buttonRadiusBottom = document.getElementById('lpButtonRadiusBottom');
-  const buttonRadiusLeft = document.getElementById('lpButtonRadiusLeft');
-  const buttonBorderWidth = document.getElementById('lpButtonBorderWidth');
-  const buttonBorderColor = document.getElementById('lpButtonBorderColor');
-  const buttonShadow = document.getElementById('lpButtonShadow');
-  const buttonShadowBlur = document.getElementById('lpButtonShadowBlur');
-  const buttonShadowOffset = document.getElementById('lpButtonShadowOffset');
-  const buttonPaddingX = document.getElementById('lpButtonPaddingX');
-  const buttonPaddingY = document.getElementById('lpButtonPaddingY');
-  const buttonFullWidth = document.getElementById('lpButtonFullWidth');
-  const buttonHoverAnimation = document.getElementById('lpButtonHoverAnimation');
-  const buttonPreview = document.getElementById('lpButtonPreviewButton');
-  const buttonWrap = document.getElementById('lpButtonPreviewWrap');
-  const buttonPanel = document.getElementById('customizeButtonPanel');
-  const buttonControlsToggle = document.getElementById('customizeButtonControls');
-
-  if (!widgetButton || !widgetOffNotice || !buttonPreview || !buttonWrap) {
-    return;
-  }
-
-  const widgetRadiusInputs = [widgetRadiusTop, widgetRadiusRight, widgetRadiusBottom, widgetRadiusLeft];
-  const buttonRadiusInputs = [buttonRadiusTop, buttonRadiusRight, buttonRadiusBottom, buttonRadiusLeft];
-
-  function updateRangeLabels() {
-    rangeLabelPairs.forEach(([inputId, labelId]) => {
-      const input = document.getElementById(inputId);
-      const label = document.getElementById(labelId);
-      if (!input || !label) {
-        return;
-      }
-      label.textContent = `${input.value}px`;
-    });
-  }
-
-  function parseRangeValue(input, fallback) {
-    const parsed = Number.parseInt(input ? input.value : '', 10);
-    return Number.isFinite(parsed) ? parsed : fallback;
-  }
-
-  function getRadiusString(inputs, fallbacks) {
-    return inputs
-      .map((input, index) => `${parseRangeValue(input, fallbacks[index])}px`)
-      .join(' ');
-  }
-
-  function syncLockedRadius(lockControl, radiusInputs, sourceInput) {
-    if (!lockControl || !lockControl.checked || !sourceInput) {
-      return;
-    }
-    radiusInputs.forEach((input) => {
-      if (!input || input === sourceInput) {
-        return;
-      }
-      input.value = sourceInput.value;
-    });
-  }
-
-  function updateRadiusInputState(lockControl, radiusInputs) {
-    const isLocked = !!(lockControl && lockControl.checked);
-    radiusInputs.forEach((input, index) => {
-      if (!input) {
-        return;
-      }
-      input.disabled = isLocked && index > 0;
-    });
-  }
-
-  function updateWidgetPreview() {
-    updateRangeLabels();
-    updateRadiusInputState(widgetRadiusLock, widgetRadiusInputs);
-
-    const isVisible = !!(widgetAutoDisplay && widgetAutoDisplay.checked);
-    widgetOffNotice.hidden = isVisible;
-    widgetButton.hidden = !isVisible;
-    widgetOffNotice.style.display = isVisible ? 'none' : 'inline-flex';
-    widgetButton.style.display = isVisible ? 'flex' : 'none';
-
-    if (!isVisible) {
-      return;
-    }
-
-    const size = Number.parseInt(widgetSize.value, 10) || 60;
-    const iconSize = Number.parseInt(widgetIconSize.value, 10) || 40;
-    const baseBg = widgetBg.value || '#10b981';
-    const hoverBg = widgetHoverBg.value || baseBg;
-    const iconColor = widgetIconColor.value || '#ffffff';
-    const widgetRadius = getRadiusString(widgetRadiusInputs, [20, 20, 20, 0]);
-
-    widgetButton.style.width = `${size}px`;
-    widgetButton.style.height = `${size}px`;
-    widgetButton.style.backgroundColor = baseBg;
-    widgetButton.style.color = iconColor;
-    widgetButton.style.borderRadius = widgetRadius;
-    widgetButton.innerHTML = getCustomizerIconSVG(widgetIcon.value || 'sitestaffr', iconSize, themeUrl);
-
-    widgetButton.onmouseenter = () => {
-      widgetButton.style.backgroundColor = hoverBg;
-      widgetButton.style.boxShadow = '0 10px 28px rgba(0,0,0,0.24)';
-    };
-    widgetButton.onmouseleave = () => {
-      widgetButton.style.backgroundColor = baseBg;
-      widgetButton.style.boxShadow = '0 8px 24px rgba(0,0,0,0.17)';
-    };
-  }
-
-  function updateButtonPreview() {
-    updateRangeLabels();
-
-    const text = (buttonText.value || '').trim() || 'Contact Us';
-    const icon = buttonIcon.value || 'sitestaffr';
-    const iconPos = buttonIconPosition.value || 'left';
-    const iconSizeValue = Number.parseInt(buttonIconSize.value, 10) || 32;
-    const fontSizeValue = Number.parseInt(buttonFontSize.value, 10) || 16;
-    const fontWeightValue = buttonFontWeight.value || '600';
-    const textTransformValue = buttonTextTransform.value || 'none';
-    const textColorValue = buttonTextColor.value || '#ffffff';
-    const iconColorValue = buttonIconColor.value || textColorValue;
-    const bgValue = buttonBg.value || '#1fb6cc';
-    const hoverBgValue = buttonHoverBg.value || '#17a2b8';
-    const gradientEnabled = !!buttonGradient.checked;
-    const gradientEndValue = buttonGradientEnd.value || '#10b981';
-    const buttonRadius = getRadiusString(buttonRadiusInputs, [80, 80, 80, 80]);
-    const borderWidthValue = Number.parseInt(buttonBorderWidth.value, 10) || 0;
-    const borderColorValue = buttonBorderColor.value || '#1fb6cc';
-    const shadowEnabled = !!buttonShadow.checked;
-    const shadowBlurValue = Number.parseInt(buttonShadowBlur.value, 10) || 10;
-    const shadowOffsetValue = Number.parseInt(buttonShadowOffset.value, 10) || 4;
-    const padXValue = Number.parseInt(buttonPaddingX.value, 10) || 24;
-    const padYValue = Number.parseInt(buttonPaddingY.value, 10) || 12;
-    const fullWidthValue = !!buttonFullWidth.checked;
-    const hoverAnimationValue = buttonHoverAnimation.value || 'none';
-
-    const bgStyle = gradientEnabled
-      ? `linear-gradient(135deg, ${bgValue} 0%, ${gradientEndValue} 100%)`
-      : bgValue;
-
-    const borderStyle = borderWidthValue > 0
-      ? `${borderWidthValue}px solid ${borderColorValue}`
-      : 'none';
-
-    const baseShadow = shadowEnabled
-      ? `0 ${shadowOffsetValue}px ${shadowBlurValue}px rgba(0,0,0,0.2)`
-      : 'none';
-
-    updateRadiusInputState(buttonRadiusLock, buttonRadiusInputs);
-
-    const iconMarkup = icon === 'none'
-      ? ''
-      : `<span class="customize-button-icon" style="color: ${iconColorValue};">${getCustomizerIconSVG(icon, iconSizeValue, themeUrl)}</span>`;
-
-    buttonPreview.innerHTML = icon === 'none'
-      ? `<span class="customize-button-text">${text}</span>`
-      : iconPos === 'left'
-        ? `${iconMarkup}<span class="customize-button-text">${text}</span>`
-        : `<span class="customize-button-text">${text}</span>${iconMarkup}`;
-
-    buttonPreview.style.color = textColorValue;
-    buttonPreview.style.fontSize = `${fontSizeValue}px`;
-    buttonPreview.style.fontWeight = fontWeightValue;
-    buttonPreview.style.textTransform = textTransformValue;
-    buttonPreview.style.background = bgStyle;
-    buttonPreview.style.borderRadius = buttonRadius;
-    buttonPreview.style.border = borderStyle;
-    buttonPreview.style.boxShadow = baseShadow;
-    buttonPreview.style.padding = `${padYValue}px ${padXValue}px`;
-    buttonPreview.style.width = fullWidthValue ? '100%' : 'auto';
-    buttonWrap.style.width = fullWidthValue ? '100%' : 'auto';
-
-    buttonPreview.onmouseenter = () => {
-      buttonPreview.style.background = hoverBgValue;
-      if (hoverAnimationValue === 'scale') {
-        buttonPreview.style.transform = 'scale(1.05)';
-      } else if (hoverAnimationValue === 'glow') {
-        buttonPreview.style.boxShadow = `0 0 22px ${bgValue}`;
-      } else if (hoverAnimationValue === 'pulse') {
-        buttonPreview.classList.add('is-pulsing');
-      }
-    };
-
-    buttonPreview.onmouseleave = () => {
-      buttonPreview.style.background = bgStyle;
-      buttonPreview.style.transform = '';
-      buttonPreview.style.boxShadow = baseShadow;
-      buttonPreview.classList.remove('is-pulsing');
-    };
-  }
-
-  widgetRadiusInputs.forEach((input) => {
-    if (!input) {
-      return;
-    }
-    input.addEventListener('input', (event) => {
-      syncLockedRadius(widgetRadiusLock, widgetRadiusInputs, event.target);
-    });
-    input.addEventListener('change', (event) => {
-      syncLockedRadius(widgetRadiusLock, widgetRadiusInputs, event.target);
-    });
-  });
-
-  if (widgetRadiusLock && widgetRadiusInputs[0]) {
-    widgetRadiusLock.addEventListener('change', () => {
-      syncLockedRadius(widgetRadiusLock, widgetRadiusInputs, widgetRadiusInputs[0]);
-    });
-  }
-
-  buttonRadiusInputs.forEach((input) => {
-    if (!input) {
-      return;
-    }
-    input.addEventListener('input', (event) => {
-      syncLockedRadius(buttonRadiusLock, buttonRadiusInputs, event.target);
-    });
-    input.addEventListener('change', (event) => {
-      syncLockedRadius(buttonRadiusLock, buttonRadiusInputs, event.target);
-    });
-  });
-
-  if (buttonRadiusLock && buttonRadiusInputs[0]) {
-    buttonRadiusLock.addEventListener('change', () => {
-      syncLockedRadius(buttonRadiusLock, buttonRadiusInputs, buttonRadiusInputs[0]);
-    });
-  }
-
-  section.querySelectorAll('[data-widget-control]').forEach((control) => {
-    control.addEventListener('input', updateWidgetPreview);
-    control.addEventListener('change', updateWidgetPreview);
-  });
-
-  section.querySelectorAll('[data-button-control]').forEach((control) => {
-    control.addEventListener('input', updateButtonPreview);
-    control.addEventListener('change', updateButtonPreview);
-  });
-
-  if (buttonPanel && buttonControlsToggle) {
-    const syncButtonPanelState = () => {
-      buttonPanel.classList.toggle('is-expanded', buttonControlsToggle.open);
-    };
-    buttonControlsToggle.addEventListener('toggle', syncButtonPanelState);
-    syncButtonPanelState();
-  }
-
-  updateWidgetPreview();
-  updateButtonPreview();
-}
-
-initCustomizationPreview();
-
 // ========== FAQ ACCORDION ==========
 document.querySelectorAll('.faq-item__question').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -1017,18 +627,39 @@ document.querySelectorAll('.faq-item__question').forEach(btn => {
   });
 });
 
-// ========== ONBOARDING AGENT BUTTON ==========
-var onboardBtn = document.getElementById('launchOnboardingAgent');
-if (onboardBtn) {
-  onboardBtn.addEventListener('click', function(e) {
-    e.preventDefault();
-    // Try to find and click the SiteStaffr floating widget button
-    var widgetBtn = document.querySelector('.sitestaffr-widget-button, .sitestaffr-text-chat-button, [class*="sitestaffr"][class*="button"]');
-    if (widgetBtn) {
-      widgetBtn.click();
-    } else {
-      // Fallback: go to get-started page
-      window.location.href = onboardBtn.closest('section').querySelector('.getstarted-card__fallback a').href;
+// ========== REPORT LIGHTBOX ==========
+(function() {
+  var doc = document.querySelector('.what-you-get__doc');
+  var lightbox = document.getElementById('reportLightbox');
+  if (!doc || !lightbox) return;
+
+  var backdrop = lightbox.querySelector('.report-lightbox__backdrop');
+  var closeBtn = lightbox.querySelector('.report-lightbox__close');
+
+  function openLightbox() {
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  doc.addEventListener('click', openLightbox);
+  doc.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openLightbox();
     }
   });
-}
+
+  closeBtn.addEventListener('click', closeLightbox);
+  backdrop.addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && lightbox.getAttribute('aria-hidden') === 'false') {
+      closeLightbox();
+    }
+  });
+})();
+

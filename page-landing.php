@@ -60,7 +60,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="hero__grid">
       <div class="hero__content reveal">
-        <span class="hero__tagline">AI Voice Agent for WordPress</span>
+        <span class="hero__tagline">Built for WordPress</span>
         <h1 class="hero__headline">
           <span class="hero__headline-prefix">Your Website Visitors Have Questions.</span>
           <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
@@ -173,37 +173,126 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="what-you-get__header reveal">
       <span class="section-label" id="demo-label">After Every Conversation</span>
-      <h2>What You Get After Every Conversation</h2>
+      <h2>A complete report, delivered to your inbox</h2>
       <p class="what-you-get__subtitle">
-        SiteStaffr doesn&rsquo;t just talk to your visitors &mdash; it tells you everything you need to follow up.
+        Automatically capture visitor conversations, summaries, and transcripts &mdash; all in one clean, shareable document.
       </p>
     </div>
-    <div class="what-you-get__grid">
-      <div class="what-you-get__card what-you-get__card--email reveal">
-        <div class="what-you-get__card-image">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-email-recap.png' ); ?>" alt="Screenshot of an email recap from SiteStaffr" loading="lazy" decoding="async">
-        </div>
-        <div class="what-you-get__card-body">
-          <h3>Email Recap</h3>
-          <p>A summary hits your inbox the moment the conversation ends &mdash; who they are, what they need, and what to do next.</p>
-        </div>
+
+    <div class="what-you-get__showcase reveal">
+      <!-- Pill badge above the document -->
+      <div class="what-you-get__pill">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+        Generated Conversation Report
       </div>
-      <div class="what-you-get__card what-you-get__card--transcript reveal reveal-delay-1">
-        <div class="what-you-get__card-image">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-transcript.png' ); ?>" alt="Screenshot of a full conversation transcript" loading="lazy" decoding="async">
+
+      <div class="what-you-get__layout">
+        <!-- Left callouts -->
+        <div class="what-you-get__callouts what-you-get__callouts--left">
+          <div class="what-you-get__callout what-you-get__callout--recap">
+            <div class="what-you-get__callout-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h4 class="what-you-get__callout-title">Conversation Recap</h4>
+            <p class="what-you-get__callout-desc">Instantly summarizes what the visitor needed</p>
+          </div>
+          <div class="what-you-get__callout what-you-get__callout--followup">
+            <div class="what-you-get__callout-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <h4 class="what-you-get__callout-title">Actionable Follow-Up</h4>
+            <p class="what-you-get__callout-desc">Know exactly what to do next</p>
+          </div>
         </div>
-        <div class="what-you-get__card-body">
-          <h3>Full Transcript</h3>
-          <p>Every word, turn by turn. Review exactly what was said so nothing gets lost.</p>
+
+        <!-- The document -->
+        <div class="what-you-get__doc-wrapper">
+          <div class="what-you-get__doc" role="button" tabindex="0" aria-label="View full conversation report">
+
+            <!-- Document header -->
+            <div class="what-you-get__doc-header">
+              <span class="what-you-get__doc-logo">&psi; SiteStaffr</span>
+              <span class="what-you-get__doc-title">SiteStaffr &mdash; Conversation Transcript</span>
+            </div>
+
+            <!-- Conversation Recap -->
+            <div class="what-you-get__doc-section what-you-get__doc-recap">
+              <div class="what-you-get__doc-section-header">
+                <strong>Conversation Recap</strong>
+                <span>March 27, 2026 11:39 AM EDT</span>
+              </div>
+              <p><strong>A visitor</strong> reached out to ask about SiteStaffr, its setup process, language support, and mobile compatibility.</p>
+              <ul><li>Reason for contact: Inquiry about SiteStaffr features and setup</li></ul>
+              <p class="what-you-get__doc-followup"><strong>Suggested follow-up:</strong> Route this message to the team and follow up with A visitor about Inquiry about SiteStaffr features and setup.</p>
+            </div>
+
+            <!-- Conversation Transcript -->
+            <div class="what-you-get__doc-section what-you-get__doc-transcript">
+              <div class="what-you-get__doc-section-header">
+                <strong>Conversation Transcript</strong>
+                <span>1:08</span>
+              </div>
+
+              <div class="what-you-get__doc-messages">
+                <!-- AI message -->
+                <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:03 AM</div>
+                  <p>Hi! Thanks for reaching out to SiteStaffr. How can I help you today?</p>
+                </div>
+                <!-- Visitor message -->
+                <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+                  <div class="what-you-get__doc-msg-avatar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+                  </div>
+                  <div class="what-you-get__doc-msg-body">
+                    <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:10 AM</div>
+                    <p>What is SiteStaffr?</p>
+                  </div>
+                </div>
+                <!-- AI message -->
+                <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:12 AM</div>
+                  <p>SiteStaffr is an AI voice agent for WordPress that answers visitors&rsquo; questions 24/7, captures details, and helps businesses follow up. It supports multiple languages and provides full conversation transcripts. Would you like to know more?</p>
+                </div>
+                <!-- Visitor message -->
+                <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+                  <div class="what-you-get__doc-msg-avatar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+                  </div>
+                  <div class="what-you-get__doc-msg-body">
+                    <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:29 AM</div>
+                    <p>How does setup work?</p>
+                  </div>
+                </div>
+                <!-- AI message -->
+                <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:31 AM</div>
+                  <p>Setting up is simple&mdash;you just install the plugin on your WordPress site, activate it with one click, and then add your business information. The whole setup takes around 5 minutes. Anything else you&rsquo;d like to know?</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Bottom fade overlay -->
+            <div class="what-you-get__doc-fade"></div>
+          </div>
         </div>
-      </div>
-      <div class="what-you-get__card what-you-get__card--followup reveal reveal-delay-2">
-        <div class="what-you-get__card-image">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-followup.png' ); ?>" alt="Screenshot of suggested follow-up actions" loading="lazy" decoding="async">
-        </div>
-        <div class="what-you-get__card-body">
-          <h3>Suggested Follow-Up</h3>
-          <p>SiteStaffr recommends your next step based on what the visitor asked for.</p>
+
+        <!-- Right callouts -->
+        <div class="what-you-get__callouts what-you-get__callouts--right">
+          <div class="what-you-get__callout what-you-get__callout--transcript">
+            <div class="what-you-get__callout-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+            </div>
+            <h4 class="what-you-get__callout-title">Full Transcript</h4>
+            <p class="what-you-get__callout-desc">See every message, exactly as it happened</p>
+          </div>
+          <div class="what-you-get__callout what-you-get__callout--instant">
+            <div class="what-you-get__callout-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            </div>
+            <h4 class="what-you-get__callout-title">Delivered Instantly</h4>
+            <p class="what-you-get__callout-desc">Generated and ready within seconds</p>
+          </div>
         </div>
       </div>
     </div>
@@ -266,44 +355,62 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 6: VOICE SHOWCASE ========== -->
 <section class="voice-section">
   <div class="container">
+    <div class="voice-section__header reveal">
+      <span class="section-label">Hear the Difference</span>
+      <h2>Meet Your AI Voice Agent</h2>
+      <p class="voice-section__subtitle"><span>Choose from 10 unique AI voices, each with their own personality.</span> <span>Preview them right here.</span></p>
+    </div>
     <?php
     get_template_part( 'template-parts/voice-showcase', null, array(
         'id'          => 'voiceShowcase',
-        'show_header' => true,
+        'show_header' => false,
     ) );
     ?>
   </div>
 </section>
 
 <!-- ========== SECTION 7: GET STARTED ========== -->
-<section class="getstarted-section">
+<section class="onboarding-section">
   <div class="container">
-    <div class="getstarted-section__header reveal">
-      <span class="section-label">Get Started</span>
-      <h2>Get Started Your Way</h2>
-    </div>
-    <div class="getstarted-section__stack">
-      <div class="getstarted-card getstarted-card--onboarding reveal">
-        <div class="getstarted-card__badge">Recommended</div>
-        <h3 class="getstarted-card__title">Let Us Help You Get Started</h3>
-        <p class="getstarted-card__subtitle">Talk to our onboarding agent &mdash; it&rsquo;ll walk you through everything.</p>
-        <a href="#" class="btn btn--primary btn--large getstarted-card__onboard-btn" id="launchOnboardingAgent" aria-label="Talk to our onboarding agent">
-          Talk to Our Onboarding Agent
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
-        <p class="getstarted-card__fallback">
-          Or <a href="<?php echo esc_url( $get_started_url ); ?>">fill out a quick form</a> and we&rsquo;ll set it up for you.
-        </p>
+    <div class="onboarding-section__inner reveal">
+      <span class="section-label">White-Glove Setup</span>
+      <h2 class="onboarding-section__headline">Let Us Set Up Your AI Voice Agent</h2>
+      <div class="onboarding-section__cta">
+        <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" variant="hero" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr"]' ); ?>
       </div>
-      <div class="getstarted-card getstarted-card--diy reveal reveal-delay-1">
-        <h3 class="getstarted-card__title">Or Set It Up Yourself</h3>
-        <p class="getstarted-card__subtitle">Less than 10 minutes</p>
-        <ol class="getstarted-card__steps">
-          <li>Install the plugin</li>
-          <li>Add your business info</li>
-          <li>Go live</li>
-        </ol>
-        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Install Plugin</a>
+      <p class="onboarding-section__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>.</p>
+
+      <div class="onboarding-section__diy reveal reveal-delay-1">
+        <p class="onboarding-section__diy-label">Or set it up yourself in minutes</p>
+        <div class="onboarding-section__timeline">
+          <div class="onboarding-diy-step">
+            <div class="onboarding-diy-step__circle">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+            </div>
+            <h3 class="onboarding-diy-step__title">Install the Plugin</h3>
+            <p class="onboarding-diy-step__desc">~2 minutes</p>
+          </div>
+          <div class="onboarding-diy-step__connector" aria-hidden="true"></div>
+          <div class="onboarding-diy-step">
+            <div class="onboarding-diy-step__circle">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <h3 class="onboarding-diy-step__title">Add Your Business Info</h3>
+            <p class="onboarding-diy-step__desc">~5 minutes</p>
+          </div>
+          <div class="onboarding-diy-step__connector" aria-hidden="true"></div>
+          <div class="onboarding-diy-step">
+            <div class="onboarding-diy-step__circle">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 class="onboarding-diy-step__title">Go Live Instantly</h3>
+            <p class="onboarding-diy-step__desc">You&rsquo;re done!</p>
+          </div>
+        </div>
+        <a href="https://wordpress.org/plugins/sitestaffr/" target="_blank" rel="noopener noreferrer" class="btn btn--white onboarding-section__diy-btn">
+          Install from WordPress.org
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </a>
       </div>
     </div>
   </div>
@@ -313,78 +420,94 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="pricing-section__header reveal">
-      <span class="section-label" id="pricing-label">Simple, Transparent Pricing</span>
       <h2>Start Free. Upgrade When You&rsquo;re Ready.</h2>
-      <p class="pricing-section__subtitle">No contracts. No hidden fees. No surprise charges.</p>
     </div>
-    <div class="pricing-includes reveal">
-      <p class="pricing-includes__title">All Plans Include:</p>
-      <ul class="pricing-includes__list">
-        <li>57+ languages with English translation</li>
-        <li>Conversation dashboard with full transcripts</li>
-        <li>Email recap after every conversation</li>
-        <li>Widget and button customization</li>
-        <li>Built-in spam and abuse protection</li>
-        <li>Add-on minutes available anytime</li>
-      </ul>
+    <div class="pricing-essentials reveal">
+      <div class="pricing-essentials__label">Every plan includes</div>
+      <div class="pricing-essentials__items">
+        <span class="pricing-essentials__pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          AI voice + text chat
+        </span>
+        <span class="pricing-essentials__pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Email recaps
+        </span>
+        <span class="pricing-essentials__pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Full transcripts
+        </span>
+        <span class="pricing-essentials__pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Lead capture
+        </span>
+        <span class="pricing-essentials__pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          57+ languages
+        </span>
+        <span class="pricing-essentials__pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Contact form fallback
+        </span>
+      </div>
     </div>
-    <div class="pricing-grid">
-      <div class="pricing-card reveal">
-        <div class="pricing-card__name">Free Trial</div>
-        <div class="pricing-card__price">$0</div>
-        <div class="pricing-card__price-sub">for 30 days</div>
-        <div class="pricing-card__divider"></div>
-        <div class="pricing-card__minutes">30 minutes included</div>
-        <ul class="pricing-card__features">
+    <div class="price-grid">
+      <div class="price-tier reveal">
+        <div class="price-tier__name">Free Trial</div>
+        <div class="price-tier__price">$0</div>
+        <div class="price-tier__period">for 30 days</div>
+        <div class="price-tier__divider"></div>
+        <div class="price-tier__minutes">30 minutes included</div>
+        <ul class="price-tier__features">
           <li>2 AI voices</li>
           <li>AI description generations</li>
           <li>No credit card required</li>
         </ul>
-        <p class="pricing-card__best-for">Try SiteStaffr free for 30 days</p>
+        <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Start Free Trial</a>
       </div>
-      <div class="pricing-card reveal reveal-delay-1">
-        <div class="pricing-card__name">Starter</div>
-        <div class="pricing-card__price">$10</div>
-        <div class="pricing-card__price-sub">per month</div>
-        <div class="pricing-card__divider"></div>
-        <div class="pricing-card__minutes">60 minutes included</div>
-        <ul class="pricing-card__features">
-          <li>2 AI voice options</li>
-          <li>3 AI description generations per billing cycle</li>
-          <li>Great for steady weekly lead volume</li>
+      <div class="price-tier reveal reveal-delay-1">
+        <div class="price-tier__name">Starter</div>
+        <div class="price-tier__price">$10</div>
+        <div class="price-tier__period">per month</div>
+        <div class="price-tier__divider"></div>
+        <div class="price-tier__minutes">60 minutes included</div>
+        <ul class="price-tier__features">
+          <li>2 AI voices</li>
+          <li>Default greeting</li>
+          <li>3 description generations / cycle</li>
         </ul>
-        <p class="pricing-card__best-for">Best for businesses getting started</p>
+        <p class="price-tier__best-for">Best for businesses getting started</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
-      <div class="pricing-card pricing-card--popular reveal reveal-delay-2">
-        <div class="pricing-card__badge">Most Popular</div>
-        <div class="pricing-card__name">Business</div>
-        <div class="pricing-card__price">$50</div>
-        <div class="pricing-card__price-sub">per month</div>
-        <div class="pricing-card__divider"></div>
-        <div class="pricing-card__minutes">300 minutes included</div>
-        <ul class="pricing-card__features">
-          <li>5 AI voice options</li>
-          <li>Custom greeting + 4 tone styles</li>
-          <li>5 AI description generations per billing cycle</li>
+      <div class="price-tier price-tier--popular reveal reveal-delay-2">
+        <div class="price-tier__badge">Most Popular</div>
+        <div class="price-tier__name">Business</div>
+        <div class="price-tier__price">$50</div>
+        <div class="price-tier__period">per month</div>
+        <div class="price-tier__divider"></div>
+        <div class="price-tier__minutes">300 minutes included</div>
+        <ul class="price-tier__features">
+          <li>5 AI voices</li>
+          <li>Custom greeting + 4 tones</li>
+          <li>5 description generations / cycle</li>
         </ul>
-        <p class="pricing-card__best-for">Best for growing local businesses</p>
+        <p class="price-tier__best-for">Best for growing local businesses</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
       </div>
-      <div class="pricing-card reveal reveal-delay-3">
-        <div class="pricing-card__name">Pro</div>
-        <div class="pricing-card__price">$100</div>
-        <div class="pricing-card__price-sub">per month</div>
-        <div class="pricing-card__divider"></div>
-        <div class="pricing-card__minutes">700 minutes included</div>
-        <ul class="pricing-card__features">
+      <div class="price-tier reveal reveal-delay-3">
+        <div class="price-tier__name">Pro</div>
+        <div class="price-tier__price">$100</div>
+        <div class="price-tier__period">per month</div>
+        <div class="price-tier__divider"></div>
+        <div class="price-tier__minutes">700 minutes included</div>
+        <ul class="price-tier__features">
           <li>All 10 AI voices</li>
-          <li>Custom greeting + 4 tone styles</li>
-          <li>20 AI description generations per billing cycle</li>
+          <li>Custom greeting + 4 tones</li>
+          <li>10 description generations / cycle</li>
           <li>Priority access to new features</li>
         </ul>
-        <p class="pricing-card__best-for">Best for multi-location or high-traffic sites</p>
+        <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
       </div>
     </div>
@@ -400,7 +523,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="final-cta__decoration" aria-hidden="true"></div>
   <div class="container">
     <div class="final-cta__content reveal">
-      <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have an Answer?</span></h2>
+      <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
       <p class="final-cta__subtitle">Let SiteStaffr take care of your visitors while you focus on running your business.</p>
       <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--white btn--large">
         Get Started
@@ -411,6 +534,113 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
+
+<!-- Conversation report lightbox -->
+<div class="report-lightbox" id="reportLightbox" aria-hidden="true">
+  <div class="report-lightbox__backdrop"></div>
+  <div class="report-lightbox__content">
+    <button class="report-lightbox__close" aria-label="Close">&times;</button>
+    <div class="report-lightbox__doc">
+      <!-- Document header -->
+      <div class="what-you-get__doc-header">
+        <span class="what-you-get__doc-logo">&psi; SiteStaffr</span>
+        <span class="what-you-get__doc-title">SiteStaffr &mdash; Conversation Transcript</span>
+      </div>
+
+      <!-- Conversation Recap -->
+      <div class="what-you-get__doc-section what-you-get__doc-recap">
+        <div class="what-you-get__doc-section-header">
+          <strong>Conversation Recap</strong>
+          <span>March 27, 2026 11:39 AM EDT</span>
+        </div>
+        <p><strong>A visitor</strong> reached out to ask about SiteStaffr, its setup process, language support, and mobile compatibility.</p>
+        <ul><li>Reason for contact: Inquiry about SiteStaffr features and setup</li></ul>
+        <p class="what-you-get__doc-followup"><strong>Suggested follow-up:</strong> Route this message to the team and follow up with A visitor about Inquiry about SiteStaffr features and setup.</p>
+      </div>
+
+      <!-- Conversation Transcript (full) -->
+      <div class="what-you-get__doc-section what-you-get__doc-transcript">
+        <div class="what-you-get__doc-section-header">
+          <strong>Conversation Transcript</strong>
+          <span>1:08</span>
+        </div>
+
+        <div class="what-you-get__doc-messages">
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:03 AM</div>
+            <p>Hi! Thanks for reaching out to SiteStaffr. How can I help you today?</p>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+            <div class="what-you-get__doc-msg-avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+            </div>
+            <div class="what-you-get__doc-msg-body">
+              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:10 AM</div>
+              <p>What is SiteStaffr?</p>
+            </div>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:12 AM</div>
+            <p>SiteStaffr is an AI voice agent for WordPress that answers visitors&rsquo; questions 24/7, captures details, and helps businesses follow up. It supports multiple languages and provides full conversation transcripts. Would you like to know more?</p>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+            <div class="what-you-get__doc-msg-avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+            </div>
+            <div class="what-you-get__doc-msg-body">
+              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:29 AM</div>
+              <p>How does setup work?</p>
+            </div>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:31 AM</div>
+            <p>Setting up is simple&mdash;you just install the plugin on your WordPress site, activate it with one click, and then add your business information. The whole setup takes around 5 minutes. Anything else you&rsquo;d like to know?</p>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+            <div class="what-you-get__doc-msg-avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+            </div>
+            <div class="what-you-get__doc-msg-body">
+              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:45 AM</div>
+              <p>How many languages?</p>
+            </div>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:45 AM</div>
+            <p>It supports 57+ languages. Would you like to know more about any specific language?</p>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+            <div class="what-you-get__doc-msg-avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+            </div>
+            <div class="what-you-get__doc-msg-body">
+              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:39:54 AM</div>
+              <p>Does this work on mobile?</p>
+            </div>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:39:55 AM</div>
+            <p>Yes, it works on mobile devices through the browser as long as it supports microphone access. Anything else you&rsquo;d like to ask?</p>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
+            <div class="what-you-get__doc-msg-avatar">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+            </div>
+            <div class="what-you-get__doc-msg-body">
+              <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:40:05 AM</div>
+              <p>That&rsquo;s all. Thank you.</p>
+            </div>
+          </div>
+          <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
+            <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:40:06 AM</div>
+            <p>You&rsquo;re welcome! Goodbye!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <?php wp_footer(); ?>
 </body>
 </html>
