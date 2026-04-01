@@ -2275,7 +2275,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: 48px 40px 36px;
   box-shadow: var(--shadow-sm);
   width: 100%;
+  max-width: 620px;
   min-width: 0;
+  position: relative;
+  z-index: 1;
 }
 .voice-showcase__header {
   text-align: center;
@@ -4839,14 +4842,13 @@ body.sitestaffr-landing-page .hero__actions {
   overflow: hidden;
 }
 
-/* Background portrait */
+/* Background portrait — fills entire section */
 .voice-section__bg-portrait {
   position: absolute;
-  right: -40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 600px;
-  height: 700px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
   pointer-events: none;
 }
 .voice-section__bg-img {
@@ -4860,10 +4862,15 @@ body.sitestaffr-landing-page .hero__actions {
   transition: opacity 0.4s ease;
 }
 .voice-section__bg-img--active {
-  opacity: 0.12;
+  opacity: 1;
 }
 @media (max-width: 900px) {
   .voice-section__bg-portrait { display: none; }
+}
+
+/* Hide small portrait area — large background portrait replaces it */
+.voice-showcase__portrait-area {
+  display: none !important;
 }
 
 .voice-section__header {
