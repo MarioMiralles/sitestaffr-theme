@@ -61,13 +61,12 @@ $header_subtitle = isset( $args['header_subtitle'] ) ? $args['header_subtitle'] 
       <audio id="showcaseAudio" preload="none"></audio>
     </div>
   </div>
-  <div class="voice-showcase__thumbs-row">
-    <button class="voice-showcase__thumbs-arrow voice-showcase__thumbs-arrow--prev" type="button" aria-label="Previous voice">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
-    </button>
-    <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
-    <button class="voice-showcase__thumbs-arrow voice-showcase__thumbs-arrow--next" type="button" aria-label="Next voice">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
-    </button>
-  </div>
+  <div class="voice-showcase__thumbs" id="showcaseThumbs"></div>
+  <!-- Carousel arrows — positioned at card edges -->
+  <button class="voice-showcase__card-arrow voice-showcase__card-arrow--prev" type="button" aria-label="Previous voice">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="voice-showcase__card-arrow voice-showcase__card-arrow--next" type="button" aria-label="Next voice">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
 </div>

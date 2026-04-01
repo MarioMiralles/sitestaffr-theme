@@ -549,15 +549,9 @@ if (voiceShowcase) {
     showcasePlayBtn.classList.remove('playing');
     showcasePlayLabel.textContent = 'Preview Voice';
 
-    var allThumbs = showcaseThumbs.querySelectorAll('.voice-showcase__thumb');
-    allThumbs.forEach(function(thumb, i) {
+    showcaseThumbs.querySelectorAll('.voice-showcase__thumb').forEach(function(thumb, i) {
       thumb.classList.toggle('active', i === index);
     });
-
-    // Scroll active thumb into view within the strip
-    if (allThumbs[index]) {
-      allThumbs[index].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
 
     // Crossfade background portrait
     if (bgCurrent && bgNext) {
@@ -600,16 +594,16 @@ if (voiceShowcase) {
     selectVoice((activeVoiceIndex + 1) % voices.length);
   });
 
-  // Thumbs-row arrows (flanking the thumbnail strip)
-  var thumbsPrev = voiceShowcase.querySelector('.voice-showcase__thumbs-arrow--prev');
-  var thumbsNext = voiceShowcase.querySelector('.voice-showcase__thumbs-arrow--next');
-  if (thumbsPrev) {
-    thumbsPrev.addEventListener('click', function() {
+  // Card-edge arrows (positioned at card boundaries on desktop)
+  var cardPrev = voiceShowcase.querySelector('.voice-showcase__card-arrow--prev');
+  var cardNext = voiceShowcase.querySelector('.voice-showcase__card-arrow--next');
+  if (cardPrev) {
+    cardPrev.addEventListener('click', function() {
       selectVoice((activeVoiceIndex - 1 + voices.length) % voices.length);
     });
   }
-  if (thumbsNext) {
-    thumbsNext.addEventListener('click', function() {
+  if (cardNext) {
+    cardNext.addEventListener('click', function() {
       selectVoice((activeVoiceIndex + 1) % voices.length);
     });
   }

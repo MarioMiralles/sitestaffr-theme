@@ -2475,16 +2475,11 @@ body.sitestaffr-landing-page .hero__visual > * {
   min-height: 20px;
 }
 .voice-showcase__thumbs {
-  display: flex;
-  justify-content: flex-start;
-  gap: 12px;
-  overflow-x: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px 12px;
   padding: 4px 0;
-  scrollbar-width: none;
-  flex: 1;
-  min-width: 0;
 }
-.voice-showcase__thumbs::-webkit-scrollbar { display: none; }
 .voice-showcase__thumb {
   display: flex;
   flex-direction: column;
@@ -2545,31 +2540,32 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: #ede9fe;
   color: #6d28d9;
 }
-/* Thumbs row with navigation arrows */
-.voice-showcase__thumbs-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.voice-showcase__thumbs-arrow {
+/* Card-level carousel arrows */
+.voice-showcase__card-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--cream);
+  background: white;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-secondary);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: all 0.2s ease;
-  flex-shrink: 0;
   cursor: pointer;
   border: none;
   padding: 0;
+  z-index: 2;
 }
-.voice-showcase__thumbs-arrow:hover {
+.voice-showcase__card-arrow:hover {
   background: var(--teal-pale);
   color: var(--teal-deep);
 }
+.voice-showcase__card-arrow--prev { left: -20px; }
+.voice-showcase__card-arrow--next { right: -20px; }
 @media (max-width: 1024px) {
   .voice-showcase {
     max-width: 620px;
@@ -2591,6 +2587,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   .voice-showcase__play-area {
     width: 100%;
     min-width: 0;
+  }
+  .voice-showcase__card-arrow {
+    display: none;
   }
 }
 @media (max-width: 640px) {
@@ -2637,8 +2636,8 @@ body.sitestaffr-landing-page .hero__visual > * {
     height: 270px;
   }
   .voice-showcase__thumbs {
-    justify-content: flex-start;
-    gap: 8px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px 8px;
     padding: 4px 2px;
   }
   .voice-showcase__thumb-img {
