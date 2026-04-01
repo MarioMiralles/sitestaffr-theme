@@ -510,6 +510,10 @@ if (voiceShowcase) {
   const stylesheetEl = document.querySelector('link[rel="stylesheet"][href*="site.css"]');
   const themeUrl = stylesheetEl ? stylesheetEl.href.replace(/\/assets\/css\/site\.css.*$/, '') : '';
 
+  // Background portrait crossfade elements
+  var bgCurrent = document.getElementById('voiceBgCurrent');
+  var bgNext = document.getElementById('voiceBgNext');
+
   const voices = [
     { name: 'Marin', file: 'Marin', personality: 'Warm & Welcoming', description: 'Makes your callers feel right at home with a friendly, inviting tone that puts people at ease. Perfect for service businesses that prioritize customer comfort.', bestFor: 'Home Services | Hospitality | Customer Support', plan: 'Starter', recommended: true },
     { name: 'Cedar', file: 'Cedar', personality: 'Smooth & Natural', description: 'Brings a calm, professional presence to every interaction. Ideal for businesses that want to project reliability and trustworthiness.', bestFor: 'Professional Services | Local Agencies | Legal Offices', plan: 'Starter', recommended: true },
@@ -547,6 +551,18 @@ if (voiceShowcase) {
     showcaseThumbs.querySelectorAll('.voice-showcase__thumb').forEach(function(thumb, i) {
       thumb.classList.toggle('active', i === index);
     });
+
+    // Crossfade background portrait
+    if (bgCurrent && bgNext) {
+      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png';
+      bgNext.src = newSrc;
+      bgNext.classList.add('voice-section__bg-img--active');
+      bgCurrent.classList.remove('voice-section__bg-img--active');
+      // Swap references after transition
+      var temp = bgCurrent;
+      bgCurrent = bgNext;
+      bgNext = temp;
+    }
   }
 
   // Build thumbnail strip
