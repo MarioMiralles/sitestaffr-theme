@@ -337,6 +337,13 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 <!-- ========== SECTION 6: VOICE SHOWCASE ========== -->
 <section class="voice-section">
+  <!-- Section-level carousel arrows -->
+  <button class="voice-section__arrow voice-section__arrow--prev" type="button" aria-label="Previous voice">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <button class="voice-section__arrow voice-section__arrow--next" type="button" aria-label="Next voice">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
     <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.png' ); ?>" alt="">
