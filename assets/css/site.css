@@ -1176,6 +1176,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   .price-includes__grid {
     grid-template-columns: 1fr;
   }
+  .price-includes--homepage .price-includes__grid {
+    padding: 28px 20px 20px;
+    grid-template-columns: 1fr 1fr;
+  }
   .price-addon-card {
     padding: 28px 24px;
   }
@@ -2914,14 +2918,57 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-width: 520px;
   margin: 0 auto 12px;
 }
-/* Reuse price-includes component on homepage (no section padding) */
+/* Reuse price-includes component on homepage — fieldset style */
 .price-includes--homepage {
   padding: 0;
-  margin-bottom: 40px;
+  margin-bottom: 48px;
+}
+.price-includes--homepage .price-includes__header {
+  margin-bottom: 0;
+}
+.price-includes--homepage .price-includes__grid {
+  position: relative;
+  border: 1.5px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px 28px;
+  max-width: 100%;
+  gap: 12px 24px;
+}
+.price-includes--homepage .price-includes__grid::before {
+  content: attr(data-label);
+  position: absolute;
+  top: -10px;
+  left: 28px;
+  padding: 0 12px;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal-deep);
+  background: #f8f5ed;
+}
+.price-includes--homepage .price-includes__item {
+  background: none;
+  border: none;
+  padding: 10px 8px;
+}
+.price-includes--homepage .price-includes__item:hover {
+  box-shadow: none;
+  transform: none;
 }
 .pricing-section .price-grid {
-  margin-bottom: 36px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  max-width: 740px;
+  margin: 0 auto 36px;
   align-items: stretch;
+}
+.pricing-section .price-tier--popular {
+  transform: none;
+}
+.pricing-section .price-tier--popular:hover {
+  transform: translateY(-4px);
 }
 .pricing-includes {
   background: white;
