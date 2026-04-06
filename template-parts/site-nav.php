@@ -10,8 +10,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 $default_menu = array(
-    array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
-    array( 'label' => 'Pricing', 'href' => home_url( '/pricing/' ) ),
+    array( 'label' => 'Voices', 'href' => home_url( '/#voices' ) ),
+    array( 'label' => 'Pricing', 'href' => home_url( '/#pricing' ) ),
     array( 'label' => 'My Account', 'href' => home_url( '/manage/' ) ),
 );
 $default_cta = array(
