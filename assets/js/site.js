@@ -558,7 +558,7 @@ if (voiceShowcase) {
     activeVoiceIndex = index;
     const voice = voices[index];
 
-    showcasePortrait.src = themeUrl + '/assets/images/agents/' + voice.file + '_half-size.png' + imgVersion;
+    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png' + imgVersion;
     showcasePortrait.alt = voice.name;
     showcaseName.textContent = voice.name;
     showcasePlan.textContent = voice.plan;
@@ -599,7 +599,7 @@ if (voiceShowcase) {
 
     thumb.innerHTML =
       '<div class="voice-showcase__thumb-img">' +
-        '<img src="' + themeUrl + '/assets/images/agents/' + voice.file + '_half-size.png' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
+        '<img src="' + themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
       '</div>' +
       '<span class="voice-showcase__thumb-name">' + voice.name + '</span>' +
       '<span class="voice-showcase__thumb-plan" data-plan="' + voice.plan + '">' + voice.plan + '</span>';
