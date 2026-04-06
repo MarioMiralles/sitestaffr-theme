@@ -45,12 +45,12 @@ $get_started_url = home_url( '/get-started/' );
 <?php
 get_template_part( 'template-parts/site-nav', null, array(
     'menu_items' => array(
-        array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
-        array( 'label' => 'Pricing', 'href' => home_url( '/pricing/' ) ),
+        array( 'label' => 'Voices', 'href' => '#voices' ),
+        array( 'label' => 'Pricing', 'href' => '#pricing' ),
     ),
     'cta' => array(
         'label' => 'Get Started',
-        'href'  => $get_started_url,
+        'href'  => '#get-started',
     ),
 ) );
 ?>
@@ -419,7 +419,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <!-- ========== SECTION 6: VOICE SHOWCASE ========== -->
-<section class="voice-section">
+<section class="voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
     <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.png' ); ?>" alt="">
@@ -441,7 +441,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <!-- ========== SECTION 7: GET STARTED ========== -->
-<section class="onboarding-section">
+<section class="onboarding-section" id="get-started">
   <div class="container">
     <div class="onboarding-section__inner reveal">
       <span class="section-label">White-Glove Setup</span>
@@ -520,7 +520,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="price-includes__icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
           </span>
-          <span class="price-includes__label">Visitor contact info captured</span>
+          <span class="price-includes__label">Visitor contact info capture</span>
         </div>
         <div class="price-includes__item">
           <span class="price-includes__icon" aria-hidden="true">
@@ -534,6 +534,12 @@ get_template_part( 'template-parts/site-nav', null, array(
           </span>
           <span class="price-includes__label">Contact form fallback</span>
         </div>
+        <div class="price-includes__item">
+          <span class="price-includes__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </span>
+          <span class="price-includes__label">AI learns your website</span>
+        </div>
       </div>
     </div>
     <div class="price-grid">
@@ -545,7 +551,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="price-tier__minutes">30 minutes included</div>
         <ul class="price-tier__features">
           <li>2 AI voices</li>
-          <li>AI description generations</li>
+          <li>3 business identity generations</li>
           <li>No credit card required</li>
         </ul>
         <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
@@ -560,7 +566,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <ul class="price-tier__features">
           <li>2 AI voices</li>
           <li>Default greeting</li>
-          <li>3 description generations / cycle</li>
+          <li>5 business identity generations (per billing cycle)</li>
         </ul>
         <p class="price-tier__best-for">Best for businesses getting started</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
@@ -575,7 +581,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <ul class="price-tier__features">
           <li>5 AI voices</li>
           <li>Custom greeting + 4 tones</li>
-          <li>5 description generations / cycle</li>
+          <li>10 business identity generations (per billing cycle)</li>
         </ul>
         <p class="price-tier__best-for">Best for growing local businesses</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
@@ -589,7 +595,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <ul class="price-tier__features">
           <li>All 10 AI voices</li>
           <li>Custom greeting + 4 tones</li>
-          <li>10 description generations / cycle</li>
+          <li>20 business identity generations (per billing cycle)</li>
           <li>Priority access to new features</li>
         </ul>
         <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>

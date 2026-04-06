@@ -2273,7 +2273,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   min-width: 0;
   position: relative;
   z-index: 1;
-  overflow-x: hidden;
 }
 .voice-showcase__header {
   text-align: center;
@@ -2473,6 +2472,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   justify-content: center;
   gap: 14px;
   padding: 12px 8px;
+  overflow: hidden;
 }
 .voice-showcase__thumb {
   display: flex;
