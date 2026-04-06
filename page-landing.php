@@ -545,7 +545,6 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="price-tier__minutes">30 minutes included</div>
         <ul class="price-tier__features">
           <li>2 AI voices</li>
-          <li>3 business identity generations</li>
           <li>No credit card required</li>
         </ul>
         <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
@@ -559,7 +558,6 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="price-tier__minutes">60 minutes included</div>
         <ul class="price-tier__features">
           <li>2 AI voices</li>
-          <li>5 business identity generations (per billing cycle)</li>
         </ul>
         <p class="price-tier__best-for">Best for businesses getting started</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
@@ -573,7 +571,6 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="price-tier__minutes">300 minutes included</div>
         <ul class="price-tier__features">
           <li>5 AI voices</li>
-          <li>10 business identity generations (per billing cycle)</li>
         </ul>
         <p class="price-tier__best-for">Best for growing local businesses</p>
         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
@@ -587,7 +584,6 @@ get_template_part( 'template-parts/site-nav', null, array(
         <ul class="price-tier__features">
           <li>All 10 AI voices</li>
           <li>Custom greeting + 4 tones</li>
-          <li>20 business identity generations (per billing cycle)</li>
           <li>Priority access to new features</li>
         </ul>
         <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
