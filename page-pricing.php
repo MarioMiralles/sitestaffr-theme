@@ -33,16 +33,7 @@ if ( is_admin_bar_showing() ) {
 <?php wp_body_open(); ?>
 
 <?php
-get_template_part( 'template-parts/site-nav', null, array(
-    'menu_items' => array(
-        array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
-        array( 'label' => 'Pricing', 'href' => home_url( '/pricing/' ) ),
-    ),
-    'cta' => array(
-        'label' => 'Get Started',
-        'href'  => home_url( '/get-started/' ),
-    ),
-) );
+get_template_part( 'template-parts/site-nav' );
 ?>
 
 <main class="pricing-page">

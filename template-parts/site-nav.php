@@ -10,7 +10,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 $default_menu = array(
-    array( 'label' => 'How It Works', 'href' => home_url( '/how-it-works/' ) ),
     array( 'label' => 'Features', 'href' => home_url( '/features/' ) ),
     array( 'label' => 'Pricing', 'href' => home_url( '/pricing/' ) ),
     array( 'label' => 'My Account', 'href' => home_url( '/manage/' ) ),
