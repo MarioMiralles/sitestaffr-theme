@@ -492,6 +492,30 @@ document.querySelectorAll('.js-audio-demo').forEach((demoLayout) => {
   initAudioDemo(demoLayout);
 });
 
+// ========== VOICE & TEXT MODE SWITCHER ==========
+document.querySelectorAll('.voice-text-section__card').forEach(function(card) {
+  card.addEventListener('click', function() {
+    var mode = this.getAttribute('data-vt-mode');
+    var panel = this.closest('.voice-text-section__panel');
+    // Toggle active card
+    panel.querySelectorAll('.voice-text-section__card').forEach(function(c) {
+      c.classList.remove('voice-text-section__card--active');
+    });
+    this.classList.add('voice-text-section__card--active');
+    // Toggle active preview
+    panel.querySelectorAll('.voice-text-section__mode').forEach(function(m) {
+      m.classList.remove('voice-text-section__mode--active');
+    });
+    panel.querySelector('.voice-text-section__mode--' + mode).classList.add('voice-text-section__mode--active');
+    // Re-trigger entry animations by cloning animated elements
+    var activeMode = panel.querySelector('.voice-text-section__mode--active');
+    activeMode.querySelectorAll('.voice-text-section__msg, .voice-text-section__chat-row').forEach(function(el) {
+      var clone = el.cloneNode(true);
+      el.parentNode.replaceChild(clone, el);
+    });
+  });
+});
+
 // ========== VOICE AGENT SHOWCASE ==========
 const voiceShowcase = document.getElementById('voiceShowcase');
 if (voiceShowcase) {

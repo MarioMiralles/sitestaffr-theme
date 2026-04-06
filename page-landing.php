@@ -148,22 +148,105 @@ get_template_part( 'template-parts/site-nav', null, array(
       <h2>Voice &amp; Chat</h2>
       <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer talking, others prefer typing &mdash; SiteStaffr handles both with the same AI and the same answers.</p>
     </div>
-    <div class="voice-text-section__grid">
-      <div class="voice-text-section__item reveal">
-        <div class="voice-text-section__screenshot">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/hero.png' ); ?>" alt="<?php echo esc_attr( 'SiteStaffr voice widget on a website' ); ?>" loading="lazy" decoding="async">
+
+    <div class="voice-text-section__panel reveal">
+      <!-- Mode selector cards -->
+      <div class="voice-text-section__selector">
+        <button class="voice-text-section__card voice-text-section__card--active" data-vt-mode="voice" type="button">
+          <span class="voice-text-section__card-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+              <line x1="12" y1="19" x2="12" y2="23"/>
+              <line x1="8" y1="23" x2="16" y2="23"/>
+            </svg>
+          </span>
+          <span class="voice-text-section__card-title">Voice</span>
+          <span class="voice-text-section__card-desc">Talk with our AI assistant</span>
+        </button>
+        <button class="voice-text-section__card" data-vt-mode="text" type="button">
+          <span class="voice-text-section__card-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </span>
+          <span class="voice-text-section__card-title">Text</span>
+          <span class="voice-text-section__card-desc">Type your questions</span>
+        </button>
+      </div>
+
+      <!-- Preview area -->
+      <div class="voice-text-section__preview">
+        <!-- Voice mode preview -->
+        <div class="voice-text-section__mode voice-text-section__mode--voice voice-text-section__mode--active">
+          <div class="voice-text-section__voice-stage">
+            <div class="voice-text-section__mic-ring">
+              <span class="voice-text-section__mic-pulse"></span>
+              <span class="voice-text-section__mic-pulse voice-text-section__mic-pulse--delayed"></span>
+              <svg class="voice-text-section__mic-svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="voice-text-section__waveform" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <span class="voice-text-section__listening">Listening&hellip;</span>
+          </div>
+          <div class="voice-text-section__transcript">
+            <div class="voice-text-section__msg voice-text-section__msg--visitor">
+              <span class="voice-text-section__msg-dot"></span>
+              <div class="voice-text-section__msg-content">
+                <span class="voice-text-section__msg-who">Visitor</span>
+                Hi, I&rsquo;d like to schedule an appointment for next week.
+              </div>
+            </div>
+            <div class="voice-text-section__msg voice-text-section__msg--ai">
+              <span class="voice-text-section__msg-dot"></span>
+              <div class="voice-text-section__msg-content">
+                <span class="voice-text-section__msg-who">AI Agent</span>
+                Of course! I can help with that. What day works best for you?
+              </div>
+            </div>
+          </div>
         </div>
-        <p class="voice-text-section__caption">Talk Naturally With an AI Voice Agent</p>
-      </div>
-      <div class="voice-text-section__divider reveal reveal-delay-1" aria-hidden="true">
-        <span class="voice-text-section__or">or</span>
-      </div>
-      <div class="voice-text-section__item reveal reveal-delay-2">
-        <div class="voice-text-section__screenshot">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-conversation.png' ); ?>" alt="<?php echo esc_attr( 'SiteStaffr text chat widget on a website' ); ?>" loading="lazy" decoding="async">
+
+        <!-- Text mode preview -->
+        <div class="voice-text-section__mode voice-text-section__mode--text">
+          <div class="voice-text-section__chat">
+            <div class="voice-text-section__chat-row voice-text-section__chat-row--ai">
+              <span class="voice-text-section__chat-avatar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              </span>
+              <div class="voice-text-section__chat-bubble">Hi! How can I help you today?</div>
+            </div>
+            <div class="voice-text-section__chat-row voice-text-section__chat-row--visitor">
+              <div class="voice-text-section__chat-bubble">Do you offer free consultations?</div>
+            </div>
+            <div class="voice-text-section__chat-row voice-text-section__chat-row--ai">
+              <span class="voice-text-section__chat-avatar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              </span>
+              <div class="voice-text-section__chat-bubble">Yes! We offer a complimentary 15-minute consultation. Would you like to schedule one?</div>
+            </div>
+            <div class="voice-text-section__chat-row voice-text-section__chat-row--ai voice-text-section__chat-typing">
+              <span class="voice-text-section__chat-avatar">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+              </span>
+              <div class="voice-text-section__chat-bubble">
+                <span class="voice-text-section__dots"><span></span><span></span><span></span></span>
+              </div>
+            </div>
+          </div>
+          <div class="voice-text-section__input-bar">
+            <span class="voice-text-section__input-text">Type a message&hellip;</span>
+            <svg class="voice-text-section__send-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </div>
         </div>
-        <p class="voice-text-section__caption">Or Type &mdash; Same AI, Same Answers</p>
       </div>
+
+      <!-- Tagline -->
+      <p class="voice-text-section__tagline">Same AI. Same knowledge. Their choice.</p>
     </div>
   </div>
 </section>
