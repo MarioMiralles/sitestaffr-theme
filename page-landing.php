@@ -451,6 +451,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
       <p class="onboarding-section__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>.</p>
 
+      <?php /* DIY install section — hidden until WP.org approval
       <div class="onboarding-section__diy reveal reveal-delay-1">
         <p class="onboarding-section__diy-label">Or set it up yourself in minutes</p>
         <div class="onboarding-section__timeline">
@@ -483,6 +484,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
         </a>
       </div>
+      */ ?>
     </div>
   </div>
 </section>
@@ -491,6 +493,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="pricing-section" id="pricing">
   <div class="container">
     <div class="pricing-section__header reveal">
+      <span class="section-label">Plans &amp; Pricing</span>
       <h2>Start Free. Upgrade When You&rsquo;re Ready.</h2>
     </div>
     <div class="price-includes price-includes--homepage reveal">
@@ -533,58 +536,70 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
       </div>
     </div>
-    <div class="price-grid">
+    <div class="price-grid price-grid--horizontal">
       <div class="price-tier reveal">
-        <div class="price-tier__name">Free Trial</div>
-        <div class="price-tier__price">$0</div>
-        <div class="price-tier__period">for 30 days</div>
-        <div class="price-tier__divider"></div>
-        <div class="price-tier__minutes">30 minutes included</div>
-        <ul class="price-tier__features">
-          <li>2 AI voices</li>
-          <li>No credit card required</li>
-        </ul>
-        <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
-        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Start Free Trial</a>
+        <div class="price-tier__identity">
+          <div class="price-tier__name">Free Trial</div>
+          <div class="price-tier__price">$0</div>
+          <div class="price-tier__period">for 30 days</div>
+        </div>
+        <div class="price-tier__details">
+          <div class="price-tier__minutes">30 minutes included</div>
+          <ul class="price-tier__features">
+            <li>2 AI voices</li>
+            <li>No credit card required</li>
+          </ul>
+          <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Start Free Trial</a>
+        </div>
       </div>
       <div class="price-tier reveal reveal-delay-1">
-        <div class="price-tier__name">Starter</div>
-        <div class="price-tier__price">$10</div>
-        <div class="price-tier__period">per month</div>
-        <div class="price-tier__divider"></div>
-        <div class="price-tier__minutes">60 minutes included</div>
-        <ul class="price-tier__features">
-          <li>2 AI voices</li>
-        </ul>
-        <p class="price-tier__best-for">Best for businesses getting started</p>
-        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
+        <div class="price-tier__identity">
+          <div class="price-tier__name">Starter</div>
+          <div class="price-tier__price">$10</div>
+          <div class="price-tier__period">per month</div>
+        </div>
+        <div class="price-tier__details">
+          <div class="price-tier__minutes">60 minutes included</div>
+          <ul class="price-tier__features">
+            <li>2 AI voices</li>
+          </ul>
+          <p class="price-tier__best-for">Best for businesses getting started</p>
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
+        </div>
       </div>
       <div class="price-tier price-tier--popular reveal reveal-delay-2">
-        <div class="price-tier__badge">Most Popular</div>
-        <div class="price-tier__name">Business</div>
-        <div class="price-tier__price">$50</div>
-        <div class="price-tier__period">per month</div>
-        <div class="price-tier__divider"></div>
-        <div class="price-tier__minutes">300 minutes included</div>
-        <ul class="price-tier__features">
-          <li>5 AI voices</li>
-        </ul>
-        <p class="price-tier__best-for">Best for growing local businesses</p>
-        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
+        <div class="price-tier__identity">
+          <span class="price-tier__badge">Most Popular</span>
+          <div class="price-tier__name">Business</div>
+          <div class="price-tier__price">$50</div>
+          <div class="price-tier__period">per month</div>
+        </div>
+        <div class="price-tier__details">
+          <div class="price-tier__minutes">300 minutes included</div>
+          <ul class="price-tier__features">
+            <li>5 AI voices</li>
+          </ul>
+          <p class="price-tier__best-for">Best for growing local businesses</p>
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
+        </div>
       </div>
       <div class="price-tier reveal reveal-delay-3">
-        <div class="price-tier__name">Pro</div>
-        <div class="price-tier__price">$100</div>
-        <div class="price-tier__period">per month</div>
-        <div class="price-tier__divider"></div>
-        <div class="price-tier__minutes">700 minutes included</div>
-        <ul class="price-tier__features">
-          <li>All 10 AI voices</li>
-          <li>Custom greeting + 4 tones</li>
-          <li>Priority access to new features</li>
-        </ul>
-        <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
-        <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
+        <div class="price-tier__identity">
+          <div class="price-tier__name">Pro</div>
+          <div class="price-tier__price">$100</div>
+          <div class="price-tier__period">per month</div>
+        </div>
+        <div class="price-tier__details">
+          <div class="price-tier__minutes">700 minutes included</div>
+          <ul class="price-tier__features">
+            <li>All 10 AI voices</li>
+            <li>Custom greeting + 4 tones</li>
+            <li>Priority access to new features</li>
+          </ul>
+          <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
+        </div>
       </div>
     </div>
     <div class="pricing-addon reveal">

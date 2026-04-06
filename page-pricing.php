@@ -162,7 +162,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <ul class="price-tier__features">
             <li>All 10 AI voices</li>
             <li>Custom greeting + 4 tones</li>
-            <li>20 description generations / cycle</li>
+            <li>10 description generations / cycle</li>
             <li>Priority access to new features</li>
           </ul>
           <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
