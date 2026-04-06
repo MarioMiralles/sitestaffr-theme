@@ -7,7 +7,7 @@ $page_title       = 'Pricing | SiteStaffr — Simple, Transparent Plans';
 $page_description = 'SiteStaffr pricing: Free trial, Starter ($10/mo), Business ($50/mo), and Pro ($100/mo). All plans include text chat, email recaps, transcripts, and 57+ languages.';
 $page_url         = home_url( '/pricing/' );
 $site_name        = get_bloginfo( 'name' );
-$get_started_url  = home_url( '/get-started/' );
+$get_started_url  = home_url( '/#get-started' );
 $body_classes     = array( 'wp-theme-sitestaffr-website', 'sitestaffr-pricing-page' );
 if ( is_admin_bar_showing() ) {
     $body_classes[] = 'admin-bar';
@@ -267,7 +267,7 @@ get_template_part( 'template-parts/site-nav' );
       <div class="price-final-cta__content reveal">
         <h2>Start your free trial</h2>
         <p class="price-final-cta__subtitle">30 days. Full access. No credit card.</p>
-        <a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>
+        <a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>
       </div>
     </div>
   </section>

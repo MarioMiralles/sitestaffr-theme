@@ -13,7 +13,7 @@ $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
 $landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.png';
 $site_name = get_bloginfo( 'name' );
-$get_started_url = home_url( '/get-started/' );
+$get_started_url = home_url( '/#get-started' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>

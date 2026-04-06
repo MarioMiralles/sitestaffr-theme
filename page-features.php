@@ -7,7 +7,7 @@ $page_title       = 'Features | SiteStaffr — AI Voice & Text Chat for WordPres
 $page_description = 'Explore SiteStaffr\'s features: AI voice agent, text chat widget, email recaps, full transcripts, 57+ languages, and more.';
 $page_url         = home_url( '/features/' );
 $site_name        = get_bloginfo( 'name' );
-$get_started_url  = home_url( '/get-started/' );
+$get_started_url  = home_url( '/#get-started' );
 $pricing_url      = home_url( '/pricing/' );
 $body_classes     = array( 'wp-theme-sitestaffr-website', 'sitestaffr-features-page' );
 if ( is_admin_bar_showing() ) {
@@ -262,7 +262,7 @@ get_template_part( 'template-parts/site-nav' );
         <h2>Ready to see it in action?</h2>
         <div class="feat-cta__buttons">
           <a href="<?php echo esc_url( home_url( '/pricing/' ) ); ?>" class="btn btn--outline btn--large">See Pricing</a>
-          <a href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>
         </div>
       </div>
     </div>

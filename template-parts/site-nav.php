@@ -16,7 +16,7 @@ $default_menu = array(
 );
 $default_cta = array(
     'label' => 'Get Started',
-    'href'  => home_url( '/get-started/' ),
+    'href'  => home_url( '/#get-started' ),
 );
 $menu_items = isset( $args['menu_items'] ) ? $args['menu_items'] : $default_menu;
 $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
