@@ -445,7 +445,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="onboarding-section" id="get-started">
   <div class="container">
     <div class="onboarding-section__inner reveal">
-      <span class="section-label">White-Glove Setup</span>
+      <span class="section-label">Get Started</span>
       <h2 class="onboarding-section__headline">Let Us Set Up Your AI Voice Agent</h2>
       <div class="onboarding-section__cta">
         <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" variant="hero" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr"]' ); ?>
