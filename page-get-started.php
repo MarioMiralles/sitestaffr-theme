@@ -130,7 +130,7 @@ $site_name        = get_bloginfo( 'name' );
 
     <div class="voice-section">
         <div class="voice-section__cta">
-            <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" variant="hero" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr"]' ); ?>
+            <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
         </div>
 
         <p class="privacy-notice">Your information will be used to set up your SiteStaffr assistant. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
