@@ -15,7 +15,7 @@ $open_audio_src = isset( $component_args['open_audio_src'] ) ? (string) $compone
 $close_audio_src = isset( $component_args['close_audio_src'] ) ? (string) $component_args['close_audio_src'] : sitestaffr_asset_url( 'assets/audio/close.mp3' );
 $total_time    = isset( $component_args['total_time'] ) ? (string) $component_args['total_time'] : '0:45';
 
-$recap_image_src = isset( $component_args['recap_image_src'] ) ? (string) $component_args['recap_image_src'] : sitestaffr_asset_url( 'assets/images/conversation-recap.png' );
+$recap_image_src = isset( $component_args['recap_image_src'] ) ? (string) $component_args['recap_image_src'] : sitestaffr_asset_url( 'assets/images/conversation-recap.webp' );
 $recap_image_alt = isset( $component_args['recap_image_alt'] ) ? (string) $component_args['recap_image_alt'] : 'Sample conversation recap with caller details and suggested follow-up';
 
 $wrapper_classes = array( 'demo-layout', 'js-audio-demo' );
@@ -137,7 +137,7 @@ $transcript_entries = array(
 			<audio preload="metadata" data-audio-demo-audio>
 				<source src="<?php echo esc_url( $audio_src ); ?>" type="audio/mpeg">
 			</audio>
-			<div class="audio-player__transcript-hint" data-audio-demo-transcript-panel aria-expanded="true">
+			<div class="audio-player__transcript-hint" data-audio-demo-transcript-panel>
 				<div class="audio-player__transcript-window" data-audio-demo-transcript-window aria-live="polite" aria-atomic="false"></div>
 				<div class="audio-player__transcript-source" data-audio-demo-transcript-source aria-hidden="true">
 					<?php foreach ( $transcript_entries as $entry ) : ?>
@@ -173,10 +173,10 @@ $transcript_entries = array(
 						Bob called about a leak under his kitchen sink that's getting worse. He requested urgent service due to the deteriorating situation.
 					</p>
 					<ul class="conversation-recap__list">
-						<li>Phone: <a href="tel:3055551234" aria-label="Phone number for Bob">305-555-1234</a></li>
+						<li>Phone: <a href="tel:3055551234" aria-label="Phone number for Bob" tabindex="-1">305-555-1234</a></li>
 						<li>Reason for call: Leak under kitchen sink</li>
 						<li>Urgency: Getting worse, needs immediate attention</li>
-						<li>Location/Address: <a href="https://maps.google.com/?q=1000+West+Palm+Avenue+Miami+Florida" target="_blank" rel="noopener noreferrer" aria-label="Service address">1000 West Palm Avenue, Miami, Florida</a></li>
+						<li>Location/Address: <a href="https://maps.google.com/?q=1000+West+Palm+Avenue+Miami+Florida" target="_blank" rel="noopener noreferrer" aria-label="Service address" tabindex="-1">1000 West Palm Avenue, Miami, Florida</a></li>
 					</ul>
 					<p class="conversation-recap__followup"><strong>Suggested follow-up:</strong> Schedule a technician to address the leak as soon as possible and confirm the appointment with Bob.</p>
 				</div>

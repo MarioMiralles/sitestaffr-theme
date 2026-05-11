@@ -42,7 +42,7 @@ $header_subtitle = isset( $args['header_subtitle'] ) ? $args['header_subtitle'] 
     </div>
     <div class="voice-showcase__info">
       <div class="voice-showcase__name-row">
-        <h4 class="voice-showcase__name" id="showcaseName"></h4>
+        <h3 class="voice-showcase__name" id="showcaseName"></h3>
         <span class="voice-showcase__plan-pill" id="showcasePlan"></span>
         <span class="voice-showcase__recommended-pill" id="showcaseRecommended" hidden>
           <span class="voice-showcase__recommended-icon" aria-hidden="true">&#9733;</span>

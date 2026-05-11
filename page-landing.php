@@ -11,7 +11,7 @@ $landing_description = 'An AI voice agent that works 24/7 on your WordPress site
 $landing_keywords = 'AI voice agent, WordPress voice assistant, lead capture, phone answering service, website assistant';
 $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
-$landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.png';
+$landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.webp';
 $site_name = get_bloginfo( 'name' );
 $get_started_url = home_url( '/#get-started' );
 ?><!doctype html>
@@ -56,6 +56,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 ) );
 ?>
 
+<main>
 <!-- ========== SECTION 1: HERO ========== -->
 <section class="hero">
   <canvas id="hero-soundwave" class="hero__canvas" aria-hidden="true"></canvas>
@@ -272,14 +273,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <div class="what-you-get__callout-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
-            <h4 class="what-you-get__callout-title">Conversation Recap</h4>
+            <h3 class="what-you-get__callout-title">Conversation Recap</h3>
             <p class="what-you-get__callout-desc">Instantly summarizes what the visitor needed</p>
           </div>
           <div class="what-you-get__callout what-you-get__callout--followup">
             <div class="what-you-get__callout-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
-            <h4 class="what-you-get__callout-title">Actionable Follow-Up</h4>
+            <h3 class="what-you-get__callout-title">Actionable Follow-Up</h3>
             <p class="what-you-get__callout-desc">Know exactly what to do next</p>
           </div>
         </div>
@@ -290,7 +291,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 
             <!-- Document header -->
             <div class="what-you-get__doc-header">
-              <img class="what-you-get__doc-logo-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.png' ); ?>" alt="SiteStaffr">
+              <img class="what-you-get__doc-logo-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.webp' ); ?>" alt="SiteStaffr" width="625" height="188">
               <span class="what-you-get__doc-print-btn">Print / Download PDF</span>
             </div>
 
@@ -351,14 +352,14 @@ get_template_part( 'template-parts/site-nav', null, array(
             <div class="what-you-get__callout-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
             </div>
-            <h4 class="what-you-get__callout-title">Full Transcript</h4>
+            <h3 class="what-you-get__callout-title">Full Transcript</h3>
             <p class="what-you-get__callout-desc">See every message, exactly as it happened</p>
           </div>
           <div class="what-you-get__callout what-you-get__callout--instant">
             <div class="what-you-get__callout-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
             </div>
-            <h4 class="what-you-get__callout-title">Delivered Instantly</h4>
+            <h3 class="what-you-get__callout-title">Delivered Instantly</h3>
             <p class="what-you-get__callout-desc">Generated and ready within seconds</p>
           </div>
         </div>
@@ -424,7 +425,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
-    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.png' ); ?>" alt="">
+    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.webp' ); ?>" alt="">
     <img id="voiceBgNext" class="voice-section__bg-img" src="" alt="">
   </div>
   <div class="container">
@@ -451,7 +452,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="onboarding-section__cta">
         <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
       </div>
-      <p class="onboarding-section__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Privacy Policy</a>.</p>
+      <p class="onboarding-section__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
 
       <?php /* DIY install section — hidden until WP.org approval
       <div class="onboarding-section__diy reveal reveal-delay-1">
@@ -626,6 +627,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
+</main>
 <?php get_template_part( 'template-parts/site-footer' ); ?>
 <?php wp_footer(); ?>
 </body>

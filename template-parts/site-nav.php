@@ -27,8 +27,10 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav__logo" aria-label="SiteStaffr home">
         <img
           class="nav__logo-image"
-          src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.png' ) ); ?>"
+          src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
           alt="SiteStaffr"
+          width="625"
+          height="188"
         >
       </a>
       <?php if ( $menu_items || $cta ) : ?>

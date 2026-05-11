@@ -20,8 +20,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="maintenance__card">
 			<img
 				class="maintenance__logo"
-				src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.png' ) ); ?>"
+				src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
 				alt="SiteStaffr"
+				width="625"
+				height="188"
 			>
 			<span class="maintenance__badge">Temporary Maintenance</span>
 			<h1>We are making a few updates</h1>

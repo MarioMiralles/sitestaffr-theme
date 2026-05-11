@@ -2370,7 +2370,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .voice-showcase__plan-pill[data-plan="Starter"] {
   background: var(--teal-pale);
-  color: var(--teal-deep);
+  color: #006570;
 }
 .voice-showcase__plan-pill[data-plan="Business"] {
   background: var(--emerald-light);
@@ -2462,7 +2462,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .voice-showcase__play-label {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #566573;
   text-align: center;
   width: 100%;
   min-height: 20px;
@@ -2509,7 +2509,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .voice-showcase__thumb-name {
   font-size: 0.65rem;
   font-weight: 600;
-  color: var(--text-muted);
+  color: #566573;
   text-align: center;
   white-space: nowrap;
 }
@@ -2526,7 +2526,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .voice-showcase__thumb-plan[data-plan="Starter"] {
   background: var(--teal-pale);
-  color: var(--teal-deep);
+  color: #006570;
 }
 .voice-showcase__thumb-plan[data-plan="Business"] {
   background: var(--emerald-light);
@@ -4280,8 +4280,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .final-cta {
   padding: clamp(80px, 12vw, 140px) 0;
   background:
-    linear-gradient(135deg, rgba(0, 131, 143, 0.9) 0%, rgba(0, 95, 107, 0.92) 100%),
-    url('../images/hero-background1.png') center center / cover no-repeat;
+    linear-gradient(135deg, rgba(0, 131, 143, 0.9) 0%, rgba(0, 95, 107, 0.92) 100%);
   color: white;
   text-align: center;
   position: relative;
@@ -4396,12 +4395,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 .footer {
   padding: 40px 0;
   background: #0a2e33;
-  color: rgba(240,250,250,0.4);
+  color: rgba(240,250,250,0.65);
   text-align: center;
   font-size: 0.85rem;
 }
 .footer a {
-  color: rgba(240,250,250,0.6);
+  color: rgba(240,250,250,0.8);
   transition: color 0.2s;
 }
 .footer a:hover { color: white; }
@@ -5429,16 +5428,17 @@ body.sitestaffr-landing-page .hero__actions {
   content: '';
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
   animation: cta-shimmer 3s ease-in-out infinite;
   pointer-events: none;
+  will-change: transform;
 }
 @keyframes cta-shimmer {
-  0% { left: -100%; }
-  50%, 100% { left: 150%; }
+  0% { transform: translateX(-100%); }
+  50%, 100% { transform: translateX(150%); }
 }
 .onboarding-section__privacy {
   font-size: 0.82rem;

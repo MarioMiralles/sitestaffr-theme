@@ -81,7 +81,7 @@ get_template_part( 'template-parts/site-nav' );
           </ul>
         </div>
         <div class="feat-section__media">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-conversation.png' ); ?>" alt="Text chat conversation showing real-time AI responses" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-conversation.webp' ); ?>" alt="Text chat conversation showing real-time AI responses" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -106,7 +106,7 @@ get_template_part( 'template-parts/site-nav' );
           </div>
         </div>
         <div class="feat-section__media">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-description.png' ); ?>" alt="AI knowledge settings showing Search Mode and Page Expert Mode" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-description.webp' ); ?>" alt="AI knowledge settings showing Search Mode and Page Expert Mode" loading="lazy" decoding="async">
         </div>
       </div>
     </div>
@@ -122,21 +122,21 @@ get_template_part( 'template-parts/site-nav' );
       <div class="feat-cards-row reveal reveal-delay-1">
         <div class="feat-card">
           <div class="feat-card__image">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-email-recap.png' ); ?>" alt="Email recap showing visitor details and action items" loading="lazy" decoding="async">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-email-recap.webp' ); ?>" alt="Email recap showing visitor details and action items" loading="lazy" decoding="async">
           </div>
           <h3>Email Recap</h3>
           <p>A summary hits your inbox the moment the conversation ends &mdash; who they are, what they need, and what to do next.</p>
         </div>
         <div class="feat-card">
           <div class="feat-card__image">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-transcript.png' ); ?>" alt="Full conversation transcript with turn-by-turn detail" loading="lazy" decoding="async">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-transcript.webp' ); ?>" alt="Full conversation transcript with turn-by-turn detail" loading="lazy" decoding="async">
           </div>
           <h3>Full Transcript</h3>
           <p>Every word, turn by turn. Review exactly what was said so nothing gets lost.</p>
         </div>
         <div class="feat-card">
           <div class="feat-card__image">
-            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-followup.png' ); ?>" alt="Suggested follow-up actions based on the conversation" loading="lazy" decoding="async">
+            <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/after-conversation-followup.webp' ); ?>" alt="Suggested follow-up actions based on the conversation" loading="lazy" decoding="async">
           </div>
           <h3>Suggested Follow-Up</h3>
           <p>SiteStaffr recommends your next step based on what the visitor asked for.</p>
@@ -171,7 +171,7 @@ get_template_part( 'template-parts/site-nav' );
           </ul>
         </div>
         <div class="feat-section__media">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-dashboard.png' ); ?>" alt="WordPress dashboard showing usage tracking and billing" loading="lazy" decoding="async">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/features-dashboard.webp' ); ?>" alt="WordPress dashboard showing usage tracking and billing" loading="lazy" decoding="async">
         </div>
       </div>
     </div>

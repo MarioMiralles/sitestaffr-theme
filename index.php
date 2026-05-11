@@ -44,8 +44,10 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav__logo" aria-label="<?php echo esc_attr( $site_name ); ?> home">
 				<img
 					class="nav__logo-image"
-					src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.png' ) ); ?>"
+					src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
 					alt="<?php echo esc_attr( $site_name ); ?>"
+					width="625"
+					height="188"
 				>
 			</a>
 			<div class="nav__cta">

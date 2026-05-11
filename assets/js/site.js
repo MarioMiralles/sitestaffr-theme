@@ -770,7 +770,7 @@ if (voiceShowcase) {
     activeVoiceIndex = index;
     const voice = voices[index];
 
-    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png' + imgVersion;
+    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
     showcasePortrait.alt = voice.name;
     showcaseName.textContent = voice.name;
     showcasePlan.textContent = voice.plan;
@@ -791,7 +791,7 @@ if (voiceShowcase) {
 
     // Crossfade background portrait
     if (bgCurrent && bgNext) {
-      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png' + imgVersion;
+      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
       bgNext.src = newSrc;
       bgNext.classList.add('voice-section__bg-img--active');
       bgCurrent.classList.remove('voice-section__bg-img--active');
@@ -811,7 +811,7 @@ if (voiceShowcase) {
 
     thumb.innerHTML =
       '<div class="voice-showcase__thumb-img">' +
-        '<img src="' + themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.png' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
+        '<img src="' + themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
       '</div>' +
       '<span class="voice-showcase__thumb-name">' + voice.name + '</span>' +
       '<span class="voice-showcase__thumb-plan" data-plan="' + voice.plan + '">' + voice.plan + '</span>';
