@@ -406,7 +406,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: block;
   margin-top: 14px;
   font-size: 0.85rem;
-  color: var(--text-muted);
+  color: #566573;
 }
 
 /* Widget Mockup */
@@ -4898,7 +4898,7 @@ body.sitestaffr-legal-page .legal-caps {
 .hero__no-cc {
   display: block;
   font-size: 0.88rem;
-  color: var(--text-muted);
+  color: #566573;
   margin-bottom: 28px;
   letter-spacing: 0.01em;
 }
