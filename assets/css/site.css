@@ -5371,14 +5371,6 @@ body.sitestaffr-landing-page .hero__actions {
   }
 }
 
-.sitestaffr-button-widget.sitestaffr-button--hero {
-  box-shadow: none;
-  animation: none;
-}
-.sitestaffr-button-widget.sitestaffr-button--hero::before {
-  display: none;
-}
-
 /* ========== SECTION 7: ONBOARDING (WHITE-GLOVE SETUP) ========== */
 .onboarding-section {
   padding: clamp(80px, 12vw, 140px) 0;
