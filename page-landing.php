@@ -58,6 +58,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 <!-- ========== SECTION 1: HERO ========== -->
 <section class="hero">
+  <canvas id="hero-soundwave" class="hero__canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="hero__grid">
       <div class="hero__content reveal">

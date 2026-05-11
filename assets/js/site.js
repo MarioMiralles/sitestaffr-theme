@@ -1,3 +1,215 @@
+// ========== HERO SOUNDWAVE CANVAS ==========
+(function() {
+  const canvas = document.getElementById('hero-soundwave');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  let W, H, dpr;
+  let mouse = { x: -1000, y: -1000, active: false };
+  let raf;
+
+  const COLORS = {
+    tealLight:  [31, 182, 204],
+    tealMid:    [0, 131, 143],
+    tealDeep:   [0, 77, 64],
+    mint:       [144, 224, 190],
+    paleAqua:   [180, 230, 220],
+  };
+
+  const BAR_COUNT = 120;
+  const BAR_GAP = 2.5;
+  let bars = [];
+
+  function resize() {
+    const rect = canvas.parentElement.getBoundingClientRect();
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    W = rect.width;
+    H = rect.height;
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+    canvas.style.width = W + 'px';
+    canvas.style.height = H + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    initBars();
+  }
+
+  function initBars() {
+    bars = [];
+    const totalWidth = W;
+    const barWidth = (totalWidth / BAR_COUNT) - BAR_GAP;
+
+    for (let i = 0; i < BAR_COUNT; i++) {
+      const t = i / BAR_COUNT;
+      const waveBase = Math.sin(t * Math.PI * 2.2) * 0.3
+                     + Math.sin(t * Math.PI * 4.5 + 1.2) * 0.2
+                     + Math.sin(t * Math.PI * 7.0 + 0.7) * 0.12
+                     + Math.sin(t * Math.PI * 1.1) * 0.25;
+      const envelope = Math.pow(t, 0.7);
+      const heightFactor = Math.max(0.05, (0.5 + waveBase * 0.5) * envelope);
+
+      bars.push({
+        x: i * (barWidth + BAR_GAP),
+        width: barWidth,
+        baseHeight: heightFactor,
+        currentHeight: heightFactor,
+        targetHeight: heightFactor,
+        phase: t * Math.PI * 6 + Math.random() * 0.8,
+        speed: 0.3 + Math.random() * 0.5,
+        colorSeed: Math.random(),
+      });
+    }
+  }
+
+  function drawMistLayer(time) {
+    const gradient = ctx.createRadialGradient(
+      W * 0.65, H * 0.45, 0,
+      W * 0.65, H * 0.45, W * 0.55
+    );
+    gradient.addColorStop(0, 'rgba(31, 182, 204, 0.06)');
+    gradient.addColorStop(0.4, 'rgba(0, 131, 143, 0.04)');
+    gradient.addColorStop(1, 'rgba(31, 182, 204, 0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, W, H);
+
+    for (let i = 0; i < 4; i++) {
+      const cx = W * (0.35 + i * 0.18) + Math.sin(time * 0.0003 + i * 1.5) * W * 0.06;
+      const cy = H * (0.35 + Math.sin(time * 0.0002 + i * 2.1) * 0.15);
+      const r = W * (0.12 + i * 0.04);
+      const [cr, cg, cb] = i % 2 === 0 ? COLORS.tealLight : COLORS.mint;
+      const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, r);
+      g.addColorStop(0, 'rgba(' + cr + ',' + cg + ',' + cb + ',0.07)');
+      g.addColorStop(1, 'rgba(' + cr + ',' + cg + ',' + cb + ',0)');
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, W, H);
+    }
+  }
+
+  function getBarColor(bar, heightRatio) {
+    const [r1, g1, b1] = COLORS.tealLight;
+    const [r2, g2, b2] = COLORS.tealMid;
+    const [r3, g3, b3] = COLORS.tealDeep;
+
+    let r, g, b;
+    if (heightRatio < 0.5) {
+      const t = heightRatio / 0.5;
+      r = r1 + (r2 - r1) * t;
+      g = g1 + (g2 - g1) * t;
+      b = b1 + (b2 - b1) * t;
+    } else {
+      const t = (heightRatio - 0.5) / 0.5;
+      r = r2 + (r3 - r2) * t;
+      g = g2 + (g3 - g2) * t;
+      b = b2 + (b3 - b2) * t;
+    }
+
+    var positionFade = Math.pow(bar.x / (W || 1), 0.5);
+    const alpha = (0.15 + heightRatio * 0.55) * (0.25 + positionFade * 0.75);
+    return 'rgba(' + Math.round(r) + ',' + Math.round(g) + ',' + Math.round(b) + ',' + alpha.toFixed(3) + ')';
+  }
+
+  function animate(time) {
+    ctx.clearRect(0, 0, W, H);
+
+    drawMistLayer(time);
+
+    const mouseRadius = W * 0.18;
+
+    for (let i = 0; i < bars.length; i++) {
+      const bar = bars[i];
+
+      const ambient = Math.sin(time * 0.001 * bar.speed + bar.phase) * 0.08
+                    + Math.sin(time * 0.0006 * bar.speed + bar.phase * 1.7) * 0.05;
+
+      bar.targetHeight = bar.baseHeight + ambient;
+
+      if (mouse.active) {
+        const barCenterX = bar.x + bar.width / 2;
+        const barCenterY = H * 0.5;
+        const dx = barCenterX - mouse.x;
+        const dy = barCenterY - mouse.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+
+        if (dist < mouseRadius) {
+          const influence = 1 - (dist / mouseRadius);
+          const boost = Math.pow(influence, 1.5) * 0.45;
+          bar.targetHeight += boost;
+        }
+      }
+
+      bar.currentHeight += (bar.targetHeight - bar.currentHeight) * 0.08;
+
+      const maxBarH = H * 0.75;
+      const barH = Math.max(4, bar.currentHeight * maxBarH);
+      const barY = (H - barH) / 2;
+
+      const heightRatio = bar.currentHeight / 0.9;
+
+      const topRadius = Math.min(bar.width / 2, 3);
+
+      ctx.beginPath();
+      ctx.moveTo(bar.x, barY + barH);
+      ctx.lineTo(bar.x, barY + topRadius);
+      ctx.quadraticCurveTo(bar.x, barY, bar.x + topRadius, barY);
+      ctx.lineTo(bar.x + bar.width - topRadius, barY);
+      ctx.quadraticCurveTo(bar.x + bar.width, barY, bar.x + bar.width, barY + topRadius);
+      ctx.lineTo(bar.x + bar.width, barY + barH);
+      ctx.closePath();
+
+      const grad = ctx.createLinearGradient(bar.x, barY, bar.x, barY + barH);
+      grad.addColorStop(0, getBarColor(bar, Math.min(1, heightRatio * 1.2)));
+      grad.addColorStop(0.5, getBarColor(bar, heightRatio));
+      grad.addColorStop(1, getBarColor(bar, Math.max(0, heightRatio * 0.3)));
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+
+    raf = requestAnimationFrame(animate);
+  }
+
+  function onMouseMove(e) {
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = e.clientX - rect.left;
+    mouse.y = e.clientY - rect.top;
+    mouse.active = true;
+  }
+
+  function onMouseLeave() {
+    mouse.active = false;
+    mouse.x = -1000;
+    mouse.y = -1000;
+  }
+
+  function onTouchMove(e) {
+    const touch = e.touches[0];
+    const rect = canvas.getBoundingClientRect();
+    mouse.x = touch.clientX - rect.left;
+    mouse.y = touch.clientY - rect.top;
+    mouse.active = true;
+  }
+
+  function onTouchEnd() {
+    mouse.active = false;
+  }
+
+  const hero = canvas.parentElement;
+  hero.addEventListener('mousemove', onMouseMove, { passive: true });
+  hero.addEventListener('mouseleave', onMouseLeave);
+  hero.addEventListener('touchmove', onTouchMove, { passive: true });
+  hero.addEventListener('touchend', onTouchEnd);
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (prefersReduced.matches) {
+    resize();
+    animate(0);
+    cancelAnimationFrame(raf);
+    return;
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  raf = requestAnimationFrame(animate);
+})();
+
 // ========== SCROLL REVEAL ==========
 const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
