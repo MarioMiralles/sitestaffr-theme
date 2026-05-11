@@ -118,7 +118,6 @@ $transcript_entries = array(
 				<span class="audio-player__demo-kicker"><?php echo esc_html( $demo_kicker ); ?></span>
 			<?php endif; ?>
 			<div class="audio-player__label">
-				<span class="audio-player__label-dot"></span>
 				<?php echo wp_kses_post( $audio_label ); ?>
 			</div>
 			<div class="audio-player__controls">
