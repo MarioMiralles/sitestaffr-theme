@@ -6,9 +6,9 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$landing_title = 'SiteStaffr | AI Voice Agent for WordPress';
-$landing_description = 'An AI voice agent that works 24/7 on your WordPress site. Visitors talk, it listens, and you get every detail. Supports 57+ languages.';
-$landing_keywords = 'AI voice agent, WordPress voice assistant, lead capture, phone answering service, website assistant';
+$landing_title = 'SiteStaffr | AI Voice & Text Agent for WordPress';
+$landing_description = 'An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail — in 57+ languages.';
+$landing_keywords = 'AI voice agent, AI text agent, WordPress voice assistant, lead capture, phone answering service, website assistant';
 $landing_url = get_permalink();
 $landing_url = $landing_url ? $landing_url : home_url( '/' );
 $landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.webp';
@@ -31,7 +31,7 @@ $get_started_url = home_url( '/#get-started' );
     <meta property="og:description" content="<?php echo esc_attr( $landing_description ); ?>">
     <meta property="og:url" content="<?php echo esc_url( $landing_url ); ?>">
     <meta property="og:image" content="<?php echo esc_url( $landing_image_url ); ?>">
-    <meta property="og:image:alt" content="SiteStaffr AI voice agent preview">
+    <meta property="og:image:alt" content="SiteStaffr AI voice and text agent preview">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="<?php echo esc_attr( $landing_title ); ?>">
     <meta name="twitter:description" content="<?php echo esc_attr( $landing_description ); ?>">
@@ -47,7 +47,6 @@ get_template_part( 'template-parts/site-nav', null, array(
     'menu_items' => array(
         array( 'label' => 'Voices', 'href' => '#voices' ),
         array( 'label' => 'Pricing', 'href' => '#pricing' ),
-        array( 'label' => 'My Account', 'href' => home_url( '/manage/' ) ),
     ),
     'cta' => array(
         'label' => 'Get Started',
@@ -69,7 +68,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
-          An AI voice agent that works 24/7 on your WordPress site. Visitors talk, it listens, and you get every detail. Supports 57+ languages.
+          An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail &mdash; in 57+ languages.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <div class="hero__actions">
@@ -251,10 +250,42 @@ get_template_part( 'template-parts/site-nav', null, array(
       <!-- Tagline -->
       <p class="voice-text-section__tagline">Same AI. Same knowledge. Their choice.</p>
     </div>
+
   </div>
 </section>
 
-<!-- ========== SECTION 4: WHAT YOU GET ========== -->
+<!-- ========== SECTION 4: 57+ LANGUAGES ========== -->
+<section class="lang-section">
+  <div class="lang-section__greetings" aria-hidden="true">
+    <span>Hola</span><span>Bonjour</span><span>&#20320;&#22909;</span><span>Ol&aacute;</span><span>Ciao</span><span>&#50504;&#45397;</span><span>Namaste</span><span>Merhaba</span><span>&#1605;&#1585;&#1581;&#1576;&#1575;</span><span>Xin ch&agrave;o</span>
+  </div>
+  <div class="container">
+    <div class="lang-section__inner reveal">
+      <div class="lang-section__lead">
+        <div class="lang-section__icon">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="lang-section__headline">
+          <h2>SiteStaffr Speaks <em>Their</em> Language.</h2>
+          <p>Your visitors speak 57+ languages &mdash; and so does SiteStaffr. Every recap arrives in English, ready for you.</p>
+        </div>
+      </div>
+      <div class="lang-section__badges">
+        <span class="lang-section__badge">Spanish</span>
+        <span class="lang-section__badge">Mandarin</span>
+        <span class="lang-section__badge">French</span>
+        <span class="lang-section__badge">Portuguese</span>
+        <span class="lang-section__badge">Arabic</span>
+        <span class="lang-section__badge">Hindi</span>
+        <span class="lang-section__badge">Japanese</span>
+        <span class="lang-section__badge">Korean</span>
+        <span class="lang-section__badge lang-section__badge--more">+50 more</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 5: WHAT YOU GET ========== -->
 <section class="what-you-get" id="demo">
   <div class="container">
     <div class="what-you-get__header reveal">
@@ -368,60 +399,43 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 5: 57+ LANGUAGES ========== -->
-<section class="language-section">
-  <div class="language-section__floaters">
-    <span class="language-float">Hola</span>
-    <span class="language-float">Bonjour</span>
-    <span class="language-float">&#20320;&#22909;</span>
-    <span class="language-float">&#1605;&#1585;&#1581;&#1576;&#1575;</span>
-    <span class="language-float">Ol&aacute;</span>
-    <span class="language-float">&#12371;&#12435;&#12395;&#12385;&#12399;</span>
-    <span class="language-float">&#1055;&#1088;&#1080;&#1074;&#1077;&#1090;</span>
-    <span class="language-float">&#50504;&#45397;&#54616;&#49464;&#50836;</span>
-    <span class="language-float">Xin ch&agrave;o</span>
-    <span class="language-float">Ciao</span>
-    <span class="language-float">Hallo</span>
-    <span class="language-float">Namaste</span>
-    <span class="language-float">Merhaba</span>
-    <span class="language-float">Salut</span>
-    <span class="language-float">Sawubona</span>
-    <span class="language-float">&#3626;&#3623;&#3633;&#3626;&#3604;&#3637;</span>
-  </div>
+<!-- ========== SECTION 6: SOCIAL PROOF ========== -->
+<section class="proof-section">
+  <div class="proof-section__deco-quote" aria-hidden="true">&ldquo;</div>
   <div class="container">
-    <div class="language-section__inner reveal">
-      <span class="section-label">57+ Languages, One Inbox</span>
-      <h2>SiteStaffr Speaks <span class="language-heading__phrase"><em>Their</em> Language</span></h2>
-      <p class="language-section__desc">
-        A customer visits your site and starts speaking Spanish. Or Mandarin. Or Portuguese. SiteStaffr understands them, responds naturally in their language, and delivers the full conversation summary to you &mdash; translated to English.
-      </p>
-      <div class="language-section__cards">
-        <div class="language-card reveal reveal-delay-1">
-          <span class="language-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          </span>
-          <div class="language-card__title">Converses naturally</div>
-          <p class="language-card__text">Your AI voice agent detects the visitor's language and responds fluently &mdash; no awkward translations or language menus.</p>
-        </div>
-        <div class="language-card reveal reveal-delay-2">
-          <span class="language-card__icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 12h2l2-4 2 8 2-4h2"/></svg>
-          </span>
-          <div class="language-card__title">English summary for you</div>
-          <p class="language-card__text">No matter what language the conversation happens in, your recap email arrives in English with every detail captured.</p>
-        </div>
+    <div class="proof-section__card reveal">
+      <div class="proof-section__portrait">
+        <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="CEO of Synergy Scribes" width="160" height="240">
       </div>
-      <div class="language-section__stat reveal reveal-delay-3">
-        <span class="language-section__stat-globe">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </span>
-        <span>Including Spanish, French, Mandarin, Portuguese, Arabic, Hindi, and <strong>50+ more</strong></span>
+      <div class="proof-section__body">
+        <span class="proof-section__label">Trusted in Healthcare</span>
+        <blockquote class="proof-section__quote">
+          <p>&ldquo;We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. SiteStaffr captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.&rdquo;</p>
+        </blockquote>
+        <cite class="proof-section__cite">
+          <span class="proof-section__author">Nathaly Martinez, <a href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a></span>
+          <span class="proof-section__role">CEO | Founder</span>
+        </cite>
+      </div>
+    </div>
+    <div class="proof-section__stats reveal reveal-delay-1">
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">24/7</span>
+        <span class="proof-section__stat-label">Lead capture</span>
+      </div>
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">57+</span>
+        <span class="proof-section__stat-label">Languages</span>
+      </div>
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">&lt;30s</span>
+        <span class="proof-section__stat-label">Recap delivery</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ========== SECTION 6: VOICE SHOWCASE ========== -->
+<!-- ========== SECTION 7: VOICE SHOWCASE ========== -->
 <section class="voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
@@ -431,7 +445,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="voice-section__header reveal">
       <span class="section-label">Hear the Difference</span>
-      <h2>Meet Your AI Voice Agent</h2>
+      <h2>Meet Your AI Voice &amp; Text Agent</h2>
       <p class="voice-section__subtitle"><span>Choose from 10 unique AI voices, each with their own personality.</span> <span>Preview them right here.</span></p>
     </div>
     <?php
@@ -440,55 +454,6 @@ get_template_part( 'template-parts/site-nav', null, array(
         'show_header' => false,
     ) );
     ?>
-  </div>
-</section>
-
-<!-- ========== SECTION 7: GET STARTED ========== -->
-<section class="onboarding-section" id="get-started">
-  <div class="container">
-    <div class="onboarding-section__inner reveal">
-      <span class="section-label">Get Started</span>
-      <h2 class="onboarding-section__headline">Let Us Set Up Your AI Voice Agent</h2>
-      <div class="onboarding-section__cta">
-        <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
-      </div>
-      <p class="onboarding-section__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
-
-      <?php /* DIY install section — hidden until WP.org approval
-      <div class="onboarding-section__diy reveal reveal-delay-1">
-        <p class="onboarding-section__diy-label">Or set it up yourself in minutes</p>
-        <div class="onboarding-section__timeline">
-          <div class="onboarding-diy-step">
-            <div class="onboarding-diy-step__circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
-            </div>
-            <h3 class="onboarding-diy-step__title">Install the Plugin</h3>
-            <p class="onboarding-diy-step__desc">~2 minutes</p>
-          </div>
-          <div class="onboarding-diy-step__connector" aria-hidden="true"></div>
-          <div class="onboarding-diy-step">
-            <div class="onboarding-diy-step__circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-            </div>
-            <h3 class="onboarding-diy-step__title">Add Your Business Info</h3>
-            <p class="onboarding-diy-step__desc">~5 minutes</p>
-          </div>
-          <div class="onboarding-diy-step__connector" aria-hidden="true"></div>
-          <div class="onboarding-diy-step">
-            <div class="onboarding-diy-step__circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            </div>
-            <h3 class="onboarding-diy-step__title">Go Live Instantly</h3>
-            <p class="onboarding-diy-step__desc">You&rsquo;re done!</p>
-          </div>
-        </div>
-        <a href="https://wordpress.org/plugins/sitestaffr/" target="_blank" rel="noopener noreferrer" class="btn btn--white onboarding-section__diy-btn">
-          Install from WordPress.org
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        </a>
-      </div>
-      */ ?>
-    </div>
   </div>
 </section>
 
@@ -612,17 +577,17 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 9: FINAL CTA ========== -->
-<section class="final-cta">
+<!-- ========== SECTION 9: FINAL CTA + GET STARTED ========== -->
+<section class="final-cta" id="get-started">
   <div class="final-cta__decoration" aria-hidden="true"></div>
   <div class="container">
     <div class="final-cta__content reveal">
       <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
       <p class="final-cta__subtitle">Let SiteStaffr take care of your visitors while you focus on running your business.</p>
-      <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--white btn--large">
-        Get Started
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
+      <div class="final-cta__onboarding">
+        <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#FFFFFF" text_color="#00838F" hover_background="#E0F7FA" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
+      </div>
+      <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
     </div>
   </div>
 </section>
