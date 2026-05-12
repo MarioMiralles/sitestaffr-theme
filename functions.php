@@ -4,6 +4,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'wp_head', function () {
+	$is_staging = false !== strpos( home_url(), 'staging.sitestaffr.com' );
+
+	if ( $is_staging ) {
+		echo '<meta name="robots" content="noindex, nofollow">' . "\n";
+		return;
+	}
 	?>
 	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ESZ2PEYMX"></script>
