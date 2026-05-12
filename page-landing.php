@@ -445,7 +445,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="voice-section__header reveal">
       <span class="section-label">Hear the Difference</span>
-      <h2>Meet Your AI Voice &amp; Text Agent</h2>
+      <h2>Meet Your AI Voice Agent</h2>
       <p class="voice-section__subtitle"><span>Choose from 10 unique AI voices, each with their own personality.</span> <span>Preview them right here.</span></p>
     </div>
     <?php
