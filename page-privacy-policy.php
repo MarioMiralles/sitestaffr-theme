@@ -6,25 +6,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$page_title       = 'Privacy Policy';
-$page_description = 'Privacy Policy for SiteStaffr, a product of PhoneEase LLC. Learn how we collect, use, and protect your data.';
-$page_url         = get_permalink() ?: home_url( '/privacy' );
-$site_name        = get_bloginfo( 'name' );
+$site_name = get_bloginfo( 'name' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<title><?php echo esc_html( $page_title . ' | ' . $site_name ); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="<?php echo esc_attr( $page_description ); ?>">
-	<meta name="robots" content="index, follow">
-	<link rel="canonical" href="<?php echo esc_url( $page_url ); ?>">
-	<meta property="og:locale" content="en_US">
-	<meta property="og:type" content="website">
-	<meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>">
-	<meta property="og:title" content="<?php echo esc_attr( $page_title ); ?>">
-	<meta property="og:description" content="<?php echo esc_attr( $page_description ); ?>">
-	<meta property="og:url" content="<?php echo esc_url( $page_url ); ?>">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-legal-page' ); ?>>
