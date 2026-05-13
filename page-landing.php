@@ -757,9 +757,10 @@ get_template_part( 'template-parts/site-nav', null, array(
       <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
       <p class="final-cta__subtitle">Let SiteStaffr take care of your visitors while you focus on running your business.</p>
       <div class="final-cta__onboarding">
-        <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#FFFFFF" text_color="#00838F" hover_background="#E0F7FA" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
+        <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
       </div>
       <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
+      <p class="final-cta__existing">Already have an account? <a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>">Manage your account</a></p>
     </div>
   </div>
 </section>
