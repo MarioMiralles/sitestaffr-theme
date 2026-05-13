@@ -339,7 +339,8 @@ get_template_part( 'template-parts/site-nav', null, array(
 	<section class="ind-faq">
 		<div class="container container--narrow">
 			<div class="ind-faq__header reveal">
-				<h2>Frequently asked questions</h2>
+				<span class="section-label">FAQ</span>
+				<h2>Frequently Asked Questions</h2>
 			</div>
 			<div class="faq-list">
 				<?php foreach ( $ind['faqs'] as $i => $faq ) : ?>
