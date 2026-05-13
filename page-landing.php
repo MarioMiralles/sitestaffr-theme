@@ -180,6 +180,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     'menu_items' => array(
         array( 'label' => 'Voices', 'href' => '#voices' ),
         array( 'label' => 'Pricing', 'href' => '#pricing' ),
+        array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
     ),
     'cta' => array(
         'label' => 'Get Started',

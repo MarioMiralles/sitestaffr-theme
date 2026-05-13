@@ -65,6 +65,7 @@ $site_name        = get_bloginfo( 'name' );
 <footer class="footer">
 	<div class="container">
 		<div class="footer__links">
+			<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a>
 			<a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
 			<a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
 			<a href="mailto:support@sitestaffr.com">Support</a>

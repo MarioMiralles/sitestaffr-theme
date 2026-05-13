@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 $default_menu = array(
     array( 'label' => 'Voices', 'href' => home_url( '/#voices' ) ),
     array( 'label' => 'Pricing', 'href' => home_url( '/#pricing' ) ),
+    array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
 );
 $default_cta = array(
     'label' => 'Get Started',
