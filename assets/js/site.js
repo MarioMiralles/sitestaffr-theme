@@ -809,7 +809,8 @@ if (voiceShowcase) {
     }
   }
 
-  // Build thumbnail strip
+  // Build thumbnail strip (clear SSR placeholders first)
+  showcaseThumbs.innerHTML = '';
   voices.forEach(function(voice, i) {
     var thumb = document.createElement('button');
     thumb.type = 'button';
@@ -889,16 +890,27 @@ document.querySelectorAll('.faq-item__question').forEach(btn => {
     const item = btn.parentElement;
     const wasOpen = item.classList.contains('open');
 
-    // Close all
     document.querySelectorAll('.faq-item.open').forEach(openItem => {
       openItem.classList.remove('open');
+      openItem.querySelector('.faq-item__question').setAttribute('aria-expanded', 'false');
     });
 
-    // Toggle clicked
     if (!wasOpen) {
       item.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
     }
   });
 });
+
+// ========== LANGUAGE SECTION EXPAND ==========
+const langExpandBtn = document.querySelector('.lang-section__expand-btn');
+if (langExpandBtn) {
+  const langDetail = document.querySelector('.lang-section__detail');
+  langExpandBtn.addEventListener('click', () => {
+    const isExpanded = langExpandBtn.getAttribute('aria-expanded') === 'true';
+    langExpandBtn.setAttribute('aria-expanded', String(!isExpanded));
+    langDetail.setAttribute('aria-hidden', String(isExpanded));
+  });
+}
 
 

@@ -6,13 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$landing_title = 'SiteStaffr | AI Voice & Text Agent for WordPress';
-$landing_description = 'An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail — in 57+ languages.';
-$landing_keywords = 'AI voice agent, AI text agent, WordPress voice assistant, lead capture, phone answering service, website assistant';
-$landing_url = get_permalink();
-$landing_url = $landing_url ? $landing_url : home_url( '/' );
-$landing_image_url = get_stylesheet_directory_uri() . '/assets/images/hero.webp';
-$site_name = get_bloginfo( 'name' );
+$landing_title   = 'SiteStaffr | AI Voice & Text Agent for WordPress';
 $get_started_url = home_url( '/#get-started' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -20,22 +14,161 @@ $get_started_url = home_url( '/#get-started' );
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <title><?php echo esc_html( $landing_title ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?php echo esc_attr( $landing_description ); ?>">
-    <meta name="keywords" content="<?php echo esc_attr( $landing_keywords ); ?>">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <link rel="canonical" href="<?php echo esc_url( $landing_url ); ?>">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>">
-    <meta property="og:title" content="<?php echo esc_attr( $landing_title ); ?>">
-    <meta property="og:description" content="<?php echo esc_attr( $landing_description ); ?>">
-    <meta property="og:url" content="<?php echo esc_url( $landing_url ); ?>">
-    <meta property="og:image" content="<?php echo esc_url( $landing_image_url ); ?>">
-    <meta property="og:image:alt" content="SiteStaffr AI voice and text agent preview">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="<?php echo esc_attr( $landing_title ); ?>">
-    <meta name="twitter:description" content="<?php echo esc_attr( $landing_description ); ?>">
-    <meta name="twitter:image" content="<?php echo esc_url( $landing_image_url ); ?>">
+
+    <?php
+    $schema_org_url  = home_url( '/' );
+    $schema_logo_url = get_stylesheet_directory_uri() . '/assets/images/logo.webp';
+    ?>
+    <script type="application/ld+json">
+    <?php echo wp_json_encode( array(
+        '@context'        => 'https://schema.org',
+        '@type'           => 'Organization',
+        '@id'             => $schema_org_url . '#organization',
+        'name'            => 'SiteStaffr',
+        'legalName'       => 'PhoneEase LLC',
+        'url'             => $schema_org_url,
+        'logo'            => $schema_logo_url,
+        'email'           => 'support@sitestaffr.com',
+        'contactPoint'    => array(
+            '@type'       => 'ContactPoint',
+            'email'       => 'support@sitestaffr.com',
+            'contactType' => 'customer support',
+        ),
+        'foundingLocation' => array(
+            '@type'   => 'Place',
+            'address' => array(
+                '@type'          => 'PostalAddress',
+                'addressRegion'  => 'FL',
+                'addressCountry' => 'US',
+            ),
+        ),
+    ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+    </script>
+
+    <script type="application/ld+json">
+    <?php echo wp_json_encode( array(
+        '@context'            => 'https://schema.org',
+        '@type'               => 'SoftwareApplication',
+        '@id'                 => $schema_org_url . '#software',
+        'name'                => 'SiteStaffr',
+        'description'         => 'An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail — in 57+ languages.',
+        'applicationCategory' => 'BusinessApplication',
+        'operatingSystem'     => 'WordPress',
+        'url'                 => $schema_org_url,
+        'publisher'           => array( '@id' => $schema_org_url . '#organization' ),
+        'offers'              => array(
+            array(
+                '@type'         => 'Offer',
+                'name'          => 'Free Trial',
+                'price'         => '0',
+                'priceCurrency' => 'USD',
+                'description'   => '30-day free trial with 30 minutes included, 2 AI voices, no credit card required',
+            ),
+            array(
+                '@type'         => 'Offer',
+                'name'          => 'Starter',
+                'price'         => '10.00',
+                'priceCurrency' => 'USD',
+                'description'   => '60 minutes per month, 2 AI voices',
+            ),
+            array(
+                '@type'         => 'Offer',
+                'name'          => 'Business',
+                'price'         => '50.00',
+                'priceCurrency' => 'USD',
+                'description'   => '300 minutes per month, 5 AI voices',
+            ),
+            array(
+                '@type'         => 'Offer',
+                'name'          => 'Pro',
+                'price'         => '100.00',
+                'priceCurrency' => 'USD',
+                'description'   => '700 minutes per month, all 10 AI voices, custom greeting and 4 tones',
+            ),
+        ),
+    ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+    </script>
+
+    <script type="application/ld+json">
+    <?php echo wp_json_encode( array(
+        '@context'     => 'https://schema.org',
+        '@type'        => 'Review',
+        'itemReviewed' => array( '@id' => $schema_org_url . '#software' ),
+        'reviewRating' => array(
+            '@type'       => 'Rating',
+            'ratingValue' => '5',
+            'bestRating'  => '5',
+        ),
+        'author'       => array(
+            '@type'    => 'Person',
+            'name'     => 'Nathaly Martinez',
+            'jobTitle' => 'CEO & Founder',
+        ),
+        'publisher'    => array(
+            '@type' => 'Organization',
+            'name'  => 'Synergy Scribes',
+            'url'   => 'https://synergyscribes.com',
+        ),
+        'reviewBody'   => 'We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. SiteStaffr captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.',
+    ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+    </script>
+
+    <?php
+    $faq_items = array(
+        array(
+            'question' => 'What is SiteStaffr?',
+            'answer'   => 'SiteStaffr is an AI voice and text agent built for service businesses on WordPress. It appears as a chat widget on your website, greets visitors, answers their questions using your website content, captures their contact information, and sends you a detailed conversation recap by email — all automatically, 24/7.',
+        ),
+        array(
+            'question' => 'How does SiteStaffr capture leads from my website?',
+            'answer'   => 'When a visitor starts a conversation through voice or text chat, SiteStaffr naturally collects their name, phone number, and reason for reaching out. After the conversation ends, you receive an email with a complete recap, the visitor\'s contact details, a full transcript, and suggested follow-up actions.',
+        ),
+        array(
+            'question' => 'What languages does SiteStaffr support?',
+            'answer'   => 'SiteStaffr supports over 57 languages, including Spanish, Mandarin, French, Portuguese, Arabic, Hindi, Japanese, and Korean. Visitors can converse in their preferred language, and every recap is delivered to you in English regardless of the conversation language.',
+        ),
+        array(
+            'question' => 'How much does SiteStaffr cost?',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — no credit card required. Paid plans are $10/month (Starter, 60 minutes), $50/month (Business, 300 minutes), and $100/month (Pro, 700 minutes). You can buy additional minutes anytime at $10 for 50 minutes, and they never expire.',
+        ),
+        array(
+            'question' => 'Does SiteStaffr work with my WordPress site?',
+            'answer'   => 'Yes. SiteStaffr is built specifically for WordPress. Install the plugin from your WordPress dashboard, configure your business details, and the AI agent appears on your website — no coding required. Setup takes less than five minutes.',
+        ),
+        array(
+            'question' => 'What happens after a visitor conversation?',
+            'answer'   => 'Within seconds of the conversation ending, SiteStaffr emails you a detailed recap including a summary of what the visitor needed, their contact information, the full conversation transcript, and a suggested follow-up action — so you can respond quickly and close more leads.',
+        ),
+        array(
+            'question' => 'Is there a free trial?',
+            'answer'   => 'Yes. SiteStaffr offers a free 30-day trial with 30 minutes of conversation time included. No credit card is required to start, and you can upgrade to a paid plan anytime.',
+        ),
+        array(
+            'question' => 'Do I need a developer to install SiteStaffr?',
+            'answer'   => 'No. SiteStaffr installs like any WordPress plugin — search for it in your dashboard, click install, activate, and enter your business details. The entire setup takes less than five minutes and requires no technical knowledge.',
+        ),
+    );
+
+    $faq_schema_entries = array();
+    foreach ( $faq_items as $faq ) {
+        $faq_schema_entries[] = array(
+            '@type'          => 'Question',
+            'name'           => $faq['question'],
+            'acceptedAnswer' => array(
+                '@type' => 'Answer',
+                'text'  => $faq['answer'],
+            ),
+        );
+    }
+    ?>
+    <script type="application/ld+json">
+    <?php echo wp_json_encode( array(
+        '@context'   => 'https://schema.org',
+        '@type'      => 'FAQPage',
+        'mainEntity' => $faq_schema_entries,
+    ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+    </script>
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-landing-page' ); ?>>
@@ -281,6 +414,15 @@ get_template_part( 'template-parts/site-nav', null, array(
         <span class="lang-section__badge">Korean</span>
         <span class="lang-section__badge lang-section__badge--more">+50 more</span>
       </div>
+      <div class="lang-section__expand">
+        <button class="lang-section__expand-btn" type="button" aria-expanded="false">
+          <span class="lang-section__expand-label">How it works</span>
+          <svg class="lang-section__expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="lang-section__detail" aria-hidden="true">
+          <p>SiteStaffr uses advanced speech-to-text and text-to-speech technology to converse fluently in your visitor&rsquo;s preferred language. Whether a caller speaks Spanish, Mandarin, Arabic, or any of 50+ other languages, the AI agent responds naturally in their language. After each conversation, SiteStaffr translates and summarizes everything into a clear English recap delivered to your inbox &mdash; so you never miss a lead, regardless of the language barrier.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -401,20 +543,27 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 <!-- ========== SECTION 6: SOCIAL PROOF ========== -->
 <section class="proof-section">
-  <div class="proof-section__deco-quote" aria-hidden="true">&ldquo;</div>
+  <div class="proof-section__backdrop" aria-hidden="true">
+    <div class="proof-section__backdrop-panel"></div>
+    <div class="proof-section__backdrop-accent"></div>
+  </div>
   <div class="container">
-    <div class="proof-section__card reveal">
-      <div class="proof-section__portrait">
-        <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="CEO of Synergy Scribes" width="160" height="240">
+    <div class="proof-section__layout reveal">
+      <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
+      <div class="proof-section__portrait-wrap">
+        <div class="proof-section__portrait-frame">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="CEO of Synergy Scribes" width="640" height="842">
+        </div>
+        <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
       </div>
-      <div class="proof-section__body">
+      <div class="proof-section__content">
         <span class="proof-section__label">Trusted in Healthcare</span>
         <blockquote class="proof-section__quote">
-          <p>&ldquo;We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. SiteStaffr captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.&rdquo;</p>
+          <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
         </blockquote>
         <cite class="proof-section__cite">
-          <span class="proof-section__author">Nathaly Martinez, <a href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a></span>
-          <span class="proof-section__role">CEO | Founder</span>
+          <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
+          <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
         </cite>
       </div>
     </div>
@@ -577,7 +726,30 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 9: FINAL CTA + GET STARTED ========== -->
+<!-- ========== SECTION 9: FAQ ========== -->
+<section class="faq-section" id="faq">
+  <div class="container">
+    <div class="faq-section__header reveal">
+      <span class="section-label">Common Questions</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list reveal">
+      <?php foreach ( $faq_items as $faq ) : ?>
+      <div class="faq-item">
+        <button class="faq-item__question" type="button" aria-expanded="false">
+          <?php echo esc_html( $faq['question'] ); ?>
+          <span class="faq-item__icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-item__answer">
+          <div class="faq-item__answer-inner"><?php echo esc_html( $faq['answer'] ); ?></div>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 10: FINAL CTA + GET STARTED ========== -->
 <section class="final-cta" id="get-started">
   <div class="final-cta__decoration" aria-hidden="true"></div>
   <div class="container">
