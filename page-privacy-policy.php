@@ -12,6 +12,24 @@ $site_name = get_bloginfo( 'name' );
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script type="application/ld+json">
+	<?php echo wp_json_encode( array(
+		'@context'      => 'https://schema.org',
+		'@type'         => 'WebPage',
+		'additionalType' => 'https://schema.org/PrivacyPolicy',
+		'name'          => 'Privacy Policy',
+		'description'   => 'SiteStaffr privacy policy — how we collect, use, and protect your data.',
+		'url'           => home_url( '/privacy-policy/' ),
+		'publisher'     => array(
+			'@type' => 'Organization',
+			'name'  => 'SiteStaffr',
+			'url'   => home_url( '/' ),
+		),
+		'datePublished' => '2026-02-24',
+		'dateModified'  => '2026-02-24',
+		'inLanguage'    => 'en-US',
+	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+	</script>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-legal-page' ); ?>>

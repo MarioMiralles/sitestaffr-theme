@@ -98,9 +98,10 @@ add_action( 'wp_enqueue_scripts', function () {
 		null
 	);
 
-	$is_about = is_page_template( 'page-about.php' );
+	$is_about    = is_page_template( 'page-about.php' );
+	$is_industry = is_page_template( 'page-industry.php' );
 
-	if ( $is_landing || $is_features || $is_pricing || $is_about ) {
+	if ( $is_landing || $is_features || $is_pricing || $is_about || $is_industry ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),

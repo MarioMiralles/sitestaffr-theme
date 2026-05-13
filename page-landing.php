@@ -169,6 +169,20 @@ $get_started_url = home_url( '/#get-started' );
     ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
     </script>
 
+    <script type="application/ld+json">
+    <?php echo wp_json_encode( array(
+        '@context'      => 'https://schema.org',
+        '@type'         => 'AudioObject',
+        'name'          => 'SiteStaffr Demo Conversation — Plumbing Business',
+        'description'   => 'A 45-second sample conversation between a website visitor reporting a kitchen leak and SiteStaffr\'s AI voice agent for a plumbing business.',
+        'contentUrl'    => get_stylesheet_directory_uri() . '/assets/audio/demo-conversation.mp3',
+        'encodingFormat' => 'audio/mpeg',
+        'duration'      => 'PT70S',
+        'inLanguage'    => 'en',
+        'isPartOf'      => array( '@id' => $schema_org_url . '#software' ),
+    ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+    </script>
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-landing-page' ); ?>>
