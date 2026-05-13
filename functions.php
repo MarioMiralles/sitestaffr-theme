@@ -128,6 +128,48 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 } , 100 );
 
+add_action( 'init', function () {
+	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
+	remove_action( 'wp_print_styles', 'print_emoji_styles' );
+	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
+	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+} );
+
+add_filter( 'robots_txt', function ( $output, $public ) {
+	$output .= "\n# AI Crawlers\n";
+	$output .= "User-agent: GPTBot\nAllow: /\n\n";
+	$output .= "User-agent: ClaudeBot\nAllow: /\n\n";
+	$output .= "User-agent: PerplexityBot\nAllow: /\n\n";
+	$output .= "User-agent: Google-Extended\nAllow: /\n\n";
+	$output .= "User-agent: OAI-SearchBot\nAllow: /\n\n";
+	return $output;
+}, 10, 2 );
+
+add_action( 'template_redirect', function () {
+	if ( isset( $_SERVER['REQUEST_URI'] ) && '/llms.txt' === wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH ) ) {
+		status_header( 200 );
+		header( 'Content-Type: text/plain; charset=utf-8' );
+		header( 'X-Robots-Tag: noindex' );
+		echo "# SiteStaffr\n\n";
+		echo "> An AI voice and text agent built for service businesses on WordPress.\n\n";
+		echo "SiteStaffr is a WordPress plugin that adds an AI-powered voice and text chat agent to your website. ";
+		echo "It greets visitors, answers questions using your website content, captures contact information, ";
+		echo "and sends you detailed conversation recaps by email — automatically, 24/7, in over 57 languages.\n\n";
+		echo "## Key Pages\n\n";
+		echo "- [Home](" . home_url( '/' ) . ") — Product overview, pricing, and demo\n";
+		echo "- [Privacy Policy](" . home_url( '/privacy/' ) . ") — How we handle data\n";
+		echo "- [Terms of Service](" . home_url( '/terms/' ) . ") — Usage terms\n\n";
+		echo "## Product Facts\n\n";
+		echo "- Category: AI Voice & Text Agent / Lead Capture / WordPress Plugin\n";
+		echo "- Pricing: Free 30-day trial, then \$10–\$100/month\n";
+		echo "- Languages: 57+ (recaps always in English)\n";
+		echo "- AI Voices: 10 unique personalities (Marin, Cedar, Sage, Coral, Ash, Alloy, Echo, Shimmer, Verse, Ballad)\n";
+		echo "- Built by: PhoneEase LLC (Florida, USA)\n";
+		echo "- Contact: support@sitestaffr.com\n";
+		exit;
+	}
+}, -10 );
+
 add_action( 'template_redirect', function () {
 	if ( is_admin() ) {
 		return;

@@ -10,6 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex, nofollow">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-maintenance-page' ); ?>>
