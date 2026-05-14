@@ -19,6 +19,7 @@ $primary_menu = array(
             array( 'label' => 'Home Services',     'href' => home_url( '/for/home-services/' ) ),
         ),
     ),
+    array( 'label' => 'Blog',  'href' => home_url( '/blog/' ) ),
     array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
 );
 

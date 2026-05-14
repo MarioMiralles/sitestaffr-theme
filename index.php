@@ -6,17 +6,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 $site_name = get_bloginfo( 'name' );
 
 if ( is_search() ) {
-	$page_title = sprintf(
-		/* translators: %s is the search query. */
-		__( 'Search Results for "%s"', 'sitestaffr-website' ),
-		get_search_query()
-	);
+	$page_title = sprintf( __( 'Search Results for "%s"', 'sitestaffr-website' ), get_search_query() );
 } elseif ( is_archive() ) {
 	$page_title = get_the_archive_title();
 } elseif ( is_singular() ) {
 	$page_title = get_the_title();
 } else {
-	$page_title = $site_name;
+	$page_title = 'Blog';
 }
 
 $page_title  = $page_title ? $page_title : $site_name;
@@ -28,34 +24,13 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 <html <?php language_attributes(); ?>>
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
-	<title><?php echo esc_html( $page_title . ' | ' . $site_name ); ?></title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="<?php echo esc_attr( $description ); ?>">
-	<meta name="robots" content="index, follow">
-	<link rel="canonical" href="<?php echo esc_url( $page_url ); ?>">
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-page sitestaffr-page--default' ); ?>>
 <?php wp_body_open(); ?>
 
-<nav class="nav" id="nav">
-	<div class="container">
-		<div class="nav__inner">
-			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav__logo" aria-label="<?php echo esc_attr( $site_name ); ?> home">
-				<img
-					class="nav__logo-image"
-					src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
-					alt="<?php echo esc_attr( $site_name ); ?>"
-					width="625"
-					height="188"
-				>
-			</a>
-			<div class="nav__cta">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="btn btn--primary">Home</a>
-			</div>
-		</div>
-	</div>
-</nav>
+<?php get_template_part( 'template-parts/site-nav' ); ?>
 
 <main class="page-content">
 	<div class="container">
@@ -65,7 +40,13 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 				the_post();
 				?>
 				<article class="page-content__article">
-					<h1 class="page-content__title"><?php the_title(); ?></h1>
+					<h1 class="page-content__title">
+						<?php if ( ! is_singular() ) : ?>
+							<a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+						<?php else : ?>
+							<?php the_title(); ?>
+						<?php endif; ?>
+					</h1>
 					<div class="page-content__body">
 						<?php the_content(); ?>
 					</div>
@@ -82,18 +63,7 @@ $page_url    = is_singular() ? ( get_permalink() ?: home_url( '/' ) ) : home_url
 	</div>
 </main>
 
-<footer class="footer">
-	<div class="container">
-		<div class="footer__links">
-			<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a>
-			<a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
-			<a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
-			<a href="mailto:support@sitestaffr.com">Support</a>
-		</div>
-		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( $site_name ); ?>. All rights reserved.</p>
-	</div>
-</footer>
-
+<?php get_template_part( 'template-parts/site-footer' ); ?>
 <?php wp_footer(); ?>
 </body>
 </html>

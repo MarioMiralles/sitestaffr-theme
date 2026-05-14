@@ -43,51 +43,16 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 	}
 }
 
-if ( ! function_exists( 'sitestaffr_request_path' ) ) {
-	/**
-	 * Get the current request path relative to the site root.
-	 *
-	 * @return string
-	 */
-	function sitestaffr_request_path() {
-		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? wp_unslash( $_SERVER['REQUEST_URI'] ) : '';
-		$path        = is_string( $request_uri ) ? wp_parse_url( $request_uri, PHP_URL_PATH ) : '';
-		$path        = is_string( $path ) ? trim( $path, '/' ) : '';
-		$home_path   = wp_parse_url( home_url( '/' ), PHP_URL_PATH );
-		$home_path   = is_string( $home_path ) ? trim( $home_path, '/' ) : '';
-
-		if ( '' !== $home_path && 0 === strpos( $path, $home_path ) ) {
-			$path = trim( substr( $path, strlen( $home_path ) ), '/' );
-		}
-
-		return $path;
-	}
-}
-
-if ( ! function_exists( 'sitestaffr_is_features_request' ) ) {
-	function sitestaffr_is_features_request() {
-		return 'features' === sitestaffr_request_path();
-	}
-}
-
-if ( ! function_exists( 'sitestaffr_is_pricing_request' ) ) {
-	function sitestaffr_is_pricing_request() {
-		return 'pricing' === sitestaffr_request_path();
-	}
-}
-
 add_action( 'wp_enqueue_scripts', function () {
 	$is_landing     = is_page_template( 'page-landing.php' );
 	$is_maintenance = is_page_template( 'page-maintenance.php' );
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
-	$is_features    = sitestaffr_is_features_request();
-	$is_pricing     = sitestaffr_is_pricing_request();
 	$is_page        = is_page();
 	$is_default     = is_home() || is_single() || is_archive() || is_search();
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_features && ! $is_pricing && ! $is_page && ! $is_default ) {
+	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_page && ! $is_default ) {
 		return;
 	}
 
@@ -101,7 +66,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_about    = is_page_template( 'page-about.php' );
 	$is_industry = is_page_template( 'page-industry.php' );
 
-	if ( $is_landing || $is_features || $is_pricing || $is_about || $is_industry ) {
+	if ( $is_landing || $is_about || $is_industry ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),
@@ -124,7 +89,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		) );
 	}
 
-	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage || $is_features || $is_pricing ) {
+	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage ) {
 		wp_dequeue_style( 'wp-block-library' );
 		wp_dequeue_style( 'classic-theme-styles' );
 		wp_dequeue_style( 'global-styles' );
@@ -160,6 +125,11 @@ add_action( 'template_redirect', function () {
 		echo "and sends you detailed conversation recaps by email — automatically, 24/7, in over 57 languages.\n\n";
 		echo "## Key Pages\n\n";
 		echo "- [Home](" . home_url( '/' ) . ") — Product overview, pricing, and demo\n";
+		echo "- [About](" . home_url( '/about/' ) . ") — Company and founder information\n";
+		echo "- [Blog](" . home_url( '/blog/' ) . ") — Guides and comparisons for service businesses\n";
+		echo "- [For Dental Practices](" . home_url( '/for/dental-practices/' ) . ") — AI voice agent for dental offices\n";
+		echo "- [For Law Firms](" . home_url( '/for/law-firms/' ) . ") — AI voice agent for legal practices\n";
+		echo "- [For Home Services](" . home_url( '/for/home-services/' ) . ") — AI voice agent for contractors\n";
 		echo "- [Privacy Policy](" . home_url( '/privacy/' ) . ") — How we handle data\n";
 		echo "- [Terms of Service](" . home_url( '/terms/' ) . ") — Usage terms\n\n";
 		echo "## Product Facts\n\n";
@@ -173,27 +143,3 @@ add_action( 'template_redirect', function () {
 	}
 }, -10 );
 
-add_action( 'template_redirect', function () {
-	if ( is_admin() ) {
-		return;
-	}
-
-	$routes = array(
-		'sitestaffr_is_features_request' => '/page-features.php',
-		'sitestaffr_is_pricing_request'  => '/page-pricing.php',
-	);
-
-	foreach ( $routes as $check_fn => $template ) {
-		if ( call_user_func( $check_fn ) ) {
-			global $wp_query;
-			if ( isset( $wp_query ) && $wp_query instanceof WP_Query ) {
-				$wp_query->is_404      = false;
-				$wp_query->is_page     = true;
-				$wp_query->is_singular = true;
-			}
-			status_header( 200 );
-			include get_stylesheet_directory() . $template;
-			exit;
-		}
-	}
-}, 0 );
