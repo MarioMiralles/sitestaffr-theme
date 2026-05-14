@@ -5197,8 +5197,8 @@ body.sitestaffr-landing-page .hero__visual > * {
     gap: 48px;
   }
   .footer__bottom-inner {
-    flex-direction: column;
-    gap: 12px;
+    justify-content: center;
+    gap: 16px;
   }
 }
 @media (max-width: 480px) {
