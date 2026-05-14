@@ -7756,6 +7756,10 @@ body.sitestaffr-landing-page .hero__actions {
   max-width: 100%;
   margin-bottom: 16px;
 }
+.blog-post__body .industry-card p:last-of-type {
+  margin-top: auto;
+  margin-bottom: 0;
+}
 .blog-post__body .industry-card a {
   margin-top: auto;
   display: inline-flex;
