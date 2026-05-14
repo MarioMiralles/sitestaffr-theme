@@ -62,17 +62,7 @@ $site_name        = get_bloginfo( 'name' );
 	</div>
 </main>
 
-<footer class="footer">
-	<div class="container">
-		<div class="footer__links">
-			<a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a>
-			<a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
-			<a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
-			<a href="mailto:support@sitestaffr.com">Support</a>
-		</div>
-		<p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php echo esc_html( $site_name ); ?>. All rights reserved.</p>
-	</div>
-</footer>
+<?php get_template_part( 'template-parts/site-footer' ); ?>
 <?php wp_footer(); ?>
 </body>
 </html>
