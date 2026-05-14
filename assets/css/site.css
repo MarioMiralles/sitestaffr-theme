@@ -5084,13 +5084,13 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .footer__grid {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 48px;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 32px;
   align-items: start;
   position: relative;
 }
 .footer__brand {
-  padding-right: 16px;
+  padding-right: 24px;
 }
 .footer__logo {
   display: inline-block;
@@ -5114,9 +5114,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* --- Nav columns --- */
 .footer__nav {
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
+  display: contents;
 }
 .footer__heading {
   font-family: var(--font-body);
@@ -5197,8 +5195,10 @@ body.sitestaffr-landing-page .hero__visual > * {
     margin-right: auto;
   }
   .footer__nav {
-    justify-content: center;
-    gap: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    grid-column: 1 / -1;
   }
   .footer__bottom-inner {
     justify-content: center;
@@ -5216,8 +5216,7 @@ body.sitestaffr-landing-page .hero__visual > * {
     padding: 40px 0 32px;
   }
   .footer__nav {
-    flex-direction: column;
-    align-items: center;
+    grid-template-columns: 1fr;
     gap: 28px;
   }
 }
