@@ -7254,6 +7254,9 @@ body.sitestaffr-landing-page .hero__actions {
 .sitestaffr-blog-post .nav:not(.scrolled).menu-open .nav__logo-image {
   filter: none;
 }
+.sitestaffr-blog-post .nav:not(.scrolled).menu-open .nav__toggle {
+  color: var(--text-primary);
+}
 .blog-post {
   flex: 1 0 auto;
 }
@@ -8039,6 +8042,9 @@ body.sitestaffr-landing-page .hero__actions {
 }
 .sitestaffr-blog-index .nav:not(.scrolled).menu-open .nav__logo-image {
   filter: none;
+}
+.sitestaffr-blog-index .nav:not(.scrolled).menu-open .nav__toggle {
+  color: var(--text-primary);
 }
 .blog-index {
   flex: 1 0 auto;
