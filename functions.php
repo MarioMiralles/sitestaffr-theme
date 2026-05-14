@@ -96,6 +96,10 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 } , 100 );
 
+add_action( 'after_setup_theme', function () {
+	add_theme_support( 'post-thumbnails' );
+} );
+
 add_action( 'init', function () {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );

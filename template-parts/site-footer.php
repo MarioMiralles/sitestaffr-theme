@@ -7,6 +7,10 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="container">
     <div class="footer__links">
       <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a>
+      <a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a>
+      <a href="<?php echo esc_url( home_url( '/for/dental-practices/' ) ); ?>">Dental Practices</a>
+      <a href="<?php echo esc_url( home_url( '/for/law-firms/' ) ); ?>">Law Firms</a>
+      <a href="<?php echo esc_url( home_url( '/for/home-services/' ) ); ?>">Home Services</a>
       <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>
       <a href="<?php echo esc_url( home_url( '/terms' ) ); ?>">Terms of Service</a>
       <a href="mailto:support@sitestaffr.com">Support</a>
