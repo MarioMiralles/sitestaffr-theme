@@ -5207,7 +5207,8 @@ body.sitestaffr-landing-page .hero__visual > * {
     display: none;
   }
   .footer__account-mobile {
-    display: list-item;
+    display: block;
+    margin-top: 6px;
   }
 }
 @media (max-width: 480px) {
