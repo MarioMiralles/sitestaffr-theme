@@ -5140,10 +5140,34 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.4;
 }
 
+/* --- Account row --- */
+.footer__account {
+  text-align: center;
+  margin-top: 36px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(240,250,250,0.06);
+}
+.footer__login {
+  display: inline-block;
+  padding: 8px 24px;
+  border: 1px solid rgba(31, 182, 204, 0.3);
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: rgba(240,250,250,0.75);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.footer__login:hover {
+  background: rgba(31, 182, 204, 0.12);
+  border-color: rgba(31, 182, 204, 0.5);
+  color: #fff;
+}
+
 /* --- Bottom bar --- */
 .footer__bottom {
   position: relative;
   padding: 18px 0;
+  text-align: center;
   font-size: 0.76rem;
   color: rgba(240,250,250,0.25);
 }
@@ -5156,25 +5180,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   width: min(100%, 1140px);
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(31,182,204,0.2) 30%, rgba(31,182,204,0.2) 70%, transparent 100%);
-}
-.footer__bottom-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-.footer__login {
-  padding: 6px 18px;
-  border: 1px solid rgba(31, 182, 204, 0.3);
-  border-radius: 8px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: rgba(240,250,250,0.7);
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-.footer__login:hover {
-  background: rgba(31, 182, 204, 0.12);
-  border-color: rgba(31, 182, 204, 0.5);
-  color: #fff;
 }
 
 /* --- Footer responsive --- */
@@ -5195,10 +5200,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   .footer__nav {
     justify-content: center;
     gap: 48px;
-  }
-  .footer__bottom-inner {
-    justify-content: center;
-    gap: 16px;
   }
 }
 @media (max-width: 480px) {
