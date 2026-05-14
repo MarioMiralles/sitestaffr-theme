@@ -44,6 +44,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               <li><a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
               <li><a href="<?php echo esc_url( home_url( '/terms/' ) ); ?>">Terms of Service</a></li>
               <li><a href="mailto:support@sitestaffr.com">Support</a></li>
+            <li class="footer__account-mobile"><a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>">My Account</a></li>
             </ul>
           </div>
         </nav>

@@ -5139,6 +5139,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.86rem;
   line-height: 1.4;
 }
+.footer__account-mobile {
+  display: none;
+}
 
 /* --- Bottom bar --- */
 .footer__bottom {
@@ -5198,9 +5201,13 @@ body.sitestaffr-landing-page .hero__visual > * {
     gap: 48px;
   }
   .footer__bottom-inner {
-    flex-direction: column-reverse;
-    align-items: center;
-    gap: 14px;
+    justify-content: center;
+  }
+  .footer__login {
+    display: none;
+  }
+  .footer__account-mobile {
+    display: list-item;
   }
 }
 @media (max-width: 480px) {
