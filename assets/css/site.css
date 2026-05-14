@@ -5203,7 +5203,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   .footer__bottom-inner {
     justify-content: center;
   }
-  .footer__login {
+  .footer__bottom .footer__login {
     display: none;
   }
   .footer__account-mobile {
