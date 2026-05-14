@@ -41,7 +41,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</div>
 				<?php if ( $has_thumb ) : ?>
 					<div class="blog-post__hero-image">
-						<?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?>
+						<?php the_post_thumbnail( 'full', array( 'loading' => 'eager' ) ); ?>
 					</div>
 				<?php endif; ?>
 			</div>
