@@ -48,16 +48,15 @@ if ( ! defined( 'ABSPATH' ) ) {
           </div>
         </nav>
       </div>
-
-      <div class="footer__account">
-        <a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>" class="footer__login">My Account &rarr;</a>
-      </div>
     </div>
   </div>
 
   <div class="footer__bottom">
     <div class="container">
-      <p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> SiteStaffr. All rights reserved.</p>
+      <div class="footer__bottom-inner">
+        <p>&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> SiteStaffr. All rights reserved.</p>
+        <a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>" class="footer__login">My Account &rarr;</a>
+      </div>
     </div>
   </div>
 </footer>
