@@ -7244,6 +7244,16 @@ body.sitestaffr-landing-page .hero__actions {
 .sitestaffr-blog-post .nav:not(.scrolled) .nav__toggle {
   color: #fff;
 }
+.sitestaffr-blog-post .nav:not(.scrolled).menu-open .nav__link {
+  color: rgba(26, 35, 50, 0.86);
+}
+.sitestaffr-blog-post .nav:not(.scrolled).menu-open .nav__link:hover,
+.sitestaffr-blog-post .nav:not(.scrolled).menu-open .nav__link:focus-visible {
+  color: var(--teal-deep);
+}
+.sitestaffr-blog-post .nav:not(.scrolled).menu-open .nav__logo-image {
+  filter: none;
+}
 .blog-post {
   flex: 1 0 auto;
 }
@@ -7745,7 +7755,6 @@ body.sitestaffr-landing-page .hero__actions {
   font-size: 0.95rem;
   max-width: 100%;
   margin-bottom: 16px;
-  flex: 1;
 }
 .blog-post__body .industry-card a {
   margin-top: auto;
