@@ -44,7 +44,7 @@ get_template_part( 'template-parts/site-nav' );
     <div class="feat-hero__pattern" aria-hidden="true"></div>
     <div class="container">
       <div class="feat-hero__content reveal">
-        <h1>Everything your website needs to help visitors and capture leads.</h1>
+        <h1>Everything Your Website Needs to Help Visitors and Capture Leads.</h1>
         <p class="feat-hero__subtitle">Voice conversations, text chat, email recaps, full transcripts, and 57+ languages &mdash; all inside WordPress.</p>
       </div>
     </div>
@@ -55,7 +55,7 @@ get_template_part( 'template-parts/site-nav' );
     <div class="container">
       <div class="feat-section__header reveal">
         <span class="section-label">Voice conversations</span>
-        <h2>A natural-sounding AI voice that represents your business</h2>
+        <h2>A Natural-Sounding AI Voice That Represents Your Business</h2>
       </div>
       <?php
       get_template_part( 'template-parts/voice-showcase', null, array(
@@ -72,7 +72,7 @@ get_template_part( 'template-parts/site-nav' );
       <div class="feat-section__split reveal">
         <div class="feat-section__text">
           <span class="section-label">Text chat</span>
-          <h2>For visitors who prefer typing</h2>
+          <h2>For Visitors Who Prefer Typing</h2>
           <ul class="feat-check-list">
             <li>Real-time AI responses</li>
             <li>Same AI knowledge as voice</li>
@@ -93,7 +93,7 @@ get_template_part( 'template-parts/site-nav' );
       <div class="feat-section__split feat-section__split--reverse reveal">
         <div class="feat-section__text">
           <span class="section-label">AI knowledge</span>
-          <h2>Your business info powers every answer</h2>
+          <h2>Your Business Info Powers Every Answer</h2>
           <div class="feat-subfeatures">
             <div class="feat-subfeature">
               <h3 class="feat-subfeature__title">Search Mode</h3>
@@ -117,7 +117,7 @@ get_template_part( 'template-parts/site-nav' );
     <div class="container">
       <div class="feat-section__header reveal">
         <span class="section-label">Recaps, transcripts &amp; follow-up</span>
-        <h2>Never miss a lead, even when you&rsquo;re away</h2>
+        <h2>Never Miss a Lead, Even When You&rsquo;re Away</h2>
       </div>
       <div class="feat-cards-row reveal reveal-delay-1">
         <div class="feat-card">
@@ -151,7 +151,7 @@ get_template_part( 'template-parts/site-nav' );
     <div class="container">
       <div class="feat-section__centered reveal">
         <span class="section-label">57+ languages</span>
-        <h2>Serve every visitor, in their language</h2>
+        <h2>Serve Every Visitor, in Their Language</h2>
         <p class="feat-section__subtitle">SiteStaffr detects your visitor&rsquo;s language automatically and responds naturally &mdash; no menus, no awkward translations. Your recap arrives in English with every detail captured.</p>
       </div>
     </div>
@@ -163,7 +163,7 @@ get_template_part( 'template-parts/site-nav' );
       <div class="feat-section__split reveal">
         <div class="feat-section__text">
           <span class="section-label">Billing &amp; usage</span>
-          <h2>Track your usage. Stay in control.</h2>
+          <h2>Track Your Usage. Stay in Control.</h2>
           <ul class="feat-check-list">
             <li>See your minutes used and remaining at a glance</li>
             <li>Review every conversation from your WordPress dashboard</li>
@@ -181,7 +181,7 @@ get_template_part( 'template-parts/site-nav' );
   <section class="feat-faq">
     <div class="container">
       <div class="feat-faq__header reveal">
-        <h2>Frequently asked questions</h2>
+        <h2>Frequently Asked Questions</h2>
       </div>
       <div class="faq-list">
         <div class="faq-item reveal">
@@ -259,7 +259,7 @@ get_template_part( 'template-parts/site-nav' );
     <div class="feat-cta__pattern" aria-hidden="true"></div>
     <div class="container">
       <div class="feat-cta__content reveal">
-        <h2>Ready to see it in action?</h2>
+        <h2>Ready to See It in Action?</h2>
         <div class="feat-cta__buttons">
           <a href="<?php echo esc_url( home_url( '/pricing/' ) ); ?>" class="btn btn--outline btn--large">See Pricing</a>
           <a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>

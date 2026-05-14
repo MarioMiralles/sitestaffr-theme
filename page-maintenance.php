@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				height="188"
 			>
 			<span class="maintenance__badge">Temporary Maintenance</span>
-			<h1>We are making a few updates</h1>
+			<h1>We Are Making a Few Updates</h1>
 			<p>
 				SiteStaffr is temporarily offline while we improve the experience.
 				We will be back shortly.

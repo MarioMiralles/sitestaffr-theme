@@ -279,6 +279,85 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   transform: translateY(-6px) rotate(-45deg);
 }
 
+/* Nav divider between secondary and primary items */
+.nav__divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.12);
+  list-style: none;
+  align-self: center;
+}
+
+/* Nav dropdown */
+.nav__dropdown {
+  position: relative;
+}
+.nav__dropdown-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+.nav__dropdown-arrow {
+  transition: transform 0.2s ease;
+}
+.nav__dropdown.is-open .nav__dropdown-arrow {
+  transform: rotate(180deg);
+}
+.nav__dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 190px;
+  padding: 8px;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  z-index: 100;
+}
+.nav__dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+.nav__dropdown.is-open .nav__dropdown-menu {
+  display: block;
+}
+@media (hover: hover) {
+  .nav__dropdown:hover .nav__dropdown-menu {
+    display: block;
+  }
+  .nav__dropdown:hover .nav__dropdown-arrow {
+    transform: rotate(180deg);
+  }
+}
+.nav__dropdown-link {
+  display: block;
+  padding: 8px 14px;
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: rgba(26,35,50,0.86);
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+.nav__dropdown-link:hover,
+.nav__dropdown-link:focus-visible {
+  background: var(--teal-pale);
+  color: var(--teal-deep);
+}
+
 #demo,
 #pricing,
 #faq {
@@ -1732,7 +1811,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin 0.4s ease;
 }
 .lang-section__detail[aria-hidden="false"] {
-  max-height: 200px;
+  max-height: 500px;
   opacity: 1;
   margin-top: 16px;
 }
@@ -5155,6 +5234,36 @@ body.sitestaffr-landing-page .hero__visual > * {
   .nav__link:hover,
   .nav__link:focus-visible {
     background: var(--teal-pale);
+  }
+  .nav__divider {
+    width: 100%;
+    height: 1px;
+    margin: 4px 0;
+  }
+  .nav__dropdown::after {
+    display: none;
+  }
+  .nav__dropdown-menu {
+    position: static;
+    transform: none;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0 0 0 16px;
+    min-width: 0;
+  }
+  .nav__dropdown-toggle {
+    display: flex;
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 8px;
+  }
+  .nav__dropdown-toggle:hover,
+  .nav__dropdown-toggle:focus-visible {
+    background: var(--teal-pale);
+  }
+  .nav__dropdown-link {
+    font-size: 0.85rem;
   }
   #demo,
   #pricing,

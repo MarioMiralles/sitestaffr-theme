@@ -3,23 +3,31 @@
  * Shared site navigation.
  *
  * Accepts $args:
- *   'menu_items' => array of [ 'label' => string, 'href' => string ]
- *   'cta'        => [ 'label' => string, 'href' => string, 'target' => string ] or null
+ *   'secondary' => array of [ 'label' => string, 'href' => string ] — page-specific links (e.g. anchor links on homepage)
  */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
-$default_menu = array(
-    array( 'label' => 'Voices', 'href' => home_url( '/#voices' ) ),
-    array( 'label' => 'Pricing', 'href' => home_url( '/#pricing' ) ),
+
+$primary_menu = array(
+    array(
+        'label'    => 'Industries',
+        'href'     => '#',
+        'children' => array(
+            array( 'label' => 'Dental Practices', 'href' => home_url( '/for/dental-practices/' ) ),
+            array( 'label' => 'Law Firms',         'href' => home_url( '/for/law-firms/' ) ),
+            array( 'label' => 'Home Services',     'href' => home_url( '/for/home-services/' ) ),
+        ),
+    ),
     array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
 );
-$default_cta = array(
+
+$secondary_menu = isset( $args['secondary'] ) ? $args['secondary'] : array();
+
+$cta = array(
     'label' => 'Get Started',
     'href'  => home_url( '/#get-started' ),
 );
-$menu_items = isset( $args['menu_items'] ) ? $args['menu_items'] : $default_menu;
-$cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
 ?>
 <nav class="nav" id="nav">
   <div class="container">
@@ -33,19 +41,34 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
           height="188"
         >
       </a>
-      <?php if ( $menu_items || $cta ) : ?>
       <ul class="nav__menu" id="navPrimaryMenu" aria-label="Primary">
-        <?php foreach ( $menu_items as $item ) : ?>
+        <?php if ( $secondary_menu ) : ?>
+          <?php foreach ( $secondary_menu as $item ) : ?>
+        <li class="nav__secondary-item"><a class="nav__link" href="<?php echo esc_url( $item['href'] ); ?>"><?php echo esc_html( $item['label'] ); ?></a></li>
+          <?php endforeach; ?>
+        <li class="nav__divider" aria-hidden="true"></li>
+        <?php endif; ?>
+        <?php foreach ( $primary_menu as $item ) : ?>
+          <?php if ( ! empty( $item['children'] ) ) : ?>
+        <li class="nav__dropdown">
+          <button class="nav__link nav__dropdown-toggle" type="button" aria-expanded="false">
+            <?php echo esc_html( $item['label'] ); ?>
+            <svg class="nav__dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="nav__dropdown-menu">
+            <?php foreach ( $item['children'] as $child ) : ?>
+            <li><a class="nav__dropdown-link" href="<?php echo esc_url( $child['href'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li>
+            <?php endforeach; ?>
+          </ul>
+        </li>
+          <?php else : ?>
         <li><a class="nav__link" href="<?php echo esc_url( $item['href'] ); ?>"><?php echo esc_html( $item['label'] ); ?></a></li>
+          <?php endif; ?>
         <?php endforeach; ?>
       </ul>
-      <?php endif; ?>
-      <?php if ( $cta ) : ?>
       <div class="nav__cta">
-        <a href="<?php echo esc_url( $cta['href'] ); ?>" class="btn btn--primary"<?php if ( ! empty( $cta['target'] ) ) : ?> target="<?php echo esc_attr( $cta['target'] ); ?>" rel="noopener noreferrer"<?php endif; ?>><?php echo esc_html( $cta['label'] ); ?></a>
+        <a href="<?php echo esc_url( $cta['href'] ); ?>" class="btn btn--primary"><?php echo esc_html( $cta['label'] ); ?></a>
       </div>
-      <?php endif; ?>
-      <?php if ( $menu_items || $cta ) : ?>
       <button
         class="nav__toggle"
         id="navToggle"
@@ -58,7 +81,6 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
         <span class="nav__toggle-line"></span>
         <span class="nav__toggle-line"></span>
       </button>
-      <?php endif; ?>
     </div>
   </div>
 </nav>
@@ -71,7 +93,6 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
   var toggle = document.getElementById('navToggle');
   var mobileNavQuery = window.matchMedia('(max-width: 768px)');
 
-  /* Mobile menu state — mirrors existing site.js behavior exactly */
   function setMobileMenuState(isOpen) {
     if (!menu || !toggle) return;
     var shouldOpen = Boolean(isOpen) && mobileNavQuery.matches;
@@ -81,7 +102,6 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
     toggle.setAttribute('aria-expanded', shouldOpen ? 'true' : 'false');
   }
 
-  /* Scroll detection */
   window.addEventListener('scroll', function() {
     if (window.scrollY > 60) {
       nav.classList.add('scrolled');
@@ -100,7 +120,6 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
       link.addEventListener('click', function() { setMobileMenuState(false); });
     });
 
-    /* Close on outside click */
     document.addEventListener('click', function(e) {
       if (!mobileNavQuery.matches) return;
       if (!nav.contains(e.target)) {
@@ -108,14 +127,12 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
       }
     });
 
-    /* Close on Escape */
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         setMobileMenuState(false);
       }
     });
 
-    /* Close menu when viewport resizes past mobile breakpoint */
     var syncMenuForViewport = function() {
       if (!mobileNavQuery.matches) {
         setMobileMenuState(false);
@@ -129,5 +146,31 @@ $cta        = isset( $args['cta'] ) ? $args['cta'] : $default_cta;
 
     setMobileMenuState(false);
   }
+
+  /* Dropdown toggles */
+  nav.querySelectorAll('.nav__dropdown-toggle').forEach(function(btn) {
+    var parent = btn.closest('.nav__dropdown');
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      nav.querySelectorAll('.nav__dropdown').forEach(function(d) {
+        d.classList.remove('is-open');
+        d.querySelector('.nav__dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+      if (!open) {
+        parent.classList.add('is-open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!e.target.closest('.nav__dropdown')) {
+      nav.querySelectorAll('.nav__dropdown').forEach(function(d) {
+        d.classList.remove('is-open');
+        d.querySelector('.nav__dropdown-toggle').setAttribute('aria-expanded', 'false');
+      });
+    }
+  });
 })();
 </script>

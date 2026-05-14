@@ -191,14 +191,9 @@ $get_started_url = home_url( '/#get-started' );
 <!-- ========== NAVIGATION ========== -->
 <?php
 get_template_part( 'template-parts/site-nav', null, array(
-    'menu_items' => array(
+    'secondary' => array(
         array( 'label' => 'Voices', 'href' => '#voices' ),
         array( 'label' => 'Pricing', 'href' => '#pricing' ),
-        array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
-    ),
-    'cta' => array(
-        'label' => 'Get Started',
-        'href'  => '#get-started',
     ),
 ) );
 ?>
@@ -262,28 +257,28 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
       <div class="cost-cards reveal reveal-delay-1">
         <div class="cost-card">
-          <div class="cost-card__icon">🔧</div>
-          <div class="cost-card__title">Emergency service inquiry</div>
-          <div class="cost-card__amount">$500</div>
-          <div class="cost-card__detail">One urgent job, gone to a competitor</div>
+          <div class="cost-card__icon">🚨</div>
+          <div class="cost-card__title">After-hours emergency</div>
+          <div class="cost-card__amount">$500+</div>
+          <div class="cost-card__detail">Urgent job, gone to a faster competitor</div>
         </div>
         <div class="cost-card">
-          <div class="cost-card__icon">🦷</div>
-          <div class="cost-card__title">New patient inquiry</div>
+          <div class="cost-card__icon">📋</div>
+          <div class="cost-card__title">New client inquiry</div>
           <div class="cost-card__amount">$3,000+</div>
-          <div class="cost-card__detail">Lifetime value of a patient</div>
+          <div class="cost-card__detail">Lifetime value of one new customer</div>
         </div>
         <div class="cost-card">
-          <div class="cost-card__icon">⚖️</div>
-          <div class="cost-card__title">Legal consultation request</div>
+          <div class="cost-card__icon">📞</div>
+          <div class="cost-card__title">Missed quote request</div>
           <div class="cost-card__amount">$2,000</div>
-          <div class="cost-card__detail">Average case value, lost to a faster firm</div>
+          <div class="cost-card__detail">Prospect who needed a fast answer</div>
         </div>
         <div class="cost-card">
-          <div class="cost-card__icon">🏠</div>
-          <div class="cost-card__title">Home buyer inquiry</div>
-          <div class="cost-card__amount">$8,000</div>
-          <div class="cost-card__detail">Commission on a single sale</div>
+          <div class="cost-card__icon">📅</div>
+          <div class="cost-card__title">Booking that never happened</div>
+          <div class="cost-card__amount">$800</div>
+          <div class="cost-card__detail">Appointment lost to a silent website</div>
         </div>
       </div>
     </div>

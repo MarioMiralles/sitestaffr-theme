@@ -42,7 +42,7 @@ get_template_part( 'template-parts/site-nav' );
   <section class="price-hero">
     <div class="container">
       <div class="price-hero__content reveal">
-        <h1>Simple, transparent pricing</h1>
+        <h1>Simple, Transparent Pricing</h1>
         <p class="price-hero__subtitle">Start free. Upgrade when you're ready.</p>
       </div>
     </div>
@@ -53,7 +53,7 @@ get_template_part( 'template-parts/site-nav' );
     <div class="container">
       <div class="price-includes__header reveal">
         <span class="section-label">Every plan includes</span>
-        <h2>All the essentials, on every tier</h2>
+        <h2>All the Essentials, on Every Tier</h2>
       </div>
       <div class="price-includes__grid reveal reveal-delay-1">
         <div class="price-includes__item">
@@ -167,7 +167,7 @@ get_template_part( 'template-parts/site-nav' );
   <section class="price-addon-section">
     <div class="container">
       <div class="price-addon-card reveal">
-        <h3>Run out of minutes?</h3>
+        <h3>Run Out of Minutes?</h3>
         <p>Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges &mdash; your widget gracefully falls back to a contact form when minutes run out.</p>
       </div>
     </div>
@@ -177,7 +177,7 @@ get_template_part( 'template-parts/site-nav' );
   <section class="price-faq">
     <div class="container">
       <div class="price-faq__header reveal">
-        <h2>Frequently asked questions</h2>
+        <h2>Frequently Asked Questions</h2>
       </div>
       <div class="faq-list">
         <div class="faq-item reveal">
@@ -265,7 +265,7 @@ get_template_part( 'template-parts/site-nav' );
   <section class="price-final-cta">
     <div class="container">
       <div class="price-final-cta__content reveal">
-        <h2>Start your free trial</h2>
+        <h2>Start Your Free Trial</h2>
         <p class="price-final-cta__subtitle">30 days. Full access. No credit card.</p>
         <a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn btn--primary btn--large">Get Started</a>
       </div>

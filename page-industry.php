@@ -70,14 +70,14 @@ $industries = array(
 				'a' => 'Most dental practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
 			),
 		),
-		'cta_headline' => 'Stop losing patients to silence.',
+		'cta_headline' => 'Stop Losing Patients to Silence',
 		'cta_text'     => 'SiteStaffr answers your website visitors 24/7 so your front desk can focus on the patients already in the chair. Try it free for 30 days &mdash; no credit card required.',
 	),
 
 	'law-firms' => array(
 		'hero_icon' => '⚖️',
 		'label'    => 'For Law Firms',
-		'headline' => 'Every Missed Inquiry Is a Case That Goes to Another&nbsp;Firm.',
+		'headline' => 'Every Missed Inquiry Is a Case That Goes to Another&nbsp;Firm',
 		'subtitle' => 'SiteStaffr captures potential client inquiries on your website around the clock &mdash; qualifying leads, collecting case details, and delivering a full intake recap to your inbox before the prospect moves on.',
 		'specialty' => 'LegalService',
 		'problems_headline' => 'Law Firms Lose Clients in the First 60 Seconds',
@@ -134,7 +134,7 @@ $industries = array(
 				'a' => 'SiteStaffr supports 57+ languages. If a Spanish-speaking prospect describes their situation in Spanish, the AI responds fluently. Your recap arrives in English with all the details intact.',
 			),
 		),
-		'cta_headline' => 'The next case is visiting your website right now.',
+		'cta_headline' => 'The Next Case Is Visiting Your Website Right Now',
 		'cta_text'     => 'SiteStaffr makes sure you never miss another inquiry. Capture leads 24/7, qualify prospects automatically, and respond first. Try it free for 30 days &mdash; no credit card required.',
 	),
 
@@ -198,7 +198,7 @@ $industries = array(
 				'a' => 'SiteStaffr supports 57+ languages. If a homeowner speaks Spanish, the AI responds in Spanish. Your recap always arrives in English.',
 			),
 		),
-		'cta_headline' => 'Every minute your website stays silent, a lead walks away.',
+		'cta_headline' => 'Every Minute Your Website Stays Silent, a Lead Walks Away',
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
 );
@@ -217,19 +217,34 @@ $cta_url   = home_url( '/#get-started' );
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<script type="application/ld+json">
-	<?php echo wp_json_encode( array(
-		'@context'   => 'https://schema.org',
-		'@type'      => 'WebPage',
-		'name'       => wp_get_document_title(),
-		'url'        => get_permalink(),
-		'specialty'  => $ind['specialty'],
-		'publisher'  => array(
+	<?php
+	// Yoast handles WebPage, BreadcrumbList, and WebSite schema — only add Service (unique to industry pages)
+	$service_schema = array(
+		'@type'       => 'Service',
+		'name'        => 'AI Voice Agent ' . $ind['label'],
+		'description' => wp_strip_all_tags( $ind['subtitle'] ),
+		'provider'    => array(
 			'@type' => 'Organization',
 			'name'  => 'SiteStaffr',
 			'url'   => home_url( '/' ),
 		),
-		'inLanguage' => 'en-US',
+		'serviceType' => 'AI Voice Agent',
+		'areaServed'  => array(
+			'@type' => 'Country',
+			'name'  => 'United States',
+		),
+		'offers'      => array(
+			'@type'         => 'Offer',
+			'price'         => '0',
+			'priceCurrency' => 'USD',
+			'description'   => 'Free 30-day trial, no credit card required',
+		),
+	);
+	?>
+	<script type="application/ld+json">
+	<?php echo wp_json_encode( array_merge(
+		array( '@context' => 'https://schema.org' ),
+		$service_schema
 	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 	</script>
 
@@ -239,13 +254,7 @@ $cta_url   = home_url( '/#get-started' );
 <?php wp_body_open(); ?>
 
 <?php
-get_template_part( 'template-parts/site-nav', null, array(
-	'menu_items' => array(),
-	'cta' => array(
-		'label' => 'Get Started',
-		'href'  => $cta_url,
-	),
-) );
+get_template_part( 'template-parts/site-nav' );
 ?>
 
 <main class="ind-page">
@@ -288,7 +297,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 			<div class="ind-problems__grid">
 				<?php foreach ( $ind['problems'] as $i => $problem ) : ?>
 					<div class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $i + 1 ); ?>">
-						<div class="ind-problem-card__icon"><?php echo $problem['icon']; ?></div>
+						<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $problem['icon']; ?></div>
 						<h3 class="ind-problem-card__title"><?php echo wp_kses_post( $problem['title'] ); ?></h3>
 						<p class="ind-problem-card__desc"><?php echo wp_kses_post( $problem['desc'] ); ?></p>
 					</div>
