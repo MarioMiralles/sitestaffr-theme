@@ -5068,27 +5068,35 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .footer a:hover { color: #fff; }
 
-/* --- Brand strip (top tier) --- */
-.footer__brand {
+/* --- Main section --- */
+.footer__main {
   position: relative;
-  text-align: center;
-  padding: 56px 0 40px;
+  padding: 56px 0 44px;
 }
-.footer__brand::before {
+.footer__main::before {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 60%, rgba(31,182,204,0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 40%, rgba(16,185,129,0.06) 0%, transparent 45%);
+    radial-gradient(ellipse at 15% 50%, rgba(31,182,204,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 40%, rgba(16,185,129,0.05) 0%, transparent 45%);
   pointer-events: none;
+}
+.footer__grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+  position: relative;
+}
+.footer__brand {
+  padding-right: 16px;
 }
 .footer__logo {
   display: inline-block;
-  position: relative;
 }
 .footer__logo-image {
-  height: 38px;
+  height: 36px;
   width: auto;
   filter: brightness(0) invert(1);
   opacity: 0.9;
@@ -5098,50 +5106,17 @@ body.sitestaffr-landing-page .hero__visual > * {
   opacity: 1;
 }
 .footer__tagline {
-  margin: 14px auto 0;
-  font-size: 0.88rem;
+  margin-top: 14px;
+  font-size: 0.86rem;
   line-height: 1.6;
-  color: rgba(240,250,250,0.4);
-  max-width: 340px;
-  position: relative;
-}
-.footer__login {
-  display: inline-block;
-  position: relative;
-  margin-top: 20px;
-  padding: 8px 24px;
-  border: 1px solid rgba(31, 182, 204, 0.3);
-  border-radius: 8px;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: rgba(240,250,250,0.8);
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-}
-.footer__login:hover {
-  background: rgba(31, 182, 204, 0.12);
-  border-color: rgba(31, 182, 204, 0.5);
-  color: #fff;
+  color: rgba(240,250,250,0.38);
 }
 
-/* --- Nav strip (columns tier) --- */
-.footer__nav-strip {
-  position: relative;
-  padding: 36px 0 40px;
-}
-.footer__nav-strip::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(100%, 1140px);
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, rgba(240,250,250,0.08) 30%, rgba(240,250,250,0.08) 70%, transparent 100%);
-}
+/* --- Nav columns --- */
 .footer__nav {
   display: flex;
-  justify-content: center;
-  gap: 80px;
+  justify-content: space-between;
+  gap: 40px;
 }
 .footer__heading {
   font-family: var(--font-body);
@@ -5169,7 +5144,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 .footer__bottom {
   position: relative;
   padding: 18px 0;
-  text-align: center;
   font-size: 0.76rem;
   color: rgba(240,250,250,0.25);
 }
@@ -5183,28 +5157,58 @@ body.sitestaffr-landing-page .hero__visual > * {
   height: 1px;
   background: linear-gradient(90deg, transparent 0%, rgba(31,182,204,0.2) 30%, rgba(31,182,204,0.2) 70%, transparent 100%);
 }
+.footer__bottom-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer__login {
+  padding: 6px 18px;
+  border: 1px solid rgba(31, 182, 204, 0.3);
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(240,250,250,0.7);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.footer__login:hover {
+  background: rgba(31, 182, 204, 0.12);
+  border-color: rgba(31, 182, 204, 0.5);
+  color: #fff;
+}
 
 /* --- Footer responsive --- */
 @media (max-width: 768px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
   .footer__brand {
-    padding: 44px 0 32px;
+    padding-right: 0;
+  }
+  .footer__tagline {
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .footer__nav {
+    justify-content: center;
     gap: 48px;
+  }
+  .footer__bottom-inner {
+    flex-direction: column;
+    gap: 12px;
   }
 }
 @media (max-width: 480px) {
-  .footer__brand {
-    padding: 36px 0 28px;
+  .footer__main {
+    padding: 40px 0 32px;
   }
   .footer__nav {
     flex-direction: column;
     align-items: center;
-    text-align: center;
     gap: 28px;
-  }
-  .footer__nav-strip {
-    padding: 28px 0 32px;
   }
 }
 
