@@ -769,6 +769,8 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="final-cta__onboarding">
         <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#15a3b8" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
       </div>
+      <p class="final-cta__or">or</p>
+      <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline final-cta__download">Download the Plugin</a>
       <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
     </div>
   </div>

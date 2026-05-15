@@ -376,10 +376,13 @@ get_template_part( 'template-parts/site-nav' );
 			<div class="ind-cta__content reveal">
 				<h2><?php echo wp_kses_post( $ind['cta_headline'] ); ?></h2>
 				<p><?php echo wp_kses_post( $ind['cta_text'] ); ?></p>
-				<a href="<?php echo esc_url( $cta_url ); ?>" class="btn ind-cta__btn">
-					Get Started
-					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-				</a>
+				<div class="ind-cta__actions">
+					<a href="<?php echo esc_url( $cta_url ); ?>" class="btn ind-cta__btn">
+						Get Started
+						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+					</a>
+					<a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline ind-cta__btn-outline">Download Plugin</a>
+				</div>
 			</div>
 		</div>
 	</section>

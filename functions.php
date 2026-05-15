@@ -66,7 +66,9 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_about    = is_page_template( 'page-about.php' );
 	$is_industry = is_page_template( 'page-industry.php' );
 
-	if ( $is_landing || $is_about || $is_industry ) {
+	$is_download = is_page_template( 'page-download.php' );
+
+	if ( $is_landing || $is_about || $is_industry || $is_download ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),

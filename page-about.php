@@ -101,7 +101,10 @@ get_template_part( 'template-parts/site-nav' );
 			<div class="about-cta__content reveal">
 				<h2>See What SiteStaffr Can Do for Your Business</h2>
 				<p>SiteStaffr is built for service businesses that can&rsquo;t afford to miss a lead &mdash; or make a visitor wait. Try it free for 30 days, no credit card required.</p>
-				<a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn about-cta__btn">Get Started</a>
+				<div class="about-cta__actions">
+					<a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn about-cta__btn">Get Started</a>
+					<a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline about-cta__btn-outline">Download Plugin</a>
+				</div>
 			</div>
 		</div>
 	</section>
