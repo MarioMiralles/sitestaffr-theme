@@ -490,6 +490,24 @@ body.sitestaffr-landing-page .hero__visual > * {
 .hero__listen-link:hover { gap: 14px; }
 .hero__listen-link svg { transition: transform 0.3s ease; }
 .hero__listen-link:hover svg { transform: translateX(3px); }
+.hero__download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--teal-deep);
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.7;
+  transition: opacity 0.2s ease, gap 0.2s ease;
+}
+.hero__download-link:hover {
+  opacity: 1;
+  gap: 8px;
+}
+.hero__download-link svg {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
 .hero__no-cc {
   display: block;
   margin-top: 14px;
@@ -4971,20 +4989,21 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   will-change: transform;
 }
-.final-cta__or {
-  color: rgba(240,250,250,0.5);
+.final-cta__secondary {
   font-size: 0.85rem;
-  margin: 12px 0 4px;
+  color: rgba(240,250,250,0.45);
+  margin-top: 16px;
 }
-.final-cta__download {
+.final-cta__download-link {
+  color: rgba(240,250,250,0.7);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(240,250,250,0.3);
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.final-cta__download-link:hover {
   color: white;
-  border-color: rgba(255,255,255,0.4);
-  font-size: 0.95rem;
-  padding: 14px 32px;
-}
-.final-cta__download:hover {
-  background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.7);
+  text-decoration-color: rgba(255,255,255,0.6);
 }
 .final-cta__privacy {
   font-size: 0.8rem;

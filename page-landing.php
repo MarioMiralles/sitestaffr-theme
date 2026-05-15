@@ -219,6 +219,10 @@ get_template_part( 'template-parts/site-nav', null, array(
             Get Started
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="hero__download-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Plugin
+          </a>
         </div>
       </div>
       <div class="hero__visual reveal reveal-delay-2" id="hero-audio-demo">
@@ -769,8 +773,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="final-cta__onboarding">
         <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#15a3b8" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
       </div>
-      <p class="final-cta__or">or</p>
-      <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline final-cta__download">Download the Plugin</a>
+      <p class="final-cta__secondary">or <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="final-cta__download-link">download the plugin</a> and install it yourself</p>
       <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
     </div>
   </div>
