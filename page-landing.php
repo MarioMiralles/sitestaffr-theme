@@ -13,6 +13,9 @@ $get_started_url = home_url( '/#get-started' );
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
+
     <?php
     $schema_org_url  = home_url( '/' );
     $schema_logo_url = get_stylesheet_directory_uri() . '/assets/images/logo.webp';

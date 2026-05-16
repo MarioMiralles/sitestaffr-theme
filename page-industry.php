@@ -246,6 +246,27 @@ $cta_url   = home_url( '/#get-started' );
 	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 	</script>
 
+	<?php
+	$faq_schema = array(
+		'@context'   => 'https://schema.org',
+		'@type'      => 'FAQPage',
+		'mainEntity' => array(),
+	);
+	foreach ( $ind['faqs'] as $faq ) {
+		$faq_schema['mainEntity'][] = array(
+			'@type'          => 'Question',
+			'name'           => $faq['q'],
+			'acceptedAnswer' => array(
+				'@type' => 'Answer',
+				'text'  => $faq['a'],
+			),
+		);
+	}
+	?>
+	<script type="application/ld+json">
+	<?php echo wp_json_encode( $faq_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+	</script>
+
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-industry-page' ); ?>>
@@ -408,27 +429,6 @@ get_template_part( 'template-parts/site-nav' );
 </main>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
-
-<script type="application/ld+json">
-<?php
-$faq_schema = array(
-	'@context'   => 'https://schema.org',
-	'@type'      => 'FAQPage',
-	'mainEntity' => array(),
-);
-foreach ( $ind['faqs'] as $faq ) {
-	$faq_schema['mainEntity'][] = array(
-		'@type'          => 'Question',
-		'name'           => $faq['q'],
-		'acceptedAnswer' => array(
-			'@type' => 'Answer',
-			'text'  => $faq['a'],
-		),
-	);
-}
-echo wp_json_encode( $faq_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
-?>
-</script>
 
 <?php wp_footer(); ?>
 </body>

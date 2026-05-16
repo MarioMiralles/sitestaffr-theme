@@ -7,6 +7,44 @@ if ( ! defined( 'ABSPATH' ) ) {
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<?php
+	$post_id    = get_the_ID();
+	$post_obj   = get_post( $post_id );
+	$thumb_url  = get_the_post_thumbnail_url( $post_id, 'full' );
+	$article_schema = array(
+		'@context'      => 'https://schema.org',
+		'@type'         => 'BlogPosting',
+		'@id'           => get_the_permalink( $post_id ) . '#article',
+		'headline'      => get_the_title( $post_id ),
+		'description'   => wp_strip_all_tags( get_the_excerpt( $post_id ) ),
+		'url'           => get_the_permalink( $post_id ),
+		'datePublished' => get_the_date( 'c', $post_id ),
+		'dateModified'  => get_the_modified_date( 'c', $post_id ),
+		'author'        => array(
+			'@type' => 'Person',
+			'name'  => 'Mario Miralles',
+			'url'   => home_url( '/about/' ),
+		),
+		'publisher'     => array(
+			'@id' => home_url( '/' ) . '#organization',
+		),
+		'isPartOf'      => array(
+			'@id' => home_url( '/' ) . '#website',
+		),
+		'inLanguage'    => 'en-US',
+	);
+	if ( $thumb_url ) {
+		$article_schema['image'] = array(
+			'@type' => 'ImageObject',
+			'url'   => $thumb_url,
+		);
+	}
+	?>
+	<script type="application/ld+json">
+	<?php echo wp_json_encode( $article_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
+	</script>
+
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-blog-post' ); ?>>
@@ -33,6 +71,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<p class="blog-post__excerpt"><?php echo esc_html( get_the_excerpt() ); ?></p>
 					<?php endif; ?>
 					<div class="blog-post__meta">
+						<span class="blog-post__author">By <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">Mario Miralles</a></span>
 						<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></time>
 						<?php if ( get_the_modified_date() !== get_the_date() ) : ?>
 							<span class="blog-post__updated">Updated <?php echo esc_html( get_the_modified_date( 'F j, Y' ) ); ?></span>
