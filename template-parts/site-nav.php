@@ -40,6 +40,7 @@ $cta = array(
           alt="SiteStaffr"
           width="625"
           height="188"
+          fetchpriority="high"
         >
       </a>
       <ul class="nav__menu" id="navPrimaryMenu" aria-label="Primary">

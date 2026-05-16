@@ -224,9 +224,7 @@ $cta_url   = home_url( '/#get-started' );
 		'name'        => 'AI Voice Agent ' . $ind['label'],
 		'description' => html_entity_decode( wp_strip_all_tags( $ind['subtitle'] ), ENT_QUOTES, 'UTF-8' ),
 		'provider'    => array(
-			'@type' => 'Organization',
-			'name'  => 'SiteStaffr',
-			'url'   => home_url( '/' ),
+			'@id' => home_url( '/' ) . '#organization',
 		),
 		'serviceType' => 'AI Voice Agent',
 		'areaServed'  => array(
@@ -354,7 +352,7 @@ get_template_part( 'template-parts/site-nav' );
 			<div class="faq-list">
 				<?php foreach ( $ind['faqs'] as $i => $faq ) : ?>
 					<div class="faq-item reveal<?php echo $i > 0 ? ' reveal-delay-' . $i : ''; ?>">
-						<button class="faq-item__question">
+						<button class="faq-item__question" type="button">
 							<?php echo esc_html( $faq['q'] ); ?>
 							<span class="faq-item__icon">+</span>
 						</button>

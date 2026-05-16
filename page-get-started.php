@@ -119,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
         </div>
 
-        <p class="privacy-notice">Your information will be used to set up your SiteStaffr assistant. See our <a href="/privacy-policy/">Privacy Policy</a>.</p>
+        <p class="privacy-notice">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
     </div>
 
     <div class="section-divider" id="formToggle">

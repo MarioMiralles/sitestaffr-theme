@@ -246,10 +246,13 @@ $download_url = home_url( '/download/' );
 })();
 </script>
 
+<?php wp_footer(); ?>
+
 <script type="application/ld+json">
 <?php echo wp_json_encode( array(
 	'@context'            => 'https://schema.org',
 	'@type'               => 'SoftwareApplication',
+	'@id'                 => home_url( '/' ) . '#software',
 	'name'                => 'SiteStaffr',
 	'description'         => 'AI voice and text agent plugin for WordPress. Greets visitors, answers questions, captures leads, and sends email recaps — 24/7.',
 	'applicationCategory' => 'BusinessApplication',
@@ -258,15 +261,13 @@ $download_url = home_url( '/download/' );
 	'downloadUrl'         => $zip_url,
 	'fileSize'            => $zip_size . ' MB',
 	'offers'              => array(
-		'@type'       => 'Offer',
-		'price'       => '0',
+		'@type'         => 'Offer',
+		'price'         => '0',
 		'priceCurrency' => 'USD',
-		'description' => '30-day free trial, no credit card required',
+		'description'   => '30-day free trial, no credit card required',
 	),
 	'publisher'           => array(
-		'@type' => 'Organization',
-		'name'  => 'SiteStaffr',
-		'url'   => home_url( '/' ),
+		'@id' => home_url( '/' ) . '#organization',
 	),
 ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 </script>
@@ -316,7 +317,5 @@ foreach ( $faq_items as $faq ) {
 echo wp_json_encode( $faq_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
 ?>
 </script>
-
-<?php wp_footer(); ?>
 </body>
 </html>

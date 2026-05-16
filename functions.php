@@ -102,6 +102,13 @@ add_action( 'after_setup_theme', function () {
 	add_theme_support( 'post-thumbnails' );
 } );
 
+add_action( 'send_headers', function () {
+	header( 'X-Content-Type-Options: nosniff' );
+	header( 'X-Frame-Options: SAMEORIGIN' );
+	header( 'Referrer-Policy: strict-origin-when-cross-origin' );
+	header( 'Permissions-Policy: microphone=(self)' );
+} );
+
 add_action( 'init', function () {
 	remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
@@ -131,6 +138,7 @@ add_action( 'template_redirect', function () {
 		echo "and sends you detailed conversation recaps by email — automatically, 24/7, in over 57 languages.\n\n";
 		echo "## Key Pages\n\n";
 		echo "- [Home](" . home_url( '/' ) . ") — Product overview, pricing, and demo\n";
+		echo "- [Download](" . home_url( '/download/' ) . ") — Plugin download and install guide\n";
 		echo "- [About](" . home_url( '/about/' ) . ") — Company and founder information\n";
 		echo "- [Blog](" . home_url( '/blog/' ) . ") — Guides and comparisons for service businesses\n";
 		echo "- [For Dental Practices](" . home_url( '/for/dental-practices/' ) . ") — AI voice agent for dental offices\n";
@@ -144,7 +152,36 @@ add_action( 'template_redirect', function () {
 		echo "- Languages: 57+ (recaps always in English)\n";
 		echo "- AI Voices: 10 unique personalities (Marin, Cedar, Sage, Coral, Ash, Alloy, Echo, Shimmer, Verse, Ballad)\n";
 		echo "- Built by: PhoneEase LLC (Florida, USA)\n";
-		echo "- Contact: support@sitestaffr.com\n";
+		echo "- Founded by: Mario Miralles — 18+ years in customer-facing roles, Software Engineering diploma from BrainStation\n";
+		echo "- Contact: support@sitestaffr.com\n\n";
+		echo "## Pricing Details\n\n";
+		echo "| Plan | Price | Minutes | AI Voices |\n";
+		echo "|------|-------|---------|----------|\n";
+		echo "| Free Trial | \$0 for 30 days | 30 minutes (one-time) | 2 voices |\n";
+		echo "| Starter | \$10/month | 60 minutes | 2 voices |\n";
+		echo "| Business | \$50/month | 300 minutes | 5 voices |\n";
+		echo "| Pro | \$100/month | 700 minutes | All 10 voices |\n\n";
+		echo "Add-on minutes: \$10 for 50 minutes, never expire. No credit card required for the free trial.\n\n";
+		echo "## How It Works\n\n";
+		echo "1. Install the SiteStaffr plugin on your WordPress site (takes under 5 minutes).\n";
+		echo "2. Run the setup wizard: enter your business info, choose a plan, and generate your AI knowledge base.\n";
+		echo "3. The voice and text agent widget appears on your site automatically.\n";
+		echo "4. Visitors ask questions via voice or text. SiteStaffr answers using your website content.\n";
+		echo "5. After each conversation, you receive an email recap with the visitor's contact info, a full transcript, and suggested follow-up actions.\n\n";
+		echo "## What Customers Say\n\n";
+		echo "\"We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. ";
+		echo "SiteStaffr captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, ";
+		echo "and start date. Monday morning it was sitting in our inbox, ready to go.\" ";
+		echo "— Nathaly Martinez, CEO & Founder, Synergy Scribes\n\n";
+		echo "## Frequently Asked Questions\n\n";
+		echo "**What is SiteStaffr?** SiteStaffr is an AI voice and text agent built for service businesses on WordPress. ";
+		echo "It appears as a chat widget on your website, greets visitors, answers their questions using your website content, ";
+		echo "captures their contact information, and sends you a detailed conversation recap by email — all automatically, 24/7.\n\n";
+		echo "**How much does SiteStaffr cost?** SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — ";
+		echo "no credit card required. Paid plans are \$10/month (Starter, 60 minutes), \$50/month (Business, 300 minutes), ";
+		echo "and \$100/month (Pro, 700 minutes). Additional minutes cost \$10 for 50 minutes and never expire.\n\n";
+		echo "**Does SiteStaffr work with my WordPress site?** Yes. SiteStaffr is built specifically for WordPress. ";
+		echo "Install the plugin from your WordPress dashboard, configure your business details, and the AI agent appears on your website — no coding required.\n";
 		exit;
 	}
 }, -10 );

@@ -6,13 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$landing_title   = 'SiteStaffr | AI Voice & Text Agent for WordPress';
 $get_started_url = home_url( '/#get-started' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <title><?php echo esc_html( $landing_title ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <?php
@@ -27,7 +25,10 @@ $get_started_url = home_url( '/#get-started' );
         'name'            => 'SiteStaffr',
         'legalName'       => 'PhoneEase LLC',
         'url'             => $schema_org_url,
-        'logo'            => $schema_logo_url,
+        'logo'            => array(
+            '@type' => 'ImageObject',
+            'url'   => $schema_logo_url,
+        ),
         'email'           => 'support@sitestaffr.com',
         'contactPoint'    => array(
             '@type'       => 'ContactPoint',
@@ -56,6 +57,13 @@ $get_started_url = home_url( '/#get-started' );
         'operatingSystem'     => 'WordPress',
         'url'                 => $schema_org_url,
         'publisher'           => array( '@id' => $schema_org_url . '#organization' ),
+        'aggregateRating'     => array(
+            '@type'       => 'AggregateRating',
+            'ratingValue' => '5',
+            'reviewCount' => '1',
+            'bestRating'  => '5',
+            'worstRating' => '1',
+        ),
         'offers'              => array(
             array(
                 '@type'         => 'Offer',
@@ -204,7 +212,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <canvas id="hero-soundwave" class="hero__canvas" aria-hidden="true"></canvas>
   <div class="container">
     <div class="hero__grid">
-      <div class="hero__content reveal">
+      <div class="hero__content">
         <span class="hero__tagline">Built for WordPress</span>
         <h1 class="hero__headline">
           <span class="hero__headline-prefix">Your Website Visitors Have Questions.</span>
@@ -225,7 +233,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </a>
         </div>
       </div>
-      <div class="hero__visual reveal reveal-delay-2" id="hero-audio-demo">
+      <div class="hero__visual" id="hero-audio-demo">
         <?php
         get_template_part(
             'template-parts/hero-audio-demo',
@@ -566,7 +574,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
       <div class="proof-section__portrait-wrap">
         <div class="proof-section__portrait-frame">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="CEO of Synergy Scribes" width="640" height="842">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="640" height="842" loading="eager" fetchpriority="high">
         </div>
         <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
       </div>
@@ -774,7 +782,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#15a3b8" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
       </div>
       <p class="final-cta__secondary">or <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="final-cta__download-link">download the plugin</a> and install it yourself</p>
-      <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy' ) ); ?>">Privacy Policy</a>.</p>
+      <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
     </div>
   </div>
 </section>

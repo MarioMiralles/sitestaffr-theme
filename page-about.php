@@ -114,22 +114,21 @@ get_template_part( 'template-parts/site-nav' );
 <?php get_template_part( 'template-parts/site-footer' ); ?>
 
 <script type="application/ld+json">
-{
-	"@context": "https://schema.org",
-	"@type": "Person",
-	"name": "Mario Miralles",
-	"jobTitle": "Founder",
-	"worksFor": {
-		"@type": "Organization",
-		"name": "SiteStaffr",
-		"url": "https://sitestaffr.com"
-	},
-	"knowsAbout": ["WordPress", "AI Voice Agents", "Web Development", "Customer Service"],
-	"alumniOf": {
-		"@type": "EducationalOrganization",
-		"name": "BrainStation"
-	}
-}
+<?php echo wp_json_encode( array(
+	'@context'   => 'https://schema.org',
+	'@type'      => 'Person',
+	'name'       => 'Mario Miralles',
+	'jobTitle'   => 'Founder',
+	'url'        => home_url( '/about/' ),
+	'worksFor'   => array(
+		'@id' => home_url( '/' ) . '#organization',
+	),
+	'knowsAbout' => array( 'WordPress', 'AI Voice Agents', 'Web Development', 'Customer Service' ),
+	'alumniOf'   => array(
+		'@type' => 'EducationalOrganization',
+		'name'  => 'BrainStation',
+	),
+), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 </script>
 
 <?php wp_footer(); ?>
