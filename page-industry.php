@@ -222,7 +222,7 @@ $cta_url   = home_url( '/#get-started' );
 	$service_schema = array(
 		'@type'       => 'Service',
 		'name'        => 'AI Voice Agent ' . $ind['label'],
-		'description' => wp_strip_all_tags( $ind['subtitle'] ),
+		'description' => html_entity_decode( wp_strip_all_tags( $ind['subtitle'] ), ENT_QUOTES, 'UTF-8' ),
 		'provider'    => array(
 			'@type' => 'Organization',
 			'name'  => 'SiteStaffr',
@@ -390,6 +390,28 @@ get_template_part( 'template-parts/site-nav' );
 </main>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
+
+<script type="application/ld+json">
+<?php
+$faq_schema = array(
+	'@context'   => 'https://schema.org',
+	'@type'      => 'FAQPage',
+	'mainEntity' => array(),
+);
+foreach ( $ind['faqs'] as $faq ) {
+	$faq_schema['mainEntity'][] = array(
+		'@type'          => 'Question',
+		'name'           => $faq['q'],
+		'acceptedAnswer' => array(
+			'@type' => 'Answer',
+			'text'  => $faq['a'],
+		),
+	);
+}
+echo wp_json_encode( $faq_schema, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
+?>
+</script>
+
 <?php wp_footer(); ?>
 </body>
 </html>

@@ -6,19 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$page_title       = 'Manage Your Account | SiteStaffr';
-$page_description = 'Manage your SiteStaffr plan, add-on minutes, and billing access from a secure email link.';
-$page_url         = get_permalink() ? get_permalink() : home_url( '/manage' );
-$site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <title><?php echo esc_html( $page_title ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?php echo esc_attr( $page_description ); ?>">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="<?php echo esc_url( $page_url ); ?>">
     <?php wp_head(); ?>
 </head>
 <body <?php body_class( 'sitestaffr-manage-page' ); ?>>

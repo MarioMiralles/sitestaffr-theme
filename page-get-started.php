@@ -6,25 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-$page_title       = 'Get Started with SiteStaffr | Guided AI Website Assistant Setup';
-$page_description = 'Tell us about your business and we will help you get your SiteStaffr assistant ready to go live.';
-$page_url         = get_permalink() ? get_permalink() : home_url( '/get-started' );
-$site_name        = get_bloginfo( 'name' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
     <meta charset="<?php bloginfo( 'charset' ); ?>">
-    <title><?php echo esc_html( $page_title ); ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="<?php echo esc_attr( $page_description ); ?>">
-    <meta name="robots" content="noindex, nofollow">
-    <link rel="canonical" href="<?php echo esc_url( $page_url ); ?>">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="<?php echo esc_attr( $site_name ); ?>">
-    <meta property="og:title" content="<?php echo esc_attr( $page_title ); ?>">
-    <meta property="og:description" content="<?php echo esc_attr( $page_description ); ?>">
-    <meta property="og:url" content="<?php echo esc_url( $page_url ); ?>">
     <?php wp_head(); ?>
     <style>
 /* Voice agent section */
