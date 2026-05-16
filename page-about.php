@@ -124,6 +124,9 @@ get_template_part( 'template-parts/site-nav' );
 		'@id' => home_url( '/' ) . '#organization',
 	),
 	'knowsAbout' => array( 'WordPress', 'AI Voice Agents', 'Web Development', 'Customer Service' ),
+	'sameAs'     => array(
+		'https://linkedin.com/in/mariofmiralles',
+	),
 	'alumniOf'   => array(
 		'@type' => 'EducationalOrganization',
 		'name'  => 'BrainStation',

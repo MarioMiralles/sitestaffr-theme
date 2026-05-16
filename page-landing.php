@@ -35,6 +35,14 @@ $get_started_url = home_url( '/#get-started' );
             'email'       => 'support@sitestaffr.com',
             'contactType' => 'customer support',
         ),
+        'founder'          => array(
+            '@type'    => 'Person',
+            'name'     => 'Mario Miralles',
+            'url'      => home_url( '/about/' ),
+        ),
+        'sameAs'           => array(
+            'https://linkedin.com/company/sitestaffr',
+        ),
         'foundingLocation' => array(
             '@type'   => 'Place',
             'address' => array(

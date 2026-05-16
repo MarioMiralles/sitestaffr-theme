@@ -367,6 +367,26 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
+	<!-- Related Resources -->
+	<section class="ind-related">
+		<div class="container container--narrow">
+			<div class="ind-related__content reveal">
+				<h2>Explore More</h2>
+				<ul class="ind-related__links">
+					<?php
+					foreach ( $industries as $slug => $industry ) {
+						if ( $slug === $page_slug ) {
+							continue;
+						}
+						echo '<li><a href="' . esc_url( home_url( '/for/' . $slug . '/' ) ) . '">' . esc_html( str_replace( '&rsquo;', "'", $industry['label'] ) ) . '</a></li>';
+					}
+					?>
+					<li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">AI Voice Agents for WordPress: A Buyer's Guide</a></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
 	<!-- CTA -->
 	<section class="ind-cta">
 		<div class="ind-cta__pattern" aria-hidden="true"></div>

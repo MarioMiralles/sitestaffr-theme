@@ -7310,6 +7310,34 @@ body.sitestaffr-landing-page .hero__actions {
   color: var(--teal-deep);
 }
 
+/* --- Related Resources --- */
+.ind-related {
+  padding: 48px 0;
+  text-align: center;
+}
+.ind-related h2 {
+  font-size: 1.25rem;
+  color: var(--teal-deep);
+  margin-bottom: 16px;
+}
+.ind-related__links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px 24px;
+}
+.ind-related__links a {
+  color: var(--teal-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+.ind-related__links a:hover {
+  text-decoration: underline;
+}
+
 /* --- CTA --- */
 .ind-cta {
   padding: clamp(80px, 12vw, 140px) 0;
