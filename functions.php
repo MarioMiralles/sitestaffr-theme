@@ -98,6 +98,19 @@ add_action( 'wp_enqueue_scripts', function () {
 	}
 } , 100 );
 
+add_filter( 'style_loader_tag', function ( $html, $handle ) {
+	$defer_handles = array(
+		'sitestaffr-widget',
+		'sitestaffr-button-widget',
+		'sitestaffr-chat-panel',
+	);
+	if ( in_array( $handle, $defer_handles, true ) ) {
+		$html = str_replace( "media='all'", "media='print' onload=\"this.media='all'\"", $html );
+		$html = str_replace( 'media="all"', 'media="print" onload="this.media=\'all\'"', $html );
+	}
+	return $html;
+}, 10, 2 );
+
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );

@@ -10,10 +10,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="footer__brand">
           <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer__logo" aria-label="SiteStaffr home">
             <img
-              src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
+              src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>"
               alt="SiteStaffr"
-              width="625"
-              height="188"
+              width="240"
+              height="72"
               class="footer__logo-image"
             >
           </a>

@@ -20,10 +20,10 @@ $site_name = get_bloginfo( 'name' );
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav__logo" aria-label="<?php echo esc_attr( $site_name ); ?> home">
 				<img
 					class="nav__logo-image"
-					src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
+					src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>"
 					alt="<?php echo esc_attr( $site_name ); ?>"
-					width="625"
-					height="188"
+					width="240"
+					height="72"
 				>
 			</a>
 			<div class="nav__cta">

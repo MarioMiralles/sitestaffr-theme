@@ -36,11 +36,10 @@ $cta = array(
       <a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="nav__logo" aria-label="SiteStaffr home">
         <img
           class="nav__logo-image"
-          src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>"
+          src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>"
           alt="SiteStaffr"
-          width="625"
-          height="188"
-          fetchpriority="high"
+          width="240"
+          height="72"
         >
       </a>
       <ul class="nav__menu" id="navPrimaryMenu" aria-label="Primary">

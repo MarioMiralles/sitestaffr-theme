@@ -21,17 +21,21 @@
   const BAR_GAP = 2.5;
   let bars = [];
 
+  let resizeRaf;
   function resize() {
-    const rect = canvas.parentElement.getBoundingClientRect();
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    W = rect.width;
-    H = rect.height;
-    canvas.width = W * dpr;
-    canvas.height = H * dpr;
-    canvas.style.width = W + 'px';
-    canvas.style.height = H + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    initBars();
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(function() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      W = rect.width;
+      H = rect.height;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      initBars();
+    });
   }
 
   function initBars() {
@@ -777,7 +781,7 @@ if (voiceShowcase) {
     activeVoiceIndex = index;
     const voice = voices[index];
 
-    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
+    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '-sm.webp' + imgVersion;
     showcasePortrait.alt = voice.name;
     showcaseName.textContent = voice.name;
     showcasePlan.textContent = voice.plan;
@@ -798,7 +802,7 @@ if (voiceShowcase) {
 
     // Crossfade background portrait
     if (bgCurrent && bgNext) {
-      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
+      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '-sm.webp' + imgVersion;
       bgNext.src = newSrc;
       bgNext.classList.add('voice-section__bg-img--active');
       bgCurrent.classList.remove('voice-section__bg-img--active');
@@ -819,7 +823,7 @@ if (voiceShowcase) {
 
     thumb.innerHTML =
       '<div class="voice-showcase__thumb-img">' +
-        '<img src="' + themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
+        '<img src="' + themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '-sm.webp' + imgVersion + '" alt="' + voice.name + '" loading="lazy">' +
       '</div>' +
       '<span class="voice-showcase__thumb-name">' + voice.name + '</span>' +
       '<span class="voice-showcase__thumb-plan" data-plan="' + voice.plan + '">' + voice.plan + '</span>';

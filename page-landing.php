@@ -13,7 +13,6 @@ $get_started_url = home_url( '/#get-started' );
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="preload" href="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>" as="image" type="image/webp">
     <link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -509,7 +508,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 
             <!-- Document header -->
             <div class="what-you-get__doc-header">
-              <img class="what-you-get__doc-logo-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo.webp' ); ?>" alt="SiteStaffr" width="625" height="188">
+              <img class="what-you-get__doc-logo-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo-240.webp' ); ?>" alt="SiteStaffr" width="240" height="72">
               <span class="what-you-get__doc-print-btn">Print / Download PDF</span>
             </div>
 
@@ -597,7 +596,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
       <div class="proof-section__portrait-wrap">
         <div class="proof-section__portrait-frame">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="640" height="842" loading="lazy">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.webp' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="400" height="526" loading="lazy">
         </div>
         <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
       </div>
@@ -633,7 +632,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
-    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.webp' ); ?>" alt="">
+    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin-sm.webp' ); ?>" alt="" loading="lazy">
     <img id="voiceBgNext" class="voice-section__bg-img" src="" alt="">
   </div>
   <div class="container">
