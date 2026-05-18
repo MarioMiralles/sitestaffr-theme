@@ -136,7 +136,7 @@ $get_started_url = home_url( '/#get-started' );
     $faq_items = array(
         array(
             'question' => 'What is SiteStaffr?',
-            'answer'   => 'SiteStaffr is an AI voice and text agent built for service businesses on WordPress. It appears as a chat widget on your website, greets visitors, answers their questions using your website content, captures their contact information, and sends you a detailed conversation recap by email — all automatically, 24/7.',
+            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $10 per month after a free 30-day trial with no credit card required.',
         ),
         array(
             'question' => 'How does SiteStaffr capture leads from my website?',
@@ -264,15 +264,6 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION: WHAT IS SITESTAFFR ========== -->
-<section class="definition-section" aria-label="What is SiteStaffr">
-  <div class="container container--narrow">
-    <div class="definition-section__block reveal">
-      <h2>What Is SiteStaffr?</h2>
-      <p>SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor's contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you're on a job site, in a consultation, or after hours. Plans start at $10 per month after a free 30-day trial with no credit card required.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ========== SECTION 2: COST OF MISSED VISITORS ========== -->
 <section class="cost-section">

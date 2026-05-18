@@ -196,9 +196,12 @@ add_action( 'template_redirect', function () {
 		echo "and start date. Monday morning it was sitting in our inbox, ready to go.\" ";
 		echo "— Nathaly Martinez, CEO & Founder, Synergy Scribes\n\n";
 		echo "## Frequently Asked Questions\n\n";
-		echo "**What is SiteStaffr?** SiteStaffr is an AI voice and text agent built for service businesses on WordPress. ";
-		echo "It appears as a chat widget on your website, greets visitors, answers their questions using your website content, ";
-		echo "captures their contact information, and sends you a detailed conversation recap by email — all automatically, 24/7.\n\n";
+		echo "**What is SiteStaffr?** SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. ";
+		echo "It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, ";
+		echo "answers their questions using your website content, and captures their name, phone number, and what they need — all through natural ";
+		echo "conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor's contact ";
+		echo "information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you're on a job site, in a ";
+		echo "consultation, or after hours. Plans start at \$10 per month after a free 30-day trial with no credit card required.\n\n";
 		echo "**How much does SiteStaffr cost?** SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — ";
 		echo "no credit card required. Paid plans are \$10/month (Starter, 60 minutes), \$50/month (Business, 300 minutes), ";
 		echo "and \$100/month (Pro, 700 minutes). Additional minutes cost \$10 for 50 minutes and never expire.\n\n";
