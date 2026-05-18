@@ -19,6 +19,9 @@
   font-weight: 300 700;
   font-style: normal;
   font-display: swap;
+  size-adjust: 105%;
+  ascent-override: 95%;
+  descent-override: 25%;
 }
 @font-face {
   font-family: 'Fraunces';
@@ -26,6 +29,9 @@
   font-weight: 300 700;
   font-style: italic;
   font-display: swap;
+  size-adjust: 105%;
+  ascent-override: 95%;
+  descent-override: 25%;
 }
 
 /* ========== RESET & VARIABLES ========== */
@@ -1285,6 +1291,21 @@ body.sitestaffr-landing-page .hero__visual > * {
   .price-addon-card {
     padding: 28px 24px;
   }
+}
+
+/* ========== DEFINITION SECTION ========== */
+.definition-section {
+  padding: clamp(40px, 6vw, 80px) 0;
+  background: var(--cream);
+}
+.definition-section__block h2 {
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  margin-bottom: 1rem;
+}
+.definition-section__block p {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
 }
 
 /* ========== SECTION 3: COST OF MISSED CALLS ========== */

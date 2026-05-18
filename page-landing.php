@@ -13,6 +13,7 @@ $get_started_url = home_url( '/#get-started' );
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="preload" href="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo.webp' ) ); ?>" as="image" type="image/webp">
     <link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/fraunces-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/assets/fonts/dm-sans-variable.woff2" as="font" type="font/woff2" crossorigin>
 
@@ -198,6 +199,7 @@ $get_started_url = home_url( '/#get-started' );
         'encodingFormat' => 'audio/mpeg',
         'duration'      => 'PT70S',
         'inLanguage'    => 'en',
+        'transcript'    => 'Visitor: Hi, I have a kitchen leak under the sink. It started about an hour ago and I put a bucket under it but it\'s still dripping pretty fast. Agent: I\'m sorry to hear about the leak. Let me help you get that taken care of. Can I get your name and a good phone number to reach you? Visitor: Sure, it\'s Mike Reynolds, 555-0147. Agent: Thanks Mike. And what\'s the address where the leak is? Visitor: 742 Oak Street. Agent: Got it. I\'ll make sure the team knows about the urgency. Someone will follow up with you shortly to schedule a visit. Is there anything else I can help with? Visitor: No, that\'s it. Thank you. Agent: You\'re welcome, Mike. Hang tight and we\'ll get this resolved for you.',
         'isPartOf'      => array( '@id' => $schema_org_url . '#software' ),
     ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
     </script>
@@ -259,6 +261,16 @@ get_template_part( 'template-parts/site-nav', null, array(
         );
         ?>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION: WHAT IS SITESTAFFR ========== -->
+<section class="definition-section" aria-label="What is SiteStaffr">
+  <div class="container container--narrow">
+    <div class="definition-section__block reveal">
+      <h2>What Is SiteStaffr?</h2>
+      <p>SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor's contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you're on a job site, in a consultation, or after hours. Plans start at $10 per month after a free 30-day trial with no credit card required.</p>
     </div>
   </div>
 </section>
@@ -585,7 +597,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
       <div class="proof-section__portrait-wrap">
         <div class="proof-section__portrait-frame">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="640" height="842" loading="eager" fetchpriority="high">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.jpg' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="640" height="842" loading="lazy">
         </div>
         <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
       </div>

@@ -115,6 +115,14 @@ add_action( 'init', function () {
 	remove_action( 'wp_print_styles', 'print_emoji_styles' );
 	remove_action( 'admin_print_scripts', 'print_emoji_detection_script' );
 	remove_action( 'admin_print_styles', 'print_emoji_styles' );
+	remove_action( 'wp_head', 'wp_generator' );
+} );
+
+add_filter( 'wpseo_robots', function ( $robots ) {
+	if ( is_author() ) {
+		return 'noindex, follow';
+	}
+	return $robots;
 } );
 
 add_filter( 'robots_txt', function ( $output, $public ) {
