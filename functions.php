@@ -76,6 +76,9 @@ add_action( 'wp_enqueue_scripts', function () {
 			null,
 			true
 		);
+		wp_localize_script( 'sitestaffr-website-script', 'sitestaffrTheme', array(
+			'url' => get_stylesheet_directory_uri(),
+		) );
 	}
 
 	if ( $is_manage ) {

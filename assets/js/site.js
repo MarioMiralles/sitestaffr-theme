@@ -754,8 +754,7 @@ if (voiceShowcase) {
   const showcaseAudio = document.getElementById('showcaseAudio');
   const showcaseThumbs = document.getElementById('showcaseThumbs');
 
-  const stylesheetEl = document.querySelector('link[rel="stylesheet"][href*="site.css"]');
-  const themeUrl = stylesheetEl ? stylesheetEl.href.replace(/\/assets\/css\/site\.css.*$/, '') : '';
+  const themeUrl = (typeof sitestaffrTheme !== 'undefined' && sitestaffrTheme.url) ? sitestaffrTheme.url.replace(/\/$/, '') : '';
 
   // Background portrait crossfade elements
   var bgCurrent = document.getElementById('voiceBgCurrent');
