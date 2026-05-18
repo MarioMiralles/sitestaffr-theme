@@ -137,7 +137,7 @@ $transcript_entries = array(
 			<audio preload="metadata" data-audio-demo-audio>
 				<source src="<?php echo esc_url( $audio_src ); ?>" type="audio/mpeg">
 			</audio>
-			<div class="audio-player__transcript-hint" data-audio-demo-transcript-panel>
+			<div class="audio-player__transcript-hint" data-audio-demo-transcript-panel role="region" aria-label="Live transcript">
 				<div class="audio-player__transcript-window" data-audio-demo-transcript-window aria-live="polite" aria-atomic="false"></div>
 				<div class="audio-player__transcript-source" data-audio-demo-transcript-source aria-hidden="true">
 					<?php foreach ( $transcript_entries as $entry ) : ?>

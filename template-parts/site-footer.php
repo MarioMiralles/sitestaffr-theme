@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <nav class="footer__nav" aria-label="Footer navigation">
           <div class="footer__col">
-            <h4 class="footer__heading">Product</h4>
+            <h3 class="footer__heading">Product</h4>
             <ul>
               <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
               <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             </ul>
           </div>
           <div class="footer__col">
-            <h4 class="footer__heading">Industries</h4>
+            <h3 class="footer__heading">Industries</h4>
             <ul>
               <li><a href="<?php echo esc_url( home_url( '/for/dental-practices/' ) ); ?>">Dental Practices</a></li>
               <li><a href="<?php echo esc_url( home_url( '/for/law-firms/' ) ); ?>">Law Firms</a></li>
@@ -39,7 +39,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             </ul>
           </div>
           <div class="footer__col">
-            <h4 class="footer__heading">Company</h4>
+            <h3 class="footer__heading">Company</h4>
             <ul>
               <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
               <li><a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
