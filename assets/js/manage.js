@@ -132,10 +132,43 @@
 
   /* ---- Unauthenticated: Send magic link ---- */
 
+  var pendingEmail = '';
+
+  function showPinEntry(email) {
+    pendingEmail = email;
+    var form = document.getElementById('magicLinkForm');
+    var pinEntry = document.getElementById('pinEntry');
+    var pinEmailEl = document.getElementById('pinEntryEmail');
+    var pinCodeInput = document.getElementById('pinCode');
+    var pinMsg = document.getElementById('pinMessage');
+
+    form.hidden = true;
+    pinEntry.hidden = false;
+    pinEmailEl.textContent = email;
+    pinCodeInput.value = '';
+    pinMsg.className = 'form-message';
+    pinMsg.textContent = '';
+    pinCodeInput.focus();
+  }
+
+  function resetToEmailForm() {
+    var form = document.getElementById('magicLinkForm');
+    var pinEntry = document.getElementById('pinEntry');
+    var submitBtn = document.getElementById('magicLinkSubmit');
+    var messageEl = document.getElementById('magicLinkMessage');
+
+    pinEntry.hidden = true;
+    form.hidden = false;
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Send me a link';
+    messageEl.className = 'form-message';
+    messageEl.textContent = '';
+    pendingEmail = '';
+  }
+
   function initMagicLinkForm() {
     var form = document.getElementById('magicLinkForm');
     var submitBtn = document.getElementById('magicLinkSubmit');
-    var successEl = document.getElementById('magicLinkSuccess');
     var messageEl = document.getElementById('magicLinkMessage');
 
     form.addEventListener('submit', function (e) {
@@ -157,8 +190,7 @@
 
       apiCall('/api/billing/send-magic-link', { email: emailInput.value.trim() })
         .then(function () {
-          form.hidden = true;
-          successEl.hidden = false;
+          showPinEntry(emailInput.value.trim());
         })
         .catch(function (err) {
           if (err.message === 'session_expired') return;
@@ -167,6 +199,108 @@
           submitBtn.disabled = false;
           submitBtn.textContent = 'Send me a link';
         });
+    });
+  }
+
+  function initPinEntry() {
+    var verifyBtn = document.getElementById('pinVerifyBtn');
+    var pinCodeInput = document.getElementById('pinCode');
+    var pinMsg = document.getElementById('pinMessage');
+    var resendBtn = document.getElementById('pinResend');
+    var diffEmailBtn = document.getElementById('pinDifferentEmail');
+
+    function doVerify() {
+      var raw = pinCodeInput.value.replace(/\s/g, '');
+      if (!/^\d{6}$/.test(raw)) {
+        pinMsg.className = 'form-message form-message--error';
+        pinMsg.textContent = 'Please enter a 6-digit code.';
+        return;
+      }
+
+      verifyBtn.disabled = true;
+      verifyBtn.textContent = 'Verifying\u2026';
+      pinMsg.className = 'form-message';
+      pinMsg.textContent = '';
+
+      apiCall('/api/billing/verify-pin', { email: pendingEmail, code: raw })
+        .then(function (data) {
+          setSession(data.session_token);
+          setInstallationId('');
+          setSites(data.sites || []);
+
+          var sites = getSites();
+          if (sites.length === 0) {
+            setView('error', '');
+            var errorText = document.getElementById('hubErrorText');
+            if (errorText) errorText.textContent = 'No sites found for this email.';
+            return;
+          }
+
+          if (sites.length === 1) {
+            setInstallationId(sites[0].installation_id);
+            fetchAccountState();
+            return;
+          }
+
+          renderSitePicker(sites);
+        })
+        .catch(function (err) {
+          verifyBtn.disabled = false;
+          verifyBtn.textContent = 'Verify';
+          if (err.message === 'session_expired') return;
+
+          if (err.message === 'rate_limit_exceeded') {
+            pinMsg.className = 'form-message form-message--error';
+            pinMsg.textContent = 'Too many attempts. Please request a new code.';
+            return;
+          }
+
+          pinMsg.className = 'form-message form-message--error';
+          pinMsg.textContent = 'Incorrect or expired code. Please try again.';
+        });
+    }
+
+    verifyBtn.addEventListener('click', doVerify);
+
+    pinCodeInput.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        doVerify();
+      }
+    });
+
+    resendBtn.addEventListener('click', function () {
+      if (!pendingEmail) return;
+      resendBtn.disabled = true;
+      resendBtn.textContent = 'Sending\u2026';
+      pinMsg.className = 'form-message';
+      pinMsg.textContent = '';
+
+      apiCall('/api/billing/send-magic-link', { email: pendingEmail })
+        .then(function () {
+          pinMsg.className = 'form-message form-message--info';
+          pinMsg.textContent = 'A new code has been sent.';
+          pinCodeInput.value = '';
+          pinCodeInput.focus();
+          resendBtn.disabled = false;
+          resendBtn.textContent = 'Didn\u2019t receive it? Resend code';
+        })
+        .catch(function (err) {
+          resendBtn.disabled = false;
+          resendBtn.textContent = 'Didn\u2019t receive it? Resend code';
+          if (err.message === 'session_expired') return;
+          if (err.message === 'rate_limit_exceeded') {
+            pinMsg.className = 'form-message form-message--error';
+            pinMsg.textContent = 'Too many requests. Please wait a while before trying again.';
+            return;
+          }
+          pinMsg.className = 'form-message form-message--error';
+          pinMsg.textContent = 'Could not resend. Please try again.';
+        });
+    });
+
+    diffEmailBtn.addEventListener('click', function () {
+      resetToEmailForm();
     });
   }
 
@@ -1084,6 +1218,7 @@
 
   function init() {
     initMagicLinkForm();
+    initPinEntry();
     initPlanCardDelegation();
     initEmailUpdateModal();
     initAuthEmailsDelegation();

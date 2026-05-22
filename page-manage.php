@@ -56,12 +56,23 @@ if ( ! defined( 'ABSPATH' ) ) {
             <button type="submit" class="btn btn--primary" id="magicLinkSubmit">Send me a link</button>
           </div>
         </form>
-        <div class="form-success" id="magicLinkSuccess" hidden>
+        <div class="pin-entry" id="pinEntry" hidden>
           <div class="form-success__icon">
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
           <h2 class="form-success__title">Check your email</h2>
-          <p class="form-success__text">If an account exists for that email, you&rsquo;ll receive a secure link to manage your plan and billing access. The link expires in 30 minutes.</p>
+          <p class="pin-entry__subtitle">We sent a 6-digit code to <strong id="pinEntryEmail"></strong></p>
+          <div class="form-message" id="pinMessage"></div>
+          <div class="pin-entry__field">
+            <input class="form-input pin-entry__input" type="text" id="pinCode" inputmode="numeric" autocomplete="one-time-code" maxlength="7" placeholder="000 000">
+          </div>
+          <div class="form-submit">
+            <button type="button" class="btn btn--primary" id="pinVerifyBtn">Verify</button>
+          </div>
+          <div class="pin-entry__links">
+            <button type="button" class="pin-entry__link" id="pinResend">Didn&rsquo;t receive it? Resend code</button>
+            <button type="button" class="pin-entry__link" id="pinDifferentEmail">Use a different email</button>
+          </div>
         </div>
       </div>
     </div>
