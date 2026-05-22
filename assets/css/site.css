@@ -4218,6 +4218,23 @@ body.sitestaffr-landing-page .hero__visual > * {
   to { transform: rotate(360deg); }
 }
 
+.hub__sign-out-row {
+  text-align: right;
+  margin-bottom: 8px;
+}
+.hub__sign-out-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 4px 0;
+}
+.hub__sign-out-btn:hover {
+  color: var(--text-secondary);
+  text-decoration: underline;
+}
+
 /* Status card */
 .hub__status-card {
   background: white;

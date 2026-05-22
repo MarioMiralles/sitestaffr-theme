@@ -1214,6 +1214,18 @@
     });
   }
 
+  /* ---- Sign out ---- */
+
+  function initSignOut() {
+    var btn = document.getElementById('hubSignOut');
+    if (!btn) return;
+
+    btn.addEventListener('click', function () {
+      clearSession();
+      setView('unauthenticated', 'Use your billing-access email to manage plans, minutes, and team access.');
+    });
+  }
+
   /* ---- Init ---- */
 
   function init() {
@@ -1224,6 +1236,7 @@
     initAuthEmailsDelegation();
     initBuyModal();
     initSiteSwitcherDismissal();
+    initSignOut();
     handleCheckoutRedirect();
 
     var params = new URLSearchParams(window.location.search);

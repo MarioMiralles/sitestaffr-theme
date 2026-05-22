@@ -79,6 +79,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 
     <!-- VIEW: Authenticated -->
     <div class="hub__view hub__view--authenticated">
+      <div class="hub__sign-out-row">
+        <button type="button" class="hub__sign-out-btn" id="hubSignOut">Sign out</button>
+      </div>
       <!-- Site switcher (multi-site only, populated by JS) -->
       <div class="hub__site-switcher" id="hubSiteSwitcher" hidden>
         <button type="button" class="hub__site-switcher-btn" id="hubSiteSwitcherBtn">
