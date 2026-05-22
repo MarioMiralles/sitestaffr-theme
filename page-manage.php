@@ -44,8 +44,8 @@ if ( ! defined( 'ABSPATH' ) ) {
     <!-- VIEW: Unauthenticated -->
     <div class="hub__view hub__view--unauthenticated">
       <div class="form-card">
-        <p style="color: var(--text-secondary); margin-bottom: 24px; text-align: center;">Enter the email you use for billing access. We&rsquo;ll send a secure link so you can manage your plan, add-on minutes, and team billing access.</p>
         <form id="magicLinkForm" novalidate>
+          <p style="color: var(--text-secondary); margin-bottom: 24px; text-align: center;">Enter the email you use for billing access. We&rsquo;ll send a code so you can manage your plan, add-on minutes, and team billing access.</p>
           <div class="form-message" id="magicLinkMessage"></div>
           <div class="form-group">
             <label class="form-label" for="magicLinkEmail">Email address</label>
