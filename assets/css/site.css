@@ -4022,6 +4022,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin: 0 auto 4px;
 }
 .pin-entry__input {
+  width: 100%;
+  box-sizing: border-box;
   text-align: center;
   font-size: 1.6rem;
   letter-spacing: 0.15em;
