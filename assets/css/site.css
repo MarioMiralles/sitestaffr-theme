@@ -4014,8 +4014,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-bottom: 20px;
 }
 .pin-entry__field {
-  max-width: 220px;
+  max-width: 240px;
   margin: 0 auto 16px;
+}
+.pin-entry .form-submit {
+  max-width: 240px;
+  margin: 0 auto 4px;
 }
 .pin-entry__input {
   text-align: center;
