@@ -14,7 +14,7 @@
   'use strict';
 
   var config = window.sitestaffrHub || {};
-  var API_URL = config.apiUrl || '';
+  var API_URL = config.apiUrl || 'https://phoneease-middleware-375589245036.us-central1.run.app';
 
   var hub = document.getElementById('hub');
   var subtitleEl = document.getElementById('hubSubtitle');
@@ -666,7 +666,7 @@
 
     var sessionEmail = (sessionStorage.getItem('sitestaffr_email') || '').trim().toLowerCase();
     var emails = Array.isArray(authorizedEmails) ? authorizedEmails : [];
-    var maxEmails = 5;
+    var maxEmails = 10;
 
     // Empty state: show simple billing email display with + Add
     if (emails.length === 0 && accountEmail) {
@@ -860,7 +860,7 @@
     if (err.message === 'session_expired') return;
     var msg = fallbackMessage || 'Something went wrong. Please try again.';
     if (err.message === 'already_authorized') msg = 'This email already has access.';
-    else if (err.message === 'max_emails_reached') msg = 'Maximum of 5 emails reached.';
+    else if (err.message === 'max_emails_reached') msg = 'Maximum of 10 emails reached.';
     else if (err.message === 'invalid_email') msg = 'Please enter a valid email address.';
     else if (err.message === 'cannot_remove_self') msg = 'You cannot remove your own access.';
     else if (err.message === 'cannot_remove_primary') msg = 'Cannot remove the primary email.';
