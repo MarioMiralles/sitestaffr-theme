@@ -50,7 +50,7 @@ $first_voice = $showcase_voices[0];
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
       </button>
       <div class="voice-showcase__portrait">
-        <img src="<?php echo esc_url( $showcase_theme_url . '/assets/images/agents/portraits/' . $first_voice['file'] . '-sm.webp' ); ?>" alt="<?php echo esc_attr( $first_voice['name'] ); ?>" id="showcasePortrait">
+        <img src="<?php echo esc_url( $showcase_theme_url . '/assets/images/agents/portraits/' . $first_voice['file'] . '.webp' ); ?>" alt="<?php echo esc_attr( $first_voice['name'] ); ?>" id="showcasePortrait">
       </div>
       <button class="voice-showcase__arrow voice-showcase__arrow--next" type="button" aria-label="Next voice">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>

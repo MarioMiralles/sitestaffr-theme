@@ -623,7 +623,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
-    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin-sm.webp' ); ?>" alt="" loading="lazy">
+    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.webp' ); ?>" alt="" loading="lazy">
     <img id="voiceBgNext" class="voice-section__bg-img" src="" alt="">
   </div>
   <div class="container">

@@ -780,7 +780,7 @@ if (voiceShowcase) {
     activeVoiceIndex = index;
     const voice = voices[index];
 
-    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '-sm.webp' + imgVersion;
+    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
     showcasePortrait.alt = voice.name;
     showcaseName.textContent = voice.name;
     showcasePlan.textContent = voice.plan;
@@ -801,7 +801,7 @@ if (voiceShowcase) {
 
     // Crossfade background portrait
     if (bgCurrent && bgNext) {
-      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '-sm.webp' + imgVersion;
+      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
       bgNext.src = newSrc;
       bgNext.classList.add('voice-section__bg-img--active');
       bgCurrent.classList.remove('voice-section__bg-img--active');
