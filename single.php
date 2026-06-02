@@ -9,9 +9,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<?php
-	$post_id    = get_the_ID();
-	$post_obj   = get_post( $post_id );
-	$thumb_url  = get_the_post_thumbnail_url( $post_id, 'full' );
+	$post_id     = get_the_ID();
+	$post_obj    = get_post( $post_id );
+	$author_id   = $post_obj ? (int) $post_obj->post_author : 0;
+	$author_name = $author_id ? get_the_author_meta( 'display_name', $author_id ) : '';
+	$author_url  = $author_id ? get_author_posts_url( $author_id ) : '';
+	$thumb_url   = get_the_post_thumbnail_url( $post_id, 'full' );
 	$article_schema = array(
 		'@context'      => 'https://schema.org',
 		'@type'         => 'BlogPosting',
@@ -23,8 +26,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		'dateModified'  => get_the_modified_date( 'c', $post_id ),
 		'author'        => array(
 			'@type' => 'Person',
-			'name'  => 'Mario Miralles',
-			'url'   => home_url( '/about/' ),
+			'name'  => $author_name,
+			'url'   => $author_url,
 		),
 		'publisher'     => array(
 			'@id' => home_url( '/' ) . '#organization',
@@ -71,7 +74,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<p class="blog-post__excerpt"><?php echo esc_html( get_the_excerpt() ); ?></p>
 					<?php endif; ?>
 					<div class="blog-post__meta">
-						<span class="blog-post__author">By <a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">Mario Miralles</a></span>
+						<?php
+						$display_author_name = get_the_author_meta( 'display_name' );
+						$display_author_url  = get_author_posts_url( get_the_author_meta( 'ID' ) );
+						?>
+						<span class="blog-post__author">By <a href="<?php echo esc_url( $display_author_url ); ?>"><?php echo esc_html( $display_author_name ); ?></a></span>
 						<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></time>
 						<?php if ( get_the_modified_date() !== get_the_date() ) : ?>
 							<span class="blog-post__updated">Updated <?php echo esc_html( get_the_modified_date( 'F j, Y' ) ); ?></span>
