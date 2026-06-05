@@ -8788,6 +8788,7 @@ body.sitestaffr-landing-page .hero__actions {
   flex-wrap: wrap;
   gap: 16px;
   align-items: center;
+  justify-content: center;
 }
 .dl-hero__download {
   position: relative;
