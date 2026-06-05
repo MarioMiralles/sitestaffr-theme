@@ -245,58 +245,34 @@ get_template_part( 'template-parts/site-nav', null, array(
           </a>
         </div>
       </div>
-      <div class="hero__visual hero__robot-stage">
-        <div class="hero__robot-glow" aria-hidden="true"></div>
-        <img class="hero__robot-img"
-             src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/hero-robot.webp' ); ?>"
-             alt="SiteStaffr &mdash; AI assistant for WordPress websites"
-             width="760" height="950" fetchpriority="high" decoding="async">
-        <div class="hero__float-cards" aria-hidden="true">
-          <span class="hero__float-card hero__float-card--voice"><span class="hero__float-emoji">🎙️</span> Answering by voice</span>
-          <span class="hero__float-card hero__float-card--lead"><span class="hero__float-emoji">✅</span> Lead captured</span>
-          <span class="hero__float-card hero__float-card--recap"><span class="hero__float-emoji">✉️</span> Recap sent</span>
-          <span class="hero__float-card hero__float-card--blog"><span class="hero__float-emoji">✍️</span> Blog post published</span>
-        </div>
-      </div>
+    </div>
+  </div>
+  <div class="hero__robot-stage">
+    <div class="hero__robot-glow" aria-hidden="true"></div>
+    <img class="hero__robot-img"
+         src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/hero-robot.webp' ); ?>"
+         alt="SiteStaffr &mdash; AI assistant for WordPress websites"
+         width="760" height="950" fetchpriority="high" decoding="async">
+    <div class="hero__float-cards" aria-hidden="true">
+      <span class="hero__float-card hero__float-card--voice"><span class="hero__float-emoji">🎙️</span> Answering by voice</span>
+      <span class="hero__float-card hero__float-card--lead"><span class="hero__float-emoji">✅</span> Lead captured</span>
+      <span class="hero__float-card hero__float-card--recap"><span class="hero__float-emoji">✉️</span> Recap sent</span>
+      <span class="hero__float-card hero__float-card--blog"><span class="hero__float-emoji">✍️</span> Blog post published</span>
     </div>
   </div>
 </section>
 
 
-<!-- ========== WHAT IT DOES: CAPABILITIES ROW ========== -->
-<section class="capabilities">
+<!-- ========== FEATURE RIBBON ========== -->
+<section class="ribbon">
   <div class="container">
-    <div class="capabilities__header reveal">
-      <span class="section-label">One Hire, Many Jobs</span>
-      <h2>Everything Your AI Hire Does for You</h2>
-    </div>
-    <div class="capabilities__grid reveal">
-      <div class="capability-card">
-        <span class="capability-card__icon" aria-hidden="true">🎙️</span>
-        <h3 class="capability-card__title">Talks to Visitors</h3>
-        <p class="capability-card__desc">Answers out loud in a natural voice, so visitors can just ask.</p>
-      </div>
-      <div class="capability-card">
-        <span class="capability-card__icon" aria-hidden="true">💬</span>
-        <h3 class="capability-card__title">Chats by Text</h3>
-        <p class="capability-card__desc">The same answers by chat, for visitors who&rsquo;d rather type.</p>
-      </div>
-      <div class="capability-card">
-        <span class="capability-card__icon" aria-hidden="true">📥</span>
-        <h3 class="capability-card__title">Captures Leads</h3>
-        <p class="capability-card__desc">Collects each visitor&rsquo;s name, number, and what they need.</p>
-      </div>
-      <div class="capability-card">
-        <span class="capability-card__icon" aria-hidden="true">✉️</span>
-        <h3 class="capability-card__title">Sends Recaps</h3>
-        <p class="capability-card__desc">Emails you a summary and transcript after every conversation.</p>
-      </div>
-      <div class="capability-card capability-card--blog">
-        <span class="capability-card__icon" aria-hidden="true">✍️</span>
-        <h3 class="capability-card__title">Writes Your Blog</h3>
-        <p class="capability-card__desc">Researches and publishes SEO posts that pull in new traffic.</p>
-      </div>
-    </div>
+    <ul class="ribbon__list">
+      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">🎙️</span> Voice answers</li>
+      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">💬</span> Text chat</li>
+      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">📥</span> Lead capture</li>
+      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">✉️</span> Email recaps</li>
+      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">✍️</span> Blog writing</li>
+    </ul>
   </div>
 </section>
 
@@ -346,34 +322,33 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <!-- ========== HEAR IT WORK: AUDIO DEMO (relocated from hero) ========== -->
-<section class="demo-section" id="live-demo">
+<section class="lead-demo" id="live-demo">
+  <div class="lead-demo__bg" aria-hidden="true"></div>
   <div class="container">
-    <div class="demo-section__header reveal">
+    <div class="lead-demo__header reveal">
       <span class="section-label">Hear It Handle a Real Lead</span>
-      <h2>Listen to SiteStaffr Turn a Visitor Into a Lead</h2>
-      <p class="demo-section__subtitle">A plumber&rsquo;s website visitor reports a kitchen leak after hours. Here&rsquo;s how SiteStaffr answers, captures the details, and emails a recap &mdash; with no one on staff.</p>
+      <h2>Listen to a Visitor Become a Lead</h2>
+      <p class="lead-demo__subtitle">A plumber&rsquo;s website visitor reports an after-hours kitchen leak. Press play and hear SiteStaffr answer, capture the details, and tee up a recap &mdash; with no one on staff.</p>
     </div>
-    <div class="demo-section__layout reveal">
-      <div class="demo-section__player">
-        <?php
-        get_template_part(
-            'template-parts/hero-audio-demo',
-            null,
-            array(
-                'layout'        => 'stacked',
-                'recap_variant' => 'card',
-                'audio_label'   => 'Plumbing business &mdash; a visitor reports an after-hours kitchen leak',
-                'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
-            )
-        );
-        ?>
-      </div>
-      <ul class="demo-section__points">
-        <li><span class="demo-section__point-icon" aria-hidden="true">🗣️</span> <span>Answers visitor questions naturally, by voice or text</span></li>
-        <li><span class="demo-section__point-icon" aria-hidden="true">📇</span> <span>Captures their name, number, and exactly what they need</span></li>
-        <li><span class="demo-section__point-icon" aria-hidden="true">✉️</span> <span>Emails you a recap so you can follow up fast</span></li>
-      </ul>
+    <div class="lead-demo__card reveal">
+      <?php
+      get_template_part(
+          'template-parts/hero-audio-demo',
+          null,
+          array(
+              'layout'        => 'stacked',
+              'recap_variant' => 'card',
+              'audio_label'   => 'Plumbing business &mdash; a visitor reports an after-hours kitchen leak',
+              'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
+          )
+      );
+      ?>
     </div>
+    <ul class="lead-demo__points reveal">
+      <li class="lead-demo__point"><span class="lead-demo__point-icon" aria-hidden="true">🗣️</span><span class="lead-demo__point-text">Answers questions naturally, by voice or text</span></li>
+      <li class="lead-demo__point"><span class="lead-demo__point-icon" aria-hidden="true">📇</span><span class="lead-demo__point-text">Captures the name, number &amp; what they need</span></li>
+      <li class="lead-demo__point"><span class="lead-demo__point-icon" aria-hidden="true">✉️</span><span class="lead-demo__point-text">Emails you a recap to follow up fast</span></li>
+    </ul>
   </div>
 </section>
 
