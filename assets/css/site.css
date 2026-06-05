@@ -8784,6 +8784,18 @@ body.sitestaffr-landing-page .hero__actions {
 }
 .dl-hero__actions {
   margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+.dl-hero__wporg {
+  color: white;
+  border-color: rgba(255,255,255,0.5);
+}
+.dl-hero__wporg:hover {
+  background: rgba(255,255,255,0.12);
+  border-color: white;
 }
 .dl-hero__download {
   position: relative;
