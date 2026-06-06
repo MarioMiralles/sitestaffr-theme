@@ -267,11 +267,26 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="ribbon">
   <div class="container">
     <ul class="ribbon__list">
-      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">🎙️</span> Voice answers</li>
-      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">💬</span> Text chat</li>
-      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">📥</span> Lead capture</li>
-      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">✉️</span> Email recaps</li>
-      <li class="ribbon__item"><span class="ribbon__icon" aria-hidden="true">✍️</span> Blog writing</li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Voice Answers</span>
+        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Text Chat</span>
+        <span class="ribbon__desc">Responds instantly on every page</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Lead Capture</span>
+        <span class="ribbon__desc">Collects name, number &amp; intent</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Email Recaps</span>
+        <span class="ribbon__desc">Sends you the details to follow up</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Blog Writing</span>
+        <span class="ribbon__desc">Publishes SEO posts on autopilot</span>
+      </li>
     </ul>
   </div>
 </section>
@@ -344,11 +359,29 @@ get_template_part( 'template-parts/site-nav', null, array(
       );
       ?>
     </div>
-    <ul class="lead-demo__points reveal">
-      <li class="lead-demo__point"><span class="lead-demo__point-icon" aria-hidden="true">🗣️</span><span class="lead-demo__point-text">Answers questions naturally, by voice or text</span></li>
-      <li class="lead-demo__point"><span class="lead-demo__point-icon" aria-hidden="true">📇</span><span class="lead-demo__point-text">Captures the name, number &amp; what they need</span></li>
-      <li class="lead-demo__point"><span class="lead-demo__point-icon" aria-hidden="true">✉️</span><span class="lead-demo__point-text">Emails you a recap to follow up fast</span></li>
-    </ul>
+    <div class="lead-demo__steps reveal">
+      <div class="lead-demo__step">
+        <span class="lead-demo__step-num" aria-hidden="true">1</span>
+        <div class="lead-demo__step-body">
+          <span class="lead-demo__step-title">Answers Naturally</span>
+          <span class="lead-demo__step-text">Responds to questions by voice or text, just like a real team member</span>
+        </div>
+      </div>
+      <div class="lead-demo__step">
+        <span class="lead-demo__step-num" aria-hidden="true">2</span>
+        <div class="lead-demo__step-body">
+          <span class="lead-demo__step-title">Captures the Lead</span>
+          <span class="lead-demo__step-text">Collects the visitor's name, number, and what they need</span>
+        </div>
+      </div>
+      <div class="lead-demo__step">
+        <span class="lead-demo__step-num" aria-hidden="true">3</span>
+        <div class="lead-demo__step-body">
+          <span class="lead-demo__step-title">Sends You a Recap</span>
+          <span class="lead-demo__step-text">Emails you the full details so you can follow up fast</span>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
