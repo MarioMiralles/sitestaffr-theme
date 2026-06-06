@@ -6056,7 +6056,7 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
   top: 0;
   bottom: 0;
   right: max(calc((100% - 1300px) / 2), clamp(-20px, 2vw, 40px));
-  width: min(54%, 700px);
+  width: min(50%, 650px);
   z-index: 1;
   pointer-events: none;
 }
@@ -6106,7 +6106,7 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
   animation: heroCardFloat 5.5s ease-in-out infinite;
 }
 .hero__float-emoji { font-size: 1.05rem; line-height: 1; }
-.hero__float-card--voice { top: 8%;  left: 0;   animation-delay: 0s; }
+.hero__float-card--voice { top: 18%; left: 0;   animation-delay: 0s; }
 .hero__float-card--chat  { top: 24%; right: 0;  animation-delay: 0.6s; }
 .hero__float-card--lead  { top: 40%; left: -2%; animation-delay: 1.2s; }
 .hero__float-card--recap { top: 56%; right: 2%; animation-delay: 1.8s; }
@@ -6124,6 +6124,8 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
 }
 @media (max-width: 768px) {
   .hero { min-height: 0; }
+  body.sitestaffr-landing-page .hero { padding-bottom: 0; }
+  body.sitestaffr-landing-page .hero::after { display: none; }
   body.sitestaffr-landing-page .hero__content { max-width: none; }
   .hero__robot-stage {
     position: relative;
@@ -6131,8 +6133,8 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
     bottom: auto;
     right: auto;
     width: 100%;
-    height: 340px;
-    margin: 16px auto 0;
+    height: 400px;
+    margin: 0 auto;
   }
   .hero__robot-img { top: auto; bottom: 0; height: 100%; }
   .hero__robot-glow { width: 260px; top: 45%; }
@@ -6973,14 +6975,14 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
     gap: 40px;
   }
   body.sitestaffr-landing-page .hero {
-    text-align: center;
+    text-align: left;
   }
   body.sitestaffr-landing-page .hero__subtitle {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
   }
   body.sitestaffr-landing-page .hero__actions {
-    justify-content: center;
+    justify-content: flex-start;
   }
   .hero__visual {
     max-width: 520px;
