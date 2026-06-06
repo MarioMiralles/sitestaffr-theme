@@ -227,8 +227,8 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="hero__content">
         <span class="hero__tagline">Built for WordPress</span>
         <h1 class="hero__headline">
-          <span class="hero__headline-prefix">Staff Your WordPress Site</span>
-          <span class="hero__headline-focus">With One AI Hire</span>
+          <span class="hero__headline-prefix">Your Website Visitors Have Questions.</span>
+          <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
         </h1>
         <p class="hero__subtitle">
           SiteStaffr answers your visitors by voice and text, captures every lead, sends you a recap, and even writes your blog &mdash; working 24/7 in 57+ languages.
@@ -255,6 +255,7 @@ get_template_part( 'template-parts/site-nav', null, array(
          width="760" height="950" fetchpriority="high" decoding="async">
     <div class="hero__float-cards" aria-hidden="true">
       <span class="hero__float-card hero__float-card--voice"><span class="hero__float-emoji">🎙️</span> Answering by voice</span>
+      <span class="hero__float-card hero__float-card--chat"><span class="hero__float-emoji">💬</span> Responding by text</span>
       <span class="hero__float-card hero__float-card--lead"><span class="hero__float-emoji">✅</span> Lead captured</span>
       <span class="hero__float-card hero__float-card--recap"><span class="hero__float-emoji">✉️</span> Recap sent</span>
       <span class="hero__float-card hero__float-card--blog"><span class="hero__float-emoji">✍️</span> Blog post published</span>
@@ -360,27 +361,62 @@ get_template_part( 'template-parts/site-nav', null, array(
       ?>
     </div>
     <div class="lead-demo__steps reveal">
-      <div class="lead-demo__step">
-        <span class="lead-demo__step-num" aria-hidden="true">1</span>
-        <div class="lead-demo__step-body">
-          <span class="lead-demo__step-title">Answers Naturally</span>
-          <span class="lead-demo__step-text">Responds to questions by voice or text, just like a real team member</span>
+
+      <div class="lead-demo__step-card">
+        <div class="lead-demo__card-glow" aria-hidden="true"></div>
+        <div class="lead-demo__icon-wrap">
+          <svg class="lead-demo__step-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          <span class="lead-demo__step-number">1</span>
         </div>
+        <h3>Answers Naturally</h3>
+        <p>Responds to questions by voice or text, just like a real team member</p>
+        <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
-      <div class="lead-demo__step">
-        <span class="lead-demo__step-num" aria-hidden="true">2</span>
-        <div class="lead-demo__step-body">
-          <span class="lead-demo__step-title">Captures the Lead</span>
-          <span class="lead-demo__step-text">Collects the visitor's name, number, and what they need</span>
+
+      <div class="lead-demo__connector" aria-hidden="true">
+        <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+          <path d="M0 12h28m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="lead-demo__step-card">
+        <div class="lead-demo__card-glow" aria-hidden="true"></div>
+        <div class="lead-demo__icon-wrap">
+          <svg class="lead-demo__step-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="8.5" cy="7" r="4"/>
+            <line x1="20" y1="8" x2="20" y2="14"/>
+            <line x1="23" y1="11" x2="17" y2="11"/>
+          </svg>
+          <span class="lead-demo__step-number">2</span>
         </div>
+        <h3>Captures the Lead</h3>
+        <p>Collects the visitor's name, number, and what they need</p>
+        <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
-      <div class="lead-demo__step">
-        <span class="lead-demo__step-num" aria-hidden="true">3</span>
-        <div class="lead-demo__step-body">
-          <span class="lead-demo__step-title">Sends You a Recap</span>
-          <span class="lead-demo__step-text">Emails you the full details so you can follow up fast</span>
+
+      <div class="lead-demo__connector" aria-hidden="true">
+        <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
+          <path d="M0 12h28m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+
+      <div class="lead-demo__step-card">
+        <div class="lead-demo__card-glow" aria-hidden="true"></div>
+        <div class="lead-demo__icon-wrap">
+          <svg class="lead-demo__step-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          <span class="lead-demo__step-number">3</span>
         </div>
+        <h3>Sends You a Recap</h3>
+        <p>Emails you the full details so you can follow up fast</p>
+        <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
+
     </div>
   </div>
 </section>
