@@ -342,9 +342,9 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="lead-demo__bg" aria-hidden="true"></div>
   <div class="container">
     <div class="lead-demo__header reveal">
-      <span class="section-label">Hear It Handle a Real Lead</span>
-      <h2>Listen to a Visitor Become a Lead</h2>
-      <p class="lead-demo__subtitle">A plumber&rsquo;s website visitor reports an after-hours kitchen leak. Press play and hear SiteStaffr answer, capture the details, and tee up a recap &mdash; with no one on staff.</p>
+      <span class="section-label">Your AI Hire in Action</span>
+      <h2>A Missed Call Turned Into a Booked Job</h2>
+      <p class="lead-demo__subtitle">It&rsquo;s 9 PM. A homeowner has a leaking kitchen pipe. Your AI hire picks up, gets the details, and delivers a full recap to your inbox &mdash; before you even check your phone.</p>
     </div>
     <div class="lead-demo__card reveal">
       <?php
@@ -354,7 +354,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array(
               'layout'        => 'stacked',
               'recap_variant' => 'card',
-              'audio_label'   => 'Plumbing business &mdash; a visitor reports an after-hours kitchen leak',
+              'audio_label'   => 'After-hours call &mdash; homeowner reports a kitchen leak',
               'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
           )
       );
@@ -370,8 +370,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           </svg>
           <span class="lead-demo__step-number">1</span>
         </div>
-        <h3>Answers Naturally</h3>
-        <p>Responds to questions by voice or text, just like a real team member</p>
+        <h3>Picks Up Instantly</h3>
+        <p>Greets the caller by voice and gathers what they need &mdash; 24/7, no hold music</p>
         <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
 
@@ -392,8 +392,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           </svg>
           <span class="lead-demo__step-number">2</span>
         </div>
-        <h3>Captures the Lead</h3>
-        <p>Collects the visitor's name, number, and what they need</p>
+        <h3>Captures Every Detail</h3>
+        <p>Name, number, urgency, and exactly what they need &mdash; nothing slips through</p>
         <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
 
@@ -412,8 +412,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           </svg>
           <span class="lead-demo__step-number">3</span>
         </div>
-        <h3>Sends You a Recap</h3>
-        <p>Emails you the full details so you can follow up fast</p>
+        <h3>Delivers Your Recap</h3>
+        <p>A complete lead summary hits your inbox so you can follow up first thing</p>
         <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
 

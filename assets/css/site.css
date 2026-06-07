@@ -578,6 +578,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .lead-demo__header h2 {
   color: var(--teal-deep);
   margin-bottom: 14px;
+  white-space: nowrap;
 }
 .lead-demo__subtitle {
   color: var(--text-secondary);
