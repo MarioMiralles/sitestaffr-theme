@@ -560,19 +560,32 @@ body.sitestaffr-landing-page .hero__visual > * {
 .lead-demo {
   position: relative;
   padding: var(--section-padding);
-  background: var(--warm-white);
+  background: linear-gradient(168deg, #f0f7f8 0%, #e6f0f2 40%, #dce9ec 100%);
   overflow: hidden;
 }
-.lead-demo__bg {
+.lead-demo::before {
+  content: '';
   position: absolute;
   inset: 0;
+  background:
+    radial-gradient(ellipse at 25% 30%, rgba(0, 131, 143, 0.07) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 70%, rgba(31, 182, 204, 0.06) 0%, transparent 50%);
   pointer-events: none;
-  background: radial-gradient(58% 55% at 50% 0%, rgba(31,182,204,0.10), transparent 70%);
+}
+.lead-demo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.5;
+}
+.lead-demo__bg {
+  display: none;
 }
 .lead-demo .container { position: relative; z-index: 1; }
 .lead-demo__header {
   text-align: center;
-  max-width: 680px;
   margin: 0 auto 44px;
 }
 .lead-demo__header h2 {
@@ -581,6 +594,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   white-space: nowrap;
 }
 .lead-demo__subtitle {
+  max-width: 680px;
+  margin-inline: auto;
   color: var(--text-secondary);
   font-size: 1.08rem;
   line-height: 1.65;
