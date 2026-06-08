@@ -6065,16 +6065,12 @@ body.sitestaffr-landing-page .hero__actions {
 
 /* ========== HOMEPAGE: HERO AI-HIRE ROBOT STAGE ========== */
 .hero { min-height: clamp(580px, 80vh, 800px); }
-body.sitestaffr-landing-page .hero__content { max-width: 46%; }
-/* Robot is anchored to fill the right of the banner; body crops at the hero's bottom edge */
+body.sitestaffr-landing-page .hero__content { max-width: none; }
+/* Robot sits in the right grid column */
 .hero__robot-stage {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: max(calc((100% - 1300px) / 2), clamp(-20px, 2vw, 40px));
-  width: min(48%, 650px);
-  z-index: 1;
+  position: relative;
   pointer-events: none;
+  min-height: clamp(400px, 50vh, 600px);
 }
 .hero__robot-glow {
   position: absolute;
@@ -6090,9 +6086,9 @@ body.sitestaffr-landing-page .hero__content { max-width: 46%; }
 .hero__robot-img {
   position: absolute;
   left: 50%;
-  top: 3%;
+  bottom: 0;
   transform: translateX(-50%);
-  height: 115%;
+  height: 110%;
   width: auto;
   max-width: none;
   filter: drop-shadow(0 28px 50px rgba(0,77,64,0.30));
@@ -6141,17 +6137,10 @@ body.sitestaffr-landing-page .hero__content { max-width: 46%; }
   .hero { min-height: 0; }
   body.sitestaffr-landing-page .hero { padding-bottom: 0; }
   body.sitestaffr-landing-page .hero::after { display: none; }
-  body.sitestaffr-landing-page .hero__content { max-width: none; }
   .hero__robot-stage {
-    position: relative;
-    top: auto;
-    bottom: auto;
-    right: auto;
-    width: 100%;
-    height: 400px;
-    margin: 0 auto;
+    min-height: 380px;
   }
-  .hero__robot-img { top: auto; bottom: 0; height: 100%; }
+  .hero__robot-img { height: 100%; }
   .hero__robot-glow { width: 260px; top: 45%; }
 }
 @media (max-width: 520px) {
