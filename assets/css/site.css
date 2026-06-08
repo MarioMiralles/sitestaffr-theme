@@ -6065,14 +6065,14 @@ body.sitestaffr-landing-page .hero__actions {
 
 /* ========== HOMEPAGE: HERO AI-HIRE ROBOT STAGE ========== */
 .hero { min-height: clamp(580px, 80vh, 800px); }
-body.sitestaffr-landing-page .hero__content { max-width: 560px; }
+body.sitestaffr-landing-page .hero__content { max-width: 46%; }
 /* Robot is anchored to fill the right of the banner; body crops at the hero's bottom edge */
 .hero__robot-stage {
   position: absolute;
   top: 0;
   bottom: 0;
   right: max(calc((100% - 1300px) / 2), clamp(-20px, 2vw, 40px));
-  width: min(50%, 650px);
+  width: min(48%, 650px);
   z-index: 1;
   pointer-events: none;
 }
@@ -6135,7 +6135,6 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
   .hero__float-card { animation: none; }
 }
 @media (max-width: 980px) {
-  .hero__robot-stage { width: 46%; right: -60px; }
   .hero__float-card { display: none; }
 }
 @media (max-width: 900px) {
