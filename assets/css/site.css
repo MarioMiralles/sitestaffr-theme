@@ -6070,8 +6070,7 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 .hero__robot-stage {
   position: relative;
   pointer-events: none;
-  overflow-x: clip;
-  overflow-y: visible;
+  overflow: visible;
   align-self: stretch;
 }
 .hero__robot-glow {
@@ -6087,9 +6086,8 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 }
 .hero__robot-img {
   position: absolute;
-  left: 50%;
+  right: 0;
   top: 0;
-  transform: translateX(-50%);
   height: 130%;
   width: auto;
   max-width: none;
