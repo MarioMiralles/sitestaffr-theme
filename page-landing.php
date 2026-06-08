@@ -248,9 +248,9 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="hero__robot-stage">
         <div class="hero__robot-glow" aria-hidden="true"></div>
         <img class="hero__robot-img"
-             src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/hero-robot.webp' ) ); ?>"
+             src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/hero-robot-v2.webp' ) ); ?>"
              alt="SiteStaffr &mdash; AI assistant for WordPress websites"
-             width="760" height="950" fetchpriority="high" decoding="async">
+             width="1080" height="1350" fetchpriority="high" decoding="async">
         <div class="hero__float-cards" aria-hidden="true">
           <span class="hero__float-card hero__float-card--voice"><span class="hero__float-emoji">🎙️</span> Answering by voice</span>
           <span class="hero__float-card hero__float-card--chat"><span class="hero__float-emoji">💬</span> Responding by text</span>
