@@ -6135,6 +6135,10 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
   .hero__float-card { animation: none; }
 }
 @media (max-width: 980px) {
+  .hero__robot-stage { width: 46%; right: -60px; }
+  .hero__float-card { display: none; }
+}
+@media (max-width: 900px) {
   .hero { min-height: 0; }
   body.sitestaffr-landing-page .hero { padding-bottom: 0; }
   body.sitestaffr-landing-page .hero::after { display: none; }
@@ -6150,7 +6154,6 @@ body.sitestaffr-landing-page .hero__content { max-width: 560px; }
   }
   .hero__robot-img { top: auto; bottom: 0; height: 100%; }
   .hero__robot-glow { width: 260px; top: 45%; }
-  .hero__float-card { display: none; }
 }
 @media (max-width: 520px) {
   body.sitestaffr-landing-page .hero__actions {
