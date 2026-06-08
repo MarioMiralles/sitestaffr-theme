@@ -736,6 +736,15 @@ document.querySelectorAll('.voice-text-section__card').forEach(function(card) {
       var clone = el.cloneNode(true);
       el.parentNode.replaceChild(clone, el);
     });
+    // Toggle flanking robot images
+    var section = this.closest('.voice-text-section');
+    if (section) {
+      section.querySelectorAll('.voice-text-section__robot').forEach(function(r) {
+        r.classList.remove('voice-text-section__robot--active');
+      });
+      var activeRobot = section.querySelector('.voice-text-section__robot--' + mode);
+      if (activeRobot) activeRobot.classList.add('voice-text-section__robot--active');
+    }
   });
 });
 

@@ -423,6 +423,12 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 <!-- ========== SECTION 3: VOICE & CHAT ========== -->
 <section class="voice-text-section">
+  <img class="voice-text-section__robot voice-text-section__robot--voice voice-text-section__robot--active"
+       src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-voice.webp' ) ); ?>"
+       alt="" width="1080" height="1350" aria-hidden="true" loading="lazy" decoding="async">
+  <img class="voice-text-section__robot voice-text-section__robot--text"
+       src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-text.webp' ) ); ?>"
+       alt="" width="1080" height="1350" aria-hidden="true" loading="lazy" decoding="async">
   <div class="container">
     <div class="voice-text-section__header reveal">
       <span class="section-label">Two Ways to Connect</span>
