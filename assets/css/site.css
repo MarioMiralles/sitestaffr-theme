@@ -6087,9 +6087,9 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 .hero__robot-img {
   position: absolute;
   left: 50%;
-  top: 0;
+  top: -25%;
   transform: translateX(-50%);
-  height: 160%;
+  height: 150%;
   width: auto;
   max-width: none;
   filter: drop-shadow(0 28px 50px rgba(0,77,64,0.30));
