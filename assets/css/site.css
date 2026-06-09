@@ -6234,6 +6234,7 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   bottom: 0;
   width: var(--vt-robot-width, 300px);
   height: auto;
+  max-height: 100%;
   max-width: none;
   opacity: 0;
   visibility: hidden;
