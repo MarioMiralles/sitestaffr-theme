@@ -6569,6 +6569,7 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20px;
   padding: 12px 16px;
   border-radius: 12px;
   background: var(--cream);
@@ -6658,15 +6659,16 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 /* ---------- Mobile ---------- */
 @media (max-width: 768px) {
   .voice-text-section__panel {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 640px;
     border-radius: var(--radius-lg);
   }
   .voice-text-section__selector {
-    gap: 10px;
-    padding: 20px 16px 0;
+    gap: 12px;
+    padding: 20px 20px 0;
   }
   .voice-text-section__card {
-    padding: 20px 12px;
+    padding: 18px 16px;
     gap: 8px;
   }
   .voice-text-section__card-badge {
@@ -6678,11 +6680,11 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     display: none;
   }
   .voice-text-section__preview {
-    margin: 16px 16px 0;
-    min-height: 300px;
+    margin: 16px 20px 0;
+    min-height: 280px;
   }
   .voice-text-section__tagline {
-    padding: 16px 16px 20px;
+    padding: 16px 20px 20px;
   }
 }
 
