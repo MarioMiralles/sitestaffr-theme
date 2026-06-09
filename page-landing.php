@@ -515,14 +515,6 @@ get_template_part( 'template-parts/site-nav', null, array(
               </span>
               <div class="voice-text-section__chat-bubble">Yes! We offer a complimentary 15-minute consultation. Would you like to schedule one?</div>
             </div>
-            <div class="voice-text-section__chat-row voice-text-section__chat-row--ai voice-text-section__chat-typing">
-              <span class="voice-text-section__chat-avatar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-              </span>
-              <div class="voice-text-section__chat-bubble">
-                <span class="voice-text-section__dots"><span></span><span></span><span></span></span>
-              </div>
-            </div>
           </div>
           <div class="voice-text-section__input-bar">
             <span class="voice-text-section__input-text">Type a message&hellip;</span>
