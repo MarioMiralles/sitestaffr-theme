@@ -6600,8 +6600,13 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
-    overflow: visible;
+    max-width: 1140px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-bottom: 0;
+    overflow: hidden;
   }
   .voice-text-section__header {
     grid-column: 1 / -1;
@@ -6613,9 +6618,9 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 50%;
+    width: auto;
     height: auto;
-    max-width: none;
+    max-width: 50%;
     max-height: calc(100% - 220px);
     filter: drop-shadow(0 16px 32px rgba(0,77,64,0.18));
   }
