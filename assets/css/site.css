@@ -6233,8 +6233,9 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   position: absolute;
   bottom: 0;
   width: auto;
-  height: 100%;
+  height: auto;
   max-width: var(--vt-robot-width, 300px);
+  max-height: 100%;
   opacity: 0;
   visibility: hidden;
   transition: opacity 0.5s ease, visibility 0.5s;
