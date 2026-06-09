@@ -6258,55 +6258,14 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   z-index: 1;
 }
 
-/* ---------- Tablet: two-column layout ---------- */
-@media (max-width: 1080px) and (min-width: 769px) {
-  .voice-text-section {
-    display: grid;
-    grid-template-columns: 2fr 3fr;
-    align-items: center;
-    overflow: visible;
-  }
-  .voice-text-section__robot {
-    position: relative;
-    bottom: auto;
-    width: 100%;
-    height: auto;
-    max-width: none;
-    max-height: none;
-    align-self: end;
-    grid-column: 1;
-    grid-row: 1;
-    filter: drop-shadow(0 16px 32px rgba(0,77,64,0.18));
-  }
-  .voice-text-section__robot--voice { left: auto; }
-  .voice-text-section__robot--text  { right: auto; }
-  .voice-text-section > .container {
-    grid-column: 2;
-    grid-row: 1;
-    z-index: auto;
-  }
-  .voice-text-section__header {
-    text-align: left;
-  }
-  .voice-text-section__header h2 {
-    margin: 0;
-  }
-  .voice-text-section__desc {
-    margin-left: 0;
-  }
-  .voice-text-section__panel {
-    max-width: none;
-  }
-  .voice-text-section__selector {
-    grid-template-columns: 1fr;
-  }
-}
 @media (max-width: 768px) {
   .voice-text-section__robot { display: none; }
 }
 .voice-text-section__header {
   text-align: center;
-  margin-bottom: clamp(40px, 6vw, 64px);
+  max-width: 1140px;
+  margin: 0 auto clamp(40px, 6vw, 64px);
+  padding: 0 20px;
 }
 .voice-text-section__header h2 {
   max-width: 600px;
@@ -6633,6 +6592,47 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   font-size: 0.95rem;
   color: var(--text-muted);
   font-weight: 400;
+}
+
+/* ---------- Tablet: two-column layout ---------- */
+@media (max-width: 1080px) and (min-width: 769px) {
+  .voice-text-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 1fr;
+    overflow: visible;
+  }
+  .voice-text-section__header {
+    grid-column: 1 / -1;
+    grid-row: 1;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .voice-text-section__robot {
+    position: relative;
+    bottom: auto;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    align-self: end;
+    grid-column: 1;
+    grid-row: 2;
+    filter: drop-shadow(0 16px 32px rgba(0,77,64,0.18));
+  }
+  .voice-text-section__robot--voice { left: auto; }
+  .voice-text-section__robot--text  { right: auto; }
+  .voice-text-section > .container {
+    grid-column: 2;
+    grid-row: 2;
+    z-index: auto;
+  }
+  .voice-text-section__panel {
+    max-width: none;
+  }
+  .voice-text-section__selector {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ---------- Mobile ---------- */

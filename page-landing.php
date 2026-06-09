@@ -429,13 +429,12 @@ get_template_part( 'template-parts/site-nav', null, array(
   <img class="voice-text-section__robot voice-text-section__robot--text"
        src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-text.webp' ) ); ?>"
        alt="" width="1080" height="1350" aria-hidden="true" loading="lazy" decoding="async">
+  <div class="voice-text-section__header reveal">
+    <span class="section-label">Two Ways to Connect</span>
+    <h2>Voice &amp; Chat</h2>
+    <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer talking, others prefer typing &mdash; SiteStaffr handles both with the same AI and the same answers.</p>
+  </div>
   <div class="container">
-    <div class="voice-text-section__header reveal">
-      <span class="section-label">Two Ways to Connect</span>
-      <h2>Voice &amp; Chat</h2>
-      <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer talking, others prefer typing &mdash; SiteStaffr handles both with the same AI and the same answers.</p>
-    </div>
-
     <div class="voice-text-section__panel reveal">
       <!-- Mode selector cards -->
       <div class="voice-text-section__selector">
