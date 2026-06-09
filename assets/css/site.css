@@ -6616,7 +6616,7 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     width: 50%;
     height: auto;
     max-width: none;
-    max-height: 100%;
+    max-height: calc(100% - 220px);
     filter: drop-shadow(0 16px 32px rgba(0,77,64,0.18));
   }
   .voice-text-section__robot--voice { left: 0; }
@@ -6626,9 +6626,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     grid-row: 2;
     z-index: 1;
     padding-bottom: clamp(60px, 10vw, 120px);
-  }
-  .voice-text-section__panel {
-    max-width: none;
   }
   .voice-text-section__selector {
     grid-template-columns: 1fr;
