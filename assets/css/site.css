@@ -6232,8 +6232,8 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 .voice-text-section__robot {
   position: absolute;
   bottom: 0;
-  height: 60%;
-  width: auto;
+  width: var(--vt-robot-width, 300px);
+  height: auto;
   max-width: none;
   opacity: 0;
   visibility: hidden;
@@ -6248,18 +6248,13 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 }
 .voice-text-section__robot--voice {
   left: 0;
-  transform: translateX(-10%);
 }
 .voice-text-section__robot--text {
   right: 0;
-  transform: translateX(10%);
 }
 .voice-text-section > .container {
   position: relative;
   z-index: 1;
-}
-@media (max-width: 1200px) {
-  .voice-text-section__robot { height: 50%; }
 }
 @media (max-width: 980px) {
   .voice-text-section__robot { display: none; }

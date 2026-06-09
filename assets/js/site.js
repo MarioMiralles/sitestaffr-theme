@@ -748,6 +748,25 @@ document.querySelectorAll('.voice-text-section__card').forEach(function(card) {
   });
 });
 
+// ========== VOICE & TEXT ROBOT SIZING ==========
+(function() {
+  var section = document.querySelector('.voice-text-section');
+  if (!section) return;
+  var panel = section.querySelector('.voice-text-section__panel');
+  if (!panel) return;
+  function sizeRobots() {
+    var panelRect = panel.getBoundingClientRect();
+    var gap = panelRect.left;
+    if (gap < 120) {
+      section.style.setProperty('--vt-robot-width', '0px');
+    } else {
+      section.style.setProperty('--vt-robot-width', (gap - 20) + 'px');
+    }
+  }
+  sizeRobots();
+  window.addEventListener('resize', sizeRobots);
+})();
+
 // ========== VOICE AGENT SHOWCASE ==========
 const voiceShowcase = document.getElementById('voiceShowcase');
 if (voiceShowcase) {
