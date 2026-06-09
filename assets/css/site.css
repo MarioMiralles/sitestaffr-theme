@@ -6595,7 +6595,7 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 }
 
 /* ---------- Tablet: two-column layout ---------- */
-@media (max-width: 1080px) and (min-width: 769px) {
+@media (max-width: 1700px) and (min-width: 769px) {
   .voice-text-section {
     display: grid;
     grid-template-columns: 1fr 1fr;
