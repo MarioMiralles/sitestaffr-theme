@@ -6600,11 +6600,8 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto 1fr;
-    max-width: 1140px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: max(20px, calc(50% - 550px));
+    padding-right: max(20px, calc(50% - 550px));
     padding-bottom: 0;
     overflow: hidden;
   }
