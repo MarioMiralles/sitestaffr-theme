@@ -43,6 +43,73 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 	}
 }
 
+if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
+	/**
+	 * Live plugin metadata from the WordPress.org directory, cached 12 hours.
+	 *
+	 * Keeps the download page's version, file size, requirements, and zip URL
+	 * in sync with the published plugin automatically — no manual zip uploads.
+	 * Falls back to known-good values if the API is ever unreachable.
+	 *
+	 * @return array{version:string,download_url:string,requires:string,requires_php:string,size_mb:string,listing_url:string}
+	 */
+	function sitestaffr_plugin_info() {
+		$listing_url = 'https://wordpress.org/plugins/sitestaffr/';
+		$fallback    = array(
+			'version'      => '1.22.18',
+			'download_url' => 'https://downloads.wordpress.org/plugin/sitestaffr.zip',
+			'requires'     => '6.2',
+			'requires_php' => '7.4',
+			'size_mb'      => '5.5',
+			'listing_url'  => $listing_url,
+		);
+
+		$cached = get_transient( 'sitestaffr_plugin_info' );
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+
+		$response = wp_remote_get(
+			'https://api.wordpress.org/plugins/info/1.0/sitestaffr.json',
+			array( 'timeout' => 5 )
+		);
+
+		if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+			return $fallback;
+		}
+
+		$data = json_decode( wp_remote_retrieve_body( $response ), true );
+		if ( ! is_array( $data ) || empty( $data['version'] ) ) {
+			return $fallback;
+		}
+
+		// Always use the unversioned permalink so the button serves the latest stable build.
+		$download_url = 'https://downloads.wordpress.org/plugin/sitestaffr.zip';
+
+		$size_mb = $fallback['size_mb'];
+		$head    = wp_remote_head( $download_url, array( 'timeout' => 5 ) );
+		if ( ! is_wp_error( $head ) ) {
+			$length = (int) wp_remote_retrieve_header( $head, 'content-length' );
+			if ( $length > 0 ) {
+				$size_mb = (string) round( $length / ( 1024 * 1024 ), 1 );
+			}
+		}
+
+		$info = array(
+			'version'      => (string) $data['version'],
+			'download_url' => $download_url,
+			'requires'     => ! empty( $data['requires'] ) ? (string) $data['requires'] : $fallback['requires'],
+			'requires_php' => ! empty( $data['requires_php'] ) ? (string) $data['requires_php'] : $fallback['requires_php'],
+			'size_mb'      => $size_mb,
+			'listing_url'  => $listing_url,
+		);
+
+		set_transient( 'sitestaffr_plugin_info', $info, 12 * HOUR_IN_SECONDS );
+
+		return $info;
+	}
+}
+
 add_action( 'wp_enqueue_scripts', function () {
 	$is_landing     = is_page_template( 'page-landing.php' );
 	$is_maintenance = is_page_template( 'page-maintenance.php' );

@@ -28,6 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
               <li><a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>">Get Started</a></li>
               <li><a href="<?php echo esc_url( home_url( '/download/' ) ); ?>">Download Plugin</a></li>
+              <li><a href="https://wordpress.org/plugins/sitestaffr/" target="_blank" rel="noopener">WordPress.org</a></li>
             </ul>
           </div>
           <div class="footer__col">

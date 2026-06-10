@@ -8630,29 +8630,10 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   text-decoration: none;
 }
 
-/* Industry links — arrow style (standalone) */
-.blog-post__body p > a[href*="/for/"] {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--teal-deep);
-  padding: 6px 0;
-  border-bottom: 2px solid var(--teal-pale);
-  transition: border-color 0.2s, gap 0.2s;
-}
-.blog-post__body p > a[href*="/for/"]::after {
-  content: '\2192';
-  transition: transform 0.2s;
-}
-.blog-post__body p > a[href*="/for/"]:hover {
-  border-color: var(--teal-light);
-  text-decoration: none;
-}
-.blog-post__body p > a[href*="/for/"]:hover::after {
-  transform: translateX(3px);
-}
+/* Industry (/for/) links inside post paragraphs render as normal inline
+   links. The arrow CTA treatment lives only in .industry-card, where links
+   are genuinely standalone — applying it to every in-paragraph /for/ link
+   bolted arrows onto links the Blog Agent weaves into sentences. */
 
 /* --- FAQ accordion --- */
 .blog-post__body .blog-faq {
@@ -9235,6 +9216,11 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 }
 .dl-hero__actions {
   margin-top: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
 }
 .dl-hero__download {
   position: relative;

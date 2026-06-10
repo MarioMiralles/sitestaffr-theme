@@ -6,10 +6,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$zip_path     = get_stylesheet_directory() . '/assets/downloads/sitestaffr.zip';
-$zip_url      = sitestaffr_asset_url( 'assets/downloads/sitestaffr.zip' );
-$zip_size     = file_exists( $zip_path ) ? round( filesize( $zip_path ) / ( 1024 * 1024 ), 1 ) : '—';
-$version      = '1.19.33';
+$plugin       = sitestaffr_plugin_info();
+$zip_url      = $plugin['download_url'];
+$zip_size     = $plugin['size_mb'];
+$version      = $plugin['version'];
+$listing_url  = $plugin['listing_url'];
 $download_url = home_url( '/download/' );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
@@ -42,6 +43,9 @@ $download_url = home_url( '/download/' );
 						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
 						Download Plugin
 					</a>
+					<a href="<?php echo esc_url( $listing_url ); ?>" class="btn btn--outline btn--large dl-hero__wporg" target="_blank" rel="noopener">
+						View on WordPress.org
+					</a>
 				</div>
 				<div class="dl-hero__meta">
 					<span class="dl-hero__meta-item">
@@ -56,12 +60,12 @@ $download_url = home_url( '/download/' );
 					<span class="dl-hero__meta-sep" aria-hidden="true"></span>
 					<span class="dl-hero__meta-item">
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-						WordPress 6.2+
+						WordPress <?php echo esc_html( $plugin['requires'] ); ?>+
 					</span>
 					<span class="dl-hero__meta-sep" aria-hidden="true"></span>
 					<span class="dl-hero__meta-item">
 						<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-						PHP 7.4+
+						PHP <?php echo esc_html( $plugin['requires_php'] ); ?>+
 					</span>
 				</div>
 			</div>
@@ -88,7 +92,7 @@ $download_url = home_url( '/download/' );
 						<span class="dl-steps__number">1</span>
 					</div>
 					<h3>Download &amp; Install</h3>
-					<p>Download the zip file above. In your WordPress admin, go to <strong>Plugins &rarr; Add New &rarr; Upload Plugin</strong>, choose the zip, and click <strong>Install Now</strong>.</p>
+					<p>The easiest way: in your WordPress admin, go to <strong>Plugins &rarr; Add New</strong>, search for <strong>SiteStaffr</strong>, and click <strong>Install Now</strong>. Prefer to do it manually? Download the zip above and upload it via <strong>Plugins &rarr; Add New &rarr; Upload Plugin</strong>.</p>
 					<div class="dl-steps__card-accent" aria-hidden="true"></div>
 				</div>
 
@@ -187,7 +191,7 @@ $download_url = home_url( '/download/' );
 					</button>
 					<div class="dl-faq__answer">
 						<div class="dl-faq__answer-inner">
-							Download the latest version from this page and re-upload it through your WordPress admin the same way you installed it. Your settings and data are preserved between updates.
+							If you installed from the WordPress.org directory, updates appear automatically in your dashboard under <strong>Plugins</strong> &mdash; just click <strong>Update Now</strong>. If you installed manually, download the latest version from this page and re-upload it the same way. Either way, your settings and data are preserved between updates.
 						</div>
 					</div>
 				</div>
@@ -256,9 +260,11 @@ $download_url = home_url( '/download/' );
 	'name'                => 'SiteStaffr',
 	'description'         => 'AI voice and text agent plugin for WordPress. Greets visitors, answers questions, captures leads, and sends email recaps — 24/7.',
 	'applicationCategory' => 'BusinessApplication',
-	'operatingSystem'     => 'WordPress 6.2+',
+	'operatingSystem'     => 'WordPress ' . $plugin['requires'] . '+',
 	'softwareVersion'     => $version,
 	'downloadUrl'         => $zip_url,
+	'installUrl'          => $listing_url,
+	'sameAs'              => $listing_url,
 	'fileSize'            => $zip_size . ' MB',
 	'offers'              => array(
 		'@type'         => 'Offer',
@@ -289,7 +295,7 @@ $faq_items = array(
 	),
 	array(
 		'question' => 'How do I update the plugin?',
-		'answer'   => 'Download the latest version from this page and re-upload it through your WordPress admin the same way you installed it. Your settings and data are preserved between updates.',
+		'answer'   => 'If you installed from the WordPress.org directory, updates appear automatically in your dashboard under Plugins — just click Update Now. If you installed manually, download the latest version from this page and re-upload it the same way. Either way, your settings and data are preserved between updates.',
 	),
 	array(
 		'question' => 'What can I do after setup?',
