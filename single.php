@@ -104,7 +104,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<div class="blog-post__cta-inner">
 					<h2><?php esc_html_e( 'Put an AI voice agent on your website', 'sitestaffr' ); ?></h2>
 					<p><?php esc_html_e( 'SiteStaffr answers visitor questions, captures contact details, and speaks 57+ languages — trained on your own website. Set up in minutes, free trial included.', 'sitestaffr' ); ?></p>
-					<a class="blog-post__cta-button" href="<?php echo esc_url( home_url( '/get-started/' ) ); ?>"><?php esc_html_e( 'Get Started Free', 'sitestaffr' ); ?></a>
+					<a class="blog-post__cta-button" href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>"><?php esc_html_e( 'Get Started Free', 'sitestaffr' ); ?></a>
 				</div>
 			</div>
 		</section>
