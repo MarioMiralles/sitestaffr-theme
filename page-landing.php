@@ -81,7 +81,7 @@ $get_started_url = home_url( '/#get-started' );
                 'name'          => 'Free Trial',
                 'price'         => '0',
                 'priceCurrency' => 'USD',
-                'description'   => '30-day free trial with 30 minutes included, 2 AI voices, 1 AI blog post per month, no credit card required',
+                'description'   => '30-day free trial with 30 minutes included, 2 AI voices, 1 AI blog post, no credit card required',
             ),
             array(
                 '@type'         => 'Offer',
@@ -148,7 +148,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — no credit card required. Paid plans are $10/month (Starter, 60 minutes), $50/month (Business, 300 minutes), and $100/month (Pro, 700 minutes). Every plan also includes AI-written blog posts each month — from 1 per month on the trial up to 8 per month on Pro. You can buy additional minutes anytime at $10 for 50 minutes, and they never expire.',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — no credit card required. Paid plans are $10/month (Starter, 60 minutes), $50/month (Business, 300 minutes), and $100/month (Pro, 700 minutes). Every plan also includes AI-written blog posts each month — from 1 post on the trial up to 8 per month on Pro. You can buy additional minutes anytime at $10 for 50 minutes, and they never expire.',
         ),
         array(
             'question' => 'Does SiteStaffr work with my WordPress site?',
@@ -812,7 +812,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__minutes">30 minutes included</div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
-            <li>1 AI blog post per month</li>
+            <li>1 AI blog post</li>
             <li>No credit card required</li>
           </ul>
           <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>

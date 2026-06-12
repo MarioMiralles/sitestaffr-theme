@@ -6209,8 +6209,10 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     min-height: 380px;
     overflow: hidden;
   }
-  .hero__robot-img { top: auto; bottom: 0; height: 100%; }
-  .hero__robot-glow { width: 260px; top: 45%; }
+  /* The stage clips overflow here, so the blurred glow and drop-shadow get cut
+     in straight lines at the stage edges — reads as a faint box around the robot. */
+  .hero__robot-img { top: auto; bottom: 0; height: 100%; filter: none; }
+  .hero__robot-glow { display: none; }
 }
 @media (max-width: 520px) {
   body.sitestaffr-landing-page .hero__actions {
