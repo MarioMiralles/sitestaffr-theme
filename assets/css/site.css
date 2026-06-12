@@ -2762,14 +2762,18 @@ body.sitestaffr-landing-page .hero__visual > * {
     height: 100%;
   }
 }
-@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
-  .demo-layout--recap-pinned.demo-layout--show-recap .conversation-recap {
-    animation: recap-delivered 0.9s ease;
+/* Double-pulse on the recap when the call completes — guides the eye to the payoff */
+@media (prefers-reduced-motion: no-preference) {
+  .demo-layout--show-recap .conversation-recap {
+    animation: recap-delivered 2s ease-out;
   }
 }
 @keyframes recap-delivered {
-  0% { box-shadow: 0 0 0 0 rgba(31, 182, 204, 0.4); }
-  100% { box-shadow: 0 0 0 18px rgba(31, 182, 204, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(31, 182, 204, 0.5); }
+  35% { box-shadow: 0 0 0 18px rgba(31, 182, 204, 0); }
+  45% { box-shadow: 0 0 0 0 rgba(31, 182, 204, 0.35); }
+  85% { box-shadow: 0 0 0 18px rgba(31, 182, 204, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(31, 182, 204, 0); }
 }
 
 /* Audio Player */
@@ -2966,15 +2970,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-height: 320px;
   overflow: hidden;
   opacity: 1;
-  /* Transcript collapse/expand animation. */
-  transition: max-height 0.24s ease-out, opacity 0.24s ease-out, margin-top 0.24s ease-out, padding-top 0.24s ease-out, border-color 0.24s ease-out;
-}
-.demo-layout--stacked.demo-layout--transcript-collapsed .audio-player__transcript-hint {
-  max-height: 0;
-  opacity: 0;
-  margin-top: 0;
-  padding-top: 0;
-  border-top-color: transparent;
 }
 .audio-player__transcript-window {
   display: flex;

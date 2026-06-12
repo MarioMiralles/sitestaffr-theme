@@ -251,7 +251,6 @@ function initAudioDemo(demoLayout) {
   const progressFill = demoLayout.querySelector('[data-audio-demo-progress-fill]');
   const currentTimeEl = demoLayout.querySelector('[data-audio-demo-current-time]');
   const totalTimeEl = demoLayout.querySelector('[data-audio-demo-total-time]');
-  const transcriptPanel = demoLayout.querySelector('[data-audio-demo-transcript-panel]');
   const transcriptWindow = demoLayout.querySelector('[data-audio-demo-transcript-window]');
   const recapCard = demoLayout.querySelector('[data-audio-demo-recap]');
   const transcriptSourceLines = Array.from(demoLayout.querySelectorAll('.transcript-line-source'));
@@ -311,14 +310,6 @@ function initAudioDemo(demoLayout) {
       // Pinned recaps stay visible at desktop widths, so the CSS (visibility on
       // the collapsed state) handles assistive-tech exposure instead of aria-hidden.
       recapCard.setAttribute('aria-hidden', visible ? 'false' : 'true');
-    }
-  }
-
-  function setTranscriptExpanded(expanded) {
-    // This class drives the transcript collapse/expand height transition in CSS.
-    demoLayout.classList.toggle('demo-layout--transcript-collapsed', !expanded);
-    if (transcriptPanel) {
-      transcriptPanel.setAttribute('aria-expanded', expanded ? 'true' : 'false');
     }
   }
 
@@ -507,16 +498,13 @@ function initAudioDemo(demoLayout) {
       setPlayState(true);
 
       if (activeSegment === 'main') {
-        setTranscriptExpanded(true);
         setRecapVisible(false);
         updateTranscriptWindow(audio.currentTime);
         emitPhase(audio.currentTime >= capturePhaseStart ? 2 : 1);
       } else if (activeSegment === 'open') {
-        setTranscriptExpanded(true);
         setRecapVisible(false);
         emitPhase(1);
       } else {
-        setTranscriptExpanded(false);
         setRecapVisible(true);
         emitPhase(3);
       }
@@ -533,7 +521,6 @@ function initAudioDemo(demoLayout) {
 
   function startMainSegment() {
     setActiveSegment('main');
-    setTranscriptExpanded(true);
     setRecapVisible(false);
     if (audio.currentTime <= 0.05) {
       resetTranscriptWindow();
@@ -550,7 +537,6 @@ function initAudioDemo(demoLayout) {
 
     setActiveSegment('close');
     outroAudio.currentTime = 0;
-    setTranscriptExpanded(false);
     setRecapVisible(true);
     emitPhase(3);
     playActiveSegment();
@@ -562,7 +548,6 @@ function initAudioDemo(demoLayout) {
     setPlayState(false);
     setActiveSegment(outroAudio ? 'close' : 'main');
     rebuildTranscriptWindow(getMainDuration() || 999);
-    setTranscriptExpanded(false);
     setRecapVisible(true);
     emitPhase(3);
     refreshTimeline(true);
@@ -581,7 +566,6 @@ function initAudioDemo(demoLayout) {
     setActiveSegment(introAudio ? 'open' : 'main');
     didReachAudioEnd = false;
     setPlayState(false);
-    setTranscriptExpanded(true);
     setRecapVisible(false);
     emitPhase(0);
     resetTranscriptWindow();
@@ -654,10 +638,6 @@ function initAudioDemo(demoLayout) {
     if (isPlaying) {
       activePlayer.pause();
       setPlayState(false);
-      if (activeSegment === 'main') {
-        setTranscriptExpanded(false);
-        setRecapVisible(true);
-      }
       refreshTimeline(false);
     } else {
       playActiveSegment();
@@ -694,7 +674,6 @@ function initAudioDemo(demoLayout) {
         outroAudio.currentTime = 0;
       }
       setActiveSegment('open');
-      setTranscriptExpanded(true);
       setRecapVisible(false);
       resetTranscriptWindow();
     } else if (targetTime < openDuration + mainDuration || !outroAudio || closeDuration <= 0) {
@@ -706,7 +685,6 @@ function initAudioDemo(demoLayout) {
         outroAudio.currentTime = 0;
       }
       setActiveSegment('main');
-      setTranscriptExpanded(true);
       setRecapVisible(false);
       rebuildTranscriptWindow(audio.currentTime);
     } else {
@@ -719,7 +697,6 @@ function initAudioDemo(demoLayout) {
         outroAudio.currentTime = closeTime;
       }
       setActiveSegment('close');
-      setTranscriptExpanded(false);
       setRecapVisible(true);
       rebuildTranscriptWindow(mainDuration || 999);
     }

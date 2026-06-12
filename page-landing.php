@@ -866,7 +866,6 @@ get_template_part( 'template-parts/site-nav', null, array(
             <li>8 AI blog posts per month</li>
             <li>Autopilot blog publishing</li>
             <li>Custom greeting + 4 tones</li>
-            <li>Priority access to new features</li>
           </ul>
           <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
           <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
