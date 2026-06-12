@@ -7,6 +7,7 @@ $component_args = isset( $args ) && is_array( $args ) ? $args : array();
 
 $layout        = isset( $component_args['layout'] ) && 'stacked' === $component_args['layout'] ? 'stacked' : 'split';
 $recap_variant = isset( $component_args['recap_variant'] ) && 'card' === $component_args['recap_variant'] ? 'card' : 'image';
+$recap_pinned  = ! empty( $component_args['recap_pinned'] );
 $extra_classes = isset( $component_args['extra_classes'] ) ? (string) $component_args['extra_classes'] : '';
 $audio_label   = isset( $component_args['audio_label'] ) ? (string) $component_args['audio_label'] : 'Sample conversation &mdash; Plumbing business';
 $demo_kicker   = isset( $component_args['demo_kicker'] ) ? (string) $component_args['demo_kicker'] : '';
@@ -22,6 +23,10 @@ $wrapper_classes = array( 'demo-layout', 'js-audio-demo' );
 
 if ( 'stacked' === $layout ) {
 	$wrapper_classes[] = 'demo-layout--stacked';
+}
+
+if ( $recap_pinned ) {
+	$wrapper_classes[] = 'demo-layout--recap-pinned';
 }
 
 if ( '' !== trim( $extra_classes ) ) {
@@ -111,7 +116,7 @@ $transcript_entries = array(
 	),
 );
 ?>
-<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" data-component="HeroAudioDemo" data-audio-demo data-audio-layout="<?php echo esc_attr( $layout ); ?>" data-audio-open-src="<?php echo esc_url( $open_audio_src ); ?>" data-audio-close-src="<?php echo esc_url( $close_audio_src ); ?>">
+<div class="<?php echo esc_attr( implode( ' ', $wrapper_classes ) ); ?>" data-component="HeroAudioDemo" data-audio-demo data-audio-layout="<?php echo esc_attr( $layout ); ?>"<?php echo $recap_pinned ? ' data-audio-demo-recap-pinned="1"' : ''; ?> data-audio-open-src="<?php echo esc_url( $open_audio_src ); ?>" data-audio-close-src="<?php echo esc_url( $close_audio_src ); ?>">
 	<div class="demo-layout__left">
 		<div class="audio-player">
 			<?php if ( '' !== trim( $demo_kicker ) ) : ?>
@@ -147,7 +152,7 @@ $transcript_entries = array(
 			</div>
 		</div>
 	</div>
-	<aside class="demo-layout__right<?php echo 'card' === $recap_variant ? ' demo-layout__right--card' : ''; ?>" data-audio-demo-recap aria-hidden="true">
+	<aside class="demo-layout__right<?php echo 'card' === $recap_variant ? ' demo-layout__right--card' : ''; ?>" data-audio-demo-recap aria-hidden="<?php echo $recap_pinned ? 'false' : 'true'; ?>">
 		<?php if ( 'card' === $recap_variant ) : ?>
 			<div class="conversation-recap">
 				<div class="conversation-recap__header">

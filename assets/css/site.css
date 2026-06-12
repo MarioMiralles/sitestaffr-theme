@@ -732,6 +732,40 @@ body.sitestaffr-landing-page .hero__visual > * {
   width: 44px;
   opacity: 0.5;
 }
+/* Step card lit up in sync with audio playback (mirrors the hover treatment) */
+.lead-demo__step-card--active {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: rgba(31, 182, 204, 0.3);
+}
+.lead-demo__step-card--active .lead-demo__card-glow {
+  opacity: 1;
+}
+.lead-demo__step-card--active .lead-demo__card-accent {
+  opacity: 1;
+}
+.lead-demo__step-card--active .lead-demo__icon-wrap::before {
+  transform: rotate(0deg) scale(1.05);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .lead-demo__step-card--active .lead-demo__step-number {
+    animation: lead-demo-step-pulse 1.6s ease-in-out infinite;
+  }
+}
+@keyframes lead-demo-step-pulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(0, 131, 143, 0.3); }
+  50% { box-shadow: 0 2px 8px rgba(0, 131, 143, 0.3), 0 0 0 6px rgba(31, 182, 204, 0.16); }
+}
+@media (min-width: 1024px) {
+  .lead-demo__card {
+    max-width: 1140px;
+  }
+}
+@media (max-width: 1120px) {
+  .lead-demo__header h2 {
+    white-space: normal;
+  }
+}
 @media (max-width: 760px) {
   .lead-demo__steps {
     flex-direction: column;
@@ -2684,22 +2718,58 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-top: 0;
   margin-left: 0;
   opacity: 0;
+  visibility: hidden;
   transform: translateY(12px);
   border: 1px solid var(--border-light);
   box-shadow: var(--shadow-sm);
-  transition: max-height 0.32s ease-out, margin-top 0.32s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+  transition: max-height 0.32s ease-out, margin-top 0.32s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s linear 0.32s;
 }
 .demo-layout--stacked.demo-layout--show-recap .demo-layout__right {
   width: 100%;
   max-height: 520px;
   margin-top: 16px;
   opacity: 1;
+  visibility: visible;
   transform: translateY(0);
   pointer-events: auto;
+  transition: max-height 0.32s ease-out, margin-top 0.32s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0s linear 0s;
 }
 .demo-layout--stacked.demo-layout--show-recap .demo-layout__right:hover {
   transform: translateY(0);
   box-shadow: var(--shadow-md);
+}
+
+/* Pinned recap (homepage lead demo): the payoff stays visible beside the player
+   at desktop widths instead of waiting for playback to finish. */
+@media (min-width: 1024px) {
+  .demo-layout--recap-pinned.demo-layout--stacked {
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    gap: 28px;
+    align-items: stretch;
+  }
+  .demo-layout--recap-pinned.demo-layout--stacked .demo-layout__right,
+  .demo-layout--recap-pinned.demo-layout--stacked.demo-layout--show-recap .demo-layout__right {
+    max-height: none;
+    margin-top: 0;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+  }
+  .demo-layout--recap-pinned.demo-layout--stacked .audio-player {
+    height: 100%;
+  }
+}
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .demo-layout--recap-pinned.demo-layout--show-recap .conversation-recap {
+    animation: recap-delivered 0.9s ease;
+  }
+}
+@keyframes recap-delivered {
+  0% { box-shadow: 0 0 0 0 rgba(31, 182, 204, 0.4); }
+  100% { box-shadow: 0 0 0 18px rgba(31, 182, 204, 0); }
 }
 
 /* Audio Player */

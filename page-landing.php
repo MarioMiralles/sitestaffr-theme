@@ -63,7 +63,7 @@ $get_started_url = home_url( '/#get-started' );
         '@type'               => 'SoftwareApplication',
         '@id'                 => $schema_org_url . '#software',
         'name'                => 'SiteStaffr',
-        'description'         => 'An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail — in 57+ languages.',
+        'description'         => 'An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail — in 57+ languages. It also writes and publishes SEO blog posts for your site every month.',
         'applicationCategory' => 'BusinessApplication',
         'operatingSystem'     => 'WordPress',
         'url'                 => $schema_org_url,
@@ -81,28 +81,28 @@ $get_started_url = home_url( '/#get-started' );
                 'name'          => 'Free Trial',
                 'price'         => '0',
                 'priceCurrency' => 'USD',
-                'description'   => '30-day free trial with 30 minutes included, 2 AI voices, no credit card required',
+                'description'   => '30-day free trial with 30 minutes included, 2 AI voices, 1 AI blog post per month, no credit card required',
             ),
             array(
                 '@type'         => 'Offer',
                 'name'          => 'Starter',
                 'price'         => '10.00',
                 'priceCurrency' => 'USD',
-                'description'   => '60 minutes per month, 2 AI voices',
+                'description'   => '60 minutes per month, 2 AI voices, 2 AI blog posts per month',
             ),
             array(
                 '@type'         => 'Offer',
                 'name'          => 'Business',
                 'price'         => '50.00',
                 'priceCurrency' => 'USD',
-                'description'   => '300 minutes per month, 5 AI voices',
+                'description'   => '300 minutes per month, 5 AI voices, 4 AI blog posts per month with Autopilot publishing',
             ),
             array(
                 '@type'         => 'Offer',
                 'name'          => 'Pro',
                 'price'         => '100.00',
                 'priceCurrency' => 'USD',
-                'description'   => '700 minutes per month, all 10 AI voices, custom greeting and 4 tones',
+                'description'   => '700 minutes per month, all 10 AI voices, 8 AI blog posts per month with Autopilot publishing, custom greeting and 4 tones',
             ),
         ),
     ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
@@ -136,7 +136,7 @@ $get_started_url = home_url( '/#get-started' );
     $faq_items = array(
         array(
             'question' => 'What is SiteStaffr?',
-            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $10 per month after a free 30-day trial with no credit card required.',
+            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. It also writes SEO blog posts for your site every month, grounded in your business and services. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $10 per month after a free 30-day trial with no credit card required.',
         ),
         array(
             'question' => 'How does SiteStaffr capture leads from my website?',
@@ -148,7 +148,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — no credit card required. Paid plans are $10/month (Starter, 60 minutes), $50/month (Business, 300 minutes), and $100/month (Pro, 700 minutes). You can buy additional minutes anytime at $10 for 50 minutes, and they never expire.',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — no credit card required. Paid plans are $10/month (Starter, 60 minutes), $50/month (Business, 300 minutes), and $100/month (Pro, 700 minutes). Every plan also includes AI-written blog posts each month — from 1 per month on the trial up to 8 per month on Pro. You can buy additional minutes anytime at $10 for 50 minutes, and they never expire.',
         ),
         array(
             'question' => 'Does SiteStaffr work with my WordPress site?',
@@ -157,6 +157,10 @@ $get_started_url = home_url( '/#get-started' );
         array(
             'question' => 'What happens after a visitor conversation?',
             'answer'   => 'Within seconds of the conversation ending, SiteStaffr emails you a detailed recap including a summary of what the visitor needed, their contact information, the full conversation transcript, and a suggested follow-up action — so you can respond quickly and close more leads.',
+        ),
+        array(
+            'question' => 'Does SiteStaffr write blog posts for my website?',
+            'answer'   => 'Yes. Every plan includes the Blog Agent, which suggests topics, writes SEO-optimized posts grounded in your business and services, generates a featured image, and saves each post as a draft in WordPress for your review. Plans include 1 to 8 posts per month depending on your tier, and on Business and Pro plans, Autopilot can write and publish posts automatically on a schedule you control.',
         ),
         array(
             'question' => 'Is there a free trial?',
@@ -286,7 +290,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       </li>
       <li class="ribbon__item">
         <span class="ribbon__title">Blog Writing</span>
-        <span class="ribbon__desc">Publishes SEO posts on autopilot</span>
+        <span class="ribbon__desc">Writes SEO posts for your site</span>
       </li>
     </ul>
   </div>
@@ -354,6 +358,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array(
               'layout'        => 'stacked',
               'recap_variant' => 'card',
+              'recap_pinned'  => true,
               'audio_label'   => 'After-hours call &mdash; homeowner reports a kitchen leak',
               'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
           )
@@ -768,13 +773,13 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="price-includes__icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </span>
-          <span class="price-includes__label">Email recap after every conversation</span>
+          <span class="price-includes__label">Email recap + full transcript</span>
         </div>
         <div class="price-includes__item">
           <span class="price-includes__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </span>
-          <span class="price-includes__label">Full conversation transcript</span>
+          <span class="price-includes__label">AI blog posts every month</span>
         </div>
         <div class="price-includes__item">
           <span class="price-includes__icon" aria-hidden="true">
@@ -807,6 +812,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__minutes">30 minutes included</div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
+            <li>1 AI blog post per month</li>
             <li>No credit card required</li>
           </ul>
           <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
@@ -823,6 +829,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__minutes">60 minutes included</div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
+            <li>2 AI blog posts per month</li>
           </ul>
           <p class="price-tier__best-for">Best for businesses getting started</p>
           <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
@@ -839,6 +846,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__minutes">300 minutes included</div>
           <ul class="price-tier__features">
             <li>5 AI voices</li>
+            <li>4 AI blog posts per month</li>
+            <li>Autopilot blog publishing</li>
           </ul>
           <p class="price-tier__best-for">Best for growing local businesses</p>
           <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
@@ -854,6 +863,8 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__minutes">700 minutes included</div>
           <ul class="price-tier__features">
             <li>All 10 AI voices</li>
+            <li>8 AI blog posts per month</li>
+            <li>Autopilot blog publishing</li>
             <li>Custom greeting + 4 tones</li>
             <li>Priority access to new features</li>
           </ul>

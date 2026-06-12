@@ -284,6 +284,20 @@ function initAudioDemo(demoLayout) {
   let renderedTranscriptIndex = -1;
   let didReachAudioEnd = false;
 
+  // Playback phase for listeners outside the component (e.g. homepage step cards):
+  // 0 = idle, 1 = answering, 2 = capturing details, 3 = recap delivered.
+  const recapPinned = Boolean(demoLayout.dataset.audioDemoRecapPinned);
+  const capturePhaseStart = Number.parseFloat(demoLayout.dataset.audioCaptureStart || '12');
+  let lastEmittedPhase = -1;
+
+  function emitPhase(phase) {
+    if (phase === lastEmittedPhase) {
+      return;
+    }
+    lastEmittedPhase = phase;
+    demoLayout.dispatchEvent(new CustomEvent('audiodemophase', { bubbles: true, detail: { phase } }));
+  }
+
   function setPlayState(isPlaying) {
     playBtn.innerHTML = isPlaying ? pauseSVG : playSVG;
     playBtn.classList.toggle('playing', isPlaying);
@@ -293,7 +307,9 @@ function initAudioDemo(demoLayout) {
   function setRecapVisible(visible) {
     // This class drives the recap reveal animation in CSS.
     demoLayout.classList.toggle('demo-layout--show-recap', visible);
-    if (recapCard) {
+    if (recapCard && !recapPinned) {
+      // Pinned recaps stay visible at desktop widths, so the CSS (visibility on
+      // the collapsed state) handles assistive-tech exposure instead of aria-hidden.
       recapCard.setAttribute('aria-hidden', visible ? 'false' : 'true');
     }
   }
@@ -494,12 +510,15 @@ function initAudioDemo(demoLayout) {
         setTranscriptExpanded(true);
         setRecapVisible(false);
         updateTranscriptWindow(audio.currentTime);
+        emitPhase(audio.currentTime >= capturePhaseStart ? 2 : 1);
       } else if (activeSegment === 'open') {
         setTranscriptExpanded(true);
         setRecapVisible(false);
+        emitPhase(1);
       } else {
         setTranscriptExpanded(false);
         setRecapVisible(true);
+        emitPhase(3);
       }
     }).catch(() => {
       if (activeSegment === 'open') {
@@ -533,6 +552,7 @@ function initAudioDemo(demoLayout) {
     outroAudio.currentTime = 0;
     setTranscriptExpanded(false);
     setRecapVisible(true);
+    emitPhase(3);
     playActiveSegment();
   }
 
@@ -544,6 +564,7 @@ function initAudioDemo(demoLayout) {
     rebuildTranscriptWindow(getMainDuration() || 999);
     setTranscriptExpanded(false);
     setRecapVisible(true);
+    emitPhase(3);
     refreshTimeline(true);
   }
 
@@ -562,6 +583,7 @@ function initAudioDemo(demoLayout) {
     setPlayState(false);
     setTranscriptExpanded(true);
     setRecapVisible(false);
+    emitPhase(0);
     resetTranscriptWindow();
     refreshTimeline(false);
   }
@@ -592,6 +614,9 @@ function initAudioDemo(demoLayout) {
     if (activeSegment === 'main') {
       updateTranscriptWindow(audio.currentTime);
       refreshTimeline(false);
+      if (!audio.paused) {
+        emitPhase(audio.currentTime >= capturePhaseStart ? 2 : 1);
+      }
     }
   });
 
@@ -713,6 +738,20 @@ function initAudioDemo(demoLayout) {
 
 document.querySelectorAll('.js-audio-demo').forEach((demoLayout) => {
   initAudioDemo(demoLayout);
+});
+
+// ========== LEAD DEMO: STEP CARDS SYNCED TO PLAYBACK ==========
+document.querySelectorAll('.lead-demo').forEach((section) => {
+  const stepCards = section.querySelectorAll('.lead-demo__step-card');
+  if (!stepCards.length) {
+    return;
+  }
+  section.addEventListener('audiodemophase', (event) => {
+    const phase = event.detail && Number.isFinite(event.detail.phase) ? event.detail.phase : 0;
+    stepCards.forEach((card, index) => {
+      card.classList.toggle('lead-demo__step-card--active', index === phase - 1);
+    });
+  });
 });
 
 // ========== VOICE & TEXT MODE SWITCHER ==========
