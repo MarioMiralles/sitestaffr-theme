@@ -2762,9 +2762,11 @@ body.sitestaffr-landing-page .hero__visual > * {
     height: 100%;
   }
 }
-/* Double-pulse on the recap when the call completes — guides the eye to the payoff */
+/* Double-pulse on the recap when the call completes — guides the eye to the payoff.
+   Must live on the aside, not .conversation-recap: the aside's overflow: hidden
+   clips any outward shadow painted by its children. */
 @media (prefers-reduced-motion: no-preference) {
-  .demo-layout--show-recap .conversation-recap {
+  .demo-layout--show-recap .demo-layout__right {
     animation: recap-delivered 2s ease-out;
   }
 }
