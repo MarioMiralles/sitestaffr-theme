@@ -84,6 +84,10 @@ $ba_faqs = array(
         'a' => 'Yes. For each post you pick the tone (professional, friendly, or authoritative), a target word count, and the language &mdash; English, Spanish, French, or Portuguese. You can set defaults once and override them anytime.',
     ),
     array(
+        'q' => 'Who owns the featured image &mdash; is it copyright-safe?',
+        'a' => 'Every featured image is generated fresh for your post and tinted in your brand color &mdash; never pulled from a stock library or scraped from the web. That means no licensing fees, no attribution requirements, and no risk of a copyright claim. The image is yours to use, and you can always swap in your own before publishing.',
+    ),
+    array(
         'q' => 'Is my content stored on SiteStaffr&rsquo;s servers?',
         'a' => 'No. Your generated posts live in your own WordPress site, like any other post. SiteStaffr does not store your business content.',
     ),
