@@ -208,7 +208,7 @@ $ba_faqs = array(
 }
 .ba-float svg { width: 16px; height: 16px; color: var(--teal-light); }
 .ba-float--a { top: -22px; left: -18px; }
-.ba-float--b { bottom: 26px; left: -34px; animation-delay: 1.4s; }
+.ba-float--b { top: 30%; left: -40px; animation-delay: 1.4s; }
 .ba-float--c { bottom: -20px; right: -10px; animation-delay: 2.4s; }
 @keyframes baFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 @media (prefers-reduced-motion: reduce) { .ba-float { animation: none; } }
@@ -354,12 +354,19 @@ $ba_faqs = array(
     .ba-features__grid { grid-template-columns: 1fr; }
     .ba-pilot__panel { grid-template-columns: 1fr; }
     .ba-plans__grid { grid-template-columns: repeat(2, 1fr); }
+    /* Autopilot schedule card: give the days room once the panel stacks. */
+    .ba-sched { width: 100%; }
+    .ba-sched__row { flex-wrap: wrap; gap: 4px 12px; }
+    .ba-sched__row--days { flex-direction: column; align-items: stretch; gap: 12px; }
+    .ba-sched__days { width: 100%; justify-content: space-between; }
+    .ba-sched__day { flex: 1 1 0; max-width: 40px; }
 }
 @media (max-width: 560px) {
     .ba-flow__grid { grid-template-columns: 1fr; }
     .ba-float { display: none; }
     .ba-hero__actions { flex-direction: column; align-items: stretch; }
     .ba-hero__actions .btn { justify-content: center; }
+    .ba-sched { padding: 20px; }
 }
     </style>
 </head>
