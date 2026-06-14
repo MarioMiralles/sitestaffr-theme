@@ -9907,3 +9907,12 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 .dl-cta__glow {
   display: none;
 }
+
+/* ========== SITESTAFFR WIDGET — kill stray container border ==========
+   The floating launcher's #sitestaffr-widget container picks up a 3px border
+   on pages where the button-widget stylesheet isn't loaded (e.g. blog/single,
+   which have no [sitestaffr_button] shortcode). The launcher button keeps its
+   own configured border; only the container outline is removed. */
+#sitestaffr-widget {
+  border: 0 !important;
+}
