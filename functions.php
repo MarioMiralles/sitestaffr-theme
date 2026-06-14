@@ -130,12 +130,12 @@ add_action( 'wp_enqueue_scripts', function () {
 		null
 	);
 
-	$is_about    = is_page_template( 'page-about.php' );
-	$is_industry = is_page_template( 'page-industry.php' );
+	$is_about      = is_page_template( 'page-about.php' );
+	$is_industry   = is_page_template( 'page-industry.php' );
+	$is_download   = is_page_template( 'page-download.php' );
+	$is_blog_agent = is_page_template( 'page-blog-agent.php' );
 
-	$is_download = is_page_template( 'page-download.php' );
-
-	if ( $is_landing || $is_about || $is_industry || $is_download ) {
+	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),
@@ -161,7 +161,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		) );
 	}
 
-	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage ) {
+	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage || $is_blog_agent ) {
 		wp_dequeue_style( 'wp-block-library' );
 		wp_dequeue_style( 'classic-theme-styles' );
 		wp_dequeue_style( 'global-styles' );
@@ -173,6 +173,31 @@ add_action( 'wp_enqueue_scripts', function () {
 add_action( 'after_setup_theme', function () {
 	add_theme_support( 'title-tag' );
 	add_theme_support( 'post-thumbnails' );
+} );
+
+/**
+ * Provision the /blog-agent marketing page once, assigning its template.
+ * Runs a single check (guarded by an option flag) so it costs nothing after
+ * the first request post-deploy. Mario never has to create the page by hand.
+ */
+add_action( 'init', function () {
+	if ( get_option( 'sitestaffr_blog_agent_page_created' ) ) {
+		return;
+	}
+	$existing = get_page_by_path( 'blog-agent' );
+	if ( ! $existing ) {
+		$page_id = wp_insert_post( array(
+			'post_title'   => 'Blog Agent',
+			'post_name'    => 'blog-agent',
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+		) );
+		if ( $page_id && ! is_wp_error( $page_id ) ) {
+			update_post_meta( $page_id, '_wp_page_template', 'page-blog-agent.php' );
+		}
+	}
+	update_option( 'sitestaffr_blog_agent_page_created', 1 );
 } );
 
 add_action( 'send_headers', function () {
