@@ -11,6 +11,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $primary_menu = array(
     array(
+        'label'    => 'Features',
+        'href'     => '#',
+        'children' => array(
+            array( 'label' => 'Blog Agent', 'href' => home_url( '/blog-agent/' ) ),
+        ),
+    ),
+    array(
         'label'    => 'Industries',
         'href'     => '#',
         'children' => array(
