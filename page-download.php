@@ -216,7 +216,7 @@ $download_url = home_url( '/download/' );
 		<div class="dl-cta__pattern" aria-hidden="true"></div>
 		<div class="dl-cta__glow" aria-hidden="true"></div>
 		<div class="container container--narrow">
-			<div class="dl-cta__content reveal">
+			<div class="dl-cta__content cta-spotlight reveal">
 				<h2>Ready to Get Started?</h2>
 				<p>Try SiteStaffr free for 30 days. No credit card, no commitment &mdash; just a better experience for your visitors and more leads in your inbox.</p>
 				<div class="dl-cta__actions">

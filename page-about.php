@@ -98,7 +98,7 @@ get_template_part( 'template-parts/site-nav' );
 
 	<section class="about-cta">
 		<div class="container container--narrow">
-			<div class="about-cta__content reveal">
+			<div class="about-cta__content cta-spotlight reveal">
 				<h2>See What SiteStaffr Can Do for Your Business</h2>
 				<p>SiteStaffr is built for service businesses that can&rsquo;t afford to miss a lead &mdash; or make a visitor wait. Try it free for 30 days, no credit card required.</p>
 				<div class="about-cta__actions">

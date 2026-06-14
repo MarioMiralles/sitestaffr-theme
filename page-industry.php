@@ -412,7 +412,7 @@ get_template_part( 'template-parts/site-nav' );
 	<section class="ind-cta">
 		<div class="ind-cta__pattern" aria-hidden="true"></div>
 		<div class="container container--narrow">
-			<div class="ind-cta__content reveal">
+			<div class="ind-cta__content cta-spotlight reveal">
 				<h2><?php echo wp_kses_post( $ind['cta_headline'] ); ?></h2>
 				<p><?php echo wp_kses_post( $ind['cta_text'] ); ?></p>
 				<div class="ind-cta__actions">

@@ -906,7 +906,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="final-cta" id="get-started">
   <div class="final-cta__decoration" aria-hidden="true"></div>
   <div class="container">
-    <div class="final-cta__content reveal">
+    <div class="final-cta__content cta-spotlight reveal">
       <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
       <p class="final-cta__subtitle">Let SiteStaffr take care of your visitors while you focus on running your business.</p>
       <div class="final-cta__onboarding">

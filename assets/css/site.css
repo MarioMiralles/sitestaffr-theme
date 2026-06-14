@@ -9835,3 +9835,75 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     padding: 32px 24px 28px;
   }
 }
+
+/* ========== SHARED CTA SPOTLIGHT ==========
+   Warm-white card with a soft teal glow — the closing CTA on every page.
+   Adopting sections drop their old dark gradient + dot texture (below).
+   Appended last so its colors win over the legacy dark-bg CTA rules. */
+.cta-spotlight {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  background:
+    radial-gradient(720px 320px at 50% 0%, rgba(31,182,204,0.16), transparent 65%),
+    var(--warm-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: clamp(48px, 7vw, 84px) clamp(24px, 5vw, 64px);
+  box-shadow: var(--shadow-md);
+}
+.cta-spotlight h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.8vw, 2.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  color: var(--text-primary);
+  margin: 0 0 14px;
+}
+.cta-spotlight p {
+  color: var(--text-secondary);
+}
+.cta-spotlight a {
+  color: var(--teal-deep);
+}
+.cta-spotlight a:hover {
+  color: var(--teal-mid);
+}
+/* Highlighted heading span → brand teal (was light green for the dark bg) */
+.cta-spotlight [class$="__highlight"] {
+  color: var(--teal-deep);
+}
+/* Outline buttons were white-on-dark; recolor them for the light card */
+.cta-spotlight .btn--outline {
+  color: var(--teal-deep);
+  border-color: rgba(0,131,143,0.32);
+}
+.cta-spotlight .btn--outline:hover {
+  background: var(--teal-pale);
+  border-color: var(--teal-deep);
+  color: var(--teal-deep);
+}
+/* Download page's primary button was white-on-dark; make it teal on the card */
+.cta-spotlight .dl-cta__btn {
+  background: var(--teal-light);
+  color: #fff;
+}
+.cta-spotlight .dl-cta__btn:hover {
+  background: #15a3b8;
+}
+
+/* Sections adopting the spotlight: drop the dark gradient + texture. */
+.final-cta,
+.about-cta,
+.ind-cta,
+.dl-cta {
+  background: var(--cream);
+  color: var(--text-primary);
+}
+.final-cta::before,
+.about-cta::before,
+.ind-cta__pattern,
+.dl-cta__pattern,
+.dl-cta__glow {
+  display: none;
+}
