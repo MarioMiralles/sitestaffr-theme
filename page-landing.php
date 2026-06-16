@@ -148,7 +148,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — no credit card required. Paid plans are $10/month (Starter, 60 minutes), $50/month (Business, 300 minutes), and $100/month (Pro, 700 minutes). Every plan also includes AI-written blog posts each month — from 1 post on the trial up to 8 per month on Pro. You can buy additional minutes anytime at $10 for 50 minutes, and they never expire.',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and 50 text-chat messages per day — no credit card required. Paid plans are $10/month (Starter: 60 voice minutes and 150 text-chat messages per day), $50/month (Business: 300 voice minutes and 500 text-chat messages per day), and $100/month (Pro: 700 voice minutes and 2,000 text-chat messages per day). Text chat is separate from your voice minutes and resets daily — it is a flat monthly rate with no per-conversation fees. Every plan also includes AI-written blog posts each month — from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $10 for 50 minutes, and they never expire.',
         ),
         array(
             'question' => 'Does SiteStaffr work with my WordPress site?',
@@ -810,6 +810,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
         <div class="price-tier__details">
           <div class="price-tier__minutes">30 minutes included</div>
+          <div class="price-tier__messages">50 text-chat messages per day</div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
             <li>1 AI blog post</li>
@@ -827,6 +828,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
         <div class="price-tier__details">
           <div class="price-tier__minutes">60 minutes included</div>
+          <div class="price-tier__messages">150 text-chat messages per day</div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
             <li>2 AI blog posts per month</li>
@@ -844,6 +846,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
         <div class="price-tier__details">
           <div class="price-tier__minutes">300 minutes included</div>
+          <div class="price-tier__messages">500 text-chat messages per day</div>
           <ul class="price-tier__features">
             <li>5 AI voices</li>
             <li>4 AI blog posts per month</li>
@@ -861,6 +864,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
         <div class="price-tier__details">
           <div class="price-tier__minutes">700 minutes included</div>
+          <div class="price-tier__messages">2,000 text-chat messages per day</div>
           <ul class="price-tier__features">
             <li>All 10 AI voices</li>
             <li>8 AI blog posts per month</li>
@@ -875,6 +879,9 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-addon reveal">
       <h3 class="pricing-addon__title">Run Out of Minutes? You Stay in Control.</h3>
       <p class="pricing-addon__text">Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges.</p>
+    </div>
+    <div class="pricing-note reveal">
+      <p class="pricing-note__text">Text-chat messages are <strong>separate from your voice minutes</strong> and your daily message count <strong>resets every day</strong>. It&rsquo;s a flat monthly rate &mdash; no per-conversation fees and no surprise charges.</p>
     </div>
   </div>
 </section>

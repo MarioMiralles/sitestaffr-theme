@@ -3936,13 +3936,22 @@ body.sitestaffr-landing-page .hero__visual > * {
   flex: 1;
 }
 .pricing-section .price-tier__details .price-tier__minutes {
+  margin-bottom: 12px;
+  padding: 0;
+  text-align: left;
+  background: none;
+  border-radius: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--teal-deep);
+  letter-spacing: -0.01em;
+}
+.price-tier__messages {
   margin-bottom: 16px;
   padding: 0 0 12px;
   text-align: left;
-  background: none;
   border-bottom: 1px solid var(--border-light);
-  border-radius: 0;
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--teal-deep);
   letter-spacing: -0.01em;
@@ -4163,6 +4172,18 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.7;
 }
 .pricing-addon strong { color: var(--text-primary); }
+.pricing-note {
+  margin-top: 20px;
+  text-align: center;
+}
+.pricing-note__text {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.7;
+  max-width: 640px;
+  margin: 0 auto;
+}
+.pricing-note strong { color: var(--text-primary); }
 
 /* ============================
    FORMS (shared)
