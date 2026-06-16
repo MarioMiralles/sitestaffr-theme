@@ -86,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="container">
     <div class="intake__header">
       <span class="section-label">Guided setup</span>
-      <h1>Let&rsquo;s get your SiteStaffr assistant ready to go live</h1>
+      <h1>Let&rsquo;s Get Your SiteStaffr Assistant Ready to Go Live</h1>
       <p class="intake__subtitle">Talk to our onboarding assistant to get started, or send your details below if you prefer to type.</p>
     </div>
 

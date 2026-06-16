@@ -126,7 +126,7 @@ $ba_faqs = array(
 }
 .ba-hero__title {
     font-family: var(--font-display);
-    font-size: clamp(2.5rem, 5.4vw, 4rem); line-height: 1.04;
+    font-size: var(--hero-title-size); line-height: 1.04;
     letter-spacing: -0.02em; margin: 20px 0 0; color: var(--text-primary);
 }
 .ba-hero__title em { font-style: italic; color: var(--teal-deep); }
@@ -387,7 +387,7 @@ $ba_faqs = array(
             <div class="ba-hero__grid">
                 <div class="ba-hero__content reveal">
                     <span class="ba-hero__eyebrow">Included in every plan</span>
-                    <h1 class="ba-hero__title">Your website writes its&nbsp;<em>own blog</em>.</h1>
+                    <h1 class="ba-hero__title">Your Website Writes Its&nbsp;<em>Own Blog</em></h1>
                     <p class="ba-hero__sub">Blog Agent is an AI content writer built into SiteStaffr. It researches your site, writes SEO-optimized posts grounded in your business, and saves each one as a draft for your review.</p>
                     <div class="ba-hero__actions">
                         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">

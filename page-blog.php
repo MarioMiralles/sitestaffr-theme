@@ -42,45 +42,17 @@ $post_index    = 0;
 		<div class="container">
 			<?php if ( $blog_query->have_posts() ) : ?>
 
-				<?php if ( $is_first_page && $blog_query->post_count > 0 ) :
-					$blog_query->the_post();
-					$post_index++;
-					$categories = get_the_category();
-					$cat_name   = ! empty( $categories ) ? esc_html( $categories[0]->name ) : '';
-				?>
-				<a href="<?php the_permalink(); ?>" class="blog-card blog-card--featured">
-					<?php if ( has_post_thumbnail() ) : ?>
-						<div class="blog-card__image blog-card__image--featured">
-							<?php the_post_thumbnail( 'large', array( 'loading' => 'eager' ) ); ?>
-						</div>
-					<?php endif; ?>
-					<div class="blog-card__content blog-card__content--featured">
-						<?php if ( $cat_name ) : ?>
-							<span class="blog-card__category"><?php echo $cat_name; ?></span>
-						<?php endif; ?>
-						<h2 class="blog-card__title blog-card__title--featured"><?php the_title(); ?></h2>
-						<?php if ( has_excerpt() ) : ?>
-							<p class="blog-card__excerpt"><?php echo esc_html( get_the_excerpt() ); ?></p>
-						<?php endif; ?>
-						<div class="blog-card__meta">
-							<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'M j, Y' ) ); ?></time>
-							<span class="blog-card__read-more">Read article &rarr;</span>
-						</div>
-					</div>
-				</a>
-				<?php endif; ?>
-
-				<?php if ( $blog_query->post_count > 1 || ! $is_first_page ) : ?>
 				<div class="blog-grid">
 					<?php while ( $blog_query->have_posts() ) : $blog_query->the_post();
 						$post_index++;
 						$categories = get_the_category();
 						$cat_name   = ! empty( $categories ) ? esc_html( $categories[0]->name ) : '';
+						$eager      = ( $is_first_page && $post_index <= 3 ) ? array( 'loading' => 'eager' ) : array();
 					?>
 					<a href="<?php the_permalink(); ?>" class="blog-card">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<div class="blog-card__image">
-								<?php the_post_thumbnail( 'medium_large' ); ?>
+								<?php the_post_thumbnail( 'medium_large', $eager ); ?>
 							</div>
 						<?php else : ?>
 							<div class="blog-card__image blog-card__image--placeholder">
@@ -103,7 +75,6 @@ $post_index    = 0;
 					</a>
 					<?php endwhile; ?>
 				</div>
-				<?php endif; ?>
 
 				<?php
 				$total_pages = $blog_query->max_num_pages;
