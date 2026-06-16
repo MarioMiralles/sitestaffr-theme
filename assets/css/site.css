@@ -1375,15 +1375,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: var(--border-light);
   margin: 0 0 16px;
 }
-.price-tier__minutes {
-  font-weight: 600;
-  font-size: 0.95rem;
-  color: var(--teal-deep);
-  margin-bottom: 16px;
-  padding: 8px 0;
-  background: var(--teal-pale);
-  border-radius: var(--radius-sm);
-}
 .price-tier__features {
   list-style: none;
   padding: 0;
@@ -3936,26 +3927,44 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: 32px 36px;
   flex: 1;
 }
-.pricing-section .price-tier__details .price-tier__minutes {
-  margin-bottom: 12px;
-  padding: 0;
-  text-align: left;
-  background: none;
-  border-radius: 0;
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--teal-deep);
-  letter-spacing: -0.01em;
+.pricing-section .price-tier__details .price-tier__allowances {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
 }
-.price-tier__messages {
-  margin-bottom: 16px;
-  padding: 0 0 12px;
-  text-align: left;
-  border-bottom: 1px solid var(--border-light);
-  font-size: 0.95rem;
+.price-tier__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+}
+.price-tier__stat + .price-tier__stat {
+  border-left: 1px solid var(--border-light);
+}
+.price-tier__stat-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+.price-tier__stat-value {
+  font-size: 1.3rem;
   font-weight: 700;
   color: var(--teal-deep);
   letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+.price-tier__stat-value small {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0;
+  margin-top: 2px;
 }
 .pricing-section .price-tier__details .price-tier__features {
   flex-grow: 1;

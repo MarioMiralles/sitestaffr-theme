@@ -809,8 +809,16 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__period">for 30 days</div>
         </div>
         <div class="price-tier__details">
-          <div class="price-tier__minutes">30 minutes included</div>
-          <div class="price-tier__messages">50 text-chat messages per day</div>
+          <div class="price-tier__allowances">
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Voice</span>
+              <span class="price-tier__stat-value">30 <small>min</small></span>
+            </div>
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Text chat</span>
+              <span class="price-tier__stat-value">50 <small>msgs/day</small></span>
+            </div>
+          </div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
             <li>1 AI blog post</li>
@@ -827,8 +835,16 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__period">per month</div>
         </div>
         <div class="price-tier__details">
-          <div class="price-tier__minutes">60 minutes included</div>
-          <div class="price-tier__messages">150 text-chat messages per day</div>
+          <div class="price-tier__allowances">
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Voice</span>
+              <span class="price-tier__stat-value">60 <small>min/mo</small></span>
+            </div>
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Text chat</span>
+              <span class="price-tier__stat-value">150 <small>msgs/day</small></span>
+            </div>
+          </div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
             <li>2 AI blog posts per month</li>
@@ -845,8 +861,16 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__period">per month</div>
         </div>
         <div class="price-tier__details">
-          <div class="price-tier__minutes">300 minutes included</div>
-          <div class="price-tier__messages">500 text-chat messages per day</div>
+          <div class="price-tier__allowances">
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Voice</span>
+              <span class="price-tier__stat-value">300 <small>min/mo</small></span>
+            </div>
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Text chat</span>
+              <span class="price-tier__stat-value">500 <small>msgs/day</small></span>
+            </div>
+          </div>
           <ul class="price-tier__features">
             <li>5 AI voices</li>
             <li>4 AI blog posts per month</li>
@@ -863,8 +887,16 @@ get_template_part( 'template-parts/site-nav', null, array(
           <div class="price-tier__period">per month</div>
         </div>
         <div class="price-tier__details">
-          <div class="price-tier__minutes">700 minutes included</div>
-          <div class="price-tier__messages">2,000 text-chat messages per day</div>
+          <div class="price-tier__allowances">
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Voice</span>
+              <span class="price-tier__stat-value">700 <small>min/mo</small></span>
+            </div>
+            <div class="price-tier__stat">
+              <span class="price-tier__stat-label">Text chat</span>
+              <span class="price-tier__stat-value">2,000 <small>msgs/day</small></span>
+            </div>
+          </div>
           <ul class="price-tier__features">
             <li>All 10 AI voices</li>
             <li>8 AI blog posts per month</li>
