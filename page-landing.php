@@ -913,17 +913,21 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="pricing-assurance__grid">
         <div class="pricing-assurance__item">
           <span class="pricing-assurance__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
           </span>
-          <h3 class="pricing-assurance__label">Flat-rate text chat</h3>
-          <p>No per-conversation fees and no surprise charges. Your daily message count <strong>resets every day</strong>, separate from your voice minutes.</p>
+          <div class="pricing-assurance__body">
+            <h3 class="pricing-assurance__label">Flat-rate text chat</h3>
+            <p>No per-conversation fees and no surprise charges. Your daily message count <strong>resets every day</strong>, separate from your voice minutes.</p>
+          </div>
         </div>
         <div class="pricing-assurance__item">
           <span class="pricing-assurance__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="8" y1="22" x2="16" y2="22"/></svg>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
           </span>
-          <h3 class="pricing-assurance__label">Voice minutes, your way</h3>
-          <p>Need more? Add <strong>50 minutes for $10</strong> anytime &mdash; they never expire, with no automatic overage charges.</p>
+          <div class="pricing-assurance__body">
+            <h3 class="pricing-assurance__label">Voice minutes, your way</h3>
+            <p>Need more? Add <strong>50 minutes for $10</strong> anytime &mdash; they never expire, with no automatic overage charges.</p>
+          </div>
         </div>
       </div>
     </div>

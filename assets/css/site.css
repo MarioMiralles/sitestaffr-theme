@@ -4182,14 +4182,15 @@ body.sitestaffr-landing-page .hero__visual > * {
   text-align: left;
 }
 .pricing-assurance__item {
-  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
 }
 .pricing-assurance__icon {
   position: relative;
-  display: inline-flex;
+  flex-shrink: 0;
   width: 46px;
   height: 46px;
-  margin-bottom: 14px;
 }
 .pricing-assurance__icon::before {
   content: '';
