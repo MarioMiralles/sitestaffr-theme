@@ -4183,17 +4183,36 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .pricing-assurance__item {
   position: relative;
-  padding-left: 18px;
 }
-.pricing-assurance__item::before {
+.pricing-assurance__icon {
+  position: relative;
+  display: inline-flex;
+  width: 46px;
+  height: 46px;
+  margin-bottom: 14px;
+}
+.pricing-assurance__icon::before {
   content: '';
   position: absolute;
-  left: 0;
-  top: 5px;
-  bottom: 5px;
-  width: 3px;
-  border-radius: 2px;
-  background: var(--teal-deep);
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--teal-pale) 0%, rgba(31, 182, 204, 0.15) 100%);
+  transform: rotate(-6deg);
+}
+.pricing-assurance__icon::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 10px;
+  background: #fff;
+}
+.pricing-assurance__icon svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--teal-deep);
+  z-index: 2;
 }
 .pricing-assurance__label {
   margin: 0 0 6px;
