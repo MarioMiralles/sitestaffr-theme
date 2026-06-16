@@ -908,12 +908,18 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
       </div>
     </div>
-    <div class="pricing-addon reveal">
-      <h3 class="pricing-addon__title">Run Out of Minutes? You Stay in Control.</h3>
-      <p class="pricing-addon__text">Buy add-on packs anytime: <strong>$10 for 50 extra minutes</strong>. They never expire, and there are no automatic overage charges.</p>
-    </div>
-    <div class="pricing-note reveal">
-      <p class="pricing-note__text">Text-chat messages are <strong>separate from your voice minutes</strong> and your daily message count <strong>resets every day</strong>. It&rsquo;s a flat monthly rate &mdash; no per-conversation fees and no surprise charges.</p>
+    <div class="pricing-assurance reveal">
+      <p class="pricing-assurance__eyebrow">Simple, predictable pricing</p>
+      <div class="pricing-assurance__grid">
+        <div class="pricing-assurance__item">
+          <h3 class="pricing-assurance__label">Flat-rate text chat</h3>
+          <p>No per-conversation fees and no surprise charges. Your daily message count <strong>resets every day</strong>, separate from your voice minutes.</p>
+        </div>
+        <div class="pricing-assurance__item">
+          <h3 class="pricing-assurance__label">Voice minutes, your way</h3>
+          <p>Need more? Add <strong>50 minutes for $10</strong> anytime &mdash; they never expire, with no automatic overage charges.</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>

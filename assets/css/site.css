@@ -4162,38 +4162,51 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-bottom: 20px;
   line-height: 1.4;
 }
-.pricing-addon {
-  max-width: 920px;
-  margin: 0 auto;
-  padding: 24px 28px;
-  background: none;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
+.pricing-assurance {
+  max-width: 860px;
+  margin: 8px auto 0;
   text-align: center;
 }
-.pricing-addon__title {
-  margin: 0 0 8px;
-  font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+.pricing-assurance__eyebrow {
+  margin: 0 0 18px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-deep);
 }
-.pricing-addon__text {
+.pricing-assurance__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px 40px;
+  text-align: left;
+}
+.pricing-assurance__item {
+  position: relative;
+  padding-left: 18px;
+}
+.pricing-assurance__item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  bottom: 5px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--teal-deep);
+}
+.pricing-assurance__label {
+  margin: 0 0 6px;
+  font-size: 1.02rem;
+  color: var(--teal-deep);
+}
+.pricing-assurance__item p {
+  margin: 0;
   color: var(--text-secondary);
-  font-size: 0.95rem;
-  line-height: 1.7;
+  font-size: 0.92rem;
+  line-height: 1.6;
 }
-.pricing-addon strong { color: var(--text-primary); }
-.pricing-note {
-  margin-top: 20px;
-  text-align: center;
-}
-.pricing-note__text {
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.7;
-  max-width: 640px;
-  margin: 0 auto;
-}
-.pricing-note strong { color: var(--text-primary); }
+.pricing-assurance__item strong { color: var(--text-primary); }
 
 /* ============================
    FORMS (shared)
@@ -5875,8 +5888,9 @@ body.sitestaffr-landing-page .hero__visual > * {
     padding: 28px 16px 20px;
     gap: 10px 16px;
   }
-  .pricing-addon {
-    padding: 16px 20px;
+  .pricing-assurance__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
   }
   .widget-bubble { right: 18px; bottom: 18px; gap: 8px; }
   .widget-bubble__caption { max-width: 220px; font-size: 0.75rem; padding: 8px 10px; }
