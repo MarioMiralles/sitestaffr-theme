@@ -77,7 +77,7 @@ $ba_faqs = array(
     ),
     array(
         'q' => 'How many posts do I get?',
-        'a' => 'It depends on your plan: 1 post on the free trial, 2 a month on Starter, 4 on Business, and 8 on Pro. You also get topic suggestions to choose from at twice your monthly post allowance.',
+        'a' => 'It depends on your plan: 1 post on the free trial, 2 a month on Starter, 4 on Business, and 8 on Pro. Blog Agent also keeps a queue of suggested topics ready for you to choose from.',
     ),
     array(
         'q' => 'Can I control the tone and length?',
@@ -540,7 +540,7 @@ $ba_faqs = array(
             <div class="ba-section__head reveal">
                 <span class="section-label">Posts per plan</span>
                 <h2 class="ba-section__title">Content that scales with you</h2>
-                <p class="ba-section__lead">Every plan includes Blog Agent. Your monthly post count grows as you do &mdash; plus topic ideas at twice your post allowance.</p>
+                <p class="ba-section__lead">Every plan includes Blog Agent. Your monthly post count grows as you do &mdash; with suggested topics always ready to go.</p>
             </div>
             <div class="ba-plans__grid reveal">
                 <?php foreach ( $ba_plans as $plan ) : ?>
