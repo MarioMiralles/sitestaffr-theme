@@ -371,7 +371,7 @@ $industries = array(
 		),
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Friday, 12:20 AM',
-		'scenario'       => 'A visitor lands on your website after their dog got into a bag of chocolate an hour ago. SiteStaffr greets them and asks what&rsquo;s going on. They describe the amount and the dog&rsquo;s size and weight. The AI lets them know this sounds urgent, confirms your clinic handles cases like this, and asks for their name and phone number so someone can call them back right away. By 12:22 AM, the details are in your inbox &mdash; symptoms, timing, and contact information. Your on-call tech reaches them within minutes instead of them searching for an emergency hospital.',
+		'scenario'       => 'A visitor lands on your website after their dog got into a bag of chocolate an hour ago. SiteStaffr greets them and asks what&rsquo;s going on. They describe the amount and the dog&rsquo;s size and weight. The AI confirms your clinic handles urgent cases, asks for their name and phone number so someone can call them back right away, and flags the timing in your recap. By 12:22 AM, the details are in your inbox &mdash; symptoms, timing, and contact information. Your on-call tech reaches them within minutes instead of them searching for an emergency hospital.',
 		'faqs' => array(
 			array(
 				'q' => 'Does SiteStaffr store my patients&rsquo; medical records?',
