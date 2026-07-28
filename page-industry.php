@@ -95,7 +95,7 @@ $industries = array(
 			array(
 				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
 				'title' => 'Speed wins in legal intake',
-				'desc'  => 'Studies show the first firm to respond gets the client. If your competitors answer faster &mdash; even with a simple conversation &mdash; they win the case before you know it existed.',
+				'desc'  => 'In legal intake, the first firm to respond usually gets the client. If your competitors answer faster &mdash; even with a simple conversation &mdash; they win the case before you know it existed.',
 			),
 		),
 		'solutions_headline' => 'SiteStaffr Works Like a 24/7 Intake Coordinator for Your Firm',
