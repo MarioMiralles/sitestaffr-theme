@@ -252,14 +252,15 @@ add_action( 'init', function () {
 } );
 
 /**
- * Provision the six new /for/<slug> industry landing pages and their SEO metadata.
+ * Provision the /for/<slug> industry landing pages and their SEO metadata.
  * Same versioned-option pattern as the Blog Agent and Salesforce pages above —
- * ensures the parent "For" page exists (noindexed, it's just a container), then
- * heals/creates each child page. Mario never has to touch WP admin to launch a
- * new industry page — bump $provision_version to re-run and heal existing pages.
+ * ensures the parent "For" page exists (it's a real indexed index page now),
+ * then heals/creates each child page. Mario never has to touch WP admin to
+ * launch a new industry page — bump $provision_version to re-run and heal
+ * existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '1';
+	$provision_version = '2';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -278,10 +279,6 @@ add_action( 'init', function () {
 		if ( $new_parent_id && ! is_wp_error( $new_parent_id ) ) {
 			$parent_id = (int) $new_parent_id;
 		}
-	}
-
-	if ( $parent_id ) {
-		update_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex', '1' );
 	}
 
 	$industry_pages = array(
@@ -314,6 +311,36 @@ add_action( 'init', function () {
 			'title'     => 'Auto Repair Shops',
 			'seo_title' => 'AI Voice Agent for Auto Repair Shops | SiteStaffr',
 			'metadesc'  => 'SiteStaffr answers auto repair shop website visitors 24/7, captures vehicle repair inquiries with a full recap by email. Free 30-day trial, no credit card.',
+		),
+		'salons-barbershops'  => array(
+			'title'     => 'Salons & Barbershops',
+			'seo_title' => 'AI Voice Agent for Salons & Barbershops | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers salon and barbershop website visitors 24/7, captures booking inquiries, and emails a full recap instantly. Free 30-day trial.',
+		),
+		'hvac-plumbing'       => array(
+			'title'     => 'HVAC & Plumbing',
+			'seo_title' => 'AI Voice Agent for HVAC & Plumbing | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers HVAC and plumbing website visitors 24/7, captures no-heat and leak emergencies, and emails a recap instantly. Free 30-day trial.',
+		),
+		'accounting-tax'      => array(
+			'title'     => 'Accounting & Tax',
+			'seo_title' => 'AI Voice Agent for Accounting & Tax Firms | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers accounting and tax website visitors 24/7, captures new client inquiries, and emails a full recap instantly. Free 30-day trial.',
+		),
+		'insurance-agencies'  => array(
+			'title'     => 'Insurance Agencies',
+			'seo_title' => 'AI Voice Agent for Insurance Agencies | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers insurance agency website visitors 24/7, captures quote and coverage requests, and emails a full recap instantly. Free 30-day trial.',
+		),
+		'fitness-studios'     => array(
+			'title'     => 'Fitness Studios',
+			'seo_title' => 'AI Voice Agent for Fitness Studios | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers fitness studio website visitors 24/7, captures class and trial pass inquiries, and emails a recap instantly. Free 30-day trial.',
+		),
+		'pest-control'        => array(
+			'title'     => 'Pest Control',
+			'seo_title' => 'AI Voice Agent for Pest Control | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers pest control website visitors 24/7, captures urgent pest inquiries with full details, and emails a recap instantly. Free 30-day trial.',
 		),
 	);
 
@@ -402,6 +429,12 @@ add_action( 'template_redirect', function () {
 		echo "- [For Chiropractic & Physical Therapy](" . home_url( '/for/chiropractors/' ) . ") — AI voice agent for chiropractic and physical therapy practices\n";
 		echo "- [For Real Estate](" . home_url( '/for/real-estate/' ) . ") — AI voice agent for real estate agents\n";
 		echo "- [For Auto Repair Shops](" . home_url( '/for/auto-repair/' ) . ") — AI voice agent for auto repair shops\n";
+		echo "- [For Salons & Barbershops](" . home_url( '/for/salons-barbershops/' ) . ") — AI voice agent for salons and barbershops\n";
+		echo "- [For HVAC & Plumbing](" . home_url( '/for/hvac-plumbing/' ) . ") — AI voice agent for HVAC and plumbing companies\n";
+		echo "- [For Accounting & Tax](" . home_url( '/for/accounting-tax/' ) . ") — AI voice agent for accounting and tax firms\n";
+		echo "- [For Insurance Agencies](" . home_url( '/for/insurance-agencies/' ) . ") — AI voice agent for insurance agencies\n";
+		echo "- [For Fitness Studios](" . home_url( '/for/fitness-studios/' ) . ") — AI voice agent for fitness studios\n";
+		echo "- [For Pest Control](" . home_url( '/for/pest-control/' ) . ") — AI voice agent for pest control companies\n";
 		echo "- [Privacy Policy](" . home_url( '/privacy/' ) . ") — How we handle data\n";
 		echo "- [Terms of Service](" . home_url( '/terms/' ) . ") — Usage terms\n\n";
 		echo "## Product Facts\n\n";

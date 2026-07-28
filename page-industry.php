@@ -585,6 +585,390 @@ $industries = array(
 		'cta_headline' => 'Every Minute Your Website Stays Silent, a Job Goes Elsewhere',
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the lift &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
+
+	'salons-barbershops' => array(
+		'hero_icon' => '💈',
+		'label'    => 'For Salons &amp; Barbershops',
+		'headline' => 'A Client Wants Saturday&rsquo;s Last Colour Slot. She&rsquo;s Booking&nbsp;Tonight.',
+		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
+		'specialty' => 'BeautySalon',
+		'problems_headline' => 'Salons and Barbershops Lose Bookings Before the Chair Opens Up',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'After-hours booking requests vanish',
+				'desc'  => 'A visitor searches your site at 9 PM hoping to grab Saturday&rsquo;s last colour appointment before someone else does. No one answers. She books with the salon down the block instead.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+				'title' => 'Your front desk is stretched thin',
+				'desc'  => 'Between blowouts, colour services, and walk-ins, no one has a free minute to answer every website visitor asking about openings.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+				'title' => 'Clients expect instant answers',
+				'desc'  => 'Today&rsquo;s clients check pricing and availability online before they call. If your website can&rsquo;t tell them when a chair opens up, they book somewhere that can.',
+			),
+		),
+		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Booking Coordinator',
+		'solutions' => array(
+			array(
+				'title' => 'A visitor asks about a service',
+				'desc'  => 'Whether it&rsquo;s a balayage touch-up, a fade, or a first-time colour consultation, SiteStaffr answers using the information on your website &mdash; accurately and naturally, in 57+ languages.',
+			),
+			array(
+				'title' => 'The AI captures their details',
+				'desc'  => 'Name, phone number, the service they want, and their preferred day &mdash; SiteStaffr collects everything your front desk would ask, without putting anyone on hold.',
+			),
+			array(
+				'title' => 'You get a complete recap by email',
+				'desc'  => 'Within seconds of the conversation ending, a full summary with contact details, the service requested, and a suggested follow-up lands in your inbox &mdash; ready to book before they try another salon.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Thursday, 9:12 PM',
+		'scenario'       => 'A visitor finds your website while planning for a wedding this Saturday and needs a colour appointment before then. SiteStaffr greets her and asks how it can help. She explains what she wants done and asks if anything is open before the weekend. The AI checks what your site says about availability, then collects her name and phone number so your team can confirm a slot. By 9:14 PM, you have an email with every detail &mdash; the service, her timeline, and contact information. You text her first thing Friday morning and fit her in before she books with the salon down the street.',
+		'faqs' => array(
+			array(
+				'q' => 'Can SiteStaffr answer questions about pricing and specific services?',
+				'a' => 'Yes. SiteStaffr learns from the content on your website. If your site lists services like colour, cuts, or waxing along with pricing, the AI can speak to those topics naturally. You control what information it has access to.',
+			),
+			array(
+				'q' => 'Can it tell a client which stylist is available?',
+				'a' => 'SiteStaffr answers from what your website publishes about stylists, services, and hours. It does not check your live booking calendar, so it captures the client&rsquo;s preferred day and stylist and passes the request to your team to confirm.',
+			),
+			array(
+				'q' => 'What if a client speaks Spanish or another language?',
+				'a' => 'SiteStaffr supports 57+ languages automatically. If a visitor speaks Spanish, Mandarin, or Arabic, the AI responds in their language. Your recap always arrives in English with every detail captured.',
+			),
+			array(
+				'q' => 'How long does setup take?',
+				'a' => 'Most salons and barbershops are up and running in under five minutes. Install the WordPress plugin, enter your business details, and the AI agent goes live on your website immediately.',
+			),
+		),
+		'cta_headline' => 'Stop Losing Bookings to Silence',
+		'cta_text'     => 'SiteStaffr answers your website visitors 24/7 so your team can focus on the clients already in the chair. Try it free for 30 days &mdash; no credit card required.',
+	),
+
+	'hvac-plumbing' => array(
+		'hero_icon' => '🚿',
+		'label'    => 'For HVAC &amp; Plumbing',
+		'headline' => 'No Heat at 11&nbsp;PM in January. Whoever Answers First Gets the&nbsp;Call.',
+		'subtitle' => 'SiteStaffr answers your website visitors the instant the heat goes out or a pipe bursts &mdash; capturing name, number, and the problem, 24/7, so you&rsquo;re the first call back, not the third.',
+		'specialty' => 'HVACBusiness',
+		'problems_headline' => 'HVAC and Plumbing Companies Lose the Emergency Call to Whoever Answers First',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'Emergencies don&rsquo;t wait for morning',
+				'desc'  => 'A furnace dies at 11 PM in January or a pipe bursts under the sink at 2 AM. The homeowner searches your website in a panic. No one answers, so they call the next number on the page.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
+				'title' => 'You&rsquo;re on a job, not by the phone',
+				'desc'  => 'You&rsquo;re elbow-deep in a water heater install when someone three streets over needs help right now. By the time you see the missed call, they&rsquo;ve already booked the competitor who picked up.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+				'title' => 'Whoever answers first gets the job',
+				'desc'  => 'A homeowner with no heat or a flooding basement calls down the list until someone picks up. If your website goes quiet at night, you lose the job before you even know it existed &mdash; even if you&rsquo;re the better crew.',
+			),
+		),
+		'solutions_headline' => 'SiteStaffr Answers the Emergency Call While You&rsquo;re Still on the Job',
+		'solutions' => array(
+			array(
+				'title' => 'A homeowner describes the emergency',
+				'desc'  => 'No heat, no hot water, a pipe that won&rsquo;t stop leaking &mdash; visitors tell SiteStaffr what&rsquo;s wrong. The AI responds using your website content, confirming your service area and that you handle emergency calls.',
+			),
+			array(
+				'title' => 'The AI captures every detail',
+				'desc'  => 'Name, phone number, address, and exactly what&rsquo;s happening &mdash; no heat since this morning, water pooling under the sink &mdash; everything you need to triage the job and call back.',
+			),
+			array(
+				'title' => 'You get the lead instantly by email',
+				'desc'  => 'A full recap hits your inbox within seconds: who they are, what&rsquo;s failing, and how urgent it is. Check it between jobs and call back before the next company on the search results does.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Tuesday, 11:20 PM',
+		'scenario'       => 'A family&rsquo;s furnace stops working in the middle of a January cold snap, and the kids are already wrapped in blankets on the couch. They find your website and SiteStaffr greets them right away. They explain the furnace won&rsquo;t kick on and the house is dropping fast. The AI confirms your company handles emergency heating calls, collects their name, phone number, and address, and lets them know someone will call shortly. By 11:22 PM, the details are in your inbox. You call them back in five minutes and have a tech on the way before the house drops another degree.',
+		'faqs' => array(
+			array(
+				'q' => 'Does SiteStaffr dispatch a technician or diagnose the problem?',
+				'a' => 'No. SiteStaffr doesn&rsquo;t diagnose HVAC or plumbing issues or estimate repair costs &mdash; that stays with your technicians. It answers from what your website publishes, collects the details of the emergency, and gets them to you so your team can call back and dispatch.',
+			),
+			array(
+				'q' => 'Can it tell if a call is a true emergency?',
+				'a' => 'SiteStaffr captures exactly what the visitor describes &mdash; no heat, a leaking pipe, a flooded basement &mdash; and flags it in your recap the way they described it. Your team makes the call on how urgently to respond.',
+			),
+			array(
+				'q' => 'Can it handle calls in the middle of the night?',
+				'a' => 'Yes. SiteStaffr runs 24/7. When a homeowner&rsquo;s pipe bursts at 2 AM, the AI captures their details and emails you immediately, so you can call back the moment you&rsquo;re awake or dispatch an on-call tech right then.',
+			),
+			array(
+				'q' => 'What if the caller speaks a different language?',
+				'a' => 'SiteStaffr supports 57+ languages. If a homeowner describes a leak or a dead furnace in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail intact.',
+			),
+		),
+		'cta_headline' => 'The Next No-Heat Call Is One Missed Website Visit Away',
+		'cta_text'     => 'SiteStaffr captures the emergency the moment it happens &mdash; 24/7, in 57+ languages, with a full recap delivered before you&rsquo;re even off the last job. Try it free for 30 days &mdash; no credit card required.',
+	),
+
+	'accounting-tax' => array(
+		'hero_icon' => '📊',
+		'label'    => 'For Accounting &amp; Tax',
+		'headline' => 'A New Client Needs Catch-Up Bookkeeping Before the Deadline. They&rsquo;re Asking&nbsp;Tonight.',
+		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services and new client availability, capturing inquiries, and sending you a full recap before they even leave the page.',
+		'specialty' => 'AccountingService',
+		'problems_headline' => 'Accounting and Tax Firms Lose Clients Before Filing Season Even Starts',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'After-hours inquiries vanish',
+				'desc'  => 'A small business owner realizes at 10 PM that they&rsquo;re behind on bookkeeping with a filing deadline two weeks out. They search your website. No one answers. They book a consultation with the firm that does.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+				'title' => 'Your team is buried during busy season',
+				'desc'  => 'Between returns, client calls, and deadlines, no one has time to answer every website visitor asking whether you&rsquo;re taking new clients.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+				'title' => 'Prospects compare firms online before they call',
+				'desc'  => 'Business owners research accountants the same way they research everything else. If your website can&rsquo;t answer basic questions about services or new client availability, they move to the next firm on the list.',
+			),
+		),
+		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best New Client Coordinator',
+		'solutions' => array(
+			array(
+				'title' => 'A visitor asks about your services',
+				'desc'  => 'Whether it&rsquo;s catch-up bookkeeping, quarterly taxes, or payroll, SiteStaffr answers using the information on your website &mdash; accurately and naturally, in 57+ languages.',
+			),
+			array(
+				'title' => 'The AI captures their details',
+				'desc'  => 'Name, phone number, what kind of help they need, and their timeline &mdash; SiteStaffr collects everything a new client coordinator would, without putting anyone on hold.',
+			),
+			array(
+				'title' => 'You get a complete recap by email',
+				'desc'  => 'Within seconds of the conversation ending, a full summary with contact details, what they need, and a suggested follow-up lands in your inbox &mdash; ready to act first thing in the morning.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Sunday, 8:36 PM',
+		'scenario'       => 'A business owner realizes their bookkeeping has fallen a full year behind, with the extension deadline three weeks out. They find your website while searching for help. SiteStaffr greets them and asks how it can help. They explain the situation and ask if you&rsquo;re taking new clients before the deadline. The AI confirms what your site says about new client intake, then collects their name, phone number, and a brief description of what they need. By 8:38 PM, you have an email with every detail. Monday morning, you call first &mdash; and sign the engagement before they try another firm.',
+		'faqs' => array(
+			array(
+				'q' => 'Does SiteStaffr give tax or accounting advice to visitors?',
+				'a' => 'No. SiteStaffr is an intake tool, not a tax advisor. It answers questions based on the content published on your website &mdash; services offered, new client process, deadlines you mention &mdash; and captures visitor details for your team to follow up on directly.',
+			),
+			array(
+				'q' => 'Can it answer questions about specific services like payroll or audits?',
+				'a' => 'Yes. SiteStaffr learns from the content on your website. If your site describes services like bookkeeping, payroll, quarterly filings, or audit support, the AI can speak to those topics naturally. You control what information it has access to.',
+			),
+			array(
+				'q' => 'Is client information kept confidential?',
+				'a' => 'All conversation data is stored in your own WordPress database, not on external servers. SiteStaffr&rsquo;s middleware processes conversations in real time but does not retain visitor personal data outside your site.',
+			),
+			array(
+				'q' => 'What if a prospective client speaks a different language?',
+				'a' => 'SiteStaffr supports 57+ languages. If a visitor describes their situation in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail captured.',
+			),
+		),
+		'cta_headline' => 'The Next New Client Is Checking Your Website Tonight',
+		'cta_text'     => 'SiteStaffr makes sure you never miss another inquiry during your busiest season. Capture leads 24/7 and respond first. Try it free for 30 days &mdash; no credit card required.',
+	),
+
+	'insurance-agencies' => array(
+		'hero_icon' => '🛡️',
+		'label'    => 'For Insurance Agencies',
+		'headline' => 'A Homeowner Just Opened Their Renewal Notice. They&rsquo;re Shopping&nbsp;Tonight.',
+		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about coverage types and availability, capturing new policy inquiries, and sending you a full recap before they even leave the page.',
+		'specialty' => 'InsuranceAgency',
+		'problems_headline' => 'Insurance Agencies Lose Shoppers the Moment They Close the Tab',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'After-hours quote requests vanish',
+				'desc'  => 'A homeowner opens their renewal notice at 9 PM, sees the increase, and starts comparing quotes online. Your website is the third tab open. No one answers, so they request a quote from the second tab instead.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+				'title' => 'Your office can&rsquo;t field every comparison shopper',
+				'desc'  => 'Between renewals, claims calls, and walk-ins, your team can&rsquo;t give every website visitor comparing rates the attention a new policy deserves.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+				'title' => 'Shoppers expect instant answers',
+				'desc'  => 'Today&rsquo;s shoppers compare coverage and carriers online before they ever call an agent. If your website can&rsquo;t answer basic questions about what you offer, they request a quote somewhere that can.',
+			),
+		),
+		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Quote Coordinator',
+		'solutions' => array(
+			array(
+				'title' => 'A visitor asks about coverage',
+				'desc'  => 'Whether it&rsquo;s auto, home, or umbrella coverage, SiteStaffr answers using the information on your website &mdash; accurately and naturally, in 57+ languages.',
+			),
+			array(
+				'title' => 'The AI captures their details',
+				'desc'  => 'Name, phone number, the type of coverage they&rsquo;re shopping for, and what prompted the search &mdash; a rate increase, a new home, a new car &mdash; SiteStaffr collects everything an agent would ask, without putting anyone on hold.',
+			),
+			array(
+				'title' => 'You get a complete recap by email',
+				'desc'  => 'Within seconds of the conversation ending, a full summary with contact details, what they&rsquo;re shopping for, and a suggested follow-up lands in your inbox &mdash; ready to quote before they compare anyone else.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Wednesday, 8:51 PM',
+		'scenario'       => 'A homeowner opens her renewal notice and sees the premium jumped again. She starts comparing agencies online and lands on your website. SiteStaffr greets her and asks how it can help. She explains the increase and asks what you offer for home and auto bundles. The AI answers using the coverage information on your site, then collects her name and phone number so an agent can follow up with a quote. By 8:53 PM, you have an email with every detail &mdash; what she&rsquo;s shopping for and why. You call her first thing tomorrow, before she compares anyone else.',
+		'faqs' => array(
+			array(
+				'q' => 'Does SiteStaffr quote policies or give coverage advice?',
+				'a' => 'No. SiteStaffr doesn&rsquo;t quote premiums or advise on coverage &mdash; that requires a licensed agent. It answers from what your website publishes about the coverage types and carriers you offer, then captures the visitor&rsquo;s details so an agent can follow up with an actual quote.',
+			),
+			array(
+				'q' => 'Can it answer questions about specific coverage types?',
+				'a' => 'Yes. SiteStaffr learns from the content on your website. If your site describes auto, home, life, or commercial coverage, the AI can speak to those topics naturally. You control what information it has access to.',
+			),
+			array(
+				'q' => 'What happens to a shopper&rsquo;s contact information?',
+				'a' => 'All conversation data is stored in your own WordPress database, not on external servers or shared with other agencies. SiteStaffr&rsquo;s middleware processes the conversation in real time but does not retain visitor personal data.',
+			),
+			array(
+				'q' => 'What if a shopper speaks a different language?',
+				'a' => 'SiteStaffr supports 57+ languages. If a visitor requests a quote in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail captured.',
+			),
+		),
+		'cta_headline' => 'The Next Rate Shopper Is Comparing Agencies Right Now',
+		'cta_text'     => 'SiteStaffr makes sure you never miss another quote request. Capture leads 24/7 and respond first. Try it free for 30 days &mdash; no credit card required.',
+	),
+
+	'fitness-studios' => array(
+		'hero_icon' => '🏋️',
+		'label'    => 'For Fitness Studios',
+		'headline' => 'A Prospect Wants to Know if Tomorrow&rsquo;s 6&nbsp;AM Class Has Room. They&rsquo;re Asking&nbsp;Tonight.',
+		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about class times, trial passes, and membership, capturing new member inquiries, and sending you a full recap before they even leave the page.',
+		'specialty' => 'ExerciseGym',
+		'problems_headline' => 'Fitness Studios Lose New Members Before They Ever Walk In',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'After-hours inquiries vanish',
+				'desc'  => 'A visitor scrolls your class schedule at 9 PM, deciding whether to try tomorrow&rsquo;s 6 AM class. No one answers her questions about the trial pass. She signs up with the studio down the street instead.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+				'title' => 'Your front desk is teaching, not answering the site',
+				'desc'  => 'Between teaching, checking members in, and answering the phone during peak hours, no one has time to walk every website visitor through class times and pricing.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
+				'title' => 'Prospects expect instant answers',
+				'desc'  => 'Today&rsquo;s prospects compare studios online before they ever show up. If your website can&rsquo;t answer basic questions about class types, trial passes, or drop-in rates, they move on.',
+			),
+		),
+		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Front Desk',
+		'solutions' => array(
+			array(
+				'title' => 'A visitor asks about classes or membership',
+				'desc'  => 'Whether it&rsquo;s a trial pass, drop-in rate, or what a beginner class involves, SiteStaffr answers using the information on your website &mdash; accurately and naturally, in 57+ languages.',
+			),
+			array(
+				'title' => 'The AI captures their details',
+				'desc'  => 'Name, phone number, which class or membership they&rsquo;re interested in, and when they want to start &mdash; SiteStaffr collects everything your front desk would ask, without putting anyone on hold.',
+			),
+			array(
+				'title' => 'You get a complete recap by email',
+				'desc'  => 'Within seconds of the conversation ending, a full summary with contact details, what they&rsquo;re interested in, and a suggested follow-up lands in your inbox &mdash; ready to welcome them before they try another studio.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Sunday, 7:40 PM',
+		'scenario'       => 'A visitor is deciding whether to finally try the 6 AM class she&rsquo;s been eyeing and lands on your website looking for a trial pass. SiteStaffr greets her and asks how it can help. She asks what the first class is like and whether there&rsquo;s a free trial. The AI answers using your website&rsquo;s class and pricing information, then collects her name and phone number so your team can follow up. By 7:42 PM, you have an email with every detail &mdash; the class she wants, her contact information, and a suggested time to reach out. Your studio texts her Monday morning, and she&rsquo;s on the mat by Wednesday.',
+		'faqs' => array(
+			array(
+				'q' => 'Can SiteStaffr check real-time class availability?',
+				'a' => 'SiteStaffr answers from what your website publishes about the schedule, class types, and trial offers. It does not check your live booking system for open spots, so it captures the prospect&rsquo;s preferred class and passes the request to your team to confirm.',
+			),
+			array(
+				'q' => 'Can it answer questions about membership pricing?',
+				'a' => 'Yes. SiteStaffr learns from the content on your website. If your site lists membership tiers, drop-in rates, or trial pass details, the AI can speak to those topics naturally. You control what information it has access to.',
+			),
+			array(
+				'q' => 'What if a prospect speaks a different language?',
+				'a' => 'SiteStaffr supports 57+ languages. If a visitor asks about classes in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail captured.',
+			),
+			array(
+				'q' => 'How long does setup take?',
+				'a' => 'Most fitness studios are up and running in under five minutes. Install the WordPress plugin, enter your studio details, and the AI agent goes live on your website immediately.',
+			),
+		),
+		'cta_headline' => 'Stop Losing New Members to Silence',
+		'cta_text'     => 'SiteStaffr answers your website visitors 24/7 so your front desk can focus on the members already on the floor. Try it free for 30 days &mdash; no credit card required.',
+	),
+
+	'pest-control' => array(
+		'hero_icon' => '🐜',
+		'label'    => 'For Pest Control',
+		'headline' => 'Someone Just Saw a Wasp Nest by the Front Door. They Want Someone Out&nbsp;Tomorrow.',
+		'subtitle' => 'SiteStaffr answers your website visitors the moment they spot roaches, a wasp nest, or something worse &mdash; capturing name, number, and the problem, 24/7, so you&rsquo;re the first call back.',
+		'specialty' => 'PestControlService',
+		'problems_headline' => 'Pest Control Companies Lose Jobs They Never Even Know About',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
+				'title' => 'Missed calls from the truck',
+				'desc'  => 'You&rsquo;re mid-treatment at one house when someone across town spots roaches in the kitchen and needs someone out fast. Your phone is in the truck. By the time you see it, they&rsquo;ve booked the next company on Google.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+				'title' => 'Seasonal surges overwhelm you',
+				'desc'  => 'When wasp season hits or the weather turns, your phone rings nonstop. You can&rsquo;t answer every website visitor while you&rsquo;re already booked solid.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>',
+				'title' => 'Whoever calls back first gets the job',
+				'desc'  => 'Someone who just saw a roach or found a wasp nest by the door wants it handled fast. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, they book the next name on the list &mdash; even if you&rsquo;re better at the job.',
+			),
+		),
+		'solutions_headline' => 'SiteStaffr Answers While You&rsquo;re on the Job',
+		'solutions' => array(
+			array(
+				'title' => 'A visitor describes what they found',
+				'desc'  => 'Roaches in the kitchen, a wasp nest by the door, signs of termites in the garage &mdash; visitors tell SiteStaffr what&rsquo;s going on. The AI responds naturally using your website content, confirming your service area and what you treat.',
+			),
+			array(
+				'title' => 'The AI captures every detail',
+				'desc'  => 'Name, phone number, address, what they found, and how urgent it feels &mdash; everything you need to prioritize the job and call them back.',
+			),
+			array(
+				'title' => 'You get the lead instantly by email',
+				'desc'  => 'A full recap hits your inbox within seconds: who they are, what they saw, and a suggested follow-up. Check it between stops and call them back before anyone else can.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Friday, 6:15 PM',
+		'scenario'       => 'A homeowner walks out the front door and finds a wasp nest tucked under the eaves, right where the kids play. She finds your website and SiteStaffr greets her right away. She describes the nest and its location and asks how soon someone can come out. The AI confirms your company handles wasp removal, collects her name, phone number, and address, and lets her know someone will follow up. By 6:17 PM, the details are in your inbox. You call her on the way home and have a tech scheduled for tomorrow morning before she calls anyone else.',
+		'faqs' => array(
+			array(
+				'q' => 'Does SiteStaffr diagnose the pest problem or quote a price?',
+				'a' => 'No. SiteStaffr doesn&rsquo;t identify pests or estimate treatment costs &mdash; that stays with your technicians. It answers from what your website publishes, captures what the visitor found and where, and gets the details to you so your team can follow up with an inspection and quote.',
+			),
+			array(
+				'q' => 'Can it handle same-day or urgent requests?',
+				'a' => 'Yes. SiteStaffr runs 24/7. When someone finds roaches or a wasp nest and wants it handled fast, the AI captures their details and emails you immediately so your team can prioritize the callback.',
+			),
+			array(
+				'q' => 'Does it work for both residential and commercial customers?',
+				'a' => 'Yes. Whether your site covers home pest control, termite inspections, or commercial accounts, SiteStaffr adapts to your website content and can discuss whatever services you&rsquo;ve published.',
+			),
+			array(
+				'q' => 'What if a visitor speaks a different language?',
+				'a' => 'SiteStaffr supports 57+ languages. If a homeowner describes their pest problem in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail intact.',
+			),
+		),
+		'cta_headline' => 'Every Minute Your Website Stays Silent, a Job Goes Elsewhere',
+		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
+	),
 );
 
 if ( ! isset( $industries[ $page_slug ] ) ) {
