@@ -34,7 +34,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s patients compare practices online. If your website can&rsquo;t answer basic questions about cleanings, cosmetic options, or insurance acceptance, they move on.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Patient Coordinator',
+		'solutions_headline' => 'What an AI Voice Agent Does for a Dental Practice',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your services',
@@ -98,7 +98,7 @@ $industries = array(
 				'desc'  => 'In legal intake, the first firm to respond usually gets the client. If your competitors answer faster &mdash; even with a simple conversation &mdash; they win the case before you know it existed.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Works Like a 24/7 Intake Coordinator for Your Firm',
+		'solutions_headline' => 'How an AI Voice Agent Handles Legal Intake',
 		'solutions' => array(
 			array(
 				'title' => 'A prospect describes their situation',
@@ -162,7 +162,7 @@ $industries = array(
 				'desc'  => 'Homeowners in a bind call the first business that picks up. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, you lose &mdash; even if you&rsquo;re better at the job.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Answers While You Work',
+		'solutions_headline' => 'An AI Voice Agent That Answers While You Work',
 		'solutions' => array(
 			array(
 				'title' => 'A homeowner describes their problem',
@@ -226,7 +226,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s clients compare med spas online before they ever call. If your website can&rsquo;t answer basic questions about laser hair removal, fillers, or membership pricing, they move on.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Client Coordinator',
+		'solutions_headline' => 'What an AI Voice Agent Does for a Med Spa',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a treatment',
@@ -290,7 +290,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s patients compare practices online before calling. If your website can&rsquo;t answer basic questions about services, insurance, or wait times, they move on to a practice that can.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Patient Coordinator',
+		'solutions_headline' => 'How an AI Voice Agent Supports a Medical Front Desk',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your practice',
@@ -333,7 +333,7 @@ $industries = array(
 	'veterinary-clinics' => array(
 		'hero_icon' => '🐾',
 		'label'    => 'For Veterinary Clinics',
-		'headline' => 'A Dog Ate Something It Shouldn&rsquo;t Have. At&nbsp;Midnight. Your Website Should&nbsp;Answer.',
+		'headline' => 'It&rsquo;s Midnight and Their Dog Ate Something It&nbsp;Shouldn&rsquo;t&nbsp;Have.',
 		'subtitle' => 'SiteStaffr greets worried pet owners on your website 24/7 &mdash; answering questions about services and availability, capturing urgent inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'VeterinaryCare',
 		'problems_headline' => 'Veterinary Clinics Lose Clients in Their Most Anxious Moment',
@@ -354,7 +354,7 @@ $industries = array(
 				'desc'  => 'A worried owner won&rsquo;t wait until morning to find help. If your website can&rsquo;t tell them whether you&rsquo;re taking new patients or handling urgent cases, they call somewhere else.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Answers While Your Team Is With a Patient',
+		'solutions_headline' => 'An AI Voice Agent for Vet Clinics, Answering When You Can&rsquo;t',
 		'solutions' => array(
 			array(
 				'title' => 'A pet owner describes what happened',
@@ -397,7 +397,7 @@ $industries = array(
 	'chiropractors' => array(
 		'hero_icon' => '🦴',
 		'label'    => 'For Chiropractic &amp; Physical Therapy',
-		'headline' => 'They Threw Out Their Back Moving Furniture. Your Website Should Answer&nbsp;Tonight.',
+		'headline' => 'They Threw Out Their Back Moving a Couch. They&rsquo;re Looking for Relief&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about treatments, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'Chiropractic',
 		'problems_headline' => 'Chiropractic and PT Practices Lose Patients Before the First Adjustment',
@@ -418,7 +418,7 @@ $industries = array(
 				'desc'  => 'Someone in pain compares practices before calling. If your website can&rsquo;t answer basic questions about treatment approach, insurance, or same-day availability, they move on.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best New Patient Coordinator',
+		'solutions_headline' => 'How an AI Voice Agent Works for Chiropractic and PT Practices',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor describes their pain',
@@ -454,7 +454,7 @@ $industries = array(
 				'a' => 'Most chiropractic and physical therapy practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
 			),
 		),
-		'cta_headline' => 'Stop Losing Patients to Silence',
+		'cta_headline' => 'Every Unanswered Question Is a Patient Who Called Someone Else',
 		'cta_text'     => 'SiteStaffr answers your website visitors 24/7 so your front desk can focus on the patients already on the table. Try it free for 30 days &mdash; no credit card required.',
 	),
 
@@ -482,7 +482,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s buyers browse listings at all hours and compare agents online. If your website can&rsquo;t answer basic questions about price, condition, or availability, they move on to the next listing.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Showing Coordinator',
+		'solutions_headline' => 'What an AI Voice Agent Does for a Real Estate Agent',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a listing',
@@ -525,10 +525,10 @@ $industries = array(
 	'auto-repair' => array(
 		'hero_icon' => '🔧',
 		'label'    => 'For Auto Repair Shops',
-		'headline' => 'The Check Engine Light Came On Tonight. Your Website Should Answer&nbsp;Now.',
+		'headline' => 'The Check Engine Light Just Came On. They&rsquo;re Picking a Shop Before&nbsp;Morning.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re under a hood or on the lift &mdash; capturing every lead with name, number, and vehicle details, 24/7.',
 		'specialty' => 'AutoRepair',
-		'problems_headline' => 'Auto Repair Shops Lose Jobs They Never Even Know About',
+		'problems_headline' => 'Auto Repair Shops Lose Work to Whoever Picks Up First',
 		'problems'  => array(
 			array(
 				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/><line x1="1" y1="1" x2="23" y2="23"/></svg>',
@@ -546,7 +546,7 @@ $industries = array(
 				'desc'  => 'A driver with a dead battery or a grinding brake calls the first shop that responds. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, you lose the job &mdash; even if you&rsquo;re the better mechanic.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Answers While You&rsquo;re Under the Hood',
+		'solutions_headline' => 'How an AI Voice Agent Answers for Your Auto Shop',
 		'solutions' => array(
 			array(
 				'title' => 'A driver describes the problem',
@@ -589,7 +589,7 @@ $industries = array(
 	'salons-barbershops' => array(
 		'hero_icon' => '💈',
 		'label'    => 'For Salons &amp; Barbershops',
-		'headline' => 'A Client Wants Saturday&rsquo;s Last Colour Slot. She&rsquo;s Booking&nbsp;Tonight.',
+		'headline' => 'Saturday&rsquo;s Last Colour Slot Is Open. They&rsquo;re Deciding at&nbsp;9&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'BeautySalon',
 		'problems_headline' => 'Salons and Barbershops Lose Bookings Before the Chair Opens Up',
@@ -610,7 +610,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s clients check pricing and availability online before they call. If your website can&rsquo;t tell them when a chair opens up, they book somewhere that can.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Booking Coordinator',
+		'solutions_headline' => 'What an AI Voice Agent Does for a Salon or Barbershop',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a service',
@@ -674,7 +674,7 @@ $industries = array(
 				'desc'  => 'A homeowner with no heat or a flooding basement calls down the list until someone picks up. If your website goes quiet at night, you lose the job before you even know it existed &mdash; even if you&rsquo;re the better crew.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Answers the Emergency Call While You&rsquo;re Still on the Job',
+		'solutions_headline' => 'How an AI Voice Agent Handles HVAC and Plumbing Emergencies',
 		'solutions' => array(
 			array(
 				'title' => 'A homeowner describes the emergency',
@@ -717,7 +717,7 @@ $industries = array(
 	'accounting-tax' => array(
 		'hero_icon' => '📊',
 		'label'    => 'For Accounting &amp; Tax',
-		'headline' => 'A New Client Needs Catch-Up Bookkeeping Before the Deadline. They&rsquo;re Asking&nbsp;Tonight.',
+		'headline' => 'Two Weeks to the Filing Deadline. A New Client Needs Catch-Up&nbsp;Bookkeeping.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services and new client availability, capturing inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'AccountingService',
 		'problems_headline' => 'Accounting and Tax Firms Lose Clients Before Filing Season Even Starts',
@@ -738,7 +738,7 @@ $industries = array(
 				'desc'  => 'Business owners research accountants the same way they research everything else. If your website can&rsquo;t answer basic questions about services or new client availability, they move to the next firm on the list.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best New Client Coordinator',
+		'solutions_headline' => 'What an AI Voice Agent Does for an Accounting or Tax Firm',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your services',
@@ -781,7 +781,7 @@ $industries = array(
 	'insurance-agencies' => array(
 		'hero_icon' => '🛡️',
 		'label'    => 'For Insurance Agencies',
-		'headline' => 'A Homeowner Just Opened Their Renewal Notice. They&rsquo;re Shopping&nbsp;Tonight.',
+		'headline' => 'A Homeowner Just Opened Their Renewal Notice. The Rate Went&nbsp;Up.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about coverage types and availability, capturing new policy inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'InsuranceAgency',
 		'problems_headline' => 'Insurance Agencies Lose Shoppers the Moment They Close the Tab',
@@ -802,7 +802,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s shoppers compare coverage and carriers online before they ever call an agent. If your website can&rsquo;t answer basic questions about what you offer, they request a quote somewhere that can.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Quote Coordinator',
+		'solutions_headline' => 'How an AI Voice Agent Works for an Insurance Agency',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about coverage',
@@ -845,7 +845,7 @@ $industries = array(
 	'fitness-studios' => array(
 		'hero_icon' => '🏋️',
 		'label'    => 'For Fitness Studios',
-		'headline' => 'A Prospect Wants to Know if Tomorrow&rsquo;s 6&nbsp;AM Class Has Room. They&rsquo;re Asking&nbsp;Tonight.',
+		'headline' => 'Does Tomorrow&rsquo;s 6 AM Class Have Room? They&rsquo;re Asking at&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about class times, trial passes, and membership, capturing new member inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'ExerciseGym',
 		'problems_headline' => 'Fitness Studios Lose New Members Before They Ever Walk In',
@@ -866,7 +866,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s prospects compare studios online before they ever show up. If your website can&rsquo;t answer basic questions about class types, trial passes, or drop-in rates, they move on.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Turns Your Website Into Your Best Front Desk',
+		'solutions_headline' => 'What an AI Voice Agent Does for a Fitness Studio',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about classes or membership',
@@ -930,7 +930,7 @@ $industries = array(
 				'desc'  => 'Someone who just saw a roach or found a wasp nest by the door wants it handled fast. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, they book the next name on the list &mdash; even if you&rsquo;re better at the job.',
 			),
 		),
-		'solutions_headline' => 'SiteStaffr Answers While You&rsquo;re on the Job',
+		'solutions_headline' => 'How an AI Voice Agent Answers for a Pest Control Company',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor describes what they found',
@@ -966,7 +966,7 @@ $industries = array(
 				'a' => 'SiteStaffr supports 57+ languages. If a homeowner describes their pest problem in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail intact.',
 			),
 		),
-		'cta_headline' => 'Every Minute Your Website Stays Silent, a Job Goes Elsewhere',
+		'cta_headline' => 'The Job Goes to Whoever Answers. Make That You.',
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
 );
@@ -1136,7 +1136,13 @@ get_template_part( 'template-parts/site-nav' );
 		<div class="container container--narrow">
 			<div class="ind-faq__header reveal">
 				<span class="section-label">FAQ</span>
-				<h2>Frequently Asked Questions</h2>
+				<?php
+				// Keyphrase-bearing subheading: the Yoast title carries
+				// "AI Voice Agent for <vertical>" but no H2 did, so the page's
+				// own target phrase never appeared in its structure.
+				$faq_vertical = preg_replace( '/^For\s+/', '', html_entity_decode( $ind['label'], ENT_QUOTES, 'UTF-8' ) );
+				?>
+				<h2><?php echo esc_html( sprintf( 'AI Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
 			</div>
 			<div class="faq-list">
 				<?php foreach ( $ind['faqs'] as $i => $faq ) : ?>
