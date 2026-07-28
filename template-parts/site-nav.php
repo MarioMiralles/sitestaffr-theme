@@ -22,50 +22,26 @@ $primary_menu = array(
         'label'      => 'Industries',
         'href'       => '#',
         'menu_class' => 'nav__dropdown-menu--mega',
-        // Fifteen industries don't scan as one column. Grouped panel on desktop,
-        // stacked list with the same headings on mobile — same dropdown component,
-        // same open/close JS.
-        'groups'     => array(
-            array(
-                'heading' => 'Health & Medical',
-                'items'   => array(
-                    array( 'label' => 'Dental Practices',     'href' => home_url( '/for/dental-practices/' ) ),
-                    array( 'label' => 'Medical Practices',    'href' => home_url( '/for/medical-practices/' ) ),
-                    array( 'label' => 'Chiropractic & PT',    'href' => home_url( '/for/chiropractors/' ) ),
-                    array( 'label' => 'Veterinary Clinics',   'href' => home_url( '/for/veterinary-clinics/' ) ),
-                ),
-            ),
-            array(
-                'heading' => 'Beauty & Wellness',
-                'items'   => array(
-                    array( 'label' => 'Med Spas & Aesthetics', 'href' => home_url( '/for/med-spas/' ) ),
-                    array( 'label' => 'Salons & Barbershops',  'href' => home_url( '/for/salons-barbershops/' ) ),
-                    array( 'label' => 'Fitness Studios',       'href' => home_url( '/for/fitness-studios/' ) ),
-                ),
-            ),
-            array(
-                'heading' => 'Home & Trades',
-                'items'   => array(
-                    array( 'label' => 'Home Services',  'href' => home_url( '/for/home-services/' ) ),
-                    array( 'label' => 'HVAC & Plumbing', 'href' => home_url( '/for/hvac-plumbing/' ) ),
-                    array( 'label' => 'Pest Control',    'href' => home_url( '/for/pest-control/' ) ),
-                ),
-            ),
-            array(
-                'heading' => 'Professional Services',
-                'items'   => array(
-                    array( 'label' => 'Law Firms',          'href' => home_url( '/for/law-firms/' ) ),
-                    array( 'label' => 'Accounting & Tax',   'href' => home_url( '/for/accounting-tax/' ) ),
-                    array( 'label' => 'Insurance Agencies', 'href' => home_url( '/for/insurance-agencies/' ) ),
-                ),
-            ),
-            array(
-                'heading' => 'Property & Auto',
-                'items'   => array(
-                    array( 'label' => 'Real Estate',       'href' => home_url( '/for/real-estate/' ) ),
-                    array( 'label' => 'Auto Repair Shops', 'href' => home_url( '/for/auto-repair/' ) ),
-                ),
-            ),
+        // Grouped panel on desktop, stacked list with the same headings on
+        // mobile — same dropdown component, same open/close JS. The industries
+        // themselves come from the registry in functions.php (one source of
+        // truth for nav, footer, /for/ index, llms.txt and page provisioning).
+        'groups'     => array_map(
+            function ( $group ) {
+                return array(
+                    'heading' => $group['heading'],
+                    'items'   => array_map(
+                        function ( $industry ) {
+                            return array(
+                                'label' => isset( $industry['label'] ) ? $industry['label'] : $industry['title'],
+                                'href'  => home_url( '/for/' . $industry['slug'] . '/' ),
+                            );
+                        },
+                        $group['industries']
+                    ),
+                );
+            },
+            sitestaffr_industry_registry()
         ),
     ),
     array( 'label' => 'Blog',  'href' => home_url( '/blog/' ) ),

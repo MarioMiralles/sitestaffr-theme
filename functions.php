@@ -252,15 +252,213 @@ add_action( 'init', function () {
 } );
 
 /**
- * Provision the /for/<slug> industry landing pages and their SEO metadata.
- * Same versioned-option pattern as the Blog Agent and Salesforce pages above —
- * ensures the parent "For" page exists (it's a real indexed index page now),
- * then heals/creates each child page. Mario never has to touch WP admin to
- * launch a new industry page — bump $provision_version to re-run and heal
- * existing pages.
+ * THE industry registry — one source of truth for which /for/ pages exist and
+ * how they present themselves. The nav panel, the footer, the /for/ index, the
+ * llms.txt output and the page provisioner all read from here.
+ *
+ * TO ADD AN INDUSTRY: add an entry here, add its content entry to the
+ * $industries array in page-industry.php (same slug), and bump
+ * $provision_version below. Two files, one bump — nothing else to wire.
+ *
+ * Fields: slug · title (WP page title) · label (nav/footer/index, defaults to
+ * title) · icon · blurb (one-liner on the /for/ index) · llms (llms.txt
+ * description) · seo_title + metadesc (Yoast, written by the provisioner).
+ *
+ * @return array<int,array<string,mixed>> Ordered groups, each with a heading and its industries.
+ */
+function sitestaffr_industry_registry() {
+	return array(
+		array(
+			'heading'    => 'Health & Medical',
+			'industries' => array(
+				array(
+					'slug'      => 'dental-practices',
+					'title'     => 'Dental Practices',
+					'icon'      => '🦷',
+					'blurb'     => 'Emergency questions and new-patient inquiries answered while your front desk is with a patient.',
+					'llms'      => 'AI voice agent for dental offices',
+					'seo_title' => 'AI Voice Agent for Dental Practices | SiteStaffr',
+					'metadesc'  => 'SiteStaffr greets dental patients on your website 24/7 — answering questions, capturing new patient inquiries, and sending you a full recap. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'medical-practices',
+					'title'     => 'Medical Practices',
+					'icon'      => '🩺',
+					'blurb'     => 'Insurance and new-patient questions handled after hours, with the details in your inbox.',
+					'llms'      => 'AI voice agent for medical practices',
+					'seo_title' => 'AI Voice Agent for Medical Practices | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers medical practice website visitors 24/7, captures new patient and insurance inquiries, and emails a full recap. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'chiropractors',
+					'title'     => 'Chiropractic & Physical Therapy',
+					'label'     => 'Chiropractic & PT',
+					'icon'      => '🦴',
+					'blurb'     => 'Turn evening pain-relief searches into booked consultations instead of missed forms.',
+					'llms'      => 'AI voice agent for chiropractic and physical therapy practices',
+					'seo_title' => 'AI Voice Agent for Chiropractors & PT | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers chiropractic and physical therapy website visitors 24/7, captures new patient inquiries, and emails you a full recap. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'veterinary-clinics',
+					'title'     => 'Veterinary Clinics',
+					'icon'      => '🐾',
+					'blurb'     => 'Worried pet owners get an answer at midnight and you get their details right away.',
+					'llms'      => 'AI voice agent for veterinary clinics',
+					'seo_title' => 'AI Voice Agent for Veterinary Clinics | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
+				),
+			),
+		),
+		array(
+			'heading'    => 'Beauty & Wellness',
+			'industries' => array(
+				array(
+					'slug'      => 'med-spas',
+					'title'     => 'Med Spas & Aesthetics',
+					'icon'      => '✨',
+					'blurb'     => 'Answer treatment and pricing questions the moment someone is ready to book.',
+					'llms'      => 'AI voice agent for med spas and aesthetics practices',
+					'seo_title' => 'AI Voice Agent for Med Spas & Aesthetics | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers med spa website visitors 24/7, capturing Botox and treatment inquiries with instant recaps by email. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'salons-barbershops',
+					'title'     => 'Salons & Barbershops',
+					'icon'      => '💈',
+					'blurb'     => 'Capture appointment requests that arrive long after the last chair is empty.',
+					'llms'      => 'AI voice agent for salons and barbershops',
+					'seo_title' => 'AI Voice Agent for Salons & Barbershops | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers salon and barbershop website visitors 24/7, captures booking inquiries, and emails a full recap instantly. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'fitness-studios',
+					'title'     => 'Fitness Studios',
+					'icon'      => '🏋️',
+					'blurb'     => 'Class times, trial passes, and membership questions answered around the clock.',
+					'llms'      => 'AI voice agent for fitness studios',
+					'seo_title' => 'AI Voice Agent for Fitness Studios | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers fitness studio website visitors 24/7, captures class and trial pass inquiries, and emails a recap instantly. Free 30-day trial.',
+				),
+			),
+		),
+		array(
+			'heading'    => 'Home & Trades',
+			'industries' => array(
+				array(
+					'slug'      => 'home-services',
+					'title'     => 'Home Services',
+					'icon'      => '🏠',
+					'blurb'     => 'Quote requests captured while you are on a job instead of going to whoever answers first.',
+					'llms'      => 'AI voice agent for contractors',
+					'seo_title' => 'AI Voice Agent for Home Service Businesses | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers your website visitors while you&rsquo;re on the job — capturing every lead with name, number, and job details, 24/7. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'hvac-plumbing',
+					'title'     => 'HVAC & Plumbing',
+					'icon'      => '🚿',
+					'blurb'     => 'No heat at 11 PM, a pipe letting go on a Sunday — the calls that go to whoever picks up.',
+					'llms'      => 'AI voice agent for HVAC and plumbing companies',
+					'seo_title' => 'AI Voice Agent for HVAC & Plumbing | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers HVAC and plumbing website visitors 24/7, captures no-heat and leak emergencies, and emails a recap instantly. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'pest-control',
+					'title'     => 'Pest Control',
+					'icon'      => '🐜',
+					'blurb'     => 'Someone who just saw a roach wants a visit tomorrow, not a callback next week.',
+					'llms'      => 'AI voice agent for pest control companies',
+					'seo_title' => 'AI Voice Agent for Pest Control | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers pest control website visitors 24/7, captures urgent pest inquiries with full details, and emails a recap instantly. Free 30-day trial.',
+				),
+			),
+		),
+		array(
+			'heading'    => 'Professional Services',
+			'industries' => array(
+				array(
+					'slug'      => 'law-firms',
+					'title'     => 'Law Firms',
+					'icon'      => '⚖️',
+					'blurb'     => 'Intake questions answered and case details captured before the next firm replies.',
+					'llms'      => 'AI voice agent for legal practices',
+					'seo_title' => 'AI Voice Agent for Law Firms | SiteStaffr',
+					'metadesc'  => 'SiteStaffr captures potential client inquiries on your law firm&rsquo;s website around the clock — qualifying leads, collecting case details, and delivering intake recaps. Free trial.',
+				),
+				array(
+					'slug'      => 'accounting-tax',
+					'title'     => 'Accounting & Tax',
+					'icon'      => '📊',
+					'blurb'     => 'Deadline-week inquiries collected in full so nothing waits on a voicemail.',
+					'llms'      => 'AI voice agent for accounting and tax firms',
+					'seo_title' => 'AI Voice Agent for Accounting & Tax Firms | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers accounting and tax website visitors 24/7, captures new client inquiries, and emails a full recap instantly. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'insurance-agencies',
+					'title'     => 'Insurance Agencies',
+					'icon'      => '🛡️',
+					'blurb'     => 'Quote and coverage questions captured while prospects are still comparing.',
+					'llms'      => 'AI voice agent for insurance agencies',
+					'seo_title' => 'AI Voice Agent for Insurance Agencies | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers insurance agency website visitors 24/7, captures quote and coverage requests, and emails a full recap instantly. Free 30-day trial.',
+				),
+			),
+		),
+		array(
+			'heading'    => 'Property & Auto',
+			'industries' => array(
+				array(
+					'slug'      => 'real-estate',
+					'title'     => 'Real Estate',
+					'icon'      => '🏡',
+					'blurb'     => 'Listing questions answered on a Sunday, with the buyer&rsquo;s details in your inbox.',
+					'llms'      => 'AI voice agent for real estate agents',
+					'seo_title' => 'AI Voice Agent for Real Estate Agents | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers real estate website visitors 24/7, captures buyer and seller inquiries about your listings, and emails a full recap. Free 30-day trial.',
+				),
+				array(
+					'slug'      => 'auto-repair',
+					'title'     => 'Auto Repair Shops',
+					'icon'      => '🔧',
+					'blurb'     => 'Vehicle, symptom, and contact details captured before the shop opens.',
+					'llms'      => 'AI voice agent for auto repair shops',
+					'seo_title' => 'AI Voice Agent for Auto Repair Shops | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers auto repair shop website visitors 24/7, captures vehicle repair inquiries with a full recap by email. Free 30-day trial, no credit card.',
+				),
+			),
+		),
+	);
+}
+
+/**
+ * Flat industry list for the consumers that don't care about grouping
+ * (footer, llms.txt, page provisioning). Each entry gains a resolved 'label'.
+ *
+ * @return array<int,array<string,mixed>>
+ */
+function sitestaffr_industry_list() {
+	$flat = array();
+	foreach ( sitestaffr_industry_registry() as $group ) {
+		foreach ( $group['industries'] as $industry ) {
+			$industry['label'] = isset( $industry['label'] ) ? $industry['label'] : $industry['title'];
+			$flat[]            = $industry;
+		}
+	}
+	return $flat;
+}
+
+/**
+ * Provision the /for/<slug> industry landing pages and their SEO metadata from
+ * the registry above. Same versioned-option pattern as the Blog Agent and
+ * Salesforce pages — ensures the parent "For" page exists (it's a real indexed
+ * index page now), then heals/creates each child page. Mario never has to touch
+ * WP admin to launch a new industry page — bump $provision_version to re-run
+ * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '2';
+	$provision_version = '3';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -281,70 +479,10 @@ add_action( 'init', function () {
 		}
 	}
 
-	$industry_pages = array(
-		'med-spas'            => array(
-			'title'     => 'Med Spas & Aesthetics',
-			'seo_title' => 'AI Voice Agent for Med Spas & Aesthetics | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers med spa website visitors 24/7, capturing Botox and treatment inquiries with instant recaps by email. Free 30-day trial.',
-		),
-		'medical-practices'   => array(
-			'title'     => 'Medical Practices',
-			'seo_title' => 'AI Voice Agent for Medical Practices | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers medical practice website visitors 24/7, captures new patient and insurance inquiries, and emails a full recap. Free 30-day trial.',
-		),
-		'veterinary-clinics'  => array(
-			'title'     => 'Veterinary Clinics',
-			'seo_title' => 'AI Voice Agent for Veterinary Clinics | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
-		),
-		'chiropractors'       => array(
-			'title'     => 'Chiropractic & Physical Therapy',
-			'seo_title' => 'AI Voice Agent for Chiropractors & PT | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers chiropractic and physical therapy website visitors 24/7, captures new patient inquiries, and emails you a full recap. Free 30-day trial.',
-		),
-		'real-estate'         => array(
-			'title'     => 'Real Estate',
-			'seo_title' => 'AI Voice Agent for Real Estate Agents | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers real estate website visitors 24/7, captures buyer and seller inquiries about your listings, and emails a full recap. Free 30-day trial.',
-		),
-		'auto-repair'         => array(
-			'title'     => 'Auto Repair Shops',
-			'seo_title' => 'AI Voice Agent for Auto Repair Shops | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers auto repair shop website visitors 24/7, captures vehicle repair inquiries with a full recap by email. Free 30-day trial, no credit card.',
-		),
-		'salons-barbershops'  => array(
-			'title'     => 'Salons & Barbershops',
-			'seo_title' => 'AI Voice Agent for Salons & Barbershops | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers salon and barbershop website visitors 24/7, captures booking inquiries, and emails a full recap instantly. Free 30-day trial.',
-		),
-		'hvac-plumbing'       => array(
-			'title'     => 'HVAC & Plumbing',
-			'seo_title' => 'AI Voice Agent for HVAC & Plumbing | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers HVAC and plumbing website visitors 24/7, captures no-heat and leak emergencies, and emails a recap instantly. Free 30-day trial.',
-		),
-		'accounting-tax'      => array(
-			'title'     => 'Accounting & Tax',
-			'seo_title' => 'AI Voice Agent for Accounting & Tax Firms | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers accounting and tax website visitors 24/7, captures new client inquiries, and emails a full recap instantly. Free 30-day trial.',
-		),
-		'insurance-agencies'  => array(
-			'title'     => 'Insurance Agencies',
-			'seo_title' => 'AI Voice Agent for Insurance Agencies | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers insurance agency website visitors 24/7, captures quote and coverage requests, and emails a full recap instantly. Free 30-day trial.',
-		),
-		'fitness-studios'     => array(
-			'title'     => 'Fitness Studios',
-			'seo_title' => 'AI Voice Agent for Fitness Studios | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers fitness studio website visitors 24/7, captures class and trial pass inquiries, and emails a recap instantly. Free 30-day trial.',
-		),
-		'pest-control'        => array(
-			'title'     => 'Pest Control',
-			'seo_title' => 'AI Voice Agent for Pest Control | SiteStaffr',
-			'metadesc'  => 'SiteStaffr answers pest control website visitors 24/7, captures urgent pest inquiries with full details, and emails a recap instantly. Free 30-day trial.',
-		),
-	);
+	$industry_pages = sitestaffr_industry_list();
 
-	foreach ( $industry_pages as $slug => $data ) {
+	foreach ( $industry_pages as $data ) {
+		$slug     = $data['slug'];
 		$existing = get_page_by_path( 'for/' . $slug );
 		$page_id  = $existing ? (int) $existing->ID : 0;
 
@@ -420,21 +558,10 @@ add_action( 'template_redirect', function () {
 		echo "- [Download](" . home_url( '/download/' ) . ") — Plugin download and install guide\n";
 		echo "- [About](" . home_url( '/about/' ) . ") — Company and founder information\n";
 		echo "- [Blog](" . home_url( '/blog/' ) . ") — Guides and comparisons for service businesses\n";
-		echo "- [For Dental Practices](" . home_url( '/for/dental-practices/' ) . ") — AI voice agent for dental offices\n";
-		echo "- [For Law Firms](" . home_url( '/for/law-firms/' ) . ") — AI voice agent for legal practices\n";
-		echo "- [For Home Services](" . home_url( '/for/home-services/' ) . ") — AI voice agent for contractors\n";
-		echo "- [For Med Spas & Aesthetics](" . home_url( '/for/med-spas/' ) . ") — AI voice agent for med spas and aesthetics practices\n";
-		echo "- [For Medical Practices](" . home_url( '/for/medical-practices/' ) . ") — AI voice agent for medical practices\n";
-		echo "- [For Veterinary Clinics](" . home_url( '/for/veterinary-clinics/' ) . ") — AI voice agent for veterinary clinics\n";
-		echo "- [For Chiropractic & Physical Therapy](" . home_url( '/for/chiropractors/' ) . ") — AI voice agent for chiropractic and physical therapy practices\n";
-		echo "- [For Real Estate](" . home_url( '/for/real-estate/' ) . ") — AI voice agent for real estate agents\n";
-		echo "- [For Auto Repair Shops](" . home_url( '/for/auto-repair/' ) . ") — AI voice agent for auto repair shops\n";
-		echo "- [For Salons & Barbershops](" . home_url( '/for/salons-barbershops/' ) . ") — AI voice agent for salons and barbershops\n";
-		echo "- [For HVAC & Plumbing](" . home_url( '/for/hvac-plumbing/' ) . ") — AI voice agent for HVAC and plumbing companies\n";
-		echo "- [For Accounting & Tax](" . home_url( '/for/accounting-tax/' ) . ") — AI voice agent for accounting and tax firms\n";
-		echo "- [For Insurance Agencies](" . home_url( '/for/insurance-agencies/' ) . ") — AI voice agent for insurance agencies\n";
-		echo "- [For Fitness Studios](" . home_url( '/for/fitness-studios/' ) . ") — AI voice agent for fitness studios\n";
-		echo "- [For Pest Control](" . home_url( '/for/pest-control/' ) . ") — AI voice agent for pest control companies\n";
+		foreach ( sitestaffr_industry_list() as $sitestaffr_industry ) {
+			echo "- [For " . $sitestaffr_industry['title'] . "](" . home_url( '/for/' . $sitestaffr_industry['slug'] . '/' ) . ") — " . $sitestaffr_industry['llms'] . "
+";
+		}
 		echo "- [Privacy Policy](" . home_url( '/privacy/' ) . ") — How we handle data\n";
 		echo "- [Terms of Service](" . home_url( '/terms/' ) . ") — Usage terms\n\n";
 		echo "## Product Facts\n\n";

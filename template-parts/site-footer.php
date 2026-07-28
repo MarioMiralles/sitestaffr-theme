@@ -35,21 +35,9 @@ if ( ! defined( 'ABSPATH' ) ) {
           <div class="footer__col">
             <h3 class="footer__heading">Industries</h4>
             <ul>
-              <li><a href="<?php echo esc_url( home_url( '/for/dental-practices/' ) ); ?>">Dental Practices</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/law-firms/' ) ); ?>">Law Firms</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/home-services/' ) ); ?>">Home Services</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/med-spas/' ) ); ?>">Med Spas & Aesthetics</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/medical-practices/' ) ); ?>">Medical Practices</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/veterinary-clinics/' ) ); ?>">Veterinary Clinics</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/chiropractors/' ) ); ?>">Chiropractic & PT</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/real-estate/' ) ); ?>">Real Estate</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/auto-repair/' ) ); ?>">Auto Repair Shops</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/salons-barbershops/' ) ); ?>">Salons & Barbershops</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/hvac-plumbing/' ) ); ?>">HVAC & Plumbing</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/accounting-tax/' ) ); ?>">Accounting & Tax</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/insurance-agencies/' ) ); ?>">Insurance Agencies</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/fitness-studios/' ) ); ?>">Fitness Studios</a></li>
-              <li><a href="<?php echo esc_url( home_url( '/for/pest-control/' ) ); ?>">Pest Control</a></li>
+              <?php foreach ( sitestaffr_industry_list() as $sitestaffr_industry ) : ?>
+              <li><a href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_industry['slug'] . '/' ) ); ?>"><?php echo esc_html( $sitestaffr_industry['label'] ); ?></a></li>
+              <?php endforeach; ?>
             </ul>
           </div>
           <div class="footer__col">
