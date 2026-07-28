@@ -9866,6 +9866,13 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   border-color: var(--teal-deep);
   color: var(--teal-deep);
 }
+/* Solid primary buttons keep white text on the card. `.cta-spotlight a` is more
+   specific than `.btn--primary`, so without this the label goes teal-on-teal and
+   disappears against the button's own background. Same for the hover state. */
+.cta-spotlight .btn--primary,
+.cta-spotlight .btn--primary:hover {
+  color: #fff;
+}
 /* Download page's primary button was white-on-dark; make it teal on the card */
 .cta-spotlight .dl-cta__btn {
   background: var(--teal-light);
