@@ -163,6 +163,10 @@ $get_started_url = home_url( '/#get-started' );
             'answer'   => 'Yes. Every plan includes the Blog Agent, which suggests topics, writes SEO-optimized posts grounded in your business and services, generates a featured image, and saves each post as a draft in WordPress for your review. Plans include 1 to 8 posts per month depending on your tier, and on Business and Pro plans, Autopilot can write and publish posts automatically on a schedule you control.',
         ),
         array(
+            'question' => 'Does SiteStaffr connect to my CRM?',
+            'answer'   => 'Yes. SiteStaffr has a native Salesforce integration on every plan. When a conversation turns into a real lead, meaning the visitor gave a name plus a phone number or email, SiteStaffr creates the Lead in your Salesforce automatically with their contact details, what they were interested in, a recap of the conversation, and a link to the full transcript. You connect with your normal Salesforce login in about a minute, with no API keys and no developer setup. Using a different CRM? Tell us which one, because what gets built next is driven by what customers ask for.',
+        ),
+        array(
             'question' => 'Is there a free trial?',
             'answer'   => 'Yes. SiteStaffr offers a free 30-day trial with 30 minutes of conversation time included. No credit card is required to start, and you can upgrade to a paid plan anytime.',
         ),
@@ -583,6 +587,10 @@ get_template_part( 'template-parts/site-nav', null, array(
       <h2>A Complete Report, Delivered to Your Inbox</h2>
       <p class="what-you-get__subtitle">
         Automatically capture visitor conversations, summaries, and transcripts &mdash; all in one clean, shareable document.
+      </p>
+      <p class="what-you-get__subtitle">
+        Run your sales out of Salesforce? Qualified leads can land in your CRM the moment the conversation ends.
+        <a href="<?php echo esc_url( home_url( '/salesforce/' ) ); ?>">See the Salesforce integration</a>
       </p>
     </div>
 

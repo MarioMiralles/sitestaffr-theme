@@ -15,6 +15,7 @@ $primary_menu = array(
         'href'     => '#',
         'children' => array(
             array( 'label' => 'Blog Agent', 'href' => home_url( '/blog-agent/' ) ),
+            array( 'label' => 'Salesforce Integration', 'href' => home_url( '/salesforce/' ) ),
         ),
     ),
     array(

@@ -26,6 +26,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <ul>
               <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
               <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/salesforce/' ) ); ?>">Salesforce Integration</a></li>
               <li><a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>">Get Started</a></li>
               <li><a href="<?php echo esc_url( home_url( '/download/' ) ); ?>">Download Plugin</a></li>
               <li><a href="https://wordpress.org/plugins/sitestaffr/" target="_blank" rel="noopener">WordPress.org</a></li>

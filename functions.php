@@ -134,8 +134,9 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_industry   = is_page_template( 'page-industry.php' );
 	$is_download   = is_page_template( 'page-download.php' );
 	$is_blog_agent = is_page_template( 'page-blog-agent.php' );
+	$is_salesforce = is_page_template( 'page-salesforce.php' );
 
-	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent ) {
+	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),
@@ -161,7 +162,7 @@ add_action( 'wp_enqueue_scripts', function () {
 		) );
 	}
 
-	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage || $is_blog_agent ) {
+	if ( $is_landing || $is_maintenance || $is_legal || $is_get_started || $is_manage || $is_blog_agent || $is_salesforce ) {
 		wp_dequeue_style( 'wp-block-library' );
 		wp_dequeue_style( 'classic-theme-styles' );
 		wp_dequeue_style( 'global-styles' );
@@ -211,6 +212,43 @@ add_action( 'init', function () {
 	}
 
 	update_option( 'sitestaffr_blog_agent_page_v', $provision_version );
+} );
+
+/**
+ * Provision the /salesforce marketing page and its SEO metadata.
+ * Same versioned-option pattern as the Blog Agent page above — bumping the
+ * version re-runs it to heal an existing page (e.g. add metadata after launch).
+ */
+add_action( 'init', function () {
+	$provision_version = '1';
+	if ( get_option( 'sitestaffr_salesforce_page_v' ) === $provision_version ) {
+		return;
+	}
+
+	$existing = get_page_by_path( 'salesforce' );
+	$page_id  = $existing ? (int) $existing->ID : 0;
+
+	if ( ! $page_id ) {
+		$new_id = wp_insert_post( array(
+			'post_title'   => 'Salesforce Integration',
+			'post_name'    => 'salesforce',
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+		) );
+		if ( $new_id && ! is_wp_error( $new_id ) ) {
+			$page_id = (int) $new_id;
+		}
+	}
+
+	if ( $page_id ) {
+		update_post_meta( $page_id, '_wp_page_template', 'page-salesforce.php' );
+		// Yoast SEO fields (site runs Yoast) — set the search title + description.
+		update_post_meta( $page_id, '_yoast_wpseo_title', 'Salesforce Integration — Send Website Leads Straight to Salesforce | SiteStaffr' );
+		update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'SiteStaffr answers your visitors by voice and text, qualifies them, and creates the Lead in your Salesforce automatically. Connect with your Salesforce login in about a minute. No API keys, no Zapier.' );
+	}
+
+	update_option( 'sitestaffr_salesforce_page_v', $provision_version );
 } );
 
 add_action( 'send_headers', function () {
