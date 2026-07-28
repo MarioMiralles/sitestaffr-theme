@@ -359,14 +359,49 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   transition: background 0.15s ease, color 0.15s ease;
   white-space: nowrap;
 }
-@media (hover: hover) and (min-width: 769px) {
-  .nav__dropdown-menu--wide {
-    min-width: 380px;
-    column-count: 2;
-    column-gap: 4px;
+/* Industries mega panel: grouped columns on desktop, plain stacked list on
+   mobile (the grid rules are desktop-only, so the mobile nav is untouched). */
+.nav__mega-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav__mega-heading {
+  display: block;
+  padding: 6px 14px 2px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: rgba(26,35,50,0.45);
+}
+.nav__mega-all .nav__dropdown-link {
+  color: var(--teal-deep);
+  font-weight: 600;
+}
+@media (min-width: 769px) {
+  .nav__dropdown-menu--mega {
+    min-width: 660px;
+    padding: 14px 14px 10px;
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    gap: 2px 14px;
   }
-  .nav__dropdown-menu--wide .nav__dropdown-link {
-    break-inside: avoid;
+  .nav__dropdown.is-open .nav__dropdown-menu--mega {
+    display: grid;
+  }
+  .nav__mega-group {
+    margin-bottom: 10px;
+  }
+  .nav__mega-all {
+    grid-column: 1 / -1;
+    margin-top: 2px;
+    padding-top: 6px;
+    border-top: 1px solid var(--border-light);
+  }
+}
+@media (hover: hover) and (min-width: 769px) {
+  .nav__dropdown:hover .nav__dropdown-menu--mega {
+    display: grid;
   }
 }
 .nav__dropdown-link:hover,
@@ -7833,6 +7868,16 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   font-size: 1.15rem;
   margin-bottom: 12px;
   color: var(--text-primary);
+}
+/* The /for/ index reuses this card as a link to each industry page. */
+a.ind-problem-card {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+a.ind-problem-card .ind-problem-card__icon {
+  font-size: 1.5rem;
+  line-height: 1;
 }
 .ind-problem-card__desc {
   font-size: 0.95rem;
