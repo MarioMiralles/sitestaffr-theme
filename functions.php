@@ -251,6 +251,101 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_salesforce_page_v', $provision_version );
 } );
 
+/**
+ * Provision the six new /for/<slug> industry landing pages and their SEO metadata.
+ * Same versioned-option pattern as the Blog Agent and Salesforce pages above —
+ * ensures the parent "For" page exists (noindexed, it's just a container), then
+ * heals/creates each child page. Mario never has to touch WP admin to launch a
+ * new industry page — bump $provision_version to re-run and heal existing pages.
+ */
+add_action( 'init', function () {
+	$provision_version = '1';
+	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
+		return;
+	}
+
+	$parent    = get_page_by_path( 'for' );
+	$parent_id = $parent ? (int) $parent->ID : 0;
+
+	if ( ! $parent_id ) {
+		$new_parent_id = wp_insert_post( array(
+			'post_title'   => 'For',
+			'post_name'    => 'for',
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+		) );
+		if ( $new_parent_id && ! is_wp_error( $new_parent_id ) ) {
+			$parent_id = (int) $new_parent_id;
+		}
+	}
+
+	if ( $parent_id ) {
+		update_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex', '1' );
+	}
+
+	$industry_pages = array(
+		'med-spas'            => array(
+			'title'     => 'Med Spas & Aesthetics',
+			'seo_title' => 'AI Voice Agent for Med Spas & Aesthetics | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers med spa website visitors 24/7, capturing Botox and treatment inquiries with instant recaps by email. Free 30-day trial.',
+		),
+		'medical-practices'   => array(
+			'title'     => 'Medical Practices',
+			'seo_title' => 'AI Voice Agent for Medical Practices | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers medical practice website visitors 24/7, captures new patient and insurance inquiries, and emails a full recap. Free 30-day trial.',
+		),
+		'veterinary-clinics'  => array(
+			'title'     => 'Veterinary Clinics',
+			'seo_title' => 'AI Voice Agent for Veterinary Clinics | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
+		),
+		'chiropractors'       => array(
+			'title'     => 'Chiropractic & Physical Therapy',
+			'seo_title' => 'AI Voice Agent for Chiropractors & PT | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers chiropractic and physical therapy website visitors 24/7, captures new patient inquiries, and emails you a full recap. Free 30-day trial.',
+		),
+		'real-estate'         => array(
+			'title'     => 'Real Estate',
+			'seo_title' => 'AI Voice Agent for Real Estate Agents | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers real estate website visitors 24/7, captures buyer and seller inquiries about your listings, and emails a full recap. Free 30-day trial.',
+		),
+		'auto-repair'         => array(
+			'title'     => 'Auto Repair Shops',
+			'seo_title' => 'AI Voice Agent for Auto Repair Shops | SiteStaffr',
+			'metadesc'  => 'SiteStaffr answers auto repair shop website visitors 24/7, captures vehicle repair inquiries with a full recap by email. Free 30-day trial, no credit card.',
+		),
+	);
+
+	foreach ( $industry_pages as $slug => $data ) {
+		$existing = get_page_by_path( 'for/' . $slug );
+		$page_id  = $existing ? (int) $existing->ID : 0;
+
+		if ( ! $page_id ) {
+			$new_id = wp_insert_post( array(
+				'post_title'   => $data['title'],
+				'post_name'    => $slug,
+				'post_parent'  => $parent_id,
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+				'post_content' => '',
+			) );
+			if ( $new_id && ! is_wp_error( $new_id ) ) {
+				$page_id = (int) $new_id;
+			}
+		}
+
+		if ( $page_id ) {
+			update_post_meta( $page_id, '_wp_page_template', 'page-industry.php' );
+			// Yoast SEO fields (site runs Yoast) — set the search title + description.
+			update_post_meta( $page_id, '_yoast_wpseo_title', $data['seo_title'] );
+			update_post_meta( $page_id, '_yoast_wpseo_metadesc', $data['metadesc'] );
+		}
+	}
+
+	update_option( 'sitestaffr_industry_pages_v', $provision_version );
+} );
+
 add_action( 'send_headers', function () {
 	header( 'X-Content-Type-Options: nosniff' );
 	header( 'X-Frame-Options: SAMEORIGIN' );
@@ -301,6 +396,12 @@ add_action( 'template_redirect', function () {
 		echo "- [For Dental Practices](" . home_url( '/for/dental-practices/' ) . ") — AI voice agent for dental offices\n";
 		echo "- [For Law Firms](" . home_url( '/for/law-firms/' ) . ") — AI voice agent for legal practices\n";
 		echo "- [For Home Services](" . home_url( '/for/home-services/' ) . ") — AI voice agent for contractors\n";
+		echo "- [For Med Spas & Aesthetics](" . home_url( '/for/med-spas/' ) . ") — AI voice agent for med spas and aesthetics practices\n";
+		echo "- [For Medical Practices](" . home_url( '/for/medical-practices/' ) . ") — AI voice agent for medical practices\n";
+		echo "- [For Veterinary Clinics](" . home_url( '/for/veterinary-clinics/' ) . ") — AI voice agent for veterinary clinics\n";
+		echo "- [For Chiropractic & Physical Therapy](" . home_url( '/for/chiropractors/' ) . ") — AI voice agent for chiropractic and physical therapy practices\n";
+		echo "- [For Real Estate](" . home_url( '/for/real-estate/' ) . ") — AI voice agent for real estate agents\n";
+		echo "- [For Auto Repair Shops](" . home_url( '/for/auto-repair/' ) . ") — AI voice agent for auto repair shops\n";
 		echo "- [Privacy Policy](" . home_url( '/privacy/' ) . ") — How we handle data\n";
 		echo "- [Terms of Service](" . home_url( '/terms/' ) . ") — Usage terms\n\n";
 		echo "## Product Facts\n\n";

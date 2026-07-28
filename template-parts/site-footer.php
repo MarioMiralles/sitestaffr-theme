@@ -38,6 +38,12 @@ if ( ! defined( 'ABSPATH' ) ) {
               <li><a href="<?php echo esc_url( home_url( '/for/dental-practices/' ) ); ?>">Dental Practices</a></li>
               <li><a href="<?php echo esc_url( home_url( '/for/law-firms/' ) ); ?>">Law Firms</a></li>
               <li><a href="<?php echo esc_url( home_url( '/for/home-services/' ) ); ?>">Home Services</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/for/med-spas/' ) ); ?>">Med Spas & Aesthetics</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/for/medical-practices/' ) ); ?>">Medical Practices</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/for/veterinary-clinics/' ) ); ?>">Veterinary Clinics</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/for/chiropractors/' ) ); ?>">Chiropractic & PT</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/for/real-estate/' ) ); ?>">Real Estate</a></li>
+              <li><a href="<?php echo esc_url( home_url( '/for/auto-repair/' ) ); ?>">Auto Repair Shops</a></li>
             </ul>
           </div>
           <div class="footer__col">

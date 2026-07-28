@@ -19,12 +19,19 @@ $primary_menu = array(
         ),
     ),
     array(
-        'label'    => 'Industries',
-        'href'     => '#',
-        'children' => array(
-            array( 'label' => 'Dental Practices', 'href' => home_url( '/for/dental-practices/' ) ),
-            array( 'label' => 'Law Firms',         'href' => home_url( '/for/law-firms/' ) ),
-            array( 'label' => 'Home Services',     'href' => home_url( '/for/home-services/' ) ),
+        'label'      => 'Industries',
+        'href'       => '#',
+        'menu_class' => 'nav__dropdown-menu--wide',
+        'children'   => array(
+            array( 'label' => 'Dental Practices',        'href' => home_url( '/for/dental-practices/' ) ),
+            array( 'label' => 'Law Firms',                'href' => home_url( '/for/law-firms/' ) ),
+            array( 'label' => 'Home Services',            'href' => home_url( '/for/home-services/' ) ),
+            array( 'label' => 'Med Spas & Aesthetics',    'href' => home_url( '/for/med-spas/' ) ),
+            array( 'label' => 'Medical Practices',        'href' => home_url( '/for/medical-practices/' ) ),
+            array( 'label' => 'Veterinary Clinics',       'href' => home_url( '/for/veterinary-clinics/' ) ),
+            array( 'label' => 'Chiropractic & PT',        'href' => home_url( '/for/chiropractors/' ) ),
+            array( 'label' => 'Real Estate',              'href' => home_url( '/for/real-estate/' ) ),
+            array( 'label' => 'Auto Repair Shops',        'href' => home_url( '/for/auto-repair/' ) ),
         ),
     ),
     array( 'label' => 'Blog',  'href' => home_url( '/blog/' ) ),
@@ -64,7 +71,7 @@ $cta = array(
             <?php echo esc_html( $item['label'] ); ?>
             <svg class="nav__dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
-          <ul class="nav__dropdown-menu">
+          <ul class="nav__dropdown-menu<?php echo ! empty( $item['menu_class'] ) ? ' ' . esc_attr( $item['menu_class'] ) : ''; ?>">
             <?php foreach ( $item['children'] as $child ) : ?>
             <li><a class="nav__dropdown-link" href="<?php echo esc_url( $child['href'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li>
             <?php endforeach; ?>

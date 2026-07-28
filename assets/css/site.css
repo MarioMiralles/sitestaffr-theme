@@ -359,6 +359,16 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   transition: background 0.15s ease, color 0.15s ease;
   white-space: nowrap;
 }
+@media (hover: hover) and (min-width: 769px) {
+  .nav__dropdown-menu--wide {
+    min-width: 380px;
+    column-count: 2;
+    column-gap: 4px;
+  }
+  .nav__dropdown-menu--wide .nav__dropdown-link {
+    break-inside: avoid;
+  }
+}
 .nav__dropdown-link:hover,
 .nav__dropdown-link:focus-visible {
   background: var(--teal-pale);
