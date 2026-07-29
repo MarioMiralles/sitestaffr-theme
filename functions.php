@@ -458,10 +458,17 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '4';
+	$provision_version = '5';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
+
+	// Pages touched by this run, purged from LiteSpeed at the end. Provisioning
+	// writes post meta rather than saving the post, so none of LiteSpeed's own
+	// invalidation hooks fire and the stale HTML survives the deploy — that is
+	// how the v4 SEO fix looked like a no-op on /for/ until the cache was
+	// bypassed with a query string. Every future bump would hit the same wall.
+	$provisioned_ids = array();
 
 	$parent    = get_page_by_path( 'for' );
 	$parent_id = $parent ? (int) $parent->ID : 0;
@@ -489,6 +496,7 @@ add_action( 'init', function () {
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-nofollow' );
 		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Voice Agent by Industry | SiteStaffr' );
 		update_post_meta( $parent_id, '_yoast_wpseo_metadesc', 'See how SiteStaffr\'s AI voice and text agent works for dental, medical, home services, law, auto and 10 more industries. Free 30-day trial.' );
+		$provisioned_ids[] = $parent_id;
 	}
 
 	$industry_pages = sitestaffr_industry_list();
@@ -517,7 +525,14 @@ add_action( 'init', function () {
 			// Yoast SEO fields (site runs Yoast) — set the search title + description.
 			update_post_meta( $page_id, '_yoast_wpseo_title', $data['seo_title'] );
 			update_post_meta( $page_id, '_yoast_wpseo_metadesc', $data['metadesc'] );
+			$provisioned_ids[] = $page_id;
 		}
+	}
+
+	// Drop the cached HTML for everything just provisioned. No-ops when
+	// LiteSpeed is not installed, and runs once per version bump.
+	foreach ( array_unique( $provisioned_ids ) as $purge_id ) {
+		do_action( 'litespeed_purge_post', $purge_id );
 	}
 
 	update_option( 'sitestaffr_industry_pages_v', $provision_version );
