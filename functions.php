@@ -43,6 +43,35 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 	}
 }
 
+/**
+ * Purge cached HTML when a new theme build lands.
+ *
+ * The site sits behind LiteSpeed. Deploying the theme over FTP changes template
+ * and copy files but touches nothing WordPress considers "content", so no
+ * invalidation hook fires and visitors keep getting the previous HTML — a
+ * deploy that succeeds and changes nothing visible. CSS and JS escape this only
+ * because sitestaffr_asset_url() appends a filemtime query string; markup has no
+ * equivalent.
+ *
+ * Watch the theme's own version (style.css "Version:") and purge once when it
+ * changes. Bumping that header is therefore what publishes a copy or template
+ * change — the provisioner purge added alongside this only covers the industry
+ * pages, and only when its own version bumps.
+ */
+add_action( 'init', function () {
+	$theme_version = wp_get_theme()->get( 'Version' );
+	if ( ! $theme_version ) {
+		return;
+	}
+
+	if ( get_option( 'sitestaffr_theme_purged_v' ) === $theme_version ) {
+		return;
+	}
+
+	do_action( 'litespeed_purge_all' );
+	update_option( 'sitestaffr_theme_purged_v', $theme_version );
+} );
+
 if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	/**
 	 * Live plugin metadata from the WordPress.org directory, cached 12 hours.
