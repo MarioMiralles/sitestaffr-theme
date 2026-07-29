@@ -589,7 +589,7 @@ $industries = array(
 	'salons-barbershops' => array(
 		'hero_icon' => '💈',
 		'label'    => 'For Salons &amp; Barbershops',
-		'headline' => 'Saturday&rsquo;s Last Colour Slot Is Open. They&rsquo;re Deciding at&nbsp;9&nbsp;PM.',
+		'headline' => 'Saturday&rsquo;s Last Color Slot Is Open. They&rsquo;re Deciding at&nbsp;9&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'BeautySalon',
 		'problems_headline' => 'Salons and Barbershops Lose Bookings Before the Chair Opens Up',
@@ -597,12 +597,12 @@ $industries = array(
 			array(
 				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
 				'title' => 'After-hours booking requests vanish',
-				'desc'  => 'A visitor searches your site at 9 PM hoping to grab Saturday&rsquo;s last colour appointment before someone else does. No one answers. She books with the salon down the block instead.',
+				'desc'  => 'A visitor searches your site at 9 PM hoping to grab Saturday&rsquo;s last color appointment before someone else does. No one answers. She books with the salon down the block instead.',
 			),
 			array(
 				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
 				'title' => 'Your front desk is stretched thin',
-				'desc'  => 'Between blowouts, colour services, and walk-ins, no one has a free minute to answer every website visitor asking about openings.',
+				'desc'  => 'Between blowouts, color services, and walk-ins, no one has a free minute to answer every website visitor asking about openings.',
 			),
 			array(
 				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 16s-1.5-2-4-2-4 2-4 2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>',
@@ -614,7 +614,7 @@ $industries = array(
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a service',
-				'desc'  => 'Whether it&rsquo;s a balayage touch-up, a fade, or a first-time colour consultation, SiteStaffr answers using the information on your website &mdash; accurately and naturally, in 57+ languages.',
+				'desc'  => 'Whether it&rsquo;s a balayage touch-up, a fade, or a first-time color consultation, SiteStaffr answers using the information on your website &mdash; accurately and naturally, in 57+ languages.',
 			),
 			array(
 				'title' => 'The AI captures their details',
@@ -627,11 +627,11 @@ $industries = array(
 		),
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Thursday, 9:12 PM',
-		'scenario'       => 'A visitor finds your website while planning for a wedding this Saturday and needs a colour appointment before then. SiteStaffr greets her and asks how it can help. She explains what she wants done and asks if anything is open before the weekend. The AI checks what your site says about availability, then collects her name and phone number so your team can confirm a slot. By 9:14 PM, you have an email with every detail &mdash; the service, her timeline, and contact information. You text her first thing Friday morning and fit her in before she books with the salon down the street.',
+		'scenario'       => 'A visitor finds your website while planning for a wedding this Saturday and needs a color appointment before then. SiteStaffr greets her and asks how it can help. She explains what she wants done and asks if anything is open before the weekend. The AI checks what your site says about availability, then collects her name and phone number so your team can confirm a slot. By 9:14 PM, you have an email with every detail &mdash; the service, her timeline, and contact information. You text her first thing Friday morning and fit her in before she books with the salon down the street.',
 		'faqs' => array(
 			array(
 				'q' => 'Can SiteStaffr answer questions about pricing and specific services?',
-				'a' => 'Yes. SiteStaffr learns from the content on your website. If your site lists services like colour, cuts, or waxing along with pricing, the AI can speak to those topics naturally. You control what information it has access to.',
+				'a' => 'Yes. SiteStaffr learns from the content on your website. If your site lists services like color, cuts, or waxing along with pricing, the AI can speak to those topics naturally. You control what information it has access to.',
 			),
 			array(
 				'q' => 'Can it tell a client which stylist is available?',
