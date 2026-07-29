@@ -8054,15 +8054,107 @@ a.ind-problem-card .ind-problem-card__icon {
 .ind-scenario__grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: clamp(32px, 5vw, 64px);
-  align-items: center;
+  gap: clamp(28px, 4vw, 52px);
+  align-items: start;
 }
+.ind-scenario__item {
+  margin: 0;
+  min-width: 0;
+}
+.ind-scenario__caption {
+  margin: 14px 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--teal-deep);
+  opacity: 0.75;
+}
+
+/* --- Recap document ---
+   Deliberately the same artifact as the home page's what-you-get document:
+   same logo header, same "Conversation Recap" block, same Name / Phone /
+   Reason list, same suggested-follow-up line. Built on the shared tokens
+   rather than reusing the home page's classes, which carry that section's
+   own wrapper layout. */
+.ind-recap {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 18px 44px rgba(10, 46, 51, 0.13);
+  overflow: hidden;
+  font-size: 0.86rem;
+}
+.ind-recap__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-light);
+}
+.ind-recap__logo {
+  height: 24px;
+  width: auto;
+}
+.ind-recap__stamp {
+  font-size: 0.72rem;
+  color: var(--text-muted, #6b7280);
+}
+.ind-recap__section {
+  margin: 16px 18px 18px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+}
+.ind-recap__section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+.ind-recap__section-head span {
+  font-size: 0.64rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--teal-deep);
+  background: var(--teal-pale);
+  padding: 3px 9px;
+  border-radius: 50px;
+}
+.ind-recap__section p {
+  margin: 0 0 9px;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+.ind-recap__section ul {
+  margin: 0 0 10px 16px;
+  padding: 0;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.ind-recap__link {
+  color: var(--teal-deep);
+  text-decoration: underline;
+}
+.ind-recap__followup {
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+  margin-bottom: 0 !important;
+}
+/* The narrative now introduces both mockups rather than sitting beside one. */
 .ind-scenario__story {
-  text-align: left;
+  max-width: 720px;
+  margin: 0 auto clamp(32px, 4vw, 48px);
+  text-align: center;
 }
 .ind-scenario__story .section-label {
   display: block;
-  text-align: left;
   margin-bottom: 14px;
 }
 
@@ -8124,20 +8216,8 @@ a.ind-problem-card .ind-problem-card__icon {
   color: var(--text-primary);
   border-bottom-right-radius: 5px;
 }
-.ind-chat__recap {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin: 8px 18px 18px;
-  padding: 11px 14px;
-  border-radius: 12px;
-  background: rgba(0, 131, 143, 0.07);
-  color: var(--teal-deep);
-  font-size: 0.82rem;
-  font-weight: 600;
-}
-.ind-chat__recap svg {
-  flex-shrink: 0;
+.ind-chat__thread {
+  padding-bottom: 18px;
 }
 .ind-scenario__time {
   display: inline-flex;
@@ -8169,12 +8249,6 @@ a.ind-problem-card .ind-problem-card__icon {
   .ind-scenario__grid {
     grid-template-columns: 1fr;
     gap: 32px;
-  }
-  .ind-scenario__story {
-    order: 2;
-  }
-  .ind-chat {
-    order: 1;
   }
 }
 

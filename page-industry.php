@@ -75,6 +75,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Dana Whitfield, 555-0134.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Dana. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can.' ),
 		),
+		'recap' => array(
+			'name'     => 'Dana Whitfield',
+			'phone'    => '555-0134',
+			'reason'   => 'Chipped tooth, asking to be seen tomorrow',
+			'summary'  => '<strong>Dana</strong> chipped a tooth at dinner and is asking whether she can be seen tomorrow.',
+			'followup' => 'Call Dana to confirm emergency availability and let her know when you can fit her in.',
+		),
 		'scenario'       => 'A first-time visitor lands on your website after searching &ldquo;emergency dentist near me.&rdquo; SiteStaffr greets them instantly. They explain they chipped a tooth at dinner and need to be seen tomorrow. The AI confirms your practice handles dental emergencies, asks for their name and phone number, and lets them know the team will follow up. By 9:16 PM, you have an email with every detail &mdash; name, number, what happened, and urgency level. Your front desk calls them at 8 AM and books the appointment before the patient even considers another practice.',
 		'faqs' => array(
 			array(
@@ -145,6 +152,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'I&rsquo;m sorry to hear that. The firm does handle auto injury cases &mdash; can I get your name and the best number to reach you?' ),
 			array( 'from' => 'visitor', 'text' => 'Renee Castillo, 555-0148.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Renee. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon.' ),
+		),
+		'recap' => array(
+			'name'     => 'Renee Castillo',
+			'phone'    => '555-0148',
+			'reason'   => 'Car accident this evening, has photos of the damage',
+			'summary'  => '<strong>Renee</strong> was in a car accident tonight and is asking whether the firm handles auto injury cases.',
+			'followup' => 'Have intake call Renee to take the details and explain what the firm can do for her.',
 		),
 		'scenario'       => 'A woman involved in a car accident earlier that evening visits your firm&rsquo;s website from her phone. SiteStaffr greets her and asks how it can help. She explains the accident, mentions she has photos of the damage, and asks if your firm handles auto injury cases. The AI confirms your practice areas, collects her name, phone number, and a brief description of what happened. By 11:45 PM, your managing partner has an email with every detail. Monday morning, your intake team calls her &mdash; first. She signs the retainer before noon.',
 		'faqs' => array(
@@ -217,6 +231,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Marcus Bell, 555-0119.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Marcus. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time.' ),
 		),
+		'recap' => array(
+			'name'     => 'Marcus Bell',
+			'phone'    => '555-0119',
+			'reason'   => 'AC not cooling, clicking sound',
+			'summary'  => '<strong>Marcus</strong> has an AC unit that stopped cooling and is making a clicking sound.',
+			'followup' => 'Call Marcus to confirm the address and get a technician scheduled.',
+		),
 		'scenario'       => 'You&rsquo;re finishing a water heater install when a homeowner three miles away discovers their AC stopped working in the middle of July. They find your website and SiteStaffr greets them immediately. They explain the problem &mdash; no cold air, unit is making a clicking sound &mdash; and share their address and phone number. By 6:50 PM, the details are in your inbox. You call them on the drive home, schedule the visit for tomorrow morning, and close a $400 repair before your competitor even checks their voicemail.',
 		'faqs' => array(
 			array(
@@ -287,6 +308,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'Great question &mdash; pricing and what to expect are best confirmed with our team directly. Can I get your name and best number so someone can reach out?' ),
 			array( 'from' => 'visitor', 'text' => 'Sydney Park, 555-0176.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Sydney. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions.' ),
+		),
+		'recap' => array(
+			'name'     => 'Sydney Park',
+			'phone'    => '555-0176',
+			'reason'   => 'Botox for forehead lines, asked about pricing',
+			'summary'  => '<strong>Sydney</strong> is interested in Botox for forehead lines and asked about pricing and comfort.',
+			'followup' => 'Call Sydney to go over pricing and offer a consultation slot.',
 		),
 		'scenario'       => 'A visitor finds your website after searching &ldquo;Botox for forehead lines near me.&rdquo; SiteStaffr greets her and asks how it can help. She wants to know pricing and whether it hurts. The AI answers using the treatment information on your site, asks about her goals, and offers to schedule a consultation. She shares her name and phone number. By 9:09 PM, you have an email with every detail &mdash; what she&rsquo;s interested in, her contact information, and a suggested time to call. Your front desk reaches her at 9 AM and books the consultation before she ever calls another spa.',
 		'faqs' => array(
@@ -359,6 +387,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Owen Bradley, 555-0163.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Owen. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
+		'recap' => array(
+			'name'     => 'Owen Bradley',
+			'phone'    => '555-0163',
+			'reason'   => 'New patient, insurance question',
+			'summary'  => '<strong>Owen</strong> is looking for a new provider and asked whether the practice takes his insurance.',
+			'followup' => 'Call Owen to confirm his insurance and get him on the schedule.',
+		),
 		'scenario'       => 'A visitor finds your practice online after a weekend of a persistent cough that won&rsquo;t clear up. SiteStaffr greets them and asks how it can help. They want to know if you&rsquo;re accepting new patients and whether you take their insurance. The AI confirms what your website says about both, then asks for their name and phone number so your staff can follow up. By 7:17 PM, you have an email with every detail &mdash; symptoms mentioned, insurance question, and contact information. Your office calls first thing Monday morning and books the appointment before the patient tries anywhere else.',
 		'faqs' => array(
 			array(
@@ -429,6 +464,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'That sounds scary. The clinic does handle urgent cases like this &mdash; can I get your name and the best number to reach you?' ),
 			array( 'from' => 'visitor', 'text' => 'Priya Nair, 555-0192.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Priya. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+		),
+		'recap' => array(
+			'name'     => 'Priya Nair',
+			'phone'    => '555-0192',
+			'reason'   => 'Dog ingested chocolate about an hour ago',
+			'summary'  => '<strong>Priya</strong>&rsquo;s dog got into a bag of chocolate roughly an hour ago.',
+			'followup' => 'Have the on-call tech call Priya as your first callback and advise on next steps.',
 		),
 		'scenario'       => 'A visitor lands on your website after their dog got into a bag of chocolate an hour ago. SiteStaffr greets them and asks what&rsquo;s going on. They describe the amount and the dog&rsquo;s size and weight. The AI confirms your clinic handles urgent cases, asks for their name and phone number so someone can call them back right away, and flags the timing in your recap. By 12:22 AM, the details are in your inbox &mdash; symptoms, timing, and contact information. Your on-call tech reaches them within minutes instead of them searching for an emergency hospital.',
 		'faqs' => array(
@@ -501,6 +543,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Trevor Nash, 555-0157.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Trevor. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
+		'recap' => array(
+			'name'     => 'Trevor Nash',
+			'phone'    => '555-0157',
+			'reason'   => 'Lower back injury moving furniture',
+			'summary'  => '<strong>Trevor</strong> injured his lower back moving a couch this afternoon and is asking about availability.',
+			'followup' => 'Call Trevor with your next opening and confirm what a first visit involves.',
+		),
 		'scenario'       => 'A visitor lands on your website after throwing out his lower back moving a couch that afternoon. SiteStaffr greets him and asks what happened. He describes the pain and asks if you have any availability tomorrow. The AI confirms your practice handles this kind of injury, asks whether he&rsquo;s a new or returning patient, and collects his name and phone number. By 5:54 PM, you have an email with every detail &mdash; what happened, urgency, and contact information. Your office calls him first thing Sunday and gets him on the schedule before he tries anywhere else.',
 		'faqs' => array(
 			array(
@@ -571,6 +620,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'It&rsquo;s still on the market &mdash; I can pull up the price and details from the listing. What&rsquo;s your name and best number so the agent can follow up?' ),
 			array( 'from' => 'visitor', 'text' => 'Alicia Moreno, 555-0184.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Alicia. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon.' ),
+		),
+		'recap' => array(
+			'name'     => 'Alicia Moreno',
+			'phone'    => '555-0184',
+			'reason'   => 'Interested in a listing, wants to view this week',
+			'summary'  => '<strong>Alicia</strong> is looking at one of your listings and wants to see it this week.',
+			'followup' => 'Call Alicia to arrange a showing and confirm the listing is still available.',
 		),
 		'scenario'       => 'A buyer finds one of your listings while scrolling from an open house down the street. SiteStaffr greets them and asks how it can help. They want to know the asking price, whether it&rsquo;s still available, and if they can see it this week. The AI confirms the details from your listing page, then collects their name and phone number. By 3:06 PM, you have an email with every detail &mdash; which property, their timeline, and contact information. You call them between showings and set up a tour before another agent even returns their message.',
 		'faqs' => array(
@@ -643,6 +699,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Jordan Vance, 2019 Honda Accord, 555-0138.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
+		'recap' => array(
+			'name'     => 'Jordan Vance',
+			'phone'    => '555-0138',
+			'reason'   => 'Flashing check engine light, shudder at highway speed',
+			'summary'  => '<strong>Jordan</strong>&rsquo;s check engine light is flashing and the car shudders at speed. 2019 Honda Accord.',
+			'followup' => 'Call Jordan to get the car booked in and advise whether it is safe to drive.',
+		),
 		'scenario'       => 'You&rsquo;re closing up when a driver two miles away notices her check engine light flashing on the drive home. She finds your website and SiteStaffr greets her right away. She describes the light and mentions a slight shudder at highway speed. The AI asks for her name, phone number, and the vehicle&rsquo;s year and model, then lets her know the shop will follow up. By 7:40 PM, the details are in your inbox. You call her when you open at 8 AM and get the car on the lift before her commute home.',
 		'faqs' => array(
 			array(
@@ -713,6 +776,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'Let&rsquo;s see what we can do &mdash; what&rsquo;s your name and best number so our team can check availability?' ),
 			array( 'from' => 'visitor', 'text' => 'Whitney Ortiz, 555-0125.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Whitney. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+		),
+		'recap' => array(
+			'name'     => 'Whitney Ortiz',
+			'phone'    => '555-0125',
+			'reason'   => 'Color appointment needed before Saturday',
+			'summary'  => '<strong>Whitney</strong> needs a color appointment before her sister&rsquo;s wedding on Saturday.',
+			'followup' => 'Call Whitney with the openings you have before the weekend.',
 		),
 		'scenario'       => 'A visitor finds your website while planning for a wedding this Saturday and needs a color appointment before then. SiteStaffr greets her and asks how it can help. She explains what she wants done and asks if anything is open before the weekend. The AI checks what your site says about availability, then collects her name and phone number so your team can confirm a slot. By 9:14 PM, you have an email with every detail &mdash; the service, her timeline, and contact information. You text her first thing Friday morning and fit her in before she books with the salon down the street.',
 		'faqs' => array(
@@ -785,6 +855,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Renata Kowalski, 555-0171.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Renata. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
 		),
+		'recap' => array(
+			'name'     => 'Renata Kowalski',
+			'phone'    => '555-0171',
+			'reason'   => 'Furnace out, house cooling fast, children at home',
+			'summary'  => '<strong>Renata</strong>&rsquo;s furnace has stopped working and the house is cooling quickly.',
+			'followup' => 'Have the on-call tech call Renata and dispatch tonight if you can cover it.',
+		),
 		'scenario'       => 'A family&rsquo;s furnace stops working in the middle of a January cold snap, and the kids are already wrapped in blankets on the couch. They find your website and SiteStaffr greets them right away. They explain the furnace won&rsquo;t kick on and the house is dropping fast. The AI confirms your company handles emergency heating calls, collects their name, phone number, and address, and lets them know the on-call team will follow up. By 11:22 PM, the details are in your inbox. You call them back in five minutes and have a tech on the way before the house drops another degree.',
 		'faqs' => array(
 			array(
@@ -855,6 +932,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'We do handle catch-up bookkeeping &mdash; let me get your name and best number so our team can follow up.' ),
 			array( 'from' => 'visitor', 'text' => 'Desmond Farrow, 555-0166.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Desmond. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+		),
+		'recap' => array(
+			'name'     => 'Desmond Farrow',
+			'phone'    => '555-0166',
+			'reason'   => 'A year behind on bookkeeping, extension deadline in three weeks',
+			'summary'  => '<strong>Desmond</strong> is about a year behind on bookkeeping with an extension deadline three weeks out.',
+			'followup' => 'Call Desmond to scope the catch-up work and confirm you can meet the deadline.',
 		),
 		'scenario'       => 'A business owner realizes their bookkeeping has fallen a full year behind, with the extension deadline three weeks out. They find your website while searching for help. SiteStaffr greets them and asks how it can help. They explain the situation and ask if you&rsquo;re taking new clients before the deadline. The AI confirms what your site says about new client intake, then collects their name, phone number, and a brief description of what they need. By 8:38 PM, you have an email with every detail. Monday morning, you call first &mdash; and sign the engagement before they try another firm.',
 		'faqs' => array(
@@ -927,6 +1011,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Camille Reyes, 555-0142.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Camille. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options.' ),
 		),
+		'recap' => array(
+			'name'     => 'Camille Reyes',
+			'phone'    => '555-0142',
+			'reason'   => 'Renewal increase, asking about home and auto bundles',
+			'summary'  => '<strong>Camille</strong>&rsquo;s renewal went up again and she is asking about home and auto bundles.',
+			'followup' => 'Call Camille to pull quotes and compare them against her current renewal.',
+		),
 		'scenario'       => 'A homeowner opens her renewal notice and sees the premium jumped again. She starts comparing agencies online and lands on your website. SiteStaffr greets her and asks how it can help. She explains the increase and asks what you offer for home and auto bundles. The AI answers using the coverage information on your site, then collects her name and phone number so an agent can follow up with a quote. By 8:53 PM, you have an email with every detail &mdash; what she&rsquo;s shopping for and why. You call her first thing tomorrow, before she compares anyone else.',
 		'faqs' => array(
 			array(
@@ -998,6 +1089,13 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Talia Brennan, 555-0159.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Talia. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up.' ),
 		),
+		'recap' => array(
+			'name'     => 'Talia Brennan',
+			'phone'    => '555-0159',
+			'reason'   => 'Asked about the 6 AM class and a trial',
+			'summary'  => '<strong>Talia</strong> asked what the 6 AM class is like and whether there is a trial.',
+			'followup' => 'Text Talia the trial details and the 6 AM class schedule.',
+		),
 		'scenario'       => 'A visitor is deciding whether to finally try the 6 AM class she&rsquo;s been eyeing and lands on your website looking for a trial pass. SiteStaffr greets her and asks how it can help. She asks what the first class is like and whether there&rsquo;s a free trial. The AI answers using your website&rsquo;s class and pricing information, then collects her name and phone number so your team can follow up. By 7:42 PM, you have an email with every detail &mdash; the class she wants, her contact information, and a suggested time to reach out. Your studio texts her Monday morning, and she&rsquo;s on the mat by Wednesday.',
 		'faqs' => array(
 			array(
@@ -1068,6 +1166,13 @@ $industries = array(
 			array( 'from' => 'ai',      'text' => 'That sounds concerning. We do handle wasp removal &mdash; what&rsquo;s your name and the best number to reach you?' ),
 			array( 'from' => 'visitor', 'text' => 'Holly Ferris, 555-0113.' ),
 			array( 'from' => 'ai',      'text' => 'Thanks, Holly. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon.' ),
+		),
+		'recap' => array(
+			'name'     => 'Holly Ferris',
+			'phone'    => '555-0113',
+			'reason'   => 'Wasp nest under the eaves near the front door',
+			'summary'  => '<strong>Holly</strong> found a wasp nest under the eaves where her kids play.',
+			'followup' => 'Call Holly to confirm the address and get a tech out.',
 		),
 		'scenario'       => 'A homeowner walks out the front door and finds a wasp nest tucked under the eaves, right where the kids play. She finds your website and SiteStaffr greets her right away. She describes the nest and its location and asks how soon someone can come out. The AI confirms your company handles wasp removal, collects her name, phone number, and address, and lets her know someone will follow up. By 6:17 PM, the details are in your inbox. You call her on the way home and have a tech scheduled for tomorrow morning before she calls anyone else.',
 		'faqs' => array(
@@ -1238,12 +1343,26 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<!-- Scenario -->
+	<?php
+	// The recap lands a couple of minutes after the conversation starts, so it is
+	// derived from scenario_title rather than stored twice and left to drift.
+	$ind_recap_stamp = $ind['scenario_title'];
+	if ( preg_match( '/^(.*?)(\d{1,2}):(\d{2})\s*(AM|PM)$/i', html_entity_decode( $ind['scenario_title'] ), $ind_tm ) ) {
+		$ind_ts          = strtotime( $ind_tm[2] . ':' . $ind_tm[3] . ' ' . strtoupper( $ind_tm[4] ) . ' +2 minutes' );
+		$ind_recap_stamp = $ind_tm[1] . gmdate( 'g:i A', $ind_ts );
+	}
+	?>
 	<section class="ind-scenario">
 		<div class="container">
+			<div class="ind-scenario__story reveal">
+				<span class="section-label"><?php echo esc_html( $ind['scenario_label'] ); ?></span>
+				<p><?php echo wp_kses_post( $ind['scenario'] ); ?></p>
+			</div>
 			<div class="ind-scenario__grid reveal">
 				<?php if ( ! empty( $ind['chat'] ) ) : ?>
 				<!-- The conversation itself. This section used to describe a chat in a
 				     paragraph; showing the exchange is the whole point of the page. -->
+				<figure class="ind-scenario__item">
 				<div class="ind-chat" role="img" aria-label="Example conversation between a website visitor and the SiteStaffr agent">
 					<div class="ind-chat__bar">
 						<span class="ind-chat__dot" aria-hidden="true"></span>
@@ -1258,24 +1377,38 @@ get_template_part( 'template-parts/site-nav' );
 						</div>
 						<?php endforeach; ?>
 					</div>
-					<div class="ind-chat__recap">
-						<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16v16H4z"/><polyline points="4,6 12,13 20,6"/></svg>
-						<span>Full recap emailed to you seconds later</span>
-					</div>
 				</div>
+				<figcaption class="ind-scenario__caption">What your visitor sees</figcaption>
+				</figure>
 				<?php endif; ?>
 
-				<div class="ind-scenario__story">
-					<span class="section-label"><?php echo esc_html( $ind['scenario_label'] ); ?></span>
-					<?php if ( empty( $ind['chat'] ) ) : ?>
-					<?php // Only when there is no mockup — otherwise the chat bar already shows the time. ?>
-					<div class="ind-scenario__time">
-						<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-						<span><?php echo esc_html( $ind['scenario_title'] ); ?></span>
+				<?php if ( ! empty( $ind['recap'] ) ) : ?>
+				<!-- The other half of the story: what lands in the owner's inbox.
+				     Mirrors the recap document on the home page so the same artifact
+				     looks the same everywhere it appears. -->
+				<figure class="ind-scenario__item">
+				<div class="ind-recap">
+					<div class="ind-recap__head">
+						<img class="ind-recap__logo" src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>" alt="SiteStaffr" width="240" height="72">
+						<span class="ind-recap__stamp"><?php echo esc_html( $ind_recap_stamp ); ?></span>
 					</div>
-					<?php endif; ?>
-					<p><?php echo wp_kses_post( $ind['scenario'] ); ?></p>
+					<div class="ind-recap__section">
+						<div class="ind-recap__section-head">
+							<strong>Conversation Recap</strong>
+							<span>New lead</span>
+						</div>
+						<p><?php echo wp_kses_post( $ind['recap']['summary'] ); ?></p>
+						<ul>
+							<li>Name: <?php echo esc_html( $ind['recap']['name'] ); ?></li>
+							<li>Phone: <span class="ind-recap__link"><?php echo esc_html( $ind['recap']['phone'] ); ?></span></li>
+							<li>Reason for contact: <?php echo esc_html( $ind['recap']['reason'] ); ?></li>
+						</ul>
+						<p class="ind-recap__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ind['recap']['followup'] ); ?></p>
+					</div>
 				</div>
+				<figcaption class="ind-scenario__caption">What lands in your inbox</figcaption>
+				</figure>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>
