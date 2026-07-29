@@ -5564,7 +5564,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  grid-template-columns: 1.4fr 1fr 1fr;
   gap: 32px;
   align-items: start;
   position: relative;
@@ -5621,6 +5621,50 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: none;
 }
 
+/* --- Industries band --- */
+.footer__industries {
+  margin-top: 44px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(31, 182, 204, 0.16);
+}
+.footer__industries-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.footer__industries-head .footer__heading {
+  margin-bottom: 0;
+}
+.footer__industries-all {
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+.footer__industries-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 28px 32px;
+}
+.footer__group-name {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(240, 250, 250, 0.62);
+  margin: 0 0 10px;
+}
+.footer__industry-group ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer__industry-group li {
+  margin-bottom: 8px;
+}
+.footer__industry-group a {
+  font-size: 0.84rem;
+  line-height: 1.4;
+}
+
 /* --- Bottom bar --- */
 .footer__bottom {
   position: relative;
@@ -5660,6 +5704,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* --- Footer responsive --- */
+@media (max-width: 1024px) {
+  /* Five groups get too narrow before the layout collapses; reflow to three. */
+  .footer__industries-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
 @media (max-width: 768px) {
   .footer__grid {
     grid-template-columns: 1fr;
@@ -5676,9 +5726,17 @@ body.sitestaffr-landing-page .hero__visual > * {
   }
   .footer__nav {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 32px;
     grid-column: 1 / -1;
+  }
+  .footer__industries-head {
+    justify-content: center;
+  }
+  .footer__industries-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    text-align: left;
   }
   .footer__bottom-inner {
     justify-content: center;

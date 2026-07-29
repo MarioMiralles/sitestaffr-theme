@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
         <nav class="footer__nav" aria-label="Footer navigation">
           <div class="footer__col">
-            <h3 class="footer__heading">Product</h4>
+            <h3 class="footer__heading">Product</h3>
             <ul>
               <li><a href="<?php echo esc_url( home_url( '/' ) ); ?>">Home</a></li>
               <li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">Blog</a></li>
@@ -33,25 +33,46 @@ if ( ! defined( 'ABSPATH' ) ) {
             </ul>
           </div>
           <div class="footer__col">
-            <h3 class="footer__heading">Industries</h4>
-            <ul>
-              <?php foreach ( sitestaffr_industry_list() as $sitestaffr_industry ) : ?>
-              <li><a href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_industry['slug'] . '/' ) ); ?>"><?php echo esc_html( $sitestaffr_industry['label'] ); ?></a></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-          <div class="footer__col">
-            <h3 class="footer__heading">Company</h4>
+            <h3 class="footer__heading">Company</h3>
             <ul>
               <li><a href="<?php echo esc_url( home_url( '/about/' ) ); ?>">About</a></li>
               <li><a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a></li>
               <li><a href="<?php echo esc_url( home_url( '/terms/' ) ); ?>">Terms of Service</a></li>
               <li><a href="mailto:support@sitestaffr.com">Support</a></li>
-            <li class="footer__account-mobile"><a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>" class="footer__login">My Account &rarr;</a></li>
+              <li class="footer__account-mobile"><a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>" class="footer__login">My Account &rarr;</a></li>
             </ul>
           </div>
         </nav>
       </div>
+
+      <?php
+      // Industries get their own band rather than a fourth column: fifteen of
+      // them stacked beside lists of six and five left the grid lopsided and
+      // three screens tall. Grouped by the registry's own taxonomy — the same
+      // five groups the header panel uses — so the shape carries real
+      // information instead of just wrapping the list.
+      $sitestaffr_industry_groups = sitestaffr_industry_registry();
+      ?>
+      <?php if ( ! empty( $sitestaffr_industry_groups ) ) : ?>
+      <section class="footer__industries" aria-labelledby="footer-industries-title">
+        <div class="footer__industries-head">
+          <h3 class="footer__heading" id="footer-industries-title">Industries</h3>
+          <a href="<?php echo esc_url( home_url( '/for/' ) ); ?>" class="footer__industries-all">All industries &rarr;</a>
+        </div>
+        <div class="footer__industries-grid">
+          <?php foreach ( $sitestaffr_industry_groups as $sitestaffr_group ) : ?>
+          <div class="footer__industry-group">
+            <p class="footer__group-name"><?php echo esc_html( $sitestaffr_group['heading'] ); ?></p>
+            <ul>
+              <?php foreach ( $sitestaffr_group['industries'] as $sitestaffr_industry ) : ?>
+              <li><a href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_industry['slug'] . '/' ) ); ?>"><?php echo esc_html( isset( $sitestaffr_industry['label'] ) ? $sitestaffr_industry['label'] : $sitestaffr_industry['title'] ); ?></a></li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+          <?php endforeach; ?>
+        </div>
+      </section>
+      <?php endif; ?>
     </div>
   </div>
 
