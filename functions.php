@@ -458,7 +458,7 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '3';
+	$provision_version = '4';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -477,6 +477,18 @@ add_action( 'init', function () {
 		if ( $new_parent_id && ! is_wp_error( $new_parent_id ) ) {
 			$parent_id = (int) $new_parent_id;
 		}
+	}
+
+	// The parent is a real index page now, but v3 only wrote SEO fields for the
+	// CHILDREN — so /for/ shipped with WordPress's fallback title ("For -
+	// SiteStaffr"), no meta description, and the stored Yoast noindex left over
+	// from when it was just a URL container. Verified live after the v3 deploy.
+	// Heal all three here; the children are already correct.
+	if ( $parent_id ) {
+		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex' );
+		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-nofollow' );
+		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Voice Agent by Industry | SiteStaffr' );
+		update_post_meta( $parent_id, '_yoast_wpseo_metadesc', 'See how SiteStaffr\'s AI voice and text agent works for dental, medical, home services, law, auto and 10 more industries. Free 30-day trial.' );
 	}
 
 	$industry_pages = sitestaffr_industry_list();
