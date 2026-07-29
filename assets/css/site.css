@@ -7945,11 +7945,29 @@ a.ind-problem-card .ind-problem-card__icon {
 }
 
 /* --- Solutions --- */
+/* The page's one dark band. Seven sections alternated between #FFFDF9 and
+   #FDFBF7 — a two-point difference nobody can see — so 5,000px of page read as
+   one uninterrupted cream scroll with no signal that a new idea had started.
+   Reuses the footer's surface rather than introducing another color. */
 .ind-solutions {
   padding: var(--section-padding);
-  background: var(--warm-white);
+  background: #0a2e33;
+  color: rgba(240, 250, 250, 0.8);
   position: relative;
   overflow: hidden;
+}
+.ind-solutions .section-label {
+  color: var(--teal-light);
+}
+.ind-solutions__header h2,
+.ind-solutions .ind-step__content h3 {
+  color: #ffffff;
+}
+.ind-solutions .ind-step__content p {
+  color: rgba(240, 250, 250, 0.72);
+}
+.ind-solutions .ind-step:not(:last-child)::after {
+  background: linear-gradient(to bottom, var(--teal-light), rgba(31, 182, 204, 0.12));
 }
 .ind-solutions__bg {
   position: absolute;
@@ -7969,7 +7987,6 @@ a.ind-problem-card .ind-problem-card__icon {
   position: relative;
 }
 .ind-solutions__header h2 {
-  color: var(--teal-deep);
   max-width: 700px;
   margin: 0 auto;
 }
@@ -8029,30 +8046,98 @@ a.ind-problem-card .ind-problem-card__icon {
 /* --- Scenario --- */
 .ind-scenario {
   padding: var(--section-padding);
-  background: var(--cream);
+  /* Tinted, so it reads as a distinct panel between the dark band above and the
+     cream FAQ below rather than merging into both. */
+  background: linear-gradient(180deg, #eef8fa 0%, #e4f3f7 100%);
   position: relative;
 }
-.ind-scenario .section-label {
-  text-align: center;
+.ind-scenario__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+.ind-scenario__story {
+  text-align: left;
+}
+.ind-scenario__story .section-label {
   display: block;
+  text-align: left;
+  margin-bottom: 14px;
 }
-.ind-scenario__card {
-  background: white;
-  border: 1px solid var(--border-light);
+
+/* --- Conversation mockup --- */
+.ind-chat {
+  background: #ffffff;
   border-radius: var(--radius-xl);
-  padding: clamp(32px, 5vw, 48px);
-  position: relative;
+  border: 1px solid rgba(0, 131, 143, 0.12);
+  box-shadow: 0 18px 44px rgba(10, 46, 51, 0.13);
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
 }
-.ind-scenario__card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--teal-light), var(--emerald), var(--teal-deep));
+.ind-chat__bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 16px;
+  background: #0a2e33;
+}
+.ind-chat__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(240, 250, 250, 0.28);
+}
+.ind-chat__time {
+  margin-left: auto;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(240, 250, 250, 0.72);
+}
+.ind-chat__thread {
+  padding: 20px 18px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ind-chat__row {
+  display: flex;
+}
+.ind-chat__row.is-visitor {
+  justify-content: flex-end;
+}
+.ind-chat__bubble {
+  max-width: 84%;
+  margin: 0;
+  padding: 11px 15px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  border-radius: 16px;
+}
+.ind-chat__row.is-ai .ind-chat__bubble {
+  background: var(--teal-pale);
+  color: #0d3f45;
+  border-bottom-left-radius: 5px;
+}
+.ind-chat__row.is-visitor .ind-chat__bubble {
+  background: #eef1f4;
+  color: var(--text-primary);
+  border-bottom-right-radius: 5px;
+}
+.ind-chat__recap {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 8px 18px 18px;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: rgba(0, 131, 143, 0.07);
+  color: var(--teal-deep);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.ind-chat__recap svg {
+  flex-shrink: 0;
 }
 .ind-scenario__time {
   display: inline-flex;
@@ -8066,10 +8151,31 @@ a.ind-problem-card .ind-problem-card__icon {
   font-weight: 600;
   margin-bottom: 24px;
 }
-.ind-scenario__card > p {
-  font-size: 1.05rem;
-  line-height: 1.85;
+.ind-scenario__story > p {
+  font-size: 1.02rem;
+  line-height: 1.8;
   color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Sections ran 650-950px tall for roughly 400px of content: 120px of padding
+   each side meant 240px of dead space between every block. Scoped to the
+   industry page type so all fifteen and the hubs move together. */
+.ind-page > section {
+  padding: clamp(52px, 6.5vw, 88px) 0;
+}
+
+@media (max-width: 900px) {
+  .ind-scenario__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .ind-scenario__story {
+    order: 2;
+  }
+  .ind-chat {
+    order: 1;
+  }
 }
 
 /* --- FAQ --- */
@@ -8230,8 +8336,9 @@ a.ind-problem-card .ind-problem-card__icon {
     left: 19px;
     top: 68px;
   }
-  .ind-scenario__card {
-    padding: 24px 20px;
+  .ind-chat__bubble {
+    max-width: 90%;
+    font-size: 0.86rem;
   }
 }
 
