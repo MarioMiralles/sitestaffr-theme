@@ -53,7 +53,13 @@ $cta_url = home_url( '/#get-started' );
 	<section class="ind-problems">
 		<div class="container">
 			<div class="ind-problems__header reveal">
-				<h2><?php echo esc_html( $group['heading'] ); ?></h2>
+				<h2>
+					<?php if ( ! empty( $group['slug'] ) ) : ?>
+						<a href="<?php echo esc_url( home_url( '/for/' . $group['slug'] . '/' ) ); ?>"><?php echo esc_html( $group['heading'] ); ?></a>
+					<?php else : ?>
+						<?php echo esc_html( $group['heading'] ); ?>
+					<?php endif; ?>
+				</h2>
 			</div>
 			<div class="ind-problems__grid">
 				<?php foreach ( $group['industries'] as $i => $item ) : ?>

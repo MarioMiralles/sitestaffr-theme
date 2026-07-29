@@ -32,6 +32,18 @@ if ( ! defined( 'ABSPATH' ) ) {
               <li><a href="https://wordpress.org/plugins/sitestaffr/" target="_blank" rel="noopener">WordPress.org</a></li>
             </ul>
           </div>
+          <?php $sitestaffr_categories = sitestaffr_industry_categories(); ?>
+          <?php if ( ! empty( $sitestaffr_categories ) ) : ?>
+          <div class="footer__col">
+            <h3 class="footer__heading">Industries</h3>
+            <ul>
+              <?php foreach ( $sitestaffr_categories as $sitestaffr_category ) : ?>
+              <li><a href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_category['slug'] . '/' ) ); ?>"><?php echo esc_html( $sitestaffr_category['label'] ); ?></a></li>
+              <?php endforeach; ?>
+              <li><a href="<?php echo esc_url( home_url( '/for/' ) ); ?>" class="footer__all-industries">All industries &rarr;</a></li>
+            </ul>
+          </div>
+          <?php endif; ?>
           <div class="footer__col">
             <h3 class="footer__heading">Company</h3>
             <ul>
@@ -44,35 +56,6 @@ if ( ! defined( 'ABSPATH' ) ) {
           </div>
         </nav>
       </div>
-
-      <?php
-      // Industries get their own band rather than a fourth column: fifteen of
-      // them stacked beside lists of six and five left the grid lopsided and
-      // three screens tall. Grouped by the registry's own taxonomy — the same
-      // five groups the header panel uses — so the shape carries real
-      // information instead of just wrapping the list.
-      $sitestaffr_industry_groups = sitestaffr_industry_registry();
-      ?>
-      <?php if ( ! empty( $sitestaffr_industry_groups ) ) : ?>
-      <section class="footer__industries" aria-labelledby="footer-industries-title">
-        <div class="footer__industries-head">
-          <h3 class="footer__heading" id="footer-industries-title">Industries</h3>
-          <a href="<?php echo esc_url( home_url( '/for/' ) ); ?>" class="footer__industries-all">All industries &rarr;</a>
-        </div>
-        <div class="footer__industries-grid">
-          <?php foreach ( $sitestaffr_industry_groups as $sitestaffr_group ) : ?>
-          <div class="footer__industry-group">
-            <p class="footer__group-name"><?php echo esc_html( $sitestaffr_group['heading'] ); ?></p>
-            <ul>
-              <?php foreach ( $sitestaffr_group['industries'] as $sitestaffr_industry ) : ?>
-              <li><a href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_industry['slug'] . '/' ) ); ?>"><?php echo esc_html( isset( $sitestaffr_industry['label'] ) ? $sitestaffr_industry['label'] : $sitestaffr_industry['title'] ); ?></a></li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-          <?php endforeach; ?>
-        </div>
-      </section>
-      <?php endif; ?>
     </div>
   </div>
 

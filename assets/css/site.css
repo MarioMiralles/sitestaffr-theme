@@ -5564,7 +5564,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .footer__grid {
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1fr;
+  grid-template-columns: 1.3fr 1fr 1fr 1fr;
   gap: 40px;
   align-items: start;
   position: relative;
@@ -5626,56 +5626,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: none;
 }
 
-/* --- Industries band --- */
-.footer__industries {
-  margin-top: 36px;
-  padding-top: 26px;
-  border-top: 1px solid rgba(31, 182, 204, 0.16);
-}
-/* The hub link sits WITH the label, not floated to the far edge — at 1440px
-   space-between stranded it ~900px away from the heading it belongs to. */
-.footer__industries-head {
-  display: flex;
-  align-items: baseline;
-  gap: 18px;
-  margin-bottom: 18px;
-}
-.footer__industries-head .footer__heading {
-  margin-bottom: 0;
-}
-.footer__industries-all {
-  font-size: 0.8rem;
-  white-space: nowrap;
+/* The footer lists the five industry CATEGORIES, not all fifteen industries.
+   Fifteen links made the footer read as a wall of text whichever way they were
+   arranged; the categories are the durable navigation and each one is a hub
+   page that absorbs new industries without the footer changing at all. */
+.footer__all-industries {
   color: rgba(240, 250, 250, 0.55);
-}
-.footer__industries-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 24px 28px;
-}
-/* Group names were the same size and weight as the links beneath them, so the
-   band read as one undifferentiated list of fifteen. Setting them as a small
-   caps label makes each group scannable as a unit. */
-.footer__group-name {
-  font-size: 0.68rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: rgba(240, 250, 250, 0.4);
-  margin: 0 0 11px;
-  line-height: 1.3;
-}
-.footer__industry-group ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.footer__industry-group li {
-  line-height: 1.35;
-  margin-bottom: 7px;
-}
-.footer__industry-group a {
-  font-size: 0.855rem;
+  white-space: nowrap;
 }
 
 /* --- Bottom bar --- */
@@ -5717,10 +5674,9 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* --- Footer responsive --- */
-@media (max-width: 1024px) {
-  /* Five groups get too narrow before the layout collapses; reflow to three. */
-  .footer__industries-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+@media (max-width: 900px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
   }
 }
 @media (max-width: 768px) {
@@ -5739,17 +5695,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   }
   .footer__nav {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 32px;
     grid-column: 1 / -1;
-  }
-  .footer__industries-head {
-    justify-content: center;
-  }
-  .footer__industries-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    text-align: left;
   }
   .footer__bottom-inner {
     justify-content: center;
@@ -7971,6 +7919,29 @@ a.ind-problem-card .ind-problem-card__icon {
   font-size: 0.95rem;
   line-height: 1.7;
   color: var(--text-secondary);
+}
+/* /for/ index: group headings link through to their category hub. */
+.ind-problems__header h2 a {
+  color: inherit;
+  text-decoration: none;
+}
+.ind-problems__header h2 a:hover {
+  color: var(--teal-deep);
+}
+
+/* Category hubs: the "not listed above?" line under the card grid. */
+.ind-problems__footnote {
+  margin: 32px auto 0;
+  max-width: 640px;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.ind-problems__footnote a {
+  color: var(--teal-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* --- Solutions --- */

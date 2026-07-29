@@ -182,8 +182,14 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_download   = is_page_template( 'page-download.php' );
 	$is_blog_agent = is_page_template( 'page-blog-agent.php' );
 	$is_salesforce = is_page_template( 'page-salesforce.php' );
+	// /for/ and the category hubs use the same .reveal markup as the industry
+	// pages. Without site.js those elements stay at opacity 0 forever — the
+	// /for/ index shipped with its entire directory invisible because this list
+	// was never extended. Any template using .reveal has to be here.
+	$is_for_index  = is_page_template( 'page-for.php' ) || is_page( 'for' );
+	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
 
-	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce ) {
+	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat ) {
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),
@@ -305,11 +311,24 @@ add_action( 'init', function () {
  *
  * TO ADD AN INDUSTRY: add an entry here, add its content entry to the
  * $industries array in page-industry.php (same slug), and bump
- * $provision_version below. Two files, one bump — nothing else to wire.
+ * $provision_version below. Two files, one bump — nothing else to wire. Drop it
+ * into whichever group it belongs to and its category hub picks it up
+ * automatically; no separate wiring per category.
  *
- * Fields: slug · title (WP page title) · label (nav/footer/index, defaults to
- * title) · icon · blurb (one-liner on the /for/ index) · llms (llms.txt
- * description) · seo_title + metadesc (Yoast, written by the provisioner).
+ * TO ADD A CATEGORY: add a group here with heading/slug/icon/seo_title/
+ * metadesc/intro and bump $provision_version. The hub page, the footer link and
+ * the /for/ index section all come from this one entry.
+ *
+ * Industry fields: slug · title (WP page title) · label (nav/footer/index,
+ * defaults to title) · icon · blurb (one-liner on the /for/ index) · llms
+ * (llms.txt description) · seo_title + metadesc (Yoast, written by the
+ * provisioner).
+ *
+ * Group fields: heading · slug (its hub at /for/<slug>/) · icon · seo_title +
+ * metadesc (Yoast) · intro (lead paragraph on the hub). Category slugs share
+ * the /for/ namespace with industry slugs, so they must not collide — the
+ * industries were already indexed under /for/<industry>/ and reparenting them
+ * would have changed live URLs.
  *
  * @return array<int,array<string,mixed>> Ordered groups, each with a heading and its industries.
  */
@@ -317,6 +336,11 @@ function sitestaffr_industry_registry() {
 	return array(
 		array(
 			'heading'    => 'Health & Medical',
+			'slug'       => 'health-medical',
+			'icon'       => '🏥',
+			'seo_title'  => 'AI Voice Agents for Healthcare Practices | SiteStaffr',
+			'metadesc'   => 'Patient questions answered on your website 24/7 — dental, medical, chiropractic and veterinary practices. Every inquiry captured. Free 30-day trial.',
+			'intro'      => 'Patients look for care outside office hours, and the practice that answers first usually gets the appointment. SiteStaffr picks up on your website — day, night and weekend — and sends you every detail.',
 			'industries' => array(
 				array(
 					'slug'      => 'dental-practices',
@@ -359,6 +383,11 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Beauty & Wellness',
+			'slug'       => 'beauty-wellness',
+			'icon'       => '💆',
+			'seo_title'  => 'AI Voice Agents for Salons, Spas & Studios | SiteStaffr',
+			'metadesc'   => 'Answer pricing and availability questions on your website 24/7 — med spas, salons, barbershops and fitness studios. Free 30-day trial.',
+			'intro'      => 'Most bookings start with a question about price, availability or what a treatment involves. SiteStaffr answers from your own website content and takes the client\'s details before they move on.',
 			'industries' => array(
 				array(
 					'slug'      => 'med-spas',
@@ -391,6 +420,11 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Home & Trades',
+			'slug'       => 'home-trades',
+			'icon'       => '🔧',
+			'seo_title'  => 'AI Voice Agents for Home Service Businesses | SiteStaffr',
+			'metadesc'   => 'Capture urgent home service jobs around the clock — HVAC, plumbing, pest control and general contracting. Every lead in your inbox. Free 30-day trial.',
+			'intro'      => 'Home service work is urgent and competitive: whoever answers first usually wins the job. SiteStaffr responds on your website at any hour and gets the name, number and problem to you right away.',
 			'industries' => array(
 				array(
 					'slug'      => 'home-services',
@@ -423,6 +457,11 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Professional Services',
+			'slug'       => 'professional-services',
+			'icon'       => '💼',
+			'seo_title'  => 'AI Voice Agents for Professional Firms | SiteStaffr',
+			'metadesc'   => 'Qualify new client inquiries on your website 24/7 — law firms, accounting and tax practices, and insurance agencies. Free 30-day trial.',
+			'intro'      => 'New clients research quietly, then reach out once. SiteStaffr answers their first questions on your site, captures what they need, and sends you a full recap before they contact anyone else.',
 			'industries' => array(
 				array(
 					'slug'      => 'law-firms',
@@ -455,6 +494,11 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Property & Auto',
+			'slug'       => 'property-auto',
+			'icon'       => '🚗',
+			'seo_title'  => 'AI Voice Agents for Real Estate & Auto Shops | SiteStaffr',
+			'metadesc'   => 'Answer listing and repair questions the moment they come in — real estate agents and auto repair shops. Every lead captured. Free 30-day trial.',
+			'intro'      => 'Buyers and drivers make decisions fast and rarely wait for a callback. SiteStaffr answers on your website the moment they ask and passes you the details while they are still interested.',
 			'industries' => array(
 				array(
 					'slug'      => 'real-estate',
@@ -485,6 +529,48 @@ function sitestaffr_industry_registry() {
  *
  * @return array<int,array<string,mixed>>
  */
+/**
+ * The registry group whose hub slug matches, or null.
+ *
+ * Used by the category hub template to work out which group it is rendering
+ * from the page it was assigned to, so one template serves all categories.
+ *
+ * @param string $slug Category slug.
+ * @return array<string,mixed>|null
+ */
+function sitestaffr_industry_category( $slug ) {
+	foreach ( sitestaffr_industry_registry() as $group ) {
+		if ( isset( $group['slug'] ) && $group['slug'] === $slug ) {
+			return $group;
+		}
+	}
+	return null;
+}
+
+/**
+ * Flat list of the category groups, without their industries.
+ *
+ * For the footer and any other nav that wants the five categories rather than
+ * all fifteen industries.
+ *
+ * @return array<int,array<string,mixed>>
+ */
+function sitestaffr_industry_categories() {
+	$categories = array();
+	foreach ( sitestaffr_industry_registry() as $group ) {
+		if ( empty( $group['slug'] ) ) {
+			continue;
+		}
+		$categories[] = array(
+			'slug'  => $group['slug'],
+			'label' => isset( $group['label'] ) ? $group['label'] : $group['heading'],
+			'icon'  => isset( $group['icon'] ) ? $group['icon'] : '',
+			'count' => isset( $group['industries'] ) ? count( $group['industries'] ) : 0,
+		);
+	}
+	return $categories;
+}
+
 function sitestaffr_industry_list() {
 	$flat = array();
 	foreach ( sitestaffr_industry_registry() as $group ) {
@@ -505,7 +591,7 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '5';
+	$provision_version = '6';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -544,6 +630,43 @@ add_action( 'init', function () {
 		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Voice Agent by Industry | SiteStaffr' );
 		update_post_meta( $parent_id, '_yoast_wpseo_metadesc', 'See how SiteStaffr\'s AI voice and text agent works for dental, medical, home services, law, auto and 10 more industries. Free 30-day trial.' );
 		$provisioned_ids[] = $parent_id;
+	}
+
+	// Category hubs at /for/<category>/ — siblings of the industry pages, not
+	// parents of them. Reparenting the industries would have rewritten fifteen
+	// URLs that are already live and indexed.
+	foreach ( sitestaffr_industry_registry() as $group ) {
+		if ( empty( $group['slug'] ) ) {
+			continue;
+		}
+
+		$existing_cat = get_page_by_path( 'for/' . $group['slug'] );
+		$cat_id       = $existing_cat ? (int) $existing_cat->ID : 0;
+
+		if ( ! $cat_id ) {
+			$new_cat_id = wp_insert_post( array(
+				'post_title'   => $group['heading'],
+				'post_name'    => $group['slug'],
+				'post_parent'  => $parent_id,
+				'post_status'  => 'publish',
+				'post_type'    => 'page',
+				'post_content' => '',
+			) );
+			if ( $new_cat_id && ! is_wp_error( $new_cat_id ) ) {
+				$cat_id = (int) $new_cat_id;
+			}
+		}
+
+		if ( $cat_id ) {
+			update_post_meta( $cat_id, '_wp_page_template', 'page-industry-category.php' );
+			if ( ! empty( $group['seo_title'] ) ) {
+				update_post_meta( $cat_id, '_yoast_wpseo_title', $group['seo_title'] );
+			}
+			if ( ! empty( $group['metadesc'] ) ) {
+				update_post_meta( $cat_id, '_yoast_wpseo_metadesc', $group['metadesc'] );
+			}
+			$provisioned_ids[] = $cat_id;
+		}
 	}
 
 	$industry_pages = sitestaffr_industry_list();
