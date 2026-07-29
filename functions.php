@@ -57,8 +57,24 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
  * changes. Bumping that header is therefore what publishes a copy or template
  * change — the provisioner purge added alongside this only covers the industry
  * pages, and only when its own version bumps.
+ *
+ * Purging via the `X-LiteSpeed-Purge` RESPONSE HEADER, which LiteSpeed Web
+ * Server itself acts on, rather than the plugin's `litespeed_purge_all` action:
+ * the action alone was verified NOT to clear the cache from here (theme 0.2.5
+ * shipped a new footer and the homepage kept serving the old markup, while the
+ * same URL with a cache-busting query string returned the new one). The action
+ * is still fired as a belt-and-braces second path.
+ *
+ * Runs on send_headers so the header lands on a real front-end response, and
+ * only records the version once the header has actually gone out — the previous
+ * version marked itself done even when the purge silently failed, so it never
+ * retried.
  */
-add_action( 'init', function () {
+add_action( 'send_headers', function () {
+	if ( is_admin() || headers_sent() ) {
+		return;
+	}
+
 	$theme_version = wp_get_theme()->get( 'Version' );
 	if ( ! $theme_version ) {
 		return;
@@ -68,7 +84,9 @@ add_action( 'init', function () {
 		return;
 	}
 
+	header( 'X-LiteSpeed-Purge: *' );
 	do_action( 'litespeed_purge_all' );
+
 	update_option( 'sitestaffr_theme_purged_v', $theme_version );
 } );
 
