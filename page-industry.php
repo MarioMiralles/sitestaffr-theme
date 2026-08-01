@@ -1135,7 +1135,7 @@ $industries = array(
 
 	'pest-control' => array(
 		'hero_icon' => '🐜',
-		'hero_alt'  => 'Isometric illustration of a home exterior with a pest control van and a technician with a sprayer, with a floating browser window and speech bubble showing the AI agent capturing an inspection inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a pest control van with a large moulded ant mounted on its roof rack, a sprayer and bait stations laid out beside it, with a floating browser window and speech bubble showing the AI agent capturing an inspection inquiry on the company website',
 		'label'    => 'For Pest Control',
 		'headline' => 'Someone Just Saw a Wasp Nest by the Front Door. They Want Someone Out&nbsp;Tomorrow.',
 		'subtitle' => 'SiteStaffr answers your website visitors the moment they spot roaches, a wasp nest, or something worse &mdash; capturing name, number, and the problem, 24/7, so you&rsquo;re the first call back.',
