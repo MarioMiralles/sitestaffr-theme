@@ -345,7 +345,7 @@ $industries = array(
 
 	'medical-practices' => array(
 		'hero_icon' => '🩺',
-		'hero_alt'  => 'Isometric illustration of a medical practice front desk with patient charts and a stethoscope, with a floating browser window and speech bubble showing the AI agent answering a patient inquiry on the practice website',
+		'hero_alt'  => 'Isometric illustration of a medical exam room with an examination table, blood pressure monitor and weighing scale, with a floating browser window and speech bubble showing the AI agent answering a patient inquiry on the practice website',
 		'label'    => 'For Medical Practices',
 		'headline' => 'A New Patient Is Checking If You Take Their Insurance. At&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7 &mdash; answering questions about services, insurance, and appointment availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
