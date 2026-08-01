@@ -12,7 +12,7 @@ $industries = array(
 
 	'dental-practices' => array(
 		'hero_icon' => '🦷',
-		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a glowing phone handset showing the AI voice agent taking an after-hours booking',
+		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI agent answering a visitor on the practice website',
 		'label'    => 'For Dental Practices',
 		'headline' => 'Your Front Desk Can&rsquo;t Answer Every Call. Your AI&nbsp;Agent&nbsp;Can.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7 &mdash; answering questions about services, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -108,7 +108,7 @@ $industries = array(
 
 	'law-firms' => array(
 		'hero_icon' => '⚖️',
-		'hero_alt'  => 'Isometric illustration of a law office desk stacked with case files and a set of scales, with a glowing phone handset showing the AI voice agent intaking a new caller',
+		'hero_alt'  => 'Isometric illustration of a law office desk stacked with case files and a set of scales, with a floating browser window and speech bubble showing the AI agent taking a new inquiry on the firm website',
 		'label'    => 'For Law Firms',
 		'headline' => 'Every Missed Inquiry Is a Case That Goes to Another&nbsp;Firm',
 		'subtitle' => 'SiteStaffr captures potential client inquiries on your website around the clock &mdash; qualifying leads, collecting case details, and delivering a full intake recap to your inbox before the prospect moves on.',
@@ -187,7 +187,7 @@ $industries = array(
 
 	'home-services' => array(
 		'hero_icon' => '🏠',
-		'hero_alt'  => 'Isometric illustration of a home with a service van parked out front and a technician loading tools, with a glowing phone handset showing the AI voice agent booking the job',
+		'hero_alt'  => 'Isometric illustration of a home with a service van parked out front and a technician loading tools, with a floating browser window and speech bubble showing the AI agent capturing a job inquiry on the company website',
 		'label'    => 'For Home Services',
 		'headline' => 'You&rsquo;re on the Job. Your Website Should Be&nbsp;Too.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re on a roof, under a sink, or in an attic &mdash; capturing every lead with name, number, and job details, 24/7.',
@@ -266,7 +266,7 @@ $industries = array(
 
 	'med-spas' => array(
 		'hero_icon' => '✨',
-		'hero_alt'  => 'Isometric illustration of a med spa treatment room with a facial bed and product shelf, with a glowing phone handset showing the AI voice agent scheduling a consultation',
+		'hero_alt'  => 'Isometric illustration of a med spa treatment room with a facial bed and product shelf, with a floating browser window and speech bubble showing the AI agent answering a consultation inquiry on the spa website',
 		'label'    => 'For Med Spas &amp; Aesthetics',
 		'headline' => 'Your Website Visitor Wants to Know What Botox Costs. Right&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about treatments, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
@@ -345,7 +345,7 @@ $industries = array(
 
 	'medical-practices' => array(
 		'hero_icon' => '🩺',
-		'hero_alt'  => 'Isometric illustration of a medical practice front desk with patient charts and a stethoscope, with a glowing phone handset showing the AI voice agent answering a patient call',
+		'hero_alt'  => 'Isometric illustration of a medical practice front desk with patient charts and a stethoscope, with a floating browser window and speech bubble showing the AI agent answering a patient inquiry on the practice website',
 		'label'    => 'For Medical Practices',
 		'headline' => 'A New Patient Is Checking If You Take Their Insurance. At&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7 &mdash; answering questions about services, insurance, and appointment availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -424,7 +424,7 @@ $industries = array(
 
 	'veterinary-clinics' => array(
 		'hero_icon' => '🐾',
-		'hero_alt'  => 'Isometric illustration of a veterinary exam room with a dog on the table and a check-in desk, with a glowing phone handset showing the AI voice agent taking an appointment',
+		'hero_alt'  => 'Isometric illustration of a veterinary exam room with a dog on the table and a check-in desk, with a floating browser window and speech bubble showing the AI agent answering a pet owner on the clinic website',
 		'label'    => 'For Veterinary Clinics',
 		'headline' => 'It&rsquo;s Midnight and Their Dog Ate Something It&nbsp;Shouldn&rsquo;t&nbsp;Have.',
 		'subtitle' => 'SiteStaffr greets worried pet owners on your website 24/7 &mdash; answering questions about services and availability, capturing urgent inquiries, and sending you a full recap before they even leave the page.',
@@ -503,7 +503,7 @@ $industries = array(
 
 	'chiropractors' => array(
 		'hero_icon' => '🦴',
-		'hero_alt'  => 'Isometric illustration of a chiropractic clinic with an adjustment table and spine model, with a glowing phone handset showing the AI voice agent booking a new patient',
+		'hero_alt'  => 'Isometric illustration of a chiropractic clinic with an adjustment table and spine model, with a floating browser window and speech bubble showing the AI agent capturing a new patient inquiry on the clinic website',
 		'label'    => 'For Chiropractic &amp; Physical Therapy',
 		'headline' => 'They Threw Out Their Back Moving a Couch. They&rsquo;re Looking for Relief&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about treatments, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -582,7 +582,7 @@ $industries = array(
 
 	'real-estate' => array(
 		'hero_icon' => '🏡',
-		'hero_alt'  => 'Isometric illustration of a listed home with a sold sign and floating listing cards, with a glowing phone handset showing the AI voice agent qualifying a buyer',
+		'hero_alt'  => 'Isometric illustration of a listed home with a yard sign and floating listing cards, with a floating browser window and speech bubble showing the AI agent qualifying a buyer on the agency website',
 		'label'    => 'For Real Estate',
 		'headline' => 'A Buyer Is Looking at Your Listing Right Now. It&rsquo;s Sunday at&nbsp;3&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors browsing your listings 24/7 &mdash; answering questions about price, square footage, and showings, capturing buyer and seller inquiries, and sending you a full recap before they leave the page.',
@@ -661,7 +661,7 @@ $industries = array(
 
 	'auto-repair' => array(
 		'hero_icon' => '🔧',
-		'hero_alt'  => 'Isometric illustration of an auto repair bay with a car on a lift and a rolling toolbox, with a glowing phone handset showing the AI voice agent scheduling a service visit',
+		'hero_alt'  => 'Isometric illustration of an auto repair bay with a car on a lift and a rolling toolbox, with a floating browser window and speech bubble showing the AI agent capturing a service inquiry on the shop website',
 		'label'    => 'For Auto Repair Shops',
 		'headline' => 'The Check Engine Light Just Came On. They&rsquo;re Picking a Shop Before&nbsp;Morning.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re under a hood or on the lift &mdash; capturing every lead with name, number, and vehicle details, 24/7.',
@@ -740,7 +740,7 @@ $industries = array(
 
 	'salons-barbershops' => array(
 		'hero_icon' => '💈',
-		'hero_alt'  => 'Isometric illustration of a salon floor with styling chairs, mirrors and a barber pole, with a glowing phone handset showing the AI voice agent filling an open slot',
+		'hero_alt'  => 'Isometric illustration of a salon floor with styling chairs, mirrors and a barber pole, with a floating browser window and speech bubble showing the AI agent answering a visitor on the salon website',
 		'label'    => 'For Salons &amp; Barbershops',
 		'headline' => 'Saturday&rsquo;s Last Color Slot Is Open. They&rsquo;re Deciding at&nbsp;9&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
@@ -819,7 +819,7 @@ $industries = array(
 
 	'hvac-plumbing' => array(
 		'hero_icon' => '🚿',
-		'hero_alt'  => 'Isometric illustration of a utility room with an HVAC unit, pipework and a technician, with a glowing phone handset showing the AI voice agent dispatching the call',
+		'hero_alt'  => 'Isometric illustration of a utility room with an HVAC unit, pipework and a technician, with a floating browser window and speech bubble showing the AI agent capturing a service inquiry on the company website',
 		'label'    => 'For HVAC &amp; Plumbing',
 		'headline' => 'No Heat at 11&nbsp;PM in January. Whoever Answers First Gets the&nbsp;Call.',
 		'subtitle' => 'SiteStaffr answers your website visitors the instant the heat goes out or a pipe bursts &mdash; capturing name, number, and the problem, 24/7, so you&rsquo;re the first call back, not the third.',
@@ -898,7 +898,7 @@ $industries = array(
 
 	'accounting-tax' => array(
 		'hero_icon' => '📊',
-		'hero_alt'  => 'Isometric illustration of an accountant desk with ledgers, a calculator and floating charts, with a glowing phone handset showing the AI voice agent screening a client call',
+		'hero_alt'  => 'Isometric illustration of an accountant desk with ledgers, a calculator and floating charts, with a floating browser window and speech bubble showing the AI agent screening a client inquiry on the firm website',
 		'label'    => 'For Accounting &amp; Tax',
 		'headline' => 'Two Weeks to the Filing Deadline. A New Client Needs Catch-Up&nbsp;Bookkeeping.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about services and new client availability, capturing inquiries, and sending you a full recap before they even leave the page.',
@@ -977,7 +977,7 @@ $industries = array(
 
 	'insurance-agencies' => array(
 		'hero_icon' => '🛡️',
-		'hero_alt'  => 'Isometric illustration of an insurance agency desk with policy folders and a shield emblem, with a glowing phone handset showing the AI voice agent capturing a quote request',
+		'hero_alt'  => 'Isometric illustration of an insurance agency desk with policy folders and a shield emblem, with a floating browser window and speech bubble showing the AI agent capturing a quote request on the agency website',
 		'label'    => 'For Insurance Agencies',
 		'headline' => 'A Homeowner Just Opened Their Renewal Notice. The Rate Went&nbsp;Up.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about coverage types and availability, capturing new policy inquiries, and sending you a full recap before they even leave the page.',
@@ -1056,7 +1056,7 @@ $industries = array(
 
 	'fitness-studios' => array(
 		'hero_icon' => '🏋️',
-		'hero_alt'  => 'Isometric illustration of a fitness studio floor with dumbbell racks and a class schedule board, with a glowing phone handset showing the AI voice agent signing up a member',
+		'hero_alt'  => 'Isometric illustration of a fitness studio floor with dumbbell racks and a class schedule board, with a floating browser window and speech bubble showing the AI agent answering a prospective member on the studio website',
 		'label'    => 'For Fitness Studios',
 		'headline' => 'Does Tomorrow&rsquo;s 6 AM Class Have Room? They&rsquo;re Asking at&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7 &mdash; answering questions about class times, trial passes, and membership, capturing new member inquiries, and sending you a full recap before they even leave the page.',
@@ -1135,7 +1135,7 @@ $industries = array(
 
 	'pest-control' => array(
 		'hero_icon' => '🐜',
-		'hero_alt'  => 'Isometric illustration of a home exterior with a pest control van and a technician with a sprayer, with a glowing phone handset showing the AI voice agent booking an inspection',
+		'hero_alt'  => 'Isometric illustration of a home exterior with a pest control van and a technician with a sprayer, with a floating browser window and speech bubble showing the AI agent capturing an inspection inquiry on the company website',
 		'label'    => 'For Pest Control',
 		'headline' => 'Someone Just Saw a Wasp Nest by the Front Door. They Want Someone Out&nbsp;Tomorrow.',
 		'subtitle' => 'SiteStaffr answers your website visitors the moment they spot roaches, a wasp nest, or something worse &mdash; capturing name, number, and the problem, 24/7, so you&rsquo;re the first call back.',
