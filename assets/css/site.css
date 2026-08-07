@@ -7835,9 +7835,28 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   line-height: 1;
   animation: ind-float 4s ease-in-out infinite;
 }
+/* Per-industry isometric art. Capped below the grid column width so the square
+   render sits in roughly the footprint the emoji held and the hero height
+   doesn't jump between pages that have art and pages that don't yet.
+   No border-radius or box-shadow: the art is a transparent cut-out, not a
+   tile, so a radius clips nothing and a shadow would draw a rectangle around
+   the invisible bounding box. The scene carries its own contact shadow, and
+   staying background-independent is what lets one file serve a light and a
+   dark page without a second set of renders. */
+.ind-hero__image {
+  width: 100%;
+  max-width: 440px;
+  animation: ind-float 4s ease-in-out infinite;
+}
 @keyframes ind-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-14px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ind-hero__icon,
+  .ind-hero__image {
+    animation: none;
+  }
 }
 
 /* --- Pain Points --- */
@@ -8391,6 +8410,9 @@ a.ind-problem-card .ind-problem-card__icon {
   }
   .ind-hero__icon {
     font-size: 120px;
+  }
+  .ind-hero__image {
+    max-width: 300px;
   }
 }
 @media (max-width: 600px) {
