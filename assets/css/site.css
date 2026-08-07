@@ -7934,6 +7934,22 @@ a.ind-problem-card .ind-problem-card__icon {
   font-size: 1.5rem;
   line-height: 1;
 }
+/* Industries with isometric art use it in place of the emoji tile. The art is
+   transparent and already carries the brand teal, so it drops the pale square
+   and takes the room it needs to stay legible. */
+.ind-problem-card__icon--art,
+a.ind-problem-card .ind-problem-card__icon--art {
+  width: 104px;
+  height: 104px;
+  background: none;
+  border-radius: 0;
+  margin-bottom: 14px;
+}
+.ind-problem-card__icon--art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .ind-problem-card__desc {
   font-size: 0.95rem;
   line-height: 1.7;

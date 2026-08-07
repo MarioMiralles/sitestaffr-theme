@@ -571,6 +571,26 @@ function sitestaffr_industry_categories() {
 	return $categories;
 }
 
+/**
+ * Card-sized thumbnail for an industry's isometric art, or '' when there is none.
+ *
+ * The full 1024px hero art in assets/images/industries/ is what page-industry.php
+ * puts at the top of each landing page; thumbs/ holds the trimmed-and-shrunk
+ * version the card grids use, so the /for/ index isn't fifteen full heroes.
+ * Optional by design: an industry added to the registry before its art is drawn
+ * falls back to its emoji rather than rendering a broken image.
+ *
+ * @param string $slug Industry slug.
+ * @return string Cache-busted URL, or '' if no thumbnail exists.
+ */
+function sitestaffr_industry_art_thumb_url( $slug ) {
+	$relative = 'assets/images/industries/thumbs/' . $slug . '.webp';
+	if ( ! file_exists( get_stylesheet_directory() . '/' . $relative ) ) {
+		return '';
+	}
+	return sitestaffr_asset_url( $relative );
+}
+
 function sitestaffr_industry_list() {
 	$flat = array();
 	foreach ( sitestaffr_industry_registry() as $group ) {

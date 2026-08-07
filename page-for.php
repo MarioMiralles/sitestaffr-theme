@@ -63,8 +63,15 @@ $cta_url = home_url( '/#get-started' );
 			</div>
 			<div class="ind-problems__grid">
 				<?php foreach ( $group['industries'] as $i => $item ) : ?>
+					<?php $item_art = sitestaffr_industry_art_thumb_url( $item['slug'] ); ?>
 					<a class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $i + 1 ); ?>" href="<?php echo esc_url( home_url( '/for/' . $item['slug'] . '/' ) ); ?>">
-						<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $item['icon']; ?></div>
+						<?php if ( $item_art ) : ?>
+							<div class="ind-problem-card__icon ind-problem-card__icon--art" aria-hidden="true">
+								<img src="<?php echo esc_url( $item_art ); ?>" alt="" width="224" height="224" loading="lazy" decoding="async">
+							</div>
+						<?php else : ?>
+							<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $item['icon']; ?></div>
+						<?php endif; ?>
 						<h3 class="ind-problem-card__title"><?php echo esc_html( isset( $item['label'] ) ? $item['label'] : $item['title'] ); ?></h3>
 						<p class="ind-problem-card__desc"><?php echo wp_kses_post( $item['blurb'] ); ?></p>
 					</a>

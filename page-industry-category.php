@@ -71,8 +71,15 @@ $cta_url               = home_url( '/#get-started' );
 			</div>
 			<div class="ind-problems__grid">
 				<?php foreach ( $sitestaffr_industries as $sitestaffr_i => $sitestaffr_item ) : ?>
+					<?php $sitestaffr_item_art = sitestaffr_industry_art_thumb_url( $sitestaffr_item['slug'] ); ?>
 					<a class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $sitestaffr_i + 1 ); ?>" href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_item['slug'] . '/' ) ); ?>">
-						<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $sitestaffr_item['icon']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- registry-controlled emoji. ?></div>
+						<?php if ( $sitestaffr_item_art ) : ?>
+							<div class="ind-problem-card__icon ind-problem-card__icon--art" aria-hidden="true">
+								<img src="<?php echo esc_url( $sitestaffr_item_art ); ?>" alt="" width="224" height="224" loading="lazy" decoding="async">
+							</div>
+						<?php else : ?>
+							<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $sitestaffr_item['icon']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- registry-controlled emoji. ?></div>
+						<?php endif; ?>
 						<h3 class="ind-problem-card__title"><?php echo esc_html( isset( $sitestaffr_item['label'] ) ? $sitestaffr_item['label'] : $sitestaffr_item['title'] ); ?></h3>
 						<p class="ind-problem-card__desc"><?php echo wp_kses_post( $sitestaffr_item['blurb'] ); ?></p>
 					</a>
