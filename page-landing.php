@@ -43,7 +43,12 @@ $get_started_url = home_url( '/#get-started' );
             'name'     => 'Mario Miralles',
             'url'      => home_url( '/about/' ),
         ),
+        // Entity disambiguation. Searching "SiteStaffr" currently returns this site 9th of 10 —
+        // the rest belong to "SiteStaff"/"SiteStaff Chat" (ssc.ai, sitestaff.net), an unrelated
+        // live-chat staffing firm. sameAs is how Google is told which third-party profiles are
+        // THIS entity. Only add URLs verified to resolve; a dead sameAs is worse than none.
         'sameAs'           => array(
+            'https://wordpress.org/plugins/sitestaffr/',
             'https://linkedin.com/company/sitestaffr',
         ),
         'foundingLocation' => array(
