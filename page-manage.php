@@ -105,11 +105,12 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="pricing-grid pricing-grid--hub">
           <div class="pricing-card">
             <div class="pricing-card__name">Starter</div>
-            <div class="pricing-card__price">$10</div>
+            <div class="pricing-card__price">$29</div>
             <div class="pricing-card__price-sub">per month</div>
             <div class="pricing-card__divider"></div>
-            <div class="pricing-card__minutes">60 minutes included</div>
+            <div class="pricing-card__minutes">100 voice minutes included</div>
             <ul class="pricing-card__features">
+              <li>Unlimited AI text chat</li>
               <li>2 AI voice options</li>
               <li>3 AI description generations per cycle</li>
               <li>Great for steady weekly lead volume</li>
@@ -119,11 +120,12 @@ if ( ! defined( 'ABSPATH' ) ) {
           <div class="pricing-card pricing-card--popular">
             <div class="pricing-card__badge">Most Popular</div>
             <div class="pricing-card__name">Business</div>
-            <div class="pricing-card__price">$50</div>
+            <div class="pricing-card__price">$69</div>
             <div class="pricing-card__price-sub">per month</div>
             <div class="pricing-card__divider"></div>
-            <div class="pricing-card__minutes">300 minutes included</div>
+            <div class="pricing-card__minutes">300 voice minutes included</div>
             <ul class="pricing-card__features">
+              <li>Unlimited AI text chat</li>
               <li>5 AI voice options</li>
               <li>Custom greeting + 4 tone styles</li>
               <li>5 AI description generations per cycle</li>
@@ -132,11 +134,12 @@ if ( ! defined( 'ABSPATH' ) ) {
           </div>
           <div class="pricing-card">
             <div class="pricing-card__name">Pro</div>
-            <div class="pricing-card__price">$100</div>
+            <div class="pricing-card__price">$129</div>
             <div class="pricing-card__price-sub">per month</div>
             <div class="pricing-card__divider"></div>
-            <div class="pricing-card__minutes">700 minutes included</div>
+            <div class="pricing-card__minutes">600 voice minutes included</div>
             <ul class="pricing-card__features">
+              <li>Unlimited AI text chat</li>
               <li>All 10 AI voices</li>
               <li>Custom greeting + 4 tone styles</li>
               <li>20 AI description generations per cycle</li>

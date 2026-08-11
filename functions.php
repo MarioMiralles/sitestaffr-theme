@@ -783,19 +783,19 @@ add_action( 'template_redirect', function () {
 		echo "- [Terms of Service](" . home_url( '/terms/' ) . ") — Usage terms\n\n";
 		echo "## Product Facts\n\n";
 		echo "- Category: AI Voice & Text Agent / Lead Capture / WordPress Plugin\n";
-		echo "- Pricing: Free 30-day trial, then \$10–\$100/month\n";
+		echo "- Pricing: Free 30-day trial, then \$29–\$129/month\n";
 		echo "- Languages: 57+ (recaps always in English)\n";
 		echo "- AI Voices: 10 unique personalities (Marin, Cedar, Sage, Coral, Ash, Alloy, Echo, Shimmer, Verse, Ballad)\n";
 		echo "- Built by: PhoneEase LLC (Florida, USA)\n";
 		echo "- Founded by: Mario Miralles — 18+ years in customer-facing roles, Software Engineering diploma from BrainStation\n";
 		echo "- Contact: support@sitestaffr.com\n\n";
 		echo "## Pricing Details\n\n";
-		echo "| Plan | Price | Minutes | AI Voices |\n";
-		echo "|------|-------|---------|----------|\n";
-		echo "| Free Trial | \$0 for 30 days | 30 minutes (one-time) | 2 voices |\n";
-		echo "| Starter | \$10/month | 60 minutes | 2 voices |\n";
-		echo "| Business | \$50/month | 300 minutes | 5 voices |\n";
-		echo "| Pro | \$100/month | 700 minutes | All 10 voices |\n\n";
+		echo "| Plan | Price | Text chat | Voice minutes | AI Voices |\n";
+		echo "|------|-------|-----------|---------------|----------|\n";
+		echo "| Free Trial | \$0 for 30 days | Included | 30 minutes (one-time) | 2 voices |\n";
+		echo "| Starter | \$29/month | Unlimited | 100 minutes | 2 voices |\n";
+		echo "| Business | \$69/month | Unlimited | 300 minutes | 5 voices |\n";
+		echo "| Pro | \$129/month | Unlimited | 600 minutes | All 10 voices |\n\n";
 		echo "Add-on minutes: \$10 for 50 minutes, never expire. No credit card required for the free trial.\n\n";
 		echo "## How It Works\n\n";
 		echo "1. Install the SiteStaffr plugin on your WordPress site (takes under 5 minutes).\n";
@@ -814,10 +814,13 @@ add_action( 'template_redirect', function () {
 		echo "answers their questions using your website content, and captures their name, phone number, and what they need — all through natural ";
 		echo "conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor's contact ";
 		echo "information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you're on a job site, in a ";
-		echo "consultation, or after hours. Plans start at \$10 per month after a free 30-day trial with no credit card required.\n\n";
+		echo "consultation, or after hours. Plans start at \$29 per month after a free 30-day trial with no credit card required.\n\n";
 		echo "**How much does SiteStaffr cost?** SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — ";
-		echo "no credit card required. Paid plans are \$10/month (Starter, 60 minutes), \$50/month (Business, 300 minutes), ";
-		echo "and \$100/month (Pro, 700 minutes). Additional minutes cost \$10 for 50 minutes and never expire.\n\n";
+		echo "no credit card required. Paid plans are \$29/month (Starter, 100 voice minutes), \$69/month (Business, 300 voice minutes), ";
+		echo "and \$129/month (Pro, 600 voice minutes). Every paid plan includes unlimited AI text chat — only voice is metered. ";
+		echo "Additional voice minutes cost \$10 for 50 minutes and never expire.
+
+";
 		echo "**Does SiteStaffr work with my WordPress site?** Yes. SiteStaffr is built specifically for WordPress. ";
 		echo "Install the plugin from your WordPress dashboard, configure your business details, and the AI agent appears on your website — no coding required.\n";
 		exit;

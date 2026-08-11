@@ -81,28 +81,28 @@ $get_started_url = home_url( '/#get-started' );
                 'name'          => 'Free Trial',
                 'price'         => '0',
                 'priceCurrency' => 'USD',
-                'description'   => '30-day free trial with 30 minutes included, 2 AI voices, 1 AI blog post, no credit card required',
+                'description'   => '30-day free trial with 30 voice minutes included, 2 AI voices, 1 AI blog post, no credit card required',
             ),
             array(
                 '@type'         => 'Offer',
                 'name'          => 'Starter',
-                'price'         => '10.00',
+                'price'         => '29.00',
                 'priceCurrency' => 'USD',
-                'description'   => '60 minutes per month, 2 AI voices, 2 AI blog posts per month',
+                'description'   => 'Unlimited AI text chat, 100 voice minutes per month, 2 AI voices, 2 AI blog posts per month',
             ),
             array(
                 '@type'         => 'Offer',
                 'name'          => 'Business',
-                'price'         => '50.00',
+                'price'         => '69.00',
                 'priceCurrency' => 'USD',
-                'description'   => '300 minutes per month, 5 AI voices, 4 AI blog posts per month with Autopilot publishing',
+                'description'   => 'Unlimited AI text chat, 300 voice minutes per month, 5 AI voices, 4 AI blog posts per month with Autopilot publishing',
             ),
             array(
                 '@type'         => 'Offer',
                 'name'          => 'Pro',
-                'price'         => '100.00',
+                'price'         => '129.00',
                 'priceCurrency' => 'USD',
-                'description'   => '700 minutes per month, all 10 AI voices, 8 AI blog posts per month with Autopilot publishing, custom greeting and 4 tones',
+                'description'   => 'Unlimited AI text chat, 600 voice minutes per month, all 10 AI voices, 8 AI blog posts per month with Autopilot publishing, custom greeting and 4 tones',
             ),
         ),
     ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
@@ -148,7 +148,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and 50 text-chat messages per day — no credit card required. Paid plans are $10/month (Starter: 60 voice minutes and 150 text-chat messages per day), $50/month (Business: 300 voice minutes and 500 text-chat messages per day), and $100/month (Pro: 700 voice minutes and 2,000 text-chat messages per day). Text chat is separate from your voice minutes and resets daily — it is a flat monthly rate with no per-conversation fees. Every plan also includes AI-written blog posts each month — from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $10 for 50 minutes, and they never expire.',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and 100 text-chat messages per day — no credit card required. Paid plans are $29/month (Starter: 100 voice minutes), $69/month (Business: 300 voice minutes), and $129/month (Pro: 600 voice minutes). Every paid plan includes unlimited AI text chat with no per-conversation fees — only voice is metered. Every plan also includes AI-written blog posts each month — from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $10 for 50 minutes, and they never expire.',
         ),
         array(
             'question' => 'Does SiteStaffr work with my WordPress site?',
@@ -824,7 +824,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             </div>
             <div class="price-tier__stat">
               <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">50 <small>msgs/day</small></span>
+              <span class="price-tier__stat-value">100 <small>msgs/day</small></span>
             </div>
           </div>
           <ul class="price-tier__features">
@@ -839,18 +839,18 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="price-tier reveal reveal-delay-1">
         <div class="price-tier__identity">
           <div class="price-tier__name">Starter</div>
-          <div class="price-tier__price">$10</div>
+          <div class="price-tier__price">$29</div>
           <div class="price-tier__period">per month</div>
         </div>
         <div class="price-tier__details">
           <div class="price-tier__allowances">
             <div class="price-tier__stat">
               <span class="price-tier__stat-label">Voice</span>
-              <span class="price-tier__stat-value">60 <small>min/mo</small></span>
+              <span class="price-tier__stat-value">100 <small>min/mo</small></span>
             </div>
             <div class="price-tier__stat">
               <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">150 <small>msgs/day</small></span>
+              <span class="price-tier__stat-value">Unlimited</span>
             </div>
           </div>
           <ul class="price-tier__features">
@@ -865,7 +865,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <div class="price-tier__identity">
           <span class="price-tier__badge">Most Popular</span>
           <div class="price-tier__name">Business</div>
-          <div class="price-tier__price">$50</div>
+          <div class="price-tier__price">$69</div>
           <div class="price-tier__period">per month</div>
         </div>
         <div class="price-tier__details">
@@ -876,7 +876,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             </div>
             <div class="price-tier__stat">
               <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">500 <small>msgs/day</small></span>
+              <span class="price-tier__stat-value">Unlimited</span>
             </div>
           </div>
           <ul class="price-tier__features">
@@ -891,18 +891,18 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="price-tier reveal reveal-delay-3">
         <div class="price-tier__identity">
           <div class="price-tier__name">Pro</div>
-          <div class="price-tier__price">$100</div>
+          <div class="price-tier__price">$129</div>
           <div class="price-tier__period">per month</div>
         </div>
         <div class="price-tier__details">
           <div class="price-tier__allowances">
             <div class="price-tier__stat">
               <span class="price-tier__stat-label">Voice</span>
-              <span class="price-tier__stat-value">700 <small>min/mo</small></span>
+              <span class="price-tier__stat-value">600 <small>min/mo</small></span>
             </div>
             <div class="price-tier__stat">
               <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">2,000 <small>msgs/day</small></span>
+              <span class="price-tier__stat-value">Unlimited</span>
             </div>
           </div>
           <ul class="price-tier__features">
