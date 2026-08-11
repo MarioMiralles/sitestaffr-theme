@@ -25,7 +25,7 @@ $site_name = get_bloginfo( 'name' );
 			'@id' => home_url( '/' ) . '#organization',
 		),
 		'datePublished'  => '2026-02-24',
-		'dateModified'   => '2026-02-24',
+		'dateModified'   => '2026-08-11',
 		'inLanguage'     => 'en-US',
 	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 	</script>
@@ -57,9 +57,10 @@ $site_name = get_bloginfo( 'name' );
 		<article class="legal-page__article">
 			<h1 class="legal-page__title">Terms of Service</h1>
 			<p class="legal-page__meta">
-				<strong>Effective Date:</strong> February 24, 2026<br>
-				<strong>Last Updated:</strong> February 24, 2026
+				<strong>Effective Date:</strong> August 11, 2026<br>
+				<strong>Last Updated:</strong> August 11, 2026
 			</p>
+			<p class="legal-page__meta"><em>This update brings the Service description up to date &mdash; SiteStaffr now includes AI text chat, blog content generation, and AI visibility tracking alongside the original voice widget &mdash; and documents the fair-use protections that already apply to text chat. It adds no new restriction on how you use the Service.</em></p>
 
 			<section class="legal-section">
 				<h2>1. Acceptance of Terms</h2>
@@ -70,15 +71,18 @@ $site_name = get_bloginfo( 'name' );
 
 			<section class="legal-section">
 				<h2>2. Service Description</h2>
-				<p>SiteStaffr provides an AI-powered voice widget that Businesses embed on their websites. The widget enables real-time voice conversations between Site Visitors and an AI assistant configured by the Business. The Service includes:</p>
+				<p>SiteStaffr provides an AI agent that Businesses embed on their websites. The agent holds real-time conversations with Site Visitors &mdash; by text chat and by browser-based voice &mdash; answering from content the Business provides and capturing enquiries on the Business&rsquo;s behalf. The Service includes:</p>
 				<ul>
-					<li>An embeddable voice widget for Business websites</li>
-					<li>A WordPress plugin for widget configuration and call management</li>
-					<li>Cloud middleware for real-time voice session routing</li>
-					<li>AI voice processing powered by third-party AI providers</li>
-					<li>A dashboard for call analytics, transcripts, and configuration</li>
+					<li>An embeddable AI agent for Business websites, supporting both text chat and browser-based voice conversations</li>
+					<li>A WordPress plugin for configuration, conversation history, and lead management</li>
+					<li>Cloud middleware for real-time session routing and knowledge retrieval</li>
+					<li>AI language and voice processing powered by third-party AI providers</li>
+					<li><strong>Blog content generation</strong> &mdash; AI-drafted blog posts for the Business&rsquo;s own website, subject to plan limits and to the Business&rsquo;s review before publication</li>
+					<li><strong>AI visibility tracking</strong> &mdash; periodic checks of whether AI search engines reference the Business&rsquo;s website for a set of prompts</li>
+					<li>A dashboard for conversation analytics, transcripts, recaps, and configuration</li>
 					<li>Subscription management and billing</li>
 				</ul>
+				<p>Not every feature is available on every plan. Current plan contents and limits are published on our website.</p>
 			</section>
 
 			<section class="legal-section">
@@ -97,18 +101,18 @@ $site_name = get_bloginfo( 'name' );
 				<h2>4. Free Trial</h2>
 				<p>We may offer a free trial period for new accounts. During the trial:</p>
 				<ul>
-					<li>You receive a limited amount of voice minutes at no charge.</li>
-					<li>The trial expires after a fixed number of days or when trial minutes are exhausted, whichever comes first.</li>
+					<li>You receive a limited amount of voice minutes at no charge, together with a limited daily allowance of AI text chat messages.</li>
+					<li>The trial expires after a fixed number of days or when trial voice minutes are exhausted, whichever comes first.</li>
 					<li>No credit card is required to start a trial.</li>
-					<li>At trial expiration, voice widget functionality will be suspended until you subscribe to a paid plan.</li>
-					<li>Trial terms (duration, minutes) may change at our discretion for new signups.</li>
+					<li>At trial expiration, the AI agent will be suspended until you subscribe to a paid plan.</li>
+					<li>Trial terms (duration, voice minutes, daily message allowance) may change at our discretion for new signups. Current trial terms are published on our website.</li>
 				</ul>
 			</section>
 
 			<section class="legal-section">
 				<h2>5. Subscriptions and Billing</h2>
 				<ul>
-					<li><strong>Paid plans:</strong> The Service is offered through paid subscription plans at prices published on our website. Plans differ in the number of included voice minutes and available features.</li>
+					<li><strong>Paid plans:</strong> The Service is offered through paid subscription plans at prices published on our website. Plans differ in the number of included voice minutes, the monthly allowance of generated blog posts and AI visibility checks, and other available features. <strong>AI text chat is not metered on paid plans</strong> and is included without a per-message or per-conversation charge, subject to the fair-use protections in Section 8.</li>
 					<li><strong>Billing cycle:</strong> Subscriptions are billed monthly on a recurring basis. Your billing cycle begins on the date of your first subscription payment.</li>
 					<li><strong>Payment:</strong> All payments are processed through Stripe. By subscribing, you authorize recurring charges to your payment method.</li>
 					<li><strong>Included minutes:</strong> Each plan includes a set number of voice minutes per billing cycle. Unused included minutes do not roll over to subsequent billing periods.</li>
@@ -123,7 +127,7 @@ $site_name = get_bloginfo( 'name' );
 					<li>Add-on minutes are consumed only after your plan&rsquo;s included monthly minutes are exhausted.</li>
 					<li><strong>Add-on minutes roll over</strong> indefinitely and do not expire as long as your account remains active.</li>
 					<li>Add-on minutes are retained even if you cancel your subscription &mdash; they remain available if you resubscribe.</li>
-					<li>There is no metered or automatic overage billing. When all minutes (included + add-on) are exhausted, the voice widget will be suspended until more minutes are available.</li>
+					<li>There is no metered or automatic overage billing. When all minutes (included + add-on) are exhausted, <strong>voice conversations</strong> are suspended until more minutes are available. <strong>Text chat is unaffected and continues to work.</strong></li>
 				</ul>
 			</section>
 
@@ -155,15 +159,25 @@ $site_name = get_bloginfo( 'name' );
 					<li>Use the Service in any manner that could damage, disable, or impair SiteStaffr&rsquo;s systems</li>
 				</ul>
 				<p>We reserve the right to suspend or terminate accounts that violate these terms, with or without notice depending on severity.</p>
+
+				<h3>Fair Use of Unlimited Text Chat</h3>
+				<p>Paid plans include unlimited AI text chat for normal business use. &ldquo;Unlimited&rdquo; means we do not meter your text conversations or charge per message &mdash; it does not mean the Service will process an unbounded volume of automated traffic.</p>
+				<p>To keep the Service fast and available for everyone, we apply the following fair-use protections to text chat:</p>
+				<ul>
+					<li><strong>Daily volume:</strong> we may limit a site to approximately <strong>2,000 messages per day</strong> (Eastern time). Free trial accounts are limited to <strong>100 messages per day</strong>.</li>
+					<li><strong>Bursts:</strong> we may temporarily slow or pause text chat on a site that sends an unusually large number of messages in a short period.</li>
+					<li><strong>Conversation length:</strong> individual conversations may be brought to a close after an extended exchange.</li>
+				</ul>
+				<p>If a limit is reached, your AI agent stops answering for the rest of that day and visitors are shown a contact form instead, so you still receive their message. Normal use is nowhere near these thresholds &mdash; a typical SiteStaffr site handles a few dozen messages a day. We will contact you before taking any further action if your usage is consistently at these levels.</p>
 			</section>
 
 			<section class="legal-section">
 				<h2>9. Business Responsibilities</h2>
 				<p>As a Business using SiteStaffr, you acknowledge and agree that:</p>
 				<ul>
-					<li><strong>You are the data controller</strong> for all personal data collected from your Site Visitors through the voice widget, including voice audio content, conversation transcripts, and any personal information disclosed during calls.</li>
-					<li><strong>You are responsible for providing appropriate privacy notices</strong> to your Site Visitors disclosing the use of AI-powered voice technology on your website.</li>
-					<li><strong>You are responsible for obtaining any legally required consent</strong> from Visitors before they interact with the voice widget, as applicable under your jurisdiction (e.g., GDPR, CCPA, state wiretapping/recording laws).</li>
+					<li><strong>You are the data controller</strong> for all personal data collected from your Site Visitors through the AI agent, including voice audio content, text chat messages, conversation transcripts, and any personal information disclosed during a conversation.</li>
+					<li><strong>You are responsible for providing appropriate privacy notices</strong> to your Site Visitors disclosing the use of AI-powered text and voice technology on your website.</li>
+					<li><strong>You are responsible for obtaining any legally required consent</strong> from Visitors before they interact with the AI agent, as applicable under your jurisdiction (e.g., GDPR, CCPA, state wiretapping/recording laws).</li>
 					<li><strong>You must comply with all applicable laws</strong> regarding recording, processing, and storing voice conversations and personal data.</li>
 					<li><strong>You are responsible for responding to data subject requests</strong> (access, deletion, etc.) from your Visitors regarding data stored in your WordPress database.</li>
 					<li><strong>You control your AI assistant&rsquo;s configuration</strong> (greeting, prompt, behavior). You are responsible for ensuring your configuration complies with applicable laws and does not facilitate harmful, misleading, or unlawful interactions.</li>
@@ -227,7 +241,7 @@ $site_name = get_bloginfo( 'name' );
 					<li>Your use of the Service</li>
 					<li>Your violation of these Terms</li>
 					<li>Your violation of any applicable law or third-party rights</li>
-					<li>Visitor interactions with the voice widget on your website</li>
+					<li>Visitor interactions with the AI agent on your website</li>
 					<li>Your configuration of the AI assistant</li>
 					<li>Any data privacy claims related to your Visitors&rsquo; data</li>
 				</ul>

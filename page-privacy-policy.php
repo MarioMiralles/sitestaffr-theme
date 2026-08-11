@@ -25,7 +25,7 @@ $site_name = get_bloginfo( 'name' );
 			'@id' => home_url( '/' ) . '#organization',
 		),
 		'datePublished'  => '2026-02-24',
-		'dateModified'   => '2026-02-24',
+		'dateModified'   => '2026-08-11',
 		'inLanguage'     => 'en-US',
 	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 	</script>
@@ -57,13 +57,13 @@ $site_name = get_bloginfo( 'name' );
 		<article class="legal-page__article">
 			<h1 class="legal-page__title">Privacy Policy</h1>
 			<p class="legal-page__meta">
-				<strong>Effective Date:</strong> February 24, 2026<br>
-				<strong>Last Updated:</strong> February 24, 2026
+				<strong>Effective Date:</strong> August 11, 2026<br>
+				<strong>Last Updated:</strong> August 11, 2026
 			</p>
 
 			<section class="legal-section">
 				<h2>1. Who We Are</h2>
-				<p>SiteStaffr is a product of <strong>PhoneEase LLC</strong>, a Florida limited liability company. SiteStaffr provides an AI-powered voice widget that website owners embed on their sites to assist visitors via real-time voice conversation.</p>
+				<p>SiteStaffr is a product of <strong>PhoneEase LLC</strong>, a Florida limited liability company. SiteStaffr provides an AI agent that website owners embed on their sites to assist visitors through real-time text chat and browser-based voice conversation. The Service also generates blog content for the Business&rsquo;s own website and tracks whether AI search engines reference it.</p>
 				<p><strong>Contact:</strong></p>
 				<ul>
 					<li>Email: <a href="mailto:support@sitestaffr.com">support@sitestaffr.com</a></li>
@@ -76,8 +76,8 @@ $site_name = get_bloginfo( 'name' );
 				<h2>2. This Policy Covers Two Groups</h2>
 				<p>We interact with two distinct groups of people, and we handle their data differently:</p>
 				<ul>
-					<li><strong>Business Owners (&ldquo;Businesses&rdquo;):</strong> People and organizations who create a SiteStaffr account, subscribe to our service, and embed the voice widget on their websites.</li>
-					<li><strong>Site Visitors (&ldquo;Visitors&rdquo;):</strong> People who interact with the SiteStaffr voice widget on a Business&rsquo;s website.</li>
+					<li><strong>Business Owners (&ldquo;Businesses&rdquo;):</strong> People and organizations who create a SiteStaffr account, subscribe to our service, and embed the AI agent on their websites.</li>
+					<li><strong>Site Visitors (&ldquo;Visitors&rdquo;):</strong> People who interact with the SiteStaffr AI agent on a Business&rsquo;s website, by text chat or by voice.</li>
 				</ul>
 			</section>
 
@@ -122,11 +122,14 @@ $site_name = get_bloginfo( 'name' );
 
 			<section class="legal-section">
 				<h2>4. What We Collect from Site Visitors</h2>
-				<p><strong>SiteStaffr acts as a data processor on behalf of the Business (the data controller) when Visitors use the voice widget.</strong></p>
+				<p><strong>SiteStaffr acts as a data processor on behalf of the Business (the data controller) when Visitors use the AI agent, whether by text chat or by voice.</strong></p>
 				<ul>
 					<li><strong>Voice audio:</strong> Visitor voice audio is streamed in real time to OpenAI for processing. Audio is not stored by SiteStaffr&rsquo;s middleware servers. OpenAI processes this data under their Zero Data Retention API policy and does not use it for training.</li>
-					<li><strong>Conversation transcripts, caller names, and any personal information disclosed during a call</strong> are stored exclusively in the Business&rsquo;s own WordPress database &mdash; not on SiteStaffr&rsquo;s infrastructure.</li>
-					<li><strong>SiteStaffr&rsquo;s middleware processes but does not store</strong> Visitor personal data. Our servers handle real-time session routing and log only non-identifying usage metrics (call duration, timestamps, account identifiers).</li>
+					<li><strong>Text chat messages:</strong> Messages a Visitor types are sent to OpenAI in real time so the AI agent can respond. Message content is not stored by SiteStaffr&rsquo;s middleware servers.</li>
+					<li><strong>Conversation transcripts, visitor names, and any personal information disclosed during a conversation</strong> &mdash; by text or by voice &mdash; are stored exclusively in the Business&rsquo;s own WordPress database, not on SiteStaffr&rsquo;s infrastructure.</li>
+					<li><strong>Conversation recaps</strong> containing this information are delivered by email to the address the Business configures, using our email provider (see Section 7).</li>
+					<li><strong>If the Business enables a CRM integration</strong>, captured lead details are additionally sent to that CRM under the Business&rsquo;s own account and its provider&rsquo;s terms.</li>
+					<li><strong>SiteStaffr&rsquo;s middleware processes but does not store</strong> Visitor personal data. Our servers handle real-time session routing and log only non-identifying usage metrics (session duration, timestamps, account identifiers).</li>
 				</ul>
 			</section>
 
@@ -142,17 +145,17 @@ $site_name = get_bloginfo( 'name' );
 					<li>Monitor and improve service performance and security</li>
 					<li>Comply with legal obligations</li>
 				</ul>
-				<p>We do <strong>not</strong> sell personal information to third parties. We do <strong>not</strong> use Visitor voice data or conversation content for advertising or marketing purposes.</p>
+				<p>We do <strong>not</strong> sell personal information to third parties. We do <strong>not</strong> use Visitor voice audio, text chat messages, or conversation content for advertising or marketing purposes.</p>
 			</section>
 
 			<section class="legal-section">
 				<h2>6. Data Processor and Data Controller Roles</h2>
 				<ul>
 					<li><strong>SiteStaffr is the data controller</strong> for Business account data (email, billing, usage metrics).</li>
-					<li><strong>The Business is the data controller</strong> for all Visitor data collected through the voice widget (transcripts, caller information, voice content).</li>
-					<li><strong>SiteStaffr is a data processor</strong> acting on behalf of the Business when facilitating voice widget sessions. We process Visitor data only as necessary to deliver the service and according to the Business&rsquo;s instructions.</li>
+					<li><strong>The Business is the data controller</strong> for all Visitor data collected through the AI agent (transcripts, visitor information, text chat messages, and voice content).</li>
+					<li><strong>SiteStaffr is a data processor</strong> acting on behalf of the Business when facilitating text chat and voice sessions. We process Visitor data only as necessary to deliver the service and according to the Business&rsquo;s instructions.</li>
 				</ul>
-				<p>Businesses are responsible for providing appropriate privacy disclosures to their Visitors and obtaining any required consent for the use of the AI voice widget on their sites.</p>
+				<p>Businesses are responsible for providing appropriate privacy disclosures to their Visitors and obtaining any required consent for the use of the AI agent on their sites.</p>
 			</section>
 
 			<section class="legal-section">
@@ -169,8 +172,28 @@ $site_name = get_bloginfo( 'name' );
 					<tbody>
 						<tr>
 							<td><strong>OpenAI</strong></td>
-							<td>Real-time AI voice processing</td>
-							<td>Voice audio streams (zero data retention API &mdash; not used for model training)</td>
+							<td>Real-time AI voice and text chat processing; blog content generation</td>
+							<td>Voice audio streams and text chat messages (zero data retention API &mdash; not used for model training); Business website content used to draft blog posts</td>
+						</tr>
+						<tr>
+							<td><strong>SendGrid</strong> (Twilio)</td>
+							<td>Transactional and notification email delivery</td>
+							<td>Business email addresses; conversation recaps, which may contain Visitor-provided contact details</td>
+						</tr>
+						<tr>
+							<td><strong>Perplexity</strong></td>
+							<td>AI visibility tracking</td>
+							<td>Prompts about the Business and its website &mdash; no Visitor personal data</td>
+						</tr>
+						<tr>
+							<td><strong>Google (Gemini API)</strong></td>
+							<td>AI visibility tracking</td>
+							<td>Prompts about the Business and its website &mdash; no Visitor personal data</td>
+						</tr>
+						<tr>
+							<td><strong>Salesforce</strong> <em>(only if the Business enables it)</em></td>
+							<td>CRM lead delivery</td>
+							<td>Captured lead details, sent to the Business&rsquo;s own Salesforce account</td>
 						</tr>
 						<tr>
 							<td><strong>Stripe</strong></td>
@@ -215,7 +238,7 @@ $site_name = get_bloginfo( 'name' );
 
 			<section class="legal-section">
 				<h2>10. Children&rsquo;s Privacy</h2>
-				<p>SiteStaffr is not directed at children under 13 (or under 16 in the EEA). We do not knowingly collect personal information from children. Businesses must not knowingly deploy the voice widget in contexts directed at children without appropriate legal basis and parental consent. If we learn that we have collected information from a child, we will take steps to delete it promptly.</p>
+				<p>SiteStaffr is not directed at children under 13 (or under 16 in the EEA). We do not knowingly collect personal information from children. Businesses must not knowingly deploy the AI agent in contexts directed at children without appropriate legal basis and parental consent. If we learn that we have collected information from a child, we will take steps to delete it promptly.</p>
 			</section>
 
 			<section class="legal-section">
