@@ -230,6 +230,44 @@ add_action( 'after_setup_theme', function () {
 } );
 
 /**
+ * Provision the homepage's search title and description.
+ *
+ * These were the last SEO fields still set by hand in wp-admin, and they had drifted.
+ * The title read "SiteStaffr – AI Voice Assistant for Websites | Capture Leads 24/7":
+ * voice-only for a product that now leads with unlimited text chat, using "Assistant"
+ * (a term the brand tone guide bans), and — on the page most likely to rank for it —
+ * omitting "WordPress" altogether. Putting them in code makes the homepage's search
+ * listing reviewable in git like every other page.
+ *
+ * Title tags carry SEARCH vocabulary rather than brand vocabulary. "Plugin" and "chat"
+ * are what buyers actually type, even though the hero deliberately avoids them.
+ *
+ * Bump $provision_version to re-apply after an edit.
+ */
+add_action( 'init', function () {
+	$provision_version = '1';
+	if ( get_option( 'sitestaffr_home_seo_v' ) === $provision_version ) {
+		return;
+	}
+
+	// Only meaningful with a static front page; otherwise Yoast reads its own
+	// Search Appearance settings and post meta would be ignored.
+	if ( 'page' !== get_option( 'show_on_front' ) ) {
+		return;
+	}
+
+	$page_id = (int) get_option( 'page_on_front' );
+	if ( ! $page_id ) {
+		return;
+	}
+
+	update_post_meta( $page_id, '_yoast_wpseo_title', 'AI Chat &amp; Voice Plugin for WordPress | SiteStaffr' );
+	update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Answer every website visitor by chat or voice, capture the lead, and get a full recap by email. Free 30-day trial, no credit card required.' );
+
+	update_option( 'sitestaffr_home_seo_v', $provision_version );
+} );
+
+/**
  * Provision the /blog-agent marketing page and its SEO metadata.
  * Guarded by a versioned option so it runs once per version bump — bumping the
  * version re-runs it to heal an existing page (e.g. add metadata after launch).

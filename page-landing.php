@@ -282,33 +282,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 
-<!-- ========== FEATURE RIBBON ========== -->
-<section class="ribbon">
-  <div class="container">
-    <ul class="ribbon__list">
-      <li class="ribbon__item">
-        <span class="ribbon__title">Voice Answers</span>
-        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Unlimited Text Chat</span>
-        <span class="ribbon__desc">Answer every visitor, on every page</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Lead Capture</span>
-        <span class="ribbon__desc">Collects name, number &amp; intent</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Email Recaps</span>
-        <span class="ribbon__desc">Sends you the details to follow up</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Blog Writing</span>
-        <span class="ribbon__desc">Writes SEO posts for your site</span>
-      </li>
-    </ul>
-  </div>
-</section>
+
 
 <!-- ========== SECTION 2: COST OF MISSED VISITORS ========== -->
 <section class="cost-section">
@@ -352,6 +326,34 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ========== FEATURE RIBBON ========== -->
+<section class="ribbon">
+  <div class="container">
+    <ul class="ribbon__list">
+      <li class="ribbon__item">
+        <span class="ribbon__title">Voice Answers</span>
+        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Unlimited Text Chat</span>
+        <span class="ribbon__desc">Answer every visitor, on every page</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Lead Capture</span>
+        <span class="ribbon__desc">Collects name, number &amp; intent</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Email Recaps</span>
+        <span class="ribbon__desc">Sends you the details to follow up</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Blog Writing</span>
+        <span class="ribbon__desc">Writes SEO posts for your site</span>
+      </li>
+    </ul>
   </div>
 </section>
 
@@ -780,12 +782,18 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-section__header reveal">
       <span class="section-label">Plans &amp; Pricing</span>
       <h2>Start Free. Upgrade When You&rsquo;re Ready.</h2>
+      <!-- Unlimited stated once, as a headline. It was list-item-1-of-6 in the band
+           below, which flattened the one real differentiator to the same weight as
+           "AI learns your website". Second sentence does the tier-choice job the
+           pricing table could not: three columns reading "Unlimited" sold well and
+           helped nobody choose. -->
+      <p class="pricing-section__subtitle">Unlimited text chat on every paid plan &mdash; chat with as many visitors as you like, for as long as you like.<br><strong>All you&rsquo;re choosing is how much voice.</strong></p>
     </div>
     <div class="price-includes price-includes--homepage reveal">
-      <div class="price-includes__grid" data-label="Every plan includes">
+      <div class="price-includes__grid" data-label="Every paid plan includes">
         <div class="price-includes__item">
           <span class="price-includes__icon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
           </span>
           <span class="price-includes__label"><strong>Unlimited</strong> AI text chat</span>
         </div>
@@ -835,13 +843,13 @@ get_template_part( 'template-parts/site-nav', null, array(
               <span class="price-tier__stat-value">30 <small>min</small></span>
             </div>
             <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">100 <small>msgs/day</small></span>
+              <span class="price-tier__stat-label">Blog posts</span>
+              <span class="price-tier__stat-value">1 <small>post</small></span>
             </div>
           </div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
-            <li>1 AI blog post</li>
+            <li>100 text messages/day</li>
             <li>No credit card required</li>
           </ul>
           <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
@@ -861,13 +869,13 @@ get_template_part( 'template-parts/site-nav', null, array(
               <span class="price-tier__stat-value">100 <small>min/mo</small></span>
             </div>
             <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">Unlimited</span>
+              <span class="price-tier__stat-label">Blog posts</span>
+              <span class="price-tier__stat-value">2 <small>per mo</small></span>
             </div>
           </div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
-            <li>2 AI blog posts per month</li>
+            <li>3 AI visibility checks</li>
           </ul>
           <p class="price-tier__best-for">Best for businesses getting started</p>
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>
@@ -887,14 +895,14 @@ get_template_part( 'template-parts/site-nav', null, array(
               <span class="price-tier__stat-value">300 <small>min/mo</small></span>
             </div>
             <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">Unlimited</span>
+              <span class="price-tier__stat-label">Blog posts</span>
+              <span class="price-tier__stat-value">4 <small>per mo</small></span>
             </div>
           </div>
           <ul class="price-tier__features">
             <li>5 AI voices</li>
-            <li>4 AI blog posts per month</li>
             <li>Autopilot blog publishing</li>
+            <li>10 AI visibility checks</li>
           </ul>
           <p class="price-tier__best-for">Best for growing local businesses</p>
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary">Get Started</a>
@@ -913,15 +921,15 @@ get_template_part( 'template-parts/site-nav', null, array(
               <span class="price-tier__stat-value">600 <small>min/mo</small></span>
             </div>
             <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Text chat</span>
-              <span class="price-tier__stat-value">Unlimited</span>
+              <span class="price-tier__stat-label">Blog posts</span>
+              <span class="price-tier__stat-value">8 <small>per mo</small></span>
             </div>
           </div>
           <ul class="price-tier__features">
             <li>All 10 AI voices</li>
-            <li>8 AI blog posts per month</li>
             <li>Autopilot blog publishing</li>
             <li>Custom greeting + 4 tones</li>
+            <li>25 AI visibility checks</li>
           </ul>
           <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>

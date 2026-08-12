@@ -3861,6 +3861,19 @@ body.sitestaffr-landing-page .hero__visual > * {
   text-align: center;
   margin-bottom: 56px;
 }
+
+.pricing-section__subtitle {
+  max-width: 620px;
+  margin: 18px auto 0;
+  font-size: 1.08rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+}
+
+.pricing-section__subtitle strong {
+  color: var(--teal-deep);
+  font-weight: 700;
+}
 .pricing-section h2 { margin-bottom: 0; }
 .pricing-section__subtitle {
   color: var(--text-secondary);
