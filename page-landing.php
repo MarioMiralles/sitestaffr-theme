@@ -67,18 +67,29 @@ $get_started_url = home_url( '/#get-started' );
         // the corroborating name/place data this list exists to provide. Engagement is a
         // marketing question, not an entity-graph one.
         //
-        // x.com / twitter.com are deliberately ABSENT: JS-rendered, so a fetch cannot confirm
-        // the handle is ours. Add only after a human look.
+        // G2, Capterra and TikTok were supplied by Mario from his own browser, 2026-08-12. That
+        // is the only workable verification for these three: G2 and Capterra return 403 to every
+        // request whether the URL exists or not, and TikTok returns 200 with the same generic
+        // "TikTok - Make Your Day" title for a real handle and a bogus one alike. In all three
+        // cases the status code carries no information, so a human look is the bar.
         //
-        // TO ADD once Mario pastes the exact URLs: G2 and Capterra. Both are worth more here
-        // than any social profile, because Google treats software directories as authoritative
-        // for software entities. They cannot be probed — both return 403 to any request, valid
-        // URL or not, so the status code proves nothing and a guessed URL would ship dead.
+        // Facebook answers DIFFERENTLY DEPENDING ON USER-AGENT — a full Chrome UA gets 400
+        // "Error" for the same URL that returns 200 "SiteStaffr | Miami FL" under a plain
+        // "Mozilla/5.0". Do not conclude this one is dead without retrying with a simpler agent.
+        //
+        // x.com / twitter.com: no account exists yet (Mario, 2026-08-12). Do not add a URL here
+        // until one does — a dead sameAs is worse than none.
         'sameAs'           => array(
+            // Software directories first: Google treats these as authoritative for software
+            // entities, which is exactly the signal the SiteStaff name collision needs.
+            'https://www.g2.com/products/sitestaffr/reviews',
+            'https://www.capterra.com/p/10046030/SiteStaffr/',
             'https://wordpress.org/plugins/sitestaffr/',
             'https://profiles.wordpress.org/sitestaffr/',
+            // Social.
             'https://linkedin.com/company/sitestaffr',
             'https://www.facebook.com/sitestaffr',
+            'https://www.tiktok.com/@sitestaffr',
         ),
         'foundingLocation' => array(
             '@type'   => 'Place',
