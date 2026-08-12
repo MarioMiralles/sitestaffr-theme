@@ -245,7 +245,7 @@ add_action( 'after_setup_theme', function () {
  * Bump $provision_version to re-apply after an edit.
  */
 add_action( 'init', function () {
-	$provision_version = '1';
+	$provision_version = '2';
 	if ( get_option( 'sitestaffr_home_seo_v' ) === $provision_version ) {
 		return;
 	}
@@ -263,6 +263,20 @@ add_action( 'init', function () {
 
 	update_post_meta( $page_id, '_yoast_wpseo_title', 'AI Chat &amp; Voice Plugin for WordPress | SiteStaffr' );
 	update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Answer every website visitor by chat or voice, capture the lead, and get a full recap by email. Free 30-day trial, no credit card required.' );
+
+	// Yoast keeps Open Graph and Twitter titles in SEPARATE meta keys. Setting the SEO
+	// title alone left og:title still serving the old voice-only string, so a share on
+	// LinkedIn or Slack showed stale copy while the browser tab showed the new title.
+	// Delete the overrides rather than duplicating the text — with these empty Yoast
+	// falls back to the SEO title above, leaving one source of truth.
+	foreach ( array(
+		'_yoast_wpseo_opengraph-title',
+		'_yoast_wpseo_opengraph-description',
+		'_yoast_wpseo_twitter-title',
+		'_yoast_wpseo_twitter-description',
+	) as $social_key ) {
+		delete_post_meta( $page_id, $social_key );
+	}
 
 	update_option( 'sitestaffr_home_seo_v', $provision_version );
 } );
