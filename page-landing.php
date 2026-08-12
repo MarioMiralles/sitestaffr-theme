@@ -28,6 +28,10 @@ $get_started_url = home_url( '/#get-started' );
         'name'            => 'SiteStaffr',
         'legalName'       => 'PhoneEase LLC',
         'url'             => $schema_org_url,
+        // Says what this entity IS, in the entity graph rather than only in prose.
+        // Without it the only structured signal distinguishing us from the live-chat
+        // staffing firm below is the name itself, which is the thing being confused.
+        'description'     => 'SiteStaffr makes an AI chat and voice agent for service businesses on WordPress. It answers website visitors, captures their contact details, and emails the business a recap of every conversation.',
         'logo'            => array(
             '@type' => 'ImageObject',
             'url'   => $schema_logo_url,
@@ -47,9 +51,23 @@ $get_started_url = home_url( '/#get-started' );
         // the rest belong to "SiteStaff"/"SiteStaff Chat" (ssc.ai, sitestaff.net), an unrelated
         // live-chat staffing firm. sameAs is how Google is told which third-party profiles are
         // THIS entity. Only add URLs verified to resolve; a dead sameAs is worse than none.
+        //
+        // "Verified" means verified BY CONTENT, not by status code. Facebook returns 200 with a
+        // generic "Facebook" title for a handle that does not exist, so a 200 proves nothing.
+        // Each URL below was checked against a deliberately bogus sibling handle: YouTube,
+        // GitHub and profiles.wordpress.org all 404 on the bogus one, and Facebook soft-404s to
+        // a bare "Facebook" title while ours returns "SiteStaffr | Miami FL". Re-run that
+        // calibration before adding any more.
+        //
+        // x.com / twitter.com are deliberately ABSENT: the pages are JS-rendered, so there is no
+        // way to confirm from a fetch that the handle is ours. Add only after a human look.
         'sameAs'           => array(
             'https://wordpress.org/plugins/sitestaffr/',
+            'https://profiles.wordpress.org/sitestaffr/',
             'https://linkedin.com/company/sitestaffr',
+            'https://github.com/sitestaffr',
+            'https://www.youtube.com/@sitestaffr',
+            'https://www.facebook.com/sitestaffr',
         ),
         'foundingLocation' => array(
             '@type'   => 'Place',
