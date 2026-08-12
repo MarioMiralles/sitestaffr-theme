@@ -645,10 +645,6 @@ get_template_part( 'template-parts/site-nav', null, array(
       <p class="what-you-get__subtitle">
         Automatically capture visitor conversations, summaries, and transcripts &mdash; all in one clean, shareable document.
       </p>
-      <p class="what-you-get__subtitle">
-        Run your sales out of Salesforce? Qualified leads can land in your CRM the moment the conversation ends.
-        <a href="<?php echo esc_url( home_url( '/salesforce/' ) ); ?>">See the Salesforce integration</a>
-      </p>
     </div>
 
     <div class="what-you-get__showcase reveal">
