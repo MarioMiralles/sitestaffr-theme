@@ -9721,6 +9721,103 @@ a.ind-problem-card .ind-problem-card__icon--art {
   max-width: 580px;
   margin: 0 auto;
 }
+/* --- Install route: the /download/ hero's primary element ---------------------
+   Not a button, because the action happens in the visitor's own wp-admin. Reuses
+   the pill vocabulary from .dl-hero__label and the arrow motif from
+   .dl-steps__connector so it reads as part of the existing system. <ol> is
+   deliberate: this is a real sequence, so the order carries information. */
+.dl-route {
+  margin: 36px auto 0;
+  max-width: 660px;
+  padding: 26px 28px 22px;
+  background: var(--warm-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+
+.dl-route__lead {
+  margin: 0 0 16px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.dl-route__path {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 10px 4px;
+}
+
+.dl-route__path li {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.dl-route__path li + li::before {
+  content: '\2192';
+  color: var(--text-muted);
+  opacity: 0.55;
+  font-size: 0.95rem;
+  padding: 0 2px;
+}
+
+.dl-route__path li span {
+  display: inline-block;
+  padding: 7px 15px;
+  border-radius: 40px;
+  background: var(--teal-pale);
+  color: var(--teal-deep);
+  font-size: 0.92rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.dl-route__path li span strong {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+.dl-route__note {
+  margin: 18px 0 0;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+}
+
+/* Quiet text link for the slowest install route. */
+.dl-hero__zip-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.dl-hero__zip-link:hover,
+.dl-hero__zip-link:focus-visible {
+  color: var(--teal-deep);
+  border-bottom-color: currentColor;
+}
+
+@media (max-width: 560px) {
+  .dl-route { padding: 22px 18px 18px; }
+  .dl-route__path { gap: 8px 3px; }
+  .dl-route__path li span { font-size: 0.85rem; padding: 6px 12px; }
+}
+
 .dl-hero__actions {
   margin-top: 40px;
   display: flex;

@@ -355,6 +355,49 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
+<!-- ========== SECTION 6: SOCIAL PROOF ========== -->
+<section class="proof-section">
+  <div class="proof-section__backdrop" aria-hidden="true">
+    <div class="proof-section__backdrop-panel"></div>
+    <div class="proof-section__backdrop-accent"></div>
+  </div>
+  <div class="container">
+    <div class="proof-section__layout reveal">
+      <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
+      <div class="proof-section__portrait-wrap">
+        <div class="proof-section__portrait-frame">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.webp' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="400" height="526" loading="lazy">
+        </div>
+        <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
+      </div>
+      <div class="proof-section__content">
+        <span class="proof-section__label">Trusted in Healthcare</span>
+        <blockquote class="proof-section__quote">
+          <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
+        </blockquote>
+        <cite class="proof-section__cite">
+          <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
+          <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
+        </cite>
+      </div>
+    </div>
+    <div class="proof-section__stats reveal reveal-delay-1">
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">24/7</span>
+        <span class="proof-section__stat-label">Lead capture</span>
+      </div>
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">57+</span>
+        <span class="proof-section__stat-label">Languages</span>
+      </div>
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">&lt;30s</span>
+        <span class="proof-section__stat-label">Recap delivery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ========== HEAR IT WORK: AUDIO DEMO (relocated from hero) ========== -->
 <section class="lead-demo" id="live-demo">
   <div class="lead-demo__bg" aria-hidden="true"></div>
@@ -707,48 +750,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 6: SOCIAL PROOF ========== -->
-<section class="proof-section">
-  <div class="proof-section__backdrop" aria-hidden="true">
-    <div class="proof-section__backdrop-panel"></div>
-    <div class="proof-section__backdrop-accent"></div>
-  </div>
-  <div class="container">
-    <div class="proof-section__layout reveal">
-      <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
-      <div class="proof-section__portrait-wrap">
-        <div class="proof-section__portrait-frame">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.webp' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="400" height="526" loading="lazy">
-        </div>
-        <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
-      </div>
-      <div class="proof-section__content">
-        <span class="proof-section__label">Trusted in Healthcare</span>
-        <blockquote class="proof-section__quote">
-          <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
-        </blockquote>
-        <cite class="proof-section__cite">
-          <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
-          <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
-        </cite>
-      </div>
-    </div>
-    <div class="proof-section__stats reveal reveal-delay-1">
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">24/7</span>
-        <span class="proof-section__stat-label">Lead capture</span>
-      </div>
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">57+</span>
-        <span class="proof-section__stat-label">Languages</span>
-      </div>
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">&lt;30s</span>
-        <span class="proof-section__stat-label">Recap delivery</span>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <!-- ========== SECTION 7: VOICE SHOWCASE ========== -->
 <section class="voice-section" id="voices">

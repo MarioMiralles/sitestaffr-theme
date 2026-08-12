@@ -37,14 +37,35 @@ $download_url = home_url( '/download/' );
 					WordPress Plugin
 				</span>
 				<h1>Install SiteStaffr on Your WordPress&nbsp;Site</h1>
-				<p class="dl-hero__subtitle">Add an AI voice and text agent to your website in minutes. Download the plugin, run the setup wizard, and start converting visitors into&nbsp;leads.</p>
+				<p class="dl-hero__subtitle">The fastest way in is from your own WordPress dashboard &mdash; nothing to download, and the setup wizard starts your free trial when it&nbsp;finishes.</p>
+
+				<!-- The primary action is deliberately NOT a link. Installing happens inside the
+				     visitor's own wp-admin, so the honest hero leads with the path rather than a
+				     button that navigates away. The zip is the slowest route (extra steps, some
+				     hosts disable plugin upload, impossible on mobile) and is demoted to a text
+				     link. This inverts the previous hierarchy, which gave the big button to the zip
+				     while burying the easy route in step 1's body copy. -->
+				<div class="dl-route">
+					<p class="dl-route__lead">In your WordPress dashboard</p>
+					<!-- Four steps, not five: at five the last pill orphaned onto its own row with a
+					     dangling arrow. Merging the final two is also more accurate — WordPress
+					     turns the "Install Now" button into "Activate" in place, same screen. -->
+					<ol class="dl-route__path">
+						<li><span>Plugins</span></li>
+						<li><span>Add New</span></li>
+						<li><span>Search <strong>SiteStaffr</strong></span></li>
+						<li><span>Install &amp; Activate</span></li>
+					</ol>
+					<p class="dl-route__note">That&rsquo;s it &mdash; the setup wizard opens on its own. Free for 30 days, no credit card.</p>
+				</div>
+
 				<div class="dl-hero__actions">
-					<a href="<?php echo esc_url( $zip_url ); ?>" class="btn btn--primary btn--large dl-hero__download" download>
-						<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-						Download Plugin
-					</a>
 					<a href="<?php echo esc_url( $listing_url ); ?>" class="btn btn--outline btn--large dl-hero__wporg" target="_blank" rel="noopener">
 						View on WordPress.org
+					</a>
+					<a href="<?php echo esc_url( $zip_url ); ?>" class="dl-hero__zip-link" download>
+						<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+						Download the .zip instead
 					</a>
 				</div>
 				<div class="dl-hero__meta">
@@ -91,8 +112,8 @@ $download_url = home_url( '/download/' );
 						</svg>
 						<span class="dl-steps__number">1</span>
 					</div>
-					<h3>Download &amp; Install</h3>
-					<p>The easiest way: in your WordPress admin, go to <strong>Plugins &rarr; Add New</strong>, search for <strong>SiteStaffr</strong>, and click <strong>Install Now</strong>. Prefer to do it manually? Download the zip above and upload it via <strong>Plugins &rarr; Add New &rarr; Upload Plugin</strong>.</p>
+					<h3>Install the Plugin</h3>
+					<p>Search for <strong>SiteStaffr</strong> under <strong>Plugins &rarr; Add New</strong> in your WordPress dashboard, then click <strong>Install Now</strong> and <strong>Activate</strong>. Installing manually instead? Upload the zip via <strong>Plugins &rarr; Add New &rarr; Upload Plugin</strong>.</p>
 					<div class="dl-steps__card-accent" aria-hidden="true"></div>
 				</div>
 
@@ -220,8 +241,8 @@ $download_url = home_url( '/download/' );
 				<h2>Ready to Get Started?</h2>
 				<p>Try SiteStaffr free for 30 days. No credit card, no commitment &mdash; just a better experience for your visitors and more leads in your inbox.</p>
 				<div class="dl-cta__actions">
-					<a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn dl-cta__btn">Get Started</a>
-					<a href="<?php echo esc_url( $zip_url ); ?>" class="btn btn--outline dl-cta__btn-outline" download>Download Plugin</a>
+					<a href="<?php echo esc_url( $listing_url ); ?>" class="btn dl-cta__btn" target="_blank" rel="noopener">Install from WordPress.org</a>
+					<a href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>" class="btn btn--outline dl-cta__btn-outline">Prefer we set it up for you?</a>
 				</div>
 			</div>
 		</div>
