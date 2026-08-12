@@ -782,12 +782,6 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-section__header reveal">
       <span class="section-label">Plans &amp; Pricing</span>
       <h2>Start Free. Upgrade When You&rsquo;re Ready.</h2>
-      <!-- Unlimited stated once, as a headline. It was list-item-1-of-6 in the band
-           below, which flattened the one real differentiator to the same weight as
-           "AI learns your website". Second sentence does the tier-choice job the
-           pricing table could not: three columns reading "Unlimited" sold well and
-           helped nobody choose. -->
-      <p class="pricing-section__subtitle">Unlimited text chat on every paid plan &mdash; chat with as many visitors as you like, for as long as you like.<br><strong>All you&rsquo;re choosing is how much voice.</strong></p>
     </div>
     <div class="price-includes price-includes--homepage reveal">
       <div class="price-includes__grid" data-label="Every paid plan includes">
