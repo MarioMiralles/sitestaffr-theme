@@ -90,6 +90,43 @@ add_action( 'send_headers', function () {
 	update_option( 'sitestaffr_theme_purged_v', $theme_version );
 } );
 
+if ( ! function_exists( 'sitestaffr_clear_yoast_social_overrides' ) ) {
+	/**
+	 * Drop a page's Yoast Open Graph / Twitter overrides so social falls back to the SEO title.
+	 *
+	 * Yoast keeps Open Graph and Twitter titles and descriptions in SEPARATE meta keys from
+	 * the SEO title. Setting `_yoast_wpseo_title` alone leaves any stored override serving the
+	 * old string, so the browser tab and Google show new copy while a share on LinkedIn or
+	 * Slack shows stale copy. This bit the homepage (theme 0.6.10) and then bit the industry
+	 * pages in exactly the same way — /for/dental-practices/, /for/law-firms/ and
+	 * /for/home-services/ each kept an og:title reading "AI Voice Agent for ..." after the
+	 * titles were reframed, and home-services also kept an og:description with the old
+	 * "name, number" copy.
+	 *
+	 * Delete rather than duplicate the text: with these empty, Yoast falls back to the SEO
+	 * title and description the provisioner already manages, leaving one source of truth.
+	 *
+	 * Only overrides that actually exist are affected, so this is safe to call on every page.
+	 *
+	 * @param int $page_id Post ID to clear.
+	 */
+	function sitestaffr_clear_yoast_social_overrides( $page_id ) {
+		$page_id = (int) $page_id;
+		if ( ! $page_id ) {
+			return;
+		}
+
+		foreach ( array(
+			'_yoast_wpseo_opengraph-title',
+			'_yoast_wpseo_opengraph-description',
+			'_yoast_wpseo_twitter-title',
+			'_yoast_wpseo_twitter-description',
+		) as $social_key ) {
+			delete_post_meta( $page_id, $social_key );
+		}
+	}
+}
+
 if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	/**
 	 * Live plugin metadata from the WordPress.org directory, cached 12 hours.
@@ -264,19 +301,7 @@ add_action( 'init', function () {
 	update_post_meta( $page_id, '_yoast_wpseo_title', 'AI Chat &amp; Voice Plugin for WordPress | SiteStaffr' );
 	update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Answer every website visitor by chat or voice, capture the lead, and get a full recap by email. Free 30-day trial, no credit card required.' );
 
-	// Yoast keeps Open Graph and Twitter titles in SEPARATE meta keys. Setting the SEO
-	// title alone left og:title still serving the old voice-only string, so a share on
-	// LinkedIn or Slack showed stale copy while the browser tab showed the new title.
-	// Delete the overrides rather than duplicating the text — with these empty Yoast
-	// falls back to the SEO title above, leaving one source of truth.
-	foreach ( array(
-		'_yoast_wpseo_opengraph-title',
-		'_yoast_wpseo_opengraph-description',
-		'_yoast_wpseo_twitter-title',
-		'_yoast_wpseo_twitter-description',
-	) as $social_key ) {
-		delete_post_meta( $page_id, $social_key );
-	}
+	sitestaffr_clear_yoast_social_overrides( $page_id );
 
 	update_option( 'sitestaffr_home_seo_v', $provision_version );
 } );
@@ -663,7 +688,7 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '7';
+	$provision_version = '8';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -699,8 +724,9 @@ add_action( 'init', function () {
 	if ( $parent_id ) {
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex' );
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-nofollow' );
-		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Voice Agent by Industry | SiteStaffr' );
-		update_post_meta( $parent_id, '_yoast_wpseo_metadesc', 'See how SiteStaffr\'s AI voice and text agent works for dental, medical, home services, law, auto and 10 more industries. Free 30-day trial.' );
+		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Chat & Voice Agent by Industry | SiteStaffr' );
+		update_post_meta( $parent_id, '_yoast_wpseo_metadesc', 'See how SiteStaffr\'s AI chat and voice agent works for dental, medical, home services, law, auto and 10 more industries. Free 30-day trial.' );
+		sitestaffr_clear_yoast_social_overrides( $parent_id );
 		$provisioned_ids[] = $parent_id;
 	}
 
@@ -737,6 +763,7 @@ add_action( 'init', function () {
 			if ( ! empty( $group['metadesc'] ) ) {
 				update_post_meta( $cat_id, '_yoast_wpseo_metadesc', $group['metadesc'] );
 			}
+			sitestaffr_clear_yoast_social_overrides( $cat_id );
 			$provisioned_ids[] = $cat_id;
 		}
 	}
@@ -767,6 +794,7 @@ add_action( 'init', function () {
 			// Yoast SEO fields (site runs Yoast) — set the search title + description.
 			update_post_meta( $page_id, '_yoast_wpseo_title', $data['seo_title'] );
 			update_post_meta( $page_id, '_yoast_wpseo_metadesc', $data['metadesc'] );
+			sitestaffr_clear_yoast_social_overrides( $page_id );
 			$provisioned_ids[] = $page_id;
 		}
 	}
