@@ -281,6 +281,34 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
+<!-- ========== FEATURE RIBBON ========== -->
+<section class="ribbon">
+  <div class="container">
+    <ul class="ribbon__list">
+      <li class="ribbon__item">
+        <span class="ribbon__title">Voice Answers</span>
+        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Unlimited Text Chat</span>
+        <span class="ribbon__desc">Answer every visitor, on every page</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Lead Capture</span>
+        <span class="ribbon__desc">Collects name, number &amp; intent</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Email Recaps</span>
+        <span class="ribbon__desc">Sends you the details to follow up</span>
+      </li>
+      <li class="ribbon__item">
+        <span class="ribbon__title">Blog Writing</span>
+        <span class="ribbon__desc">Writes SEO posts for your site</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
 
 
 
@@ -329,33 +357,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== FEATURE RIBBON ========== -->
-<section class="ribbon">
-  <div class="container">
-    <ul class="ribbon__list">
-      <li class="ribbon__item">
-        <span class="ribbon__title">Voice Answers</span>
-        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Unlimited Text Chat</span>
-        <span class="ribbon__desc">Answer every visitor, on every page</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Lead Capture</span>
-        <span class="ribbon__desc">Collects name, number &amp; intent</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Email Recaps</span>
-        <span class="ribbon__desc">Sends you the details to follow up</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Blog Writing</span>
-        <span class="ribbon__desc">Writes SEO posts for your site</span>
-      </li>
-    </ul>
-  </div>
-</section>
+
 
 <!-- ========== SECTION 6: SOCIAL PROOF ========== -->
 <section class="proof-section">
