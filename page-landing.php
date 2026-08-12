@@ -328,6 +328,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <p class="cost-section__text">SiteStaffr turns those missed moments into conversations, and conversations into leads.</p>
       </div>
       <div class="cost-cards reveal reveal-delay-1">
+        <p class="cost-cards__note">Examples, not averages. What a single missed inquiry is worth depends entirely on your trade.</p>
         <div class="cost-card">
           <div class="cost-card__icon">🚨</div>
           <div class="cost-card__title">After-hours emergency</div>

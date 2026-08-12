@@ -1584,6 +1584,17 @@ body.sitestaffr-landing-page .hero__visual > * {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
 }
+/* The figures below are illustrative, not measured. This says so above them
+   rather than in a footnote, because a reader who spots an unsourced number
+   on their own stops trusting the rest of the page. Spans the grid so it
+   reads as a caption for all four cards, not as a fifth card. */
+.cost-cards__note {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
 .cost-card {
   background: white;
   border: 1px solid var(--border-light);
