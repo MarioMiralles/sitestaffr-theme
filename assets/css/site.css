@@ -6319,8 +6319,9 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   animation: heroCardFloat 5.5s ease-in-out infinite;
 }
 .hero__float-emoji { font-size: 1.05rem; line-height: 1; }
-.hero__float-card--voice { top: 18%; left: 0;   animation-delay: 0s; }
-.hero__float-card--chat  { top: 24%; right: 0;  animation-delay: 0.6s; }
+/* Text leads: chat takes the top slot and the first beat of the stagger. */
+.hero__float-card--chat  { top: 18%; left: 0;   animation-delay: 0s; }
+.hero__float-card--voice { top: 24%; right: 0;  animation-delay: 0.6s; }
 .hero__float-card--lead  { top: 40%; left: -2%; animation-delay: 1.2s; }
 .hero__float-card--recap { top: 56%; right: 2%; animation-delay: 1.8s; }
 .hero__float-card--blog  { top: 72%; left: 0;   animation-delay: 2.4s; }
