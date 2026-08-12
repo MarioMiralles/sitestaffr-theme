@@ -50,9 +50,13 @@ $primary_menu = array(
 
 $secondary_menu = isset( $args['secondary'] ) ? $args['secondary'] : array();
 
+// Self-serve is the primary conversion path (Mario, 2026-08-11). The trial starts
+// when the plugin's Setup Wizard registers the site, so /download/ IS the trial —
+// there is no separate signup. This previously pointed at #get-started, the
+// white-glove form, which answers "Start Free Trial" with "our team will reach out".
 $cta = array(
-    'label' => 'Get Started',
-    'href'  => home_url( '/#get-started' ),
+    'label' => 'Start Free Trial',
+    'href'  => home_url( '/download/' ),
 );
 ?>
 <nav class="nav" id="nav">

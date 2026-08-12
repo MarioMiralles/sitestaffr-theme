@@ -141,7 +141,7 @@ $get_started_url = home_url( '/#get-started' );
     $faq_items = array(
         array(
             'question' => 'What is SiteStaffr?',
-            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. It also writes SEO blog posts for your site every month, grounded in your business and services. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $10 per month after a free 30-day trial with no credit card required.',
+            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. It also writes SEO blog posts for your site every month, grounded in your business and services. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $29 per month after a free 30-day trial with no credit card required.',
         ),
         array(
             'question' => 'How does SiteStaffr capture leads from my website?',
@@ -247,14 +247,19 @@ get_template_part( 'template-parts/site-nav', null, array(
           SiteStaffr answers your visitors by voice and text, captures every lead, sends you a recap, and even writes your blog &mdash; working 24/7 in 57+ languages.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
+        <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
+             These two were previously reversed: the big button went to the onboarding
+             form and the actual trial was a small text link. Same two elements, same
+             layout, swapped roles. NOTE: .hero__download-link is now a style hook only
+             — it no longer points at /download/. Rename when the CSS is next touched. -->
         <div class="hero__actions">
-          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
-            Get Started
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary btn--large">
+            Start Free Trial
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="hero__download-link">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Plugin
+          <a href="<?php echo esc_url( $get_started_url ); ?>" class="hero__download-link">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Prefer we set it up for you?
           </a>
         </div>
       </div>
@@ -838,7 +843,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <li>No credit card required</li>
           </ul>
           <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
-          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Start Free Trial</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Start Free Trial</a>
         </div>
       </div>
       <div class="price-tier reveal reveal-delay-1">
@@ -863,7 +868,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <li>2 AI blog posts per month</li>
           </ul>
           <p class="price-tier__best-for">Best for businesses getting started</p>
-          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>
         </div>
       </div>
       <div class="price-tier price-tier--popular reveal reveal-delay-2">
@@ -890,7 +895,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <li>Autopilot blog publishing</li>
           </ul>
           <p class="price-tier__best-for">Best for growing local businesses</p>
-          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary">Get Started</a>
         </div>
       </div>
       <div class="price-tier reveal reveal-delay-3">
@@ -917,7 +922,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <li>Custom greeting + 4 tones</li>
           </ul>
           <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
-          <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--outline">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>
         </div>
       </div>
     </div>
@@ -930,7 +935,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </span>
           <div class="pricing-assurance__body">
             <h3 class="pricing-assurance__label">Flat-rate text chat</h3>
-            <p>No per-conversation fees and no surprise charges. Your daily message count <strong>resets every day</strong>, separate from your voice minutes.</p>
+            <p>No per-conversation fees and no surprise charges. Text chat is unlimited for normal business use &mdash; a fair-use ceiling of around 2,000 messages a day per site keeps runaway scripts from spoiling it, which is roughly seventy times what a busy site actually uses.</p>
           </div>
         </div>
         <div class="pricing-assurance__item">
@@ -976,7 +981,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="final-cta__content cta-spotlight reveal">
       <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
-      <p class="final-cta__subtitle">Let SiteStaffr take care of your visitors while you focus on running your business.</p>
+      <p class="final-cta__subtitle">Rather not set it up yourself? Tell us about your business and we&rsquo;ll get your agent live for you.</p>
       <div class="final-cta__onboarding">
         <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#15a3b8" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
       </div>
