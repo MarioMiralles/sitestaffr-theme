@@ -141,11 +141,11 @@ $get_started_url = home_url( '/#get-started' );
     $faq_items = array(
         array(
             'question' => 'What is SiteStaffr?',
-            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, phone number, and what they need — all through natural conversation in over 57 languages. It also writes SEO blog posts for your site every month, grounded in your business and services. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $29 per month after a free 30-day trial with no credit card required.',
+            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, their email or phone, and what they need, all through natural conversation in over 57 languages. It also writes SEO blog posts for your site every month, grounded in your business and services. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $29 per month after a free 30-day trial with no credit card required.',
         ),
         array(
             'question' => 'How does SiteStaffr capture leads from my website?',
-            'answer'   => 'When a visitor starts a conversation through voice or text chat, SiteStaffr naturally collects their name, phone number, and reason for reaching out. After the conversation ends, you receive an email with a complete recap, the visitor\'s contact details, a full transcript, and suggested follow-up actions.',
+            'answer'   => 'When a visitor starts a conversation through voice or text chat, SiteStaffr naturally collects their name, their email or phone, and reason for reaching out. After the conversation ends, you receive an email with a complete recap, the visitor\'s contact details, a full transcript, and suggested follow-up actions.',
         ),
         array(
             'question' => 'What languages does SiteStaffr support?',
@@ -244,7 +244,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">You Get the Lead.</span>
         </h1>
         <p class="hero__subtitle">
-          Visitors can type, or talk to SiteStaffr out loud, right there on your page. It answers from your own site day or night, then emails you their name, their number, and what they need.
+          Visitors can type their question, or ask it out loud, right there on your page. SiteStaffr answers from your own site day or night, then emails you their name, their email or phone, and what they need.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
@@ -286,16 +286,16 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <ul class="ribbon__list">
       <li class="ribbon__item">
-        <span class="ribbon__title">Voice Answers</span>
-        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
-      </li>
-      <li class="ribbon__item">
         <span class="ribbon__title">Unlimited Text Chat</span>
         <span class="ribbon__desc">Answer every visitor, on every page</span>
       </li>
       <li class="ribbon__item">
+        <span class="ribbon__title">Voice Answers</span>
+        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
+      </li>
+      <li class="ribbon__item">
         <span class="ribbon__title">Lead Capture</span>
-        <span class="ribbon__desc">Collects name, number &amp; intent</span>
+        <span class="ribbon__desc">Collects name, email, phone &amp; intent</span>
       </li>
       <li class="ribbon__item">
         <span class="ribbon__title">Email Recaps</span>
