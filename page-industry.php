@@ -1242,12 +1242,12 @@ if ( file_exists( $hero_image_path ) ) {
 	// Yoast handles WebPage, BreadcrumbList, and WebSite schema — only add Service (unique to industry pages)
 	$service_schema = array(
 		'@type'       => 'Service',
-		'name'        => 'AI Voice Agent ' . $ind['label'],
+		'name'        => 'AI Chat & Voice Agent ' . $ind['label'],
 		'description' => html_entity_decode( wp_strip_all_tags( $ind['subtitle'] ), ENT_QUOTES, 'UTF-8' ),
 		'provider'    => array(
 			'@id' => home_url( '/' ) . '#organization',
 		),
-		'serviceType' => 'AI Voice Agent',
+		'serviceType' => 'AI Chat & Voice Agent',
 		'areaServed'  => array(
 			'@type' => 'Country',
 			'name'  => 'United States',
@@ -1457,11 +1457,12 @@ get_template_part( 'template-parts/site-nav' );
 				<span class="section-label">FAQ</span>
 				<?php
 				// Keyphrase-bearing subheading: the Yoast title carries
-				// "AI Voice Agent for <vertical>" but no H2 did, so the page's
-				// own target phrase never appeared in its structure.
+				// "AI Chat & Voice Agent for <vertical>" but no H2 did, so the
+				// page's own target phrase never appeared in its structure.
+				// Keep this in step with the seo_title pattern in functions.php.
 				$faq_vertical = preg_replace( '/^For\s+/', '', html_entity_decode( $ind['label'], ENT_QUOTES, 'UTF-8' ) );
 				?>
-				<h2><?php echo esc_html( sprintf( 'AI Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
+				<h2><?php echo esc_html( sprintf( 'AI Chat & Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
 			</div>
 			<div class="faq-list">
 				<?php foreach ( $ind['faqs'] as $i => $faq ) : ?>
