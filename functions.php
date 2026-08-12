@@ -90,6 +90,41 @@ add_action( 'send_headers', function () {
 	update_option( 'sitestaffr_theme_purged_v', $theme_version );
 } );
 
+if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
+	/**
+	 * Bring an existing page's post_title back in line with the registry.
+	 *
+	 * Provisioners set post_title only inside wp_insert_post, so a page created before the
+	 * registry existed keeps its original title forever while every other managed field gets
+	 * rewritten on each version bump. Yoast builds the BreadcrumbList from post_title, so a
+	 * stale one survives every SEO-title and override fix and is easy to mistake for a
+	 * caching problem.
+	 *
+	 * No-ops when the title already matches, because wp_update_post fires save_post (which
+	 * rebuilds the Yoast indexable) and that should not run for every page on every load.
+	 * Only post_title is passed, so post_name — and therefore the live URL — is untouched.
+	 *
+	 * @param int    $page_id Post ID.
+	 * @param string $title   Title the registry says it should have.
+	 */
+	function sitestaffr_heal_post_title( $page_id, $title ) {
+		$page_id = (int) $page_id;
+		$title   = (string) $title;
+		if ( ! $page_id || '' === $title ) {
+			return;
+		}
+
+		if ( get_post_field( 'post_title', $page_id ) === $title ) {
+			return;
+		}
+
+		wp_update_post( array(
+			'ID'         => $page_id,
+			'post_title' => $title,
+		) );
+	}
+}
+
 if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 	/**
 	 * Drop a page's stored Yoast title/description overrides so everything falls back to the
@@ -692,7 +727,7 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '9';
+	$provision_version = '10';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -760,6 +795,7 @@ add_action( 'init', function () {
 		}
 
 		if ( $cat_id ) {
+			sitestaffr_heal_post_title( $cat_id, $group['heading'] );
 			update_post_meta( $cat_id, '_wp_page_template', 'page-industry-category.php' );
 			if ( ! empty( $group['seo_title'] ) ) {
 				update_post_meta( $cat_id, '_yoast_wpseo_title', $group['seo_title'] );
@@ -794,6 +830,19 @@ add_action( 'init', function () {
 		}
 
 		if ( $page_id ) {
+			// post_title was only ever set at creation, so pages provisioned before this
+			// registry existed kept whatever they were made with. Three of them still held
+			// SEO-style titles ("AI Voice Agent for Dental Practices"), which is what Yoast
+			// puts in the BreadcrumbList — the other twelve correctly showed the short
+			// registry title. Clearing the Yoast override meta did NOT fix it, because the
+			// breadcrumb was reading the post title itself.
+			//
+			// Only update when it actually differs: wp_update_post fires save_post, which is
+			// also what rebuilds the Yoast indexable, and there is no reason to do that on
+			// every page on every run. Passing post_title alone leaves post_name untouched,
+			// so the fifteen live URLs do not move.
+			sitestaffr_heal_post_title( $page_id, $data['title'] );
+
 			update_post_meta( $page_id, '_wp_page_template', 'page-industry.php' );
 			// Yoast SEO fields (site runs Yoast) — set the search title + description.
 			update_post_meta( $page_id, '_yoast_wpseo_title', $data['seo_title'] );
