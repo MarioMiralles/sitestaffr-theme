@@ -240,11 +240,11 @@ get_template_part( 'template-parts/site-nav', null, array(
       <div class="hero__content">
         <span class="hero__tagline">Built for WordPress</span>
         <h1 class="hero__headline">
-          <span class="hero__headline-prefix">Your Website Visitors Have Questions.</span>
-          <span class="hero__headline-focus">SiteStaffr Answers Them.</span>
+          <span class="hero__headline-prefix">Your Website Talks to Every Visitor.</span>
+          <span class="hero__headline-focus">You Get the Lead.</span>
         </h1>
         <p class="hero__subtitle">
-          SiteStaffr answers your visitors by voice and text, captures every lead, sends you a recap, and even writes your blog &mdash; working 24/7 in 57+ languages.
+          Visitors can type, or just talk &mdash; right there on your page. Day or night, SiteStaffr answers from your own site, then emails you their name, their number, and what they need.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
