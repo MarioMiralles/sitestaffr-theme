@@ -244,7 +244,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">You Get the Lead.</span>
         </h1>
         <p class="hero__subtitle">
-          Visitors can type their question, or ask it out loud, right there on your page. SiteStaffr answers from your own site day or night, then emails you their name, their email or phone, and what they need.
+          Visitors can type or speak to your website, day or night. SiteStaffr answers their questions, then emails you their name, their email or phone, and what they need.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
