@@ -291,8 +291,8 @@ get_template_part( 'template-parts/site-nav', null, array(
         <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
       </li>
       <li class="ribbon__item">
-        <span class="ribbon__title">Text Chat</span>
-        <span class="ribbon__desc">Responds instantly on every page</span>
+        <span class="ribbon__title">Unlimited Text Chat</span>
+        <span class="ribbon__desc">Answer every visitor, on every page</span>
       </li>
       <li class="ribbon__item">
         <span class="ribbon__title">Lead Capture</span>
@@ -787,7 +787,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="price-includes__icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
           </span>
-          <span class="price-includes__label">AI voice + text chat</span>
+          <span class="price-includes__label"><strong>Unlimited</strong> AI text chat</span>
         </div>
         <div class="price-includes__item">
           <span class="price-includes__icon" aria-hidden="true">
@@ -931,15 +931,6 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="pricing-assurance reveal">
       <p class="pricing-assurance__eyebrow">Simple, predictable pricing</p>
       <div class="pricing-assurance__grid">
-        <div class="pricing-assurance__item">
-          <span class="pricing-assurance__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
-          </span>
-          <div class="pricing-assurance__body">
-            <h3 class="pricing-assurance__label">Flat-rate text chat</h3>
-            <p>No per-conversation fees and no surprise charges. Text chat is unlimited for normal business use &mdash; a fair-use ceiling of around 2,000 messages a day per site keeps runaway scripts from spoiling it, which is roughly seventy times what a busy site actually uses.</p>
-          </div>
-        </div>
         <div class="pricing-assurance__item">
           <span class="pricing-assurance__icon" aria-hidden="true">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>

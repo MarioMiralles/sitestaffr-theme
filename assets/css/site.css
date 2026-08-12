@@ -4222,7 +4222,11 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .pricing-assurance__grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* auto-fit + centred so the row stays balanced whatever the item count. Was a
+     hard 1fr 1fr, which stranded the survivor in the left column when the
+     flat-rate text-chat item was removed. */
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 420px));
+  justify-content: center;
   gap: 20px 40px;
   text-align: left;
 }
@@ -9729,11 +9733,13 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .dl-route {
   margin: 36px auto 0;
   max-width: 660px;
-  padding: 26px 28px 22px;
-  background: var(--warm-white);
-  border: 1px solid var(--border-light);
+  padding: 28px 28px 24px;
+  /* Dark on purpose: /download/ is an almost entirely white page, so the one thing
+     we want read first has to carry weight. Same gradient as
+     .proof-section__backdrop-panel rather than a new dark — keeps it in-system. */
+  background: linear-gradient(145deg, #004D40 0%, #00695C 50%, #00838F 100%);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-xl);
   text-align: center;
 }
 
@@ -9743,7 +9749,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: rgba(240, 250, 250, 0.72);
 }
 
 .dl-route__path {
@@ -9765,8 +9771,8 @@ a.ind-problem-card .ind-problem-card__icon--art {
 
 .dl-route__path li + li::before {
   content: '\2192';
-  color: var(--text-muted);
-  opacity: 0.55;
+  color: var(--text-on-dark);
+  opacity: 0.45;
   font-size: 0.95rem;
   padding: 0 2px;
 }
@@ -9775,22 +9781,24 @@ a.ind-problem-card .ind-problem-card__icon--art {
   display: inline-block;
   padding: 7px 15px;
   border-radius: 40px;
-  background: var(--teal-pale);
-  color: var(--teal-deep);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-on-dark);
   font-size: 0.92rem;
   font-weight: 600;
   white-space: nowrap;
 }
 
+/* The search term is the one thing to carry into wp-admin — brighten it. */
 .dl-route__path li span strong {
-  color: var(--text-primary);
+  color: #fff;
   font-weight: 700;
 }
 
 .dl-route__note {
   margin: 18px 0 0;
   font-size: 0.92rem;
-  color: var(--text-secondary);
+  color: rgba(240, 250, 250, 0.85);
 }
 
 /* Quiet text link for the slowest install route. */

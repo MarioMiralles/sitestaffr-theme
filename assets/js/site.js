@@ -820,12 +820,58 @@ if (voiceShowcase) {
 
   let activeVoiceIndex = 0;
 
+  function portraitUrl(voice) {
+    return themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
+  }
+
+  // Warm the full-size portraits once the page is idle. The thumbnail strip uses
+  // -sm.webp, so the large file for a voice had never been fetched when you clicked
+  // it — the browser went to the network mid-swap and the portrait visibly blanked
+  // and reloaded. All ten together are ~700KB, so this is cheap after first paint.
+  function preloadPortraits() {
+    voices.forEach(function (v) { new Image().src = portraitUrl(v); });
+  }
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(preloadPortraits, { timeout: 3000 });
+  } else {
+    setTimeout(preloadPortraits, 1500);
+  }
+
+  // Guards against a slow earlier request landing after a faster later one and
+  // painting the wrong face.
+  let portraitSwapToken = 0;
+
   function selectVoice(index) {
     activeVoiceIndex = index;
     const voice = voices[index];
+    const src = portraitUrl(voice);
+    const token = ++portraitSwapToken;
 
-    showcasePortrait.src = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
-    showcasePortrait.alt = voice.name;
+    // Swap only once the new file has decoded, so the visible portrait never blanks
+    // mid-change. Everything else on the card updates immediately.
+    const pre = new Image();
+    pre.src = src;
+    const applyPortrait = function () {
+      if (token !== portraitSwapToken) return;
+      showcasePortrait.src = src;
+      showcasePortrait.alt = voice.name;
+      if (bgCurrent && bgNext) {
+        bgNext.src = src;
+        bgNext.classList.add('voice-section__bg-img--active');
+        bgCurrent.classList.remove('voice-section__bg-img--active');
+        const temp = bgCurrent;
+        bgCurrent = bgNext;
+        bgNext = temp;
+      }
+    };
+    if (pre.decode) {
+      pre.decode().then(applyPortrait).catch(applyPortrait);
+    } else if (pre.complete) {
+      applyPortrait();
+    } else {
+      pre.onload = applyPortrait;
+      pre.onerror = applyPortrait;
+    }
     showcaseName.textContent = voice.name;
     showcasePlan.textContent = voice.plan;
     showcasePlan.setAttribute('data-plan', voice.plan);
@@ -839,21 +885,10 @@ if (voiceShowcase) {
     showcasePlayBtn.classList.remove('playing');
     showcasePlayLabel.textContent = 'Preview Voice';
 
+    // Selection feedback is immediate — it must not wait on the image.
     showcaseThumbs.querySelectorAll('.voice-showcase__thumb').forEach(function(thumb, i) {
       thumb.classList.toggle('active', i === index);
     });
-
-    // Crossfade background portrait
-    if (bgCurrent && bgNext) {
-      var newSrc = themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
-      bgNext.src = newSrc;
-      bgNext.classList.add('voice-section__bg-img--active');
-      bgCurrent.classList.remove('voice-section__bg-img--active');
-      // Swap references after transition
-      var temp = bgCurrent;
-      bgCurrent = bgNext;
-      bgNext = temp;
-    }
   }
 
   // Build thumbnail strip (clear SSR placeholders first)
