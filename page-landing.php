@@ -52,21 +52,32 @@ $get_started_url = home_url( '/#get-started' );
         // live-chat staffing firm. sameAs is how Google is told which third-party profiles are
         // THIS entity. Only add URLs verified to resolve; a dead sameAs is worse than none.
         //
-        // "Verified" means verified BY CONTENT, not by status code. Facebook returns 200 with a
-        // generic "Facebook" title for a handle that does not exist, so a 200 proves nothing.
-        // Each URL below was checked against a deliberately bogus sibling handle: YouTube,
-        // GitHub and profiles.wordpress.org all 404 on the bogus one, and Facebook soft-404s to
-        // a bare "Facebook" title while ours returns "SiteStaffr | Miami FL". Re-run that
-        // calibration before adding any more.
+        // "Verified" means verified BY CONTENT, not by status code — Facebook returns 200 with a
+        // generic "Facebook" title for a handle that does not exist. But resolving is only half
+        // the bar: the profile also has to SAY something about the entity. An empty profile
+        // corroborates nothing and just spends crawl trust on a dead end.
         //
-        // x.com / twitter.com are deliberately ABSENT: the pages are JS-rendered, so there is no
-        // way to confirm from a fetch that the handle is ours. Add only after a human look.
+        // Removed 2026-08-12 after checking what each page actually contains:
+        //   github.com/sitestaffr   — resolves, but "This organization has no public
+        //                             repositories". An empty shell; the org is private.
+        //   youtube.com/@sitestaffr — no channel content.
+        //
+        // Facebook is KEPT despite having almost no posts. Post count is irrelevant here: it is
+        // an indexed business page carrying a name and a location (Miami FL), which is exactly
+        // the corroborating name/place data this list exists to provide. Engagement is a
+        // marketing question, not an entity-graph one.
+        //
+        // x.com / twitter.com are deliberately ABSENT: JS-rendered, so a fetch cannot confirm
+        // the handle is ours. Add only after a human look.
+        //
+        // TO ADD once Mario pastes the exact URLs: G2 and Capterra. Both are worth more here
+        // than any social profile, because Google treats software directories as authoritative
+        // for software entities. They cannot be probed — both return 403 to any request, valid
+        // URL or not, so the status code proves nothing and a guessed URL would ship dead.
         'sameAs'           => array(
             'https://wordpress.org/plugins/sitestaffr/',
             'https://profiles.wordpress.org/sitestaffr/',
             'https://linkedin.com/company/sitestaffr',
-            'https://github.com/sitestaffr',
-            'https://www.youtube.com/@sitestaffr',
             'https://www.facebook.com/sitestaffr',
         ),
         'foundingLocation' => array(
