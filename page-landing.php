@@ -68,7 +68,7 @@ $get_started_url = home_url( '/#get-started' );
         '@type'               => 'SoftwareApplication',
         '@id'                 => $schema_org_url . '#software',
         'name'                => 'SiteStaffr',
-        'description'         => 'An AI voice and text agent built for service businesses on WordPress. Visitors talk or type, it listens, and you get every detail — in 57+ languages. It also writes and publishes SEO blog posts for your site every month.',
+        'description'         => 'An AI chat and voice agent built for service businesses on WordPress. Visitors type or talk, it listens, and you get every detail in 57+ languages. It also writes and publishes SEO blog posts for your site every month.',
         'applicationCategory' => 'BusinessApplication',
         'operatingSystem'     => 'WordPress',
         'url'                 => $schema_org_url,
@@ -153,15 +153,15 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and 100 text-chat messages per day — no credit card required. Paid plans are $29/month (Starter: 100 voice minutes), $69/month (Business: 300 voice minutes), and $129/month (Pro: 600 voice minutes). Every paid plan includes unlimited AI text chat with no per-conversation fees — only voice is metered. Every plan also includes AI-written blog posts each month — from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $10 for 50 minutes, and they never expire.',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and 100 text-chat messages per day, with no credit card required. Paid plans are $29/month (Starter: 100 voice minutes), $69/month (Business: 300 voice minutes), and $129/month (Pro: 600 voice minutes). Every paid plan includes unlimited AI text chat with no per-conversation fees, so only voice is metered. Every plan also includes AI-written blog posts each month, from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $10 for 50 minutes, and they never expire.',
         ),
         array(
             'question' => 'Does SiteStaffr work with my WordPress site?',
-            'answer'   => 'Yes. SiteStaffr is built specifically for WordPress. Install the plugin from your WordPress dashboard, configure your business details, and the AI agent appears on your website — no coding required. Setup takes less than five minutes.',
+            'answer'   => 'Yes. SiteStaffr is built specifically for WordPress. Install the plugin from your WordPress dashboard, configure your business details, and the AI agent appears on your website. No coding required, and setup takes less than five minutes.',
         ),
         array(
             'question' => 'What happens after a visitor conversation?',
-            'answer'   => 'Within seconds of the conversation ending, SiteStaffr emails you a detailed recap including a summary of what the visitor needed, their contact information, the full conversation transcript, and a suggested follow-up action — so you can respond quickly and close more leads.',
+            'answer'   => 'Within seconds of the conversation ending, SiteStaffr emails you a detailed recap including a summary of what the visitor needed, their contact information, the full conversation transcript, and a suggested follow-up action, so you can respond quickly and close more leads.',
         ),
         array(
             'question' => 'Does SiteStaffr write blog posts for my website?',
@@ -177,7 +177,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'Do I need a developer to install SiteStaffr?',
-            'answer'   => 'No. SiteStaffr installs like any WordPress plugin — search for it in your dashboard, click install, activate, and enter your business details. The entire setup takes less than five minutes and requires no technical knowledge.',
+            'answer'   => 'No. SiteStaffr installs like any WordPress plugin. Search for it in your dashboard, click install, activate, and enter your business details. The entire setup takes less than five minutes and requires no technical knowledge.',
         ),
     );
 
@@ -205,7 +205,7 @@ $get_started_url = home_url( '/#get-started' );
     <?php echo wp_json_encode( array(
         '@context'      => 'https://schema.org',
         '@type'         => 'AudioObject',
-        'name'          => 'SiteStaffr Demo Conversation — Plumbing Business',
+        'name'          => 'SiteStaffr Demo Conversation for a Plumbing Business',
         'description'   => 'A 45-second sample conversation between a website visitor reporting a kitchen leak and SiteStaffr\'s AI voice agent for a plumbing business.',
         'contentUrl'    => get_stylesheet_directory_uri() . '/assets/audio/demo-conversation.mp3',
         'encodingFormat' => 'audio/mpeg',
@@ -409,7 +409,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="lead-demo__header reveal">
       <span class="section-label">Your AI Hire in Action</span>
       <h2>A Missed Call Turned Into a Booked Job</h2>
-      <p class="lead-demo__subtitle">It&rsquo;s 9 PM. A homeowner has a leaking kitchen pipe. Your AI hire picks up, gets the details, and delivers a full recap to your inbox &mdash; before you even check your phone.</p>
+      <p class="lead-demo__subtitle">It&rsquo;s 9 PM. A homeowner has a leaking kitchen pipe. Your AI hire picks up, gets the details, and delivers a full recap to your inbox before you even check your phone.</p>
     </div>
     <div class="lead-demo__card reveal">
       <?php
@@ -420,7 +420,7 @@ get_template_part( 'template-parts/site-nav', null, array(
               'layout'        => 'stacked',
               'recap_variant' => 'card',
               'recap_pinned'  => true,
-              'audio_label'   => 'After-hours call &mdash; homeowner reports a kitchen leak',
+              'audio_label'   => 'After-hours call from a homeowner reporting a kitchen leak',
               'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
           )
       );
@@ -437,7 +437,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="lead-demo__step-number">1</span>
         </div>
         <h3>Picks Up Instantly</h3>
-        <p>Greets the caller by voice and gathers what they need &mdash; 24/7, no hold music</p>
+        <p>Greets the caller by voice and gathers what they need, 24/7 with no hold music</p>
         <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
 
@@ -459,7 +459,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="lead-demo__step-number">2</span>
         </div>
         <h3>Captures Every Detail</h3>
-        <p>Name, number, urgency, and exactly what they need &mdash; nothing slips through</p>
+        <p>Name, email, phone, urgency, and exactly what they need. Nothing slips through.</p>
         <div class="lead-demo__card-accent" aria-hidden="true"></div>
       </div>
 
@@ -498,7 +498,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="voice-text-section__header reveal">
     <span class="section-label">Two Ways to Connect</span>
     <h2>Voice &amp; Chat</h2>
-    <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer talking, others prefer typing &mdash; SiteStaffr handles both with the same AI and the same answers.</p>
+    <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer typing, others prefer talking, and SiteStaffr handles both with the same AI and the same answers.</p>
   </div>
   <div class="container">
     <div class="voice-text-section__panel reveal">
@@ -609,7 +609,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
         <div class="lang-section__headline">
           <h2>SiteStaffr Speaks <em>Their</em> Language.</h2>
-          <p>Your visitors speak 57+ languages &mdash; and so does SiteStaffr. Every recap arrives in English, ready for you.</p>
+          <p>Your visitors speak 57+ languages, and so does SiteStaffr. Every recap arrives in English, ready for you.</p>
         </div>
       </div>
       <div class="lang-section__badges">
@@ -629,7 +629,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <svg class="lang-section__expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         </button>
         <div class="lang-section__detail" aria-hidden="true">
-          <p>SiteStaffr uses advanced speech-to-text and text-to-speech technology to converse fluently in your visitor&rsquo;s preferred language. Whether a caller speaks Spanish, Mandarin, Arabic, or any of 50+ other languages, the AI agent responds naturally in their language. After each conversation, SiteStaffr translates and summarizes everything into a clear English recap delivered to your inbox &mdash; so you never miss a lead, regardless of the language barrier.</p>
+          <p>SiteStaffr reads and speaks your visitor&rsquo;s preferred language fluently. Whether a caller speaks Spanish, Mandarin, Arabic, or any of 50+ other languages, the AI agent responds naturally in their language. After each conversation, SiteStaffr translates and summarizes everything into a clear English recap delivered to your inbox, so you never miss a lead, regardless of the language barrier.</p>
         </div>
       </div>
     </div>
@@ -643,7 +643,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <span class="section-label" id="demo-label">After Every Conversation</span>
       <h2>A Complete Report, Delivered to Your Inbox</h2>
       <p class="what-you-get__subtitle">
-        Automatically capture visitor conversations, summaries, and transcripts &mdash; all in one clean, shareable document.
+        Automatically capture visitor conversations, summaries, and transcripts, all in one clean, shareable document.
       </p>
     </div>
 
@@ -937,7 +937,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </span>
           <div class="pricing-assurance__body">
             <h3 class="pricing-assurance__label">Voice minutes, your way</h3>
-            <p>Need more? Add <strong>50 minutes for $10</strong> anytime &mdash; they never expire, with no automatic overage charges.</p>
+            <p>Need more? Add <strong>50 minutes for $10</strong> anytime. They never expire, and there are no automatic overage charges.</p>
           </div>
         </div>
       </div>
