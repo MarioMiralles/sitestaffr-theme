@@ -931,7 +931,7 @@ add_action( 'template_redirect', function () {
 		echo "| Starter | \$29/month | Unlimited | 100 minutes | 2 voices |\n";
 		echo "| Business | \$69/month | Unlimited | 300 minutes | 5 voices |\n";
 		echo "| Pro | \$129/month | Unlimited | 600 minutes | All 10 voices |\n\n";
-		echo "Add-on minutes: \$10 for 50 minutes, never expire. No credit card required for the free trial.\n\n";
+		echo "Add-on minutes: \$20 for 60 minutes, never expire. No credit card required for the free trial.\n\n";
 		echo "## How It Works\n\n";
 		echo "1. Install the SiteStaffr plugin on your WordPress site (takes under 5 minutes).\n";
 		echo "2. Run the setup wizard: enter your business info, choose a plan, and generate your AI knowledge base.\n";
@@ -953,7 +953,7 @@ add_action( 'template_redirect', function () {
 		echo "**How much does SiteStaffr cost?** SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — ";
 		echo "no credit card required. Paid plans are \$29/month (Starter, 100 voice minutes), \$69/month (Business, 300 voice minutes), ";
 		echo "and \$129/month (Pro, 600 voice minutes). Every paid plan includes unlimited AI text chat — only voice is metered. ";
-		echo "Additional voice minutes cost \$10 for 50 minutes and never expire.
+		echo "Additional voice minutes cost \$20 for 60 minutes and never expire.
 
 ";
 		echo "**Does SiteStaffr work with my WordPress site?** Yes. SiteStaffr is built specifically for WordPress. ";

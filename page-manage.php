@@ -176,7 +176,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     <div class="hub__buy-body">
       <div class="hub__buy-product">
         <div class="hub__buy-product-name">Add-on Minutes Pack</div>
-        <div class="hub__buy-product-detail">50 minutes per pack &middot; Add-on minutes never expire</div>
+        <div class="hub__buy-product-detail">60 minutes per pack &middot; Add-on minutes never expire</div>
       </div>
       <div class="hub__buy-stepper-row">
         <span class="hub__buy-stepper-label">Quantity</span>
@@ -187,7 +187,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
       </div>
       <div class="hub__buy-summary">
-        <span class="hub__buy-summary-minutes" id="hubBuyMinutesDisplay">50 minutes</span>
+        <span class="hub__buy-summary-minutes" id="hubBuyMinutesDisplay">60 minutes</span>
         <span class="hub__buy-summary-price" id="hubBuyPriceDisplay">$10</span>
       </div>
     </div>

@@ -1020,8 +1020,8 @@
 
   /* ---- Buy More Minutes modal ---- */
 
-  var ADDON_MINUTES = 50;
-  var ADDON_PRICE = 10;
+  var ADDON_MINUTES = 60;
+  var ADDON_PRICE = 20;
   var MIN_QTY = 1;
   var MAX_QTY = 10;
   var buyModalQty = 1;
