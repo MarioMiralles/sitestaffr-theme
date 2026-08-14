@@ -25,7 +25,7 @@ $site_name = get_bloginfo( 'name' );
 			'@id' => home_url( '/' ) . '#organization',
 		),
 		'datePublished'  => '2026-02-24',
-		'dateModified'   => '2026-08-11',
+		'dateModified'   => '2026-08-14',
 		'inLanguage'     => 'en-US',
 	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 	</script>
@@ -58,7 +58,7 @@ $site_name = get_bloginfo( 'name' );
 			<h1 class="legal-page__title">Terms of Service</h1>
 			<p class="legal-page__meta">
 				<strong>Effective Date:</strong> August 11, 2026<br>
-				<strong>Last Updated:</strong> August 11, 2026
+				<strong>Last Updated:</strong> August 14, 2026
 			</p>
 			<p class="legal-page__meta"><em>This update brings the Service description up to date &mdash; SiteStaffr now includes AI text chat, blog content generation, and AI visibility tracking alongside the original voice widget &mdash; and documents the fair-use protections that already apply to text chat. It adds no new restriction on how you use the Service.</em></p>
 
@@ -202,7 +202,7 @@ $site_name = get_bloginfo( 'name' );
 					<li>SiteStaffr acts as a data processor for Visitor data on behalf of the Business (data controller).</li>
 					<li>Visitor personal data (transcripts, names) is stored only in the Business&rsquo;s WordPress database.</li>
 					<li>SiteStaffr middleware stores only usage metrics, billing data, and account identifiers &mdash; not Visitor personal information.</li>
-					<li>Voice audio is processed in real time by OpenAI under their zero data retention API policy.</li>
+					<li>Voice audio is processed in real time by OpenAI. SiteStaffr does not store it, and OpenAI does not use API data to train its models. OpenAI may hold API content for a limited period for abuse monitoring under its standard API policy.</li>
 				</ul>
 			</section>
 

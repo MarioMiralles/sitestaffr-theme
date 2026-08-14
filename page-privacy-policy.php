@@ -25,7 +25,7 @@ $site_name = get_bloginfo( 'name' );
 			'@id' => home_url( '/' ) . '#organization',
 		),
 		'datePublished'  => '2026-02-24',
-		'dateModified'   => '2026-08-11',
+		'dateModified'   => '2026-08-14',
 		'inLanguage'     => 'en-US',
 	), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
 	</script>
@@ -58,7 +58,7 @@ $site_name = get_bloginfo( 'name' );
 			<h1 class="legal-page__title">Privacy Policy</h1>
 			<p class="legal-page__meta">
 				<strong>Effective Date:</strong> August 11, 2026<br>
-				<strong>Last Updated:</strong> August 11, 2026
+				<strong>Last Updated:</strong> August 14, 2026
 			</p>
 
 			<section class="legal-section">
@@ -124,7 +124,7 @@ $site_name = get_bloginfo( 'name' );
 				<h2>4. What We Collect from Site Visitors</h2>
 				<p><strong>SiteStaffr acts as a data processor on behalf of the Business (the data controller) when Visitors use the AI agent, whether by text chat or by voice.</strong></p>
 				<ul>
-					<li><strong>Voice audio:</strong> Visitor voice audio is streamed in real time to OpenAI for processing. Audio is not stored by SiteStaffr&rsquo;s middleware servers. OpenAI processes this data under their Zero Data Retention API policy and does not use it for training.</li>
+					<li><strong>Voice audio:</strong> Visitor voice audio is streamed in real time to OpenAI for processing. Audio is not stored by SiteStaffr&rsquo;s middleware servers. OpenAI does not use API data to train its models, and may hold API content for a limited period for abuse monitoring under its standard API policy.</li>
 					<li><strong>Text chat messages:</strong> Messages a Visitor types are sent to OpenAI in real time so the AI agent can respond. Message content is not stored by SiteStaffr&rsquo;s middleware servers.</li>
 					<li><strong>Conversation transcripts, visitor names, and any personal information disclosed during a conversation</strong> &mdash; by text or by voice &mdash; are stored exclusively in the Business&rsquo;s own WordPress database, not on SiteStaffr&rsquo;s infrastructure.</li>
 					<li><strong>Conversation recaps</strong> containing this information are delivered by email to the address the Business configures, using our email provider (see Section 7).</li>
@@ -173,7 +173,7 @@ $site_name = get_bloginfo( 'name' );
 						<tr>
 							<td><strong>OpenAI</strong></td>
 							<td>Real-time AI voice and text chat processing; blog content generation</td>
-							<td>Voice audio streams and text chat messages (zero data retention API &mdash; not used for model training); Business website content used to draft blog posts</td>
+							<td>Voice audio streams and text chat messages (not used for model training; held by OpenAI only briefly for abuse monitoring); Business website content used to draft blog posts</td>
 						</tr>
 						<tr>
 							<td><strong>SendGrid</strong> (Twilio)</td>
