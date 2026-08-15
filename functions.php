@@ -175,22 +175,32 @@ if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 
 if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	/**
-	 * Live plugin metadata from the WordPress.org directory, cached 12 hours.
+	 * Live plugin metadata from our own signed release manifest, cached 12 hours.
 	 *
-	 * Keeps the download page's version, file size, requirements, and zip URL
-	 * in sync with the published plugin automatically — no manual zip uploads.
-	 * Falls back to known-good values if the API is ever unreachable.
+	 * The zip this page serves is the DIRECT-DOWNLOAD build, which updates itself from
+	 * sitestaffr.com. The WordPress.org build cannot: guideline 8 forbids a plugin in the
+	 * directory from updating itself from anywhere else. So anyone who installs from this
+	 * page stays updatable even if the .org listing goes away, and anyone who installs from
+	 * the directory depends on the directory continuing to exist.
+	 *
+	 * This used to read api.wordpress.org and link downloads.wordpress.org. That made the
+	 * download page fail in the one scenario it most needs to survive: if the listing is
+	 * closed, the API call fails, the page falls back to a hardcoded version that was twenty
+	 * releases stale, and the download button 404s. The source of truth is now ours.
 	 *
 	 * @return array{version:string,download_url:string,requires:string,requires_php:string,size_mb:string,listing_url:string}
 	 */
 	function sitestaffr_plugin_info() {
 		$listing_url = 'https://wordpress.org/plugins/sitestaffr/';
-		$fallback    = array(
-			'version'      => '1.22.18',
-			'download_url' => 'https://downloads.wordpress.org/plugin/sitestaffr.zip',
+
+		// Kept current by the release runbook. Only reached if every endpoint is unreachable,
+		// so it must point at a real, downloadable build rather than a placeholder.
+		$fallback = array(
+			'version'      => '1.42.7',
+			'download_url' => 'https://storage.googleapis.com/sitestaffr-releases/sitestaffr-v1.42.7-032923ba28ce.zip',
 			'requires'     => '6.2',
 			'requires_php' => '7.4',
-			'size_mb'      => '5.5',
+			'size_mb'      => '5.7',
 			'listing_url'  => $listing_url,
 		);
 
@@ -199,25 +209,42 @@ if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 			return $cached;
 		}
 
-		$response = wp_remote_get(
-			'https://api.wordpress.org/plugins/info/1.0/sitestaffr.json',
-			array( 'timeout' => 5 )
+		// Same two endpoints, in the same order, that the plugin itself checks.
+		$endpoints = array(
+			'https://updates.sitestaffr.com/api/plugin/update',
+			'https://phoneease-middleware-375589245036.us-central1.run.app/api/plugin/update',
 		);
 
-		if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
-			return $fallback;
+		$manifest = null;
+		foreach ( $endpoints as $endpoint ) {
+			$response = wp_remote_get( $endpoint, array( 'timeout' => 5 ) );
+
+			if ( is_wp_error( $response ) || 200 !== (int) wp_remote_retrieve_response_code( $response ) ) {
+				continue;
+			}
+
+			$data = json_decode( wp_remote_retrieve_body( $response ), true );
+
+			// The download URL is prefix-checked rather than merely non-empty. This value goes
+			// straight into a download link on a public page, so a malformed or unexpected
+			// manifest must not be able to point visitors somewhere else.
+			if (
+				is_array( $data )
+				&& ! empty( $data['version'] )
+				&& ! empty( $data['download_url'] )
+				&& 0 === strpos( $data['download_url'], 'https://storage.googleapis.com/sitestaffr-releases/' )
+			) {
+				$manifest = $data;
+				break;
+			}
 		}
 
-		$data = json_decode( wp_remote_retrieve_body( $response ), true );
-		if ( ! is_array( $data ) || empty( $data['version'] ) ) {
+		if ( null === $manifest ) {
 			return $fallback;
 		}
-
-		// Always use the unversioned permalink so the button serves the latest stable build.
-		$download_url = 'https://downloads.wordpress.org/plugin/sitestaffr.zip';
 
 		$size_mb = $fallback['size_mb'];
-		$head    = wp_remote_head( $download_url, array( 'timeout' => 5 ) );
+		$head    = wp_remote_head( $manifest['download_url'], array( 'timeout' => 5 ) );
 		if ( ! is_wp_error( $head ) ) {
 			$length = (int) wp_remote_retrieve_header( $head, 'content-length' );
 			if ( $length > 0 ) {
@@ -226,10 +253,10 @@ if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 		}
 
 		$info = array(
-			'version'      => (string) $data['version'],
-			'download_url' => $download_url,
-			'requires'     => ! empty( $data['requires'] ) ? (string) $data['requires'] : $fallback['requires'],
-			'requires_php' => ! empty( $data['requires_php'] ) ? (string) $data['requires_php'] : $fallback['requires_php'],
+			'version'      => (string) $manifest['version'],
+			'download_url' => (string) $manifest['download_url'],
+			'requires'     => ! empty( $manifest['requires'] ) ? (string) $manifest['requires'] : $fallback['requires'],
+			'requires_php' => ! empty( $manifest['requires_php'] ) ? (string) $manifest['requires_php'] : $fallback['requires_php'],
 			'size_mb'      => $size_mb,
 			'listing_url'  => $listing_url,
 		);

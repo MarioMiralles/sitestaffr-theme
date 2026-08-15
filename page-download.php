@@ -212,7 +212,7 @@ $download_url = home_url( '/download/' );
 					</button>
 					<div class="dl-faq__answer">
 						<div class="dl-faq__answer-inner">
-							If you installed from the WordPress.org directory, updates appear automatically in your dashboard under <strong>Plugins</strong> &mdash; just click <strong>Update Now</strong>. If you installed manually, download the latest version from this page and re-upload it the same way. Either way, your settings and data are preserved between updates.
+							Updates appear in your WordPress dashboard under <strong>Plugins</strong>, and you click <strong>Update Now</strong>. That works whether you installed from the WordPress.org directory or from the zip on this page. You can also switch on automatic updates and let it handle itself. Your settings and data are preserved either way.
 						</div>
 					</div>
 				</div>
@@ -316,7 +316,7 @@ $faq_items = array(
 	),
 	array(
 		'question' => 'How do I update the plugin?',
-		'answer'   => 'If you installed from the WordPress.org directory, updates appear automatically in your dashboard under Plugins — just click Update Now. If you installed manually, download the latest version from this page and re-upload it the same way. Either way, your settings and data are preserved between updates.',
+		'answer'   => 'Updates appear in your WordPress dashboard under Plugins, and you click Update Now. That works whether you installed from the WordPress.org directory or from the zip on this page. You can also switch on automatic updates and let it handle itself. Your settings and data are preserved either way.',
 	),
 	array(
 		'question' => 'What can I do after setup?',
