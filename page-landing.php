@@ -819,7 +819,8 @@ get_template_part( 'template-parts/site-nav', null, array(
   <div class="container">
     <div class="pricing-section__header reveal">
       <span class="section-label">Plans &amp; Pricing</span>
-      <h2>Start Free. Upgrade When You&rsquo;re Ready.</h2>
+      <h2>One Flat Price. Unlimited Conversations.</h2>
+      <p class="pricing-section__subtitle">Start free for 30 days, no credit card. After that a busy month costs the same as a quiet one. Only voice minutes change between plans.</p>
     </div>
     <div class="price-includes price-includes--homepage reveal">
       <div class="price-includes__grid" data-label="Every paid plan includes">
@@ -829,7 +830,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </span>
           <span class="price-includes__label">
             <strong>Unlimited</strong> AI text chat
-            <span class="price-includes__note">No per-message or per-conversation fees &mdash; only voice minutes are metered.</span>
+            <span class="price-includes__note">No per-message or per-conversation fees. Only voice minutes count against your plan.</span>
           </span>
         </div>
         <div class="price-includes__item">
