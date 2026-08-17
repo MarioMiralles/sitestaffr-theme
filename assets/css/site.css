@@ -3916,6 +3916,42 @@ body.sitestaffr-landing-page .hero__visual > * {
 .price-includes--homepage .price-includes__label {
   color: white;
 }
+/* Lead row — the flat-rate promise is the reason the pricing works, so it gets
+   a full-width row above the other inclusions instead of being one chip of six. */
+.price-includes--homepage .price-includes__item--lead {
+  grid-column: 1 / -1;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 2px 8px 18px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__icon {
+  color: white;
+  margin-top: 2px;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__icon svg {
+  width: 28px;
+  height: 28px;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__label {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__label strong {
+  font-weight: 600;
+}
+.price-includes__note {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(224,247,250,0.85);
+}
 .pricing-section .price-grid {
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
@@ -5985,6 +6021,52 @@ body.sitestaffr-landing-page .hero__visual > * {
   .widget-bubble__btn { width: 54px; height: 54px; }
   .widget-bubble__voice-bars { gap: 4px; height: 18px; }
   .widget-bubble__voice-bars span { width: 3px; }
+}
+
+/* Homepage "Every paid plan includes" on phones. The notch label is an absolutely
+   positioned ::before whose height the box's padding-top cannot know about, so
+   below ~403px it wraps to two lines and lands on the first row of inclusions.
+   On mobile it becomes an in-flow, full-width eyebrow instead — it can no longer
+   collide at any width. Placed after the 768px block so it wins the cascade. */
+@media (max-width: 600px) {
+  .price-includes--homepage .price-includes__grid {
+    padding: 22px 18px 20px;
+    gap: 12px 18px;
+  }
+  .price-includes--homepage .price-includes__grid::before {
+    position: static;
+    grid-column: 1 / -1;
+    justify-self: start;
+    padding: 0;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+    letter-spacing: 0.09em;
+    border-radius: 0;
+    color: rgba(224,247,250,0.9);
+  }
+  .price-includes--homepage .price-includes__item--lead {
+    gap: 12px;
+    padding: 0 0 14px;
+    margin-bottom: 4px;
+  }
+  .price-includes--homepage .price-includes__item--lead .price-includes__icon svg {
+    width: 24px;
+    height: 24px;
+  }
+  .price-includes--homepage .price-includes__item--lead .price-includes__label {
+    font-size: 1.25rem;
+  }
+  .price-includes__note {
+    font-size: 0.85rem;
+  }
+}
+/* Two columns leave ~110px for a label on a phone, which shreds the longer
+   inclusions into three and four lines. One column for every portrait phone. */
+@media (max-width: 460px) {
+  .price-includes--homepage .price-includes__grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
 }
 
 @media (max-width: 480px) {
