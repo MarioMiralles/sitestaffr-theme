@@ -38,13 +38,23 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  /* One measure for every marketing subtitle on the site. Before this, the same kind of
-     subtext under an h2 used 480, 520, 540, 560, 580, 600, 620 and 680px with nothing
-     distinguishing the cases, and several had no cap at all. 680px is roughly 75 characters
-     at these font sizes, inside the comfortable 60-80 reading measure. Raised by Mario
-     2026-08-17: "Why do we make subtext so tight? Don't understand this style decision." It
-     was not a decision, it was drift. */
-  --subtext-measure: 680px;
+  /* One measure for every marketing subtitle on the site. Before this the same kind of subtext
+     under an h2 used 480, 520, 540, 560, 580, 600, 620 and 680px with nothing distinguishing
+     the cases, and several had no cap at all.
+
+     RELATIVE, NOT A FIXED PIXEL WIDTH, for two reasons:
+
+     - `min(..., 100%)` never exceeds a smaller parent. Subtext dropped into a narrow column,
+       a card or a modal shrinks to fit instead of being capped at a number chosen for a
+       full-width section.
+     - `em` resolves against the ELEMENT'S OWN font-size, so every subtitle gets the same
+       reading measure rather than the same pixel count. These range from 1rem to 1.15rem, and
+       a fixed 680px silently meant ~72 characters on one and ~62 on another - the same number
+       describing two different things, which is how the drift started.
+
+     40em is roughly 80 characters, the top of the comfortable 60-80 measure, and lands within
+     a few percent of the 680px it replaces at the most common size. */
+  --subtext-measure: min(40em, 100%);
   --teal-deep: #00838F;
   --teal-mid: #0097A7;
   --teal-light: #1FB6CC;
