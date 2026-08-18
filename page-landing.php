@@ -786,6 +786,25 @@ get_template_part( 'template-parts/site-nav', null, array(
           </div>
         </div>
       </div>
+
+      <?php // BELOW the document, not beside it. The four callouts describe what is IN the
+      // report; this is what happens NEXT. As a fifth item in a callout column it read as a
+      // peer of things it is not, left the right column hanging well below the left, and was
+      // the only bordered, full-colour element on a page of borderless teal annotations. ?>
+      <a class="what-you-get__crm" href="<?php echo esc_url( home_url( '/salesforce/' ) ); ?>">
+        <img class="what-you-get__crm-logo"
+             src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logos/logo-salesforce.png' ); ?>"
+             alt="Salesforce" width="84" height="59" loading="lazy" decoding="async">
+        <span class="what-you-get__crm-text">
+          <?php // Addressed to people who ALREADY have Salesforce. Opening with a question only a
+          // Salesforce owner answers yes to does the segmenting on its own: everyone else reads
+          // one line and moves on, without the copy having to reassure them, which is what made
+          // the previous version ("Optional... Not a Salesforce user?") read as defensive.
+          // Both claims already appear in this page's FAQ and on /salesforce/. ?>
+          <span class="what-you-get__crm-title">Already using Salesforce?</span>
+          <span class="what-you-get__crm-line">Connect your org in about a minute and qualified leads land there automatically. Included on every plan.</span>
+        </span>
+      </a>
     </div>
   </div>
 </section>

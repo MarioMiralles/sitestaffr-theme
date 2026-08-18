@@ -2427,6 +2427,60 @@ body.sitestaffr-landing-page .hero__visual > * {
 .what-you-get__callout-icon {
   margin-bottom: 8px;
 }
+/* Salesforce hand-off. A slim strip UNDER the document, not a card beside it.
+   As a bordered card in the right-hand callout column it was the only bordered, full-colour
+   element among borderless teal annotations, it made the right column hang below the left,
+   and it sat among four items that describe what is IN the report when it describes what
+   happens next. A single centred row fixes all three, and it stacks predictably on narrow
+   screens instead of competing inside a wrapped flex row. */
+.what-you-get__crm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  width: fit-content;
+  max-width: var(--subtext-measure);
+  margin: 40px auto 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-light);
+  text-decoration: none;
+}
+.what-you-get__crm-logo {
+  width: 84px;
+  height: auto;
+  display: block;
+  flex-shrink: 0;
+}
+.what-you-get__crm-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: left;
+  /* Bounded so the second line wraps to two or three lines instead of running the full width
+     of the section, which would make the strip read as a paragraph rather than a footnote. */
+  max-width: 44ch;
+}
+.what-you-get__crm-title {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.what-you-get__crm-line {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+/* Only the title takes the link treatment. Underlining three lines of body copy on hover
+   reads as a broken paragraph rather than a link. */
+.what-you-get__crm:hover .what-you-get__crm-title,
+.what-you-get__crm:focus-visible .what-you-get__crm-title {
+  color: var(--teal-deep);
+  border-bottom-color: var(--teal-light);
+}
+
+
 .what-you-get__callout-icon svg {
   color: var(--teal-light);
 }
@@ -2631,6 +2685,18 @@ body.sitestaffr-landing-page .hero__visual > * {
   .what-you-get__callouts--right {
     order: 2;
     text-align: center;
+  }
+  /* The strip is centred at every width; on narrow screens it stacks the logo above the line
+     rather than shrinking the text into a column beside a fixed-width logo. */
+  .what-you-get__crm {
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 32px;
+    padding-top: 24px;
+  }
+  .what-you-get__crm-text {
+    text-align: center;
+    align-items: center;
   }
   .what-you-get__doc-wrapper {
     order: 3;
