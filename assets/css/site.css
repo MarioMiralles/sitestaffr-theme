@@ -3865,7 +3865,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 .pricing-section__subtitle {
   color: var(--text-secondary);
   font-size: 1.05rem;
-  max-width: 520px;
+  /* 680px, matching .feat-section__subtitle, .voice-section__subtitle and
+     .lead-demo__subtitle. 520px was not a considered choice: centred subtitles on this site
+     range from 480 to 680 with no rule behind the spread, and pricing had one of the tightest,
+     which wrapped a two-sentence subhead onto three lines. At this font size 680px is about 75
+     characters, inside the comfortable 60-80 measure rather than under it. */
+  max-width: 680px;
   margin: 0 auto 12px;
 }
 /* Homepage includes — fieldset style with border label */
