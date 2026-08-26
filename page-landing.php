@@ -356,7 +356,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="cost-section">
   <div class="container">
     <div class="cost-section__grid">
-      <div class="reveal">
+      <div>
         <span class="section-label">The Hidden Cost of Lost Website Visitors</span>
         <h2>Busy Owners Miss Website Leads and Often Never Know It</h2>
         <p class="cost-section__text">
@@ -367,7 +367,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </p>
         <p class="cost-section__text">SiteStaffr turns those missed moments into conversations, and conversations into leads.</p>
       </div>
-      <div class="cost-cards reveal reveal-delay-1">
+      <div class="cost-cards">
         <div class="cost-card">
           <div class="cost-card__icon">🚨</div>
           <div class="cost-card__title">After-hours emergency</div>
@@ -406,7 +406,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="proof-section__backdrop-accent"></div>
   </div>
   <div class="container">
-    <div class="proof-section__layout reveal">
+    <div class="proof-section__layout">
       <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
       <div class="proof-section__portrait-wrap">
         <div class="proof-section__portrait-frame">
@@ -425,7 +425,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </cite>
       </div>
     </div>
-    <div class="proof-section__stats reveal reveal-delay-1">
+    <div class="proof-section__stats">
       <div class="proof-section__stat">
         <span class="proof-section__stat-number">24/7</span>
         <span class="proof-section__stat-label">Lead capture</span>
@@ -446,12 +446,12 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="lead-demo" id="live-demo">
   <div class="lead-demo__bg" aria-hidden="true"></div>
   <div class="container">
-    <div class="lead-demo__header reveal">
+    <div class="lead-demo__header">
       <span class="section-label">Your AI Hire in Action</span>
       <h2>A Missed Call Turned Into a Booked Job</h2>
       <p class="lead-demo__subtitle">It&rsquo;s 9 PM. A homeowner has a leaking kitchen pipe. Your AI hire picks up, gets the details, and delivers a full recap to your inbox before you even check your phone.</p>
     </div>
-    <div class="lead-demo__card reveal">
+    <div class="lead-demo__card">
       <?php
       get_template_part(
           'template-parts/hero-audio-demo',
@@ -466,7 +466,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       );
       ?>
     </div>
-    <div class="lead-demo__steps reveal">
+    <div class="lead-demo__steps">
 
       <div class="lead-demo__step-card">
         <div class="lead-demo__card-glow" aria-hidden="true"></div>
@@ -535,13 +535,13 @@ get_template_part( 'template-parts/site-nav', null, array(
   <img class="voice-text-section__robot voice-text-section__robot--text"
        src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-text.webp' ) ); ?>"
        alt="" width="1080" height="1350" aria-hidden="true" loading="lazy" decoding="async">
-  <div class="voice-text-section__header reveal">
+  <div class="voice-text-section__header">
     <span class="section-label">Two Ways to Connect</span>
     <h2>Voice &amp; Chat</h2>
     <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer typing, others prefer talking, and SiteStaffr handles both with the same AI and the same answers.</p>
   </div>
   <div class="container">
-    <div class="voice-text-section__panel reveal">
+    <div class="voice-text-section__panel">
       <!-- Mode selector cards -->
       <div class="voice-text-section__selector">
         <button class="voice-text-section__card voice-text-section__card--active" data-vt-mode="voice" type="button">
@@ -642,7 +642,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     <span>Hola</span><span>Bonjour</span><span>&#20320;&#22909;</span><span>Ol&aacute;</span><span>Ciao</span><span>&#50504;&#45397;</span><span>Namaste</span><span>Merhaba</span><span>&#1605;&#1585;&#1581;&#1576;&#1575;</span><span>Xin ch&agrave;o</span>
   </div>
   <div class="container">
-    <div class="lang-section__inner reveal">
+    <div class="lang-section__inner">
       <div class="lang-section__lead">
         <div class="lang-section__icon">
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -679,7 +679,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 5: WHAT YOU GET ========== -->
 <section class="what-you-get" id="demo">
   <div class="container">
-    <div class="what-you-get__header reveal">
+    <div class="what-you-get__header">
       <span class="section-label" id="demo-label">After Every Conversation</span>
       <h2>A Complete Report, Delivered to Your Inbox</h2>
       <p class="what-you-get__subtitle">
@@ -687,7 +687,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       </p>
     </div>
 
-    <div class="what-you-get__showcase reveal">
+    <div class="what-you-get__showcase">
       <div class="what-you-get__layout">
         <!-- Left callouts -->
         <div class="what-you-get__callouts what-you-get__callouts--left">
@@ -819,7 +819,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     <img id="voiceBgNext" class="voice-section__bg-img" src="" alt="">
   </div>
   <div class="container">
-    <div class="voice-section__header reveal">
+    <div class="voice-section__header">
       <span class="section-label">Hear the Difference</span>
       <h2>Meet Your AI Voice Agent</h2>
       <p class="voice-section__subtitle"><span>Choose from 10 unique AI voices, each with their own personality.</span> <span>Preview them right here.</span></p>
@@ -836,12 +836,12 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 8: PRICING ========== -->
 <section class="pricing-section" id="pricing">
   <div class="container">
-    <div class="pricing-section__header reveal">
+    <div class="pricing-section__header">
       <span class="section-label">Plans &amp; Pricing</span>
       <h2>One Flat Price. Unlimited Conversations.</h2>
       <p class="pricing-section__subtitle">Start free for 30 days, no credit card. After that a busy month costs the same as a quiet one. Only voice minutes change between plans.</p>
     </div>
-    <div class="price-includes price-includes--homepage reveal">
+    <div class="price-includes price-includes--homepage">
       <div class="price-includes__grid" data-label="Every plan includes">
         <div class="price-includes__item price-includes__item--lead">
           <span class="price-includes__icon" aria-hidden="true">
@@ -885,7 +885,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
     </div>
     <div class="price-grid price-grid--horizontal">
-      <div class="price-tier reveal">
+      <div class="price-tier">
         <div class="price-tier__identity">
           <div class="price-tier__name">Free Trial</div>
           <div class="price-tier__price">$0</div>
@@ -911,7 +911,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Start Free Trial</a>
         </div>
       </div>
-      <div class="price-tier reveal reveal-delay-1">
+      <div class="price-tier">
         <div class="price-tier__identity">
           <div class="price-tier__name">Starter</div>
           <div class="price-tier__price">$29</div>
@@ -936,7 +936,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>
         </div>
       </div>
-      <div class="price-tier price-tier--popular reveal reveal-delay-2">
+      <div class="price-tier price-tier--popular">
         <div class="price-tier__identity">
           <span class="price-tier__badge">Most Popular</span>
           <div class="price-tier__name">Business</div>
@@ -963,7 +963,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary">Get Started</a>
         </div>
       </div>
-      <div class="price-tier reveal reveal-delay-3">
+      <div class="price-tier">
         <div class="price-tier__identity">
           <div class="price-tier__name">Pro</div>
           <div class="price-tier__price">$129</div>
@@ -991,7 +991,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         </div>
       </div>
     </div>
-    <div class="pricing-assurance reveal">
+    <div class="pricing-assurance">
       <p class="pricing-assurance__eyebrow">Simple, predictable pricing</p>
       <div class="pricing-assurance__grid">
         <div class="pricing-assurance__item">
@@ -1011,11 +1011,11 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 9: FAQ ========== -->
 <section class="faq-section" id="faq">
   <div class="container">
-    <div class="faq-section__header reveal">
+    <div class="faq-section__header">
       <span class="section-label">Common Questions</span>
       <h2>Frequently Asked Questions</h2>
     </div>
-    <div class="faq-list reveal">
+    <div class="faq-list">
       <?php foreach ( $faq_items as $faq ) : ?>
       <div class="faq-item">
         <button class="faq-item__question" type="button" aria-expanded="false">
@@ -1035,7 +1035,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 <section class="final-cta" id="get-started">
   <div class="final-cta__decoration" aria-hidden="true"></div>
   <div class="container">
-    <div class="final-cta__content cta-spotlight reveal">
+    <div class="final-cta__content cta-spotlight">
       <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
       <p class="final-cta__subtitle">Rather not set it up yourself? Tell us about your business and we&rsquo;ll get your agent live for you.</p>
       <div class="final-cta__onboarding">

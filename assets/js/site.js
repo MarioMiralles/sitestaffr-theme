@@ -221,17 +221,8 @@
   raf = requestAnimationFrame(animate);
 })();
 
-// ========== SCROLL REVEAL ==========
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+// The scroll-reveal IntersectionObserver was deleted 2026-08-26. Content
+// visibility must never depend on decorative JS running successfully.
 
 // ========== AUDIO PLAYER ==========
 const playSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>';
