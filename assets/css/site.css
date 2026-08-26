@@ -185,6 +185,98 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    invisible. That happened in production. Testers complained about the effect
    independently. Nothing replaces it — sections are simply visible. */
 
+/* ========== BLOCK SYSTEM ==========================================
+   V3, 2026-08-26. Every section is exactly one of four blocks:
+   Statement, Split, Cards, Panel. That is the whole vocabulary.
+
+   WHY THIS REPLACES FOUR RUNS AND THREE SEAMS. A seam is a colour contract
+   between two neighbouring sections. It fails silently — it looks right at
+   1440 and wrong at 1150 — so every change to any section near it cost a
+   five-width screenshot sweep to re-verify. Whitespace has no contract, and a
+   dark block is one background declaration that is finished when it is written.
+
+   DARK IS EMPHASIS, NOT A RUN, and it appears exactly twice: the section 2-3
+   block after the hero, and the section 10-11 tail. Everything between is
+   light. Adjacent dark blocks share one background, so no seam is needed
+   between them.
+
+   The dark tone is deliberately V1's DEEP TEAL, not the night world's
+   near-black #0A1F2B. Testers preferred V1's palette and rejected the night
+   world's; reaching for that near-black here would quietly reintroduce the
+   exact tone the redesign exists to drop. It reads as emphasis because the
+   page around it is light, not because it is black. */
+:root {
+  /* Exactly two section-padding values. Resist adding a third — the drift this
+     replaces started as "just one more case". */
+  --block-pad-tight: clamp(48px, 7vw, 72px);
+  --block-pad-loose: clamp(72px, 10vw, 120px);
+
+  /* Matches .container so the restored container is one number site-wide.
+     V2 broke hero content to 40px from the raw viewport edge; V1 sits at ~150px
+     at 1440, which is the measure testers read comfortably. */
+  --block-max: 1140px;
+  --block-gutter: 20px;
+
+  --block-dark: #00323A;
+  --block-dark-raised: #0A424A;   /* the elevated panel in section 10 */
+}
+
+.block { padding-block: var(--block-pad-loose); }
+.block--tight { padding-block: var(--block-pad-tight); }
+
+.block__inner {
+  width: 100%;
+  max-width: var(--block-max);
+  margin-inline: auto;
+  padding-inline: var(--block-gutter);
+}
+
+.block--dark {
+  background: var(--block-dark);
+  color: var(--text-on-dark);
+}
+.block--dark h1, .block--dark h2, .block--dark h3, .block--dark h4 { color: #FFFFFF; }
+/* Adjacent dark blocks must not draw a line between themselves — they are one
+   dark run visually, two blocks structurally. */
+.block--dark + .block--dark { padding-block-start: 0; }
+
+/* ---- Statement: centered eyebrow + heading + one paragraph. Type only. ---- */
+.block-statement { text-align: center; }
+.block-statement .block__inner { max-width: 760px; }
+
+/* ---- Split: text one side, one artifact the other. Sides alternate. ---- */
+.block-split__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 64px);
+  align-items: center;
+}
+/* Puts the artifact first in visual order without touching DOM order, so the
+   reading sequence and the tab order stay correct. */
+.block-split--reverse .block-split__art { order: -1; }
+
+/* ---- Cards: a row of 2-4 equal cards. ---- */
+.block-cards__grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cards, 3), minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 24px);
+}
+
+/* ---- Panel: one wide product surface, centered, with a caption. ---- */
+.block-panel .block__inner { max-width: 1040px; }
+
+@media (max-width: 900px) {
+  .block-split__grid { grid-template-columns: 1fr; }
+  /* The artifact returns to DOM order on one column: a reversed Split stacks
+     image-then-text on desktop, but on mobile the heading must come first or
+     the reader meets a picture with no idea what it is. */
+  .block-split--reverse .block-split__art { order: 0; }
+  .block-cards__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 560px) {
+  .block-cards__grid { grid-template-columns: 1fr; }
+}
+
 /* ========== NAVIGATION ========== */
 .nav {
   position: fixed;
