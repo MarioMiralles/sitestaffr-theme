@@ -1031,18 +1031,67 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 10: FINAL CTA + GET STARTED ========== -->
-<section class="final-cta" id="get-started">
-  <div class="final-cta__decoration" aria-hidden="true"></div>
-  <div class="container">
-    <div class="final-cta__content cta-spotlight">
-      <h2>Your Next Visitor Has a Question.<br><span class="final-cta__highlight">Will Your Website Have the Answer?</span></h2>
-      <p class="final-cta__subtitle">Rather not set it up yourself? Tell us about your business and we&rsquo;ll get your agent live for you.</p>
-      <div class="final-cta__onboarding">
-        <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#15a3b8" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
+<!-- ========== SECTION 11: CLOSING CTA ==========================================
+     THE HIERARCHY HERE WAS INVERTED, and site-nav.php:53 records why that was
+     wrong: "Self-serve is the primary conversion path (Mario, 2026-08-11)."
+
+     What it used to be, measured rather than guessed:
+       - the onboarding WIDGET button was the visual primary, and carried a
+         shimmer animation actively pulling the eye to it
+       - the actual trial - the primary conversion path - was a text link at
+         0.85rem and 45% opacity, prefixed with the word "or"
+
+     So on the page that closes the sale, the one action the business wants was
+     the faintest thing in the section. This is copy and hierarchy only; no new
+     functionality. Order is now trial > concierge > chat. -->
+<section class="block block--dark block-split final-cta" id="get-started">
+  <div class="block__inner">
+    <div class="block-split__grid final-cta__grid">
+      <div class="final-cta__copy">
+        <h2>Be the One That&rsquo;s Still Open<br><span class="final-cta__highlight">When Everyone Else Has Closed</span></h2>
+
+        <?php /* "answers every call, chat and question" became "answers your visitors".
+                 "call" invites the phone-line misreading, which is worse now the H1 says
+                 receptionist and the product has no phone line. "every" is the word commit
+                 f73108a recorded as untrue - it had come back. */ ?>
+        <p class="final-cta__subtitle">SiteStaffr answers your visitors around the clock &mdash; nights, weekends, holidays.</p>
+
+        <?php /* PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded
+                 link: the target funnel is pricing -> checkout modal -> purchase, with
+                 /download/ becoming post-purchase instructions. When checkout exists this
+                 is a one-line change at four call sites. */ ?>
+        <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>"
+           class="btn btn--primary final-cta__primary js-cta"
+           data-cta="trial">
+          Start Free Trial
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <p class="final-cta__reassure">Free for 30 days &middot; No credit card required</p>
+
+        <p class="final-cta__or"><span>or</span></p>
+
+        <?php /* SECONDARY. Still the real onboarding widget - the shortcode is the working
+                 mechanism and is not worth reimplementing - but demoted to an outline
+                 treatment and stripped of the shimmer. */ ?>
+        <div class="final-cta__concierge">
+          <span class="final-cta__concierge-label">Rather have us set it up?</span>
+          <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Let\'s Get Started" background_color="transparent" hover_background="#0A424A" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
+        </div>
+        <p class="final-cta__note">We reply within 3 business days.</p>
+
+        <?php /* TERTIARY. Kept because it converts the support widget from a help link into
+                 proof: it is the same AI the visitor would install. */ ?>
+        <p class="final-cta__tertiary">Questions? Ask our AI &mdash; it&rsquo;s the same one you&rsquo;d install.</p>
+
+        <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
       </div>
-      <p class="final-cta__secondary">or <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="final-cta__download-link">download the plugin</a> and install it yourself</p>
-      <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
+
+      <?php /* Robot on the right, matching section 1 and section 5 - three appearances on
+               the same side make him a motif rather than floating decoration.
+               robot-cta.webp is pending: Mario is re-running the prompt, attempt 1 failed
+               the pose check. The cell is reserved at the final ratio so dropping the file
+               in needs no layout change, and it collapses on mobile either way. */ ?>
+      <div class="block-split__art final-cta__art" aria-hidden="true"></div>
     </div>
   </div>
 </section>

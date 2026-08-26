@@ -167,7 +167,12 @@ if ( ! defined( 'ABSPATH' ) ) {
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2 class="form-success__title">We'll be in touch!</h2>
-        <p class="form-success__text">Thanks for your interest in SiteStaffr. We&rsquo;ll reach out within one business day to help get your assistant ready to go live.</p>
+        <?php /* Three business days, matching the homepage closing CTA. These two are the
+                 only places the response-time commitment is stated, and on 2026-08-26 they
+                 disagreed - this said "one business day" while the current promise is three.
+                 A commitment stated in two places drifts; if it changes again, grep for
+                 "business day" and change both. */ ?>
+        <p class="form-success__text">Thanks for your interest in SiteStaffr. We&rsquo;ll reach out within three business days to help get your assistant ready to go live.</p>
       </div>
     </div>
     </div>

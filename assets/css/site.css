@@ -5584,11 +5584,10 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ========== SECTION 10: FINAL CTA ========== */
 .final-cta {
-  padding: clamp(80px, 12vw, 140px) 0;
-  background:
-    linear-gradient(135deg, rgba(0, 131, 143, 0.9) 0%, rgba(0, 95, 107, 0.92) 100%);
-  color: white;
-  text-align: center;
+  /* Padding, background and colour now come from .block .block--dark. The old
+     gradient and centered text are deliberately not declared here: this section
+     is a dark Split, and re-declaring them would silently override the block
+     system from further down the file. */
   position: relative;
   overflow: hidden;
 }
@@ -5608,10 +5607,9 @@ body.sitestaffr-landing-page .hero__visual > * {
 .final-cta__subtitle {
   font-size: 1.15rem;
   color: rgba(240,250,250,0.75);
-  margin-bottom: 40px;
+  margin-bottom: 32px;
   max-width: var(--subtext-measure);
-  margin-left: auto;
-  margin-right: auto;
+  /* No auto margins: this is a left column in a Split now, not a centered stack. */
 }
 .final-cta__setup {
   display: inline-block;
@@ -5626,42 +5624,89 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.85rem;
   color: rgba(240,250,250,0.5);
 }
-.final-cta__onboarding {
-  margin-bottom: 16px;
-}
-.final-cta__onboarding .sitestaffr-button-widget {
+/* ---- Section 11 hierarchy, corrected 2026-08-26 -------------------------
+   The trial is the primary conversion path (site-nav.php:53) and is now styled
+   as the primary element. What it replaces: the onboarding widget button was
+   the visual primary WITH a shimmer animation, while the trial was a 0.85rem
+   link at 45% opacity behind the word "or".
+
+   The shimmer is deliberately not reused on the trial button. It was pulling
+   attention to the wrong action; the fix is to stop animating, not to move the
+   animation onto the right one. */
+.final-cta__grid { align-items: center; }
+.final-cta__copy { text-align: left; }
+
+.final-cta__primary {
+  font-size: 1.0625rem;
+  padding: 17px 34px;
   display: inline-flex;
-  position: relative;
-  overflow: hidden;
+  align-items: center;
+  gap: 10px;
 }
-.final-cta__onboarding .sitestaffr-button-widget::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  animation: cta-shimmer 3s ease-in-out infinite;
-  pointer-events: none;
-  will-change: transform;
+.final-cta__reassure {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: rgba(240,250,250,0.75);
 }
-.final-cta__secondary {
+
+/* The rule that keeps the demotion honest: the concierge action must not be
+   able to out-weigh the trial button again. Outline on the dark, no fill. */
+.final-cta__or {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0 20px;
+  color: rgba(240,250,250,0.4);
   font-size: 0.85rem;
-  color: rgba(240,250,250,0.45);
-  margin-top: 16px;
 }
-.final-cta__download-link {
-  color: rgba(240,250,250,0.7);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: rgba(240,250,250,0.3);
-  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+.final-cta__or::before,
+.final-cta__or::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: currentColor;
 }
-.final-cta__download-link:hover {
-  color: white;
-  text-decoration-color: rgba(255,255,255,0.6);
+.final-cta__concierge {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
 }
+.final-cta__concierge-label {
+  font-size: 0.95rem;
+  color: rgba(240,250,250,0.8);
+}
+/* The shortcode renders its own widget button and its attributes are not
+   trustworthy - border_width="1" is a documented no-op, so the border is set
+   here rather than passed in. Measure the render; do not read the attribute. */
+.final-cta__concierge .sitestaffr-button-widget {
+  display: inline-flex;
+  border: 1px solid rgba(240,250,250,0.45) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.final-cta__concierge .sitestaffr-button-widget:hover {
+  border-color: rgba(240,250,250,0.8) !important;
+  background: var(--block-dark-raised) !important;
+}
+.final-cta__note {
+  margin-top: 12px;
+  font-size: 0.85rem;
+  color: rgba(240,250,250,0.5);
+}
+.final-cta__tertiary {
+  margin-top: 24px;
+  font-size: 0.9rem;
+  color: rgba(240,250,250,0.65);
+}
+
+/* Reserved for robot-cta.webp. Holds its cell so the layout does not move when
+   the render lands; hidden on one column, where the copy is the whole point. */
+.final-cta__art { min-height: 340px; }
+@media (max-width: 900px) {
+  .final-cta__art { display: none; min-height: 0; }
+}
+
 .final-cta__privacy {
   font-size: 0.8rem;
   color: rgba(240,250,250,0.45);
@@ -7533,8 +7578,13 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   position: relative;
   z-index: 1;
 }
+/* Was #b9e991, a lime green. V3 runs one accent - teal - with emerald reserved
+   strictly for capture/success states and the recommended pricing tier. A
+   heading highlight is neither, so a green one reads as a second accent and
+   spends the signal that makes "Lead captured" mean something.
+   --teal-light holds its own against #00323A at display size. */
 .final-cta__highlight {
-  color: #b9e991;
+  color: var(--teal-light);
 }
 
 /* ========== HOMEPAGE V2: RESPONSIVE HERO GRID ========== */
@@ -10601,8 +10651,16 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: #fff;
 }
 
-/* Sections adopting the spotlight: drop the dark gradient + texture. */
-.final-cta,
+/* Sections adopting the spotlight: drop the dark gradient + texture.
+
+   .final-cta LEFT THIS GROUP on 2026-08-26. In V3 the homepage's closing CTA is
+   the second half of the dark tail (section 10's contained panel, then section
+   11 opening full-width), so it must be dark. It is styled by .block--dark now.
+
+   The other three stay: /about/, the industry pages and /download/ still use the
+   cream spotlight, and this rule is the only thing giving it to them. Deleting
+   the whole block to fix the homepage would have silently restyled three other
+   templates. */
 .about-cta,
 .ind-cta,
 .dl-cta {
