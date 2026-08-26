@@ -279,14 +279,28 @@ get_template_part( 'template-parts/site-nav', null, array(
     <div class="hero__grid">
       <div class="hero__content">
         <span class="hero__tagline">Built for WordPress</span>
+        <?php /* The headline used to state the OUTCOME ("You Get the Lead") and never the
+                 CATEGORY, which left the five float cards doing all the category work on
+                 their own. A stranger has to read this once and think "this is a thing I
+                 put on my site that talks to my visitors".
+
+                 Teal falls on "on Your Website" deliberately - Mario: "people are searching
+                 to put this on their site", so the accent lands on the phrase that matches
+                 transactional search intent, not on the product noun.
+
+                 No trailing period: single sentence, per the heading rule. */ ?>
         <h1 class="hero__headline">
-          <span class="hero__headline-prefix">Your Website Talks to Every Visitor.</span>
-          <span class="hero__headline-focus">You Get the Lead.</span>
+          <span class="hero__headline-prefix">Put an AI Receptionist</span>
+          <span class="hero__headline-focus">on Your Website</span>
         </h1>
+        <?php /* Ends on SITUATION, not category. "while you're on a job, with a client, or
+                 asleep" is audience signalling a dentist recognises instantly. Never write
+                 "small and medium-sized businesses" - nobody self-identifies that way, and
+                 it would tell an agency this page is not for them. */ ?>
         <p class="hero__subtitle">
-          Visitors can type or speak to your website, day or night. SiteStaffr answers their questions, then emails you their name, their email or phone, and what they need.
+          Visitors type or talk. SiteStaffr answers from your own pages, takes their name and number, and emails you the lead &mdash; while you&rsquo;re on a job, with a client, or asleep.
         </p>
-        <span class="hero__no-cc">Free for 30 days &bull; Install in minutes &bull; No code required</span>
+        <span class="hero__no-cc">Free for 30 days &bull; Installs in minutes &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
              These two were previously reversed: the big button went to the onboarding
              form and the actual trial was a small text link. Same two elements, same
@@ -302,6 +316,28 @@ get_template_part( 'template-parts/site-nav', null, array(
             Prefer we set it up for you?
           </a>
         </div>
+        <?php
+        /* The industry line anchors to #industries (section 6) rather than /for/ — it
+           scrolls DOWN THE PAGE instead of leaving it, which is why the arrow is a down
+           arrow and not a right one. Fifteen exit doors before proof and pricing is what
+           section 6 is being rebuilt to stop.
+
+           The remainder is COUNTED FROM THE REGISTRY, never hardcoded. The spec says
+           "+10 more", written when there were fifteen industries; adding Medical Staffing
+           makes it eleven, and a hardcoded number would have gone quietly wrong the moment
+           the sixteenth landed. The registry is the one place the count lives. */
+        $hero_named_industries = array( 'Dental', 'Law', 'HVAC', 'Veterinary', 'Salons' );
+        $hero_more_count       = max( 0, count( sitestaffr_industry_list() ) - count( $hero_named_industries ) );
+        ?>
+        <p class="hero__industries">
+          <a href="#industries">
+            <?php echo esc_html( implode( ' · ', $hero_named_industries ) ); ?>
+            <?php if ( $hero_more_count > 0 ) : ?>
+              &middot; +<?php echo (int) $hero_more_count; ?> more
+            <?php endif; ?>
+            <span class="hero__industries-arrow" aria-hidden="true">&darr;</span>
+          </a>
+        </p>
       </div>
       <div class="hero__robot-stage">
         <div class="hero__robot-glow" aria-hidden="true"></div>
@@ -321,36 +357,22 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== FEATURE RIBBON ========== -->
-<section class="ribbon">
-  <div class="container">
-    <ul class="ribbon__list">
-      <li class="ribbon__item">
-        <span class="ribbon__title">Unlimited Text Chat</span>
-        <span class="ribbon__desc">Answer every visitor, on every page</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Voice Answers</span>
-        <span class="ribbon__desc">Speaks to visitors naturally, 24/7</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Lead Capture</span>
-        <span class="ribbon__desc">Collects name, email, phone &amp; intent</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Email Recaps</span>
-        <span class="ribbon__desc">Sends you the details to follow up</span>
-      </li>
-      <li class="ribbon__item">
-        <span class="ribbon__title">Blog Writing</span>
-        <span class="ribbon__desc">Writes SEO posts for your site</span>
-      </li>
-    </ul>
-  </div>
-</section>
+<?php /* THE FIVE-CAPABILITY RIBBON WAS DELETED HERE, 2026-08-26.
 
+   It listed Unlimited Text Chat / Voice Answers / Lead Capture / Email Recaps /
+   Blog Writing — the same five things the hero's float cards already say, in
+   the same order, immediately below them. It was the redundant copy, and the
+   float cards are the version testers actually responded to.
 
+   It was also load-bearing in the wrong direction: at 1440x900 it occupied 133px
+   between the hero and section 2, which pushed section 2's dark block to y=929
+   and off the first screen. Capping the hero height alone could not fix that —
+   the band had to go for the page to open on its first contrast moment.
 
+   Measured after removal: section 2 starts at y=796, on screen.
+
+   Nothing replaces it. The capabilities are covered by the float cards above and
+   by sections 3 and 4 below. */ ?>
 
 <!-- ========== SECTION 2: COST OF MISSED VISITORS ========== -->
 <section class="cost-section">

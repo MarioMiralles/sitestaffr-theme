@@ -44,6 +44,16 @@ $primary_menu = array(
             sitestaffr_industry_registry()
         ),
     ),
+    // Agencies is a TOP-LEVEL item, deliberately not inside the Industries
+    // dropdown. Agencies are an audience, not an industry: they are not in
+    // sitestaffr_industry_registry(), and putting them there would drop them
+    // into section 6's list of sixteen businesses alongside dental practices
+    // and salons, which is the wrong shelf.
+    //
+    // It sits before Blog and About because it is the only nav item addressing
+    // the second audience, and the ones who self-classify do it in the first
+    // few seconds — after that they are reading a page written to a plumber.
+    array( 'label' => 'Agencies', 'href' => home_url( '/for/agencies/' ) ),
     array( 'label' => 'Blog',  'href' => home_url( '/blog/' ) ),
     array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
 );

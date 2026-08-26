@@ -6562,7 +6562,27 @@ body.sitestaffr-landing-page .hero__actions {
 }
 
 /* ========== HOMEPAGE: HERO AI-HIRE ROBOT STAGE ========== */
-.hero { min-height: clamp(580px, 80vh, 800px); }
+/* Capped at ~720px so section 2's dark block is on screen at 1440x900 without
+   scrolling. The old 800px ceiling pushed it below the fold on a laptop, which
+   cost the page its first contrast moment. */
+.hero { min-height: clamp(560px, 76vh, 720px); }
+
+/* The industry line: type, one link, anchors down the page to section 6. */
+.hero__industries {
+  margin-top: 26px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.hero__industries a {
+  color: inherit;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.hero__industries a:hover {
+  color: var(--teal-deep);
+  border-bottom-color: currentColor;
+}
+.hero__industries-arrow { margin-left: 2px; }
 body.sitestaffr-landing-page .hero__content { max-width: none; }
 /* Robot column stretches to full row height; content column drives that height */
 .hero__robot-stage {
@@ -6630,9 +6650,8 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero__float-card { animation: none; }
 }
-@media (max-width: 980px) {
-  .hero__float-card { display: none; }
-}
+/* The float cards' mobile layout lives AFTER the 900px block below, because that
+   block re-positions .hero__robot-img and would otherwise win the cascade. */
 @media (max-width: 900px) {
   .hero { min-height: 0; }
   body.sitestaffr-landing-page .hero { padding-bottom: 0; }
@@ -6645,6 +6664,69 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
      in straight lines at the stage edges — reads as a faint box around the robot. */
   .hero__robot-img { top: auto; bottom: 0; height: 100%; filter: none; }
   .hero__robot-glow { display: none; }
+}
+
+/* ---- Hero float cards on mobile ---------------------------------------
+   These five cards used to be `display: none` below 980px.
+
+   They are the thing testers meant by "the hero explains the product
+   instantly" — they, not the headline, were carrying the category. Hiding them
+   on phones removed that work entirely, on the traffic that needs it most:
+   most SMB traffic is phones.
+
+   Below 980px they stop being absolutely-positioned decoration floating over
+   the robot and become an in-flow 2-2-1 grid — two, two, and the fifth centered
+   across both columns. Fixed rather than ragged, and always five.
+
+   THE ROBOT IMAGE HAS TO JOIN THE FLOW FOR THIS TO WORK. It is absolutely
+   positioned so it can bleed out of the hero on desktop; left that way, the
+   in-flow cards render on top of its head, because an absolute element occupies
+   no space for its siblings to sit after. Measured, not guessed: the cards
+   landed at y=785 inside a stage whose image also started at y=761.
+
+   This block sits after the 900px block deliberately — that block re-positions
+   .hero__robot-img, so anything earlier loses the cascade at phone widths. */
+@media (max-width: 980px) {
+  .hero__robot-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 0;
+    overflow: visible;   /* the 900px block clips; in-flow cards must not be cut */
+  }
+  .hero__robot-img {
+    position: static;
+    height: 380px;
+    width: auto;
+    max-width: 100%;
+    transform: none;
+    margin: 0 auto;
+  }
+  .hero__float-cards {
+    position: static;
+    inset: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin-top: 20px;
+  }
+  .hero__float-card {
+    position: static;
+    top: auto; right: auto; left: auto;
+    animation: none;     /* floating is meaningless once they are in flow */
+    justify-content: center;
+    text-align: center;
+    font-size: 0.82rem;
+    padding: 10px 12px;
+  }
+  /* The fifth spans both columns so the block reads 2-2-1 rather than 2-2 plus
+     an orphan hanging in the left column. */
+  .hero__float-card--blog {
+    grid-column: 1 / -1;
+    justify-self: center;
+    min-width: 62%;
+  }
 }
 @media (max-width: 520px) {
   body.sitestaffr-landing-page .hero__actions {
