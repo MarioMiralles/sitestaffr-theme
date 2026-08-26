@@ -193,7 +193,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and 100 text-chat messages per day, with no credit card required. Paid plans are $29/month (Starter: 100 voice minutes), $69/month (Business: 300 voice minutes), and $129/month (Pro: 600 voice minutes). Every paid plan includes unlimited AI text chat with no per-conversation fees, so only voice is metered. Every plan also includes AI-written blog posts each month, from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $20 for 60 minutes, and they never expire.',
+            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and unlimited AI text chat, with no credit card required. Paid plans are $29/month (Starter: 100 voice minutes), $69/month (Business: 300 voice minutes), and $129/month (Pro: 600 voice minutes). Every plan includes unlimited AI text chat with no per-conversation fees, so only voice is metered. Every plan also includes AI-written blog posts each month, from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $20 for 60 minutes, and they never expire.',
         ),
         array(
             'question' => 'Does SiteStaffr work with my WordPress site?',
@@ -904,7 +904,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </div>
           <ul class="price-tier__features">
             <li>2 AI voices</li>
-            <li>100 text messages/day</li>
+            <li>Unlimited text chat</li>
             <li>No credit card required</li>
           </ul>
           <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>

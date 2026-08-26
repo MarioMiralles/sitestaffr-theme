@@ -58,7 +58,7 @@ $site_name = get_bloginfo( 'name' );
 			<h1 class="legal-page__title">Terms of Service</h1>
 			<p class="legal-page__meta">
 				<strong>Effective Date:</strong> August 11, 2026<br>
-				<strong>Last Updated:</strong> August 14, 2026
+				<strong>Last Updated:</strong> August 26, 2026
 			</p>
 			<p class="legal-page__meta"><em>This update brings the Service description up to date &mdash; SiteStaffr now includes AI text chat, blog content generation, and AI visibility tracking alongside the original voice widget &mdash; and documents the fair-use protections that already apply to text chat. It adds no new restriction on how you use the Service.</em></p>
 
@@ -161,10 +161,10 @@ $site_name = get_bloginfo( 'name' );
 				<p>We reserve the right to suspend or terminate accounts that violate these terms, with or without notice depending on severity.</p>
 
 				<h3>Fair Use of Unlimited Text Chat</h3>
-				<p>Paid plans include unlimited AI text chat for normal business use. &ldquo;Unlimited&rdquo; means we do not meter your text conversations or charge per message &mdash; it does not mean the Service will process an unbounded volume of automated traffic.</p>
+				<p>Every plan, including the free 30-day trial, includes unlimited AI text chat for normal business use. &ldquo;Unlimited&rdquo; means we do not meter your text conversations or charge per message &mdash; it does not mean the Service will process an unbounded volume of automated traffic.</p>
 				<p>To keep the Service fast and available for everyone, we apply the following fair-use protections to text chat:</p>
 				<ul>
-					<li><strong>Daily volume:</strong> we may limit a site to approximately <strong>2,000 messages per day</strong> (Eastern time). Free trial accounts are limited to <strong>100 messages per day</strong>.</li>
+					<li><strong>Daily volume:</strong> we may limit a site to approximately <strong>2,000 messages per day</strong> (Eastern time).</li>
 					<li><strong>Bursts:</strong> we may temporarily slow or pause text chat on a site that sends an unusually large number of messages in a short period.</li>
 					<li><strong>Conversation length:</strong> individual conversations may be brought to a close after an extended exchange.</li>
 				</ul>
