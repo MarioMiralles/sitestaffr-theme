@@ -781,135 +781,127 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <!-- ========== SECTION 5: WHAT YOU GET ========== -->
-<section class="what-you-get" id="demo">
-  <div class="container">
+<?php /* SECTION 4 — Your morning. Light again; the dark block ended with section 3.
+
+         THE RECAP DOCUMENT THAT USED TO BE HERE IS DELETED, and that is the largest
+         length saving on the page — achieved by removing a duplicate rather than by
+         cutting content.
+
+         Section 3 now shows a recap ASSEMBLING as the conversation plays. This section
+         then showed the same artifact again, static, one screen later. That is a
+         downgrade repeat: the second showing can only be less interesting than the first.
+
+           section 3 = ONE conversation, seen happening.
+           section 4 = THREE conversations, seen accumulated.
+
+         Singular to plural is an escalation instead of a repeat, and it gives this
+         section the one argument section 3 structurally cannot make: you did not get a
+         lead, you got three, and you were asleep for all of them.
+
+         The bridge line went with the document ("Here is what the 2:14 AM one looked
+         like when you opened it") — it pointed at the thing that no longer exists. */ ?>
+<section class="block what-you-get" id="your-morning">
+  <div class="block__inner">
     <div class="what-you-get__header">
-      <span class="section-label" id="demo-label">After Every Conversation</span>
-      <h2>A Complete Report, Delivered to Your Inbox</h2>
+      <span class="section-label">Your Morning</span>
+      <?php /* The strongest heading on the page. Do not rewrite it. */ ?>
+      <h2>You Were Asleep. Your Website Wasn&rsquo;t.</h2>
+      <?php /* THE SUBTITLE IS LOAD-BEARING and was cut once before for looking like
+               filler. It actively guards against the reading that leads queue up and
+               get handled at opening time — "answered within seconds and sent to you
+               the moment it ended" is the whole product claim, and without it an inbox
+               labelled "Overnight" implies exactly the opposite. */ ?>
       <p class="what-you-get__subtitle">
-        Automatically capture visitor conversations, summaries, and transcripts, all in one clean, shareable document.
+        Each of these was answered within seconds and sent to you the moment it ended. Nothing waited for opening time.
       </p>
     </div>
 
-    <div class="what-you-get__showcase">
-      <div class="what-you-get__layout">
-        <!-- Left callouts -->
-        <div class="what-you-get__callouts what-you-get__callouts--left">
-          <div class="what-you-get__callout what-you-get__callout--recap">
-            <div class="what-you-get__callout-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            </div>
-            <h3 class="what-you-get__callout-title">Conversation Recap</h3>
-            <p class="what-you-get__callout-desc">Instantly summarizes what the visitor needed</p>
-          </div>
-          <div class="what-you-get__callout what-you-get__callout--followup">
-            <div class="what-you-get__callout-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            </div>
-            <h3 class="what-you-get__callout-title">Actionable Follow-Up</h3>
-            <p class="what-you-get__callout-desc">Know exactly what to do next</p>
-          </div>
-        </div>
+    <?php
+    /* THE INBOX IS THE EVIDENCE, AND IT IS WHERE THE CLOCK IDEA LANDS. Mario asked
+       about a large clock or a 24/7 symbol behind the hero robot. Wrong slot — the
+       hero's job is identity — but the right instinct, and the better version is not a
+       clock at all: it is A REAL TIMESTAMP ON A REAL THING. "6:03 AM" on a captured
+       lead does concretely what a clock face gestures at.
 
-        <!-- The document -->
-        <div class="what-you-get__doc-wrapper">
-          <div class="what-you-get__doc">
+       ⚠️ NEWEST FIRST, WHICH PUTS THE OPEN ONE IN THE MIDDLE. An inbox sorts 6:03 AM /
+       2:14 AM / 11:47 PM. Do not reorder to put the highlighted row on top: a list that
+       sorts wrongly stops reading as an inbox, and the realism is the entire argument.
+       The middle row being the open one is what a real morning looks like.
 
-            <!-- Document header -->
-            <div class="what-you-get__doc-header">
-              <img class="what-you-get__doc-logo-img" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logo-240.webp' ); ?>" alt="SiteStaffr" width="240" height="72">
-              <span class="what-you-get__doc-print-btn">Print / Download PDF</span>
-            </div>
-
-            <!-- Business name heading -->
-            <div class="what-you-get__doc-business">Maggie&rsquo;s Cakes</div>
-
-            <!-- Conversation Recap -->
-            <div class="what-you-get__doc-section what-you-get__doc-recap">
-              <div class="what-you-get__doc-section-header">
-                <strong>Conversation Recap</strong>
-                <span>March 27, 2026 11:40 AM EDT</span>
-              </div>
-              <p><strong>Sarah</strong> reached out to inquire about ordering a custom birthday cake for her daughter&rsquo;s 7th birthday party. She&rsquo;s looking for a two-tier unicorn theme cake for 25 guests.</p>
-              <ul>
-                <li>Name: Sarah Mitchell</li>
-                <li>Phone: <a class="what-you-get__doc-link" href="tel:+15551234567">(555) 123-4567</a></li>
-                <li>Reason for contact: Custom birthday cake order inquiry</li>
-              </ul>
-              <p class="what-you-get__doc-followup"><strong>Suggested follow-up:</strong> Call Sarah back to confirm cake design details, discuss pricing for a two-tier unicorn cake, and schedule the pickup date for April 12th.</p>
-            </div>
-
-            <!-- Conversation Transcript -->
-            <div class="what-you-get__doc-section what-you-get__doc-transcript">
-              <div class="what-you-get__doc-section-header">
-                <strong>Conversation Transcript</strong>
-                <span>2:14</span>
-              </div>
-
-              <div class="what-you-get__doc-messages">
-                <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:40:03 AM</div>
-                  <p>Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?</p>
-                </div>
-                <div class="what-you-get__doc-msg what-you-get__doc-msg--visitor">
-                  <div class="what-you-get__doc-msg-avatar">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
-                  </div>
-                  <div class="what-you-get__doc-msg-body">
-                    <div class="what-you-get__doc-msg-meta"><strong>Visitor</strong> 11:40:10 AM</div>
-                    <p>Hi! I need to order a birthday cake for my daughter. She&rsquo;s turning 7 and wants a unicorn theme.</p>
-                  </div>
-                </div>
-                <div class="what-you-get__doc-msg what-you-get__doc-msg--ai">
-                  <div class="what-you-get__doc-msg-meta"><strong>AI</strong> 11:40:12 AM</div>
-                  <p>That sounds wonderful! We&rsquo;d love to help with a unicorn cake. How many guests are you expecting? And do you have a date in mind?</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Bottom fade overlay -->
-            <div class="what-you-get__doc-fade"></div>
-          </div>
-        </div>
-
-        <!-- Right callouts -->
-        <div class="what-you-get__callouts what-you-get__callouts--right">
-          <div class="what-you-get__callout what-you-get__callout--transcript">
-            <div class="what-you-get__callout-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
-            </div>
-            <h3 class="what-you-get__callout-title">Full Transcript</h3>
-            <p class="what-you-get__callout-desc">See every message, exactly as it happened</p>
-          </div>
-          <div class="what-you-get__callout what-you-get__callout--instant">
-            <div class="what-you-get__callout-icon">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-            </div>
-            <h3 class="what-you-get__callout-title">Delivered Instantly</h3>
-            <p class="what-you-get__callout-desc">Generated and ready within seconds</p>
-          </div>
-        </div>
+       ⚠️ ONE BUSINESS, THREE LEADS. An inbox belongs to one owner. Do not turn these
+       three rows into three different industries to show range — that turns a believable
+       morning into a brochure, and the section stops being evidence. */
+    ?>
+    <div class="morning-inbox">
+      <div class="morning-inbox__chrome">
+        <span class="morning-inbox__label">Overnight &mdash; Maggie&rsquo;s Cakes</span>
+        <span class="morning-inbox__count">3 new leads</span>
       </div>
-
-      <?php // BELOW the document, not beside it. The four callouts describe what is IN the
-      // report; this is what happens NEXT. As a fifth item in a callout column it read as a
-      // peer of things it is not, left the right column hanging well below the left, and was
-      // the only bordered, full-colour element on a page of borderless teal annotations. ?>
-      <a class="what-you-get__crm" href="<?php echo esc_url( home_url( '/salesforce/' ) ); ?>">
-        <img class="what-you-get__crm-logo"
-             src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/logos/logo-salesforce.png' ); ?>"
-             alt="Salesforce" width="84" height="59" loading="lazy" decoding="async">
-        <span class="what-you-get__crm-text">
-          <?php // Addressed to people who ALREADY have Salesforce. Opening with a question only a
-          // Salesforce owner answers yes to does the segmenting on its own: everyone else reads
-          // one line and moves on, without the copy having to reassure them, which is what made
-          // the previous version ("Optional... Not a Salesforce user?") read as defensive.
-          // Both claims already appear in this page's FAQ and on /salesforce/. ?>
-          <span class="what-you-get__crm-title">Already using Salesforce?</span>
-          <span class="what-you-get__crm-line">Connect your org in about a minute and qualified leads land there automatically. Included on every plan.</span>
-        </span>
-      </a>
+      <ul class="morning-inbox__list">
+        <li class="morning-inbox__item">
+          <span class="morning-inbox__time">6:03 AM</span>
+          <span class="morning-inbox__who">Tom Byrne</span>
+          <span class="morning-inbox__what">Gluten-free cupcakes, 40 for Friday</span>
+          <span class="morning-inbox__tag">Lead captured</span>
+        </li>
+        <li class="morning-inbox__item morning-inbox__item--open" aria-current="true">
+          <span class="morning-inbox__time">2:14 AM</span>
+          <span class="morning-inbox__who">Sarah Mitchell</span>
+          <span class="morning-inbox__what">Two-tier unicorn cake, 25 guests, April 12</span>
+          <span class="morning-inbox__tag">Lead captured</span>
+        </li>
+        <li class="morning-inbox__item">
+          <span class="morning-inbox__time">11:47 PM</span>
+          <span class="morning-inbox__who">Priya Raman</span>
+          <span class="morning-inbox__what">Wedding tasting &mdash; are you open Sundays?</span>
+          <span class="morning-inbox__tag">Lead captured</span>
+        </li>
+      </ul>
     </div>
+
+    <?php /* THE FOUR CALLOUTS BECOME A CARDS ROW UNDER THE INBOX. They were set as two
+             right-aligned on the left of the document and two left-aligned on the right,
+             with the right pair floating above a large gap — a layout that only made
+             sense as annotations flanking the artifact they pointed at. With the
+             document gone they have nothing to flank, so they become what they always
+             were: four short claims about how the recap reaches you. */ ?>
+    <div class="block-cards__grid what-you-get__callouts" style="--cards: 4;">
+      <div class="what-you-get__callout">
+        <h3 class="what-you-get__callout-title">Sent in Seconds</h3>
+        <p class="what-you-get__callout-desc">It reaches your inbox while the visitor is still on your site.</p>
+      </div>
+      <?php /* KEEP THIS ONE INTACT. Nothing else on the page says that conversations
+               which did NOT turn into a lead are still reported, and that is the
+               difference between a lead tool and a record of everything that happened. */ ?>
+      <div class="what-you-get__callout">
+        <h3 class="what-you-get__callout-title">Every Conversation</h3>
+        <p class="what-you-get__callout-desc">Voice and text alike, whether or not it turned into a lead.</p>
+      </div>
+      <div class="what-you-get__callout">
+        <h3 class="what-you-get__callout-title">One Link to Share</h3>
+        <p class="what-you-get__callout-desc">Send the whole thing to whoever is doing the job.</p>
+      </div>
+      <?php /* ⚠️ REWORDED. This read "No dashboard to log into." The plugin SHIPS a
+               Dashboard with a Follow-ups queue and it is a feature we sell, so as
+               written the card denied the existence of a real feature in order to make
+               a convenience point. The claim intended was always "you don't have to",
+               which is both true and a better sell. */ ?>
+      <div class="what-you-get__callout">
+        <h3 class="what-you-get__callout-title">Nothing to Check</h3>
+        <p class="what-you-get__callout-desc">The details come to where you already work. There&rsquo;s a dashboard too, if you want it.</p>
+      </div>
+    </div>
+
+    <?php /* THE SALESFORCE BAND MOVED OUT, to the FAQ in section 9.
+
+             It sat directly under a story about a bakery owner asleep at 2 AM. Maggie's
+             Cakes does not have Salesforce, and an enterprise CRM logo in the middle of
+             that story is the same register problem testers disliked in the "connect
+             your org" line. It also leaked to /salesforce/ in the same tab, which breaks
+             the one-exit rule on the section immediately before proof and pricing.
+
+             "Does it fit my stack" is a buying question, so it belongs in the FAQ where
+             buying questions are answered — see the CRM entry in $faq_items. */ ?>
   </div>
 </section>
 
