@@ -987,3 +987,195 @@ if (langExpandBtn) {
 }
 
 
+
+/* ===================================================================
+   SECTION 3 — "See it answer": the live-fill demo.
+
+   THE ONE RULE THIS FILE MUST NOT BREAK: the panels are rendered FULLY
+   POPULATED by PHP. This script only empties them when it is certain it is
+   going to refill them. If the script never runs, throws, or the visitor
+   prefers reduced motion, the section stays complete and readable.
+
+   That is not defensiveness for its own sake — the reveal system deleted
+   earlier in this redesign failed in production for exactly this reason:
+   content defaulted to invisible and depended on decorative JS to restore it.
+
+   All script, timing and copy come from demo-timings.js. Nothing here
+   hardcodes a timestamp or a line of dialogue, so landing the real recording
+   is a change to that file alone.
+   =================================================================== */
+(function () {
+  var DEMO = window.SITESTAFFR_DEMO;
+  var root = document.querySelector('.see-it');
+  if (!DEMO || !root) return;
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;   // leave the fully-rendered PHP output exactly as it is
+
+  var thread    = root.querySelector('[data-see-it-thread]');
+  var fields    = root.querySelector('[data-see-it-fields]');
+  var summary   = root.querySelector('[data-see-it-summary]');
+  var followUp  = root.querySelector('[data-see-it-followup]');
+  var toast     = root.querySelector('[data-see-it-toast]');
+  var caption   = root.querySelector('[data-see-it-caption]');
+  var transport = root.querySelector('[data-see-it-transport]');
+  var playBtn   = root.querySelector('[data-see-it-play]');
+  var fillBar   = root.querySelector('[data-see-it-fill]');
+  var timeEl    = root.querySelector('[data-see-it-time]');
+  var business  = root.querySelector('[data-see-it-business]');
+  var tabs      = Array.prototype.slice.call(root.querySelectorAll('.see-it__tab'));
+
+  if (!thread || !fields || !transport || !playBtn) return;
+
+  var mode  = DEMO.DEFAULT_MODE || 'text';
+  var timer = null;
+  var t0    = 0;
+  var playing = false;
+
+  function data() { return DEMO[mode]; }
+
+  function fmt(sec) {
+    var m = Math.floor(sec / 60), s = Math.floor(sec % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  }
+
+  /* Empty the panels. Only ever called once we know we can drive them. */
+  function clear() {
+    thread.innerHTML = '';
+    fields.innerHTML = '';
+    [summary, followUp, toast].forEach(function (el) {
+      if (el) el.classList.remove('is-in', 'is-shimmer');
+    });
+    if (caption) caption.hidden = false;
+  }
+
+  function addLine(turn, index) {
+    if (!turn.text) return null;
+    var p = document.createElement('p');
+    p.className = 'see-it__line see-it__line--' + (turn.who === 'ai' ? 'ai' : 'visitor');
+    var who = document.createElement('span');
+    who.className = 'see-it__who';
+    who.textContent = turn.who === 'ai' ? 'SiteStaffr' : 'Visitor';
+    p.appendChild(who);
+    p.appendChild(document.createTextNode(turn.text));
+    p.dataset.turn = String(index);
+    thread.appendChild(p);
+    thread.scrollTop = thread.scrollHeight;
+    return p;
+  }
+
+  /* Label and value arrive TOGETHER, as a pair. There is no pre-drawn skeleton,
+     because the product has no fixed recap schema to draw. */
+  function addField(fill, sourceLine) {
+    var wrap = document.createElement('div');
+    wrap.className = 'see-it__field is-in';
+    var dt = document.createElement('dt');
+    dt.textContent = fill.label;
+    var dd = document.createElement('dd');
+    dd.textContent = fill.value;
+    wrap.appendChild(dt);
+    wrap.appendChild(dd);
+    fields.appendChild(wrap);
+
+    /* THE FLASH IS WHAT MAKES THIS AN ARGUMENT RATHER THAN AN ANIMATION. Without
+       linking the filled field back to the line that produced it, the right panel
+       just looks like it is moving for decoration. */
+    if (sourceLine) {
+      sourceLine.classList.add('is-flash');
+      setTimeout(function () { sourceLine.classList.remove('is-flash'); }, 900);
+    }
+  }
+
+  function reveal(el, shimmerMs) {
+    if (!el) return;
+    el.classList.add('is-shimmer');
+    setTimeout(function () {
+      el.classList.remove('is-shimmer');
+      el.classList.add('is-in');
+    }, shimmerMs || 900);
+  }
+
+  function stop() {
+    playing = false;
+    clearInterval(timer);
+    timer = null;
+    root.classList.remove('is-playing');
+    playBtn.setAttribute('aria-label', 'Play the conversation');
+  }
+
+  function tick() {
+    var d = data();
+    var now = (Date.now() - t0) / 1000;
+
+    d.turns.forEach(function (turn, i) {
+      if (turn._done || now < turn.t) return;
+      turn._done = true;
+      var line = addLine(turn, i);
+      if (turn.fill) addField(turn.fill, line);
+    });
+
+    if (d.summary  && !d.summary._done  && now >= d.summary.t)  { d.summary._done  = true; reveal(summary); }
+    if (d.followUp && !d.followUp._done && now >= d.followUp.t) { d.followUp._done = true; reveal(followUp); }
+    if (d.toast    && !d.toast._done    && now >= d.toast.t)    { d.toast._done    = true; reveal(toast, 200); }
+
+    var pct = Math.min(100, (now / d.duration) * 100);
+    if (fillBar) fillBar.style.width = pct + '%';
+    if (timeEl)  timeEl.textContent = fmt(Math.min(now, d.duration)) + ' / ' + fmt(d.duration);
+
+    if (now >= d.duration) stop();
+  }
+
+  function resetProgress() {
+    var d = data();
+    d.turns.forEach(function (t) { delete t._done; });
+    if (d.summary)  delete d.summary._done;
+    if (d.followUp) delete d.followUp._done;
+    if (d.toast)    delete d.toast._done;
+    if (fillBar) fillBar.style.width = '0%';
+    if (timeEl)  timeEl.textContent = '0:00 / ' + fmt(d.duration);
+  }
+
+  function play() {
+    if (playing) { stop(); return; }
+    clear();
+    resetProgress();
+    /* The caption is an at-rest instruction. Leaving it up during playback means
+       the panel reads "Press play" while it is already playing. */
+    if (caption) caption.hidden = true;
+    playing = true;
+    t0 = Date.now();
+    root.classList.add('is-playing');
+    playBtn.setAttribute('aria-label', 'Pause the conversation');
+    timer = setInterval(tick, 100);
+    tick();
+  }
+
+  function setMode(next) {
+    if (next === mode) return;
+    var d = DEMO[next];
+    if (!d || !d.enabled) return;      // the voice tab is disabled until the recording exists
+    stop();
+    mode = next;
+    tabs.forEach(function (tab) {
+      var on = tab.dataset.mode === mode;
+      tab.classList.toggle('see-it__tab--active', on);
+      tab.setAttribute('aria-selected', String(on));
+    });
+    if (business) business.textContent = d.business;
+    clear();
+    resetProgress();
+  }
+
+  tabs.forEach(function (tab) {
+    tab.addEventListener('click', function () { setMode(tab.dataset.mode); });
+  });
+  playBtn.addEventListener('click', play);
+
+  /* Everything above is wired. Only NOW is it safe to swap the fully-rendered
+     panels for the empty, playable version — so a throw anywhere earlier leaves
+     the reader with a complete section rather than two empty boxes. */
+  transport.hidden = false;
+  root.classList.add('is-interactive');
+  clear();
+  resetProgress();
+})();

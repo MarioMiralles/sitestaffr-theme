@@ -586,196 +586,157 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <!-- ========== HEAR IT WORK: AUDIO DEMO (relocated from hero) ========== -->
-<section class="lead-demo" id="live-demo">
-  <div class="lead-demo__bg" aria-hidden="true"></div>
-  <div class="container">
-    <div class="lead-demo__header">
-      <span class="section-label">Your AI Hire in Action</span>
-      <h2>A Missed Call Turned Into a Booked Job</h2>
-      <p class="lead-demo__subtitle">It&rsquo;s 9 PM. A homeowner has a leaking kitchen pipe. Your AI hire picks up, gets the details, and delivers a full recap to your inbox before you even check your phone.</p>
+<?php /* SECTION 3 — the second half of the dark block. Shares section 2's background, so
+         there is deliberately no seam between them.
+
+         REPLACES TWO SECTIONS: "A Missed Call Turned Into a Booked Job" (lead-demo) and
+         "Voice & Chat" (voice-text-section). Both demoed the product; together they said
+         it twice and neither showed the payoff arriving.
+
+         ⚠️ THE OLD HEADING HAD TO GO AND IT MATTERS MORE NOW. "A Missed Call Turned Into
+         a Booked Job" — and its sibling "Hear It Take a Call" — read unmistakably as
+         "this answers my phone". The product has no phone line; the readme leads with
+         "No phone lines." With "receptionist" in the H1 that misreading is the single
+         most likely misunderstanding of the whole positioning, and it also throws away
+         the real differentiator: the visitor talks ON YOUR WEBSITE, with no number to
+         dial and nothing to install.
+
+         It also books nothing. The conversation ends with details captured and a human
+         following up, because that is what the product does. A demo that books something
+         is a demo of a product we do not sell. */ ?>
+<section class="block block--dark block--tight see-it" id="live-demo">
+  <div class="block__inner">
+    <div class="see-it__header">
+      <span class="section-label">See It Answer</span>
+      <h2>Hear a Visitor Talk to a Website</h2>
+      <p class="see-it__subtitle">One types, one talks. Same AI, same answers.</p>
     </div>
-    <div class="lead-demo__card">
-      <?php
-      get_template_part(
-          'template-parts/hero-audio-demo',
-          null,
-          array(
-              'layout'        => 'stacked',
-              'recap_variant' => 'card',
-              'recap_pinned'  => true,
-              'audio_label'   => 'After-hours call from a homeowner reporting a kitchen leak',
-              'extra_classes' => 'hero-audio-demo hero-audio-demo--preview',
-          )
-      );
-      ?>
-    </div>
-    <div class="lead-demo__steps">
 
-      <div class="lead-demo__step-card">
-        <div class="lead-demo__card-glow" aria-hidden="true"></div>
-        <div class="lead-demo__icon-wrap">
-          <svg class="lead-demo__step-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-          </svg>
-          <span class="lead-demo__step-number">1</span>
-        </div>
-        <h3>Picks Up Instantly</h3>
-        <p>Greets the caller by voice and gathers what they need, 24/7 with no hold music</p>
-        <div class="lead-demo__card-accent" aria-hidden="true"></div>
-      </div>
+    <div class="see-it__panels">
+      <?php /* LEFT: the conversation. The two column labels do the arguing — "On your
+               website" / "In your inbox" states the value exchange in four words and
+               kills the phone-line ambiguity for free. */ ?>
+      <div class="see-it__col">
+        <span class="see-it__col-label">On Your Website</span>
 
-      <div class="lead-demo__connector" aria-hidden="true">
-        <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-          <path d="M0 12h28m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+        <div class="see-it__panel see-it__panel--convo">
+          <?php /* THE TOGGLE ATTACHES TO THE PANEL IT CONTROLS. On the V2 branch these
+                   were chips floating over a street render; with the art gone they were
+                   labels attached to nothing. They only change the conversation, so they
+                   belong to the conversation.
 
-      <div class="lead-demo__step-card">
-        <div class="lead-demo__card-glow" aria-hidden="true"></div>
-        <div class="lead-demo__icon-wrap">
-          <svg class="lead-demo__step-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="8.5" cy="7" r="4"/>
-            <line x1="20" y1="8" x2="20" y2="14"/>
-            <line x1="23" y1="11" x2="17" y2="11"/>
-          </svg>
-          <span class="lead-demo__step-number">2</span>
-        </div>
-        <h3>Captures Every Detail</h3>
-        <p>Name, email, phone, urgency, and exactly what they need. Nothing slips through.</p>
-        <div class="lead-demo__card-accent" aria-hidden="true"></div>
-      </div>
-
-      <div class="lead-demo__connector" aria-hidden="true">
-        <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-          <path d="M0 12h28m0 0l-6-6m6 6l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
-
-      <div class="lead-demo__step-card">
-        <div class="lead-demo__card-glow" aria-hidden="true"></div>
-        <div class="lead-demo__icon-wrap">
-          <svg class="lead-demo__step-icon" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <span class="lead-demo__step-number">3</span>
-        </div>
-        <h3>Delivers Your Recap</h3>
-        <p>A complete lead summary hits your inbox so you can follow up first thing</p>
-        <div class="lead-demo__card-accent" aria-hidden="true"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ========== SECTION 3: VOICE & CHAT ========== -->
-<section class="voice-text-section">
-  <img class="voice-text-section__robot voice-text-section__robot--voice voice-text-section__robot--active"
-       src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-voice.webp' ) ); ?>"
-       alt="" width="1080" height="1350" aria-hidden="true" loading="lazy" decoding="async">
-  <img class="voice-text-section__robot voice-text-section__robot--text"
-       src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-text.webp' ) ); ?>"
-       alt="" width="1080" height="1350" aria-hidden="true" loading="lazy" decoding="async">
-  <div class="voice-text-section__header">
-    <span class="section-label">Two Ways to Connect</span>
-    <h2>Voice &amp; Chat</h2>
-    <p class="voice-text-section__desc">Your visitors choose how they want to communicate. Some prefer typing, others prefer talking, and SiteStaffr handles both with the same AI and the same answers.</p>
-  </div>
-  <div class="container">
-    <div class="voice-text-section__panel">
-      <!-- Mode selector cards -->
-      <div class="voice-text-section__selector">
-        <button class="voice-text-section__card voice-text-section__card--active" data-vt-mode="voice" type="button">
-          <span class="voice-text-section__card-badge">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-              <line x1="12" y1="19" x2="12" y2="23"/>
-              <line x1="8" y1="23" x2="16" y2="23"/>
-            </svg>
-          </span>
-          <span class="voice-text-section__card-title">Voice</span>
-          <span class="voice-text-section__card-desc">Talk with our AI assistant</span>
-        </button>
-        <button class="voice-text-section__card" data-vt-mode="text" type="button">
-          <span class="voice-text-section__card-badge">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-          </span>
-          <span class="voice-text-section__card-title">Text</span>
-          <span class="voice-text-section__card-desc">Type your questions</span>
-        </button>
-      </div>
-
-      <!-- Preview area -->
-      <div class="voice-text-section__preview">
-        <!-- Voice mode preview -->
-        <div class="voice-text-section__mode voice-text-section__mode--voice voice-text-section__mode--active">
-          <div class="voice-text-section__voice-stage">
-            <div class="voice-text-section__mic-ring">
-              <span class="voice-text-section__mic-pulse"></span>
-              <span class="voice-text-section__mic-pulse voice-text-section__mic-pulse--delayed"></span>
-              <svg class="voice-text-section__mic-svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <div class="voice-text-section__waveform" aria-hidden="true">
-              <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
-            </div>
-            <span class="voice-text-section__listening">Listening&hellip;</span>
+                   Both labels are THE VISITOR'S QUESTION, not one question and one
+                   description — the tabs are two examples of the same thing, and
+                   labelling them asymmetrically implied they were different features. */ ?>
+          <div class="see-it__tabs" role="tablist" aria-label="Choose a conversation">
+            <button class="see-it__tab" role="tab" type="button"
+                    id="see-it-tab-voice" aria-controls="see-it-convo"
+                    data-mode="voice" aria-selected="false" disabled>
+              <span class="see-it__tab-mode">Voice</span>
+              <span class="see-it__tab-q">&ldquo;My check engine light came on&rdquo;</span>
+              <span class="see-it__tab-soon">Recording coming soon</span>
+            </button>
+            <button class="see-it__tab see-it__tab--active" role="tab" type="button"
+                    id="see-it-tab-text" aria-controls="see-it-convo"
+                    data-mode="text" aria-selected="true">
+              <span class="see-it__tab-mode">Text</span>
+              <span class="see-it__tab-q">&ldquo;There are ants all over my kitchen&rdquo;</span>
+            </button>
           </div>
-          <div class="voice-text-section__transcript">
-            <div class="voice-text-section__msg voice-text-section__msg--visitor">
-              <span class="voice-text-section__msg-dot"></span>
-              <div class="voice-text-section__msg-content">
-                <span class="voice-text-section__msg-who">Visitor</span>
-                Hi, I&rsquo;d like to schedule an appointment for next week.
-              </div>
+
+          <?php /* Light browser/widget chrome, so "on a website" is SHOWN rather than
+                   claimed. Decorative only — hidden from the a11y tree. */ ?>
+          <div class="see-it__chrome" aria-hidden="true">
+            <span class="see-it__dot"></span><span class="see-it__dot"></span><span class="see-it__dot"></span>
+            <span class="see-it__url" data-see-it-business>Copperleaf Pest Control</span>
+          </div>
+
+          <div class="see-it__convo" id="see-it-convo" role="tabpanel"
+               aria-labelledby="see-it-tab-text" data-see-it-thread>
+            <?php /* RENDERED FULLY POPULATED IN PHP. JS empties it on load only when it
+                     is actually going to animate it. An empty panel that fills only when
+                     a script runs re-creates exactly the failure the reveal system caused
+                     in production. With JS off, or under prefers-reduced-motion, the
+                     whole conversation and the whole recap are simply here. */ ?>
+            <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>Copperleaf Pest Control &mdash; what are you seeing?</p>
+            <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>Ants all over the kitchen counter, started today.</p>
+            <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>That usually means a trail in from outside. Is it a house or an apartment?</p>
+            <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>A house, single storey.</p>
+            <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>We can get someone out to look. What name should I put down?</p>
+            <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>Priya Raman.</p>
+            <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>Thanks Priya &mdash; best email or number to reach you?</p>
+            <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>priya.raman@example.com</p>
+            <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>Got it. Someone will follow up to arrange a visit.</p>
+          </div>
+
+          <?php /* The play button is the largest interactive element in the section, and
+                   the scrubber is the hero soundwave motif reused as a progress bar.
+                   Browsers will not autoplay audio, so nothing animates until this is
+                   pressed — which is fine, it makes the button the gateway.
+
+                   `hidden` until JS removes it: with no script there is nothing to play,
+                   and a dead play button is worse than none. */ ?>
+          <div class="see-it__transport" data-see-it-transport hidden>
+            <button class="see-it__play" type="button" data-see-it-play
+                    aria-label="Play the conversation">
+              <svg class="see-it__play-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7,4 20,12 7,20"/></svg>
+              <svg class="see-it__pause-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+            </button>
+            <div class="see-it__scrub" data-see-it-scrub>
+              <span class="see-it__scrub-fill" data-see-it-fill></span>
             </div>
-            <div class="voice-text-section__msg voice-text-section__msg--ai">
-              <span class="voice-text-section__msg-dot"></span>
-              <div class="voice-text-section__msg-content">
-                <span class="voice-text-section__msg-who">AI Agent</span>
-                Of course! I can help with that. What day works best for you?
-              </div>
-            </div>
+            <span class="see-it__time" data-see-it-time>0:00 / 0:54</span>
           </div>
         </div>
 
-        <!-- Text mode preview -->
-        <div class="voice-text-section__mode voice-text-section__mode--text">
-          <div class="voice-text-section__chat">
-            <div class="voice-text-section__chat-row voice-text-section__chat-row--ai">
-              <span class="voice-text-section__chat-avatar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-              </span>
-              <div class="voice-text-section__chat-bubble">Hi! How can I help you today?</div>
-            </div>
-            <div class="voice-text-section__chat-row voice-text-section__chat-row--visitor">
-              <div class="voice-text-section__chat-bubble">Do you offer free consultations?</div>
-            </div>
-            <div class="voice-text-section__chat-row voice-text-section__chat-row--ai">
-              <span class="voice-text-section__chat-avatar">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
-              </span>
-              <div class="voice-text-section__chat-bubble">Yes! We offer a complimentary 15-minute consultation. Would you like to schedule one?</div>
-            </div>
-          </div>
-          <div class="voice-text-section__input-bar">
-            <span class="voice-text-section__input-text">Type a message&hellip;</span>
-            <svg class="voice-text-section__send-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          </div>
-        </div>
+        <?php /* Connects the recording to the dogfood. The live widget on this site is
+                 better than any recording, because a visitor can verify it themselves. */ ?>
+        <p class="see-it__dogfood">This site runs it too. Ask it anything.</p>
       </div>
 
-      <!-- Tagline -->
-      <p class="voice-text-section__tagline">Same AI. Same knowledge. Their choice.</p>
-    </div>
+      <?php /* RIGHT: the recap. Mario's idea and the best one in the session — it
+               assembles as the conversation plays, which makes the causal link visible:
+               you watch the visitor give their email, and the email appears. */ ?>
+      <div class="see-it__col">
+        <span class="see-it__col-label">In Your Inbox</span>
 
+        <div class="see-it__panel see-it__panel--recap" data-see-it-recap>
+          <div class="see-it__recap-head">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+            Conversation Recap
+          </div>
+
+          <dl class="see-it__fields" data-see-it-fields>
+            <?php /* ⚠️ NO FIXED SCHEMA. Label and value materialise together as a PAIR.
+                     The product builds each recap intelligently — sometimes a name only,
+                     sometimes a name and an email, sometimes a name and a phone. A
+                     pre-drawn skeleton of greyed labels would be a picture of a form the
+                     product does not have. The voice thread captures a PHONE where this
+                     one captures an EMAIL, and that difference is the point. */ ?>
+            <div class="see-it__field"><dt>Reason for visit</dt><dd>Ants in the kitchen</dd></div>
+            <div class="see-it__field"><dt>Property</dt><dd>Single-storey house</dd></div>
+            <div class="see-it__field"><dt>Name</dt><dd>Priya Raman</dd></div>
+            <div class="see-it__field"><dt>Email</dt><dd>priya.raman@example.com</dd></div>
+          </dl>
+
+          <?php /* The summary and follow-up genuinely ARE generated after the conversation
+                   ends, so they arrive last, after a brief shimmer. That is the one part
+                   of the sequence that mirrors how the product actually works. */ ?>
+          <div class="see-it__gen" data-see-it-summary>
+            <span class="see-it__gen-label">Summary</span>
+            <p>Ant trail in the kitchen of a single-storey house. Wants someone to come out.</p>
+          </div>
+          <div class="see-it__gen" data-see-it-followup>
+            <span class="see-it__gen-label">Suggested follow-up</span>
+            <p>Email Priya to arrange a visit.</p>
+          </div>
+
+          <p class="see-it__toast" data-see-it-toast>&#10003; Recap emailed to you</p>
+        </div>
+
+        <p class="see-it__caption" data-see-it-caption hidden>Press play &mdash; this fills in as the conversation happens.</p>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -300,10 +300,26 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
 
 	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat ) {
+		/* Section 3's demo script and timings. Landing page only — no other template has
+		   the panels, and loading the timings elsewhere would be dead weight.
+
+		   It is a SEPARATE FILE from site.js on purpose: it is the one thing that changes
+		   when Mario's auto-repair recording lands, and keeping it separate means that
+		   change never touches the file driving the nav, the FAQ and the accordion. */
+		if ( $is_landing ) {
+			wp_enqueue_script(
+				'sitestaffr-demo-timings',
+				sitestaffr_asset_url( 'assets/js/demo-timings.js' ),
+				array(),
+				null,
+				true
+			);
+		}
+
 		wp_enqueue_script(
 			'sitestaffr-website-script',
 			sitestaffr_asset_url( 'assets/js/site.js' ),
-			array(),
+			$is_landing ? array( 'sitestaffr-demo-timings' ) : array(),
 			null,
 			true
 		);
