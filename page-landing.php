@@ -741,40 +741,99 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 <!-- ========== SECTION 4: 57+ LANGUAGES ========== -->
-<section class="lang-section">
-  <div class="lang-section__greetings" aria-hidden="true">
-    <span>Hola</span><span>Bonjour</span><span>&#20320;&#22909;</span><span>Ol&aacute;</span><span>Ciao</span><span>&#50504;&#45397;</span><span>Namaste</span><span>Merhaba</span><span>&#1605;&#1585;&#1581;&#1576;&#1575;</span><span>Xin ch&agrave;o</span>
-  </div>
-  <div class="container">
-    <div class="lang-section__inner">
-      <div class="lang-section__lead">
-        <div class="lang-section__icon">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+<?php
+/* SECTION 5 — Speaks their language.
+
+   THE CROWD RENDER IS DELETED. It was the best-looking image on the site and it still
+   had to go:
+
+     1. In the V3 order it would be a dark full-bleed band between two light sections,
+        which is a stripe, and it put the abandoned painterly style directly against the
+        glossy cyan robot.
+     2. It was the maintenance trap this whole review was called to fix — twelve
+        hand-measured --x/--y percentages positioned over the artwork, where a code
+        comment recorded that swapping the image "silently invalidates all twelve", and
+        that they had already been re-measured twice.
+     3. Most bubbles did not render: twelve specced, four visible at 1440.
+     4. About 250px of it was wet pavement; people occupied a 200px band in a ~900px
+        section.
+     5. It carried TWO LISTS OF LANGUAGES that did not agree — pills saying Spanish /
+        Mandarin / French, bubbles saying Hola / Hallo / Xin chào.
+
+   THE REPLACEMENT COSTS NO NEW ART. robot-languages.webp was generated for this exact
+   slot on 2026-08-25, committed, and never placed.
+
+   WHY THE ROBOT ARGUES BETTER THAN THE CROWD. A crowd claims "your visitors are
+   diverse" — true, but not the product claim, and a picture of a street cannot prove it.
+   The robot with a live greeting claims "it speaks them", which is the thing only
+   SiteStaffr can say, and the greeting is a real product surface rather than a stock
+   photograph.
+
+   THE PILLS BECOME THE CONTROL. That collapses the two redundant lists into one thing
+   and adds the interactivity that tested well: click Mandarin, the greeting becomes 你好.
+
+   ⚠️ `lang` ON EVERY GREETING AND `dir="rtl"` ON THE ARABIC. A screen reader switches
+   voice on `lang`; without it a synthesiser reads "Hola" in English phonetics on the one
+   section whose entire subject is other languages. This is not decoration.
+*/
+$lang_greetings = array(
+	array( 'code' => 'es', 'name' => 'Spanish',  'text' => '¡Hola! ¿En qué puedo ayudarte?' ),
+	array( 'code' => 'zh', 'name' => 'Mandarin', 'text' => '你好！有什么可以帮您的吗？' ),
+	array( 'code' => 'fr', 'name' => 'French',   'text' => 'Bonjour ! Comment puis-je vous aider ?' ),
+	array( 'code' => 'ar', 'name' => 'Arabic',   'text' => 'مرحبا! كيف يمكنني مساعدتك؟', 'rtl' => true ),
+	array( 'code' => 'hi', 'name' => 'Hindi',    'text' => 'नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?' ),
+);
+?>
+<section class="block block-split lang-section" id="languages">
+  <div class="block__inner">
+    <div class="block-split__grid">
+      <div class="lang-section__copy">
+        <span class="section-label">Speaks Their Language</span>
+        <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
+        <p class="lang-section__text">
+          Your visitors speak 57+ languages, and so does SiteStaffr. It answers in whatever language they open with.
+        </p>
+
+        <?php /* The greeting bubble. Rendered with the FIRST greeting already in it, so
+                 the section is complete before any script runs. */ ?>
+        <div class="lang-bubble" data-lang-bubble>
+          <p class="lang-bubble__text" lang="es" data-lang-text>¡Hola! ¿En qué puedo ayudarte?</p>
         </div>
-        <div class="lang-section__headline">
-          <h2>SiteStaffr Speaks <em>Their</em> Language.</h2>
-          <p>Your visitors speak 57+ languages, and so does SiteStaffr. Every recap arrives in English, ready for you.</p>
+
+        <?php /* PROMOTED FROM BODY TEXT TO ITS OWN ELEMENT. It closes the owner's
+                 immediate objection — "great, but I can't read Mandarin" — and as a
+                 sentence buried in a paragraph it was doing none of that work. */ ?>
+        <p class="lang-section__english">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Every recap arrives in English, ready for you.
+        </p>
+
+        <?php /* The pills ARE the control, not a second list. With JS off they still
+                 read as the list of supported languages, which is what they were
+                 before — so nothing is lost, only gained. */ ?>
+        <div class="lang-pills" role="group" aria-label="Preview a greeting in another language">
+          <?php foreach ( $lang_greetings as $i => $g ) : ?>
+            <button type="button"
+                    class="lang-pill<?php echo 0 === $i ? ' lang-pill--active' : ''; ?>"
+                    data-lang-code="<?php echo esc_attr( $g['code'] ); ?>"
+                    data-lang-greeting="<?php echo esc_attr( $g['text'] ); ?>"
+                    <?php echo ! empty( $g['rtl'] ) ? 'data-lang-rtl="1"' : ''; ?>
+                    aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>">
+              <?php echo esc_html( $g['name'] ); ?>
+            </button>
+          <?php endforeach; ?>
+          <span class="lang-pill lang-pill--more">+52 more</span>
         </div>
       </div>
-      <div class="lang-section__badges">
-        <span class="lang-section__badge">Spanish</span>
-        <span class="lang-section__badge">Mandarin</span>
-        <span class="lang-section__badge">French</span>
-        <span class="lang-section__badge">Portuguese</span>
-        <span class="lang-section__badge">Arabic</span>
-        <span class="lang-section__badge">Hindi</span>
-        <span class="lang-section__badge">Japanese</span>
-        <span class="lang-section__badge">Korean</span>
-        <span class="lang-section__badge lang-section__badge--more">+50 more</span>
-      </div>
-      <div class="lang-section__expand">
-        <button class="lang-section__expand-btn" type="button" aria-expanded="false">
-          <span class="lang-section__expand-label">How it works</span>
-          <svg class="lang-section__expand-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        </button>
-        <div class="lang-section__detail" aria-hidden="true">
-          <p>SiteStaffr reads and speaks your visitor&rsquo;s preferred language fluently. Whether a caller speaks Spanish, Mandarin, Arabic, or any of 50+ other languages, the AI agent responds naturally in their language. After each conversation, SiteStaffr translates and summarizes everything into a clear English recap delivered to your inbox, so you never miss a lead, regardless of the language barrier.</p>
-        </div>
+
+      <?php /* Robot on the RIGHT. Section 6 puts its artifact on the left so the two
+               alternate, and section 1 and section 11 also carry him on the right —
+               three appearances on the same side make him a motif rather than floating
+               decoration. */ ?>
+      <div class="block-split__art lang-section__art">
+        <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-languages.webp' ) ); ?>"
+             alt="" aria-hidden="true"
+             width="1122" height="1383" loading="lazy" decoding="async">
       </div>
     </div>
   </div>

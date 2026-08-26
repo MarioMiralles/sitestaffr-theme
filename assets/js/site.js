@@ -1179,3 +1179,46 @@ if (langExpandBtn) {
   clear();
   resetProgress();
 })();
+
+/* ===================================================================
+   SECTION 5 — the language pills ARE the control.
+
+   Same resilience rule as section 3: the bubble is rendered with a real
+   greeting already in it by PHP, so with no JS the section still reads as
+   "here is a greeting, and here are the languages we speak". The script only
+   makes the pills switch it.
+   =================================================================== */
+(function () {
+  var pills  = document.querySelectorAll('[data-lang-code]');
+  var text   = document.querySelector('[data-lang-text]');
+  var bubble = document.querySelector('[data-lang-bubble]');
+  if (!pills.length || !text || !bubble) return;
+
+  function select(pill) {
+    pills.forEach(function (p) {
+      p.classList.remove('lang-pill--active');
+      p.setAttribute('aria-pressed', 'false');
+    });
+    pill.classList.add('lang-pill--active');
+    pill.setAttribute('aria-pressed', 'true');
+
+    /* lang AND dir move with the text, not just the string. Setting the greeting
+       without updating lang leaves a screen reader pronouncing Mandarin with
+       English phonetics, on the one section about other languages. */
+    text.textContent = pill.dataset.langGreeting;
+    text.setAttribute('lang', pill.dataset.langCode);
+    if (pill.dataset.langRtl) {
+      text.setAttribute('dir', 'rtl');
+    } else {
+      text.removeAttribute('dir');
+    }
+
+    bubble.classList.remove('is-swap');
+    void bubble.offsetWidth;          // restart the animation on repeat clicks
+    bubble.classList.add('is-swap');
+  }
+
+  pills.forEach(function (pill) {
+    pill.addEventListener('click', function () { select(pill); });
+  });
+})();

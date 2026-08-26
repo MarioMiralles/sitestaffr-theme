@@ -1943,6 +1943,99 @@ body.sitestaffr-landing-page .hero__visual > * {
   .see-it__tab-q { font-size: 0.78rem; }
 }
 
+/* ---- Section 5: speaks their language ---------------------------------
+   The crowd render and its twelve hand-measured --x/--y coordinate variables
+   are gone. Those coordinates were the maintenance trap this review was called
+   to fix: they positioned bubbles over artwork, so swapping the image silently
+   invalidated all twelve, and they had already been re-measured twice. */
+.lang-section { background: var(--warm-white); }
+.lang-section__text { color: var(--text-secondary); margin-top: 14px; }
+
+.lang-bubble {
+  margin-top: 22px;
+  padding: 16px 20px;
+  background: var(--teal-pale);
+  border: 1px solid rgba(0,131,143,0.18);
+  border-radius: var(--radius-lg);
+  border-bottom-left-radius: 4px;   /* speech-bubble tail corner */
+  max-width: 30ch;
+}
+.lang-bubble__text {
+  font-size: 1.05rem;
+  color: var(--teal-deep);
+  font-weight: 500;
+}
+.lang-bubble.is-swap { animation: langSwap 0.32s ease both; }
+@keyframes langSwap {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lang-bubble.is-swap { animation: none; }
+}
+
+/* Promoted from body text to its own element: it answers "great, but I can't
+   read Mandarin", which is the owner's immediate objection to this whole
+   section, and buried in a paragraph it did none of that work. */
+.lang-section__english {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 18px;
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  background: var(--emerald-light);
+  color: #065f46;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.lang-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.lang-pill {
+  padding: 7px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--border-light);
+  background: #fff;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep); }
+.lang-pill--active {
+  background: var(--teal-deep);
+  border-color: var(--teal-deep);
+  color: #fff;
+}
+/* Not a button: it is the count, not a sixth choice. */
+.lang-pill--more {
+  background: transparent;
+  border-style: dashed;
+  color: var(--text-muted);
+}
+
+.lang-section__art img {
+  width: 100%;
+  max-width: 420px;
+  margin-inline: auto;
+  height: auto;
+  /* THE RENDER WAS MADE FOR A DARK SECTION. Its alpha bbox is the full frame and
+     the torso runs opaque and near-black to the bottom edge (sampled: 14 of 41
+     columns still very-dark-opaque at y=1382 of 1383), so on the night-world
+     background it read as the robot dissolving into the dark. Moved onto a light
+     Split it becomes a hard black block sitting on cream.
+
+     The artwork is not wrong and does not need regenerating — it needs the fade
+     the old background was providing for free. Masking the last third restores
+     that, and it costs nothing. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 96%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 96%);
+}
+
 /* ---- The curtain seam -------------------------------------------------
    Sits in the flow between the light hero and the dark section 2. Its own
    background is the hero's, and the path is filled with the dark block colour,
@@ -2433,409 +2526,13 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ========== LANGUAGE SECTION (condensed) ========== */
-.lang-section {
-  padding: clamp(48px, 7vw, 72px) 0;
-  background: linear-gradient(135deg, #003d42 0%, #005a63 100%);
-  position: relative;
-  overflow: hidden;
-}
-.lang-section__greetings {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.lang-section__greetings span {
-  position: absolute;
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 300;
-  color: rgba(224, 247, 250, 0.28);
-  font-size: clamp(1.4rem, 3.5vw, 2.4rem);
-  font-weight: 400;
-  animation: langFloat 24s ease-in-out infinite;
-  white-space: nowrap;
-}
-.lang-section__greetings span:nth-child(1)  { top: 10%; left: 3%;  animation-delay: 0s; }
-.lang-section__greetings span:nth-child(2)  { top: 25%; right: 5%; animation-delay: -3s; }
-.lang-section__greetings span:nth-child(3)  { top: 50%; left: 65%; animation-delay: -7s; }
-.lang-section__greetings span:nth-child(4)  { top: 70%; left: 10%; animation-delay: -11s; }
-.lang-section__greetings span:nth-child(5)  { bottom: 12%; right: 12%; animation-delay: -5s; }
-.lang-section__greetings span:nth-child(6)  { top: 15%; left: 40%; animation-delay: -9s; }
-.lang-section__greetings span:nth-child(7)  { bottom: 25%; left: 50%; animation-delay: -14s; }
-.lang-section__greetings span:nth-child(8)  { top: 40%; left: 20%; animation-delay: -17s; }
-.lang-section__greetings span:nth-child(9)  { bottom: 8%; left: 30%; animation-delay: -2s; }
-.lang-section__greetings span:nth-child(10) { top: 5%; right: 25%; animation-delay: -20s; }
-@keyframes langFloat {
-  0%, 100% { opacity: 0; transform: translateY(4px); }
-  20% { opacity: 1; transform: translateY(0); }
-  80% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(-4px); }
-}
-.lang-section__inner {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-}
-.lang-section__lead {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-  margin-bottom: 24px;
-}
-.lang-section__icon {
-  flex-shrink: 0;
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  background: rgba(31, 182, 204, 0.12);
-  border: 1px solid rgba(31, 182, 204, 0.2);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--teal-light);
-}
-.lang-section__headline {
-  text-align: left;
-}
-.lang-section__headline h2 {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 600;
-  color: #e8f8fa;
-  margin-bottom: 6px;
-}
-.lang-section__headline p {
-  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-  color: rgba(224, 247, 250, 0.65);
-  line-height: 1.5;
-}
-.lang-section__badges {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-}
-.lang-section__badge {
-  padding: 6px 16px;
-  border-radius: 100px;
-  font-size: 0.82rem;
-  font-weight: 500;
-  background: rgba(31, 182, 204, 0.1);
-  border: 1px solid rgba(31, 182, 204, 0.18);
-  color: rgba(224, 247, 250, 0.7);
-}
-.lang-section__badge--more {
-  background: rgba(31, 182, 204, 0.22);
-  color: var(--teal-light);
-  font-weight: 600;
-}
-.lang-section__expand {
-  margin-top: 24px;
-  text-align: center;
-}
-.lang-section__expand-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(31, 182, 204, 0.08);
-  border: none;
-  color: var(--teal-light);
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  cursor: pointer;
-  padding: 8px 20px;
-  border-radius: 100px;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.3s, background 0.3s, transform 0.2s;
-}
-.lang-section__expand-btn::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(135deg, rgba(31, 182, 204, 0.4), rgba(16, 185, 129, 0.2));
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-.lang-section__expand-btn:hover {
-  background: rgba(31, 182, 204, 0.15);
-  transform: translateY(-1px);
-}
-.lang-section__expand-icon {
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.lang-section__expand-btn[aria-expanded="true"] .lang-section__expand-icon {
-  transform: rotate(180deg);
-}
-.lang-section__expand-btn[aria-expanded="true"] {
-  background: rgba(31, 182, 204, 0.15);
-}
-.lang-section__detail {
-  max-width: 720px;
-  margin: 0 auto;
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease, margin 0.4s ease;
-}
-.lang-section__detail[aria-hidden="false"] {
-  max-height: 500px;
-  opacity: 1;
-  margin-top: 16px;
-}
-.lang-section__detail p {
-  font-size: clamp(0.85rem, 1.3vw, 0.95rem);
-  line-height: 1.7;
-  color: rgba(224, 247, 250, 0.55);
-  text-align: center;
-}
-@media (max-width: 600px) {
-  .lang-section__lead {
-    flex-direction: column;
-    text-align: center;
-  }
-  .lang-section__headline { text-align: center; }
-}
-.language-section {
-  padding: clamp(80px, 12vw, 140px) 0;
-  background: var(--warm-white);
-  border-top: 1px double #e8e2d8;
-  border-bottom: 1px double #e8e2d8;
-  position: relative;
-  overflow: hidden;
-  color: var(--text-primary);
-}
-.language-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140%;
-  height: 100%;
-  background:
-    radial-gradient(ellipse at 50% 30%, rgba(0,131,143,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse at 20% 80%, rgba(31,182,204,0.1) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 70%, rgba(16,185,129,0.08) 0%, transparent 50%);
-  pointer-events: none;
-}
-.language-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.38;
-}
-
-/* Floating language words */
-.language-section__floaters {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-}
-.language-float {
-  position: absolute;
-  font-family: var(--font-body);
-  font-weight: 500;
-  opacity: 0;
-  animation: langFloat linear infinite;
-  white-space: nowrap;
-  will-change: transform, opacity;
-}
-@keyframes langFloat {
-  0% {
-    transform: translateY(20px) rotate(var(--rot, 0deg));
-    opacity: 0;
-  }
-  8% {
-    opacity: var(--peak-opacity, 0.12);
-  }
-  50% {
-    opacity: var(--peak-opacity, 0.12);
-  }
-  92% {
-    opacity: var(--peak-opacity, 0.12);
-  }
-  100% {
-    transform: translateY(-30px) rotate(var(--rot, 0deg));
-    opacity: 0;
-  }
-}
-
-/* Floating word instances — positioned and timed via inline styles */
-.language-float:nth-child(1)  { left: 3%;  top: 12%; font-size: 1.4rem; --peak-opacity: 0.18; --rot: -3deg; animation-duration: 18s; animation-delay: 0s; color: rgba(0, 86, 96, 0.88); }
-.language-float:nth-child(2)  { left: 88%; top: 8%;  font-size: 1.1rem; --peak-opacity: 0.14; --rot: 2deg;  animation-duration: 22s; animation-delay: -4s; color: rgba(0, 123, 136, 0.82); }
-.language-float:nth-child(3)  { left: 15%; top: 75%; font-size: 1.6rem; --peak-opacity: 0.16; --rot: -1deg; animation-duration: 20s; animation-delay: -2s; color: rgba(0, 101, 112, 0.86); }
-.language-float:nth-child(4)  { left: 72%; top: 82%; font-size: 1.0rem; --peak-opacity: 0.13; --rot: 4deg;  animation-duration: 24s; animation-delay: -8s; color: rgba(11, 139, 97, 0.72); }
-.language-float:nth-child(5)  { left: 45%; top: 5%;  font-size: 1.3rem; --peak-opacity: 0.15; --rot: -2deg; animation-duration: 19s; animation-delay: -6s; color: rgba(0, 94, 104, 0.84); }
-.language-float:nth-child(6)  { left: 92%; top: 45%; font-size: 1.5rem; --peak-opacity: 0.17; --rot: 1deg;  animation-duration: 21s; animation-delay: -10s; color: rgba(0, 127, 141, 0.84); }
-.language-float:nth-child(7)  { left: 5%;  top: 42%; font-size: 1.2rem; --peak-opacity: 0.14; --rot: 3deg;  animation-duration: 23s; animation-delay: -3s; color: rgba(0, 86, 96, 0.8); }
-.language-float:nth-child(8)  { left: 60%; top: 18%; font-size: 0.95rem;--peak-opacity: 0.12; --rot: -4deg; animation-duration: 26s; animation-delay: -12s; color: rgba(11, 139, 97, 0.66); }
-.language-float:nth-child(9)  { left: 30%; top: 88%; font-size: 1.1rem; --peak-opacity: 0.14; --rot: 2deg;  animation-duration: 17s; animation-delay: -1s; color: rgba(0, 123, 136, 0.8); }
-.language-float:nth-child(10) { left: 78%; top: 55%; font-size: 1.35rem;--peak-opacity: 0.15; --rot: -2deg; animation-duration: 20s; animation-delay: -7s; color: rgba(0, 101, 112, 0.82); }
-.language-float:nth-child(11) { left: 22%; top: 30%; font-size: 1.0rem; --peak-opacity: 0.13; --rot: 3deg;  animation-duration: 25s; animation-delay: -14s; color: rgba(11, 139, 97, 0.68); }
-.language-float:nth-child(12) { left: 55%; top: 68%; font-size: 1.5rem; --peak-opacity: 0.16; --rot: -1deg; animation-duration: 19s; animation-delay: -5s; color: rgba(0, 94, 104, 0.82); }
-.language-float:nth-child(13) { left: 82%; top: 30%; font-size: 1.15rem;--peak-opacity: 0.14; --rot: 2deg;  animation-duration: 22s; animation-delay: -9s; color: rgba(0, 123, 136, 0.78); }
-.language-float:nth-child(14) { left: 40%; top: 40%; font-size: 0.9rem; --peak-opacity: 0.11; --rot: -3deg; animation-duration: 28s; animation-delay: -16s; color: rgba(0, 86, 96, 0.7); }
-.language-float:nth-child(15) { left: 10%; top: 60%; font-size: 1.25rem;--peak-opacity: 0.15; --rot: 1deg;  animation-duration: 21s; animation-delay: -11s; color: rgba(0, 127, 141, 0.8); }
-.language-float:nth-child(16) { left: 67%; top: 92%; font-size: 1.0rem; --peak-opacity: 0.12; --rot: -2deg; animation-duration: 24s; animation-delay: -13s; color: rgba(11, 139, 97, 0.62); }
-
-/* Center content */
-.language-section .container {
-  position: relative;
-  z-index: 2;
-}
-.language-section__inner {
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto;
-}
-.language-section .section-label {
-  color: var(--teal-deep);
-}
-.language-section h2 {
-  margin-bottom: 20px;
-  color: var(--text-primary);
-  white-space: nowrap;
-}
-.language-section h2 em {
-  font-style: italic;
-  color: var(--teal);
-}
-.language-heading__phrase {
-  white-space: nowrap;
-}
-.language-section__desc {
-  font-size: 1.1rem;
-  line-height: 1.75;
-  color: rgba(60, 72, 96, 0.86);
-  margin-bottom: 40px;
-}
-.language-section__cards {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-.language-card {
-  background: rgba(255,255,255,0.62);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0,131,143,0.18);
-  border-radius: var(--radius-md);
-  padding: 28px 24px;
-  text-align: left;
-  transition: background 0.3s ease, border-color 0.3s ease;
-}
-.language-card:hover {
-  background: rgba(255,255,255,0.82);
-  border-color: rgba(0,131,143,0.24);
-}
-.language-card__icon {
-  font-size: 28px;
-  margin-bottom: 14px;
-  display: block;
-  color: var(--teal-deep);
-  line-height: 1;
-}
-.language-card__title {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.05rem;
-  margin-bottom: 8px;
-  color: var(--text-primary);
-}
-.language-card__text {
-  font-size: 0.88rem;
-  color: rgba(60, 72, 96, 0.8);
-  line-height: 1.6;
-}
-.language-section__stat {
-  margin-top: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  color: rgba(56, 76, 96, 0.82);
-  width: fit-content;
-  max-width: min(92%, 980px);
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px 18px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.72);
-  border: 1px solid rgba(0,131,143,0.2);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  position: relative;
-  z-index: 3;
-}
-.language-section__stat-globe {
-  width: 36px;
-  height: 36px;
-  min-width: 36px;
-  min-height: 36px;
-  flex: 0 0 36px;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
-  background: rgba(31,182,204,0.16);
-  border: 1px solid rgba(31,182,204,0.28);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--teal-deep);
-}
-.language-section__stat strong {
-  color: var(--teal-deep);
-  font-weight: 700;
-}
-
-@media (max-width: 1366px) {
-  .language-section {
-    padding-bottom: clamp(64px, 8vw, 96px);
-  }
-}
-
-@media (max-width: 768px) {
-  .language-section__cards { grid-template-columns: 1fr; }
-  .language-section {
-    padding-bottom: clamp(56px, 10vw, 80px);
-  }
-  .language-section__stat {
-    max-width: 92%;
-    font-size: 0.84rem;
-    line-height: 1.4;
-    text-align: center;
-    border-radius: 22px;
-    padding: 10px 14px;
-  }
-  .language-section__stat-globe {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    min-height: 32px;
-    flex: 0 0 32px;
-  }
-  .language-section h2 {
-    white-space: normal;
-  }
-  .language-float { font-size: 0.9rem !important; }
-  .language-float:nth-child(n+10) { display: none; }
-}
-@media (max-width: 480px) {
-  .language-float:nth-child(n+7) { display: none; }
-}
-
+/* The old language-section CSS was deleted here on 2026-08-26 (~403 lines): the dark
+   gradient band, the floating .lang-section__greetings, the badge list, the expand
+   button and the .language-card/.language-float sets. All of it styled markup this
+   redesign replaced, and the dark gradient was still WINNING over the new light
+   Split because it sat later in the file — the section rendered dark-on-dark with an
+   almost invisible heading. Checked class by class before removal: .lang-section was
+   the only selector in the block still referenced by page-landing.php. */
 /* ========== WHAT YOU GET SECTION ========== */
 .what-you-get {
   background: var(--cream);
