@@ -6114,7 +6114,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   .widget-bubble__voice-bars span { width: 3px; }
 }
 
-/* Homepage "Every paid plan includes" on phones. The notch label is an absolutely
+/* Homepage "Every plan includes" on phones. The notch label is an absolutely
    positioned ::before whose height the box's padding-top cannot know about, so
    below ~403px it wraps to two lines and lands on the first row of inclusions.
    On mobile it becomes an in-flow, full-width eyebrow instead — it can no longer

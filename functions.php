@@ -977,9 +977,9 @@ add_action( 'template_redirect', function () {
 		echo "conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor's contact ";
 		echo "information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you're on a job site, in a ";
 		echo "consultation, or after hours. Plans start at \$29 per month after a free 30-day trial with no credit card required.\n\n";
-		echo "**How much does SiteStaffr cost?** SiteStaffr starts with a free 30-day trial including 30 minutes of conversation time — ";
-		echo "no credit card required. Paid plans are \$29/month (Starter, 100 voice minutes), \$69/month (Business, 300 voice minutes), ";
-		echo "and \$129/month (Pro, 600 voice minutes). Every paid plan includes unlimited AI text chat — only voice is metered. ";
+		echo "**How much does SiteStaffr cost?** SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and ";
+		echo "unlimited AI text chat — no credit card required. Paid plans are \$29/month (Starter, 100 voice minutes), \$69/month (Business, 300 voice minutes), ";
+		echo "and \$129/month (Pro, 600 voice minutes). Every plan includes unlimited AI text chat — only voice is metered. ";
 		echo "Additional voice minutes cost \$20 for 60 minutes and never expire.
 
 ";
