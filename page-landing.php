@@ -178,6 +178,52 @@ $get_started_url = home_url( '/#get-started' );
     </script>
 
     <?php
+    /* SECTION 2's FOUR JOB-VALUE FIGURES. Ported from the V2 branch on 2026-08-26 with the
+       figures, notes and sources byte-identical — these are the sourced numbers user testing
+       responded to, and retyping them by hand is how a citation quietly becomes wrong.
+
+       AMBER APPEARS IN EXACTLY ONE PLACE ON THE SITE: the four `amount` values below. Not on
+       a button, a card, an icon, a heading or a border. Anywhere else is a bug. Mario
+       overruled the objection to keeping amber here on 2026-08-26 — the original concern was
+       that amber was doing semantic work across every section and becoming a second accent
+       competing with teal, and one confined use on the element you most want people to stop
+       on is a different thing. Confined is the whole reason it is allowed. */
+    $job_values = array(
+        array(
+            'img'    => 'ind-hvac',
+            'label'  => 'HVAC',
+            'amount' => '$5,500',
+            'note'   => 'Median cost of one HVAC project',
+            'source' => 'U.S. Census Bureau, 2023 Home Improvements, from the American Housing Survey (2021-23). Median cost by project type, as published.',
+        ),
+        array(
+            'img'    => 'ind-wrench',
+            'label'  => 'Auto repair',
+            'amount' => '$494',
+            'note'   => 'Average customer-pay repair order',
+            'source' => 'NADA, 2025 Annual Financial Profile of America\'s Franchised New-Car Dealerships. Franchised dealer service departments, full-year 2025.',
+        ),
+        array(
+            'img'    => 'ind-tooth',
+            'label'  => 'Dental',
+            'amount' => '$391',
+            'note'   => 'Average spend per dental visit',
+            /* ⚠️ THE ONLY DERIVED FIGURE ON THE PAGE, and the tooltip says so. AHRQ publishes
+               total dental expenditures and total dental visits in the same brief but no
+               per-visit line; this is one divided by the other. Disclosed rather than
+               presented as published, because "computed from" and "reported as" are not the
+               same claim. Cross-checks at $386 against the brief's own per-person figures. */
+            'source' => 'Computed from AHRQ MEPS Statistical Brief #555 (March 2024, 2021 data): total U.S. dental expenditures divided by total dental visits. AHRQ does not publish a per-visit figure for this period.',
+        ),
+        array(
+            'img'    => 'ind-paw',
+            'label'  => 'Veterinary',
+            'amount' => '$200',
+            'note'   => 'What owners report paying at their last visit',
+            'source' => 'AVMA, 2025 Pet Ownership and Demographics Sourcebook. Owner self-reported, published October 2025.',
+        ),
+    );
+
     $faq_items = array(
         array(
             'question' => 'What is SiteStaffr?',
@@ -374,46 +420,121 @@ get_template_part( 'template-parts/site-nav', null, array(
    Nothing replaces it. The capabilities are covered by the float cards above and
    by sections 3 and 4 below. */ ?>
 
+<?php get_template_part( 'template-parts/seam-curtain' ); ?>
+
 <!-- ========== SECTION 2: COST OF MISSED VISITORS ========== -->
-<section class="cost-section">
-  <div class="container">
-    <div class="cost-section__grid">
-      <div>
-        <span class="section-label">The Hidden Cost of Lost Website Visitors</span>
+<?php /* SECTION 2 — the first half of the dark block. Sections 2 and 3 share one dark
+         background so there is no seam between them; the only seam on the page is the
+         curtain above, where the light hero meets this.
+
+         PORTED from the V2 branch, figures and sources byte-identical, because these are
+         what user testing responded to. The four unsourced placeholders that used to live
+         here ($500+/$3,000+/$2,000/$800) are gone: they were invented, and this section's
+         whole argument is that the numbers are real and cited. */ ?>
+<section class="block block--dark block-split cost-section">
+  <div class="block__inner">
+    <div class="block-split__grid cost-section__grid">
+      <div class="cost-section__copy">
+        <?php /* Eyebrow was "The Hidden Cost of Lost Website Visitors", and on the V2 branch
+                 "What One Job Is Worth". Both described the RIGHT column while the heading
+                 described the left — two arguments stacked, and the reader had to work out
+                 which one the section was about. This one describes the section. */ ?>
+        <span class="section-label">The Shift Nobody Covers</span>
         <h2>Busy Owners Miss Website Leads and Often Never Know It</h2>
+
+        <?php /* SETS UP THE AUDIT, and does not restate the hero. It also does not attack
+                 "we'll get back to you" (Mario, 2026-08-20) — that would be a self-own,
+                 since SiteStaffr's own conversations end with details captured and a human
+                 following up. The difference is WHEN the visitor gets their answer. */ ?>
         <p class="cost-section__text">
-          You&rsquo;re on a job site. In a consultation. In the middle of a procedure. A visitor lands on your website ready to ask a question, request a quote, or book an appointment, and they want help now.
+          Your website is where most customers meet your business first, and it is usually working a shift you are not there for.
         </p>
+
+        <?php /* The best copy on the site — do not rewrite it. "no missed call" is correct
+                 here and must survive the "call" sweep: it is describing the ABSENCE of a
+                 phone signal, which is the point, not claiming the product answers phones. */ ?>
         <p class="cost-section__text">
-          Most visitors won&rsquo;t dig through pages or fill out a contact form. If they can&rsquo;t get instant help, they leave your site and choose the next business on Google. That&rsquo;s real revenue walking out the door, and you may never know it happened.
+          When it cannot answer, nobody tells you. There is no missed call, no voicemail, nothing in your inbox. The visitor just goes back to the search results, and the job quietly happens somewhere else.
         </p>
-        <p class="cost-section__text">SiteStaffr turns those missed moments into conversations, and conversations into leads.</p>
+
+        <?php /* CUT TO ONE LINE. This paragraph used to resolve the problem the section had
+                 just posed — "SiteStaffr is an employee for your website. It answers your
+                 visitors day or night…" — which made section 3 arrive as a repeat of an
+                 answer already given. Section 3 is where the product shows up; this line
+                 just hands over to it, and it picks up "a shift you are not there for"
+                 from the first paragraph. */ ?>
+        <p class="cost-section__text cost-section__handoff">That&rsquo;s the shift SiteStaffr covers.</p>
       </div>
-      <div class="cost-cards">
-        <div class="cost-card">
-          <div class="cost-card__icon">🚨</div>
-          <div class="cost-card__title">After-hours emergency</div>
-          <div class="cost-card__amount">$500+</div>
-          <div class="cost-card__detail">Urgent job, gone to a faster competitor</div>
-        </div>
-        <div class="cost-card">
-          <div class="cost-card__icon">📋</div>
-          <div class="cost-card__title">New client inquiry</div>
-          <div class="cost-card__amount">$3,000+</div>
-          <div class="cost-card__detail">Lifetime value of one new customer</div>
-        </div>
-        <div class="cost-card">
-          <div class="cost-card__icon">📞</div>
-          <div class="cost-card__title">Missed quote request</div>
-          <div class="cost-card__amount">$2,000</div>
-          <div class="cost-card__detail">Prospect who needed a fast answer</div>
-        </div>
-        <div class="cost-card">
-          <div class="cost-card__icon">📅</div>
-          <div class="cost-card__title">Booking that never happened</div>
-          <div class="cost-card__amount">$800</div>
-          <div class="cost-card__detail">Appointment lost to a silent website</div>
-        </div>
+
+      <?php /* 2x2, AND THE GRID SHAPE IS PART OF WHY THIS WORKS. A previous pass replaced
+               these with a single time-ordered column and it read as overwhelming despite
+               running FEWER words — four boxes are four glances, four stacked rows are a
+               paragraph with rules between them. Scannability is not word count. */ ?>
+      <div class="block-split__art job-values">
+        <ul class="job-values__grid">
+<?php foreach ( $job_values as $jv ) : ?>
+          <li class="job-value">
+            <?php
+            /* The sprite fallback from the V2 branch was dropped in this port, deliberately.
+               There it read `<use href="#i-ind-…">` against template-parts/icon-sprite.php,
+               and main has no sprite system at all — so the "fallback" would have rendered
+               nothing at all if the image were ever missing, which is worse than no
+               fallback because it looks like a working safety net. The four renders are
+               committed alongside this file; if one goes missing the alt-empty img is the
+               honest failure. */
+            ?>
+            <img class="job-value__icon"
+                 src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/icons/' . $jv['img'] . '.webp' ) ); ?>"
+                 width="64" height="64" alt="" aria-hidden="true" decoding="async" loading="lazy">
+
+            <?php
+            /* SOURCE ON DEMAND, not in the card (Mario: "a little I icon for information up
+               at the top right corner… it can have a tool tip for the source").
+
+               A real <button>, not a hover-only span, and that is the accessibility
+               difference: a hover tooltip is unreachable by keyboard and unreachable on
+               touch. As a button it takes focus, opens on :focus-visible as well as :hover,
+               and announces through aria-describedby. `title` is deliberately not used — it
+               is invisible on touch, unstyleable, and read inconsistently by screen readers.
+
+               The info glyph is inline rather than a sprite reference, for the same reason
+               the fallback was dropped: main has no sprite to point at. */
+            $jv_src_id = 'jv-src-' . sanitize_html_class( $jv['img'] );
+            ?>
+            <button class="job-value__src" type="button"
+                    aria-label="<?php echo esc_attr( 'Source for the ' . $jv['label'] . ' figure' ); ?>"
+                    aria-describedby="<?php echo esc_attr( $jv_src_id ); ?>">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+            </button>
+            <span class="job-value__tip" id="<?php echo esc_attr( $jv_src_id ); ?>" role="tooltip">
+              <?php echo esc_html( $jv['source'] ); ?>
+            </span>
+
+            <?php
+            /* NO VISIBLE INDUSTRY LABEL (Mario, 2026-08-25: "remove the industry name under
+               each icon"). The icon carries it, and a wrench captioned "Auto repair" is a
+               caption telling you what the picture already said.
+
+               `label` stays in the array and is still USED — it builds the info button's
+               aria-label, so a screen-reader user hears "Source for the Auto repair figure"
+               rather than "Source". Deleting the field to tidy up would take that with it. */
+            ?>
+            <span class="job-value__amount"><?php echo esc_html( $jv['amount'] ); ?></span>
+            <span class="job-value__note"><?php echo esc_html( $jv['note'] ); ?></span>
+          </li>
+<?php endforeach; ?>
+        </ul>
+        <?php /* The price anchor was REMOVED here (Mario, 2026-08-26: not yet). It read
+                 "A single repair order covers a year of SiteStaffr."
+
+                 ⚠️ IF IT EVER RETURNS, IT STAYS SPECIFIC TO THE REPAIR ORDER. Starter is
+                 $29/mo = $348/yr, so it is true of the $494 card and FALSE of the $391 and
+                 $200 ones. An earlier version said "winning one of them pays for a year",
+                 which was true of four invented figures and became false the moment real
+                 ones replaced them — a claim that quantifies over a list breaks silently
+                 every time the list changes, and nothing in the diff says so. This trap has
+                 already caught the project once. */ ?>
+        <p class="job-values__foot">Real industry averages, each with its source &mdash; not estimates.</p>
       </div>
     </div>
   </div>
