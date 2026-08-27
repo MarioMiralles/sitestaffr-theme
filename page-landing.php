@@ -1190,7 +1190,19 @@ $ind_groups = sitestaffr_industry_registry();
 $ind_flat   = sitestaffr_industry_list();
 $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 ?>
-<section class="block block-split block-split--reverse industries" id="industries">
+<?php /* ⚠️ NOT A block-split ANY MORE (Mario, 2026-08-27: "the side by side looks weird
+         because the industries is too long vertically and doesn't look good").
+
+         It was image-left / list-right. The list is five groups and sixteen names in ONE
+         column, so it ran far taller than the 440px image beside it and the Split was
+         permanently lopsided — a two-column layout where one column ends two thirds of
+         the way up.
+
+         Now it is two stacked rows: the isometric and its excerpt side by side on top,
+         then the full list underneath at full width, where five groups sit as five
+         columns instead of one tall stack. The list gets SHORTER by getting WIDER, which
+         is the thing the Split could not do. */ ?>
+<section class="block industries" id="industries">
   <div class="block__inner">
     <div class="industries__header">
       <span class="section-label">Who This Is For</span>
@@ -1202,10 +1214,11 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
       </p>
     </div>
 
-    <div class="block-split__grid industries__grid">
-      <?php /* IMAGE LEFT. Section 5 puts the robot on the right, so this alternates —
-               that is the whole reason block-split--reverse exists. */ ?>
-      <div class="block-split__art industries__art">
+    <?php /* ROW 1 — the isometric and its excerpt, side by side. The excerpt used to sit
+             UNDER the image inside the art column; beside it, the pair reads as one card
+             and the row stays short. */ ?>
+    <div class="industries__stage">
+      <div class="industries__art">
         <?php foreach ( $ind_flat as $i => $ind ) :
             $art = sitestaffr_industry_art_url( $ind['slug'] );
             /* ⚠️ A MISSING RENDER MUST NOT PRODUCE A BROKEN IMAGE. Medical Staffing is
@@ -1229,10 +1242,13 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           </div>
         <?php endforeach; ?>
 
-        <?php /* The excerpt sits under the image on desktop and inside each accordion
-                 item on mobile, so it is rendered twice — once here for the pointer
-                 layout, once per item below. Both come from the same registry field. */ ?>
-        <div class="industries__excerpt" data-ind-excerpt>
+      </div>
+
+      <?php /* The excerpt is now a SIBLING of the art, not a child of it — that is what
+               puts it beside the isometric instead of under it. It is still rendered
+               twice in total (once here for the pointer layout, once inside each mobile
+               accordion item below), and both still come from the same registry field. */ ?>
+      <div class="industries__excerpt" data-ind-excerpt>
           <?php foreach ( $ind_flat as $i => $ind ) : ?>
             <div class="industries__excerpt-item<?php echo 0 === $i ? ' is-active' : ''; ?>"
                  data-ind-excerpt-for="<?php echo esc_attr( $ind['slug'] ); ?>">
@@ -1302,7 +1318,6 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           </div>
         <?php endforeach; ?>
       </div>
-    </div>
   </div>
 </section>
 

@@ -2272,7 +2272,21 @@ body.sitestaffr-landing-page .hero__visual > * {
 .industries { background: var(--cream); }
 .industries__header { text-align: center; margin-bottom: 40px; }
 .industries__subtitle { color: var(--text-secondary); margin-top: 8px; }
-.industries__grid { align-items: start; }
+/* ---- Two stacked rows, not a Split ------------------------------------
+   Mario, 2026-08-27: the Split "looks weird because the industries is too long
+   vertically". The list is five groups and sixteen names; in one column of a Split it
+   ran far past the bottom of the 440px image beside it.
+
+   ROW 1: isometric | excerpt.   ROW 2: the whole list, full width.
+
+   The list gets shorter by getting WIDER — five groups become five columns instead of
+   one stack — which is the fix the Split structurally could not provide. */
+.industries__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 52px);
+  align-items: center;
+}
 
 .industries__art { position: relative; }
 .industries__panel { display: none; }
@@ -2297,14 +2311,17 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-xl);
 }
 
-.industries__excerpt-item { display: none; text-align: center; margin-top: 8px; }
+/* LEFT-ALIGNED NOW, not centred. It used to sit under the image as a caption, where
+   centring was right; beside the image it is a column of prose, and centred prose in a
+   column reads as a pull-quote rather than as a description. */
+.industries__excerpt-item { display: none; margin-top: 0; }
 .industries__excerpt-item.is-active { display: block; }
-.industries__excerpt-item h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.industries__excerpt-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
 .industries__excerpt-item p {
   color: var(--text-secondary);
-  font-size: 0.92rem;
+  font-size: 1rem;
+  line-height: 1.65;
   max-width: 42ch;
-  margin-inline: auto;
 }
 .industries__link {
   display: inline-block;
@@ -2316,7 +2333,24 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .industries__link:hover { border-bottom-color: var(--teal-deep); }
 
-.industries__group + .industries__group { margin-top: 22px; }
+/* ⚠️ THE LIST IS FIVE COLUMNS, ONE PER GROUP — this is what actually fixes the
+   complaint. Stacked in a single column the five groups were the tallest thing in the
+   section; side by side the tallest group sets the height and the whole block is a few
+   names deep.
+
+   `auto-fit` rather than a hard `repeat(5, ...)`: the registry drives the group count,
+   and a hardcoded 5 would silently leave a ragged empty column the day a sixth group is
+   added. 160px is comfortably wider than the longest industry name at this size. */
+.industries__list {
+  margin-top: clamp(30px, 5vw, 56px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: clamp(18px, 2.5vw, 34px);
+  align-items: start;
+}
+/* The stacked-column spacing belonged to the one-column Split. In a grid the gap owns
+   it, and leaving this in adds a phantom offset to every group after the first. */
+.industries__group + .industries__group { margin-top: 0; }
 .industries__group-heading {
   font-family: var(--font-body);
   font-size: 0.7rem;
@@ -2356,7 +2390,15 @@ body.sitestaffr-landing-page .hero__visual > * {
      bit screens, so someone scanning for their trade sees everything at once.
      Two stacked columns would mean tapping a name changes an image scrolled off
      screen; a two-level accordion would be three taps deep. */
-  .industries__art { display: none; }
+  /* ⚠️ THE EXCERPT MUST BE HIDDEN EXPLICITLY NOW. It used to be a CHILD of
+     .industries__art, so this one line hid both; the 2026-08-27 restructure made it a
+     sibling so it could sit beside the isometric, and a sibling does not inherit its
+     old parent's display. Left out, the desktop excerpt renders on phones directly
+     above the accordion that repeats the same blurb. */
+  .industries__art,
+  .industries__excerpt { display: none; }
+  .industries__stage { display: block; }
+  .industries__list { margin-top: 0; grid-template-columns: minmax(0, 1fr); }
   .industries__name { padding: 11px 10px; }
   .industries__name::after {
     content: "+";
