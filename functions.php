@@ -477,6 +477,77 @@ add_action( 'init', function () {
 } );
 
 /**
+ * Provision /for/agencies/ — the second-audience page.
+ *
+ * Same versioned-option pattern as the Salesforce and industry pages: Mario never has to
+ * touch WP admin, and a bump re-heals the page if someone edits it by hand.
+ *
+ * ⚠️ IT IS A CHILD OF THE "for" PARENT so the URL is /for/agencies/, which is what the
+ * homepage nav item and the section 10 CTA both link to. A top-level /agencies/ page would
+ * make those two links 404 while the template itself rendered perfectly at another URL —
+ * which is exactly what happened on the first staging deploy: the template shipped, no page
+ * used it, and /for/agencies/ returned 404.
+ *
+ * ⚠️ AGENCIES ARE NOT IN sitestaffr_industry_registry() AND MUST NOT BE. They are an
+ * audience, not an industry. This provisioner is deliberately separate from the industry
+ * one for that reason — putting them in the registry would file them in homepage section
+ * 6's list of sixteen businesses and in the Industries dropdown.
+ */
+add_action( 'init', function () {
+	$provision_version = '1';
+	if ( get_option( 'sitestaffr_agencies_page_v' ) === $provision_version ) {
+		return;
+	}
+
+	/* The "for" parent must exist first; the industry provisioner creates it, but this
+	   must not depend on the order the two run in. */
+	$parent    = get_page_by_path( 'for' );
+	$parent_id = $parent ? (int) $parent->ID : 0;
+	if ( ! $parent_id ) {
+		$new_parent = wp_insert_post( array(
+			'post_title'  => 'For',
+			'post_name'   => 'for',
+			'post_status' => 'publish',
+			'post_type'   => 'page',
+		) );
+		if ( $new_parent && ! is_wp_error( $new_parent ) ) {
+			$parent_id = (int) $new_parent;
+		}
+	}
+
+	$existing = get_page_by_path( 'for/agencies' );
+	$page_id  = $existing ? (int) $existing->ID : 0;
+
+	if ( ! $page_id ) {
+		$new_id = wp_insert_post( array(
+			'post_title'   => 'SiteStaffr for WordPress Agencies',
+			'post_name'    => 'agencies',
+			'post_parent'  => $parent_id,
+			'post_status'  => 'publish',
+			'post_type'    => 'page',
+			'post_content' => '',
+		) );
+		if ( $new_id && ! is_wp_error( $new_id ) ) {
+			$page_id = (int) $new_id;
+		}
+	}
+
+	if ( $page_id ) {
+		update_post_meta( $page_id, '_wp_page_template', 'page-agencies.php' );
+
+		/* Yoast owns title and meta, as everywhere else. ⚠️ DELIBERATELY NOT TARGETING
+		   "white label ai chatbot wordpress" — high-intent, and the product cannot satisfy
+		   it today, so ranking for it buys bounces and a reputation for overclaiming.
+		   Revisit only if white-label is ever built. */
+		update_post_meta( $page_id, '_yoast_wpseo_title', 'AI Chat for WordPress Agencies — Add It to Every Client Site | SiteStaffr' );
+		update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Add an AI receptionist to the client sites you build. About five minutes per site, no code, and one login for billing across every client. Free 30-day trial on any site.' );
+		sitestaffr_clear_yoast_title_overrides( $page_id );
+	}
+
+	update_option( 'sitestaffr_agencies_page_v', $provision_version );
+} );
+
+/**
  * THE industry registry — one source of truth for which /for/ pages exist and
  * how they present themselves. The nav panel, the footer, the /for/ index, the
  * llms.txt output and the page provisioner all read from here.
