@@ -3964,21 +3964,191 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .morning-inbox__count { color: var(--teal-deep); font-weight: 600; }
 .morning-inbox__list { list-style: none; margin: 0; padding: 0; }
-.morning-inbox__item {
+.morning-inbox__item { border-bottom: 1px solid var(--border-light); }
+.morning-inbox__item:last-child { border-bottom: 0; }
+
+/* The row is a BUTTON now, so it has to be un-styled back to a row: browsers give
+   buttons their own font, a centred text-align and a background, none of which a table
+   row wants. `font: inherit` is the one that matters — without it the whole inbox
+   silently drops to the UA's 13px system font. */
+.morning-inbox__row {
   display: grid;
-  grid-template-columns: 84px 150px 1fr auto;
+  grid-template-columns: 84px 150px 1fr auto auto;
   gap: 14px;
   align-items: center;
+  width: 100%;
   padding: 15px 18px;
-  border-bottom: 1px solid var(--border-light);
+  border: 0;
+  background: none;
+  font: inherit;
   font-size: 0.9rem;
+  text-align: left;
+  color: inherit;
+  transition: background-color 0.16s ease;
 }
-.morning-inbox__item:last-child { border-bottom: 0; }
-/* The open row. It is the MIDDLE one because the list sorts newest-first and a
-   list that sorts wrongly stops reading as an inbox. */
-.morning-inbox__item--open {
+
+/* ⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOUR IT. `.is-interactive` is added by
+   the script after the dialogs are wired, so with no JS these read as plain rows — no
+   pointer cursor, no hover, no "View recap". A button that looks clickable and does
+   nothing is worse than a row that never claimed to be one. */
+.what-you-get .morning-inbox__view { display: none; }
+.what-you-get.is-interactive .morning-inbox__row { cursor: pointer; }
+.what-you-get.is-interactive .morning-inbox__row:hover,
+.what-you-get.is-interactive .morning-inbox__row:focus-visible {
   background: var(--teal-pale);
-  box-shadow: inset 3px 0 0 var(--teal-deep);
+}
+.what-you-get.is-interactive .morning-inbox__view {
+  display: inline;
+  justify-self: end;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+  opacity: 0;
+  transition: opacity 0.16s ease;
+  white-space: nowrap;
+}
+.what-you-get.is-interactive .morning-inbox__row:hover .morning-inbox__view,
+.what-you-get.is-interactive .morning-inbox__row:focus-visible .morning-inbox__view {
+  opacity: 1;
+}
+
+/* ---- The recap document ----------------------------------------------
+   Ported from V1's inline artifact: logo bar, business name, Conversation Recap with a
+   contact list and a suggested follow-up, then the full transcript. V1 showed one
+   document permanently and cropped it with a fade; here there are three and they open
+   on demand, so nothing is cropped and the fade is gone with the crop it was hiding. */
+.recap-doc {
+  width: min(760px, calc(100vw - 32px));
+  max-height: min(86vh, 900px);
+  /* ⚠️ `margin: auto` IS RESTORED DELIBERATELY. A modal <dialog> is centred by the UA
+     stylesheet's own `margin: auto`, and line 38 of this file resets margin to 0 on
+     `*` — which beats it and pins the sheet to the top-left corner. Nothing about the
+     dialog looks wrong in the markup; it just sits in the corner. */
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  overflow: visible;
+}
+.recap-doc::backdrop { background: rgba(6, 34, 42, 0.55); }
+.recap-doc__sheet {
+  display: flex;
+  flex-direction: column;
+  max-height: min(86vh, 900px);
+  background: #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 24px 70px rgba(0,0,0,0.35);
+  overflow: hidden;
+}
+.recap-doc__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  background: var(--cream-dark);
+  border-bottom: 1px solid var(--border-light);
+  flex: none;
+}
+.recap-doc__logo { width: 132px; height: auto; }
+.recap-doc__close {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  background: transparent;
+  color: var(--text-secondary);
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+.recap-doc__close:hover,
+.recap-doc__close:focus-visible { background: rgba(0,0,0,0.07); color: var(--text-primary); }
+/* The sheet is a flex column with a capped height and this is the only scrolling part,
+   so the logo bar stays put while a long transcript scrolls under it. */
+.recap-doc__body {
+  padding: 24px clamp(18px, 3vw, 32px) 30px;
+  overflow-y: auto;
+}
+.recap-doc__business {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 20px;
+}
+.recap-doc__section + .recap-doc__section { margin-top: 26px; }
+.recap-doc__section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+.recap-doc__section-head strong {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  letter-spacing: 0.01em;
+}
+.recap-doc__section > p { color: var(--text-secondary); line-height: 1.65; }
+.recap-doc__section > p strong { color: var(--text-primary); }
+.recap-doc__fields {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 14px 16px;
+  background: var(--cream);
+  border-radius: var(--radius-sm);
+  font-size: 0.92rem;
+}
+.recap-doc__fields li + li { margin-top: 7px; }
+.recap-doc__field-label { color: var(--text-muted); }
+.recap-doc__fields a { color: var(--teal-deep); border-bottom: 1px solid rgba(0,131,143,0.35); }
+.recap-doc__followup {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border-left: 3px solid var(--teal-deep);
+  background: var(--teal-tint);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+.recap-doc__messages { display: flex; flex-direction: column; gap: 12px; }
+.recap-doc__msg { max-width: 86%; }
+.recap-doc__msg p {
+  margin: 0;
+  padding: 10px 14px;
+  border-radius: var(--radius-md);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.recap-doc__msg-meta {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+.recap-doc__msg-meta strong { color: var(--text-secondary); }
+.recap-doc__msg--ai p { background: var(--teal-pale); color: var(--text-primary); }
+.recap-doc__msg--visitor { margin-left: auto; }
+.recap-doc__msg--visitor .recap-doc__msg-meta { text-align: right; }
+.recap-doc__msg--visitor p { background: var(--cream-dark); }
+
+@media (max-width: 620px) {
+  /* The row's five columns cannot survive a phone. Time and name on one line, the
+     one-liner under them, and the tag drops out of the row entirely rather than
+     squeezing the message it describes down to two words. */
+  .morning-inbox__row {
+    grid-template-columns: 78px 1fr;
+    row-gap: 4px;
+    padding: 13px 14px;
+  }
+  .morning-inbox__what { grid-column: 1 / -1; }
+  .morning-inbox__tag,
+  .what-you-get.is-interactive .morning-inbox__view { grid-column: 1 / -1; justify-self: start; }
+  .recap-doc__msg { max-width: 96%; }
 }
 .morning-inbox__time {
   font-variant-numeric: tabular-nums;

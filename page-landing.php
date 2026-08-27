@@ -955,32 +955,207 @@ get_template_part( 'template-parts/site-nav', null, array(
        three rows into three different industries to show range — that turns a believable
        morning into a brochure, and the section stops being evidence. */
     ?>
+    <?php
+    /* THE THREE LEADS, AND THE DOCUMENT BEHIND EACH ONE (Mario, 2026-08-27: "it would be
+       really cool if we could click on each of those emails and see an example of the
+       document that we have in v1").
+
+       ⚠️ ONE ARRAY DRIVES BOTH THE ROW AND THE DOCUMENT. The row's name, time and
+       one-liner are read from the same entry the recap and transcript are, so a row can
+       never advertise a lead the document contradicts. Splitting these into two literals
+       is how "Sarah Mitchell, 25 guests" ends up opening a document about 40 cupcakes.
+
+       ⚠️ EVERY TRANSCRIPT OPENS ON THE SAME LINE, and that is the product's real greeting
+       rather than three invented ones (Mario asked for it explicitly). It is also the
+       line V1's document already used. Note the wording is "How can I help you today?" —
+       Mario's message transposed it to "How I can help you today?", which is not
+       grammatical and is not what V1 shipped.
+
+       PRIYA RAMAN IS GONE FROM THIS SECTION (Mario: "use a different name... a Hispanic
+       woman or something") and that also removes a duplicate: the same fictional person
+       was giving her details to a pest control company in section 3 and to a bakery here.
+       Section 3 keeps the name; this one is Camila Reyes.
+
+       These are illustrative examples for a demo, not real customer data. Phone numbers
+       are 555-01xx, the block reserved for fiction, and emails are @example.com. */
+    $morning_leads = array(
+      array(
+        'id'      => 'tom-byrne',
+        'time'    => '6:03 AM',
+        'who'     => 'Tom Byrne',
+        'what'    => 'Gluten-free cupcakes, 40 for Friday',
+        'stamp'   => 'March 27, 2026 6:03 AM EDT',
+        'length'  => '1:48',
+        'recap'   => '<strong>Tom</strong> asked whether Maggie&rsquo;s Cakes can do gluten-free cupcakes, and needs about 40 of them for an office birthday on Friday morning.',
+        'fields'  => array(
+          array( 'label' => 'Name',               'value' => 'Tom Byrne' ),
+          array( 'label' => 'Phone',              'value' => '(555) 555-0176', 'tel' => '+15555550176' ),
+          array( 'label' => 'Reason for contact', 'value' => 'Gluten-free cupcake order, 40 for Friday' ),
+        ),
+        'followup' => 'Call Tom to confirm flavours, pickup time and pricing for 40 gluten-free cupcakes.',
+        'turns'   => array(
+          array( 'who' => 'ai',      'at' => '6:03:04 AM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
+          array( 'who' => 'visitor', 'at' => '6:03:21 AM', 'text' => 'Do you do gluten-free cupcakes? I need about 40 for Friday.' ),
+          array( 'who' => 'ai',      'at' => '6:03:24 AM', 'text' => 'We do &mdash; our gluten-free sponge is made in a separate prep area. Forty is no problem with a few days&rsquo; notice. Is this for an event?' ),
+          array( 'who' => 'visitor', 'at' => '6:04:02 AM', 'text' => 'Office birthday. Friday morning if possible.' ),
+          array( 'who' => 'ai',      'at' => '6:04:05 AM', 'text' => 'Got it. What name and number should I put down so someone can confirm the flavours and pickup time?' ),
+          array( 'who' => 'visitor', 'at' => '6:04:39 AM', 'text' => 'Tom Byrne, 555-0176.' ),
+          array( 'who' => 'ai',      'at' => '6:04:42 AM', 'text' => 'Thanks Tom. Someone will follow up this morning to confirm.' ),
+        ),
+      ),
+      array(
+        'id'      => 'sarah-mitchell',
+        'time'    => '2:14 AM',
+        'who'     => 'Sarah Mitchell',
+        'what'    => 'Two-tier unicorn cake, 25 guests, April 12',
+        'stamp'   => 'March 27, 2026 2:14 AM EDT',
+        'length'  => '2:14',
+        /* Carried over from V1's document, which used this exact lead. */
+        'recap'   => '<strong>Sarah</strong> reached out to inquire about ordering a custom birthday cake for her daughter&rsquo;s 7th birthday party. She&rsquo;s looking for a two-tier unicorn theme cake for 25 guests.',
+        'fields'  => array(
+          array( 'label' => 'Name',               'value' => 'Sarah Mitchell' ),
+          array( 'label' => 'Phone',              'value' => '(555) 555-0123', 'tel' => '+15555550123' ),
+          array( 'label' => 'Reason for contact', 'value' => 'Custom birthday cake order inquiry' ),
+        ),
+        'followup' => 'Call Sarah back to confirm cake design details, discuss pricing for a two-tier unicorn cake, and schedule the pickup date for April 12th.',
+        'turns'   => array(
+          array( 'who' => 'ai',      'at' => '2:14:03 AM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
+          array( 'who' => 'visitor', 'at' => '2:14:10 AM', 'text' => 'Hi! I need to order a birthday cake for my daughter. She&rsquo;s turning 7 and wants a unicorn theme.' ),
+          array( 'who' => 'ai',      'at' => '2:14:12 AM', 'text' => 'That sounds wonderful! We&rsquo;d love to help with a unicorn cake. How many guests are you expecting? And do you have a date in mind?' ),
+          array( 'who' => 'visitor', 'at' => '2:14:58 AM', 'text' => 'About 25 guests, and the party is April 12.' ),
+          array( 'who' => 'ai',      'at' => '2:15:01 AM', 'text' => 'Perfect &mdash; a two-tier will suit 25 comfortably. What name and number should I put down for the order?' ),
+          array( 'who' => 'visitor', 'at' => '2:15:44 AM', 'text' => 'Sarah Mitchell, 555-0123.' ),
+          array( 'who' => 'ai',      'at' => '2:15:47 AM', 'text' => 'Thanks Sarah. Someone will be in touch to confirm the design and pricing.' ),
+        ),
+      ),
+      array(
+        'id'      => 'camila-reyes',
+        'time'    => '11:47 PM',
+        'who'     => 'Camila Reyes',
+        'what'    => 'Wedding tasting &mdash; are you open Sundays?',
+        'stamp'   => 'March 26, 2026 11:47 PM EDT',
+        'length'  => '1:59',
+        'recap'   => '<strong>Camila</strong> is getting married in September and wants to book a wedding cake tasting. She specifically asked whether Sunday appointments are available.',
+        'fields'  => array(
+          array( 'label' => 'Name',               'value' => 'Camila Reyes' ),
+          array( 'label' => 'Email',              'value' => 'camila.reyes@example.com', 'mail' => 'camila.reyes@example.com' ),
+          array( 'label' => 'Reason for contact', 'value' => 'Wedding cake tasting, September wedding' ),
+        ),
+        'followup' => 'Email Camila with available Sunday tasting times in late September.',
+        'turns'   => array(
+          array( 'who' => 'ai',      'at' => '11:47:02 PM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
+          array( 'who' => 'visitor', 'at' => '11:47:29 PM', 'text' => 'We&rsquo;re getting married in September and wanted to book a tasting. Are you open Sundays?' ),
+          array( 'who' => 'ai',      'at' => '11:47:32 PM', 'text' => 'Congratulations! Tastings run Saturdays, and Sundays by appointment. Do you have a date in mind?' ),
+          array( 'who' => 'visitor', 'at' => '11:48:11 PM', 'text' => 'A Sunday would be much easier for us. Late September if possible.' ),
+          array( 'who' => 'ai',      'at' => '11:48:14 PM', 'text' => 'That works. What name and email should I put down so someone can send you times?' ),
+          array( 'who' => 'visitor', 'at' => '11:48:56 PM', 'text' => 'Camila Reyes, camila.reyes@example.com' ),
+          array( 'who' => 'ai',      'at' => '11:48:59 PM', 'text' => 'Thanks Camila. Someone will email you with Sunday tasting times.' ),
+        ),
+      ),
+    );
+    ?>
     <div class="morning-inbox">
       <div class="morning-inbox__chrome">
         <span class="morning-inbox__label">Overnight &mdash; Maggie&rsquo;s Cakes</span>
-        <span class="morning-inbox__count">3 new leads</span>
+        <span class="morning-inbox__count"><?php echo count( $morning_leads ); ?> new leads</span>
       </div>
       <ul class="morning-inbox__list">
+        <?php foreach ( $morning_leads as $ml ) : ?>
         <li class="morning-inbox__item">
-          <span class="morning-inbox__time">6:03 AM</span>
-          <span class="morning-inbox__who">Tom Byrne</span>
-          <span class="morning-inbox__what">Gluten-free cupcakes, 40 for Friday</span>
-          <span class="morning-inbox__tag">Lead captured</span>
+          <?php /* A REAL <button>, not a click handler on the <li>. It is the row's whole
+                   surface, so the row stays one target, but it takes focus, fires on
+                   Enter and Space for free, and announces as a control. The row was a
+                   plain <li> before, so nothing about the no-JS rendering regresses if
+                   the script never runs — see the CSS note on .is-interactive. */ ?>
+          <button type="button" class="morning-inbox__row"
+                  data-morning-open="<?php echo esc_attr( $ml['id'] ); ?>"
+                  aria-label="<?php echo esc_attr( 'Open the recap for ' . wp_strip_all_tags( $ml['who'] ) ); ?>">
+            <span class="morning-inbox__time"><?php echo esc_html( $ml['time'] ); ?></span>
+            <span class="morning-inbox__who"><?php echo esc_html( $ml['who'] ); ?></span>
+            <span class="morning-inbox__what"><?php echo wp_kses_post( $ml['what'] ); ?></span>
+            <span class="morning-inbox__tag">Lead captured</span>
+            <span class="morning-inbox__view" aria-hidden="true">View recap &rarr;</span>
+          </button>
         </li>
-        <li class="morning-inbox__item morning-inbox__item--open" aria-current="true">
-          <span class="morning-inbox__time">2:14 AM</span>
-          <span class="morning-inbox__who">Sarah Mitchell</span>
-          <span class="morning-inbox__what">Two-tier unicorn cake, 25 guests, April 12</span>
-          <span class="morning-inbox__tag">Lead captured</span>
-        </li>
-        <li class="morning-inbox__item">
-          <span class="morning-inbox__time">11:47 PM</span>
-          <span class="morning-inbox__who">Priya Raman</span>
-          <span class="morning-inbox__what">Wedding tasting &mdash; are you open Sundays?</span>
-          <span class="morning-inbox__tag">Lead captured</span>
-        </li>
+        <?php endforeach; ?>
       </ul>
     </div>
+
+    <?php
+    /* THE DOCUMENTS. Rendered server-side, one <dialog> each, hidden until opened.
+
+       ⚠️ THIS IS AN ENHANCEMENT AND IT IS ALLOWED TO BE ONE. The page's standing rule is
+       that content must not default to invisible and depend on JS to restore it — that
+       rule exists because PRIMARY content once did. These are worked examples behind a
+       row that already states the lead, the time and the outcome in the inbox itself; a
+       reader with no script loses the detail view and nothing they were told about.
+       Without JS the rows never gain their affordance (see .is-interactive in the CSS),
+       so there is no button advertising something that cannot happen.
+
+       <dialog> rather than a hand-built overlay: focus trapping, Esc, inertness of the
+       page behind and the top layer are all native. showModal() is what activates them —
+       a plain .show() or a CSS-only reveal gets none of it. */
+    ?>
+    <?php foreach ( $morning_leads as $ml ) : ?>
+    <dialog class="recap-doc" id="recap-<?php echo esc_attr( $ml['id'] ); ?>"
+            aria-labelledby="recap-<?php echo esc_attr( $ml['id'] ); ?>-title">
+      <div class="recap-doc__sheet">
+        <div class="recap-doc__bar">
+          <img class="recap-doc__logo"
+               src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>"
+               alt="SiteStaffr" width="240" height="72" loading="lazy" decoding="async">
+          <button type="button" class="recap-doc__close" data-morning-close aria-label="Close recap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <div class="recap-doc__body">
+          <p class="recap-doc__business" id="recap-<?php echo esc_attr( $ml['id'] ); ?>-title">Maggie&rsquo;s Cakes</p>
+
+          <section class="recap-doc__section">
+            <div class="recap-doc__section-head">
+              <strong>Conversation Recap</strong>
+              <span><?php echo esc_html( $ml['stamp'] ); ?></span>
+            </div>
+            <p><?php echo wp_kses_post( $ml['recap'] ); ?></p>
+            <ul class="recap-doc__fields">
+              <?php foreach ( $ml['fields'] as $f ) : ?>
+                <li>
+                  <span class="recap-doc__field-label"><?php echo esc_html( $f['label'] ); ?>:</span>
+                  <?php if ( ! empty( $f['tel'] ) ) : ?>
+                    <a href="tel:<?php echo esc_attr( $f['tel'] ); ?>"><?php echo esc_html( $f['value'] ); ?></a>
+                  <?php elseif ( ! empty( $f['mail'] ) ) : ?>
+                    <a href="mailto:<?php echo esc_attr( $f['mail'] ); ?>"><?php echo esc_html( $f['value'] ); ?></a>
+                  <?php else : ?>
+                    <?php echo esc_html( $f['value'] ); ?>
+                  <?php endif; ?>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+            <p class="recap-doc__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ml['followup'] ); ?></p>
+          </section>
+
+          <section class="recap-doc__section">
+            <div class="recap-doc__section-head">
+              <strong>Conversation Transcript</strong>
+              <span><?php echo esc_html( $ml['length'] ); ?></span>
+            </div>
+            <div class="recap-doc__messages">
+              <?php foreach ( $ml['turns'] as $t ) : ?>
+                <div class="recap-doc__msg recap-doc__msg--<?php echo 'ai' === $t['who'] ? 'ai' : 'visitor'; ?>">
+                  <div class="recap-doc__msg-meta">
+                    <strong><?php echo 'ai' === $t['who'] ? 'AI' : 'Visitor'; ?></strong>
+                    <?php echo esc_html( $t['at'] ); ?>
+                  </div>
+                  <p><?php echo wp_kses_post( $t['text'] ); ?></p>
+                </div>
+              <?php endforeach; ?>
+            </div>
+          </section>
+        </div>
+      </div>
+    </dialog>
+    <?php endforeach; ?>
 
     <?php /* THE FOUR CALLOUTS BECOME A CARDS ROW UNDER THE INBOX. They were set as two
              right-aligned on the left of the document and two left-aligned on the right,

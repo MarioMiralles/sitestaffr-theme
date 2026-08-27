@@ -1230,6 +1230,65 @@ if (langExpandBtn) {
 })();
 
 /* ===================================================================
+   SECTION 4 — the overnight inbox opens its recap documents.
+
+   Each row is a real <button> rendered by PHP; each document is a <dialog>
+   rendered by PHP alongside it. This script only connects the two.
+
+   ⚠️ `.is-interactive` IS ADDED LAST, AFTER EVERYTHING IS WIRED, and the CSS
+   hangs the entire affordance off it — pointer cursor, hover, the "View recap"
+   hint. If <dialog> is unsupported or anything here throws, the class is never
+   added and the rows read as the plain inbox they were before. A button that
+   looks clickable and does nothing is worse than one that never offered.
+
+   showModal(), never show(): the focus trap, Esc-to-close, the ::backdrop and
+   the top layer are all things the modal mode provides and the non-modal mode
+   does not.
+   =================================================================== */
+(function () {
+  var root = document.querySelector('.what-you-get');
+  if (!root) return;
+
+  var rows = Array.prototype.slice.call(root.querySelectorAll('[data-morning-open]'));
+  if (!rows.length) return;
+
+  /* Feature-detect the METHOD, not the element. A <dialog> tag parses everywhere;
+     older browsers simply render it inert with no showModal, which would throw on
+     the first click and leave the reader with a dead row. */
+  var probe = root.querySelector('dialog.recap-doc');
+  if (!probe || typeof probe.showModal !== 'function') return;
+
+  rows.forEach(function (row) {
+    var dlg = document.getElementById('recap-' + row.dataset.morningOpen);
+    if (!dlg) return;
+
+    row.addEventListener('click', function () {
+      dlg.showModal();
+    });
+
+    /* Click-outside-to-close. The dialog element fills the top layer, so a click
+       landing on the DIALOG itself rather than on the sheet inside it is a click on
+       the backdrop. Comparing against the sheet is what makes this reliable —
+       event.target === dlg is true only outside .recap-doc__sheet. */
+    dlg.addEventListener('click', function (e) {
+      if (e.target === dlg) dlg.close();
+    });
+
+    var closeBtn = dlg.querySelector('[data-morning-close]');
+    if (closeBtn) closeBtn.addEventListener('click', function () { dlg.close(); });
+
+    /* Focus returns to the row that opened it. Browsers restore focus to the opener
+       for showModal(), but not after a programmatic close() in every engine, and
+       landing back at the top of the document loses a keyboard reader their place. */
+    dlg.addEventListener('close', function () {
+      if (typeof row.focus === 'function') row.focus();
+    });
+  });
+
+  root.classList.add('is-interactive');
+})();
+
+/* ===================================================================
    SECTION 5 — the language orbit has NO SCRIPT, deliberately.
 
    It used to: clickable pills swapped a single greeting bubble, and this is
