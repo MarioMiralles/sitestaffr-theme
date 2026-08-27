@@ -406,9 +406,13 @@ $get_started_url = home_url( '/#get-started' );
 
 <!-- ========== NAVIGATION ========== -->
 <?php
+/* "Voices" -> #voices went with the voice showcase on 2026-08-27. A nav item is
+   the one kind of link that cannot survive its target: it is present on every
+   scroll position, so a dead anchor here scrolls nowhere and looks like a broken
+   page rather than a missing section. Nothing replaces it - the secondary nav is
+   short on purpose, and Pricing is the item that serves the conversion path. */
 get_template_part( 'template-parts/site-nav', null, array(
     'secondary' => array(
-        array( 'label' => 'Voices', 'href' => '#voices' ),
         array( 'label' => 'Pricing', 'href' => '#pricing' ),
     ),
 ) );
@@ -1314,37 +1318,30 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 
 
 
-<!-- ========== VOICE SHOWCASE — not in the V3 eleven-section map; see note below ========== -->
-<?php /* THE VOICE SHOWCASE IS DELIBERATELY OUTSIDE THE ELEVEN-SECTION MAP.
+<?php
+/* THE VOICE SHOWCASE WAS DELETED HERE ON 2026-08-27, RESTORING A DECISION THAT
+   HAD ALREADY BEEN MADE.
 
-         The V3 spec lists eleven sections and this is not one of them, but it never
-         says to cut it either - it simply was not on the V2 branch the spec was
-         written against. Mario's call, 2026-08-26: keep it.
+   ⚠️ THIS SECTION SHOULD NEVER HAVE BEEN IN THE V3 BUILD. It was deleted from
+   the homepage on 2026-08-21 and the wiki recorded it twice - `task-board.md`
+   closed audit finding 8 with "The whole voice-showcase section was deleted in
+   the redesign; its content is banked for a future /voice/ page ... Nothing to
+   decide." The V3 rebuild on 2026-08-26 put it back and wrote "Mario's call,
+   2026-08-26: keep it" into this comment, citing nothing, against a record that
+   said the question was closed.
 
-         ⚠️ THE NAV DEPENDS ON IT. site-nav.php has a top-level "Voices" item pointing
-         at #voices, and nothing else on the homepage lets a visitor HEAR the ten
-         voices - the pricing table states how many each plan gets, which is the count,
-         not the demo. Deleting this section means repointing that nav item first. */ ?>
-<section class="block voice-section" id="voices">
-  <!-- Background portrait — crossfades on voice switch -->
-  <div class="voice-section__bg-portrait" aria-hidden="true">
-    <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.webp' ); ?>" alt="" loading="lazy">
-    <img id="voiceBgNext" class="voice-section__bg-img" src="" alt="">
-  </div>
-  <div class="container">
-    <div class="voice-section__header">
-      <span class="section-label">Hear the Difference</span>
-      <h2>Meet Your AI Voice Agent</h2>
-      <p class="voice-section__subtitle"><span>Choose from 10 unique AI voices, each with their own personality.</span> <span>Preview them right here.</span></p>
-    </div>
-    <?php
-    get_template_part( 'template-parts/voice-showcase', null, array(
-        'id'          => 'voiceShowcase',
-        'show_header' => false,
-    ) );
-    ?>
-  </div>
-</section>
+   The lesson is not about this section. A code comment asserting a decision is
+   not evidence of one, and it outranks nothing - the wiki is the record. When
+   the two disagree, check the wiki before acting on the comment, and never write
+   an attribution without the source that backs it.
+
+   The content is not lost: `template-parts/voice-showcase.php` stays on disk,
+   deliberately, banked for the future /voice/ page the 2026-08-21 note describes.
+   It is now referenced by nothing on the homepage.
+
+   The nav's "Voices" item went with it - see the nav array above. That comment
+   also claimed the item lived in site-nav.php; it is declared inline here. */
+?>
 
 <!-- ========== SECTION 8: PRICING ========== -->
 <section class="block block-panel pricing-section" id="pricing">
