@@ -705,6 +705,53 @@ get_template_part( 'template-parts/site-nav', null, array(
       <p class="see-it__subtitle">One types, one talks. Same AI, same answers.</p>
     </div>
 
+    <?php
+    /* THE AT-REST STAGE (Mario, 2026-08-27: "the two blank panels looks bad so let's hide
+       them and just put a huge play button").
+
+       WHY THE PANELS WERE BLANK IN THE FIRST PLACE, because it is not a bug and the fix
+       must not "repair" it: the panels are rendered FULLY POPULATED by PHP, and the script
+       empties them on load only once it knows it can drive them. That is deliberate — with
+       JS off, or under prefers-reduced-motion, the whole conversation and the whole recap
+       are simply there. The blankness only ever existed in the one state where a script is
+       standing by to fill them, and this stage now covers exactly that state.
+
+       So there are three states, not two:
+         no JS / reduced motion  -> no stage at all, both panels full. Unchanged.
+         JS, not yet played      -> this stage. Panels hidden, one enormous target.
+         played once             -> stage gone for good, panels take over and animate.
+
+       `hidden` until JS removes it, for the same reason the transport is: with no script
+       there is nothing to play, and a dead play button is worse than none.
+
+       THE ROBOT IS THE EXISTING assets/images/robot-voice.webp — the one that came out
+       with the voice showcase and has been sitting unreferenced since. It is not a new
+       generation: it is already in the hero's render language (the style anchor), it is
+       already mid-conversation with speech lines and chat bubbles, which is precisely
+       what this section is about, and it costs nothing. Do not re-generate it to "match"
+       — matching is what it already does.
+
+       ⚠️ THE ROBOT IS DECORATION AND MUST STAY SECONDARY. The hero has this same
+       character two sections up at a much larger size; the reason this reads as a
+       different beat rather than a repeat is that here the PLAY BUTTON is the subject and
+       the robot is behind it. If the robot ever grows to compete, the section turns into
+       the hero again. */
+    ?>
+    <div class="see-it__stage" data-see-it-stage hidden
+         data-see-it-open-sound="<?php echo esc_url( sitestaffr_asset_url( 'assets/audio/open.mp3' ) ); ?>">
+      <img class="see-it__stage-robot"
+           src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-voice.webp' ) ); ?>"
+           alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
+      <?php /* A real <button> with a real accessible name. The label says what it plays,
+               not "play" — this is the only control in the section at rest, so it is the
+               one thing a screen-reader user has to understand from its name alone. */ ?>
+      <button class="see-it__stage-play" type="button" data-see-it-stage-play
+              aria-label="Play the conversation">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="8,5 20,12 8,19"/></svg>
+      </button>
+      <p class="see-it__stage-hint">Watch a visitor get answered &mdash; and the lead land in your inbox.</p>
+    </div>
+
     <div class="see-it__panels">
       <?php /* LEFT: the conversation. The two column labels do the arguing — "On your
                website" / "In your inbox" states the value exchange in four words and

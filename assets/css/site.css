@@ -1713,6 +1713,128 @@ body.sitestaffr-landing-page .hero__visual > * {
 .see-it__header { text-align: center; margin-bottom: 40px; }
 .see-it__subtitle { color: rgba(240,250,250,0.7); margin-top: 8px; }
 
+/* ---- The at-rest stage ------------------------------------------------
+   Mario, 2026-08-27: "the two blank panels looks bad so let's hide them and just put a
+   huge play button". See page-landing.php for why the panels were blank and why that is
+   only true in one of three states.
+
+   ⚠️ THE HIDE IS SCOPED TO `.is-interactive`, WHICH IS THE ENTIRE SAFETY PROPERTY.
+   `.is-interactive` is added by JS only after every handler is wired. Hiding the panels
+   unconditionally — or off a plain `.see-it` selector — would blank the section for
+   anyone without JS, under prefers-reduced-motion (which returns early and never adds
+   the class), or if the script throws on the way up. Those readers get the fully
+   rendered panels and no stage, which is the behaviour this section already had. */
+.see-it.is-interactive:not(.has-played) .see-it__panels { display: none; }
+.see-it.has-played .see-it__stage { display: none; }
+
+.see-it__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: 18px;
+  padding: clamp(20px, 4vw, 40px) 20px clamp(24px, 4vw, 44px);
+  text-align: center;
+}
+/* ⚠️ THE GLOW IS WHAT MAKES THE ROBOT VISIBLE, and raising opacity is not a substitute —
+   that was tried first and barely moved. The artwork is a DARK body with a thin teal rim
+   and it is sitting on a dark teal section, so the two are close in value before any
+   opacity is involved; at 0.5 it read as a smudge and at 0.88 it still read as murk.
+
+   The hero has exactly this problem solved exactly this way (.hero__robot-glow): put a
+   soft teal bloom BEHIND the figure so it has something to be seen against. Contrast is
+   the fix; transparency was the wrong dial.
+
+   `closest-side` is load-bearing, for the reason recorded against the hero's wash — an
+   ellipse without it draws a visible rectangle at the element's edges. */
+.see-it__stage::before {
+  content: '';
+  position: absolute;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Sized against the ROBOT, not the stage. At min(460px,84%) the bloom died out ~200px
+     from centre while the figure is 240px wide and 300px tall, so the silhouette's own
+     edges — the part that has to read — were sitting back on flat section colour. Wider
+     and a touch stronger puts the whole figure inside the lit area. Sampled at 1440:
+     section is (0,50,58) and the centre of the bloom lifts to about (9,91,115). */
+  width: min(680px, 96%);
+  aspect-ratio: 1 / 0.92;
+  background: radial-gradient(ellipse closest-side,
+              rgba(31,182,204,0.38) 0%, rgba(31,182,204,0.16) 52%, rgba(31,182,204,0) 78%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+}
+.see-it__stage > * { position: relative; z-index: 1; }
+/* Decoration, and deliberately quiet: the hero has this same character two sections up
+   at a far larger size, and the only thing stopping this reading as a repeat is that the
+   button is the subject here. Low opacity + behind the button is that decision in CSS. */
+.see-it__stage-robot {
+  width: auto;
+  height: clamp(190px, 26vw, 300px);
+  max-width: 100%;
+  /* 0.88, not the 0.5 this started at. The instinct to fade it was about keeping it
+     secondary to the button — but this artwork is a DARK body with a teal rim, sitting on
+     a dark section, so it is already low-contrast before any opacity is applied. At 0.5
+     it stopped reading as a robot and read as a smudge. Subordinate is a job for SIZE and
+     for the button sitting in front of it, both of which are doing it; dimming on top of
+     that only made the art look broken. */
+  opacity: 0.88;
+  pointer-events: none;
+  filter: drop-shadow(0 20px 44px rgba(0,0,0,0.45));
+}
+/* HUGE, as asked. It overlaps the robot rather than sitting under it, so the two read as
+   one object instead of a picture with a control beneath it. */
+.see-it__stage-play {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(-104px, -13vw, -70px);
+  width: clamp(84px, 11vw, 124px);
+  height: clamp(84px, 11vw, 124px);
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #04262C;
+  background: var(--teal-light);
+  box-shadow: 0 0 0 10px rgba(31,182,204,0.16), 0 18px 40px rgba(0,0,0,0.42);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.see-it__stage-play svg { width: 44%; height: 44%; margin-left: 6%; }
+.see-it__stage-play:hover,
+.see-it__stage-play:focus-visible {
+  transform: scale(1.06);
+  background: #35C9DD;
+  box-shadow: 0 0 0 16px rgba(31,182,204,0.20), 0 22px 48px rgba(0,0,0,0.48);
+}
+.see-it__stage-hint {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  max-width: 34rem;
+  font-size: 0.95rem;
+  color: rgba(240,250,250,0.72);
+}
+
+/* The panels arrive when the stage leaves. Two beats, left then right, so the eye reads
+   "a conversation happened" before "and here is what it produced" — the same causal
+   order the demo itself plays in. Decoration only: the panels are already in the DOM and
+   already populated, so a dropped animation costs nothing but the flourish. */
+@keyframes seeItPanelIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.see-it.has-played .see-it__col {
+  animation: seeItPanelIn 0.5s ease both;
+}
+.see-it.has-played .see-it__col:nth-child(1) { animation-delay: 0s; }
+.see-it.has-played .see-it__col:nth-child(2) { animation-delay: 0.16s; }
+@media (prefers-reduced-motion: reduce) {
+  .see-it.has-played .see-it__col { animation: none; }
+  .see-it__stage-play { transition: none; }
+}
+
 .see-it__panels {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
@@ -3254,7 +3376,7 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
    hover that turns it into a readable word makes it the loudest thing on the card. */
 .job-value:hover .job-value__mark span,
 .job-value:focus-within .job-value__mark span {
-  color: rgba(240,250,250,0.09);
+  color: rgba(240,250,250,0.065);
 }
 @media (prefers-reduced-motion: reduce) {
   .job-value { transition: none; }
@@ -3291,11 +3413,11 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   right: 14px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(2rem, 5.2vw, 3.25rem);
+  font-size: clamp(1.65rem, 4.2vw, 2.6rem);
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
-  color: rgba(240,250,250,0.055);
+  color: rgba(240,250,250,0.038);
   transition: color 0.3s ease;
 }
 

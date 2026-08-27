@@ -1023,6 +1023,8 @@ if (langExpandBtn) {
   var fillBar   = root.querySelector('[data-see-it-fill]');
   var timeEl    = root.querySelector('[data-see-it-time]');
   var business  = root.querySelector('[data-see-it-business]');
+  var stage     = root.querySelector('[data-see-it-stage]');
+  var stagePlay = root.querySelector('[data-see-it-stage-play]');
   var tabs      = Array.prototype.slice.call(root.querySelectorAll('.see-it__tab'));
 
   if (!thread || !fields || !transport || !playBtn) return;
@@ -1135,8 +1137,42 @@ if (langExpandBtn) {
     if (timeEl)  timeEl.textContent = '0:00 / ' + fmt(d.duration);
   }
 
+  /* THE OPEN CHIME. assets/audio/open.mp3 is the widget's own open sound, so pressing
+     the stage button sounds like the widget opening on a real site — which is exactly
+     what the panels then show. It is the ONE audio cue here: text mode has `src: null`
+     because a typed thread drives itself off a clock, so without this the section is
+     silent.
+
+     ⚠️ IT IS PLAYED ONLY FROM A CLICK, and that is not a style choice. Browsers block
+     audio that is not user-initiated; firing this anywhere else produces a rejected
+     promise and, in some browsers, a console error on a page that looks fine. The
+     .catch is not optional either — a blocked or missing file must not take the
+     animation down with it, because the sound is the garnish and the demo is the point. */
+  function chime() {
+    if (!stage) return;
+    var src = stage.getAttribute('data-see-it-open-sound');
+    if (!src) return;
+    try {
+      var a = new Audio(src);
+      a.volume = 0.5;
+      var p = a.play();
+      if (p && p.catch) p.catch(function () {});
+    } catch (e) {}
+  }
+
+  /* Retire the stage. ONE WAY ONLY — once the panels are up they stay up, including
+     after the demo finishes. Reverting to the stage on stop() would take the assembled
+     recap away at the exact moment it has finished assembling, which is the payoff the
+     whole section is built around. Replay is the transport's job, not the stage's. */
+  function revealPanels() {
+    if (root.classList.contains('has-played')) return;
+    root.classList.add('has-played');
+    if (stage) stage.hidden = true;
+  }
+
   function play() {
     if (playing) { stop(); return; }
+    revealPanels();
     clear();
     resetProgress();
     /* The caption is an at-rest instruction. Leaving it up during playback means
@@ -1171,10 +1207,23 @@ if (langExpandBtn) {
   });
   playBtn.addEventListener('click', play);
 
+  /* The stage button and the transport button both call play(); the stage's press adds
+     the chime because that press is the one that "opens the widget". Focus moves to the
+     transport afterwards so a keyboard user is not left on a button that has just
+     removed itself from the page. */
+  if (stagePlay) {
+    stagePlay.addEventListener('click', function () {
+      chime();
+      play();
+      if (playBtn && typeof playBtn.focus === 'function') playBtn.focus();
+    });
+  }
+
   /* Everything above is wired. Only NOW is it safe to swap the fully-rendered
      panels for the empty, playable version — so a throw anywhere earlier leaves
      the reader with a complete section rather than two empty boxes. */
   transport.hidden = false;
+  if (stage) stage.hidden = false;
   root.classList.add('is-interactive');
   clear();
   resetProgress();
