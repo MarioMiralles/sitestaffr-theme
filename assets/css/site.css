@@ -2431,7 +2431,26 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   border: 0;
   border-radius: var(--radius-lg);
   box-shadow: 0 20px 54px rgba(0,50,58,0.26), 0 4px 12px rgba(0,50,58,0.14);
-  overflow: hidden;
+  /* ⚠️ VISIBLE, NOT HIDDEN, AND THE BADGE DEPENDS ON IT. "Most Popular" sits
+     astride the panel's top edge as a label on the border, so it has to be able
+     to hang outside the panel's box. `overflow: hidden` is what sliced it in
+     half the first time.
+     The corner rounding that overflow was providing is done per column instead -
+     see the two rules below. Only the end columns need it; the middle ones are
+     square regardless, which is why this costs two rules and not four. */
+  overflow: visible;
+}
+/* ⚠️ MIN-WIDTH, and it has to be. Below 1040px these stop being columns of one
+   panel and become separate cards that round on all four corners. Left
+   unscoped, the end-column radii out-specify the card rule and the Pro card
+   renders with two square corners on a phone. */
+@media (min-width: 1041px) {
+  .price-grid--table > .price-grid__labels {
+    border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  }
+  .price-grid--table > .price-tier:last-of-type {
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+  }
 }
 
 /* ⚠️ ONE HAIRLINE VALUE FOR THE WHOLE TABLE. Every internal rule is this
@@ -2645,15 +2664,26 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 .price-grid--table .price-tier--popular .price-tier__price { color: #34D399; }
 .price-grid--table .price-tier--popular .price-tier__name { color: #fff; }
 
-/* IN FLOW, not absolute. The card version hangs at top:-14px to sit astride a
-   card's edge; the table clips its overflow, so that version was sliced in half
-   by the panel's top border. Inside a centred identity cell an inline-block sits
-   above the name on its own. */
+/* A LABEL ON THE BORDER, not a chip inside the box (Mario, 2026-08-26). It
+   straddles the panel's top edge over the Business column, the way a fieldset
+   legend sits on its frame.
+
+   Two things make this work rather than clip. The panel is `overflow: visible`
+   (see the note there), and .price-tier is already `position: relative`, so the
+   offset is measured from the column - not from the identity cell, which would
+   move the badge every time that cell's padding changed.
+
+   Out of flow also means the identity cell no longer reserves a line for it, so
+   Business's name and price sit on the same baseline as the other three columns
+   instead of 20px lower. */
 .price-grid--table .price-tier__badge {
-  position: static;
-  transform: none;
+  position: absolute;
+  top: -11px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
   display: inline-block;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   background: var(--emerald);
   background-image: none;
@@ -2662,8 +2692,9 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  margin-bottom: 4px;
-  box-shadow: none;
+  white-space: nowrap;
+  margin-bottom: 0;
+  box-shadow: 0 2px 10px rgba(0,50,58,0.35);
 }
 
 @media (max-width: 1040px) {
@@ -2680,7 +2711,9 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
     background: transparent;
     border: 0;
     box-shadow: none;
-    gap: 16px;
+    /* 26px, not 16: the badge hangs 11px above the Business card, and at 16px it
+       nearly touched the card stacked above it. */
+    gap: 26px;
     overflow: visible;
   }
   .price-grid__labels { display: none; }
@@ -2693,7 +2726,11 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
     border-radius: var(--radius-lg);
     background: var(--block-dark);
     box-shadow: 0 10px 28px rgba(0,50,58,0.18);
-    overflow: hidden;
+    /* Visible for the same reason the panel is: the badge straddles this card's
+       top edge here too. Nothing inside needs clipping - the rows carry a
+       border-top and no background, so there is nothing to spill past the
+       radius. */
+    overflow: visible;
   }
   /* Each card is its own surface now, so the trial and the recommended tier
      have to re-state their tint over the card rather than over the panel. */
