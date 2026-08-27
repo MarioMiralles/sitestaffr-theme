@@ -3212,16 +3212,25 @@ body.sitestaffr-landing-page .hero__visual > * {
   align-items: start;
 }
 
-/* Now a centered block under the heading rather than a card in the rail. It is seen
-   BEFORE the questions here, which was the original complaint about its older position
-   underneath the list — only a reader who finished all seventeen ever reached it. */
+/* ⚠️ IT CLOSES THE SECTION NOW, and that is a third position for this element — worth
+   knowing the history before moving it a fourth time. It sat under the list (seen only
+   by someone who read all seventeen), then in a sticky rail (which went with the rail
+   when the list became two columns), then in the header — where Mario's read was that it
+   "looks weird", because a support CTA above the questions interrupts the reader on the
+   way TO them.
+
+   Under two balanced columns it is a full-width footer to the section: it is passed by
+   everyone, and it arrives after the questions have had their chance rather than before.
+   The old "only finishers see it" objection does not apply, because a two-column list is
+   half as tall and its end is on screen with the columns. */
 .faq-section__ask {
-  display: inline-block;
-  margin-top: 26px;
-  padding: 18px 24px;
+  max-width: 34rem;
+  margin: clamp(30px, 4vw, 48px) auto 0;
+  padding: 20px 24px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   background: #fff;
+  text-align: center;
 }
 .faq-section__ask-lead { font-weight: 600; margin-bottom: 10px; }
 .faq-section__ask-note {
@@ -3244,7 +3253,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* The first item ships open: every answer is already in the DOM for the schema,
    so it costs nothing and shows the reader what an answer looks like. */
-.faq-item--open .faq-item__answer { max-height: 42rem; }
+/* ⚠️ ONE OPEN CLASS, AND IT IS `faq-item--open`. There were TWO, and that was the bug:
+   PHP rendered `faq-item--open` on the first question while the script toggled a bare
+   `open`, so the first answer was held open by a class nothing could ever remove and a
+   second answer could sit open beside it. Both names existed in this stylesheet, which
+   is why neither looked wrong on its own. If a bare `.open` ever reappears here, it is
+   this defect coming back. */
 
 @media (max-width: 900px) {
   /* One column on a phone. Two columns of accordions at this width would be two
@@ -7187,7 +7201,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .faq-item__icon::after {
   transform: translate(-50%, -50%) rotate(90deg);
 }
-.faq-item.open .faq-item__icon {
+.faq-item--open .faq-item__icon {
   transform: rotate(45deg);
   background: var(--teal-deep);
   color: white;
@@ -7197,9 +7211,24 @@ body.sitestaffr-landing-page .hero__visual > * {
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.faq-item.open .faq-item__answer {
-  max-height: 300px;
+/* ⚠️ 300px HAD TO GO UP. The longest answer here runs past it, and a max-height that
+   clips mid-sentence looks like a rendering fault rather than a truncation. It is a
+   transition ceiling, not a layout constraint — overshooting only makes the open
+   animation slightly faster over the unused portion. */
+.faq-item--open .faq-item__answer {
+  max-height: 46rem;
 }
+
+/* THE OPEN ONE IS HIGHLIGHTED (Mario, 2026-08-27: "Should we highlight the expanded
+   one?"). With everything collapsed by default, the open card is the only thing on
+   screen with any state, and it needs to read as selected rather than as merely taller.
+   Teal border + tinted head, matching the industry list's selected pill — same idea,
+   same palette, so the page has one language for "this is the one you chose". */
+.faq-item--open {
+  border-color: var(--teal-deep);
+  box-shadow: 0 6px 20px rgba(0,131,143,0.10);
+}
+.faq-item--open .faq-item__question { color: var(--teal-deep); }
 .faq-item__answer-inner {
   padding: 0 24px 20px;
   color: var(--text-secondary);

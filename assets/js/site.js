@@ -957,19 +957,28 @@ if (voiceShowcase) {
   });
 }
 
-// ========== FAQ ACCORDION ==========
+/* ========== FAQ ACCORDION ==========
+   ONE OPEN AT A TIME, AND ALL OF THEM CAN BE CLOSED (Mario, 2026-08-27). The logic here
+   was already correct; what was broken was the CLASS NAME. This toggled a bare `open`
+   while the PHP rendered `faq-item--open` on the first question and the stylesheet
+   carried rules for BOTH — so the first answer was pinned open by a class this code
+   never looked at, and clicking another question left two open at once.
+
+   Everything now agrees on `faq-item--open`. Nothing ships open; `aria-expanded` moves
+   with the class so the state is announced, not just drawn. */
 document.querySelectorAll('.faq-item__question').forEach(btn => {
   btn.addEventListener('click', () => {
-    const item = btn.parentElement;
-    const wasOpen = item.classList.contains('open');
+    const item = btn.closest('.faq-item');
+    if (!item) return;
+    const wasOpen = item.classList.contains('faq-item--open');
 
-    document.querySelectorAll('.faq-item.open').forEach(openItem => {
-      openItem.classList.remove('open');
+    document.querySelectorAll('.faq-item--open').forEach(openItem => {
+      openItem.classList.remove('faq-item--open');
       openItem.querySelector('.faq-item__question').setAttribute('aria-expanded', 'false');
     });
 
     if (!wasOpen) {
-      item.classList.add('open');
+      item.classList.add('faq-item--open');
       btn.setAttribute('aria-expanded', 'true');
     }
   });

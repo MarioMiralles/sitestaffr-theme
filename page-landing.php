@@ -2193,12 +2193,6 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
       <span class="section-label">Common Questions</span>
       <h2>Frequently Asked Questions</h2>
       <p class="faq-section__subtitle">The things people ask before they install it.</p>
-
-      <div class="faq-section__ask">
-        <p class="faq-section__ask-lead">Still have a question?</p>
-        <button type="button" class="btn btn--outline js-open-chat" data-cta="chat">Ask Our AI</button>
-        <p class="faq-section__ask-note">It&rsquo;s the same one you&rsquo;d install.</p>
-      </div>
     </div>
 
     <div class="faq-section__columns">
@@ -2208,15 +2202,19 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
             <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
             <?php foreach ( $faq_grouped[ $faq_group ] as $entry ) :
                 $faq = $entry['item'];
-                /* The first item of the whole list is open by default — every answer is
-                   already in the DOM for the schema, so opening one costs nothing and
-                   shows the reader what an answer looks like before they decide whether
-                   to bother. Keyed off the ORIGINAL index, so it stays the first question
-                   of the first category however the columns are dealt. */
-                $faq_open = 0 === $entry['i'];
+                /* ⚠️ NOTHING SHIPS OPEN (Mario, 2026-08-27). The first question used to,
+                   on the reasoning that it showed a reader what an answer looks like for
+                   free. Two things killed that: in two columns one open item makes the
+                   left column visibly taller than the right for no reason a reader can
+                   see, and the class it opened with was one the script could not remove,
+                   so it was permanently expanded rather than merely expanded first.
+
+                   SEO is unaffected — every answer is in the DOM either way, which is
+                   what the FAQPage schema reads. Collapsed is a CSS max-height, not
+                   absence. */
                 ?>
-              <div class="faq-item<?php echo $faq_open ? ' faq-item--open' : ''; ?>">
-                <button class="faq-item__question" type="button" aria-expanded="<?php echo $faq_open ? 'true' : 'false'; ?>">
+              <div class="faq-item">
+                <button class="faq-item__question" type="button" aria-expanded="false">
                   <?php echo esc_html( $faq['question'] ); ?>
                   <span class="faq-item__icon" aria-hidden="true"></span>
                 </button>
@@ -2228,6 +2226,15 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
           <?php endforeach; ?>
         </div>
       <?php endforeach; ?>
+    </div>
+
+    <?php /* AFTER the questions, not before them. It was in the header for one release
+             and read as an interruption on the way to the list. See the CSS note for the
+             full history of this element's position — it has moved three times. */ ?>
+    <div class="faq-section__ask">
+      <p class="faq-section__ask-lead">Still have a question?</p>
+      <button type="button" class="btn btn--outline js-open-chat" data-cta="chat">Ask Our AI</button>
+      <p class="faq-section__ask-note">It&rsquo;s the same one you&rsquo;d install.</p>
     </div>
   </div>
 </section>
