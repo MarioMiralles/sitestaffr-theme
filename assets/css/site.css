@@ -1788,9 +1788,9 @@ body.sitestaffr-landing-page .hero__visual > * {
 .see-it__stage-play {
   position: relative;
   z-index: 1;
-  margin-top: clamp(-104px, -13vw, -70px);
-  width: clamp(84px, 11vw, 124px);
-  height: clamp(84px, 11vw, 124px);
+  margin-top: clamp(-118px, -14.5vw, -78px);
+  width: clamp(98px, 13vw, 150px);
+  height: clamp(98px, 13vw, 150px);
   display: grid;
   place-items: center;
   border: 0;
@@ -1801,7 +1801,11 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: 0 0 0 10px rgba(31,182,204,0.16), 0 18px 40px rgba(0,0,0,0.42);
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
-.see-it__stage-play svg { width: 44%; height: 44%; margin-left: 6%; }
+/* NO margin-left. The centring lives in the polygon's coordinates (see page-landing.php);
+   a CSS nudge here would stack on top of that offset and is what put the glyph off-centre
+   in the first place. `display: block` so the svg does not sit on a text baseline, which
+   adds a few px of descender space under it and pushes the glyph optically high. */
+.see-it__stage-play svg { display: block; width: 42%; height: 42%; }
 .see-it__stage-play:hover,
 .see-it__stage-play:focus-visible {
   transform: scale(1.06);

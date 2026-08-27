@@ -747,7 +747,21 @@ get_template_part( 'template-parts/site-nav', null, array(
                one thing a screen-reader user has to understand from its name alone. */ ?>
       <button class="see-it__stage-play" type="button" data-see-it-stage-play
               aria-label="Play the conversation">
-        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="8,5 20,12 8,19"/></svg>
+        <?php /* ⚠️ THE TRIANGLE'S OWN COORDINATES DO THE CENTRING — there is no margin
+                 nudge on this icon and there must not be one added back.
+
+                 It was `8,5 20,12 8,19`, whose bounding box runs x=8..20 and is therefore
+                 centred on x=14 inside a 24-wide viewBox: two units right of centre before
+                 any CSS is involved. A `margin-left` was then added on top of that, which
+                 is why the glyph sat visibly right in the circle. Two offsets stacking is
+                 also why nudging the CSS never fixed it — the error was in the artwork.
+
+                 Now x=7..19: the bounding box is centred on 13, one unit right of the
+                 viewBox's 12. That single unit is deliberate and is optical, not
+                 geometric — a right-pointing triangle carries its mass on the flat left
+                 edge, so a perfectly centred bounding box reads as sitting too far left.
+                 Verified by measuring the rendered pixels, not by eye. */ ?>
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7,5 19,12 7,19"/></svg>
       </button>
       <p class="see-it__stage-hint">Watch a visitor get answered &mdash; and the lead land in your inbox.</p>
     </div>
