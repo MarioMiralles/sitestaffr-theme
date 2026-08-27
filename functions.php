@@ -545,6 +545,29 @@ function sitestaffr_industry_registry() {
 					'seo_title' => 'AI Chat & Voice Agent for Veterinary Clinics | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
+				/* THE SIXTEENTH INDUSTRY, added 2026-08-26. It exists so section 7's
+				   testimonial belongs to a named industry: Synergy Scribes is medical
+				   staffing, and until now the proof section named a business in a
+				   category the industries section did not list.
+
+				   IT GOES IN HEALTH & MEDICAL EVEN THOUGH IT IS B2B. Someone searching
+				   for it thinks healthcare, and the five groups are a browse aid rather
+				   than a taxonomy — filing it by business model instead of by the word
+				   people would look under would be technically tidier and less useful.
+
+				   ⚠️ The homepage's industry count is COUNTED from this registry
+				   (page-landing.php derives "+N more" from sitestaffr_industry_list()),
+				   so adding this entry moves that number by itself. The plugin's
+				   "Great For" list is a SEPARATE repo and is not updated by this. */
+				array(
+					'slug'      => 'medical-staffing',
+					'title'     => 'Medical Staffing',
+					'icon'      => '🩺',
+					'blurb'     => 'After-hours facility inquiries answered and captured, with the details ready on Monday.',
+					'llms'      => 'AI chat and voice agent for medical staffing agencies',
+					'seo_title' => 'AI Chat & Voice Agent for Medical Staffing | SiteStaffr',
+					'metadesc'  => 'SiteStaffr answers medical staffing website visitors 24/7, captures facility and scribe inquiries after hours, and emails a full recap. Free 30-day trial.',
+				),
 			),
 		),
 		array(
@@ -751,6 +774,30 @@ function sitestaffr_industry_categories() {
  */
 function sitestaffr_industry_art_thumb_url( $slug ) {
 	$relative = 'assets/images/industries/thumbs/' . $slug . '.webp';
+	if ( ! file_exists( get_stylesheet_directory() . '/' . $relative ) ) {
+		return '';
+	}
+	return sitestaffr_asset_url( $relative );
+}
+
+/**
+ * Full-size industry isometric, for the homepage's section 6 panel.
+ *
+ * The 1024x1024 originals rather than the thumbs: section 6 renders them at ~440px on
+ * desktop and ~200px inside the mobile accordion, and the thumb set is sized for the
+ * small card grids on /for/.
+ *
+ * ⚠️ RETURNS '' WHEN THE FILE IS ABSENT, exactly like the thumb helper, and callers are
+ * expected to branch on that. Medical Staffing was added to the registry on 2026-08-26
+ * before its isometric was keyed, so this returning empty is a REAL state today, not a
+ * theoretical one. A missing render must degrade to something deliberate rather than to
+ * a broken-image box.
+ *
+ * @param string $slug Industry slug.
+ * @return string URL, or '' if there is no render for this industry yet.
+ */
+function sitestaffr_industry_art_url( $slug ) {
+	$relative = 'assets/images/industries/' . $slug . '.webp';
 	if ( ! file_exists( get_stylesheet_directory() . '/' . $relative ) ) {
 		return '';
 	}

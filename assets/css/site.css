@@ -2036,6 +2036,131 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
           mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 96%);
 }
 
+/* ---- Section 6: who this is for --------------------------------------
+   Split, image LEFT (block-split--reverse) because section 5 puts the robot on
+   the right and the two alternate.
+
+   The isometrics render at ~440px here. The design-system rule that deleted them
+   was about SIZE — "wherever they render below ~100px" — not about the style. */
+.industries { background: var(--warm-white); }
+.industries__header { text-align: center; margin-bottom: 40px; }
+.industries__subtitle { color: var(--text-secondary); margin-top: 8px; }
+.industries__grid { align-items: start; }
+
+.industries__art { position: relative; }
+.industries__panel { display: none; }
+.industries__panel.is-active { display: block; }
+.industries__panel img {
+  width: 100%;
+  max-width: 440px;
+  height: auto;
+  margin-inline: auto;
+}
+/* A missing render degrades to the industry's own emoji at display size, not to
+   an alt-text box. Medical Staffing is in this state today. */
+.industries__panel-fallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  max-width: 440px;
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  font-size: 140px;
+  background: var(--teal-pale);
+  border-radius: var(--radius-xl);
+}
+
+.industries__excerpt-item { display: none; text-align: center; margin-top: 8px; }
+.industries__excerpt-item.is-active { display: block; }
+.industries__excerpt-item h3 { font-size: 1.15rem; margin-bottom: 6px; }
+.industries__excerpt-item p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  max-width: 42ch;
+  margin-inline: auto;
+}
+.industries__link {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--teal-deep);
+  border-bottom: 1px solid rgba(0,131,143,0.35);
+}
+.industries__link:hover { border-bottom-color: var(--teal-deep); }
+
+.industries__group + .industries__group { margin-top: 22px; }
+.industries__group-heading {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.industries__names { list-style: none; margin: 0; padding: 0; }
+.industries__name {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 7px 10px;
+  margin-left: -10px;
+  border-radius: var(--radius-sm);
+  background: none;
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  transition: background 0.16s ease, color 0.16s ease;
+}
+.industries__name:hover { background: var(--teal-pale); color: var(--teal-deep); }
+.industries__name.is-active {
+  background: var(--teal-pale);
+  color: var(--teal-deep);
+  font-weight: 600;
+  box-shadow: inset 2px 0 0 var(--teal-deep);
+}
+
+/* Desktop: the mobile expansion is not rendered at all. */
+.industries__mobile-detail { display: none; }
+
+@media (max-width: 900px) {
+  /* ONE-LEVEL ACCORDION. Category headings stay visible as static labels and only
+     the industries expand — closed state is 5 headings + 16 names, about one and a
+     bit screens, so someone scanning for their trade sees everything at once.
+     Two stacked columns would mean tapping a name changes an image scrolled off
+     screen; a two-level accordion would be three taps deep. */
+  .industries__art { display: none; }
+  .industries__name { padding: 11px 10px; }
+  .industries__name::after {
+    content: "+";
+    float: right;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+  .industries__name.is-open::after { content: "\2212"; }
+  .industries__names li { border-bottom: 1px solid var(--border-light); }
+
+  .industries__mobile-detail {
+    display: block;
+    padding: 4px 0 16px;
+  }
+  .industries__mobile-detail img {
+    width: 200px;          /* ~200px here, not 440 */
+    height: auto;
+    margin: 0 0 10px;
+  }
+  .industries__mobile-detail p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+  }
+  /* Collapsed only once JS confirms it can reopen them. Without JS every detail
+     stays open, so a phone visitor with no script still gets every blurb and
+     every link rather than a list of dead buttons. */
+  .industries.is-interactive .industries__mobile-detail { display: none; }
+  .industries.is-interactive .industries__name.is-open + .industries__mobile-detail { display: block; }
+}
+
 /* ---- The curtain seam -------------------------------------------------
    Sits in the flow between the light hero and the dark section 2. Its own
    background is the hero's, and the path is filled with the dark block colour,

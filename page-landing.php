@@ -542,48 +542,6 @@ get_template_part( 'template-parts/site-nav', null, array(
 
 
 
-<!-- ========== SECTION 6: SOCIAL PROOF ========== -->
-<section class="proof-section">
-  <div class="proof-section__backdrop" aria-hidden="true">
-    <div class="proof-section__backdrop-panel"></div>
-    <div class="proof-section__backdrop-accent"></div>
-  </div>
-  <div class="container">
-    <div class="proof-section__layout">
-      <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
-      <div class="proof-section__portrait-wrap">
-        <div class="proof-section__portrait-frame">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.webp' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="400" height="526" loading="lazy">
-        </div>
-        <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
-      </div>
-      <div class="proof-section__content">
-        <span class="proof-section__label">Trusted in Healthcare</span>
-        <blockquote class="proof-section__quote">
-          <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
-        </blockquote>
-        <cite class="proof-section__cite">
-          <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
-          <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
-        </cite>
-      </div>
-    </div>
-    <div class="proof-section__stats">
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">24/7</span>
-        <span class="proof-section__stat-label">Lead capture</span>
-      </div>
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">57+</span>
-        <span class="proof-section__stat-label">Languages</span>
-      </div>
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">&lt;30s</span>
-        <span class="proof-section__stat-label">Recap delivery</span>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ========== HEAR IT WORK: AUDIO DEMO (relocated from hero) ========== -->
 <?php /* SECTION 3 — the second half of the dark block. Shares section 2's background, so
@@ -740,125 +698,6 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 4: 57+ LANGUAGES ========== -->
-<?php
-/* SECTION 5 — Speaks their language.
-
-   THE CROWD RENDER IS DELETED. It was the best-looking image on the site and it still
-   had to go:
-
-     1. In the V3 order it would be a dark full-bleed band between two light sections,
-        which is a stripe, and it put the abandoned painterly style directly against the
-        glossy cyan robot.
-     2. It was the maintenance trap this whole review was called to fix — twelve
-        hand-measured --x/--y percentages positioned over the artwork, where a code
-        comment recorded that swapping the image "silently invalidates all twelve", and
-        that they had already been re-measured twice.
-     3. Most bubbles did not render: twelve specced, four visible at 1440.
-     4. About 250px of it was wet pavement; people occupied a 200px band in a ~900px
-        section.
-     5. It carried TWO LISTS OF LANGUAGES that did not agree — pills saying Spanish /
-        Mandarin / French, bubbles saying Hola / Hallo / Xin chào.
-
-   THE REPLACEMENT COSTS NO NEW ART. robot-languages.webp was generated for this exact
-   slot on 2026-08-25, committed, and never placed.
-
-   WHY THE ROBOT ARGUES BETTER THAN THE CROWD. A crowd claims "your visitors are
-   diverse" — true, but not the product claim, and a picture of a street cannot prove it.
-   The robot with a live greeting claims "it speaks them", which is the thing only
-   SiteStaffr can say, and the greeting is a real product surface rather than a stock
-   photograph.
-
-   THE PILLS BECOME THE CONTROL. That collapses the two redundant lists into one thing
-   and adds the interactivity that tested well: click Mandarin, the greeting becomes 你好.
-
-   ⚠️ `lang` ON EVERY GREETING AND `dir="rtl"` ON THE ARABIC. A screen reader switches
-   voice on `lang`; without it a synthesiser reads "Hola" in English phonetics on the one
-   section whose entire subject is other languages. This is not decoration.
-*/
-$lang_greetings = array(
-	array( 'code' => 'es', 'name' => 'Spanish',  'text' => '¡Hola! ¿En qué puedo ayudarte?' ),
-	array( 'code' => 'zh', 'name' => 'Mandarin', 'text' => '你好！有什么可以帮您的吗？' ),
-	array( 'code' => 'fr', 'name' => 'French',   'text' => 'Bonjour ! Comment puis-je vous aider ?' ),
-	array( 'code' => 'ar', 'name' => 'Arabic',   'text' => 'مرحبا! كيف يمكنني مساعدتك؟', 'rtl' => true ),
-	array( 'code' => 'hi', 'name' => 'Hindi',    'text' => 'नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?' ),
-);
-?>
-<section class="block block-split lang-section" id="languages">
-  <div class="block__inner">
-    <div class="block-split__grid">
-      <div class="lang-section__copy">
-        <span class="section-label">Speaks Their Language</span>
-        <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
-        <p class="lang-section__text">
-          Your visitors speak 57+ languages, and so does SiteStaffr. It answers in whatever language they open with.
-        </p>
-
-        <?php /* The greeting bubble. Rendered with the FIRST greeting already in it, so
-                 the section is complete before any script runs. */ ?>
-        <div class="lang-bubble" data-lang-bubble>
-          <p class="lang-bubble__text" lang="es" data-lang-text>¡Hola! ¿En qué puedo ayudarte?</p>
-        </div>
-
-        <?php /* PROMOTED FROM BODY TEXT TO ITS OWN ELEMENT. It closes the owner's
-                 immediate objection — "great, but I can't read Mandarin" — and as a
-                 sentence buried in a paragraph it was doing none of that work. */ ?>
-        <p class="lang-section__english">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          Every recap arrives in English, ready for you.
-        </p>
-
-        <?php /* The pills ARE the control, not a second list. With JS off they still
-                 read as the list of supported languages, which is what they were
-                 before — so nothing is lost, only gained. */ ?>
-        <div class="lang-pills" role="group" aria-label="Preview a greeting in another language">
-          <?php foreach ( $lang_greetings as $i => $g ) : ?>
-            <button type="button"
-                    class="lang-pill<?php echo 0 === $i ? ' lang-pill--active' : ''; ?>"
-                    data-lang-code="<?php echo esc_attr( $g['code'] ); ?>"
-                    data-lang-greeting="<?php echo esc_attr( $g['text'] ); ?>"
-                    <?php echo ! empty( $g['rtl'] ) ? 'data-lang-rtl="1"' : ''; ?>
-                    aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>">
-              <?php echo esc_html( $g['name'] ); ?>
-            </button>
-          <?php endforeach; ?>
-          <span class="lang-pill lang-pill--more">+52 more</span>
-        </div>
-      </div>
-
-      <?php /* Robot on the RIGHT. Section 6 puts its artifact on the left so the two
-               alternate, and section 1 and section 11 also carry him on the right —
-               three appearances on the same side make him a motif rather than floating
-               decoration. */ ?>
-      <div class="block-split__art lang-section__art">
-        <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-languages.webp' ) ); ?>"
-             alt="" aria-hidden="true"
-             width="1122" height="1383" loading="lazy" decoding="async">
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========== SECTION 5: WHAT YOU GET ========== -->
-<?php /* SECTION 4 — Your morning. Light again; the dark block ended with section 3.
-
-         THE RECAP DOCUMENT THAT USED TO BE HERE IS DELETED, and that is the largest
-         length saving on the page — achieved by removing a duplicate rather than by
-         cutting content.
-
-         Section 3 now shows a recap ASSEMBLING as the conversation plays. This section
-         then showed the same artifact again, static, one screen later. That is a
-         downgrade repeat: the second showing can only be less interesting than the first.
-
-           section 3 = ONE conversation, seen happening.
-           section 4 = THREE conversations, seen accumulated.
-
-         Singular to plural is an escalation instead of a repeat, and it gives this
-         section the one argument section 3 structurally cannot make: you did not get a
-         lead, you got three, and you were asleep for all of them.
-
-         The bridge line went with the document ("Here is what the 2:14 AM one looked
-         like when you opened it") — it pointed at the thing that no longer exists. */ ?>
 <section class="block what-you-get" id="your-morning">
   <div class="block__inner">
     <div class="what-you-get__header">
@@ -963,6 +802,315 @@ $lang_greetings = array(
              buying questions are answered — see the CRM entry in $faq_items. */ ?>
   </div>
 </section>
+
+<!-- ========== SECTION 4: 57+ LANGUAGES ========== -->
+<?php
+/* SECTION 5 — Speaks their language.
+
+   THE CROWD RENDER IS DELETED. It was the best-looking image on the site and it still
+   had to go:
+
+     1. In the V3 order it would be a dark full-bleed band between two light sections,
+        which is a stripe, and it put the abandoned painterly style directly against the
+        glossy cyan robot.
+     2. It was the maintenance trap this whole review was called to fix — twelve
+        hand-measured --x/--y percentages positioned over the artwork, where a code
+        comment recorded that swapping the image "silently invalidates all twelve", and
+        that they had already been re-measured twice.
+     3. Most bubbles did not render: twelve specced, four visible at 1440.
+     4. About 250px of it was wet pavement; people occupied a 200px band in a ~900px
+        section.
+     5. It carried TWO LISTS OF LANGUAGES that did not agree — pills saying Spanish /
+        Mandarin / French, bubbles saying Hola / Hallo / Xin chào.
+
+   THE REPLACEMENT COSTS NO NEW ART. robot-languages.webp was generated for this exact
+   slot on 2026-08-25, committed, and never placed.
+
+   WHY THE ROBOT ARGUES BETTER THAN THE CROWD. A crowd claims "your visitors are
+   diverse" — true, but not the product claim, and a picture of a street cannot prove it.
+   The robot with a live greeting claims "it speaks them", which is the thing only
+   SiteStaffr can say, and the greeting is a real product surface rather than a stock
+   photograph.
+
+   THE PILLS BECOME THE CONTROL. That collapses the two redundant lists into one thing
+   and adds the interactivity that tested well: click Mandarin, the greeting becomes 你好.
+
+   ⚠️ `lang` ON EVERY GREETING AND `dir="rtl"` ON THE ARABIC. A screen reader switches
+   voice on `lang`; without it a synthesiser reads "Hola" in English phonetics on the one
+   section whose entire subject is other languages. This is not decoration.
+*/
+$lang_greetings = array(
+	array( 'code' => 'es', 'name' => 'Spanish',  'text' => '¡Hola! ¿En qué puedo ayudarte?' ),
+	array( 'code' => 'zh', 'name' => 'Mandarin', 'text' => '你好！有什么可以帮您的吗？' ),
+	array( 'code' => 'fr', 'name' => 'French',   'text' => 'Bonjour ! Comment puis-je vous aider ?' ),
+	array( 'code' => 'ar', 'name' => 'Arabic',   'text' => 'مرحبا! كيف يمكنني مساعدتك؟', 'rtl' => true ),
+	array( 'code' => 'hi', 'name' => 'Hindi',    'text' => 'नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?' ),
+);
+?>
+<section class="block block-split lang-section" id="languages">
+  <div class="block__inner">
+    <div class="block-split__grid">
+      <div class="lang-section__copy">
+        <span class="section-label">Speaks Their Language</span>
+        <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
+        <p class="lang-section__text">
+          Your visitors speak 57+ languages, and so does SiteStaffr. It answers in whatever language they open with.
+        </p>
+
+        <?php /* The greeting bubble. Rendered with the FIRST greeting already in it, so
+                 the section is complete before any script runs. */ ?>
+        <div class="lang-bubble" data-lang-bubble>
+          <p class="lang-bubble__text" lang="es" data-lang-text>¡Hola! ¿En qué puedo ayudarte?</p>
+        </div>
+
+        <?php /* PROMOTED FROM BODY TEXT TO ITS OWN ELEMENT. It closes the owner's
+                 immediate objection — "great, but I can't read Mandarin" — and as a
+                 sentence buried in a paragraph it was doing none of that work. */ ?>
+        <p class="lang-section__english">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+          Every recap arrives in English, ready for you.
+        </p>
+
+        <?php /* The pills ARE the control, not a second list. With JS off they still
+                 read as the list of supported languages, which is what they were
+                 before — so nothing is lost, only gained. */ ?>
+        <div class="lang-pills" role="group" aria-label="Preview a greeting in another language">
+          <?php foreach ( $lang_greetings as $i => $g ) : ?>
+            <button type="button"
+                    class="lang-pill<?php echo 0 === $i ? ' lang-pill--active' : ''; ?>"
+                    data-lang-code="<?php echo esc_attr( $g['code'] ); ?>"
+                    data-lang-greeting="<?php echo esc_attr( $g['text'] ); ?>"
+                    <?php echo ! empty( $g['rtl'] ) ? 'data-lang-rtl="1"' : ''; ?>
+                    aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>">
+              <?php echo esc_html( $g['name'] ); ?>
+            </button>
+          <?php endforeach; ?>
+          <span class="lang-pill lang-pill--more">+52 more</span>
+        </div>
+      </div>
+
+      <?php /* Robot on the RIGHT. Section 6 puts its artifact on the left so the two
+               alternate, and section 1 and section 11 also carry him on the right —
+               three appearances on the same side make him a motif rather than floating
+               decoration. */ ?>
+      <div class="block-split__art lang-section__art">
+        <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-languages.webp' ) ); ?>"
+             alt="" aria-hidden="true"
+             width="1122" height="1383" loading="lazy" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<?php
+/* SECTION 6 — Who this is for. The section Mario hated most, and the one that
+   motivated this review. Rebuilt rather than adjusted.
+
+   WHAT WAS WRONG WITH THE OLD FLAT BLOCK:
+     - all fifteen names linked to /for/{slug}/ — fifteen exit doors immediately before
+       proof and pricing, and they did not LOOK like links, so a click surprised and a
+       wanted click was undiscoverable.
+     - five lines ended on a dangling separator dot, the mirror of a bug already fixed
+       once: a separator in flowing text cannot be suppressed at a line boundary in pure
+       CSS.
+     - it did the recognition job and nothing else.
+
+   THE ISOMETRICS FINALLY GET A SIZE YOU CAN SEE. ⚠️ This does NOT contradict the "no
+   isometric" rule — that rule was about SIZE. The design system deletes them "wherever
+   they render below ~100px", because you could not see them. They are 1024x1024 and hold
+   at 440px easily, and they are the right style family: smooth, brand teal, transparent
+   background, no warm light. The incompatible style was the painterly amber CITY.
+
+   CLICK, NOT HOVER, for three reasons: hover does not exist on touch and most SMB
+   traffic is phones; hover flickers, because crossing the list swaps a 440px image four
+   times; and the excerpt needs persistence — you cannot move the pointer to a link that
+   vanishes when you leave the name.
+
+   THE BLURBS COME FROM THE REGISTRY. No copywriting, and a new industry stays correct
+   for free. */
+$ind_groups = sitestaffr_industry_registry();
+$ind_flat   = sitestaffr_industry_list();
+$ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
+?>
+<section class="block block-split block-split--reverse industries" id="industries">
+  <div class="block__inner">
+    <div class="industries__header">
+      <span class="section-label">Who This Is For</span>
+      <h2>Built for Businesses Where a Missed Message Is a Lost Customer</h2>
+      <?php /* Counted, never written out. "Sixteen industries" hardcoded here is how the
+               subtitle and the registry drift apart the moment a seventeenth is added. */ ?>
+      <p class="industries__subtitle">
+        <?php echo esc_html( count( $ind_flat ) ); ?> industries, one problem. Find yours.
+      </p>
+    </div>
+
+    <div class="block-split__grid industries__grid">
+      <?php /* IMAGE LEFT. Section 5 puts the robot on the right, so this alternates —
+               that is the whole reason block-split--reverse exists. */ ?>
+      <div class="block-split__art industries__art">
+        <?php foreach ( $ind_flat as $i => $ind ) :
+            $art = sitestaffr_industry_art_url( $ind['slug'] );
+            /* ⚠️ A MISSING RENDER MUST NOT PRODUCE A BROKEN IMAGE. Medical Staffing is
+               the sixteenth industry and its isometric is generated but not yet keyed,
+               so the file genuinely is absent right now. sitestaffr_industry_art_url()
+               returns '' when the file does not exist, and the panel falls back to the
+               industry's emoji at display size rather than an alt-text box. */
+            ?>
+          <div class="industries__panel<?php echo 0 === $i ? ' is-active' : ''; ?>"
+               data-ind-panel="<?php echo esc_attr( $ind['slug'] ); ?>"
+               <?php echo 0 === $i ? '' : 'aria-hidden="true"'; ?>>
+            <?php if ( $art ) : ?>
+              <img src="<?php echo esc_url( $art ); ?>"
+                   alt=""
+                   width="1024" height="1024"
+                   <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?>
+                   decoding="async">
+            <?php else : ?>
+              <span class="industries__panel-fallback" aria-hidden="true"><?php echo esc_html( $ind['icon'] ); ?></span>
+            <?php endif; ?>
+          </div>
+        <?php endforeach; ?>
+
+        <?php /* The excerpt sits under the image on desktop and inside each accordion
+                 item on mobile, so it is rendered twice — once here for the pointer
+                 layout, once per item below. Both come from the same registry field. */ ?>
+        <div class="industries__excerpt" data-ind-excerpt>
+          <?php foreach ( $ind_flat as $i => $ind ) : ?>
+            <div class="industries__excerpt-item<?php echo 0 === $i ? ' is-active' : ''; ?>"
+                 data-ind-excerpt-for="<?php echo esc_attr( $ind['slug'] ); ?>">
+              <h3><?php echo esc_html( $ind['title'] ); ?></h3>
+              <p><?php echo esc_html( $ind['blurb'] ); ?></p>
+              <?php /* ONE link, at the end, NEW TAB, with per-industry text rather than
+                       a generic "learn more" — per the happy-path rule, this is a
+                       deliberate exit and it should say where it goes. */ ?>
+              <a class="industries__link"
+                 href="<?php echo esc_url( home_url( '/for/' . $ind['slug'] . '/' ) ); ?>"
+                 target="_blank" rel="noopener">
+                See what <?php echo esc_html( strtolower( $ind['title'] ) ); ?> get asked
+                <span aria-hidden="true">&nearr;</span>
+              </a>
+            </div>
+          <?php endforeach; ?>
+        </div>
+      </div>
+
+      <?php /* LIST RIGHT. Group headings RETURN, and that correctly reverses a recorded
+               decision. They were killed because "five headings plus fifteen names is a
+               rail again" — an objection that does not survive this layout: the list is
+               one column of a Split beside a 440px image, not the shape of the section.
+
+               ⚠️ ON MOBILE the category headings stay VISIBLE as static labels and only
+               the industries collapse. Closed state is 5 headings + 16 names, about one
+               and a bit screens, so someone scanning for their trade sees everything at
+               once. Mobile is genuinely better at the recognition job than desktop here.
+               A two-level accordion would be three taps deep and every 440px expansion
+               would blow the layout apart. */ ?>
+      <div class="industries__list">
+        <?php foreach ( $ind_groups as $group ) : ?>
+          <div class="industries__group">
+            <h3 class="industries__group-heading"><?php echo esc_html( $group['heading'] ); ?></h3>
+            <ul class="industries__names">
+              <?php foreach ( $group['industries'] as $ind ) : ?>
+                <li>
+                  <button type="button"
+                          class="industries__name<?php echo ( $ind_first && $ind['slug'] === $ind_first['slug'] ) ? ' is-active' : ''; ?>"
+                          data-ind-name="<?php echo esc_attr( $ind['slug'] ); ?>"
+                          aria-pressed="<?php echo ( $ind_first && $ind['slug'] === $ind_first['slug'] ) ? 'true' : 'false'; ?>">
+                    <?php echo esc_html( $ind['title'] ); ?>
+                  </button>
+
+                  <?php /* THE MOBILE EXPANSION. Rendered for every industry and hidden by
+                           CSS at desktop widths, so with no JS at all a phone visitor
+                           still gets every blurb and every link — the accordion is a
+                           progressive enhancement over a plain list, not a requirement
+                           for reading it. Image is ~200px here, not 440. */ ?>
+                  <div class="industries__mobile-detail" data-ind-detail="<?php echo esc_attr( $ind['slug'] ); ?>">
+                    <?php $m_art = sitestaffr_industry_art_url( $ind['slug'] ); ?>
+                    <?php if ( $m_art ) : ?>
+                      <img src="<?php echo esc_url( $m_art ); ?>" alt=""
+                           width="1024" height="1024" loading="lazy" decoding="async">
+                    <?php endif; ?>
+                    <p><?php echo esc_html( $ind['blurb'] ); ?></p>
+                    <a class="industries__link"
+                       href="<?php echo esc_url( home_url( '/for/' . $ind['slug'] . '/' ) ); ?>"
+                       target="_blank" rel="noopener">
+                      See what <?php echo esc_html( strtolower( $ind['title'] ) ); ?> get asked
+                      <span aria-hidden="true">&nearr;</span>
+                    </a>
+                  </div>
+                </li>
+              <?php endforeach; ?>
+            </ul>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 6: SOCIAL PROOF ========== -->
+<section class="proof-section">
+  <div class="proof-section__backdrop" aria-hidden="true">
+    <div class="proof-section__backdrop-panel"></div>
+    <div class="proof-section__backdrop-accent"></div>
+  </div>
+  <div class="container">
+    <div class="proof-section__layout">
+      <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
+      <div class="proof-section__portrait-wrap">
+        <div class="proof-section__portrait-frame">
+          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.webp' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="400" height="526" loading="lazy">
+        </div>
+        <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
+      </div>
+      <div class="proof-section__content">
+        <span class="proof-section__label">Trusted in Healthcare</span>
+        <blockquote class="proof-section__quote">
+          <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
+        </blockquote>
+        <cite class="proof-section__cite">
+          <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
+          <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
+        </cite>
+      </div>
+    </div>
+    <div class="proof-section__stats">
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">24/7</span>
+        <span class="proof-section__stat-label">Lead capture</span>
+      </div>
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">57+</span>
+        <span class="proof-section__stat-label">Languages</span>
+      </div>
+      <div class="proof-section__stat">
+        <span class="proof-section__stat-number">&lt;30s</span>
+        <span class="proof-section__stat-label">Recap delivery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SECTION 5: WHAT YOU GET ========== -->
+<?php /* SECTION 4 — Your morning. Light again; the dark block ended with section 3.
+
+         THE RECAP DOCUMENT THAT USED TO BE HERE IS DELETED, and that is the largest
+         length saving on the page — achieved by removing a duplicate rather than by
+         cutting content.
+
+         Section 3 now shows a recap ASSEMBLING as the conversation plays. This section
+         then showed the same artifact again, static, one screen later. That is a
+         downgrade repeat: the second showing can only be less interesting than the first.
+
+           section 3 = ONE conversation, seen happening.
+           section 4 = THREE conversations, seen accumulated.
+
+         Singular to plural is an escalation instead of a repeat, and it gives this
+         section the one argument section 3 structurally cannot make: you did not get a
+         lead, you got three, and you were asleep for all of them.
+
+         The bridge line went with the document ("Here is what the 2:14 AM one looked
+         like when you opened it") — it pointed at the thing that no longer exists. */ ?>
 
 
 

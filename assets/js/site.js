@@ -1222,3 +1222,77 @@ if (langExpandBtn) {
     pill.addEventListener('click', function () { select(pill); });
   });
 })();
+
+/* ===================================================================
+   SECTION 6 — the industry directory.
+
+   CLICK, NOT HOVER. Hover does not exist on touch and most SMB traffic is
+   phones; hover flickers, because crossing the list swaps a 440px image four
+   times on the way past; and the excerpt needs persistence, since you cannot
+   move the pointer onto a link that vanishes when you leave the name.
+
+   Desktop and mobile are the SAME buttons doing two different jobs: on desktop
+   a click swaps the big panel, on mobile it opens that industry's own detail.
+   One handler, because two would drift.
+   =================================================================== */
+(function () {
+  var root = document.querySelector('.industries');
+  if (!root) return;
+
+  var names    = Array.prototype.slice.call(root.querySelectorAll('[data-ind-name]'));
+  var panels   = Array.prototype.slice.call(root.querySelectorAll('[data-ind-panel]'));
+  var excerpts = Array.prototype.slice.call(root.querySelectorAll('[data-ind-excerpt-for]'));
+  if (!names.length) return;
+
+  var mobile = window.matchMedia('(max-width: 900px)');
+
+  function activate(slug) {
+    names.forEach(function (b) {
+      var on = b.dataset.indName === slug;
+      b.classList.toggle('is-active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    panels.forEach(function (p) {
+      var on = p.dataset.indPanel === slug;
+      p.classList.toggle('is-active', on);
+      if (on) { p.removeAttribute('aria-hidden'); } else { p.setAttribute('aria-hidden', 'true'); }
+    });
+    excerpts.forEach(function (e) {
+      e.classList.toggle('is-active', e.dataset.indExcerptFor === slug);
+    });
+  }
+
+  function toggleMobile(btn) {
+    var wasOpen = btn.classList.contains('is-open');
+    names.forEach(function (b) { b.classList.remove('is-open'); });
+    if (!wasOpen) btn.classList.add('is-open');
+  }
+
+  names.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (mobile.matches) {
+        toggleMobile(btn);
+      } else {
+        activate(btn.dataset.indName);
+      }
+    });
+
+    /* Desktop only, and only a prefetch: the next 440px render is likely to be
+       wanted, but nothing is decoded or displayed until the click happens. */
+    btn.addEventListener('mouseenter', function () {
+      if (mobile.matches) return;
+      var panel = root.querySelector('[data-ind-panel="' + btn.dataset.indName + '"] img');
+      if (panel && panel.loading === 'lazy') panel.loading = 'eager';
+    });
+  });
+
+  /* Crossing the breakpoint with a mobile item left open would leave a stray
+     .is-open on desktop, where it means nothing. */
+  mobile.addEventListener('change', function () {
+    names.forEach(function (b) { b.classList.remove('is-open'); });
+  });
+
+  /* Last, as everywhere else in this file: only now does CSS start collapsing the
+     mobile details, so a throw above leaves every blurb and link readable. */
+  root.classList.add('is-interactive');
+})();
