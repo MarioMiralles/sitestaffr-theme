@@ -2207,6 +2207,143 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   margin-top: 8px;
 }
 
+/* THE INCLUSIONS STRIP: PLAIN ON THE CREAM, no border and no tab.
+   It was a solid teal panel with a floating tab label, which out-weighed the
+   prices it introduces. The argument order is right - establish that the
+   differences are small, THEN show what varies - but the treatment was arguing
+   louder than the thing it introduces, and it would fight the table for
+   attention now the table is the heavy object in this section.
+   Nothing here draws a box. The only fill in section 8 is the table. */
+.price-includes--homepage {
+  padding: 0;
+  max-width: 900px;
+  margin: 0 auto 40px;
+}
+.price-includes--homepage .price-includes__grid {
+  position: relative;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  max-width: 100%;
+  gap: 12px 30px;
+}
+/* The label survives as type. It is the sentence the strip completes - the
+   items below it are the predicate - so removing the tab must not remove the
+   words. In flow, not absolutely positioned: the old notch was a positioned
+   ::before whose height the padding could not know about, and it collided with
+   the first row of inclusions below ~403px. In flow it cannot collide at any
+   width, which also retires the phone-specific patch that used to chase it. */
+.price-includes--homepage .price-includes__grid::before {
+  content: attr(data-label);
+  grid-column: 1 / -1;
+  justify-self: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.price-includes--homepage .price-includes__item {
+  background: none;
+  border: 0;
+  border-radius: 0;
+  padding: 4px 0;
+  gap: 10px;
+}
+.price-includes--homepage .price-includes__item:hover {
+  box-shadow: none;
+  transform: none;
+}
+.price-includes--homepage .price-includes__icon {
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  color: var(--teal-deep);
+}
+.price-includes--homepage .price-includes__icon svg { width: 18px; height: 18px; }
+.price-includes--homepage .price-includes__label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+/* The flat-rate promise is the reason the pricing works at all, so it stays a
+   full-width row above the other inclusions rather than one chip of six. It is
+   the one place in this strip allowed display type. */
+.price-includes--homepage .price-includes__item--lead {
+  grid-column: 1 / -1;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 2px 0 16px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border-light);
+  text-align: center;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__icon {
+  color: var(--teal-deep);
+  margin-top: 4px;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__icon svg {
+  width: 26px;
+  height: 26px;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__label {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--text-primary);
+  text-align: left;
+}
+.price-includes--homepage .price-includes__item--lead .price-includes__label strong {
+  font-weight: 600;
+  color: var(--teal-deep);
+}
+.price-includes__note {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--text-secondary);
+}
+.price-includes__footer {
+  grid-column: 1 / -1;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-light);
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.price-includes__link { color: var(--teal-deep); font-weight: 600; }
+.price-includes__link:hover { text-decoration: underline; }
+
+@media (max-width: 600px) {
+  .price-includes--homepage .price-includes__grid { gap: 10px 18px; }
+  .price-includes--homepage .price-includes__item--lead {
+    gap: 12px;
+    padding: 0 0 14px;
+  }
+  .price-includes--homepage .price-includes__item--lead .price-includes__label {
+    font-size: 1.2rem;
+  }
+  .price-includes--homepage .price-includes__item--lead .price-includes__icon svg {
+    width: 22px;
+    height: 22px;
+  }
+  .price-includes__note { font-size: 0.85rem; }
+}
+/* Two columns leave ~110px for a label on a phone, which shreds the longer
+   inclusions into three and four lines. One column for every portrait phone. */
+@media (max-width: 460px) {
+  .price-includes--homepage .price-includes__grid { grid-template-columns: 1fr; }
+}
+
 /* ⚠️ SELECTOR SPECIFICITY IS DELIBERATE HERE. The V1 card layout still lives in
    this file as `.pricing-section .price-grid` (line ~4607) and reuses the SAME
    class names for a different structure, forcing repeat(2, 1fr). Two classes
@@ -2266,6 +2403,35 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   align-self: end;
 }
 
+/* ⚠️ THIS RESET IS LOAD-BEARING, AND ITS ABSENCE IS WHAT MADE THE V1 BLOCK LOOK
+   NECESSARY. `.price-tier` and friends were first written for FREESTANDING CARDS
+   (line ~1458): white fill, 36px padding, rounded border, drop shadow, a hover
+   lift, an absolutely positioned badge at top:-14px, and `transform: scale(1.03)`
+   on the popular one. Those rules are still live and still needed by the card
+   layouts elsewhere in the theme.
+
+   The V3 table declared only the properties it wanted CHANGED, so everything it
+   did not name kept leaking through from the card rules. The deleted V1 block was
+   silently cancelling that leak, which is why removing it produced a clipped
+   badge, a Business column shifted 3% out of alignment with its own label rail,
+   and CTAs wrapping to three lines.
+
+   A table cell is not a card. Neutralise the card treatment explicitly, scoped to
+   the table, rather than relying on another block to do it by accident. */
+.price-grid--table .price-tier {
+  background: none;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  transform: none;
+  transition: background 0.2s ease;
+}
+.price-grid--table .price-tier:hover {
+  transform: none;
+  box-shadow: none;
+}
+
 .price-tier {
   display: grid;
   grid-row: 1 / -1;
@@ -2282,14 +2448,24 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   padding: 16px 12px;
   text-align: center;
 }
-.price-tier__name { font-weight: 600; font-size: 0.95rem; }
+.price-grid--table .price-tier__name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  margin-bottom: 0;
+}
 .price-tier__price {
   font-family: var(--font-display);
   font-size: 2rem;
   font-weight: 600;
   line-height: 1.05;
 }
-.price-tier__period { font-size: 0.75rem; color: var(--text-muted); }
+.price-grid--table .price-tier__period {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-bottom: 0;
+}
 
 .price-tier__row {
   display: flex;
@@ -2312,10 +2488,22 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   gap: 10px;
   justify-content: flex-end;
 }
-.price-tier__best-for {
+.price-grid--table .price-tier__best-for {
   font-size: 0.75rem;
   color: var(--text-muted);
   line-height: 1.4;
+  font-style: normal;
+  margin-bottom: 0;
+}
+/* The column is ~150px wide. The site button's 36px side padding leaves room for
+   about six characters, which turned "Start Free Trial" into three stacked lines. */
+.price-grid--table .price-tier .btn {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  margin-top: auto;
+  justify-content: center;
+  text-align: center;
 }
 
 /* THE ON-RAMP TREATMENT. Muted so it never competes with a paid tier, but not
@@ -2326,19 +2514,37 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 /* Business is the recommended tier, and EMERALD IS THE SIGNAL. Cyan is the
    ambient colour of this whole page, so a cyan price could not distinguish
    anything - that is the documented reason this rule exists. */
-.price-tier--popular { background: #F5FBF8; }
+.price-grid--table .price-tier--popular {
+  background: #F5FBF8;
+  /* The card rule scales this 1.03. In a subgrid table that shifts the whole
+     column off the label rail it is supposed to be read against, which in a
+     comparison table means the reader lines a value up with the wrong label. */
+  transform: none;
+  border: 0;
+  border-right: 1px solid var(--border-light);
+  box-shadow: none;
+}
 .price-tier--popular .price-tier__price { color: var(--emerald); }
-.price-tier__badge {
+
+/* IN FLOW, not absolute. The card version hangs at top:-14px to sit astride a
+   card's edge; the table clips its overflow, so that version was sliced in half
+   by the panel's top border. Inside a centred identity cell an inline-block sits
+   above the name on its own. */
+.price-grid--table .price-tier__badge {
+  position: static;
+  transform: none;
   display: inline-block;
   padding: 3px 10px;
   border-radius: 999px;
   background: var(--emerald);
+  background-image: none;
   color: #fff;
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   margin-bottom: 4px;
+  box-shadow: none;
 }
 
 @media (max-width: 1040px) {
@@ -4810,259 +5016,28 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   }
 }
 
-/* ========== SECTION 9: PRICING ========== */
-.pricing-section {
-  /* No padding here: .block owns it. A `padding` SHORTHAND declared later in this
-     file beats .block's `padding-block`, so a section can carry the class and still
-     sit off the scale - which is exactly what these two were doing. */
-  background:
-    radial-gradient(circle at 15% 12%, rgba(31,182,204,0.08) 0%, rgba(31,182,204,0) 32%),
-    radial-gradient(circle at 85% 88%, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0) 42%),
-    linear-gradient(180deg, #f9f7f1 0%, #f6f3ea 100%);
-  position: relative;
-}
-.pricing-section__header {
-  text-align: center;
-  margin-bottom: 56px;
-}
-.pricing-section h2 { margin-bottom: 0; }
-.pricing-section__subtitle {
-  color: var(--text-secondary);
-  font-size: 1.05rem;
-  /* 680px, matching .feat-section__subtitle, .voice-section__subtitle and
-     .lead-demo__subtitle. 520px was not a considered choice: centred subtitles on this site
-     range from 480 to 680 with no rule behind the spread, and pricing had one of the tightest,
-     which wrapped a two-sentence subhead onto three lines. At this font size 680px is about 75
-     characters, inside the comfortable 60-80 measure rather than under it. */
-  max-width: var(--subtext-measure);
-  margin: 0 auto 12px;
-}
-/* Homepage includes — fieldset style with border label */
-.price-includes--homepage {
-  padding: 0;
-  margin-bottom: 48px;
-}
-.price-includes--homepage .price-includes__grid {
-  position: relative;
-  background: var(--teal-deep);
-  border: none;
-  border-radius: var(--radius-lg);
-  padding: 36px 32px 28px;
-  max-width: 100%;
-  gap: 16px 32px;
-}
-.price-includes--homepage .price-includes__grid::before {
-  content: attr(data-label);
-  position: absolute;
-  top: -14px;
-  left: 28px;
-  padding: 5px 18px;
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: white;
-  background: var(--teal-deep);
-  border-radius: 20px;
-}
-.price-includes--homepage .price-includes__item {
-  background: none;
-  border: none;
-  padding: 10px 8px;
-}
-.price-includes--homepage .price-includes__item:hover {
-  box-shadow: none;
-  transform: none;
-}
-.price-includes--homepage .price-includes__icon {
-  width: auto;
-  height: auto;
-  background: none;
-  border-radius: 0;
-  color: rgba(224,247,250,0.85);
-}
-.price-includes--homepage .price-includes__label {
-  color: white;
-}
-/* Lead row — the flat-rate promise is the reason the pricing works, so it gets
-   a full-width row above the other inclusions instead of being one chip of six. */
-.price-includes--homepage .price-includes__item--lead {
-  grid-column: 1 / -1;
-  align-items: flex-start;
-  gap: 14px;
-  padding: 2px 8px 18px;
-  margin-bottom: 6px;
-  border-bottom: 1px solid rgba(255,255,255,0.18);
-}
-.price-includes--homepage .price-includes__item--lead .price-includes__icon {
-  color: white;
-  margin-top: 2px;
-}
-.price-includes--homepage .price-includes__item--lead .price-includes__icon svg {
-  width: 28px;
-  height: 28px;
-}
-.price-includes--homepage .price-includes__item--lead .price-includes__label {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 500;
-  line-height: 1.25;
-}
-.price-includes--homepage .price-includes__item--lead .price-includes__label strong {
-  font-weight: 600;
-}
-.price-includes__note {
-  display: block;
-  margin-top: 6px;
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1.45;
-  color: rgba(224,247,250,0.85);
-}
-.pricing-section .price-grid {
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  max-width: 100%;
-  margin: 0 auto 48px;
-  align-items: stretch;
-}
-.pricing-section .price-tier--popular {
-  transform: none;
-}
-.pricing-section .price-tier--popular:hover {
-  transform: translateY(-4px);
-}
-/* Horizontal plan cards — bold layout */
-.pricing-section .price-tier {
-  flex-direction: row;
-  padding: 0;
-  overflow: hidden;
-  border: 1.5px solid rgba(31,182,204,0.15);
-  box-shadow: 0 2px 12px rgba(0,77,64,0.06);
-}
-.pricing-section .price-tier:hover {
-  box-shadow: 0 8px 32px rgba(0,77,64,0.12);
-}
-.pricing-section .price-tier__identity {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 36px 32px;
-  min-width: 200px;
-  flex: 0 0 38%;
-  background: linear-gradient(160deg, #f0fbfc 0%, #f7fafa 100%);
-  border-right: 1.5px solid rgba(31,182,204,0.12);
-  text-align: center;
-}
-.pricing-section .price-tier__identity .price-tier__name {
-  font-size: 1.25rem;
-  letter-spacing: -0.01em;
-}
-.pricing-section .price-tier__identity .price-tier__price {
-  font-size: 3.2rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 4px 0 2px;
-}
-.pricing-section .price-tier__identity .price-tier__period {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-.pricing-section .price-tier__details {
-  display: flex;
-  flex-direction: column;
-  padding: 32px 36px;
-  flex: 1;
-}
-.pricing-section .price-tier__details .price-tier__allowances {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  margin-bottom: 20px;
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-}
-.price-tier__stat {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 14px 16px;
-}
-.price-tier__stat + .price-tier__stat {
-  border-left: 1px solid var(--border-light);
-}
-.price-tier__stat-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--text-muted);
-}
-.price-tier__stat-value {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--teal-deep);
-  letter-spacing: -0.01em;
-  line-height: 1.1;
-}
-.price-tier__stat-value small {
-  display: block;
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  letter-spacing: 0;
-  margin-top: 2px;
-}
-.pricing-section .price-tier__details .price-tier__features {
-  flex-grow: 1;
-  margin-bottom: 16px;
-}
-.pricing-section .price-tier__details .price-tier__features li {
-  font-size: 0.92rem;
-  padding: 7px 0 7px 26px;
-  color: var(--text-secondary);
-}
-.pricing-section .price-tier__details .price-tier__best-for {
-  text-align: left;
-  margin-bottom: 16px;
-}
-.pricing-section .price-tier__details .btn {
-  width: auto;
-  align-self: flex-start;
-  padding: 12px 32px;
-}
-/* Popular card — teal accent */
-.pricing-section .price-tier--popular {
-  border-color: var(--teal-deep);
-  box-shadow: 0 4px 20px rgba(0,131,143,0.15);
-}
-.pricing-section .price-tier--popular:hover {
-  box-shadow: 0 8px 36px rgba(0,131,143,0.22);
-}
-.pricing-section .price-tier--popular .price-tier__identity {
-  background: linear-gradient(160deg, #e0f7fa 0%, #f0fbfc 100%);
-}
-.pricing-section .price-tier--popular .price-tier__identity .price-tier__price {
-  color: var(--teal-deep);
-}
-/* Badge inline inside identity */
-.pricing-section .price-tier__badge {
-  position: static;
-  transform: none;
-  background: var(--emerald);
-  color: white;
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding: 5px 16px;
-  border-radius: 20px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 8px rgba(16,185,129,0.3);
-}
+/* ========== SECTION 8: PRICING ==========
+   The V1 homepage-pricing rules that lived here were DELETED on 2026-08-26.
+   Section 8's styling now lives in exactly one place: the block at the top of
+   this file (search `Section 8: the pricing table`).
+
+   They were kept once before and out-specified instead, on the theory that they
+   still styled panel internals the markup uses. That was wrong twice over:
+
+     - They set the section background to a two-radial gradient, so the spec's
+       cream never rendered.
+     - They made the inclusions strip a solid teal panel with a floating tab.
+     - `.pricing-section .price-tier__identity` (2 classes) beat the V3 mobile
+       rule (1 class) below 768px, so every plan card on a phone carried the V1
+       padding and a stray teal border.
+
+   Two blocks reusing one set of class names for two different structures cannot
+   be made safe by specificity. Only one may exist. If a homepage pricing rule is
+   needed, it goes in the block above -- not here.
+
+   NOT deleted, because `page-manage.php` (the billing hub) still uses them:
+   `.pricing-grid`, `.pricing-card*`. Those follow below and are unrelated to
+   the homepage. ========== */
 .pricing-includes {
   background: white;
   border: 1.5px solid var(--border-light);
@@ -6814,9 +6789,6 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   }
   .hero__grid { gap: 40px; }
   .pricing-grid { grid-template-columns: repeat(2, 1fr); }
-  .pricing-section .price-grid {
-    grid-template-columns: 1fr;
-  }
   .cost-section__grid { gap: 48px; }
   .steps::before { display: none; }
   .demo-layout {
@@ -7002,30 +6974,6 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
     margin-left: 0;
     margin-right: 0;
   }
-  .pricing-section .price-grid {
-    grid-template-columns: 1fr;
-  }
-  .pricing-section .price-tier {
-    flex-direction: column;
-  }
-  .pricing-section .price-tier__identity {
-    flex: none;
-    min-width: 0;
-    border-right: none;
-    border-bottom: 1.5px solid rgba(31,182,204,0.12);
-    padding: 28px 24px;
-  }
-  .pricing-section .price-tier__details {
-    padding: 24px;
-  }
-  .pricing-section .price-tier__details .btn {
-    width: 100%;
-    justify-content: center;
-    align-self: stretch;
-  }
-  .price-includes--homepage .price-includes__grid {
-    padding: 28px 16px 20px;
-    gap: 10px 16px;
   }
   .pricing-assurance__grid {
     grid-template-columns: 1fr;
@@ -7038,51 +6986,9 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   .widget-bubble__voice-bars span { width: 3px; }
 }
 
-/* Homepage "Every plan includes" on phones. The notch label is an absolutely
-   positioned ::before whose height the box's padding-top cannot know about, so
-   below ~403px it wraps to two lines and lands on the first row of inclusions.
-   On mobile it becomes an in-flow, full-width eyebrow instead — it can no longer
-   collide at any width. Placed after the 768px block so it wins the cascade. */
-@media (max-width: 600px) {
-  .price-includes--homepage .price-includes__grid {
-    padding: 22px 18px 20px;
-    gap: 12px 18px;
-  }
-  .price-includes--homepage .price-includes__grid::before {
-    position: static;
-    grid-column: 1 / -1;
-    justify-self: start;
-    padding: 0;
-    margin-bottom: 2px;
-    font-size: 0.9rem;
-    letter-spacing: 0.09em;
-    border-radius: 0;
-    color: rgba(224,247,250,0.9);
-  }
-  .price-includes--homepage .price-includes__item--lead {
-    gap: 12px;
-    padding: 0 0 14px;
-    margin-bottom: 4px;
-  }
-  .price-includes--homepage .price-includes__item--lead .price-includes__icon svg {
-    width: 24px;
-    height: 24px;
-  }
-  .price-includes--homepage .price-includes__item--lead .price-includes__label {
-    font-size: 1.25rem;
-  }
-  .price-includes__note {
-    font-size: 0.85rem;
-  }
-}
-/* Two columns leave ~110px for a label on a phone, which shreds the longer
-   inclusions into three and four lines. One column for every portrait phone. */
-@media (max-width: 460px) {
-  .price-includes--homepage .price-includes__grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-}
+/* The two phone blocks that used to sit here moved up into the section 8 block
+   with the rest of the strip's rules. They existed to chase a positioned notch
+   label that no longer exists. */
 
 @media (max-width: 480px) {
   .container { padding: 0 20px; }
