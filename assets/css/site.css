@@ -2520,26 +2520,42 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 }
 
 /* COLUMN HOVER (Mario, 2026-08-26). A comparison table is read by tracking one
-   column down against a label rail, and a lit column is what keeps your eye on
-   the right one.
+   column down against a label rail, and a lit column keeps the eye on the right
+   one. ONE highlight, identical on all four columns.
 
-   ⚠️ EACH VARIANT LIFTS FROM ITS OWN BASE, not to a shared colour. The three
-   columns start at three different values - the panel, the trial's deeper fill,
-   Business's emerald tint - so one shared hover colour would flatten them into
-   each other and the tier you hovered would lose the treatment that identifies
-   it. Each moves one step from where it already is.
+   ⚠️ IT IS AN OVERLAY, NOT A BACKGROUND SWAP, and that is what makes "identical"
+   possible. Business sits on an emerald tint and the other three sit on the
+   panel. Setting one shared hover BACKGROUND would overwrite Business's tint, so
+   hovering the recommended tier would strip the thing that marks it as
+   recommended - which is how the first attempt ended up with three different
+   hover colours, each tuned to its own base, and reading as three different
+   effects. Painting the same translucent white ON TOP of whatever is underneath
+   gives every column the same delta and leaves every base intact.
+
+   z-index -1 with `isolation: isolate` on the column: the tier creates its own
+   stacking context, so the overlay lands above the column's background and below
+   all of its content. Absolutely positioned, so it is not a grid item and the
+   subgrid rows do not shift. Radius inherited, or the square overlay would poke
+   past the rounded ends of the panel.
 
    ⚠️ hover: hover, because :hover sticks after a tap on a touch device. The
    phone would keep a column lit until something else was tapped, which reads as
-   a selection the visitor did not make - and this is not a selection, there is
-   nothing to select. The CTA is still the only click target in the column. */
+   a selection the visitor did not make - and there is nothing here to select.
+   The CTA is still the only click target in the column. */
+.price-grid--table .price-tier { isolation: isolate; }
+.price-grid--table .price-tier::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: rgba(240,250,250,0.07);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
 @media (hover: hover) {
-  .price-grid--table .price-tier:hover { background: rgba(240,250,250,0.07); }
-  /* 0.16 -> 0.09, not 0.16 -> 0.04. Lifting the trial all the way to the panel
-     made it match Starter exactly while hovered, so the on-ramp stopped looking
-     like an on-ramp at the moment someone was actually reading it. */
-  .price-grid--table .price-tier--trial:hover { background: rgba(0,0,0,0.09); }
-  .price-grid--table .price-tier--popular:hover { background: rgba(16,185,129,0.2); }
+  .price-grid--table .price-tier:hover::before { opacity: 1; }
 }
 
 .price-tier {
@@ -2656,14 +2672,18 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   transform: none;
 }
 
-/* THE ON-RAMP TREATMENT, INVERTED. Muted so it never competes with a paid tier,
-   but not so faint it reads as disabled - it is the primary conversion path.
-   ⚠️ ON LIGHT, "MUTED" MEANT A CREAM FILL - SLIGHTLY DARKER THAN THE WHITE
-   AROUND IT. Carried over unchanged, cream would be the BRIGHTEST cell in a dark
-   table and the on-ramp would out-shout all three paid plans. Recessive is
-   directional, not a colour: here it means deeper than the panel, matching the
-   rail it sits beside. */
-.price-grid--table .price-tier--trial { background: rgba(0,0,0,0.16); }
+/* THE ON-RAMP TREATMENT, NOW CARRIED BY TYPE AND WIDTH RATHER THAN BY FILL.
+   Mario, 2026-08-26: every column the same colour except Business. So the
+   trial's deeper fill is gone and only Business is tinted - which makes the
+   emerald read harder, because it is now the single exception in the row rather
+   than one of two.
+
+   ⚠️ THE MUTING STILL HAS TO EXIST SOMEWHERE - the spec's requirement is that
+   this never reads as a fourth plan. Three things still carry it: the column is
+   narrower than the paid three (0.88fr), the price and name are stepped down
+   from white, and its CTA is an outline while the recommended tier's is filled.
+   If those are ever levelled up, the trial becomes a fourth plan and the ladder
+   reads as four prices rather than three. */
 .price-grid--table .price-tier--trial .price-tier__price { color: rgba(240,250,250,0.82); }
 .price-grid--table .price-tier--trial .price-tier__name { color: rgba(240,250,250,0.66); }
 
@@ -2759,9 +2779,9 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
        radius. */
     overflow: visible;
   }
-  /* Each card is its own surface now, so the trial and the recommended tier
-     have to re-state their tint over the card rather than over the panel. */
-  .price-grid--table .price-tier--trial { background: #002930; }
+  /* Each card is its own surface now, so the recommended tier has to re-state
+     its tint over the card rather than over the panel. The trial is the same
+     colour as the other cards here, same as on desktop. */
   .price-grid--table .price-tier--popular {
     background: #073E42;
     border-color: rgba(52,211,153,0.4);
