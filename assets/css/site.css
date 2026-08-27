@@ -2593,12 +2593,31 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   background-clip: text;
   letter-spacing: -0.02em;
 }
+/* The labels stopped being two-word product facts ("Lead capture", "Languages")
+   and became sentences stating a customer result. Uppercase + 0.1em tracking at
+   0.7rem is a category label treatment; applied to "of their conversations
+   arrived after they closed" it reads as shouting and wraps badly inside the
+   old 200px cap. Sentence case, normal tracking, wider card. */
 .proof-section__stat-label {
-  font-size: 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-weight: 600;
+  font-weight: 500;
+  text-align: center;
+  max-width: 24ch;
+}
+.proof-section__stat { max-width: 300px; }
+
+/* Not a disclaimer to hide. This sentence is why the two numbers above are
+   believable, so it is legible rather than fine print. */
+.proof-section__footnote {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 /* Responsive */

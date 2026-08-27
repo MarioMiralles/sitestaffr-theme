@@ -698,6 +698,25 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
+<?php /* SECTION 4 — Your morning. Light again; the dark block ended with section 3.
+
+         THE RECAP DOCUMENT THAT USED TO BE HERE IS DELETED, and that is the largest
+         length saving on the page — achieved by removing a duplicate rather than by
+         cutting content.
+
+         Section 3 now shows a recap ASSEMBLING as the conversation plays. This section
+         then showed the same artifact again, static, one screen later. That is a
+         downgrade repeat: the second showing can only be less interesting than the first.
+
+           section 3 = ONE conversation, seen happening.
+           section 4 = THREE conversations, seen accumulated.
+
+         Singular to plural is an escalation instead of a repeat, and it gives this
+         section the one argument section 3 structurally cannot make: you did not get a
+         lead, you got three, and you were asleep for all of them.
+
+         The bridge line went with the document ("Here is what the 2:14 AM one looked
+         like when you opened it") — it pointed at the thing that no longer exists. */ ?>
 <section class="block what-you-get" id="your-morning">
   <div class="block__inner">
     <div class="what-you-get__header">
@@ -803,7 +822,7 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<!-- ========== SECTION 4: 57+ LANGUAGES ========== -->
+<!-- ========== SECTION 5: SPEAKS THEIR LANGUAGE ========== -->
 <?php
 /* SECTION 5 — Speaks their language.
 
@@ -1048,7 +1067,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
   </div>
 </section>
 
-<!-- ========== SECTION 6: SOCIAL PROOF ========== -->
+<!-- ========== SECTION 7: SOCIAL PROOF ========== -->
 <section class="proof-section">
   <div class="proof-section__backdrop" aria-hidden="true">
     <div class="proof-section__backdrop-panel"></div>
@@ -1074,47 +1093,45 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
         </cite>
       </div>
     </div>
+    <?php
+    /* TWO REAL CUSTOMER RESULTS, replacing three generic product facts (24/7 lead
+       capture, 57+ languages, <30s recap delivery). Those three were true, and every
+       one of them is already stated elsewhere on the page — they were the product
+       spec sitting in the slot reserved for evidence.
+
+       THE PAIR CLOSES THE PAGE'S ARGUMENT, in this order:
+         86% of their conversations arrived after they closed  -> section 2's thesis is true
+         23 qualified leads in 30 days                          -> and it turned into business
+
+       ⚠️ THE SECOND ONE USED TO BE "1 in 3". That is a conversion RATE, and the reader
+       has to do arithmetic before they know whether it is good — one in three of what,
+       and is that a lot? The underlying fact is 23 qualified leads in 30 days, which is
+       immediately meaningful and needs no denominator explained.
+
+       ⚠️ THE FOOTNOTE STAYS AND IS NOT A DISCLAIMER TO MINIMISE. "One customer's
+       results, not an average" buys more credibility than the two numbers do: it is the
+       sentence that tells a skeptical reader these are real rather than modelled. Do
+       not shrink it, move it into a tooltip, or drop it when a second testimonial
+       arrives — with two customers it becomes more necessary, not less. */
+    ?>
     <div class="proof-section__stats">
       <div class="proof-section__stat">
-        <span class="proof-section__stat-number">24/7</span>
-        <span class="proof-section__stat-label">Lead capture</span>
+        <span class="proof-section__stat-number">86%</span>
+        <span class="proof-section__stat-label">of their conversations arrived after they closed</span>
       </div>
       <div class="proof-section__stat">
-        <span class="proof-section__stat-number">57+</span>
-        <span class="proof-section__stat-label">Languages</span>
-      </div>
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">&lt;30s</span>
-        <span class="proof-section__stat-label">Recap delivery</span>
+        <span class="proof-section__stat-number">23</span>
+        <span class="proof-section__stat-label">qualified leads in 30 days</span>
       </div>
     </div>
+    <p class="proof-section__footnote">One customer&rsquo;s results, not an average.</p>
   </div>
 </section>
 
-<!-- ========== SECTION 5: WHAT YOU GET ========== -->
-<?php /* SECTION 4 — Your morning. Light again; the dark block ended with section 3.
-
-         THE RECAP DOCUMENT THAT USED TO BE HERE IS DELETED, and that is the largest
-         length saving on the page — achieved by removing a duplicate rather than by
-         cutting content.
-
-         Section 3 now shows a recap ASSEMBLING as the conversation plays. This section
-         then showed the same artifact again, static, one screen later. That is a
-         downgrade repeat: the second showing can only be less interesting than the first.
-
-           section 3 = ONE conversation, seen happening.
-           section 4 = THREE conversations, seen accumulated.
-
-         Singular to plural is an escalation instead of a repeat, and it gives this
-         section the one argument section 3 structurally cannot make: you did not get a
-         lead, you got three, and you were asleep for all of them.
-
-         The bridge line went with the document ("Here is what the 2:14 AM one looked
-         like when you opened it") — it pointed at the thing that no longer exists. */ ?>
 
 
 
-<!-- ========== SECTION 7: VOICE SHOWCASE ========== -->
+<!-- ========== VOICE SHOWCASE — not in the V3 eleven-section map; see note below ========== -->
 <section class="voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
