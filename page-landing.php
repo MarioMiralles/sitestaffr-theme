@@ -502,6 +502,11 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
     </div>
   </div>
+  <?php /* INSIDE the hero, not between the sections. It is an absolute overlay pinned to
+           the hero's bottom edge so the robot can stand BEHIND it — that underlap is the
+           whole point, and an in-flow sibling cannot provide it. See the template part
+           for why the overlay is safe here when the V2 wave was not. */ ?>
+  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </section>
 
 <?php /* THE FIVE-CAPABILITY RIBBON WAS DELETED HERE, 2026-08-26.
@@ -520,8 +525,6 @@ get_template_part( 'template-parts/site-nav', null, array(
 
    Nothing replaces it. The capabilities are covered by the float cards above and
    by sections 3 and 4 below. */ ?>
-
-<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 
 <!-- ========== SECTION 2: COST OF MISSED VISITORS ========== -->
 <?php /* SECTION 2 — the first half of the dark block. Sections 2 and 3 share one dark

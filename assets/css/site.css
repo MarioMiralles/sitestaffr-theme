@@ -556,7 +556,27 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 /* Landing page hero background art (front page). */
 body.sitestaffr-landing-page .hero {
   background: #fffefc;
+  /* Bottom padding CLEARS THE CURTAIN, which is absolutely positioned and
+     therefore costs no height of its own. Decoration goes behind content and
+     never adds height — the same rule the dark blocks follow. Set below the
+     curtain's own max height and the copy's last line sits in the dark. */
+  padding-bottom: clamp(112px, 13vw, 168px);
 }
+/* ⚠️ THE FADE IS OFF ON THIS PAGE, AND THAT IS THE POINT (Mario, 2026-08-27:
+   the robot "has a fade and you can tell that it's cut-off at the waist which
+   doesn't look seamless or natural").
+
+   `.hero::after` above paints a 120px `transparent -> var(--cream)` fade across
+   the bottom of every hero. That was correct when the section below was cream and
+   when the seam was an in-flow band the robot could not reach behind. Here it does
+   two wrong things at once: it dissolves the robot's torso into the background,
+   and it lays a pale grey band directly on top of the curtain — the seam this
+   element exists to make clean.
+
+   The robot's bottom edge is handled by the curtain cropping it instead; see
+   .hero__robot-img. Do not reinstate this as a "safety" fade — the two treatments
+   are alternatives, and running both is what produced the cut-off waist. */
+body.sitestaffr-landing-page .hero::after { display: none; }
 .hero__canvas {
   position: absolute;
   top: 0;
@@ -3108,41 +3128,37 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 .agency-cta__note a { color: var(--teal-light); border-bottom: 1px solid rgba(31,182,204,0.4); }
 
 /* ---- The curtain seam -------------------------------------------------
-   Sits in the flow between the light hero and the dark section 2. Its own
-   background is the hero's, and the path is filled with the dark block colour,
-   so the element reads as the dark rising into the light rather than as a
-   band of its own.
+   An absolute overlay pinned to the HERO's bottom edge (restored 2026-08-27),
+   filled with the dark block colour, so it reads as the dark rising into the
+   light rather than as a band of its own.
 
-   line-height:0 on the wrapper matters: without it the inline SVG sits on a
-   text baseline and leaves a few px of hero background under the curve, which
-   renders as a pale hairline exactly where the seam is meant to remove one. */
+   ⚠️ IT HAS NO BACKGROUND OF ITS OWN, and must not get one back. It used to be
+   an in-flow band between the two sections and therefore needed to paint the
+   hero's exact bottom colour behind the path — a value that was breakpoint-
+   dependent and cost two rounds of hairline bugs. As an overlay it sits ON the
+   hero, so the hero IS the background and the two can never disagree.
+
+   `bottom: -1px` kills the hairline of hero background that sub-pixel rounding
+   otherwise leaves between this and the section below — a pale line across the
+   full width, which is the exact edge this element exists to remove.
+
+   z-index 1 puts it level with `.hero > .container` (line ~574) and, as the
+   later sibling in paint order, above it. That is what lets it cover the
+   robot's legs. Raising the container above 1 would silently undo the underlap
+   the whole change is for. */
 .seam-curtain {
-  line-height: 0;
-  /* --cream, NOT the hero's declared #fffefc. `.hero::after` fades the hero's
-     last 120px to var(--cream), so the hero's BOTTOM EDGE — the only edge this
-     touches — is #FDFBF7. Matching the declared background instead produced a
-     3-point jump (252,250,247 -> 255,254,252) that read as a faint band right
-     where the seam exists to remove one. Sampled, not read off the stylesheet. */
-  background: var(--cream);
-  margin-bottom: -1px;          /* kills the sub-pixel gap at fractional zooms */
-}
-.seam-curtain svg {
-  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
   width: 100%;
-  height: clamp(40px, 5.5vw, 96px);
+  height: clamp(56px, 7vw, 120px);
+  line-height: 0;
+  z-index: 1;
+  pointer-events: none;
 }
+.seam-curtain svg { display: block; width: 100%; height: 100%; }
 .seam-curtain path { fill: var(--block-dark); }
-
-/* THE SEAM'S CORRECT BACKGROUND IS BREAKPOINT-DEPENDENT, which is not obvious and
-   is exactly why this needed five widths rather than two.
-
-   `.hero::after` — the gradient that fades the hero's last 120px to --cream — is
-   `display: none` below 900px. So on phones the hero's bottom edge is its own
-   #fffefc, and inheriting the desktop --cream left a measured 2-point jump at 390
-   and 768 while 1150/1440/1920 were clean. One value could not be right for both. */
-@media (max-width: 900px) {
-  .seam-curtain { background: #fffefc; }
-}
 
 /* ---- Section 2: the job-value grid ------------------------------------
    Padding, background and colour come from .block .block--dark. The old
@@ -7465,12 +7481,25 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   filter: blur(24px);
   border-radius: 50%;
 }
+/* ⚠️ THE HEIGHT IS SET SO THE CURTAIN CROPS HIM, not so he fits (Mario, 2026-08-25:
+   "make sure that the robot's waist is flush with the section so that it doesn't look
+   cut off"; reaffirmed 2026-08-27 against the faded version).
+
+   The artwork ends on its own hard bottom edge. That is fine when the dark covers it and
+   obvious when it does not — and with no fade there is nothing else hiding it, so the
+   robot has to run PAST the curtain rather than stop short of it.
+
+   The trap is that the curtain's height varies ACROSS the width — it peaks at centre and
+   sits low at the edges, and the robot is on the right, which is the shallowest part. So
+   the number that matters is the curtain's y AT THE ROBOT, not the seam element's top.
+   Re-measure if the robot's `top`, the seam's height clamp, or the Book path's edge
+   value (104 of 120) changes. Screenshot it; do not re-read the stylesheet. */
 .hero__robot-img {
   position: absolute;
   left: 50%;
-  top: -25%;
+  top: -22%;
   transform: translateX(-50%);
-  height: 150%;
+  height: 161%;
   width: auto;
   max-width: none;
   filter: drop-shadow(0 28px 50px rgba(0,77,64,0.30));
@@ -7517,8 +7546,21 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
    block re-positions .hero__robot-img and would otherwise win the cascade. */
 @media (max-width: 900px) {
   .hero { min-height: 0; }
-  body.sitestaffr-landing-page .hero { padding-bottom: 0; }
-  body.sitestaffr-landing-page .hero::after { display: none; }
+  /* NOT zero. It was zero while the curtain was an in-flow band that added its own
+     height below the hero; as an overlay it adds none, so a zero here puts the dark
+     straight over whatever the hero ends on.
+
+     ⚠️ IT MUST CLEAR THE SEAM'S FULL HEIGHT, and the desktop reasoning does NOT carry
+     over. On desktop the last thing in the hero is the ROBOT, whose hard bottom edge
+     is meant to be swallowed by the dark, so the padding can sit inside the curtain.
+     Below 980px the float cards drop out of their absolute positions and become an
+     in-flow 2-2-1 grid BELOW the robot — so the last thing in the hero is text, and
+     text under the curtain is just text the dark eats.
+
+     Measured at 390 before this was raised: the fifth card's bottom sat 18px BELOW the
+     apex. Seam height here is clamp(56px, 7vw, 120px) = 56px at phone widths, and the
+     apex is within 3px of the seam's top, so anything under ~60px collides. */
+  body.sitestaffr-landing-page .hero { padding-bottom: clamp(76px, 10vw, 104px); }
   .hero__robot-stage {
     min-height: 380px;
     overflow: hidden;
