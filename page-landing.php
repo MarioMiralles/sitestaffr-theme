@@ -1672,6 +1672,81 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
   </div>
 </section>
 
+<?php /* SECTION 10 — the agency door. The one section that did not exist in any form.
+
+         There were ZERO occurrences of "agency" on the homepage or in any template part,
+         and lines like "while you're on a job, with a client, or asleep" actively tell an
+         agency this product is not for them. An agency visitor has just read an entire
+         page written to a plumber; this is where the page says "and if you're the person
+         who BUILDS the plumber's site, here's your version."
+
+         ⚠️ SHAPE: A CONTAINED PANEL, NOT A FULL SECTION. Sections 10 and 11 are both dark
+         and adjacent, and two full-bleed dark sections end the page on an undifferentiated
+         slab that deflates the run-up to the close. This is an elevated panel on the dark;
+         section 11 then opens full-width. That says "this is an aside, not your path" —
+         correct for ~90% of readers — and lets section 11 read as the ending.
+
+         NO ROBOT. Three appearances is the ceiling and section 11 owns the third.
+
+         POSITION: BEFORE section 11. An agency who reaches the closing CTA and finds
+         nothing for them bounces, and putting the door after the final ask buries it in
+         footer territory. The nav item catches the ones who self-classify in the first
+         three seconds; this catches the ones who read to the end. */ ?>
+<section class="block block--dark block--tight agency-door">
+  <div class="block__inner">
+    <div class="agency-door__panel">
+      <?php /* THE EYEBROW IS LOAD-BEARING. It tells a plumber to skip this, which is what
+               protects the SMB path through the rest of the page. */ ?>
+      <span class="agency-door__eyebrow">For WordPress Agencies</span>
+
+      <?php /* The H1, pluralised. An agency who scrolled past the hero recognises the
+               offer instantly, and "every client site" is the phrase that makes it
+               theirs rather than their client's. */ ?>
+      <h2>Give Every Client Site a Receptionist</h2>
+      <p class="agency-door__lead">
+        You build the sites. This is what makes them answer &mdash; and what makes renewal conversations easier.
+      </p>
+
+      <?php /* ⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE ON 2026-08-26, and what
+               is NOT claimed matters as much as what is. None of them mention margin,
+               reseller pricing, white-label or bulk billing, because none of those exist.
+               An agency is a technical, skeptical audience that checks. */ ?>
+      <ul class="agency-door__points">
+        <li>
+          <strong>Minutes per site, not hours</strong>
+          A plugin and a connect step. No snippet to maintain, no separate platform for a client to lose access to.
+        </li>
+        <li>
+          <?php /* ⚠️ THIS POINT WAS CORRECTED AFTER A CODE CHECK. It originally read
+                   "Every client site in one place — switch between the sites you manage
+                   from a single dashboard." That is TRUE FOR BILLING AND FALSE FOR LEADS:
+                   /manage/ authenticates on the billing email and its site switcher covers
+                   plans, minutes and team billing access, but the Follow-ups queue,
+                   transcripts and Agent Health live in each client's own wp-admin, per
+                   site. THERE IS NO CROSS-CLIENT LEAD VIEW. Scope every "one place"
+                   phrase to billing — the first agency to sign up finds out in ten
+                   minutes, and this is exactly the audience that would say so publicly. */ ?>
+          <strong>One login for every client&rsquo;s plan</strong>
+          Manage billing, plans and minutes across every site you look after, from a single sign-in.
+        </li>
+        <li>
+          <strong>Something to show at renewal</strong>
+          Their site starts producing named leads with full transcripts. That&rsquo;s the hardest number in agency work, and it arrives on its own.
+        </li>
+      </ul>
+
+      <?php /* "See SiteStaffr for Agencies", NOT "See agency plans". The second would
+               promise a pricing page that would then have to be invented. If the agency
+               page's contact form generates real demand, that is the signal to build
+               reseller pricing — the page is the demand-validation mechanism. */ ?>
+      <a href="<?php echo esc_url( home_url( '/for/agencies/' ) ); ?>" class="btn btn--outline agency-door__cta">
+        See SiteStaffr for Agencies
+        <span aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <!-- ========== SECTION 11: CLOSING CTA ==========================================
      THE HIERARCHY HERE WAS INVERTED, and site-nav.php:53 records why that was
      wrong: "Self-serve is the primary conversion path (Mario, 2026-08-11)."

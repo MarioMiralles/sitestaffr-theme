@@ -2432,6 +2432,68 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   .faq-section__rail { position: static; }
 }
 
+/* ---- Section 10: the agency door --------------------------------------
+   A CONTAINED PANEL ON THE DARK, not a full-bleed section. Sections 10 and 11
+   are both dark and adjacent; two full-bleed dark sections would end the page on
+   an undifferentiated slab. The panel says "aside, not your path" - right for
+   ~90% of readers - and lets section 11 open full-width as the ending. */
+.agency-door__panel {
+  max-width: 860px;
+  margin-inline: auto;
+  padding: clamp(28px, 4vw, 44px);
+  background: var(--block-dark-raised);
+  border: 1px solid rgba(240,250,250,0.14);
+  border-radius: var(--radius-xl);
+}
+/* Load-bearing: it tells a plumber to skip this, which protects the SMB path. */
+.agency-door__eyebrow {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal-light);
+  margin-bottom: 10px;
+}
+.agency-door h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+.agency-door__lead {
+  margin-top: 10px;
+  color: rgba(240,250,250,0.78);
+  max-width: 54ch;
+}
+.agency-door__points {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+.agency-door__points li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: rgba(240,250,250,0.72);
+  padding-left: 16px;
+  border-left: 2px solid rgba(31,182,204,0.45);
+}
+.agency-door__points strong {
+  display: block;
+  color: var(--text-on-dark);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.agency-door__cta { margin-top: 26px; }
+.agency-door .btn--outline {
+  border-color: rgba(240,250,250,0.45);
+  color: var(--text-on-dark);
+}
+.agency-door .btn--outline:hover {
+  border-color: var(--text-on-dark);
+  background: rgba(240,250,250,0.08);
+}
+@media (min-width: 760px) {
+  .agency-door__points { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* ---- The curtain seam -------------------------------------------------
    Sits in the flow between the light hero and the dark section 2. Its own
    background is the hero's, and the path is filled with the dark block colour,
