@@ -1057,73 +1057,106 @@ get_template_part( 'template-parts/site-nav', null, array(
    SiteStaffr can say, and the greeting is a real product surface rather than a stock
    photograph.
 
-   THE PILLS BECOME THE CONTROL. That collapses the two redundant lists into one thing
-   and adds the interactivity that tested well: click Mandarin, the greeting becomes 你好.
-
    ⚠️ `lang` ON EVERY GREETING AND `dir="rtl"` ON THE ARABIC. A screen reader switches
    voice on `lang`; without it a synthesiser reads "Hola" in English phonetics on the one
    section whose entire subject is other languages. This is not decoration.
+
+   ────────────────────────────────────────────────────────────────────────────
+   REBUILT AGAIN, 2026-08-27. Mario: "I hate it. I'd rather see the robot super big with
+   many different languages saying hello around the robot."
+
+   WHAT WENT: the split layout, the single greeting bubble, and the clickable pills that
+   drove it. The pills were a good idea that solved the wrong problem — they let you see
+   ONE language at a time, and the argument this section has to make is that it speaks a
+   LOT of them. Twelve greetings visible at once makes that argument in one glance and
+   needs no interaction to do it.
+
+   ⚠️ THIS IS THE THIRD DESIGN IN THIS SLOT AND THE SECOND ONE KILLED BY THE SAME BUG.
+   The crowd render before it positioned twelve bubbles with hand-measured --x/--y
+   percentages over the artwork: twelve were specced and FOUR rendered at 1440, and a
+   comment recorded that swapping the image silently invalidated all twelve.
+
+   So the greetings here are NOT positioned against the robot. They sit in the stage's
+   own coordinate space, in two symmetric side bands that the centred figure never
+   reaches, and below 900px they stop being positioned at all and become an in-flow
+   wrap. Swapping robot-languages.webp cannot invalidate a single one of them. If you
+   ever find yourself measuring a percentage against a pixel in the artwork, that is
+   this bug coming back.
 */
 $lang_greetings = array(
-	array( 'code' => 'es', 'name' => 'Spanish',  'text' => '¡Hola! ¿En qué puedo ayudarte?' ),
-	array( 'code' => 'zh', 'name' => 'Mandarin', 'text' => '你好！有什么可以帮您的吗？' ),
-	array( 'code' => 'fr', 'name' => 'French',   'text' => 'Bonjour ! Comment puis-je vous aider ?' ),
-	array( 'code' => 'ar', 'name' => 'Arabic',   'text' => 'مرحبا! كيف يمكنني مساعدتك؟', 'rtl' => true ),
-	array( 'code' => 'hi', 'name' => 'Hindi',    'text' => 'नमस्ते! मैं आपकी कैसे मदद कर सकता हूँ?' ),
+	array( 'code' => 'es',    'name' => 'Spanish',    'hello' => '¡Hola!' ),
+	array( 'code' => 'zh',    'name' => 'Mandarin',   'hello' => '你好' ),
+	array( 'code' => 'fr',    'name' => 'French',     'hello' => 'Bonjour' ),
+	array( 'code' => 'ar',    'name' => 'Arabic',     'hello' => 'مرحبا', 'rtl' => true ),
+	array( 'code' => 'hi',    'name' => 'Hindi',      'hello' => 'नमस्ते' ),
+	array( 'code' => 'pt',    'name' => 'Portuguese', 'hello' => 'Olá' ),
+	array( 'code' => 'de',    'name' => 'German',     'hello' => 'Hallo' ),
+	array( 'code' => 'ja',    'name' => 'Japanese',   'hello' => 'こんにちは' ),
+	array( 'code' => 'ko',    'name' => 'Korean',     'hello' => '안녕하세요' ),
+	array( 'code' => 'ru',    'name' => 'Russian',    'hello' => 'Привет' ),
+	array( 'code' => 'vi',    'name' => 'Vietnamese', 'hello' => 'Xin chào' ),
+	array( 'code' => 'it',    'name' => 'Italian',    'hello' => 'Ciao' ),
 );
 ?>
-<section class="block block-split lang-section" id="languages">
+<section class="block lang-section" id="languages">
   <div class="block__inner">
-    <div class="block-split__grid">
-      <div class="lang-section__copy">
-        <span class="section-label">Speaks Their Language</span>
-        <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
-        <p class="lang-section__text">
-          Your visitors speak 57+ languages, and so does SiteStaffr. It answers in whatever language they open with.
-        </p>
-
-        <?php /* The greeting bubble. Rendered with the FIRST greeting already in it, so
-                 the section is complete before any script runs. */ ?>
-        <div class="lang-bubble" data-lang-bubble>
-          <p class="lang-bubble__text" lang="es" data-lang-text>¡Hola! ¿En qué puedo ayudarte?</p>
-        </div>
-
-        <?php /* PROMOTED FROM BODY TEXT TO ITS OWN ELEMENT. It closes the owner's
-                 immediate objection — "great, but I can't read Mandarin" — and as a
-                 sentence buried in a paragraph it was doing none of that work. */ ?>
-        <p class="lang-section__english">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-          Every recap arrives in English, ready for you.
-        </p>
-
-        <?php /* The pills ARE the control, not a second list. With JS off they still
-                 read as the list of supported languages, which is what they were
-                 before — so nothing is lost, only gained. */ ?>
-        <div class="lang-pills" role="group" aria-label="Preview a greeting in another language">
-          <?php foreach ( $lang_greetings as $i => $g ) : ?>
-            <button type="button"
-                    class="lang-pill<?php echo 0 === $i ? ' lang-pill--active' : ''; ?>"
-                    data-lang-code="<?php echo esc_attr( $g['code'] ); ?>"
-                    data-lang-greeting="<?php echo esc_attr( $g['text'] ); ?>"
-                    <?php echo ! empty( $g['rtl'] ) ? 'data-lang-rtl="1"' : ''; ?>
-                    aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>">
-              <?php echo esc_html( $g['name'] ); ?>
-            </button>
-          <?php endforeach; ?>
-          <span class="lang-pill lang-pill--more">+52 more</span>
-        </div>
-      </div>
-
-      <?php /* Robot on the RIGHT. Section 6 puts its artifact on the left so the two
-               alternate, and section 1 and section 11 also carry him on the right —
-               three appearances on the same side make him a motif rather than floating
-               decoration. */ ?>
-      <div class="block-split__art lang-section__art">
-        <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-languages.webp' ) ); ?>"
-             alt="" aria-hidden="true"
-             width="1122" height="1383" loading="lazy" decoding="async">
-      </div>
+    <div class="lang-section__header">
+      <span class="section-label">Speaks Their Language</span>
+      <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
+      <p class="lang-section__text">
+        Your visitors speak 57+ languages, and so does SiteStaffr. It answers in whatever language they open with.
+      </p>
     </div>
+
+    <?php
+    /* THE STAGE. The robot is in the FLOW and the greetings are absolute around it, which
+       is the opposite of how the deleted crowd version worked and is the whole reason
+       this one cannot rot the same way. The image sets the stage's height; the greetings
+       are placed against the stage, never against the picture.
+
+       ⚠️ THE ROBOT IS aria-hidden AND THE GREETINGS ARE NOT. The greetings are the
+       section's evidence, not decoration — "here are twelve languages" is the claim, and
+       hiding them would leave a screen-reader user with a heading and nothing under it. */
+    ?>
+    <div class="lang-orbit">
+      <img class="lang-orbit__robot"
+           src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-languages.webp' ) ); ?>"
+           alt="" aria-hidden="true"
+           width="1122" height="1383" loading="lazy" decoding="async">
+
+      <?php
+      /* ⚠️ `lang` ON EVERY GREETING AND `dir="rtl"` ON THE ARABIC — carried over from the
+         previous design, where the note read "this is not decoration", and it is even
+         more true now that there are twelve of them. A screen reader switches voice on
+         `lang`; without it a synthesiser reads 你好 and Привет with English phonetics,
+         in the one section whose entire subject is other languages.
+
+         The visible chip is the greeting; the language's NAME rides along in a
+         visually-hidden span. Sighted readers get "Bonjour" and infer French from the
+         word — a screen-reader user hearing a French synthesiser say "Bonjour" with no
+         label has no idea which language just went past. */
+      ?>
+      <ul class="lang-orbit__list">
+        <?php foreach ( $lang_greetings as $i => $g ) : ?>
+          <li class="lang-orbit__item lang-orbit__item--<?php echo (int) ( $i + 1 ); ?>">
+            <span class="lang-orbit__hello"
+                  lang="<?php echo esc_attr( $g['code'] ); ?>"
+                  <?php echo ! empty( $g['rtl'] ) ? 'dir="rtl"' : ''; ?>><?php echo esc_html( $g['hello'] ); ?></span>
+            <span class="screen-reader-text"><?php echo esc_html( $g['name'] ); ?></span>
+          </li>
+        <?php endforeach; ?>
+      </ul>
+    </div>
+
+    <?php /* KEPT, and moved under the stage where it closes the section. It answers the
+             owner's immediate objection — "great, but I can't read Mandarin" — and it is
+             the one line here that is about THEM rather than about the visitor. Deleting
+             it with the old layout would have thrown away the reassurance and kept only
+             the spectacle. */ ?>
+    <p class="lang-section__english">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+      Every recap arrives in English, ready for you.
+    </p>
   </div>
 </section>
 
