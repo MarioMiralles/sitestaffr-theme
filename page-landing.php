@@ -985,7 +985,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         'who'     => 'Tom Byrne',
         'what'    => 'Gluten-free cupcakes, 40 for Friday',
         'stamp'   => 'March 27, 2026 6:03 AM EDT',
-        'length'  => '1:48',
+        'length'  => '1:32',
         'recap'   => '<strong>Tom</strong> asked whether Maggie&rsquo;s Cakes can do gluten-free cupcakes, and needs about 40 of them for an office birthday on Friday morning.',
         'fields'  => array(
           array( 'label' => 'Name',               'value' => 'Tom Byrne' ),
@@ -996,11 +996,11 @@ get_template_part( 'template-parts/site-nav', null, array(
         'turns'   => array(
           array( 'who' => 'ai',      'at' => '6:03:04 AM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
           array( 'who' => 'visitor', 'at' => '6:03:21 AM', 'text' => 'Do you do gluten-free cupcakes? I need about 40 for Friday.' ),
-          array( 'who' => 'ai',      'at' => '6:03:24 AM', 'text' => 'We do &mdash; our gluten-free sponge is made in a separate prep area. Forty is no problem with a few days&rsquo; notice. Is this for an event?' ),
-          array( 'who' => 'visitor', 'at' => '6:04:02 AM', 'text' => 'Office birthday. Friday morning if possible.' ),
-          array( 'who' => 'ai',      'at' => '6:04:05 AM', 'text' => 'Got it. What name and number should I put down so someone can confirm the flavours and pickup time?' ),
-          array( 'who' => 'visitor', 'at' => '6:04:39 AM', 'text' => 'Tom Byrne, 555-0176.' ),
-          array( 'who' => 'ai',      'at' => '6:04:42 AM', 'text' => 'Thanks Tom. Someone will follow up this morning to confirm.' ),
+          array( 'who' => 'ai',      'at' => '6:03:24 AM', 'text' => 'We do &mdash; our gluten-free sponge is made in a separate prep area. For an order that size I&rsquo;ll take a message so the team can confirm the details with you. May I have your name?' ),
+          array( 'who' => 'visitor', 'at' => '6:03:58 AM', 'text' => 'Tom Byrne.' ),
+          array( 'who' => 'ai',      'at' => '6:04:01 AM', 'text' => 'Thanks Tom. What&rsquo;s the best number for our team to reach you at?' ),
+          array( 'who' => 'visitor', 'at' => '6:04:33 AM', 'text' => '555-0176.' ),
+          array( 'who' => 'ai',      'at' => '6:04:36 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch. Is there anything else I can help you with?' ),
         ),
       ),
       array(
@@ -1009,7 +1009,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         'who'     => 'Sarah Mitchell',
         'what'    => 'Two-tier unicorn cake, 25 guests, April 12',
         'stamp'   => 'March 27, 2026 2:14 AM EDT',
-        'length'  => '2:14',
+        'length'  => '1:41',
         /* Carried over from V1's document, which used this exact lead. */
         'recap'   => '<strong>Sarah</strong> reached out to inquire about ordering a custom birthday cake for her daughter&rsquo;s 7th birthday party. She&rsquo;s looking for a two-tier unicorn theme cake for 25 guests.',
         'fields'  => array(
@@ -1021,11 +1021,11 @@ get_template_part( 'template-parts/site-nav', null, array(
         'turns'   => array(
           array( 'who' => 'ai',      'at' => '2:14:03 AM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
           array( 'who' => 'visitor', 'at' => '2:14:10 AM', 'text' => 'Hi! I need to order a birthday cake for my daughter. She&rsquo;s turning 7 and wants a unicorn theme.' ),
-          array( 'who' => 'ai',      'at' => '2:14:12 AM', 'text' => 'That sounds wonderful! We&rsquo;d love to help with a unicorn cake. How many guests are you expecting? And do you have a date in mind?' ),
-          array( 'who' => 'visitor', 'at' => '2:14:58 AM', 'text' => 'About 25 guests, and the party is April 12.' ),
-          array( 'who' => 'ai',      'at' => '2:15:01 AM', 'text' => 'Perfect &mdash; a two-tier will suit 25 comfortably. What name and number should I put down for the order?' ),
-          array( 'who' => 'visitor', 'at' => '2:15:44 AM', 'text' => 'Sarah Mitchell, 555-0123.' ),
-          array( 'who' => 'ai',      'at' => '2:15:47 AM', 'text' => 'Thanks Sarah. Someone will be in touch to confirm the design and pricing.' ),
+          array( 'who' => 'ai',      'at' => '2:14:13 AM', 'text' => 'That sounds wonderful &mdash; we do custom themed cakes. I&rsquo;ll take a message so the team can go over designs and pricing with you. May I have your name?' ),
+          array( 'who' => 'visitor', 'at' => '2:14:52 AM', 'text' => 'Sarah Mitchell.' ),
+          array( 'who' => 'ai',      'at' => '2:14:55 AM', 'text' => 'Thanks Sarah. What&rsquo;s the best number for our team to reach you at?' ),
+          array( 'who' => 'visitor', 'at' => '2:15:41 AM', 'text' => '555-0123. It&rsquo;s for 25 guests, on April 12.' ),
+          array( 'who' => 'ai',      'at' => '2:15:44 AM', 'text' => 'Got it &mdash; a two-tier unicorn cake for 25 guests on April 12. I&rsquo;ve passed that to the team and someone will be in touch. Is there anything else I can help you with?' ),
         ),
       ),
       array(
@@ -1034,22 +1034,22 @@ get_template_part( 'template-parts/site-nav', null, array(
         'who'     => 'Camila Reyes',
         'what'    => 'Wedding tasting &mdash; are you open Sundays?',
         'stamp'   => 'March 26, 2026 11:47 PM EDT',
-        'length'  => '1:59',
-        'recap'   => '<strong>Camila</strong> is getting married in September and wants to book a wedding cake tasting. She specifically asked whether Sunday appointments are available.',
+        'length'  => '1:48',
+        'recap'   => '<strong>Camila</strong> is getting married in September and asked about booking a wedding cake tasting, specifically whether Sundays are possible. Availability was not answered on the chat &mdash; the question was passed to the team.',
         'fields'  => array(
           array( 'label' => 'Name',               'value' => 'Camila Reyes' ),
           array( 'label' => 'Email',              'value' => 'camila.reyes@example.com', 'mail' => 'camila.reyes@example.com' ),
           array( 'label' => 'Reason for contact', 'value' => 'Wedding cake tasting, September wedding' ),
         ),
-        'followup' => 'Email Camila with available Sunday tasting times in late September.',
+        'followup' => 'Email Camila about Sunday tasting availability for a late-September wedding.',
         'turns'   => array(
           array( 'who' => 'ai',      'at' => '11:47:02 PM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
           array( 'who' => 'visitor', 'at' => '11:47:29 PM', 'text' => 'We&rsquo;re getting married in September and wanted to book a tasting. Are you open Sundays?' ),
-          array( 'who' => 'ai',      'at' => '11:47:32 PM', 'text' => 'Congratulations! Tastings run Saturdays, and Sundays by appointment. Do you have a date in mind?' ),
-          array( 'who' => 'visitor', 'at' => '11:48:11 PM', 'text' => 'A Sunday would be much easier for us. Late September if possible.' ),
-          array( 'who' => 'ai',      'at' => '11:48:14 PM', 'text' => 'That works. What name and email should I put down so someone can send you times?' ),
-          array( 'who' => 'visitor', 'at' => '11:48:56 PM', 'text' => 'Camila Reyes, camila.reyes@example.com' ),
-          array( 'who' => 'ai',      'at' => '11:48:59 PM', 'text' => 'Thanks Camila. Someone will email you with Sunday tasting times.' ),
+          array( 'who' => 'ai',      'at' => '11:47:32 PM', 'text' => 'Congratulations! I don&rsquo;t have the tasting schedule to hand, but I can take a message so the team can get back to you about Sunday availability. May I have your name?' ),
+          array( 'who' => 'visitor', 'at' => '11:48:08 PM', 'text' => 'Camila Reyes.' ),
+          array( 'who' => 'ai',      'at' => '11:48:11 PM', 'text' => 'Thanks Camila. What&rsquo;s the best number for our team to reach you at?' ),
+          array( 'who' => 'visitor', 'at' => '11:48:47 PM', 'text' => 'Email is easier &mdash; camila.reyes@example.com' ),
+          array( 'who' => 'ai',      'at' => '11:48:50 PM', 'text' => 'Got it. I&rsquo;ve passed along your question about Sunday tastings for a September wedding, and someone from the team will follow up by email. Is there anything else I can help you with?' ),
         ),
       ),
     );
@@ -1104,6 +1104,12 @@ get_template_part( 'template-parts/site-nav', null, array(
           <img class="recap-doc__logo"
                src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>"
                alt="SiteStaffr" width="240" height="72" loading="lazy" decoding="async">
+          <?php /* V1's teal "Print / Download PDF" pill. It is a <span> there and a <span>
+                   here: the real button lives in the emailed recap, and a control on this
+                   page that looked live but printed nothing would be a lie about the
+                   product. It is part of the picture of the document, not a feature of
+                   the marketing site. */ ?>
+          <span class="recap-doc__print" aria-hidden="true">Print / Download PDF</span>
           <button type="button" class="recap-doc__close" data-morning-close aria-label="Close recap">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
           </button>
@@ -1142,13 +1148,28 @@ get_template_part( 'template-parts/site-nav', null, array(
             </div>
             <div class="recap-doc__messages">
               <?php foreach ( $ml['turns'] as $t ) : ?>
-                <div class="recap-doc__msg recap-doc__msg--<?php echo 'ai' === $t['who'] ? 'ai' : 'visitor'; ?>">
-                  <div class="recap-doc__msg-meta">
-                    <strong><?php echo 'ai' === $t['who'] ? 'AI' : 'Visitor'; ?></strong>
-                    <?php echo esc_html( $t['at'] ); ?>
+                <?php if ( 'ai' === $t['who'] ) : ?>
+                  <?php /* ⚠️ THE LABEL SAYS "AI" BECAUSE THE PRODUCT DOES. It is a picture
+                           of the emailed recap, so it has to match what the recap actually
+                           prints — changing it here alone would make the mockup a promise
+                           the product does not keep. Renaming it to "SiteStaffr" is a real
+                           task, logged on the wiki task board for the plugin and the email
+                           transcript; when that ships, this line changes with it. */ ?>
+                  <div class="recap-doc__msg recap-doc__msg--ai">
+                    <div class="recap-doc__msg-meta"><strong>AI</strong> <?php echo esc_html( $t['at'] ); ?></div>
+                    <p><?php echo wp_kses_post( $t['text'] ); ?></p>
                   </div>
-                  <p><?php echo wp_kses_post( $t['text'] ); ?></p>
-                </div>
+                <?php else : ?>
+                  <div class="recap-doc__msg recap-doc__msg--visitor">
+                    <span class="recap-doc__avatar" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12c2.7 0 5-2.3 5-5s-2.3-5-5-5-5 2.3-5 5 2.3 5 5 5zm0 2c-3.3 0-10 1.7-10 5v2h20v-2c0-3.3-6.7-5-10-5z"/></svg>
+                    </span>
+                    <div class="recap-doc__msg-body">
+                      <div class="recap-doc__msg-meta"><strong>Visitor</strong> <?php echo esc_html( $t['at'] ); ?></div>
+                      <p><?php echo wp_kses_post( $t['text'] ); ?></p>
+                    </div>
+                  </div>
+                <?php endif; ?>
               <?php endforeach; ?>
             </div>
           </section>

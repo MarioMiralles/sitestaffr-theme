@@ -4013,13 +4013,22 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ---- The recap document ----------------------------------------------
-   Ported from V1's inline artifact: logo bar, business name, Conversation Recap with a
-   contact list and a suggested follow-up, then the full transcript. V1 showed one
-   document permanently and cropped it with a fade; here there are three and they open
-   on demand, so nothing is cropped and the fade is gone with the crop it was hiding. */
+   V1's artifact, ported rather than re-imagined (Mario, 2026-08-27: "I just want that
+   full document that we created in v1"). Bordered cards for the recap and the
+   transcript, grey AI blocks, and the visitor on a teal-edged card behind an avatar.
+
+   ⚠️ NO INNER SCROLL PANE. The first version capped .recap-doc__sheet and scrolled
+   .recap-doc__body underneath a pinned logo bar, which read as a cropped window onto a
+   document rather than as the document. The sheet is now its natural height and the
+   DIALOG scrolls as one piece if the viewport is short — the whole page of paper moves,
+   which is what a document does. V1's bottom fade is gone with it: that fade existed to
+   disguise a crop, and there is no crop here.
+
+   Sizing is deliberately larger than V1's 440px/0.72rem. That was a thumbnail sitting in
+   a page layout; this is the reader's whole screen and has to be legible. */
 .recap-doc {
-  width: min(760px, calc(100vw - 32px));
-  max-height: min(86vh, 900px);
+  width: min(680px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
   /* ⚠️ `margin: auto` IS RESTORED DELIBERATELY. A modal <dialog> is centred by the UA
      stylesheet's own `margin: auto`, and line 38 of this file resets margin to 0 on
      `*` — which beats it and pins the sheet to the top-left corner. Nothing about the
@@ -4028,113 +4037,127 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: 0;
   border: 0;
   background: transparent;
-  overflow: visible;
+  overflow: auto;          /* the document scrolls as one sheet, not as an inner pane */
+  overscroll-behavior: contain;
 }
 .recap-doc::backdrop { background: rgba(6, 34, 42, 0.55); }
 .recap-doc__sheet {
-  display: flex;
-  flex-direction: column;
-  max-height: min(86vh, 900px);
   background: #fff;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   box-shadow: 0 24px 70px rgba(0,0,0,0.35);
   overflow: hidden;
+  text-align: left;
+  line-height: 1.55;
 }
 .recap-doc__bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 14px 20px;
-  background: var(--cream-dark);
+  gap: 12px;
+  padding: 14px 22px;
   border-bottom: 1px solid var(--border-light);
-  flex: none;
 }
-.recap-doc__logo { width: 132px; height: auto; }
+.recap-doc__logo { height: 30px; width: auto; }
+/* V1's teal pill, pushed to the right of the logo. */
+.recap-doc__print {
+  margin-left: auto;
+  padding: 6px 14px;
+  background: var(--teal-light);
+  color: #fff;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
 .recap-doc__close {
   display: grid;
   place-items: center;
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border: 0;
   border-radius: 50%;
   cursor: pointer;
   background: transparent;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   transition: background-color 0.16s ease, color 0.16s ease;
 }
 .recap-doc__close:hover,
 .recap-doc__close:focus-visible { background: rgba(0,0,0,0.07); color: var(--text-primary); }
-/* The sheet is a flex column with a capped height and this is the only scrolling part,
-   so the logo bar stays put while a long transcript scrolls under it. */
-.recap-doc__body {
-  padding: 24px clamp(18px, 3vw, 32px) 30px;
-  overflow-y: auto;
-}
+
+.recap-doc__body { padding: 4px 22px 24px; }
 .recap-doc__business {
   font-family: var(--font-display);
-  font-size: 1.5rem;
   font-weight: 600;
-  margin: 0 0 20px;
+  font-size: 1.35rem;
+  color: var(--text-primary);
+  padding: 18px 0 6px;
 }
-.recap-doc__section + .recap-doc__section { margin-top: 26px; }
+
+/* Each block is its own bordered card — this is the part that makes it read as a
+   document rather than as a modal with headings in it. */
+.recap-doc__section {
+  margin-top: 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+}
 .recap-doc__section-head {
   display: flex;
-  align-items: baseline;
   justify-content: space-between;
+  align-items: center;
   gap: 12px;
-  padding-bottom: 8px;
   margin-bottom: 12px;
-  border-bottom: 1px solid var(--border-light);
-  font-size: 0.82rem;
-  color: var(--text-muted);
 }
-.recap-doc__section-head strong {
-  font-size: 0.95rem;
-  color: var(--text-primary);
-  letter-spacing: 0.01em;
-}
-.recap-doc__section > p { color: var(--text-secondary); line-height: 1.65; }
+.recap-doc__section-head strong { font-size: 1rem; color: var(--text-primary); }
+.recap-doc__section-head span { color: var(--text-muted); font-size: 0.78rem; }
+.recap-doc__section > p { margin: 0 0 10px; color: var(--text-secondary); font-size: 0.92rem; }
 .recap-doc__section > p strong { color: var(--text-primary); }
+/* A real bulleted list, as in V1 — not a styled panel. The document is a printout. */
 .recap-doc__fields {
-  list-style: none;
-  margin: 14px 0 0;
-  padding: 14px 16px;
-  background: var(--cream);
-  border-radius: var(--radius-sm);
+  margin: 0 0 12px 18px;
+  padding: 0;
+  color: var(--text-secondary);
   font-size: 0.92rem;
 }
-.recap-doc__fields li + li { margin-top: 7px; }
-.recap-doc__field-label { color: var(--text-muted); }
-.recap-doc__fields a { color: var(--teal-deep); border-bottom: 1px solid rgba(0,131,143,0.35); }
+.recap-doc__fields li + li { margin-top: 4px; }
+.recap-doc__fields a { color: var(--teal-light); text-decoration: underline; }
 .recap-doc__followup {
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-left: 3px solid var(--teal-deep);
-  background: var(--teal-tint);
-  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-  font-size: 0.92rem;
-  line-height: 1.6;
-}
-.recap-doc__messages { display: flex; flex-direction: column; gap: 12px; }
-.recap-doc__msg { max-width: 86%; }
-.recap-doc__msg p {
   margin: 0;
-  padding: 10px 14px;
-  border-radius: var(--radius-md);
+  padding-top: 12px;
+  border-top: 1px solid var(--border-light);
+  color: var(--text-secondary);
   font-size: 0.92rem;
-  line-height: 1.55;
 }
-.recap-doc__msg-meta {
-  font-size: 0.7rem;
-  color: var(--text-muted);
-  margin-bottom: 4px;
+.recap-doc__followup strong { color: var(--text-primary); }
+
+.recap-doc__messages { display: flex; flex-direction: column; gap: 12px; }
+.recap-doc__msg--ai {
+  padding: 11px 14px;
+  border-radius: var(--radius-sm);
+  background: #f7f7f8;
+  border: 1px solid #ececec;
 }
-.recap-doc__msg-meta strong { color: var(--text-secondary); }
-.recap-doc__msg--ai p { background: var(--teal-pale); color: var(--text-primary); }
-.recap-doc__msg--visitor { margin-left: auto; }
-.recap-doc__msg--visitor .recap-doc__msg-meta { text-align: right; }
-.recap-doc__msg--visitor p { background: var(--cream-dark); }
+.recap-doc__msg--visitor { display: flex; gap: 10px; align-items: flex-start; }
+.recap-doc__avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--teal-light);
+  color: #fff;
+}
+.recap-doc__msg-body {
+  flex: 1;
+  padding: 11px 14px;
+  border: 1px solid #b2dfdb;
+  border-left: 3px solid var(--teal-light);
+  border-radius: var(--radius-sm);
+  background: #fff;
+}
+.recap-doc__msg-meta { font-size: 0.74rem; color: var(--text-muted); margin-bottom: 4px; }
+.recap-doc__msg-meta strong { color: var(--text-primary); }
+.recap-doc__msg--visitor .recap-doc__msg-meta strong { color: var(--teal-deep); }
+.recap-doc__msg p { margin: 0; color: var(--text-secondary); font-size: 0.92rem; }
 
 @media (max-width: 620px) {
   /* The row's five columns cannot survive a phone. Time and name on one line, the
@@ -4148,7 +4171,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   .morning-inbox__what { grid-column: 1 / -1; }
   .morning-inbox__tag,
   .what-you-get.is-interactive .morning-inbox__view { grid-column: 1 / -1; justify-self: start; }
-  .recap-doc__msg { max-width: 96%; }
+  .recap-doc__body { padding: 4px 16px 20px; }
+  .recap-doc__bar { padding: 12px 16px; }
+  .recap-doc__print { display: none; }   /* the pill and the close button fight for the same row on a phone */
 }
 .morning-inbox__time {
   font-variant-numeric: tabular-nums;
