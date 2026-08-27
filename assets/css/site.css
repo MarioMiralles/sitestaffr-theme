@@ -4039,7 +4039,31 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: transparent;
   overflow: auto;          /* the document scrolls as one sheet, not as an inner pane */
   overscroll-behavior: contain;
+
+  /* ⚠️ THE SCROLLBAR IS PART OF THE DESIGN HERE, because the scroll container is the
+     DIALOG and the rounded sheet sits inside it — so a default bar runs down the flat
+     edge of a rounded document and reads as a seam next to the corner radius.
+
+     `padding-right` is what fixes that, not the bar's own styling: it opens a gutter so
+     the bar rides in space beside the sheet instead of against it. The thumb is then
+     inset inside that gutter with the transparent-border + background-clip trick, which
+     is the only way to pad a ::-webkit-scrollbar-thumb — it has no margin.
+
+     scrollbar-color/scrollbar-width cover Firefox, which supports neither pseudo-element.
+     Both are declared on purpose; one alone leaves half the browsers on the default. */
+  padding-right: 6px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,131,143,0.45) transparent;
 }
+.recap-doc::-webkit-scrollbar { width: 12px; }
+.recap-doc::-webkit-scrollbar-track { background: transparent; }
+.recap-doc::-webkit-scrollbar-thumb {
+  background: rgba(0,131,143,0.42);
+  border: 3px solid transparent;
+  background-clip: padding-box;
+  border-radius: 999px;
+}
+.recap-doc::-webkit-scrollbar-thumb:hover { background: rgba(0,131,143,0.65); background-clip: padding-box; }
 .recap-doc::backdrop { background: rgba(6, 34, 42, 0.55); }
 .recap-doc__sheet {
   background: #fff;
