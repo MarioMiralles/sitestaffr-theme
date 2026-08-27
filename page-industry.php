@@ -2,6 +2,29 @@
 /*
 Template Name: Industry
 */
+
+/* ⚠️ THE PHONE RULE, AND IT APPLIES TO EVERY INDUSTRY BLOCK IN THIS FILE.
+   SiteStaffr HAS NO PHONE LINE. The readme leads with "No phone lines"; a visitor
+   talks or types on the website and there is no number to dial. With
+   "receptionist" now in the homepage H1, any phrasing that sounds like telephony
+   reads as "this answers my phone" - a crowded, more expensive, different
+   category that we do not sell.
+
+   NEVER, in copy: "answers calls", "handles calls", "the caller", "on hold",
+   "switchboard", "answering service", "voicemail" as something WE provide.
+
+   ALWAYS FINE, and load-bearing - this is the argument of the whole page:
+   the CUSTOMER calling ("they call the next practice on Google", "drivers call
+   whoever answers first"), the OWNER calling back ("you call them on the drive
+   home"), and the MISSED call as the problem ("Missed calls from the field").
+   Do not sweep those; a blanket find-and-replace on "call" would delete the
+   product's reason to exist.
+
+   The test is simple: is SiteStaffr the thing doing the calling or answering? If
+   yes, rewrite it. If the human is, leave it. Swept 2026-08-27; before that this
+   file's dental H1 read "Your Front Desk Can't Answer Every Call. Your AI Agent
+   Can." on sixteen pages. */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -14,7 +37,17 @@ $industries = array(
 		'hero_icon' => '🦷',
 		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI agent answering a visitor on the practice website',
 		'label'    => 'For Dental Practices',
-		'headline' => 'Your Front Desk Can&rsquo;t Answer Every Call. Your AI&nbsp;Agent&nbsp;Can.',
+		/* ⚠️ WAS "Your Front Desk Can't Answer Every Call. Your AI Agent Can." Two problems
+		   and the first is the serious one: it claims the product answers CALLS. SiteStaffr
+		   has no phone line - the readme leads with "No phone lines" - so this promised the
+		   one thing it does not do, in an H1, on sixteen pages. It also used "every" as an
+		   absolute. Both are standing rules.
+
+		   It was additionally the only headline of the fifteen that was a product CLAIM
+		   rather than a situational scene, so replacing it also puts dental back in the
+		   house pattern. The front-desk contrast is what made the original work, so it is
+		   kept - it just no longer implies a switchboard. */
+		'headline' => 'A Cracked Tooth at 8&nbsp;PM. Your Front Desk Went Home at&nbsp;Five.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7, answering questions about services, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'Dentistry',
 		'problems_headline' => 'Dental Practices Lose Patients Before They Ever Sit in the Chair',
@@ -43,7 +76,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, reason for calling, insurance questions &mdash; SiteStaffr collects everything a new patient coordinator would, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, reason for calling, insurance questions &mdash; SiteStaffr collects everything a new patient coordinator would, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -297,7 +330,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, the treatment they&rsquo;re interested in, and their preferred day &mdash; SiteStaffr collects everything your front desk would ask, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, the treatment they&rsquo;re interested in, and their preferred day &mdash; SiteStaffr collects everything your front desk would ask, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -376,7 +409,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, reason for the visit, and insurance questions &mdash; SiteStaffr collects everything a new patient coordinator would, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, reason for the visit, and insurance questions &mdash; SiteStaffr collects everything a new patient coordinator would, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -534,7 +567,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, what&rsquo;s bothering them, and insurance questions &mdash; SiteStaffr collects everything a new patient coordinator would, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, what&rsquo;s bothering them, and insurance questions &mdash; SiteStaffr collects everything a new patient coordinator would, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -771,7 +804,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, the service they want, and their preferred day &mdash; SiteStaffr collects everything your front desk would ask, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, the service they want, and their preferred day &mdash; SiteStaffr collects everything your front desk would ask, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -880,15 +913,21 @@ $industries = array(
 				'a' => 'No. SiteStaffr doesn&rsquo;t diagnose HVAC or plumbing issues or estimate repair costs &mdash; that stays with your technicians. It answers from what your website publishes, collects the details of the emergency, and gets them to you so your team can call back and dispatch.',
 			),
 			array(
-				'q' => 'Can it tell if a call is a true emergency?',
-				'a' => 'SiteStaffr captures exactly what the visitor describes &mdash; no heat, a leaking pipe, a flooded basement &mdash; and flags it in your recap the way they described it. Your team makes the call on how urgently to respond.',
+			/* ⚠️ BOTH OF THESE ASKED ABOUT "CALLS", which on a page selling an AI reads as
+			   "does it answer my phone" - the exact misunderstanding the positioning has to
+			   avoid, and worse in an FAQ because an answer engine can lift the question on
+			   its own with no page around it to correct the impression.
+			   "makes the call" went too: it is only an idiom, but it is an idiom about
+			   phone calls sitting two lines under a question about phone calls. */
+				'q' => 'Can it tell how urgent a request is?',
+				'a' => 'SiteStaffr captures exactly what the visitor describes &mdash; no heat, a leaking pipe, a flooded basement &mdash; and flags it in your recap the way they described it. Your team decides how urgently to respond.',
 			),
 			array(
-				'q' => 'Can it handle calls in the middle of the night?',
+				'q' => 'Can it handle emergencies in the middle of the night?',
 				'a' => 'Yes. SiteStaffr runs 24/7. When a homeowner&rsquo;s pipe bursts at 2 AM, the AI captures their details and emails you immediately, so you can call back the moment you&rsquo;re awake or dispatch an on-call tech right then.',
 			),
 			array(
-				'q' => 'What if the caller speaks a different language?',
+				'q' => 'What if the visitor speaks a different language?',
 				'a' => 'SiteStaffr supports 57+ languages. If a homeowner describes a leak or a dead furnace in Spanish, the AI responds in Spanish. Your recap always arrives in English with every detail intact.',
 			),
 		),
@@ -929,7 +968,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, what kind of help they need, and their timeline &mdash; SiteStaffr collects everything a new client coordinator would, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, what kind of help they need, and their timeline &mdash; SiteStaffr collects everything a new client coordinator would, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -1008,7 +1047,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, the type of coverage they&rsquo;re shopping for, and what prompted the search &mdash; a rate increase, a new home, a new car &mdash; SiteStaffr collects everything an agent would ask, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, the type of coverage they&rsquo;re shopping for, and what prompted the search &mdash; a rate increase, a new home, a new car &mdash; SiteStaffr collects everything an agent would ask, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',
@@ -1087,7 +1126,7 @@ $industries = array(
 			),
 			array(
 				'title' => 'The AI captures their details',
-				'desc'  => 'Name, phone number, which class or membership they&rsquo;re interested in, and when they want to start &mdash; SiteStaffr collects everything your front desk would ask, without putting anyone on hold.',
+				'desc'  => 'Name, phone number, which class or membership they&rsquo;re interested in, and when they want to start &mdash; SiteStaffr collects everything your front desk would ask, without making anyone wait.',
 			),
 			array(
 				'title' => 'You get a complete recap by email',

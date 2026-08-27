@@ -200,7 +200,7 @@ $download_url = home_url( '/download/' );
 					</button>
 					<div class="dl-faq__answer">
 						<div class="dl-faq__answer-inner">
-							Yes. You get 30 days with 30 minutes of call time, no credit card required. Just activate the plugin, run the wizard, and choose the free trial option.
+							Yes. You get 30 days with 30 voice minutes, no credit card required. Just activate the plugin, run the wizard, and choose the free trial option.
 						</div>
 					</div>
 				</div>
@@ -312,7 +312,7 @@ $faq_items = array(
 	),
 	array(
 		'question' => 'Is there a free trial?',
-		'answer'   => 'Yes. You get 30 days with 30 minutes of call time, no credit card required. Just activate the plugin, run the wizard, and choose the free trial option.',
+		'answer'   => 'Yes. You get 30 days with 30 voice minutes, no credit card required. Just activate the plugin, run the wizard, and choose the free trial option.',
 	),
 	array(
 		'question' => 'How do I update the plugin?',
