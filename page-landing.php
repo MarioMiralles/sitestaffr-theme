@@ -1412,18 +1412,34 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         ?>
         <div class="proof-section__lead-pair">
           <div class="proof-section__lead-stat">
+            <?php /* "after business hours", not "after they closed" (Mario, 2026-08-27).
+                     Clearer, and it now matches the language of the quote beside it —
+                     Nathaly says "after hours is when most new facility inquiries come
+                     in", so the stat and the customer describe the same thing the same
+                     way instead of two ways. */ ?>
             <span class="proof-section__lead-number">86%</span>
-            <span class="proof-section__lead-label">of their conversations arrived <strong>after they closed</strong></span>
+            <span class="proof-section__lead-label">of their conversations arrived <strong>after business hours</strong></span>
           </div>
           <div class="proof-section__lead-stat">
+            <?php /* ⚠️ "23 qualified leads / out of 72 conversations" RESOLVES A REAL
+                     AMBIGUITY, which is why the denominator moved here rather than
+                     staying a shared footnote.
+
+                     The label read "23 — of those became a qualified lead", and "those"
+                     had two readings: all 72 conversations, or only the 86% that arrived
+                     after hours. Those are different claims about a named customer (23/72
+                     vs 23/62). Stating the denominator directly under the number it
+                     belongs to makes it say one thing.
+
+                     72 is still support and still quieter than the number above it — it
+                     has simply stopped being a floating footnote under both stats. 86%
+                     carries its own denominator in its own label ("of their
+                     conversations"), so nothing was taken from it. */ ?>
             <span class="proof-section__lead-number">23</span>
-            <span class="proof-section__lead-label">of those became a <strong>qualified lead</strong></span>
+            <span class="proof-section__lead-label"><strong>qualified leads</strong></span>
+            <span class="proof-section__lead-sub">out of <strong>72</strong> conversations</span>
           </div>
         </div>
-
-        <?php // 72 is support, not a claim of its own: it is the denominator that
-              // makes 86% mean anything. Deliberately quieter than the pair above. ?>
-        <p class="proof-section__support">out of <strong>72</strong> conversations</p>
 
         <?php
         /* ⚠️ NOT A FOOTNOTE TO MINIMISE. "One customer's results, not an average"

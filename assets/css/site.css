@@ -3649,7 +3649,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  gap: clamp(16px, 2.2vw, 24px);
+  /* Roomier (Mario, 2026-08-27: "space out the title, stats, and text underneath").
+     This gap is the only spacing between the header, the stat pair and the source
+     line -- .proof-section__evidence is a flex column, so one value moves all three. */
+  gap: clamp(26px, 3.4vw, 42px);
 }
 .proof-section__header h2 {
   margin-top: 10px;
@@ -3694,14 +3697,20 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-weight: 600;
 }
 
-/* Quieter than the pair by design. It is the denominator, not a third claim -
-   set at the same weight it would compete with the numbers it exists to support. */
-.proof-section__support {
-  font-size: 0.9rem;
+/* THE DENOMINATOR, NOW ATTACHED TO THE NUMBER IT BELONGS TO. It used to be
+   .proof-section__support, a sibling of the whole pair, which is what let "of those"
+   stay ambiguous about which stat it was the denominator FOR. It sits inside the 23
+   now -- see the note in page-landing.php.
+
+   Quieter than the label above it by design: it is support, not a third claim. At the
+   same weight it competes with the number it exists to prop up. */
+.proof-section__lead-sub {
+  font-size: 0.85rem;
+  line-height: 1.4;
   color: var(--text-muted);
-  margin-top: -4px;
+  margin-top: 2px;
 }
-.proof-section__support strong {
+.proof-section__lead-sub strong {
   color: var(--text-secondary);
   font-weight: 600;
 }
