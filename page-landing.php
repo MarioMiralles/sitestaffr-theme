@@ -2143,61 +2143,91 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 </section>
 
 <!-- ========== SECTION 9: FAQ ========== -->
-<?php /* SECTION 9 — the FAQ.
+<?php
+/* SECTION 9 — the FAQ.
 
-         STICKY RAIL + SINGLE-COLUMN ACCORDION. Never two columns of questions: a reader
-         scanning for their own objection has to track two streams at once, and the
-         answer they open pushes the other column out of alignment.
+   ⚠️ TWO COLUMNS NOW, WHICH REVERSES A RECORDED DECISION (Mario, 2026-08-27: "It's way
+   too vertical, maybe we should separate them into two columns and do 2 categories per
+   column"). The note that stood here said "Never two columns of questions", for two
+   stated reasons. One of them was real and is now designed around; the other does not
+   apply to this shape:
 
-         The deflection CTA moved INTO THE BOTTOM OF THE RAIL. It used to sit under the
-         list, which left ~575px of dead cream beside the questions and put the CTA where
-         only someone who had already read all seventeen would see it. In the rail it
-         follows the reader down the whole list.
+     "the answer they open pushes the other column out of alignment" — TRUE of a
+     newspaper/masonry flow, where one list wraps across both columns. These are two
+     INDEPENDENT stacks, each holding whole categories, so opening an answer in the left
+     column moves only the left column. Nothing it does can disturb the right.
 
-         "Ask Our AI" rather than an email address, deliberately: it is the same widget a
-         visitor would install, so the support path is also a demo. */ ?>
-<section class="block block-split faq-section" id="faq">
+     "a reader scanning for their own objection has to track two streams" — this is why
+     the split is BY CATEGORY and not by item count. A reader is not scanning seventeen
+     questions; they are looking for the heading that matches their worry and reading
+     under it. Two categories per column keeps every category whole and in reading order.
+
+   The split is 2/2 in DOCUMENT ORDER — Installing it (4) + Can I trust it (4) on the
+   left, What it does (6) + Cost and commitment (3) on the right. That is 8 and 9, so it
+   also happens to balance; do not re-sort by count and break reading order to chase a
+   perfect match.
+
+   THE RAIL IS GONE and its CTA moved to the top with the heading. The rail existed to
+   keep the deflection CTA beside a very long single column; with the list half as tall
+   there is no long scroll to follow, and a third column beside two would squeeze the
+   questions into ~390px each. At the top it is seen BEFORE the questions rather than
+   only by someone who read all seventeen — which was the original complaint about its
+   old position under the list.
+
+   "Ask Our AI" rather than an email address, deliberately: it is the same widget a
+   visitor would install, so the support path is also a demo. */
+
+/* Group the flat list, then deal the groups into two columns. The JSON-LD above stays a
+   FLAT mainEntity list regardless — FAQPage has no grouping concept, and the schema must
+   not learn about this presentation. */
+$faq_grouped = array();
+foreach ( $faq_items as $faq_i => $faq ) {
+	$faq_grouped[ $faq['group'] ][] = array( 'i' => $faq_i, 'item' => $faq );
+}
+$faq_group_names = array_keys( $faq_grouped );
+$faq_columns     = array_chunk( $faq_group_names, 2 );
+?>
+<section class="block faq-section" id="faq">
   <div class="block__inner">
-    <div class="block-split__grid faq-section__grid">
-      <div class="faq-section__rail">
-        <span class="section-label">Common Questions</span>
-        <h2>Frequently Asked Questions</h2>
-        <p class="faq-section__subtitle">The things people ask before they install it.</p>
+    <div class="faq-section__head">
+      <span class="section-label">Common Questions</span>
+      <h2>Frequently Asked Questions</h2>
+      <p class="faq-section__subtitle">The things people ask before they install it.</p>
 
-        <div class="faq-section__ask">
-          <p class="faq-section__ask-lead">Still have a question?</p>
-          <button type="button" class="btn btn--outline js-open-chat" data-cta="chat">Ask Our AI</button>
-          <p class="faq-section__ask-note">It&rsquo;s the same one you&rsquo;d install.</p>
-        </div>
+      <div class="faq-section__ask">
+        <p class="faq-section__ask-lead">Still have a question?</p>
+        <button type="button" class="btn btn--outline js-open-chat" data-cta="chat">Ask Our AI</button>
+        <p class="faq-section__ask-note">It&rsquo;s the same one you&rsquo;d install.</p>
       </div>
+    </div>
 
-      <div class="faq-list">
-        <?php
-        /* GROUPS ARE PRESENTATIONAL. They break the wall of seventeen without breaking
-           the single-column rule; the JSON-LD above stays a flat mainEntity list,
-           because FAQPage has no grouping concept.
-
-           The first item is open by default — every answer is already in the DOM for
-           the schema, so opening one costs nothing and shows the reader what an answer
-           looks like before they decide whether to bother. */
-        $faq_group = null;
-        foreach ( $faq_items as $faq_i => $faq ) :
-            if ( $faq['group'] !== $faq_group ) :
-                $faq_group = $faq['group'];
+    <div class="faq-section__columns">
+      <?php foreach ( $faq_columns as $faq_col ) : ?>
+        <div class="faq-list">
+          <?php foreach ( $faq_col as $faq_group ) : ?>
+            <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
+            <?php foreach ( $faq_grouped[ $faq_group ] as $entry ) :
+                $faq = $entry['item'];
+                /* The first item of the whole list is open by default — every answer is
+                   already in the DOM for the schema, so opening one costs nothing and
+                   shows the reader what an answer looks like before they decide whether
+                   to bother. Keyed off the ORIGINAL index, so it stays the first question
+                   of the first category however the columns are dealt. */
+                $faq_open = 0 === $entry['i'];
                 ?>
-                <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
-            <?php endif; ?>
-        <div class="faq-item<?php echo 0 === $faq_i ? ' faq-item--open' : ''; ?>">
-          <button class="faq-item__question" type="button" aria-expanded="<?php echo 0 === $faq_i ? 'true' : 'false'; ?>">
-            <?php echo esc_html( $faq['question'] ); ?>
-            <span class="faq-item__icon" aria-hidden="true"></span>
-          </button>
-          <div class="faq-item__answer">
-            <div class="faq-item__answer-inner"><?php echo esc_html( $faq['answer'] ); ?></div>
-          </div>
+              <div class="faq-item<?php echo $faq_open ? ' faq-item--open' : ''; ?>">
+                <button class="faq-item__question" type="button" aria-expanded="<?php echo $faq_open ? 'true' : 'false'; ?>">
+                  <?php echo esc_html( $faq['question'] ); ?>
+                  <span class="faq-item__icon" aria-hidden="true"></span>
+                </button>
+                <div class="faq-item__answer">
+                  <div class="faq-item__answer-inner"><?php echo esc_html( $faq['answer'] ); ?></div>
+                </div>
+              </div>
+            <?php endforeach; ?>
+          <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
-      </div>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>

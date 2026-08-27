@@ -223,6 +223,9 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
      Sections carrying a seam overlay add the seam's height ON TOP of this so the
      visible gap below the divider is still 64px — see .what-you-get. */
   --block-pad: 64px;
+  /* The cream run, sections 4-9 — see the .block:not(.block--dark) rule for why this is
+     a second value and not a regression to the old two-clamp scale. */
+  --block-pad-light: 96px;
 
   /* Matches .container so the restored container is one number site-wide.
      V2 broke hero content to 40px from the raw viewport edge; V1 sits at ~150px
@@ -235,6 +238,24 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 }
 
 .block { padding-block: var(--block-pad); }
+
+/* ⚠️ THE LIGHT RUN GETS MORE AIR THAN THE DARK, AND THAT IS NOT AN INCONSISTENCY
+   (Mario, 2026-08-27: "space the cream section apart a bit more. They feel too close
+   and cramped").
+
+   Sections 4-9 all sit on the same cream. Nothing marks where one ends and the next
+   begins except the gap itself, so the padding is doing the ENTIRE job of separating
+   them. The dark sections do not have that problem: 2-3 and 10-11 are bounded by a
+   color change and a curtain, which separate them for free.
+
+   So one number could not be right for both, and matching them was what made the cream
+   run feel cramped while the dark block looked fine. The scale is still a single value
+   per context, not the unprincipled two-clamp drift that was removed earlier.
+
+   Scoped by SECTION rather than by a `--light` class because the light run is defined by
+   the four dark ones being listed here — add a dark section and it must be added here
+   too, which is a one-line change with an obvious symptom if missed. */
+.block:not(.block--dark) { padding-block: var(--block-pad-light); }
 /* `.block--tight` NO LONGER CHANGES ANYTHING. The rule is kept, pointing at the same
    single value, so the class still resolves everywhere it appears in the markup rather
    than sitting there as a dead attribute that looks like it does something. If a second
@@ -3163,24 +3184,41 @@ body.sitestaffr-landing-page .hero__visual > * {
 .price-footnote strong { color: var(--text-primary); font-weight: 600; }
 
 /* ---- Section 9: the FAQ ------------------------------------------------
-   Sticky rail + single-column accordion. Never two columns of questions. */
+   ⚠️ TWO COLUMNS, WHICH REVERSES THE "never two columns of questions" NOTE THAT USED TO
+   BE HERE (Mario, 2026-08-27: "It's way too vertical"). Read the reasoning in
+   page-landing.php before undoing it — the old objection was about a masonry flow, where
+   one list wraps across both columns and an opened answer shunts the other side. These
+   are two INDEPENDENT stacks of whole categories, so opening an answer moves only its
+   own column.
+
+   The sticky rail is gone with it. It existed to keep the deflection CTA beside a very
+   long single column; the list is half as tall now, and a third column beside two would
+   squeeze the questions to ~390px each. The CTA sits in the header instead. */
 .faq-section { background: var(--cream); }
-.faq-section__grid {
-  grid-template-columns: 0.62fr 1fr;
-  align-items: start;
-  gap: clamp(28px, 4vw, 56px);
-}
-.faq-section__rail {
-  position: sticky;
-  top: 96px;          /* clears the fixed nav */
+.faq-section__head {
+  text-align: center;
+  max-width: 44rem;
+  margin: 0 auto clamp(30px, 4vw, 48px);
 }
 .faq-section__subtitle { color: var(--text-secondary); margin-top: 8px; }
 
-/* Fills what used to be ~575px of dead cream, and follows the reader down all
-   seventeen questions instead of waiting at the bottom for whoever finishes. */
+/* TWO COLUMNS OF CATEGORIES. `align-items: start` matters: without it the columns
+   stretch to equal height and the shorter one grows a tail of empty cream that tracks
+   whichever answers happen to be open. */
+.faq-section__columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(24px, 3.5vw, 56px);
+  align-items: start;
+}
+
+/* Now a centered block under the heading rather than a card in the rail. It is seen
+   BEFORE the questions here, which was the original complaint about its older position
+   underneath the list — only a reader who finished all seventeen ever reached it. */
 .faq-section__ask {
-  margin-top: 28px;
-  padding: 18px;
+  display: inline-block;
+  margin-top: 26px;
+  padding: 18px 24px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
   background: #fff;
@@ -3209,9 +3247,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 .faq-item--open .faq-item__answer { max-height: 42rem; }
 
 @media (max-width: 900px) {
-  .faq-section__grid { grid-template-columns: 1fr; }
-  /* Sticky is meaningless once the rail is stacked above the list. */
-  .faq-section__rail { position: static; }
+  /* One column on a phone. Two columns of accordions at this width would be two
+     ~170px stacks, and every question would wrap to four lines. */
+  .faq-section__columns { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  /* The second column's first heading needs the same separation from the item above it
+     that it would have had inside its own column. */
+  .faq-section__columns .faq-list + .faq-list .faq-list__group:first-child { margin-top: 26px; }
 }
 
 /* ---- Section 10: the agency door --------------------------------------
@@ -5812,35 +5853,11 @@ body.sitestaffr-landing-page .hero__visual > * {
 .faq-section h2 {
   margin-bottom: 0;
 }
-.faq-section__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px 48px;
-  max-width: 960px;
-  margin: 0 auto;
-}
-.faq-section__item {
-  padding: 0;
-}
-.faq-section__question {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--teal-deep);
-  margin-bottom: 8px;
-  line-height: 1.4;
-}
-.faq-section__answer {
-  font-size: 0.92rem;
-  line-height: 1.7;
-  color: var(--text-secondary);
-}
-@media (max-width: 768px) {
-  .faq-section__grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-}
+/* THE LEGACY FAQ RULES WERE DELETED HERE, 2026-08-27.
+   .faq-section__grid / __item / __question / __answer styled an OLDER FAQ markup that no
+   template renders any more — grepped all PHP before removing. The __grid copy was
+   actively harmful: declared later than the real layout rules above, it won on equal
+   specificity, so the section's true column definition was the dead one. */
 
 /* ========== SECTION 8: PRICING ==========
    The V1 homepage-pricing rules that lived here were DELETED on 2026-08-26.
