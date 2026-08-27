@@ -1165,7 +1165,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 </section>
 
 <!-- ========== SECTION 7: SOCIAL PROOF ========== -->
-<section class="proof-section">
+<section class="block block-panel proof-section">
   <div class="proof-section__backdrop" aria-hidden="true">
     <div class="proof-section__backdrop-panel"></div>
     <div class="proof-section__backdrop-accent"></div>

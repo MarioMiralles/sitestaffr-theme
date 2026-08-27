@@ -2813,7 +2813,10 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 /* ========== SOCIAL PROOF ========== */
 /* --- Proof section: Layered Depth editorial --- */
 .proof-section {
-  padding: clamp(80px, 12vw, 140px) 0;
+  /* Padding comes from .block. This was the last section still carrying its own
+     clamp, so the page now really does have exactly two section-padding values -
+     which is the claim the block system makes and the thing that keeps it cheap. */
+
   background: linear-gradient(168deg, #f0f7f8 0%, #e6f0f2 40%, #dce9ec 100%);
   position: relative;
   overflow: hidden;
@@ -4765,7 +4768,9 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 
 /* ========== SECTION 8: FAQ ========== */
 .faq-section {
-  padding: var(--section-padding);
+  /* No padding here: .block owns it. A `padding` SHORTHAND declared later in this
+     file beats .block's `padding-block`, so a section can carry the class and still
+     sit off the scale - which is exactly what these two were doing. */
   background: var(--warm-white);
 }
 .faq-section__header {
@@ -4807,7 +4812,9 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 
 /* ========== SECTION 9: PRICING ========== */
 .pricing-section {
-  padding: var(--section-padding);
+  /* No padding here: .block owns it. A `padding` SHORTHAND declared later in this
+     file beats .block's `padding-block`, so a section can carry the class and still
+     sit off the scale - which is exactly what these two were doing. */
   background:
     radial-gradient(circle at 15% 12%, rgba(31,182,204,0.08) 0%, rgba(31,182,204,0) 32%),
     radial-gradient(circle at 85% 88%, rgba(16,185,129,0.1) 0%, rgba(16,185,129,0) 42%),
