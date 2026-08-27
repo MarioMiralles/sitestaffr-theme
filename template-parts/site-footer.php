@@ -17,7 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
               class="footer__logo-image"
             >
           </a>
-          <p class="footer__tagline">AI voice and text agents for service businesses on WordPress.</p>
+          <?php /* Positioning realigned 2026-08-26 with the V3 H1. Was "AI voice and text agents
+         for service businesses on WordPress" - the superseded framing. This tagline is
+         the most-repeated sentence on the site: it renders under EVERY page, so leaving
+         it on the old term would have the site contradicting its own headline site-wide.
+
+         "receptionist" never alone - the second clause breaks the ceiling the word sets,
+         because the product also writes blogs, sends recaps and speaks. */ ?>
+          <p class="footer__tagline">An AI receptionist for your website &mdash; answering visitors, capturing leads and writing your blog.</p>
         </div>
 
         <nav class="footer__nav" aria-label="Footer navigation">

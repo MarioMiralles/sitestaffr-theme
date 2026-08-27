@@ -634,7 +634,7 @@ function sitestaffr_industry_registry() {
 					'slug'      => 'hvac-plumbing',
 					'title'     => 'HVAC & Plumbing',
 					'icon'      => '🚿',
-					'blurb'     => 'No heat at 11 PM, a pipe letting go on a Sunday. These are the calls that go to whoever picks up.',
+					'blurb'     => 'No heat at 11 PM, a pipe letting go on a Sunday. These go to whoever answers first.',
 					'llms'      => 'AI chat and voice agent for HVAC and plumbing companies',
 					'seo_title' => 'AI Chat & Voice Agent for HVAC & Plumbing | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers HVAC and plumbing website visitors 24/7, captures no-heat and leak emergencies, and emails a recap instantly. Free 30-day trial.',
@@ -997,7 +997,7 @@ add_action( 'template_redirect', function () {
 		header( 'Content-Type: text/plain; charset=utf-8' );
 		header( 'X-Robots-Tag: noindex' );
 		echo "# SiteStaffr\n\n";
-		echo "> An AI voice and text agent built for service businesses on WordPress.\n\n";
+		echo "> An AI receptionist for your website, built for service businesses on WordPress. It answers visitors by text or voice, captures leads, and writes your blog.\n\n";
 		echo "SiteStaffr is a WordPress plugin that adds an AI-powered voice and text chat agent to your website. ";
 		echo "It greets visitors, answers questions using your website content, captures contact information, ";
 		echo "and sends you detailed conversation recaps by email — automatically, 24/7, in over 57 languages.\n\n";
@@ -1031,7 +1031,7 @@ add_action( 'template_redirect', function () {
 		echo "## How It Works\n\n";
 		echo "1. Install the SiteStaffr plugin on your WordPress site (takes under 5 minutes).\n";
 		echo "2. Run the setup wizard: enter your business info, choose a plan, and generate your AI knowledge base.\n";
-		echo "3. The voice and text agent widget appears on your site automatically.\n";
+		echo "3. The SiteStaffr widget appears on your site automatically.\n";
 		echo "4. Visitors ask questions via voice or text. SiteStaffr answers using your website content.\n";
 		echo "5. After each conversation, you receive an email recap with the visitor's contact info, a full transcript, and suggested follow-up actions.\n\n";
 		echo "## What Customers Say\n\n";
@@ -1040,7 +1040,7 @@ add_action( 'template_redirect', function () {
 		echo "and start date. Monday morning it was sitting in our inbox, ready to go.\" ";
 		echo "— Nathaly Martinez, CEO & Founder, Synergy Scribes\n\n";
 		echo "## Frequently Asked Questions\n\n";
-		echo "**What is SiteStaffr?** SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. ";
+		echo "**What is SiteStaffr?** SiteStaffr is an AI receptionist for your website, built as a WordPress plugin for service businesses. ";
 		echo "It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, ";
 		echo "answers their questions using your website content, and captures their name, phone number, and what they need — all through natural ";
 		echo "conversation in over 57 languages. After every interaction, you receive an email recap with a full transcript, the visitor's contact ";
