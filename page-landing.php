@@ -1188,7 +1188,29 @@ $lang_greetings = array(
    for free. */
 $ind_groups = sitestaffr_industry_registry();
 $ind_flat   = sitestaffr_industry_list();
-$ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
+
+/* WHICH INDUSTRY OPENS THE SECTION IS RANDOM (Mario, 2026-08-27: "would be great if a
+   business is picked at random instead of always starting with Dental Practice").
+
+   It was $ind_flat[0], so Dental Practices — the first entry in the registry — was the
+   permanent face of a section whose whole argument is breadth. Sixteen industries, and a
+   visitor only ever saw one of them unless they clicked.
+
+   ⚠️ IT IS RANDOM PER PAGE RENDER, NOT PER VISITOR, and that distinction is worth
+   knowing before anyone calls it broken. Full-page caching (LiteSpeed on production)
+   serves one generated copy to everybody, so the pick changes when the cache is built,
+   not on every load. That is fine here — the goal is that the section is not permanently
+   Dental, not that two people see different things — but it does mean you can reload ten
+   times and see no change, and that is the cache working rather than this failing.
+
+   Doing it in JS instead would give per-visitor variety at the cost of rendering one
+   industry and visibly swapping it a frame later, which is a worse trade for a section
+   whose panel is a 440px image.
+
+   ⚠️ EVERY is-active FLAG IN THIS SECTION DERIVES FROM $ind_first — the panel, the
+   excerpt, and the list button. They must agree, so there is exactly one source for the
+   choice. Do not re-roll it further down the template. */
+$ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null;
 ?>
 <?php /* ⚠️ NOT A block-split ANY MORE (Mario, 2026-08-27: "the side by side looks weird
          because the industries is too long vertically and doesn't look good").
@@ -1227,14 +1249,22 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
                returns '' when the file does not exist, and the panel falls back to the
                industry's emoji at display size rather than an alt-text box. */
             ?>
-          <div class="industries__panel<?php echo 0 === $i ? ' is-active' : ''; ?>"
+          <?php /* ⚠️ ACTIVE IS $ind_first, NOT INDEX 0. These three flags -- the panel,
+                   the excerpt below, and the list button further down -- are what make one
+                   industry the open one, and they must all name the SAME industry. They
+                   were each hardcoded to `0 === $i` back when the default was always the
+                   first entry; with a random default that silently splits the section,
+                   highlighting one name in the list while showing a different picture. */ ?>
+          <?php $ind_is_open = ( $ind_first && $ind['slug'] === $ind_first['slug'] ); ?>
+          <div class="industries__panel<?php echo $ind_is_open ? ' is-active' : ''; ?>"
                data-ind-panel="<?php echo esc_attr( $ind['slug'] ); ?>"
-               <?php echo 0 === $i ? '' : 'aria-hidden="true"'; ?>>
+               <?php echo $ind_is_open ? '' : 'aria-hidden="true"'; ?>>
             <?php if ( $art ) : ?>
               <img src="<?php echo esc_url( $art ); ?>"
                    alt=""
                    width="1024" height="1024"
-                   <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?>
+                   <?php /* The eagerly-fetched one is whichever is actually visible. */ ?>
+                   <?php echo $ind_is_open ? 'fetchpriority="high"' : 'loading="lazy"'; ?>
                    decoding="async">
             <?php else : ?>
               <span class="industries__panel-fallback" aria-hidden="true"><?php echo esc_html( $ind['icon'] ); ?></span>
@@ -1250,7 +1280,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
                accordion item below), and both still come from the same registry field. */ ?>
       <div class="industries__excerpt" data-ind-excerpt>
           <?php foreach ( $ind_flat as $i => $ind ) : ?>
-            <div class="industries__excerpt-item<?php echo 0 === $i ? ' is-active' : ''; ?>"
+            <div class="industries__excerpt-item<?php echo ( $ind_first && $ind['slug'] === $ind_first['slug'] ) ? ' is-active' : ''; ?>"
                  data-ind-excerpt-for="<?php echo esc_attr( $ind['slug'] ); ?>">
               <h3><?php echo esc_html( $ind['title'] ); ?></h3>
               <p><?php echo esc_html( $ind['blurb'] ); ?></p>

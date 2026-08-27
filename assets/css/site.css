@@ -2270,7 +2270,9 @@ body.sitestaffr-landing-page .hero__visual > * {
    The isometrics render at ~440px here. The design-system rule that deleted them
    was about SIZE — "wherever they render below ~100px" — not about the style. */
 .industries { background: var(--cream); }
-.industries__header { text-align: center; margin-bottom: 40px; }
+/* Tightened from 40px (Mario, 2026-08-27: "reduce the spacing a bit between the title
+   section, isometric and excerpt, and the list"). */
+.industries__header { text-align: center; margin-bottom: 24px; }
 .industries__subtitle { color: var(--text-secondary); margin-top: 8px; }
 /* ---- Two stacked rows, not a Split ------------------------------------
    Mario, 2026-08-27: the Split "looks weird because the industries is too long
@@ -2342,7 +2344,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    and a hardcoded 5 would silently leave a ragged empty column the day a sixth group is
    added. 160px is comfortably wider than the longest industry name at this size. */
 .industries__list {
-  margin-top: clamp(30px, 5vw, 56px);
+  margin-top: clamp(18px, 3vw, 34px);   /* was clamp(30px, 5vw, 56px) */
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: clamp(18px, 2.5vw, 34px);
@@ -2374,11 +2376,25 @@ body.sitestaffr-landing-page .hero__visual > * {
   transition: background 0.16s ease, color 0.16s ease;
 }
 .industries__name:hover { background: var(--teal-pale); color: var(--teal-deep); }
+/* ACTIVE IS A FILLED PILL (Mario, 2026-08-27: "remove the highlight left border on the
+   active and do something a bit different when highlighted").
+
+   The inset 2px left border is gone. It was doing the same job as the pale fill next to
+   it, so the active row carried two markers and read as a rail. Solid teal instead:
+   hover is the pale tint, selected is the full colour, which is one escalation of one
+   idea rather than two competing ones. */
 .industries__name.is-active {
-  background: var(--teal-pale);
-  color: var(--teal-deep);
+  background: var(--teal-deep);
+  color: #fff;
   font-weight: 600;
-  box-shadow: inset 2px 0 0 var(--teal-deep);
+  box-shadow: none;
+}
+/* Hover must not repaint the SELECTED row back to pale — it comes later in the file and
+   would otherwise win on equal specificity, so pointing at the open industry would make
+   it look unselected. */
+.industries__name.is-active:hover {
+  background: var(--teal-deep);
+  color: #fff;
 }
 
 /* Desktop: the mobile expansion is not rendered at all. */
