@@ -2169,9 +2169,24 @@ body.sitestaffr-landing-page .hero__visual > * {
      very-dark-opaque at y=1382 of 1383). On cream that is a hard black block sitting on
      the background. The artwork is not wrong and does not need regenerating — it needs
      the fade the dark background used to provide for free. Delete this and the block
-     comes straight back. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 96%);
-          mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 96%);
+     comes straight back.
+
+     ⚠️ THE END STOP IS NOW 78%, NOT 96% (Mario, 2026-08-27: "I don't like showing the
+     legs too much"). It does the second job as well as the first: the fade no longer
+     just prevents a black block, it CROPS the figure to roughly waist-up.
+
+     THE TWO NUMBERS ARE MEASURED AGAINST THE SILHOUETTE, not chosen by eye. Sampling the
+     alpha row by row: the outstretched arms and hands still occupy the frame at y=0.65
+     (silhouette 720px wide, three runs), the pelvis is a single narrow run by y=0.70
+     (324px), and the legs separate into two runs by y=0.88. So the fade cannot START
+     before ~0.66 without dissolving the open-hands gesture, which is the whole pose —
+     and finishing by 0.78 puts the figure out before the thighs read as legs.
+
+     Regenerating the render was considered and rejected: this is a crop, the artwork is
+     the hero's style anchor, and a new generation risks drift for something two numbers
+     already do. Re-measure these if the render is ever replaced. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 78%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 66%, transparent 78%);
 }
 
 .lang-orbit__list {
