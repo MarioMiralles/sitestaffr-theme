@@ -189,7 +189,7 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    V3, 2026-08-26. Every section is exactly one of four blocks:
    Statement, Split, Cards, Panel. That is the whole vocabulary.
 
-   WHY THIS REPLACES FOUR RUNS AND THREE SEAMS. A seam is a colour contract
+   WHY THIS REPLACES FOUR RUNS AND THREE SEAMS. A seam is a color contract
    between two neighbouring sections. It fails silently — it looks right at
    1440 and wrong at 1150 — so every change to any section near it cost a
    five-width screenshot sweep to re-verify. Whitespace has no contract, and a
@@ -588,7 +588,7 @@ body.sitestaffr-landing-page .hero {
    the bottom of every hero. That was correct when the section below was cream and
    when the seam was an in-flow band the robot could not reach behind. Here it does
    two wrong things at once: it dissolves the robot's torso into the background,
-   and it lays a pale grey band directly on top of the curtain — the seam this
+   and it lays a pale gray band directly on top of the curtain — the seam this
    element exists to make clean.
 
    The robot's bottom edge is handled by the curtain cropping it instead; see
@@ -1723,7 +1723,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    unconditionally — or off a plain `.see-it` selector — would blank the section for
    anyone without JS, under prefers-reduced-motion (which returns early and never adds
    the class), or if the script throws on the way up. Those readers get the fully
-   rendered panels and no stage, which is the behaviour this section already had. */
+   rendered panels and no stage, which is the behavior this section already had. */
 .see-it.is-interactive:not(.has-played) .see-it__panels { display: none; }
 .see-it.has-played .see-it__stage { display: none; }
 
@@ -1753,10 +1753,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   left: 50%;
   transform: translate(-50%, -50%);
   /* Sized against the ROBOT, not the stage. At min(460px,84%) the bloom died out ~200px
-     from centre while the figure is 240px wide and 300px tall, so the silhouette's own
-     edges — the part that has to read — were sitting back on flat section colour. Wider
+     from center while the figure is 240px wide and 300px tall, so the silhouette's own
+     edges — the part that has to read — were sitting back on flat section color. Wider
      and a touch stronger puts the whole figure inside the lit area. Sampled at 1440:
-     section is (0,50,58) and the centre of the bloom lifts to about (9,91,115). */
+     section is (0,50,58) and the center of the bloom lifts to about (9,91,115). */
   width: min(680px, 96%);
   aspect-ratio: 1 / 0.92;
   background: radial-gradient(ellipse closest-side,
@@ -1801,8 +1801,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: 0 0 0 10px rgba(31,182,204,0.16), 0 18px 40px rgba(0,0,0,0.42);
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
-/* NO margin-left. The centring lives in the polygon's coordinates (see page-landing.php);
-   a CSS nudge here would stack on top of that offset and is what put the glyph off-centre
+/* NO margin-left. The centering lives in the polygon's coordinates (see page-landing.php);
+   a CSS nudge here would stack on top of that offset and is what put the glyph off-center
    in the first place. `display: block` so the svg does not sit on a text baseline, which
    adds a few px of descender space under it and pushes the glyph optically high. */
 .see-it__stage-play svg { display: block; width: 42%; height: 42%; }
@@ -2147,7 +2147,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    artwork — twelve bubbles specced against the old crowd render, four visible at 1440.
    Nothing here is measured against the picture. The robot is IN THE FLOW and sets the
    stage's height; the greetings are placed against the STAGE, in two side bands the
-   centred figure never reaches. Swapping the render cannot invalidate a single one. */
+   centered figure never reaches. Swapping the render cannot invalidate a single one. */
 .lang-section__header { text-align: center; max-width: 46rem; margin: 0 auto; }
 .lang-section__text { color: var(--text-secondary); margin-top: 14px; }
 
@@ -2223,7 +2223,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ⚠️ BELOW 900px THE GREETINGS STOP BEING POSITIONED AT ALL. This is the safety net the
    crowd version never had: rather than shrinking twelve absolute chips until they
-   collide or fall off, the whole set drops into an in-flow centred wrap under the robot.
+   collide or fall off, the whole set drops into an in-flow centered wrap under the robot.
    Twelve chips that wrap are always twelve chips; twelve that are positioned are only as
    good as the narrowest viewport anybody checked. */
 @media (max-width: 900px) {
@@ -2259,7 +2259,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.9rem;
   font-weight: 500;
 }
-/* The wrapper is centred, not the text: an inline-flex pill cannot centre itself. */
+/* The wrapper is centered, not the text: an inline-flex pill cannot center itself. */
 .lang-section .block__inner { text-align: center; }
 .lang-orbit, .lang-orbit__item { text-align: left; }
 
@@ -2313,8 +2313,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-xl);
 }
 
-/* LEFT-ALIGNED NOW, not centred. It used to sit under the image as a caption, where
-   centring was right; beside the image it is a column of prose, and centred prose in a
+/* LEFT-ALIGNED NOW, not centered. It used to sit under the image as a caption, where
+   centering was right; beside the image it is a column of prose, and centered prose in a
    column reads as a pull-quote rather than as a description. */
 .industries__excerpt-item { display: none; margin-top: 0; }
 .industries__excerpt-item.is-active { display: block; }
@@ -2381,7 +2381,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    The inset 2px left border is gone. It was doing the same job as the pale fill next to
    it, so the active row carried two markers and read as a rail. Solid teal instead:
-   hover is the pale tint, selected is the full colour, which is one escalation of one
+   hover is the pale tint, selected is the full color, which is one escalation of one
    idea rather than two competing ones. */
 .industries__name.is-active {
   background: var(--teal-deep);
@@ -2470,7 +2470,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* ---- Section 8: the pricing table -------------------------------------
    ONE SHARED LABEL RAIL plus four columns. The trial is the first column rather
    than a strip above the table: it used to present its specs as bullets while
-   the paid plans presented the same facts as labelled rows, so the one thing a
+   the paid plans presented the same facts as labeled rows, so the one thing a
    visitor is being asked to start with was the one thing they could not compare.
 
    ⚠️ THE MOBILE TREATMENT IS LOAD-BEARING, not a nicety. Rail + four columns is
@@ -2499,10 +2499,10 @@ body.sitestaffr-landing-page .hero__visual > * {
    louder than the thing it introduces, and it would fight the table for
    attention now the table is the heavy object in this section.
    Nothing here draws a box. The only fill in section 8 is the table. */
-/* ⚠️ ONE LEFT AXIS. NOTHING IN THIS STRIP IS CENTRED.
+/* ⚠️ ONE LEFT AXIS. NOTHING IN THIS STRIP IS CENTERED.
 
-   The first attempt at removing the panel centred the label, centred the lead
-   row and centred the footer while the six items stayed left-aligned — four
+   The first attempt at removing the panel centered the label, centered the lead
+   row and centered the footer while the six items stayed left-aligned — four
    different axes in a block about 200px tall. The teal panel had been hiding
    that, because a fill gives a grid an edge to be read against and forgives
    almost any internal alignment. Take the fill away and the alignment is the
@@ -2511,7 +2511,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    ⚠️ THE WIDTH MATCHES THE TABLE'S 1080px, and it is not a free choice. This
    strip and the table are the only two objects in the light part of section 8;
    set to different measures they present two left edges and two right edges
-   under one centred heading, and the eye reads that as one of them being
+   under one centered heading, and the eye reads that as one of them being
    misplaced. Change one, change both. */
 .price-includes--homepage {
   padding: 0;
@@ -2577,9 +2577,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--teal-deep);
 }
 .price-includes--homepage .price-includes__icon svg { width: 19px; height: 19px; }
-/* ⚠️ ALL SIX ITEMS CARRY THE SAME WEIGHT AND THE SAME COLOUR, and that is a
+/* ⚠️ ALL SIX ITEMS CARRY THE SAME WEIGHT AND THE SAME COLOR, and that is a
    correctness rule rather than a preference. Two of them are links. Styled as
-   teal-and-bold against five grey siblings, a link does not read as "clickable"
+   teal-and-bold against five gray siblings, a link does not read as "clickable"
    — it reads as "this one is selected", and the visitor spends their attention
    working out why one inclusion is special. Uniform type, and the link says it
    is a link by underlining. */
@@ -2739,7 +2739,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ⚠️ ONE HAIRLINE VALUE FOR THE WHOLE TABLE. Every internal rule is this
-   colour. The light version had three (--border-light, cream-dark edges, the
+   color. The light version had three (--border-light, cream-dark edges, the
    popular column's own border) and they read as one line only because they were
    all pale. On dark, a rule that is 2% brighter than its neighbour is visible as
    a mistake, so there is exactly one. */
@@ -2784,7 +2784,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    The V3 table declared only the properties it wanted CHANGED, so everything it
    did not name kept leaking through from the card rules. The deleted V1 block was
-   silently cancelling that leak, which is why removing it produced a clipped
+   silently canceling that leak, which is why removing it produced a clipped
    badge, a Business column shifted 3% out of alignment with its own label rail,
    and CTAs wrapping to three lines.
 
@@ -2813,7 +2813,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    panel. Setting one shared hover BACKGROUND would overwrite Business's tint, so
    hovering the recommended tier would strip the thing that marks it as
    recommended - which is how the first attempt ended up with three different
-   hover colours, each tuned to its own base, and reading as three different
+   hover colors, each tuned to its own base, and reading as three different
    effects. Painting the same translucent white ON TOP of whatever is underneath
    gives every column the same delta and leaves every base intact.
 
@@ -2944,7 +2944,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* The recommended tier's CTA is the one action this section is built to get, so
    it is the only filled button on the panel. Teal-light rather than teal-deep:
    the accent stays teal, and a light fill on a dark panel is the strongest
-   contrast available without introducing a colour. Dark ink on it, not white -
+   contrast available without introducing a color. Dark ink on it, not white -
    white on #1FB6CC is about 2:1. */
 .price-grid--table .price-tier .btn--primary {
   background: var(--teal-light);
@@ -2958,7 +2958,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* THE ON-RAMP TREATMENT, NOW CARRIED BY TYPE AND WIDTH RATHER THAN BY FILL.
-   Mario, 2026-08-26: every column the same colour except Business. So the
+   Mario, 2026-08-26: every column the same color except Business. So the
    trial's deeper fill is gone and only Business is tinted - which makes the
    emerald read harder, because it is now the single exception in the row rather
    than one of two.
@@ -2973,7 +2973,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .price-grid--table .price-tier--trial .price-tier__name { color: rgba(240,250,250,0.66); }
 
 /* Business is the recommended tier, and EMERALD IS THE SIGNAL. Cyan is the
-   ambient colour of this whole page, so a cyan price could not distinguish
+   ambient color of this whole page, so a cyan price could not distinguish
    anything - that is the documented reason this rule exists. */
 .price-grid--table .price-tier--popular {
   /* The emerald tint that made this column the recommended one on white was
@@ -3066,7 +3066,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   }
   /* Each card is its own surface now, so the recommended tier has to re-state
      its tint over the card rather than over the panel. The trial is the same
-     colour as the other cards here, same as on desktop. */
+     color as the other cards here, same as on desktop. */
   .price-grid--table .price-tier--popular {
     background: #073E42;
     border-color: rgba(52,211,153,0.4);
@@ -3374,12 +3374,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ---- The curtain seam -------------------------------------------------
    An absolute overlay pinned to the HERO's bottom edge (restored 2026-08-27),
-   filled with the dark block colour, so it reads as the dark rising into the
+   filled with the dark block color, so it reads as the dark rising into the
    light rather than as a band of its own.
 
    ⚠️ IT HAS NO BACKGROUND OF ITS OWN, and must not get one back. It used to be
    an in-flow band between the two sections and therefore needed to paint the
-   hero's exact bottom colour behind the path — a value that was breakpoint-
+   hero's exact bottom color behind the path — a value that was breakpoint-
    dependent and cost two rounds of hairline bugs. As an overlay it sits ON the
    hero, so the hero IS the background and the two can never disagree.
 
@@ -3411,7 +3411,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .seam-curtain path { fill: var(--block-dark); }
 
 /* ---- Section 2: the job-value grid ------------------------------------
-   Padding, background and colour come from .block .block--dark. The old
+   Padding, background and color come from .block .block--dark. The old
    .cost-card rules are gone with the unsourced placeholders they styled.
 
    ⚠️ --amber IS DEFINED HERE AND USED IN EXACTLY ONE RULE: .job-value__amount.
@@ -3455,7 +3455,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* ---- Card hover -------------------------------------------------------
    V1's card gesture (Mario, 2026-08-27: "hover effects to the price cards like how we
    had in V1"): `translateY(-4px)` plus a heavier shadow, over 0.3s ease. The lift and
-   the timing are ported unchanged, because that is the part that is recognisably V1.
+   the timing are ported unchanged, because that is the part that is recognizably V1.
 
    ⚠️ THE SHADOW COULD NOT BE PORTED. V1's `--shadow-lg` is rgba(0,0,0,0.10) on white,
    where a soft black bloom is most of the effect. These cards sit on #00323A, and black
@@ -3786,7 +3786,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* Punctuation, not ornament (Mario: "doesn't have to be super big or imposing").
    ⚠️ ANCHORED TO THE INNER WRAPPER, not the figure. On the figure it is
    positioned against a box taller than its own contents, so the mark stays at the
-   panel's top edge while the words it introduces centre somewhere below it -
+   panel's top edge while the words it introduces center somewhere below it -
    punctuation stranded from its sentence.
    ⚠️ The glyph is written literally, and it has shipped mangled twice: once as
    content: '\201C' where a script ate the backslash as an octal escape, once as a
@@ -3869,7 +3869,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 @media (max-width: 900px) {
   /* Stacked, the quote panel no longer has a column to be as tall as, so the
-     centring and the stretch both stop applying. The two planes stay - they are
+     centering and the stretch both stop applying. The two planes stay - they are
      the section's one piece of treatment and they read the same at any width. */
   .proof-section__quote-block { padding-inline: clamp(20px, 5vw, 34px); }
   .proof-section__stats-source { max-width: none; }
@@ -3920,13 +3920,13 @@ body.sitestaffr-landing-page .hero__visual > * {
 
      The seam is an overlay and costs no height, so a bare 64px here would be measured
      from the section's box — and the curtain's point hangs 95% of the way down into
-     that box (y=114 of 120), landing on the centred heading. The eye does not measure
+     that box (y=114 of 120), landing on the centered heading. The eye does not measure
      from the box; it measures from the ink. Adding the spike's depth is what makes the
      gap BELOW THE DIVIDER read as the same 64px as every other section.
 
      0.95 is 114/120 of the seam's own height clamp. Re-derive both if the Book path's
      apex or .seam-curtain's height ever changes — and note the depth is only this deep
-     AT CENTRE, which is exactly where a centred heading sits. */
+     AT CENTER, which is exactly where a centered heading sits. */
   padding-top: calc(64px + clamp(53px, 6.65vw, 114px));
 }
 .what-you-get__header { text-align: center; margin-bottom: 32px; }
@@ -3968,7 +3968,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .morning-inbox__item:last-child { border-bottom: 0; }
 
 /* The row is a BUTTON now, so it has to be un-styled back to a row: browsers give
-   buttons their own font, a centred text-align and a background, none of which a table
+   buttons their own font, a centered text-align and a background, none of which a table
    row wants. `font: inherit` is the one that matters — without it the whole inbox
    silently drops to the UA's 13px system font. */
 .morning-inbox__row {
@@ -3987,7 +3987,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   transition: background-color 0.16s ease;
 }
 
-/* ⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOUR IT. `.is-interactive` is added by
+/* ⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOR IT. `.is-interactive` is added by
    the script after the dialogs are wired, so with no JS these read as plain rows — no
    pointer cursor, no hover, no "View recap". A button that looks clickable and does
    nothing is worse than a row that never claimed to be one. */
@@ -4015,7 +4015,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* ---- The recap document ----------------------------------------------
    V1's artifact, ported rather than re-imagined (Mario, 2026-08-27: "I just want that
    full document that we created in v1"). Bordered cards for the recap and the
-   transcript, grey AI blocks, and the visitor on a teal-edged card behind an avatar.
+   transcript, gray AI blocks, and the visitor on a teal-edged card behind an avatar.
 
    ⚠️ NO INNER SCROLL PANE. The first version capped .recap-doc__sheet and scrolled
    .recap-doc__body underneath a pinned logo bar, which read as a cropped window onto a
@@ -4029,7 +4029,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .recap-doc {
   width: min(680px, calc(100vw - 32px));
   max-height: calc(100vh - 40px);
-  /* ⚠️ `margin: auto` IS RESTORED DELIBERATELY. A modal <dialog> is centred by the UA
+  /* ⚠️ `margin: auto` IS RESTORED DELIBERATELY. A modal <dialog> is centered by the UA
      stylesheet's own `margin: auto`, and line 38 of this file resets margin to 0 on
      `*` — which beats it and pins the sheet to the top-left corner. Nothing about the
      dialog looks wrong in the markup; it just sits in the corner. */
@@ -4277,10 +4277,10 @@ body.sitestaffr-landing-page .hero__visual > * {
    Deleted rather than overridden. An override would have left two competing layouts
    for one element, which is how the next person ends up debugging this twice. */
 /* Salesforce hand-off. A slim strip UNDER the document, not a card beside it.
-   As a bordered card in the right-hand callout column it was the only bordered, full-colour
+   As a bordered card in the right-hand callout column it was the only bordered, full-color
    element among borderless teal annotations, it made the right column hang below the left,
    and it sat among four items that describe what is IN the report when it describes what
-   happens next. A single centred row fixes all three, and it stacks predictably on narrow
+   happens next. A single centered row fixes all three, and it stacks predictably on narrow
    screens instead of competing inside a wrapped flex row. */
 .what-you-get__crm {
   display: flex;
@@ -4535,7 +4535,7 @@ body.sitestaffr-landing-page .hero__visual > * {
     order: 2;
     text-align: center;
   }
-  /* The strip is centred at every width; on narrow screens it stacks the logo above the line
+  /* The strip is centered at every width; on narrow screens it stacks the logo above the line
      rather than shrinking the text into a column beside a fixed-width logo. */
   .what-you-get__crm {
     flex-direction: column;
@@ -5967,7 +5967,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .pricing-assurance__grid {
   display: grid;
-  /* auto-fit + centred so the row stays balanced whatever the item count. Was a
+  /* auto-fit + centered so the row stays balanced whatever the item count. Was a
      hard 1fr 1fr, which stranded the survivor in the left column when the
      flat-rate text-chat item was removed. */
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 420px));
@@ -6386,7 +6386,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: #fef3c7;
   color: #92400e;
 }
-.hub__status-badge--cancelled {
+.hub__status-badge--canceled {
   background: #fee2e2;
   color: #991b1b;
 }
@@ -6790,7 +6790,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: #065f46;
   border: 1px solid #a7f3d0;
 }
-.hub__banner--cancelled {
+.hub__banner--canceled {
   background: #fef3c7;
   color: #92400e;
   border: 1px solid #fde68a;
@@ -7131,7 +7131,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ========== SECTION 10: FINAL CTA ========== */
 .final-cta {
-  /* Padding, background and colour now come from .block .block--dark. The old
+  /* Padding, background and color now come from .block .block--dark. The old
      gradient and centered text are deliberately not declared here: this section
      is a dark Split, and re-declaring them would silently override the block
      system from further down the file. */
@@ -8091,7 +8091,7 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
    obvious when it does not — and with no fade there is nothing else hiding it, so the
    robot has to run PAST the curtain rather than stop short of it.
 
-   The trap is that the curtain's height varies ACROSS the width — it peaks at centre and
+   The trap is that the curtain's height varies ACROSS the width — it peaks at center and
    sits low at the edges, and the robot is on the right, which is the shallowest part. So
    the number that matters is the curtain's y AT THE ROBOT, not the seam element's top.
    Re-measure if the robot's `top`, the seam's height clamp, or the Book path's edge

@@ -245,7 +245,7 @@ $get_started_url = home_url( '/#get-started' );
        WHY THE SCHEMA WORK STILL MATTERS IN 2026. FAQ rich results are effectively gone
        from Google — restricted to authoritative government and health sites since 2023.
        The case for FAQPage markup now is AI ANSWER ENGINES, which is on-brand: SiteStaffr
-       sells AI Visibility checks, so the site should practise what the product measures.
+       sells AI Visibility checks, so the site should practice what the product measures.
 
        ANSWER-WRITING RULES, driven by extraction rather than ranking:
          - SELF-CONTAINED. An answer engine lifts one Q&A pair with no page context, so
@@ -314,7 +314,7 @@ $get_started_url = home_url( '/#get-started' );
         array(
             'group'    => 'Can I trust it',
             'question' => 'Can I control what it says and how it looks?',
-            'answer'   => 'Yes. You can set the greeting, choose the voice, pick the widget colours and icon, and add custom instructions that steer how it answers. You can also tell it what not to discuss. Everything is editable from your WordPress dashboard without touching code.',
+            'answer'   => 'Yes. You can set the greeting, choose the voice, pick the widget colors and icon, and add custom instructions that steer how it answers. You can also tell it what not to discuss. Everything is editable from your WordPress dashboard without touching code.',
         ),
 
         /* ---- What it does ---- */
@@ -454,7 +454,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">on Your Website</span>
         </h1>
         <?php /* Ends on SITUATION, not category. "while you're on a job, with a client, or
-                 asleep" is audience signalling a dentist recognises instantly. Never write
+                 asleep" is audience signalling a dentist recognizes instantly. Never write
                  "small and medium-sized businesses" - nobody self-identifies that way, and
                  it would tell an agency this page is not for them. */ ?>
         <p class="hero__subtitle">
@@ -747,19 +747,19 @@ get_template_part( 'template-parts/site-nav', null, array(
                one thing a screen-reader user has to understand from its name alone. */ ?>
       <button class="see-it__stage-play" type="button" data-see-it-stage-play
               aria-label="Play the conversation">
-        <?php /* ⚠️ THE TRIANGLE'S OWN COORDINATES DO THE CENTRING — there is no margin
+        <?php /* ⚠️ THE TRIANGLE'S OWN COORDINATES DO THE CENTERING — there is no margin
                  nudge on this icon and there must not be one added back.
 
                  It was `8,5 20,12 8,19`, whose bounding box runs x=8..20 and is therefore
-                 centred on x=14 inside a 24-wide viewBox: two units right of centre before
+                 centered on x=14 inside a 24-wide viewBox: two units right of center before
                  any CSS is involved. A `margin-left` was then added on top of that, which
                  is why the glyph sat visibly right in the circle. Two offsets stacking is
                  also why nudging the CSS never fixed it — the error was in the artwork.
 
-                 Now x=7..19: the bounding box is centred on 13, one unit right of the
+                 Now x=7..19: the bounding box is centered on 13, one unit right of the
                  viewBox's 12. That single unit is deliberate and is optical, not
                  geometric — a right-pointing triangle carries its mass on the flat left
-                 edge, so a perfectly centred bounding box reads as sitting too far left.
+                 edge, so a perfectly centered bounding box reads as sitting too far left.
                  Verified by measuring the rendered pixels, not by eye. */ ?>
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="7,5 19,12 7,19"/></svg>
       </button>
@@ -781,7 +781,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 
                    Both labels are THE VISITOR'S QUESTION, not one question and one
                    description — the tabs are two examples of the same thing, and
-                   labelling them asymmetrically implied they were different features. */ ?>
+                   labeling them asymmetrically implied they were different features. */ ?>
           <div class="see-it__tabs" role="tablist" aria-label="Choose a conversation">
             <button class="see-it__tab" role="tab" type="button"
                     id="see-it-tab-voice" aria-controls="see-it-convo"
@@ -815,7 +815,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>Copperleaf Pest Control &mdash; what are you seeing?</p>
             <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>Ants all over the kitchen counter, started today.</p>
             <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>That usually means a trail in from outside. Is it a house or an apartment?</p>
-            <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>A house, single storey.</p>
+            <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>A house, single story.</p>
             <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>We can get someone out to look. What name should I put down?</p>
             <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>Priya Raman.</p>
             <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>Thanks Priya &mdash; best email or number to reach you?</p>
@@ -864,11 +864,11 @@ get_template_part( 'template-parts/site-nav', null, array(
             <?php /* ⚠️ NO FIXED SCHEMA. Label and value materialise together as a PAIR.
                      The product builds each recap intelligently — sometimes a name only,
                      sometimes a name and an email, sometimes a name and a phone. A
-                     pre-drawn skeleton of greyed labels would be a picture of a form the
+                     pre-drawn skeleton of grayed labels would be a picture of a form the
                      product does not have. The voice thread captures a PHONE where this
                      one captures an EMAIL, and that difference is the point. */ ?>
             <div class="see-it__field"><dt>Reason for visit</dt><dd>Ants in the kitchen</dd></div>
-            <div class="see-it__field"><dt>Property</dt><dd>Single-storey house</dd></div>
+            <div class="see-it__field"><dt>Property</dt><dd>Single-story house</dd></div>
             <div class="see-it__field"><dt>Name</dt><dd>Priya Raman</dd></div>
             <div class="see-it__field"><dt>Email</dt><dd>priya.raman@example.com</dd></div>
           </dl>
@@ -878,7 +878,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                    of the sequence that mirrors how the product actually works. */ ?>
           <div class="see-it__gen" data-see-it-summary>
             <span class="see-it__gen-label">Summary</span>
-            <p>Ant trail in the kitchen of a single-storey house. Wants someone to come out.</p>
+            <p>Ant trail in the kitchen of a single-story house. Wants someone to come out.</p>
           </div>
           <div class="see-it__gen" data-see-it-followup>
             <span class="see-it__gen-label">Suggested follow-up</span>
@@ -922,7 +922,7 @@ get_template_part( 'template-parts/site-nav', null, array(
            It belongs to THIS section, not to section 3, for the same reason the opening
            one belongs to the hero: it is an overlay on the LIGHT side of the boundary,
            so the light section is its background and the two can never disagree on
-           colour. Section 3 needs no cooperation at all. */ ?>
+           color. Section 3 needs no cooperation at all. */ ?>
   <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
   <div class="block__inner">
     <div class="what-you-get__header">
@@ -933,7 +933,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                filler. It actively guards against the reading that leads queue up and
                get handled at opening time — "answered within seconds and sent to you
                the moment it ended" is the whole product claim, and without it an inbox
-               labelled "Overnight" implies exactly the opposite. */ ?>
+               labeled "Overnight" implies exactly the opposite. */ ?>
       <p class="what-you-get__subtitle">
         Each of these was answered within seconds and sent to you the moment it ended. Nothing waited for opening time.
       </p>
@@ -992,7 +992,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'label' => 'Phone',              'value' => '(216) 555-0176', 'tel' => '+12165550176' ),
           array( 'label' => 'Reason for contact', 'value' => 'Gluten-free cupcake order, 40 for Friday' ),
         ),
-        'followup' => 'Call Tom to confirm the flavours, pickup time and pricing for 40 gluten-free cupcakes.',
+        'followup' => 'Call Tom to confirm the flavors, pickup time and pricing for 40 gluten-free cupcakes.',
         'turns'   => array(
           array( 'who' => 'ai',      'at' => '6:03:04 AM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
           array( 'who' => 'visitor', 'at' => '6:03:21 AM', 'text' => 'Do you do gluten-free cupcakes?' ),
@@ -1002,7 +1002,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '6:04:24 AM', 'text' => 'Tom Byrne.' ),
           array( 'who' => 'ai',      'at' => '6:04:27 AM', 'text' => 'Thanks Tom. What&rsquo;s the best number for our team to reach you at?' ),
           array( 'who' => 'visitor', 'at' => '6:04:56 AM', 'text' => '(216) 555-0176.' ),
-          array( 'who' => 'ai',      'at' => '6:04:59 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch to confirm the flavours and pickup time. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '6:04:59 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch to confirm the flavors and pickup time. Is there anything else I can help you with?' ),
         ),
       ),
       array(
@@ -1023,7 +1023,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         'turns'   => array(
           array( 'who' => 'ai',      'at' => '2:14:03 AM', 'text' => 'Hi! Thanks for reaching out to Maggie&rsquo;s Cakes. How can I help you today?' ),
           array( 'who' => 'visitor', 'at' => '2:14:10 AM', 'text' => 'Hi! I need to order a birthday cake for my daughter. She&rsquo;s turning 7 and wants a unicorn theme.' ),
-          array( 'who' => 'ai',      'at' => '2:14:13 AM', 'text' => 'That sounds wonderful. Themed cakes are one of our specialties, and unicorn is among the designs we&rsquo;re asked for most &mdash; hand-piped mane, fondant horn and ears. Two tiers is the usual choice once you&rsquo;re over about 20 guests. Would you like to hear more about sizes and flavours, or shall I take your details so the team can quote it?' ),
+          array( 'who' => 'ai',      'at' => '2:14:13 AM', 'text' => 'That sounds wonderful. Themed cakes are one of our specialties, and unicorn is among the designs we&rsquo;re asked for most &mdash; hand-piped mane, fondant horn and ears. Two tiers is the usual choice once you&rsquo;re over about 20 guests. Would you like to hear more about sizes and flavors, or shall I take your details so the team can quote it?' ),
           array( 'who' => 'visitor', 'at' => '2:14:52 AM', 'text' => 'Take my details please. It&rsquo;s for 25 guests, on April 12.' ),
           array( 'who' => 'ai',      'at' => '2:14:55 AM', 'text' => 'Perfect. May I have your name?' ),
           array( 'who' => 'visitor', 'at' => '2:15:19 AM', 'text' => 'Sarah Mitchell.' ),
@@ -1280,7 +1280,7 @@ get_template_part( 'template-parts/site-nav', null, array(
    comment recorded that swapping the image silently invalidated all twelve.
 
    So the greetings here are NOT positioned against the robot. They sit in the stage's
-   own coordinate space, in two symmetric side bands that the centred figure never
+   own coordinate space, in two symmetric side bands that the centered figure never
    reaches, and below 900px they stop being positioned at all and become an in-flow
    wrap. Swapping robot-languages.webp cannot invalidate a single one of them. If you
    ever find yourself measuring a percentage against a pixel in the artwork, that is
@@ -1645,7 +1645,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
 
         <?php
-        /* ⚠️ NOT A FOOTNOTE TO MINIMISE. "One customer's results, not an average"
+        /* ⚠️ NOT A FOOTNOTE TO MINIMIZE. "One customer's results, not an average"
            buys more credibility than the two numbers do - it is the sentence that
            tells a skeptical reader these are real rather than modelled. Do not
            shrink it, move it into a tooltip, or drop it when a second testimonial
@@ -1675,11 +1675,11 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         <?php
         /* AN INNER WRAPPER, for exactly one reason: the panel is taller than its
            contents. The column stretches to match the evidence column, so quote and
-           attribution sit CENTRED in that height rather than pinned to the top with
+           attribution sit CENTERED in that height rather than pinned to the top with
            a pool of empty panel underneath.
 
-           It cannot be done by centring the figure's children directly - the quote
-           glyph is positioned against its container, so centring the text would
+           It cannot be done by centering the figure's children directly - the quote
+           glyph is positioned against its container, so centering the text would
            strand the glyph at the panel's top edge. Anchoring the glyph to this
            wrapper makes mark and words move together. */
         ?>
@@ -1911,7 +1911,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 
                It used to present its specs as five bullets - "30 voice minutes, 1 blog
                post, 2 AI voices" - while the paid plans presented the same facts as
-               labelled rows. The same information in two incompatible formats, so nobody
+               labeled rows. The same information in two incompatible formats, so nobody
                could actually compare the thing they were being asked to start with. As
                the first column every row lines up, and it moves the primary conversion
                path into the most prominent object on the page.
@@ -2073,9 +2073,9 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
       </div>
       <?php
       /* THE RAIL'S STUB HEAD, and it earns its place by fixing a real imbalance
-         rather than by labelling something obvious. The label column is ~286px
+         rather than by labeling something obvious. The label column is ~286px
          wide, so leaving its top cell empty left a dead corner that size and
-         pushed the three shopfronts visibly right of the axis the centred
+         pushed the three shopfronts visibly right of the axis the centered
          section header sits on. A stub head is what a comparison table puts
          there anyway.
 
@@ -2189,7 +2189,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
                protects the SMB path through the rest of the page. */ ?>
       <span class="agency-door__eyebrow">For WordPress Agencies</span>
 
-      <?php /* The H1, pluralised. An agency who scrolled past the hero recognises the
+      <?php /* The H1, pluralised. An agency who scrolled past the hero recognizes the
                offer instantly, and "every client site" is the phrase that makes it
                theirs rather than their client's. */ ?>
       <h2>Give Every Client Site a Receptionist</h2>

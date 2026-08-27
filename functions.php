@@ -107,7 +107,7 @@ if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	 *
 	 * That second point is why this call is deliberately unconditional. An earlier version
 	 * skipped the update when post_title already matched, which looked like a sensible
-	 * optimisation and was in fact the bug: on three pages post_title was already correct, the
+	 * optimization and was in fact the bug: on three pages post_title was already correct, the
 	 * update was skipped, save_post never fired, and the BreadcrumbList kept serving
 	 * "AI Voice Agent for Dental Practices" through two further fixes that each looked like
 	 * they had failed. Nothing here runs per-request — the caller is version-gated and returns

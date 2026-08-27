@@ -24,7 +24,7 @@
  * ⚠️ THERE IS NO FIXED RECAP SCHEMA. Each turn's optional `fill` carries a label AND a
  * value, and they materialise together as a pair. The product builds each recap
  * intelligently — sometimes a name only, sometimes a name and an email, sometimes a name
- * and a phone. A pre-drawn skeleton of greyed labels would be a picture of a form the
+ * and a phone. A pre-drawn skeleton of grayed labels would be a picture of a form the
  * product does not have. Note the two threads below capture DIFFERENT fields, and that
  * difference is load-bearing, not incidental.
  *
@@ -81,9 +81,9 @@ window.SITESTAFFR_DEMO = {
       { t: 4,  who: 'visitor', text: 'Ants all over the kitchen counter, started today.' },
       { t: 9,  who: 'ai',      text: 'That usually means a trail in from outside. Is it a house or an apartment?',
                 fill: { label: 'Reason for visit', value: 'Ants in the kitchen' } },
-      { t: 17, who: 'visitor', text: 'A house, single storey.' },
+      { t: 17, who: 'visitor', text: 'A house, single story.' },
       { t: 22, who: 'ai',      text: 'We can get someone out to look. What name should I put down?',
-                fill: { label: 'Property', value: 'Single-storey house' } },
+                fill: { label: 'Property', value: 'Single-story house' } },
       { t: 29, who: 'visitor', text: 'Priya Raman.' },
       { t: 34, who: 'ai',      text: 'Thanks Priya — best email or number to reach you?',
                 fill: { label: 'Name', value: 'Priya Raman' } },
@@ -94,7 +94,7 @@ window.SITESTAFFR_DEMO = {
     /* The summary and the follow-up genuinely ARE generated after the conversation ends,
        so they arrive last and after a brief shimmer. That is not decoration; it is the
        one part of the sequence that mirrors how the product actually works. */
-    summary:  { t: 49, text: 'Ant trail in the kitchen of a single-storey house. Wants someone to come out.' },
+    summary:  { t: 49, text: 'Ant trail in the kitchen of a single-story house. Wants someone to come out.' },
     followUp: { t: 51, text: 'Email Priya to arrange a visit.' },
     toast:    { t: 53, text: 'Recap emailed to you' }
   }

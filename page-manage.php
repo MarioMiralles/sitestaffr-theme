@@ -97,7 +97,7 @@ if ( ! defined( 'ABSPATH' ) ) {
       <!-- Actions (populated by JS based on subscription state) -->
       <div class="hub__actions" id="hubActions"></div>
 
-      <!-- Plan selection cards (shown for trial / cancelled users) -->
+      <!-- Plan selection cards (shown for trial / canceled users) -->
       <div id="hubPlans" hidden>
         <div class="hub__plans-header">
           <h2>Choose a plan</h2>

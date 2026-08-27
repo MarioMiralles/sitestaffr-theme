@@ -316,9 +316,15 @@
       banner.className = 'hub__banner hub__banner--success';
       banner.textContent = 'Payment successful! Your account has been updated.';
       banner.hidden = false;
+    /* ⚠️ 'cancelled', DOUBLE-L, AND IT IS NOT A SPELLING MISTAKE. This compares against
+       a query parameter the MIDDLEWARE builds: routes/hub.js sets
+       `${manageBaseUrl}?checkout=cancelled` on the Stripe cancel_url. It is a wire value
+       in another repo, not prose — Americanising it here silently kills the cancel
+       banner, because the redirect still arrives spelled the other way. The visible
+       TEXT below is American; the value it matches on cannot be. */
     } else if (checkout === 'cancelled') {
-      banner.className = 'hub__banner hub__banner--cancelled';
-      banner.textContent = 'Checkout was cancelled. No charges were made.';
+      banner.className = 'hub__banner hub__banner--canceled';
+      banner.textContent = 'Checkout was canceled. No charges were made.';
       banner.hidden = false;
     }
     cleanUrl();
@@ -532,6 +538,10 @@
     var isTrial = status === 'trialing' || status === 'trial' || status === 'trial_active';
     var isActive = status === 'active';
     var isPastDue = status === 'past_due';
+    /* ⚠️ BOTH SPELLINGS ON PURPOSE. Stripe reports `canceled`; other paths have sent
+       `cancelled`. This line checked both, and a spelling sweep collapsed it into the
+       same test twice — which reads as a harmless duplicate and quietly stops matching
+       half the statuses it was written to catch. */
     var isCancelled = status === 'canceled' || status === 'cancelled';
 
     /* Determine if trial is expired */
@@ -553,8 +563,8 @@
       badgeClass += 'hub__status-badge--warning';
       badgeText = 'Past Due';
     } else if (isCancelled) {
-      badgeClass += 'hub__status-badge--cancelled';
-      badgeText = 'Cancelled';
+      badgeClass += 'hub__status-badge--canceled';
+      badgeText = 'Canceled';
     } else {
       badgeClass += 'hub__status-badge--active';
       badgeText = 'Active';
@@ -576,7 +586,7 @@
       html += '</div>';
     } else if (isCancelled) {
       html += '<div class="hub__status-plan">SiteStaffr ' + escHtml(formatPlanLabel(account.plan_name) || 'Plan') + '</div>';
-      html += '<div class="hub__status-warning">Your subscription is cancelled. It remains active until ' + formatDate(account.subscription_current_period_end) + '.</div>';
+      html += '<div class="hub__status-warning">Your subscription is canceled. It remains active until ' + formatDate(account.subscription_current_period_end) + '.</div>';
     } else {
       html += '<div class="hub__status-plan">SiteStaffr ' + escHtml(formatPlanLabel(account.plan_name) || 'Plan') + '</div>';
       html += '<div class="hub__status-details">';
@@ -601,7 +611,7 @@
     }
     actionsEl.innerHTML = actionsHtml;
 
-    /* Show plan cards for trial or cancelled users */
+    /* Show plan cards for trial or canceled users */
     plansEl.hidden = !(isTrial || trialExpired || isCancelled);
 
     /* Authorized emails */

@@ -18,7 +18,7 @@
  * seamless or natural."
  *
  * BOTH PROBLEMS ARE THE WAVE'S, NOT THE OVERLAY'S. The Book shape below sits LOW at both
- * edges and peaks at centre; the robot stands on the right, where the dark only reaches
+ * edges and peaks at center; the robot stands on the right, where the dark only reaches
  * the very bottom of the frame. There is nothing on the right for it to slice, so it can
  * go back over the hero and let the robot stand behind it.
  *
@@ -53,13 +53,13 @@ $seam_variant = isset( $args['variant'] ) && 'close' === $args['variant'] ? 'clo
 
 /* THE SHAPE IS A "BOOK" / CURTAIN (Mario, 2026-08-25: "I want like a curtain opening...
    so that the peak is the night mode blue"). The dark sits low along both edges and
-   sweeps up to a sharp point at centre, so the page reads as a curtain being drawn up
+   sweeps up to a sharp point at center, so the page reads as a curtain being drawn up
    rather than as a horizon.
 
    THE SHAPE LIVES IN THE CONTROL POINTS, not the endpoints. Both cubics hold their
    handles close to the baseline for most of the run (520 and 640 out of 720) and only
    then whip up to the apex. That is what produces the long shallow sweep with a sudden
-   spike; move the handles toward the centre and it degrades into a plain hill — which is
+   spike; move the handles toward the center and it degrades into a plain hill — which is
    the shallow single-arc variant this replaced, and which Mario asked to be taken off. */
 $seam_paths = array(
 	'open'  => 'M0,120 L0,104 C520,102 640,98 720,6 C800,98 920,102 1440,104 L1440,120 Z',
