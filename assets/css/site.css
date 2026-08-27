@@ -3246,356 +3246,264 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   .job-value__icon { width: 38px; height: 38px; }
 }
 
-/* ========== SOCIAL PROOF ========== */
-/* --- Proof section: Layered Depth editorial --- */
+/* ---- Section 7: social proof ------------------------------------------
+   THE V2 ARRANGEMENT IN V3's PALETTE. What was here was the V1 design: a
+   glassmorphic card floating on a gradient wash, with an SVG noise texture and a
+   rotated backdrop panel behind it - about 350 lines to say "testimonial". It
+   was carrying V2's numbers, which is what made the miss hard to see: the facts
+   were right and the layout was the thing testers had actually preferred.
+
+   ⚠️ THE PALETTE DOES NOT PORT, ONLY THE ARRANGEMENT. V2's version of this
+   section lived on the night theme: a translucent slab over a dark ground, cyan
+   hairlines at 8-20% white, and a `run--day` override block re-stating half of it
+   for the light run. On cream, "a slab lighter than its background" has to invert
+   to "a slab that is white where the section is not", and the hairlines become
+   teal at low alpha rather than cyan. Copying the values across is what produces
+   an invisible panel. */
 .proof-section {
-  /* Padding comes from .block. This was the last section still carrying its own
-     clamp, so the page now really does have exactly two section-padding values -
-     which is the claim the block system makes and the thing that keeps it cheap. */
+  /* Padding comes from .block. No background of its own: section 6 above is
+     --warm-white and section 8 below is --cream, and a third light tone between
+     them would read as a band rather than as continuous light. */
+  background: var(--warm-white);
+}
 
-  background: linear-gradient(168deg, #f0f7f8 0%, #e6f0f2 40%, #dce9ec 100%);
+/* STRETCH, so the quote panel is as tall as the evidence column beside it. This
+   is the other half of moving the header into the column: the header supplies the
+   height and `stretch` hands it to the panel. At `start` the panel is only ever as
+   tall as its own text, which is what made it read small. */
+.proof-section__grid {
+  align-items: stretch;
+  gap: clamp(32px, 5vw, 76px);
+}
+.proof-section__evidence {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(16px, 2.2vw, 24px);
+}
+.proof-section__header h2 {
+  margin-top: 10px;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  line-height: 1.15;
+}
+.proof-section__header h2 em {
+  font-style: normal;
+  color: var(--teal-deep);
+}
+
+/* The pair sits on one row and splits evenly. Below 520px it stacks - two
+   columns of a 3.4rem number on a phone is two numbers nobody can read. */
+.proof-section__lead-pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 34px);
+}
+.proof-section__lead-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.proof-section__lead-number {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.6vw, 3.6rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--teal-deep);
+  letter-spacing: -0.02em;
+}
+.proof-section__lead-label {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  /* 26ch, not 22: at 22 the second label broke as "qualified / lead" and split
+     the two-word phrase the stat is actually about across a line end. */
+  max-width: 26ch;
+}
+.proof-section__lead-label strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Quieter than the pair by design. It is the denominator, not a third claim -
+   set at the same weight it would compete with the numbers it exists to support. */
+.proof-section__support {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-top: -4px;
+}
+.proof-section__support strong {
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.proof-section__stats-source {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-muted);
+  padding-top: 16px;
+  border-top: 1px solid var(--border-light);
+  max-width: 46ch;
+}
+.proof-section__stats-source a {
+  color: var(--teal-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(0,131,143,0.35);
+  text-underline-offset: 3px;
+}
+.proof-section__stats-source a:hover { text-decoration-color: var(--teal-deep); }
+
+/* ---- The quote panel: two overlapping planes ----
+   `isolation: isolate` for the same reason .price-tier needs it - the planes sit
+   at z-index -1, and without a stacking context here that is behind the SECTION's
+   background rather than behind this figure's content, i.e. invisible. */
+.proof-section__quote-block {
   position: relative;
-  overflow: hidden;
-}
-.proof-section::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 25% 30%, rgba(0, 131, 143, 0.07) 0%, transparent 55%),
-    radial-gradient(ellipse at 75% 70%, rgba(31, 182, 204, 0.06) 0%, transparent 50%);
-  pointer-events: none;
-}
-.proof-section::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-/* Backdrop: offset teal panel + accent strip behind the card */
-.proof-section__backdrop {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(900px, 88%);
-  height: 82%;
-  pointer-events: none;
-  z-index: 0;
-}
-.proof-section__backdrop-panel {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(145deg, #004D40 0%, #00695C 50%, #00838F 100%);
-  border-radius: 20px;
-  transform: rotate(-1.2deg) translateX(-18px) translateY(8px);
-  opacity: 0.08;
-}
-.proof-section__backdrop-accent {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  bottom: -6px;
-  width: 40%;
-  background: linear-gradient(180deg, rgba(31, 182, 204, 0.12) 0%, rgba(0, 131, 143, 0.06) 100%);
-  border-radius: 16px;
-  transform: rotate(0.8deg);
-}
-
-/* Main layout: portrait + content side by side */
-.proof-section__layout {
-  position: relative;
-  z-index: 1;
+  isolation: isolate;
   display: flex;
   align-items: center;
-  gap: clamp(32px, 5vw, 64px);
-  max-width: 920px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-radius: 20px;
-  padding: clamp(28px, 4vw, 52px);
-  border: 1px solid rgba(0, 131, 143, 0.1);
-  box-shadow:
-    0 1px 2px rgba(0, 77, 64, 0.04),
-    0 4px 12px rgba(0, 77, 64, 0.05),
-    0 16px 48px rgba(0, 77, 64, 0.07),
-    0 32px 80px rgba(0, 77, 64, 0.04);
+  padding: clamp(28px, 3.4vw, 44px) clamp(24px, 3vw, 40px);
+}
+.proof-section__quote-inner {
+  position: relative;
+  width: 100%;
+  padding-top: clamp(34px, 3.4vw, 46px);
 }
 
-/* Gradient border via pseudo-element */
-.proof-section__layout::before {
+/* PLANE ONE, the surface.
+   ⚠️ RIGHT INSET IS 0, and that is a rule rather than a value. It shipped at
+   -34px on V2, which at a 1440 viewport puts the panel edge past the container
+   and, with overflow clipped, sliced the corner off. It misbehaves only at
+   viewports near the container width - which is most real screens. It may grow
+   up, down and LEFT into the column gap. Not right. */
+.proof-section__quote-plate {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 14px 40px rgba(0,77,64,0.07), 0 2px 6px rgba(0,77,64,0.04);
+  transform: rotate(-1.2deg);
+  pointer-events: none;
+}
+/* PLANE TWO — THE OFFSET GHOST BORDER (Mario, 2026-08-26: it is intentional and
+   it stays). A hairline with no fill, rotated the other way, CROSSING out of the
+   slab rather than nested inside it. Nested it would sit concentric and read as
+   one thick border; crossing, the two read as two overlapping objects.
+   It costs nothing to the text's margins because it has no fill, so it is not the
+   edge the eye measures padding against. That is why this one is allowed to reach
+   left into the column gap and the filled slab above is not. */
+.proof-section__quote-plate::after {
   content: '';
   position: absolute;
-  inset: -1px;
-  border-radius: 21px;
-  padding: 1px;
-  background: linear-gradient(
-    160deg,
-    rgba(31, 182, 204, 0.25) 0%,
-    rgba(0, 131, 143, 0.08) 40%,
-    rgba(31, 182, 204, 0.2) 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
+  inset: -14px 14px 12px -14px;
+  border-radius: 18px;
+  border: 1px solid rgba(0,131,143,0.28);
+  transform: rotate(2.4deg);
   pointer-events: none;
 }
 
-/* Portrait with overlapping depth shadow */
-.proof-section__portrait-wrap {
+/* Punctuation, not ornament (Mario: "doesn't have to be super big or imposing").
+   ⚠️ ANCHORED TO THE INNER WRAPPER, not the figure. On the figure it is
+   positioned against a box taller than its own contents, so the mark stays at the
+   panel's top edge while the words it introduces centre somewhere below it -
+   punctuation stranded from its sentence.
+   ⚠️ The glyph is written literally, and it has shipped mangled twice: once as
+   content: '\201C' where a script ate the backslash as an octal escape, once as a
+   raw character that lost its encoding in transit. If this changes, verify the
+   bytes afterwards; do not trust that it round-tripped. */
+.proof-section__quote-inner::before {
+  content: '\201C';
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 4.2vw, 3.6rem);
+  line-height: 1;
+  color: rgba(0,131,143,0.28);
+  pointer-events: none;
+}
+
+/* ⚠️ THE QUOTE IS SIZED SO THE EVIDENCE COLUMN SETS THE ROW HEIGHT, not the
+   panel. At 1.35rem/1.6 the quote ran six lines and the panel became the taller
+   of the two, which inverts the whole arrangement: `stretch` then hands the
+   evidence column a height it has nothing to fill, and the argument floats in
+   the middle of a tall empty column. The quote corroborates the numbers; it does
+   not out-measure them. If this is ever enlarged again, check the row heights,
+   not just the panel. */
+.proof-section__quote p {
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 1.25vw, 1.18rem);
+  font-weight: 400;
+  line-height: 1.62;
+  color: var(--text-primary);
+}
+.proof-section__quote p strong { font-weight: 600; color: var(--teal-deep); }
+
+/* Portrait, name and role on one row, so the face lands at the moment you read
+   who said it. */
+.proof-section__cite {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: clamp(14px, 1.6vw, 20px);
+  margin-top: 22px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+  font-style: normal;
+}
+.proof-section__portrait {
   flex-shrink: 0;
-  position: relative;
-  width: clamp(160px, 20vw, 220px);
-}
-.proof-section__portrait-frame {
-  position: relative;
-  z-index: 2;
-  border-radius: 16px;
+  display: block;
+  width: clamp(76px, 8vw, 96px);
+  aspect-ratio: 4 / 5;
+  border-radius: 12px;
   overflow: hidden;
-  aspect-ratio: 3 / 4;
-  box-shadow:
-    0 4px 16px rgba(0, 77, 64, 0.12),
-    0 12px 40px rgba(0, 77, 64, 0.1);
-  border: 3px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 6px 18px rgba(0,77,64,0.14);
 }
-.proof-section__portrait-frame img {
+.proof-section__portrait img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
-  image-rendering: auto;
-  -webkit-image-rendering: auto;
+  display: block;
 }
-.proof-section__portrait-shadow {
-  position: absolute;
-  inset: 8px -8px -8px 8px;
-  z-index: 1;
-  border-radius: 16px;
-  background: linear-gradient(145deg, #004D40, #00838F);
-  opacity: 0.18;
-}
-
-/* Content area */
-.proof-section__content {
-  flex: 1;
-  position: relative;
-}
-
-/* Giant quote mark — bold, filled, substantial */
-.proof-section__quote-mark {
-  position: absolute;
-  top: 12px;
-  left: 22px;
-  font-size: clamp(64px, 9vw, 96px);
-  line-height: 1;
-  color: #1FB6CC;
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 0;
-  user-select: none;
-}
-
-.proof-section__label {
-  position: relative;
-  z-index: 1;
-  font-family: var(--font-body);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #00838F;
-  margin-bottom: 16px;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: linear-gradient(135deg, rgba(0, 131, 143, 0.1), rgba(31, 182, 204, 0.06));
-  padding: 5px 14px;
-  border-radius: 100px;
-  border: 1px solid rgba(0, 131, 143, 0.12);
-}
-
-.proof-section__quote {
-  position: relative;
-  z-index: 1;
-  margin-bottom: 24px;
-}
-.proof-section__quote p {
-  font-family: var(--font-display);
-  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
-  font-style: italic;
-  font-weight: 300;
-  line-height: 1.75;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-.proof-section__quote p {
-  color: var(--text-secondary);
-}
-.proof-section__quote p strong {
-  font-weight: inherit;
-  font-style: inherit;
-  color: var(--text-primary);
-}
-
-.proof-section__cite {
-  position: relative;
-  z-index: 1;
+.proof-section__cite-text {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  font-style: normal;
-  padding-top: 20px;
-  border-top: 2px solid transparent;
-  border-image: linear-gradient(90deg, #1FB6CC 0%, rgba(31, 182, 204, 0) 70%) 1;
+  min-width: 0;
 }
 .proof-section__author {
-  font-weight: 700;
-  font-size: 1rem;
-  color: var(--text-primary);
-  letter-spacing: -0.01em;
-}
-.proof-section__divider {
-  color: rgba(0, 131, 143, 0.25);
-  font-weight: 300;
-  margin: 0 2px;
-}
-.proof-section__role {
-  font-size: 0.88rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
-.proof-section__company {
-  display: inline-block;
-  font-size: 0.9rem;
   font-weight: 600;
-  color: #00838F;
-  text-decoration: none;
-  font-style: normal;
-  transition: color 0.25s ease;
+  font-size: 0.95rem;
+  color: var(--text-primary);
 }
-.proof-section__company:hover {
-  color: #004D40;
+.proof-section__divider { color: var(--border-light); margin: 0 4px; }
+.proof-section__role { font-weight: 400; color: var(--text-secondary); }
+.proof-section__company {
+  font-size: 0.88rem;
+  color: var(--teal-deep);
+  font-weight: 600;
 }
+.proof-section__company:hover { text-decoration: underline; }
 
-/* Stats bar — pill-style with depth */
-.proof-section__stats {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  gap: clamp(12px, 2vw, 20px);
-  max-width: 920px;
-  margin: clamp(28px, 4vw, 44px) auto 0;
+@media (max-width: 900px) {
+  /* Stacked, the quote panel no longer has a column to be as tall as, so the
+     centring and the stretch both stop applying. The two planes stay - they are
+     the section's one piece of treatment and they read the same at any width. */
+  .proof-section__quote-block { padding-inline: clamp(20px, 5vw, 34px); }
+  .proof-section__stats-source { max-width: none; }
 }
-.proof-section__stat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: 16px clamp(24px, 3vw, 36px);
-  border-radius: 14px;
-  border: 1px solid rgba(0, 131, 143, 0.08);
-  box-shadow: 0 2px 8px rgba(0, 77, 64, 0.05), 0 8px 24px rgba(0, 77, 64, 0.04);
-  flex: 1;
-  max-width: 200px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.proof-section__stat:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(0, 77, 64, 0.08), 0 16px 40px rgba(0, 77, 64, 0.06);
-}
-.proof-section__stat-number {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 2.8vw, 2rem);
-  font-weight: 800;
-  background: linear-gradient(160deg, #004D40, #00838F);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  letter-spacing: -0.02em;
-}
-/* The labels stopped being two-word product facts ("Lead capture", "Languages")
-   and became sentences stating a customer result. Uppercase + 0.1em tracking at
-   0.7rem is a category label treatment; applied to "of their conversations
-   arrived after they closed" it reads as shouting and wraps badly inside the
-   old 200px cap. Sentence case, normal tracking, wider card. */
-.proof-section__stat-label {
-  font-size: 0.82rem;
-  line-height: 1.45;
-  color: var(--text-secondary);
-  font-weight: 500;
-  text-align: center;
-  max-width: 24ch;
-}
-.proof-section__stat { max-width: 300px; }
-
-/* Not a disclaimer to hide. This sentence is why the two numbers above are
-   believable, so it is legible rather than fine print. */
-.proof-section__footnote {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  margin-top: 14px;
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* Responsive */
-@media (max-width: 700px) {
-  .proof-section__layout {
-    flex-direction: column;
-    text-align: center;
-    padding: 28px 24px;
-  }
-  .proof-section__portrait-wrap {
-    width: 180px;
-  }
-  .proof-section__portrait-shadow {
-    inset: 6px -6px -6px 6px;
-  }
-  .proof-section__quote-mark {
-    left: 14px;
-    top: 10px;
-    font-size: 48px;
-  }
-  .proof-section__cite {
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    border-image: none;
-    border-top: 2px solid rgba(31, 182, 204, 0.2);
-  }
-  .proof-section__role {
-    padding-left: 0;
-  }
-  .proof-section__role::before {
-    display: none;
-  }
-  .proof-section__backdrop-accent {
-    display: none;
-  }
-  .proof-section__stats {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .proof-section__stat {
-    max-width: 280px;
-    width: 100%;
-    flex-direction: row;
-    justify-content: center;
-    gap: 10px;
-    padding: 14px 24px;
-  }
+@media (max-width: 520px) {
+  .proof-section__lead-pair { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .proof-section__lead-label { max-width: none; }
+  /* ⚠️ The role drops to its own line here. Inline after a "|" on a phone it
+     wrapped mid-attribution and left the divider dangling at a line end - the
+     same dangling-separator bug section 6 was rebuilt to fix. */
+  .proof-section__divider { display: none; }
+  .proof-section__role { display: block; }
 }
 
 /* ========== LANGUAGE SECTION (condensed) ========== */
@@ -11059,8 +10967,10 @@ a.ind-problem-card .ind-problem-card__icon--art {
   max-width: 660px;
   padding: 28px 28px 24px;
   /* Dark on purpose: /download/ is an almost entirely white page, so the one thing
-     we want read first has to carry weight. Same gradient as
-     .proof-section__backdrop-panel rather than a new dark — keeps it in-system. */
+     we want read first has to carry weight.
+     This used to say "same gradient as .proof-section__backdrop-panel, keeps it
+     in-system" — that element was deleted with the V1 proof design on 2026-08-26,
+     so the gradient is now local to this page and nothing else shares it. */
   background: linear-gradient(145deg, #004D40 0%, #00695C 50%, #00838F 100%);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);

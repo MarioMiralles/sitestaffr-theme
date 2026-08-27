@@ -1165,63 +1165,149 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 </section>
 
 <!-- ========== SECTION 7: SOCIAL PROOF ========== -->
-<section class="block block-panel proof-section">
-  <div class="proof-section__backdrop" aria-hidden="true">
-    <div class="proof-section__backdrop-panel"></div>
-    <div class="proof-section__backdrop-accent"></div>
-  </div>
-  <div class="container">
-    <div class="proof-section__layout">
-      <div class="proof-section__quote-mark" aria-hidden="true">&#10077;</div>
-      <div class="proof-section__portrait-wrap">
-        <div class="proof-section__portrait-frame">
-          <img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/synergy-scribes__ceo.webp' ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="400" height="526" loading="lazy">
+<?php
+/* SECTION 7 — social proof. THE V2 ARRANGEMENT, IN V3's PALETTE.
+
+   ⚠️ THE ARRANGEMENT IS THE THING THAT TESTED WELL, so it is what gets ported —
+   not just the two numbers. What was here until 2026-08-26 was the V1 design
+   (a glassmorphic card on a gradient wash, with a noise texture and a rotated
+   backdrop panel) carrying V2's stats. That is the combination the spec's
+   opening line rules out: "Testers preferred it over the live site's" is a
+   statement about the LAYOUT.
+
+   The shape, left to right: evidence, then the human voice.
+
+     - The header lives INSIDE the evidence column, not above the grid. Two
+       reasons and the second is the real one. It reads better - the left column
+       becomes the whole argument top to bottom, and the right column is one
+       object, the customer's own words. And it is what lets the panel be big:
+       with the header outside, the grid row is only as tall as the stats, so the
+       quote panel can never be more than ~350px however it is styled. Moving
+       ~150px of header into the row is what gives the panel its height.
+
+     - The heading names the customer and the month rather than paraphrasing the
+       finding. It read "They Closed for the Day. Their Customers Didn't." for one
+       round - accurate, and cheesy (Mario, 2026-08-22). A heading that
+       paraphrases the finding spoils it: you read the turn of phrase, then the
+       number restates it and lands as a repeat instead of as evidence.
+
+   ⚠️ THE OFFSET GHOST BORDER STAYS (Mario, 2026-08-26). It is the second plane
+   on the quote panel - a hairline with no fill, rotated the other way, crossing
+   out of the slab rather than nested inside it. Nested, the two read as one thick
+   border; crossing, they read as two overlapping objects. It is not a rendering
+   fault and it is not up for tidying.
+
+   ⚠️ EVERY NUMBER APPEARS EXACTLY ONCE, and that took rewording. The V2 version
+   ran "1 in 3" as the second lead stat and repeated 23 in the source line; with
+   23 promoted to a lead number, the source line would have stated it twice and
+   the support line would have stated the month three times. 86% and 23 lead, 72
+   is the denominator underneath them, and the date range lives in the source. */
+?>
+<section class="block block-split proof-section" id="proof">
+  <div class="block__inner">
+    <div class="block-split__grid proof-section__grid">
+
+      <div class="proof-section__evidence">
+        <div class="proof-section__header">
+          <span class="section-label">Customer Results</span>
+          <h2>What One Month Looked Like at <em>Synergy Scribes</em></h2>
         </div>
-        <div class="proof-section__portrait-shadow" aria-hidden="true"></div>
+
+        <?php
+        /* TWO LEAD NUMBERS, NOT ONE. They answer different questions, and together
+           they close the page's argument:
+             86% -> section 2's thesis is true, these visitors are being missed
+             23  -> and it turned into business
+
+           ⚠️ THE SECOND ONE USED TO BE "1 in 3". That is a conversion RATE, and the
+           reader has to do arithmetic before knowing whether it is good - one in
+           three of what, and is that a lot? 23 is immediately meaningful. */
+        ?>
+        <div class="proof-section__lead-pair">
+          <div class="proof-section__lead-stat">
+            <span class="proof-section__lead-number">86%</span>
+            <span class="proof-section__lead-label">of their conversations arrived <strong>after they closed</strong></span>
+          </div>
+          <div class="proof-section__lead-stat">
+            <span class="proof-section__lead-number">23</span>
+            <span class="proof-section__lead-label">of those became a <strong>qualified lead</strong></span>
+          </div>
+        </div>
+
+        <?php // 72 is support, not a claim of its own: it is the denominator that
+              // makes 86% mean anything. Deliberately quieter than the pair above. ?>
+        <p class="proof-section__support">out of <strong>72</strong> conversations</p>
+
+        <?php
+        /* ⚠️ NOT A FOOTNOTE TO MINIMISE. "One customer's results, not an average"
+           buys more credibility than the two numbers do - it is the sentence that
+           tells a skeptical reader these are real rather than modelled. Do not
+           shrink it, move it into a tooltip, or drop it when a second testimonial
+           arrives; with two customers it becomes more necessary, not less.
+
+           It sits in the evidence column rather than under the whole grid, where
+           it used to be. Full width, it put the source of the numbers further from
+           the numbers than the quote was, and a disclaimer that has to be hunted
+           for is not doing its job.
+
+           The figures are Synergy Scribes' own, used with permission. CORRECTED
+           2026-08-19 (Mario): the first set - 80%, 110 conversations, 29 leads -
+           was inflated by technical faults since found and fixed. Anything still
+           quoting 110 or 29 anywhere is stale and wrong. */
+        ?>
+        <p class="proof-section__stats-source">Measured at <a href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>, 1 June &ndash; 1 July 2026. One customer&rsquo;s results, not an average.</p>
       </div>
-      <div class="proof-section__content">
-        <span class="proof-section__label">Trusted in Healthcare</span>
-        <blockquote class="proof-section__quote">
-          <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
-        </blockquote>
-        <cite class="proof-section__cite">
-          <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
-          <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
-        </cite>
-      </div>
+
+      <?php
+      /* The quote CORROBORATES the number rather than introducing it, so it sits
+         beside and reads quieter. Two overlapping planes: the slab, and the ghost
+         hairline crossing out of it. The slab is a real element rather than a
+         pseudo because this figure's own ::before is already the quote glyph. */
+      ?>
+      <figure class="block-split__art proof-section__quote-block">
+        <span class="proof-section__quote-plate" aria-hidden="true"></span>
+        <?php
+        /* AN INNER WRAPPER, for exactly one reason: the panel is taller than its
+           contents. The column stretches to match the evidence column, so quote and
+           attribution sit CENTRED in that height rather than pinned to the top with
+           a pool of empty panel underneath.
+
+           It cannot be done by centring the figure's children directly - the quote
+           glyph is positioned against its container, so centring the text would
+           strand the glyph at the panel's top edge. Anchoring the glyph to this
+           wrapper makes mark and words move together. */
+        ?>
+        <div class="proof-section__quote-inner">
+          <blockquote class="proof-section__quote">
+            <p>We staff medical scribes across multiple clinics, and after hours is when most new facility inquiries come in. <strong>SiteStaffr</strong> captured a full intake request at 9 PM on a Sunday, with the clinic name, number of scribes needed, and start date. Monday morning it was sitting in our inbox, ready to go.</p>
+          </blockquote>
+          <?php
+          /* THE PORTRAIT SITS WITH THE NAME, not beside the quote. Beside a
+             five-line quote it floats at mid-height with dead space above and
+             below, and the eye has to travel to work out who is speaking. Next to
+             the attribution it does the job a face actually does in a testimonial:
+             identifying the person at the moment you read their name.
+
+             ⚠️ A SEPARATE HEADSHOT CROP, not object-fit on the full-body original.
+             That source is 400x526 of her standing at full length; in a small
+             frame her face lands at about 13px, and object-fit cannot zoom past
+             the source width - no combination of object-position and transform
+             gets a readable face out of it. Both crops ship alongside the
+             full-length original she supplied. */
+          ?>
+          <figcaption class="proof-section__cite">
+            <span class="proof-section__portrait">
+              <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/synergy-scribes__ceo-portrait.webp' ) ); ?>" alt="Nathaly Martinez, CEO of Synergy Scribes" width="320" height="400" loading="lazy" decoding="async">
+            </span>
+            <span class="proof-section__cite-text">
+              <span class="proof-section__author">Nathaly Martinez <span class="proof-section__divider">|</span> <span class="proof-section__role">CEO &amp; Founder</span></span>
+              <a class="proof-section__company" href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>
+            </span>
+          </figcaption>
+        </div>
+      </figure>
+
     </div>
-    <?php
-    /* TWO REAL CUSTOMER RESULTS, replacing three generic product facts (24/7 lead
-       capture, 57+ languages, <30s recap delivery). Those three were true, and every
-       one of them is already stated elsewhere on the page — they were the product
-       spec sitting in the slot reserved for evidence.
-
-       THE PAIR CLOSES THE PAGE'S ARGUMENT, in this order:
-         86% of their conversations arrived after they closed  -> section 2's thesis is true
-         23 qualified leads in 30 days                          -> and it turned into business
-
-       ⚠️ THE SECOND ONE USED TO BE "1 in 3". That is a conversion RATE, and the reader
-       has to do arithmetic before they know whether it is good — one in three of what,
-       and is that a lot? The underlying fact is 23 qualified leads in 30 days, which is
-       immediately meaningful and needs no denominator explained.
-
-       ⚠️ THE FOOTNOTE STAYS AND IS NOT A DISCLAIMER TO MINIMISE. "One customer's
-       results, not an average" buys more credibility than the two numbers do: it is the
-       sentence that tells a skeptical reader these are real rather than modelled. Do
-       not shrink it, move it into a tooltip, or drop it when a second testimonial
-       arrives — with two customers it becomes more necessary, not less. */
-    ?>
-    <div class="proof-section__stats">
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">86%</span>
-        <span class="proof-section__stat-label">of their conversations arrived after they closed</span>
-      </div>
-      <div class="proof-section__stat">
-        <span class="proof-section__stat-number">23</span>
-        <span class="proof-section__stat-label">qualified leads in 30 days</span>
-      </div>
-    </div>
-    <p class="proof-section__footnote">One customer&rsquo;s results, not an average.</p>
   </div>
 </section>
 
