@@ -1758,6 +1758,26 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-height: 268px;
   overflow-y: auto;
 }
+/* ⚠️ THE CAP EXISTS ONLY BECAUSE PLAYBACK REVEALS LINES ONE AT A TIME. It holds
+   the panel at a fixed height so pressing play does not make the layout jump. In
+   both fallback states the whole transcript is in the DOM at once - 645px of it
+   against a 268px box - so the cap turns the conversation into a scroll box that
+   opens mid-sentence and reads as a rendering fault. Nothing is animating in
+   either state, so there is nothing left for the cap to protect.
+
+   `scripting: none` is a real media feature (Chrome 120+, Safari 17+, FF 113+)
+   and needs no no-js class, so there is no flash and nothing to keep in sync
+   with a script. Older browsers simply keep today's scrollable box, which is
+   degraded rather than broken.
+
+   The reduced-motion case is NOT covered by that query - JS is running, it just
+   populates everything immediately - so it needs its own rule. */
+@media (scripting: none) {
+  .see-it__convo { min-height: 0; max-height: none; overflow-y: visible; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .see-it__convo { min-height: 0; max-height: none; overflow-y: visible; }
+}
 .see-it__line {
   font-size: 0.88rem;
   line-height: 1.5;
