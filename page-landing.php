@@ -1471,7 +1471,12 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
         </div>
         <div class="price-tier__foot">
-          <p class="price-tier__best-for">No credit card. Ends after 30 days unless you pick a plan.</p>
+<?php /* "Ends after 30 days unless you pick a plan" removed (Mario, 2026-08-26):
+               obvious from "$0 / for 30 days" directly above it. The spec asked for an
+               explicit end state here so the column could never read as a permanent free
+               tier - the identity row already says it, so the sentence was saying it
+               twice in the narrowest column on the page. */ ?>
+          <p class="price-tier__best-for">No credit card required</p>
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline js-cta" data-cta="trial">Start Free Trial</a>
         </div>
       </div>
