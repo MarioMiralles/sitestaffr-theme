@@ -1321,7 +1321,47 @@ $lang_greetings = array(
        section's evidence, not decoration — "here are twelve languages" is the claim, and
        hiding them would leave a screen-reader user with a heading and nothing under it. */
     ?>
+    <?php
+    /* THE HAZE — more languages, receding behind the robot (Mario, 2026-08-27: "add more
+       languages behind the robot as if it was in some sort of vortex").
+
+       ⚠️ DELIBERATELY NOT A LITERAL VORTEX. A swirl would need the words on a rotated
+       ellipse with perspective, and every one of them would then be positioned against
+       the FIGURE — which is the maintenance trap that killed the crowd render in this
+       exact slot (twelve bubbles hand-measured over artwork, four of them rendering).
+       This does the same job with depth cues instead of motion: words get smaller,
+       fainter and more rotated as they approach the center, so the field reads as
+       receding behind him. Nothing here is measured against the robot; the coordinates
+       are the stage's, and the robot simply sits on top.
+
+       THESE ARE NOT THE TWELVE. The chips are the section's evidence and are readable;
+       this is texture, at 4-7% opacity, and is aria-hidden. Different words on purpose —
+       repeating the chips would read as a printing error rather than as "there are more".
+
+       Each entry is: greeting, top %, left %, font-size rem, rotation deg, opacity. */
+    $lang_haze = array(
+      array( 'Hej',      12,  22, 2.6, -14, 0.055 ),
+      array( 'Merhaba',  30,  14, 2.1, -8,  0.05  ),
+      array( 'Cześć',    52,  20, 1.7, -5,  0.042 ),
+      array( 'Shalom',   72,  16, 2.3, 10,  0.05  ),
+      array( 'Habari',   86,  30, 1.9, 6,   0.045 ),
+      array( 'Γεια',     20,  40, 1.5, -4,  0.04  ),
+      array( 'Ahoj',     64,  44, 1.4, 5,   0.038 ),
+      array( 'Tere',     40,  55, 1.4, -3,  0.038 ),
+      array( 'Halo',     10,  62, 2.0, 9,   0.048 ),
+      array( 'Kamusta',  34,  74, 2.2, 7,   0.05  ),
+      array( 'Sveiki',   56,  80, 1.8, -6,  0.044 ),
+      array( 'Bok',      76,  70, 2.5, -11, 0.055 ),
+      array( 'Salam',    88,  58, 2.0, 4,   0.045 ),
+      array( 'Dobrý den', 4,  36, 1.6, -6,  0.04  ),
+    );
+    ?>
     <div class="lang-orbit">
+      <div class="lang-orbit__haze" aria-hidden="true">
+        <?php foreach ( $lang_haze as $h ) : ?>
+          <span style="top:<?php echo (float) $h[1]; ?>%;left:<?php echo (float) $h[2]; ?>%;font-size:<?php echo (float) $h[3]; ?>rem;--rot:<?php echo (float) $h[4]; ?>deg;opacity:<?php echo (float) $h[5]; ?>;"><?php echo esc_html( $h[0] ); ?></span>
+        <?php endforeach; ?>
+      </div>
       <img class="lang-orbit__robot"
            src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-languages.webp' ) ); ?>"
            alt="" aria-hidden="true"

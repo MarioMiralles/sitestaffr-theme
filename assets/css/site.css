@@ -2158,11 +2158,57 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: flex;
   justify-content: center;
 }
+/* ---- The haze: more languages, receding behind the robot ---------------
+   Texture, not content — the twelve chips carry the claim and stay readable; this is
+   4-7% ink that tells you the list keeps going. See page-landing.php for why it is a
+   depth field rather than the literal vortex that was asked about.
+
+   z-index 0 with the robot and chips above it. Both of those are positioned, so they
+   win paint order on their own, but stating it here means a future `position` on the
+   haze cannot quietly lift it in front of the figure. */
+.lang-orbit__haze {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.lang-orbit__haze span {
+  position: absolute;
+  transform: translate(-50%, -50%) rotate(var(--rot, 0deg));
+  font-family: var(--font-body);
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--teal-deep);
+  letter-spacing: -0.01em;
+}
+/* The robot has to sit ON the haze, so it needs a stacking position of its own — it is
+   an in-flow flex child and would otherwise paint underneath a positioned sibling. */
+.lang-orbit__robot { position: relative; z-index: 1; }
+
+/* ⚠️ THE HAZE IS DESKTOP-ONLY. Below 900px the chips leave their orbit and become an
+   in-flow wrap under the robot, so the stage stops being a fixed field for anything to
+   be scattered across — percentage coordinates there would land words on top of the
+   readable chips. */
+@media (max-width: 900px) {
+  .lang-orbit__haze { display: none; }
+}
+
 /* SUPER BIG, as asked — this is the largest the robot appears anywhere except the hero. */
 .lang-orbit__robot {
+  /* The height lives in a custom property because the negative margin below is derived
+     from it. Two independent literals would drift the moment either is tuned. */
+  --robot-h: clamp(320px, 42vw, 560px);
   width: auto;
-  height: clamp(320px, 42vw, 560px);
+  height: var(--robot-h);
   max-width: 100%;
+  /* ⚠️ A MASK HIDES PIXELS, IT DOES NOT SHRINK THE BOX. The image still occupies its
+     full height after the crop, so the bottom 22% is now blank space the layout still
+     reserves — which is the gap that opened between the robot and the recap line the
+     moment the end stop moved to 78%. Pulling the following content up by exactly that
+     22% closes it. Keep this multiplier and the mask's end stop in step: 100% - 78%. */
+  margin-bottom: calc(var(--robot-h) * -0.22);
   /* ⚠️ THE MASK IS LOAD-BEARING AND PRE-DATES THIS REDESIGN. Carried over verbatim.
      The render was made for a DARK section: its alpha bbox is the full frame and the
      torso runs opaque and near-black to the bottom edge (sampled: 14 of 41 columns still
@@ -2243,7 +2289,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    good as the narrowest viewport anybody checked. */
 @media (max-width: 900px) {
   .lang-orbit { flex-direction: column; align-items: center; }
-  .lang-orbit__robot { height: clamp(260px, 54vw, 380px); }
+  .lang-orbit__robot { --robot-h: clamp(260px, 54vw, 380px); }
   .lang-orbit__list {
     position: static;
     display: flex;
