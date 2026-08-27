@@ -30,23 +30,44 @@
  * preserveAspectRatio="none" lets it stretch to any viewport width, which is why it is
  * viewport-proportional and why two widths prove nothing about it. Check 390 through 1920.
  *
+ * TWO VARIANTS, ONE SHAPE. Pass `variant => 'close'` for the second one:
+ *
+ *   'open'  (default) — the dark rises out of the light below. Sits at the BOTTOM of a
+ *                       light section, over it. Used at the hero.
+ *   'close'           — the dark comes back down into the light. Sits at the TOP of the
+ *                       light section that FOLLOWS the dark run, over it.
+ *
+ * The close path is the open path mirrored exactly — every y became 120-y — so the dark
+ * run is bracketed by one gesture rather than decorated by two shapes (Mario, 2026-08-25:
+ * "the same shape divider but... upside down"; re-asked for the V3 dark block 2026-08-27:
+ * "so that the dark sections show a completion with the divider").
+ *
+ * ⚠️ IF ONE PATH IS EVER EDITED, MIRROR THE OTHER IN THE SAME COMMIT. They are the same
+ * curve and the whole point is that they read as one; a diff that touches only the top
+ * one is invisible until someone scrolls past both.
+ *
  * @package SiteStaffr
  */
 
-?>
-<div class="seam-curtain" aria-hidden="true">
-	<svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false" role="presentation">
-		<?php /* THE SHAPE IS A "BOOK" / CURTAIN (Mario, 2026-08-25: "I want like a curtain
-		         opening... so that the peak is the night mode blue", reaffirmed 2026-08-27).
-		         The dark sits low along both edges and sweeps up to a sharp point at centre,
-		         so the page reads as a curtain being drawn up rather than as a horizon.
+$seam_variant = isset( $args['variant'] ) && 'close' === $args['variant'] ? 'close' : 'open';
 
-		         THE SHAPE LIVES IN THE CONTROL POINTS, not the endpoints. Both cubics hold
-		         their handles close to the baseline for most of the run (520 and 640 out of
-		         720) and only then whip up to the apex. That is what produces the long
-		         shallow sweep with a sudden spike; move the handles toward the centre and it
-		         degrades into a plain hill — which is the shallow single-arc variant this
-		         replaced, and which Mario asked to be taken back off. */ ?>
-		<path d="M0,120 L0,104 C520,102 640,98 720,6 C800,98 920,102 1440,104 L1440,120 Z" />
+/* THE SHAPE IS A "BOOK" / CURTAIN (Mario, 2026-08-25: "I want like a curtain opening...
+   so that the peak is the night mode blue"). The dark sits low along both edges and
+   sweeps up to a sharp point at centre, so the page reads as a curtain being drawn up
+   rather than as a horizon.
+
+   THE SHAPE LIVES IN THE CONTROL POINTS, not the endpoints. Both cubics hold their
+   handles close to the baseline for most of the run (520 and 640 out of 720) and only
+   then whip up to the apex. That is what produces the long shallow sweep with a sudden
+   spike; move the handles toward the centre and it degrades into a plain hill — which is
+   the shallow single-arc variant this replaced, and which Mario asked to be taken off. */
+$seam_paths = array(
+	'open'  => 'M0,120 L0,104 C520,102 640,98 720,6 C800,98 920,102 1440,104 L1440,120 Z',
+	'close' => 'M0,0 L0,16 C520,18 640,22 720,114 C800,22 920,18 1440,16 L1440,0 Z',
+);
+?>
+<div class="seam-curtain seam-curtain--<?php echo esc_attr( $seam_variant ); ?>" aria-hidden="true">
+	<svg viewBox="0 0 1440 120" preserveAspectRatio="none" focusable="false" role="presentation">
+		<path d="<?php echo esc_attr( $seam_paths[ $seam_variant ] ); ?>" />
 	</svg>
 </div>

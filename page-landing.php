@@ -822,6 +822,16 @@ get_template_part( 'template-parts/site-nav', null, array(
          The bridge line went with the document ("Here is what the 2:14 AM one looked
          like when you opened it") — it pointed at the thing that no longer exists. */ ?>
 <section class="block what-you-get" id="your-morning">
+  <?php /* THE CURTAIN CLOSES HERE (Mario, 2026-08-27: "add the same book shape divider
+           for the Your Morning section top so that the dark sections show a completion
+           with the divider"). Same path as the hero's, mirrored — the dark block that
+           opened with a peak drawn up now comes back down with one.
+
+           It belongs to THIS section, not to section 3, for the same reason the opening
+           one belongs to the hero: it is an overlay on the LIGHT side of the boundary,
+           so the light section is its background and the two can never disagree on
+           colour. Section 3 needs no cooperation at all. */ ?>
+  <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
   <div class="block__inner">
     <div class="what-you-get__header">
       <span class="section-label">Your Morning</span>

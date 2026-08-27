@@ -206,10 +206,23 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    exact tone the redesign exists to drop. It reads as emphasis because the
    page around it is light, not because it is black. */
 :root {
-  /* Exactly two section-padding values. Resist adding a third — the drift this
-     replaces started as "just one more case". */
-  --block-pad-tight: clamp(48px, 7vw, 72px);
-  --block-pad-loose: clamp(72px, 10vw, 120px);
+  /* ONE section-padding value, and it is a FIXED 64px (Mario, 2026-08-27: "make all
+     the padding for all the sections a consistent 64px for top and bottom").
+
+     It was two clamps — tight `clamp(48px,7vw,72px)` and loose `clamp(72px,10vw,120px)`
+     — which put section 2 at 120px top and bottom on a desktop and read as a hole in
+     the page. Both are gone rather than retuned: two values meant every new section
+     had to pick one, which is the drift the old comment here warned about while
+     itself being the cause of it.
+
+     NOT a clamp. A viewport-proportional value is why the same section looked
+     correct at 1150 and cavernous at 1920 — the padding grew while the type did not.
+     64px is 64px everywhere, which is the consistency that was asked for.
+
+     THE HERO IS EXEMPT and sets its own padding; it is composition, not rhythm.
+     Sections carrying a seam overlay add the seam's height ON TOP of this so the
+     visible gap below the divider is still 64px — see .what-you-get. */
+  --block-pad: 64px;
 
   /* Matches .container so the restored container is one number site-wide.
      V2 broke hero content to 40px from the raw viewport edge; V1 sits at ~150px
@@ -221,8 +234,13 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   --block-dark-raised: #0A424A;   /* the elevated panel in section 10 */
 }
 
-.block { padding-block: var(--block-pad-loose); }
-.block--tight { padding-block: var(--block-pad-tight); }
+.block { padding-block: var(--block-pad); }
+/* `.block--tight` NO LONGER CHANGES ANYTHING. The rule is kept, pointing at the same
+   single value, so the class still resolves everywhere it appears in the markup rather
+   than sitting there as a dead attribute that looks like it does something. If a second
+   padding value is ever genuinely needed, this is the hook — but adding one reopens the
+   inconsistency this collapse was asked for. */
+.block--tight { padding-block: var(--block-pad); }
 
 .block__inner {
   width: 100%;
@@ -607,7 +625,10 @@ body.sitestaffr-landing-page .hero__visual > * {
 .hero__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  /* 40px, was 60px (Mario, 2026-08-27). NOTE: this rule is DUPLICATED verbatim
+     further down the file and the later copy wins. Both were changed together;
+     edit one alone and the value you read is not the value that renders. */
+  gap: 40px;
   align-items: center;
 }
 .hero__content { position: relative; z-index: 2; }
@@ -3150,13 +3171,18 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
   width: 100%;
   height: clamp(56px, 7vw, 120px);
   line-height: 0;
   z-index: 1;
   pointer-events: none;
 }
+/* -1px on BOTH, for the same reason in both directions: sub-pixel rounding otherwise
+   leaves a hairline of the light section's background between the seam and the dark
+   block it meets — a pale line across the full width, which is the exact edge these
+   elements exist to remove. */
+.seam-curtain--open  { bottom: -1px; }
+.seam-curtain--close { top: -1px; }
 .seam-curtain svg { display: block; width: 100%; height: 100%; }
 .seam-curtain path { fill: var(--block-dark); }
 
@@ -3553,9 +3579,24 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 /* ========== WHAT YOU GET SECTION ========== */
 .what-you-get {
   background: var(--cream);
-  /* Padding comes from .block. The top/bottom hairlines are gone: this section
-     now follows the dark block, and a border between a dark section and a cream
-     one is a line drawn on a boundary that is already unmistakable. */
+  /* The top/bottom hairlines are gone: this section now follows the dark block, and a
+     border between a dark section and a cream one is a line drawn on a boundary that is
+     already unmistakable. The closing curtain does that job properly instead. */
+  position: relative;   /* the closing seam is absolute against this */
+
+  /* ⚠️ TOP PADDING IS THE 64px SCALE **PLUS THE SPIKE'S DEPTH**, and that is what makes
+     it consistent rather than an exception to the rule.
+
+     The seam is an overlay and costs no height, so a bare 64px here would be measured
+     from the section's box — and the curtain's point hangs 95% of the way down into
+     that box (y=114 of 120), landing on the centred heading. The eye does not measure
+     from the box; it measures from the ink. Adding the spike's depth is what makes the
+     gap BELOW THE DIVIDER read as the same 64px as every other section.
+
+     0.95 is 114/120 of the seam's own height clamp. Re-derive both if the Book path's
+     apex or .seam-curtain's height ever changes — and note the depth is only this deep
+     AT CENTRE, which is exactly where a centred heading sits. */
+  padding-top: calc(64px + clamp(53px, 6.65vw, 114px));
 }
 .what-you-get__header { text-align: center; margin-bottom: 32px; }
 .what-you-get__subtitle {
@@ -6440,7 +6481,15 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 
 /* ========== SECTION 9: FAQ ========== */
 .faq-section {
-  padding: var(--section-padding);
+  /* NO PADDING. `.block` owns it, and this rule used to override it with
+     `padding: var(--section-padding)` — a SHORTHAND, declared later in the file, which
+     beats .block's `padding-block` on both specificity-of-order and shorthand-vs-longhand.
+     Measured before removal: 115px/120px while every other section sat at 64px.
+
+     There is an older `.faq-section` rule further up carrying a comment that says exactly
+     this ("No padding here: .block owns it") — written when the offending declaration was
+     removed from THAT rule, while this copy further down kept it and kept winning. The
+     comment was true and the page still rendered wrong. Grep the selector, not one rule. */
   background: var(--cream);
 }
 .faq-section__header {
@@ -7399,7 +7448,10 @@ body.sitestaffr-legal-page .legal-caps {
 .hero__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  /* 40px, was 60px (Mario, 2026-08-27). NOTE: this rule is DUPLICATED verbatim
+     further down the file and the later copy wins. Both were changed together;
+     edit one alone and the value you read is not the value that renders. */
+  gap: 40px;
   align-items: center;
 }
 .hero__tagline {
