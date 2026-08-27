@@ -224,46 +224,141 @@ $get_started_url = home_url( '/#get-started' );
         ),
     );
 
+    /* SECTION 9 — the FAQ. Seventeen questions in four groups, reordered
+       OBJECTION-FIRST. The old ten opened with questions that sections 1, 3, 4, 5 and 8
+       had already answered, which wastes the one place on the page a skeptical reader
+       goes looking for a reason not to buy.
+
+       WHY THE SCHEMA WORK STILL MATTERS IN 2026. FAQ rich results are effectively gone
+       from Google — restricted to authoritative government and health sites since 2023.
+       The case for FAQPage markup now is AI ANSWER ENGINES, which is on-brand: SiteStaffr
+       sells AI Visibility checks, so the site should practise what the product measures.
+
+       ANSWER-WRITING RULES, driven by extraction rather than ranking:
+         - SELF-CONTAINED. An answer engine lifts one Q&A pair with no page context, so
+           every answer names SiteStaffr and stands alone.
+         - 40-80 WORDS. The old "What is SiteStaffr?" answer ran ~150 and was both too
+           long to extract cleanly and a wall inside the accordion.
+         - LEAD WITH THE DIRECT ANSWER, then qualify.
+         - CONCRETE NOUNS AND NUMBERS over adjectives. "Installs in under five minutes"
+           extracts; "easy to install" does not.
+
+       ⚠️ `group` IS PRESENTATIONAL ONLY. The JSON-LD below iterates this same array and
+       emits a FLAT mainEntity list, because FAQPage has no grouping concept and inventing
+       one would produce invalid markup. Grouping solves the wall-of-questions problem
+       inside the single column without breaking the never-two-column rule.
+
+       ⚠️ NEVER REPEAT A QUESTION ACROSS TWO FAQPage BLOCKS. /for/agencies/ carries its own
+       ten agency questions and they are deliberately disjoint from these — duplicates make
+       the two URLs compete with each other. */
     $faq_items = array(
+
+        /* ---- Installing it ---- */
         array(
-            'question' => 'What is SiteStaffr?',
-            'answer'   => 'SiteStaffr is an AI voice and text agent built as a WordPress plugin for service businesses. It installs in under five minutes and appears as a chat widget on your website. When a visitor arrives, SiteStaffr greets them, answers their questions using your website content, and captures their name, their email or phone, and what they need, all through natural conversation in over 57 languages. It also writes SEO blog posts for your site every month, grounded in your business and services. After every interaction, you receive an email recap with a full transcript, the visitor\'s contact information, and a suggested follow-up action. SiteStaffr works 24/7 so you never miss a lead while you\'re on a job site, in a consultation, or after hours. Plans start at $29 per month after a free 30-day trial with no credit card required.',
-        ),
-        array(
-            'question' => 'How does SiteStaffr capture leads from my website?',
-            'answer'   => 'When a visitor starts a conversation through voice or text chat, SiteStaffr naturally collects their name, their email or phone, and reason for reaching out. After the conversation ends, you receive an email with a complete recap, the visitor\'s contact details, a full transcript, and suggested follow-up actions.',
-        ),
-        array(
-            'question' => 'What languages does SiteStaffr support?',
-            'answer'   => 'SiteStaffr supports over 57 languages, including Spanish, Mandarin, French, Portuguese, Arabic, Hindi, Japanese, and Korean. Visitors can converse in their preferred language, and every recap is delivered to you in English regardless of the conversation language.',
-        ),
-        array(
-            'question' => 'How much does SiteStaffr cost?',
-            'answer'   => 'SiteStaffr starts with a free 30-day trial including 30 minutes of voice time and unlimited AI text chat, with no credit card required. Paid plans are $29/month (Starter: 100 voice minutes), $69/month (Business: 300 voice minutes), and $129/month (Pro: 600 voice minutes). Every plan includes unlimited AI text chat with no per-conversation fees, so only voice is metered. Every plan also includes AI-written blog posts each month, from 1 post on the trial up to 8 per month on Pro. You can buy additional voice minutes anytime at $20 for 60 minutes, and they never expire.',
-        ),
-        array(
+            'group'    => 'Installing it',
             'question' => 'Does SiteStaffr work with my WordPress site?',
-            'answer'   => 'Yes. SiteStaffr is built specifically for WordPress. Install the plugin from your WordPress dashboard, configure your business details, and the AI agent appears on your website. No coding required, and setup takes less than five minutes.',
+            'answer'   => 'Yes. SiteStaffr is a WordPress plugin built for self-hosted WordPress sites. You install it from your dashboard the same way you install any other plugin, connect it in one step, and the chat widget appears on your site. It works with any theme and does not require you to change your existing pages.',
         ),
         array(
-            'question' => 'What happens after a visitor conversation?',
-            'answer'   => 'Within seconds of the conversation ending, SiteStaffr emails you a detailed recap including a summary of what the visitor needed, their contact information, the full conversation transcript, and a suggested follow-up action, so you can respond quickly and close more leads.',
-        ),
-        array(
-            'question' => 'Does SiteStaffr write blog posts for my website?',
-            'answer'   => 'Yes. Every plan includes the Blog Agent, which suggests topics, writes SEO-optimized posts grounded in your business and services, generates a featured image, and saves each post as a draft in WordPress for your review. Plans include 1 to 8 posts per month depending on your tier, and on Business and Pro plans, Autopilot can write and publish posts automatically on a schedule you control.',
-        ),
-        array(
-            'question' => 'Does SiteStaffr connect to my CRM?',
-            'answer'   => 'Yes. SiteStaffr has a native Salesforce integration on every plan. When a conversation turns into a real lead, meaning the visitor gave a name plus a phone number or email, SiteStaffr creates the Lead in your Salesforce automatically with their contact details, what they were interested in, a recap of the conversation, and a link to the full transcript. You connect with your normal Salesforce login in about a minute, with no API keys and no developer setup. Using a different CRM? Tell us which one, because what gets built next is driven by what customers ask for.',
-        ),
-        array(
-            'question' => 'Is there a free trial?',
-            'answer'   => 'Yes. SiteStaffr offers a free 30-day trial with 30 minutes of conversation time included. No credit card is required to start, and you can upgrade to a paid plan anytime.',
-        ),
-        array(
+            'group'    => 'Installing it',
             'question' => 'Do I need a developer to install SiteStaffr?',
-            'answer'   => 'No. SiteStaffr installs like any WordPress plugin. Search for it in your dashboard, click install, activate, and enter your business details. The entire setup takes less than five minutes and requires no technical knowledge.',
+            'answer'   => 'No. SiteStaffr installs in under five minutes without any code. Search for it in your WordPress dashboard, click install, activate it, and enter your business details in the setup wizard. If you would rather not do it yourself, SiteStaffr can set it up for you.',
+        ),
+        array(
+            'group'    => 'Installing it',
+            /* NEW. The reflex objection of every WordPress owner to every plugin, and
+               nothing on the site addressed it. */
+            'question' => 'Will SiteStaffr slow down my website?',
+            'answer'   => 'No. The SiteStaffr widget loads after your page content and runs from SiteStaffr servers rather than yours, so your pages render at the same speed. The AI work happens off your site entirely, which means no extra load on your hosting no matter how many visitors are chatting at once.',
+        ),
+        array(
+            'group'    => 'Installing it',
+            /* NEW. Buyers assume an AI product needs training data or scripting. */
+            'question' => 'Do I need to train it or write scripts?',
+            'answer'   => 'No. SiteStaffr reads your published pages automatically and answers from what is already there, then re-reads new and changed pages daily. The setup wizard asks for your business details once. You can add custom instructions if you want to steer its tone or answers, but nothing needs writing before it works.',
+        ),
+
+        /* ---- Can I trust it ---- */
+        array(
+            'group'    => 'Can I trust it',
+            /* NEW, and the most important one on the page. THE objection to any AI
+               product, and the answer is a differentiator that was sitting on the floor. */
+            'question' => 'Will it make things up?',
+            'answer'   => 'SiteStaffr answers from your own indexed pages rather than from general knowledge, so it tells visitors what your site actually says. When a question falls outside what it has read, it says it does not know and offers to take the visitor\'s details instead of guessing. You can read every conversation in the recap it emails you.',
+        ),
+        array(
+            'group'    => 'Can I trust it',
+            'question' => 'What happens if it cannot answer a question?',
+            'answer'   => 'It says so plainly and captures the visitor\'s name and contact details so you can follow up. That is the intended outcome rather than a failure: SiteStaffr gathers leads, and a question it cannot answer is usually the most valuable one to know about. The recap tells you what was asked.',
+        ),
+        array(
+            'group'    => 'Can I trust it',
+            /* NEW. Five of the sixteen industries are medical, dental, chiropractic,
+               veterinary and medical staffing. */
+            'question' => 'What happens to my visitors\' data?',
+            'answer'   => 'Conversation details are used to answer the visitor and to build the recap emailed to you. SiteStaffr does not sell visitor data or use it to advertise to them. Contact details captured in a conversation belong to you. Full detail is in the SiteStaffr privacy policy.',
+        ),
+        array(
+            'group'    => 'Can I trust it',
+            'question' => 'Can I control what it says and how it looks?',
+            'answer'   => 'Yes. You can set the greeting, choose the voice, pick the widget colours and icon, and add custom instructions that steer how it answers. You can also tell it what not to discuss. Everything is editable from your WordPress dashboard without touching code.',
+        ),
+
+        /* ---- What it does ---- */
+        array(
+            'group'    => 'What it does',
+            /* Cut from ~150 words to ~65. Too long to extract cleanly, and a wall
+               inside the accordion. */
+            'question' => 'What is SiteStaffr?',
+            'answer'   => 'SiteStaffr is an AI receptionist for your website, built as a WordPress plugin. Visitors type or talk to it, and it answers their questions from your own pages, captures their name and contact details, and emails you a recap of every conversation. It also writes SEO blog posts for your site each month.',
+        ),
+        array(
+            'group'    => 'What it does',
+            /* NEW. Protects the positioning: with "receptionist" in the H1, people will
+               assume phone answering, which is a different and more expensive category. */
+            'question' => 'Can visitors really talk to my website without calling a phone number?',
+            'answer'   => 'Yes. Visitors click the widget on your site and speak to it in the browser. There is no phone number to dial, nothing to install on their end, and no phone line involved on yours. They can also type instead, and both get the same AI and the same answers from your pages.',
+        ),
+        array(
+            'group'    => 'What it does',
+            'question' => 'What happens after a visitor conversation?',
+            'answer'   => 'SiteStaffr emails you a recap within seconds of the conversation ending. It contains the visitor\'s name and contact details, what they were asking about, a short summary, a suggested follow-up, and the full transcript. You get one for every conversation, whether or not it turned into a lead.',
+        ),
+        array(
+            'group'    => 'What it does',
+            'question' => 'What languages does SiteStaffr support?',
+            'answer'   => 'Over 57 languages, including Spanish, Mandarin, French, Portuguese, Arabic, Hindi, Japanese and Korean. Visitors are answered in whatever language they open with, and no setup is needed to enable them. Every recap arrives in English regardless of the language the conversation was in.',
+        ),
+        array(
+            'group'    => 'What it does',
+            'question' => 'Does SiteStaffr write blog posts for my website?',
+            'answer'   => 'Yes. SiteStaffr writes SEO blog posts grounded in your own business and services, from one post a month on the free trial up to eight on Pro. Each arrives ready to publish, with the SEO details handled and an optional featured image. Turn on Autopilot and it publishes on a schedule.',
+        ),
+        array(
+            'group'    => 'What it does',
+            /* ABSORBS THE SALESFORCE BAND removed from section 4. "Does it fit my stack"
+               is a buying question and belongs here, not under a story about a bakery
+               owner asleep at 2 AM. */
+            'question' => 'Does SiteStaffr connect to my CRM?',
+            'answer'   => 'SiteStaffr connects to Salesforce, so captured leads can flow straight into your existing pipeline. Every plan also emails you a full recap of each conversation, which is enough for most businesses without a CRM. If you use a different system, tell SiteStaffr which one and it will help you work out the options.',
+        ),
+
+        /* ---- Cost and commitment ---- */
+        array(
+            'group'    => 'Cost and commitment',
+            'question' => 'Is there a free trial?',
+            'answer'   => 'Yes. SiteStaffr is free for 30 days with no credit card required. The trial includes 30 minutes of voice time, unlimited AI text chat and one AI blog post. It ends after 30 days unless you choose a plan, and nothing is charged automatically.',
+        ),
+        array(
+            'group'    => 'Cost and commitment',
+            'question' => 'How much does SiteStaffr cost?',
+            'answer'   => 'Plans are $29 a month for Starter, $69 for Business and $129 for Pro, after a free 30-day trial. Every plan includes unlimited AI text chat with no per-conversation fees, so only voice minutes change between them. Extra voice minutes are $20 for 60 and never expire.',
+        ),
+        array(
+            'group'    => 'Cost and commitment',
+            /* NEW. The cheapest trust available. */
+            'question' => 'Can I cancel anytime?',
+            'answer'   => 'Yes. SiteStaffr is month to month with no contract and no cancellation fee. You can cancel from your account at any time and keep access until the end of the period you have already paid for. Any add-on voice minutes you bought stay available and never expire.',
         ),
     );
 
@@ -287,20 +382,22 @@ $get_started_url = home_url( '/#get-started' );
     ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
     </script>
 
-    <script type="application/ld+json">
-    <?php echo wp_json_encode( array(
-        '@context'      => 'https://schema.org',
-        '@type'         => 'AudioObject',
-        'name'          => 'SiteStaffr Demo Conversation for a Plumbing Business',
-        'description'   => 'A 45-second sample conversation between a website visitor reporting a kitchen leak and SiteStaffr\'s AI voice agent for a plumbing business.',
-        'contentUrl'    => get_stylesheet_directory_uri() . '/assets/audio/demo-conversation.mp3',
-        'encodingFormat' => 'audio/mpeg',
-        'duration'      => 'PT70S',
-        'inLanguage'    => 'en',
-        'transcript'    => 'Visitor: Hi, I have a kitchen leak under the sink. It started about an hour ago and I put a bucket under it but it\'s still dripping pretty fast. Agent: I\'m sorry to hear about the leak. Let me help you get that taken care of. Can I get your name and a good phone number to reach you? Visitor: Sure, it\'s Mike Reynolds, 555-0147. Agent: Thanks Mike. And what\'s the address where the leak is? Visitor: 742 Oak Street. Agent: Got it. I\'ll make sure the team knows about the urgency. Someone will follow up with you shortly to schedule a visit. Is there anything else I can help with? Visitor: No, that\'s it. Thank you. Agent: You\'re welcome, Mike. Hang tight and we\'ll get this resolved for you.',
-        'isPartOf'      => array( '@id' => $schema_org_url . '#software' ),
-    ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
-    </script>
+    <?php /* THE AudioObject SCHEMA WAS REMOVED HERE, 2026-08-26.
+
+             It described a 45-second plumbing demo (demo-conversation.mp3, "kitchen leak
+             under the sink") complete with a full transcript, and the page now contains
+             ZERO audio elements — the hero audio demo went with the two sections that
+             section 3 replaced. Structured data has to describe content that is actually
+             on the page; a detailed AudioObject for a file the visitor cannot reach is
+             invalid markup and, unlike a broken image, nothing on screen reveals it.
+
+             It was also the wrong business: the spec drops Brightwater Plumbing entirely.
+             Voice is auto repair and text is pest control now.
+
+             ⚠️ DO NOT RE-ADD THIS WHEN THE AUTO-REPAIR RECORDING LANDS unless the audio
+             is genuinely reachable on the page, and re-derive the name, description,
+             duration and transcript from that recording. assets/audio/demo-conversation.mp3
+             is still on disk and is now unreferenced. */ ?>
 
     <?php wp_head(); ?>
 </head>
@@ -1516,24 +1613,61 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 </section>
 
 <!-- ========== SECTION 9: FAQ ========== -->
-<section class="faq-section" id="faq">
-  <div class="container">
-    <div class="faq-section__header">
-      <span class="section-label">Common Questions</span>
-      <h2>Frequently Asked Questions</h2>
-    </div>
-    <div class="faq-list">
-      <?php foreach ( $faq_items as $faq ) : ?>
-      <div class="faq-item">
-        <button class="faq-item__question" type="button" aria-expanded="false">
-          <?php echo esc_html( $faq['question'] ); ?>
-          <span class="faq-item__icon" aria-hidden="true"></span>
-        </button>
-        <div class="faq-item__answer">
-          <div class="faq-item__answer-inner"><?php echo esc_html( $faq['answer'] ); ?></div>
+<?php /* SECTION 9 — the FAQ.
+
+         STICKY RAIL + SINGLE-COLUMN ACCORDION. Never two columns of questions: a reader
+         scanning for their own objection has to track two streams at once, and the
+         answer they open pushes the other column out of alignment.
+
+         The deflection CTA moved INTO THE BOTTOM OF THE RAIL. It used to sit under the
+         list, which left ~575px of dead cream beside the questions and put the CTA where
+         only someone who had already read all seventeen would see it. In the rail it
+         follows the reader down the whole list.
+
+         "Ask Our AI" rather than an email address, deliberately: it is the same widget a
+         visitor would install, so the support path is also a demo. */ ?>
+<section class="block block-split faq-section" id="faq">
+  <div class="block__inner">
+    <div class="block-split__grid faq-section__grid">
+      <div class="faq-section__rail">
+        <span class="section-label">Common Questions</span>
+        <h2>Frequently Asked Questions</h2>
+        <p class="faq-section__subtitle">The things people ask before they install it.</p>
+
+        <div class="faq-section__ask">
+          <p class="faq-section__ask-lead">Still have a question?</p>
+          <button type="button" class="btn btn--outline js-open-chat" data-cta="chat">Ask Our AI</button>
+          <p class="faq-section__ask-note">It&rsquo;s the same one you&rsquo;d install.</p>
         </div>
       </div>
-      <?php endforeach; ?>
+
+      <div class="faq-list">
+        <?php
+        /* GROUPS ARE PRESENTATIONAL. They break the wall of seventeen without breaking
+           the single-column rule; the JSON-LD above stays a flat mainEntity list,
+           because FAQPage has no grouping concept.
+
+           The first item is open by default — every answer is already in the DOM for
+           the schema, so opening one costs nothing and shows the reader what an answer
+           looks like before they decide whether to bother. */
+        $faq_group = null;
+        foreach ( $faq_items as $faq_i => $faq ) :
+            if ( $faq['group'] !== $faq_group ) :
+                $faq_group = $faq['group'];
+                ?>
+                <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
+            <?php endif; ?>
+        <div class="faq-item<?php echo 0 === $faq_i ? ' faq-item--open' : ''; ?>">
+          <button class="faq-item__question" type="button" aria-expanded="<?php echo 0 === $faq_i ? 'true' : 'false'; ?>">
+            <?php echo esc_html( $faq['question'] ); ?>
+            <span class="faq-item__icon" aria-hidden="true"></span>
+          </button>
+          <div class="faq-item__answer">
+            <div class="faq-item__answer-inner"><?php echo esc_html( $faq['answer'] ); ?></div>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
     </div>
   </div>
 </section>
