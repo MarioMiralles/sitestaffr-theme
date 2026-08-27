@@ -2161,6 +2161,225 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   .industries.is-interactive .industries__name.is-open + .industries__mobile-detail { display: block; }
 }
 
+/* ---- .screen-reader-text ----------------------------------------------
+   WordPress convention class, used 11 times in the pricing table and NEVER
+   DEFINED IN THIS THEME. The markup was ported from a branch where a parent
+   theme or an earlier stylesheet supplied it; here it did nothing, so text
+   meant only for screen readers rendered on screen — every "not included" cell
+   read "—Not included" with the em dash and the hidden label jammed together.
+
+   The clip-rect technique rather than display:none or visibility:hidden: those
+   remove the element from the accessibility tree too, which defeats the point. */
+.screen-reader-text {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ---- Section 8: the pricing table -------------------------------------
+   ONE SHARED LABEL RAIL plus four columns. The trial is the first column rather
+   than a strip above the table: it used to present its specs as bullets while
+   the paid plans presented the same facts as labelled rows, so the one thing a
+   visitor is being asked to start with was the one thing they could not compare.
+
+   ⚠️ THE MOBILE TREATMENT IS LOAD-BEARING, not a nicety. Rail + four columns is
+   five tracks at 1440 and impossible at 390, and the spec required this settled
+   BEFORE the trial column landed. Chosen: stacked per-plan cards. Horizontal
+   scroll keeps the grid intact but hides Pro behind a gesture users may never
+   discover, and Pro is the tier you most want seen last.
+
+   That is why every value cell carries its own .price-tier__row-label in the
+   markup: hidden on desktop where the rail speaks for all four columns, shown
+   on mobile where each card has to stand alone. Generating them in JS would
+   make the mobile layout depend on a script. */
+.pricing-section { background: var(--cream); }
+.pricing-section__header { text-align: center; margin-bottom: 28px; }
+.pricing-section__subtitle {
+  color: var(--text-secondary);
+  max-width: var(--subtext-measure);
+  margin-inline: auto;
+  margin-top: 8px;
+}
+
+/* ⚠️ SELECTOR SPECIFICITY IS DELIBERATE HERE. The V1 card layout still lives in
+   this file as `.pricing-section .price-grid` (line ~4607) and reuses the SAME
+   class names for a different structure, forcing repeat(2, 1fr). Two classes
+   beats one, so a plain `.price-grid--table` lost regardless of source order and
+   the four-column table silently rendered as 2x2 cards at 1440.
+
+   Out-specified rather than deleted: the old block also styles .price-includes
+   and tier internals that this markup still uses, so removing it wholesale would
+   fix the grid and break the panel. */
+.pricing-section .price-grid.price-grid--table {
+  display: grid;
+  /* rail | trial (narrower on purpose) | starter | business | pro */
+  grid-template-columns: 132px 0.88fr 1fr 1fr 1fr;
+  /* ROWS ARE DEFINED ON THE OUTER GRID AND INHERITED BY EVERY COLUMN VIA SUBGRID.
+     Without this each tier is an independent nested grid whose rows only line up
+     by coincidence — and they did not: the rail's labels drifted against the
+     values they name, which in a comparison table means the reader is looking at
+     the wrong number. Subgrid makes the alignment structural rather than lucky. */
+  grid-template-rows: auto repeat(6, auto) 1fr;
+  gap: 0;
+  align-items: stretch;
+  max-width: 1080px;
+  margin-inline: auto;
+  background: #fff;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* The rail: one set of labels for four columns. */
+.price-grid__labels {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+  padding-bottom: 18px;
+  background: var(--cream-dark);
+  border-right: 1px solid var(--border-light);
+}
+.price-grid__label {
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-light);
+}
+.price-grid__rail-head {
+  /* Sits in the identity row, aligned to its BOTTOM so it meets the first data
+     row rather than floating at the vertical middle. */
+  padding: 0 14px 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  align-self: end;
+}
+
+.price-tier {
+  display: grid;
+  grid-row: 1 / -1;
+  grid-template-rows: subgrid;
+  border-right: 1px solid var(--border-light);
+}
+.price-tier:last-child { border-right: 0; }
+.price-tier__identity {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  padding: 16px 12px;
+  text-align: center;
+}
+.price-tier__name { font-weight: 600; font-size: 0.95rem; }
+.price-tier__price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.05;
+}
+.price-tier__period { font-size: 0.75rem; color: var(--text-muted); }
+
+.price-tier__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.price-tier__row-label { display: none; }   /* the rail speaks for all four columns */
+.price-tier__row-value small { color: var(--text-muted); font-size: 0.78em; }
+.price-tier__row-value--none { color: var(--text-muted); }
+
+.price-tier__foot {
+  padding: 16px 12px 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: flex-end;
+}
+.price-tier__best-for {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* THE ON-RAMP TREATMENT. Muted so it never competes with a paid tier, but not
+   so faint it reads as disabled - it is the primary conversion path. */
+.price-tier--trial { background: var(--cream); }
+.price-tier--trial .price-tier__price { color: var(--text-secondary); }
+
+/* Business is the recommended tier, and EMERALD IS THE SIGNAL. Cyan is the
+   ambient colour of this whole page, so a cyan price could not distinguish
+   anything - that is the documented reason this rule exists. */
+.price-tier--popular { background: #F5FBF8; }
+.price-tier--popular .price-tier__price { color: var(--emerald); }
+.price-tier__badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--emerald);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 1040px) {
+  /* STACKED PER-PLAN CARDS. The rail cannot follow four columns down a phone,
+     so it goes and each card carries its own labels. */
+  .pricing-section .price-grid.price-grid--table {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+    gap: 16px;
+    overflow: visible;
+  }
+  .price-grid__labels { display: none; }
+  .price-tier {
+    /* Cards stand alone here, so they leave the subgrid entirely. */
+    grid-row: auto;
+    grid-template-rows: none;
+    display: block;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    background: #fff;
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+  }
+  .price-tier__row {
+    justify-content: space-between;
+    text-align: left;
+    padding: 9px 14px;
+  }
+  .price-tier__row-label {
+    display: block;               /* now the only label this value has */
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+  }
+  .price-tier__identity { padding: 18px 14px 14px; }
+}
+@media (max-width: 620px) {
+  .pricing-section .price-grid.price-grid--table { grid-template-columns: 1fr; }
+}
+
 /* ---- The curtain seam -------------------------------------------------
    Sits in the flow between the light hero and the dark section 2. Its own
    background is the hero's, and the path is filled with the dark block colour,
@@ -7575,7 +7794,8 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 
 /* ========== SECTION 6: VOICE SHOWCASE WRAPPER ========== */
 .voice-section {
-  padding: var(--section-padding);
+  /* Padding comes from .block now, so this section sits on the same spacing
+     scale as the eleven even though it is not one of them. */
   background: var(--cream);
   position: relative;
   overflow: hidden;

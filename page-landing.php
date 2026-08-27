@@ -1132,7 +1132,17 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 
 
 <!-- ========== VOICE SHOWCASE — not in the V3 eleven-section map; see note below ========== -->
-<section class="voice-section" id="voices">
+<?php /* THE VOICE SHOWCASE IS DELIBERATELY OUTSIDE THE ELEVEN-SECTION MAP.
+
+         The V3 spec lists eleven sections and this is not one of them, but it never
+         says to cut it either - it simply was not on the V2 branch the spec was
+         written against. Mario's call, 2026-08-26: keep it.
+
+         ⚠️ THE NAV DEPENDS ON IT. site-nav.php has a top-level "Voices" item pointing
+         at #voices, and nothing else on the homepage lets a visitor HEAR the ten
+         voices - the pricing table states how many each plan gets, which is the count,
+         not the demo. Deleting this section means repointing that nav item first. */ ?>
+<section class="block voice-section" id="voices">
   <!-- Background portrait — crossfades on voice switch -->
   <div class="voice-section__bg-portrait" aria-hidden="true">
     <img id="voiceBgCurrent" class="voice-section__bg-img voice-section__bg-img--active" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/images/agents/portraits/marin.webp' ); ?>" alt="" loading="lazy">
@@ -1154,11 +1164,15 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
 </section>
 
 <!-- ========== SECTION 8: PRICING ========== -->
-<section class="pricing-section" id="pricing">
+<section class="block block-panel pricing-section" id="pricing">
   <div class="container">
     <div class="pricing-section__header">
       <span class="section-label">Plans &amp; Pricing</span>
-      <h2>One Flat Price. Unlimited Conversations.</h2>
+<?php // "Unlimited Conversations" was not true: voice is metered at 100/300/600 minutes a
+        // month. The settled positioning is unlimited TEXT chat, which is what the strip
+        // below this already says, so the heading was the one place still overclaiming.
+        // This is a correctness fix, not a style one. ?>
+      <h2>One Flat Price. Unlimited Text Chat.</h2>
       <p class="pricing-section__subtitle">Start free for 30 days, no credit card. After that a busy month costs the same as a quiet one. Only voice minutes change between plans.</p>
     </div>
     <div class="price-includes price-includes--homepage">
@@ -1182,7 +1196,34 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           <span class="price-includes__icon" aria-hidden="true">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           </span>
-          <span class="price-includes__label">AI blog posts every month</span>
+          <?php
+          /* Blog Agent is otherwise invisible on the homepage, and a features
+             section for it would break the single argument the page was just
+             rebuilt around (and reopen audit finding 4). This existing phrase is
+             the whole fix - /blog-agent/ already exists and is already in the nav.
+
+             NEW TAB, and this is not a style choice (Mario, 2026-08-21): the
+             pricing strip is the moment of purchase intent, so nothing in this
+             section may navigate the buyer away from it. Any link added here
+             later gets target="_blank" for the same reason. */
+          ?>
+          <span class="price-includes__label"><a class="price-includes__link" href="<?php echo esc_url( home_url( '/blog-agent/' ) ); ?>" target="_blank" rel="noopener">AI blog posts every month<span class="screen-reader-text"> (opens in a new tab)</span></a></span>
+        </div>
+        <?php
+        /* SIXTH INCLUSION, AND THE COUNT IS THE POINT. The lead row sits full-width
+           above, so the remainder is what fills the three-column grid: five left a
+           ragged 3+2 last row, six fills 3+3.
+
+           "AI visibility checks" is the one chosen because it is the term the tier
+           columns below use (3 / 10 / 25) and never explain, so a buyer met it for
+           the first time as a bare number. True on every paid plan - the allowance
+           differs, the inclusion does not. */
+        ?>
+        <div class="price-includes__item">
+          <span class="price-includes__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg>
+          </span>
+          <span class="price-includes__label">AI search visibility checks</span>
         </div>
         <div class="price-includes__item">
           <span class="price-includes__icon" aria-hidden="true">
@@ -1202,33 +1243,139 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           </span>
           <span class="price-includes__label">AI learns your website</span>
         </div>
+        <?php
+        /* THE /features/ LINK LIVES HERE NOW, not in a reassurance block at the
+           foot of the section. It was bolted onto the "Simple, predictable
+           pricing" pair, where it sat beside an add-on billing fact it has
+           nothing to do with — one item removes the fear of overage, the other
+           removes the fear of not understanding, and an eyebrow over both made
+           the pair read as filler (Mario, 2026-08-24).
+
+           This panel is where a first-time visitor MEETS the unexplained terms —
+           AI blog posts, AI visibility checks — several hundred pixels before the
+           tier columns repeat them as bare numbers. The answer belongs next to
+           the question, as one quiet line on the panel's own floor.
+
+           NEW TAB, same rule as every other link in this section (Mario,
+           2026-08-21): the pricing strip is the moment of purchase intent and
+           nothing in it may navigate the buyer away. */
+        ?>
+        <p class="price-includes__footer">
+          New to any of this? <a class="price-includes__link" href="<?php echo esc_url( home_url( '/features/' ) ); ?>" target="_blank" rel="noopener">See what every feature actually does<span class="screen-reader-text"> (opens in a new tab)</span></a>, in plain English.
+        </p>
       </div>
     </div>
-    <div class="price-grid price-grid--horizontal">
-      <div class="price-tier">
+    <?php
+    /* The paid ladder is three tiers, so the grid is three columns and the free
+       trial is not a fourth card competing with them. Nothing is lost: every
+       allowance the trial card listed is still here, and so is its link to
+       /download/, which is the URL that must not change. */
+    ?>
+    <?php /* THE TRIAL STRIP THAT SAT HERE IS GONE - the trial is the table's first
+             column now (see .price-tier--trial above). Keeping both would state the
+             same plan twice in two formats, which is the exact problem moving it into
+             the table was meant to solve.
+
+             ⚠️ IT ALSO CARRIED "100 text messages/day". That cap was removed from the
+             product, the copy and the Terms on 2026-08-26 and is live in production.
+             This markup was ported from a branch that PREDATES that change, so the
+             port silently reverted it - along with "Every paid plan includes", which
+             main had already corrected to "Every plan includes".
+
+             When porting from the V2 branch, re-check anything the unlimited-trial
+             rollout touched: that branch is older than main on this subject. */ ?>
+
+    <?php
+    /* ONE LABEL COLUMN, NOT THREE (Mario, 2026-08-24: "the main issue is that it
+       rewrites everything 3 times and some of the data is small or difficult to
+       read"). He was right and I had talked myself out of it when this table was
+       first built: six rows repeated across three columns is eighteen labels for
+       six facts, and twelve of them are noise. Repetition at that density stops
+       reading as a price table and starts reading as a form.
+
+       So the section is now a real four-column comparison table - a shared label
+       rail plus three value columns - and the space that bought is spent on size:
+       values went 1.02rem -> 1.35rem, the voice figure 1.65rem -> 2rem, units
+       0.72 -> 0.82rem, and the labels dropped uppercase micro-type for sentence
+       case at 0.95rem. The uppercase was part of what made them hard to read.
+
+       SUBGRID IS LOAD-BEARING, NOT A FLOURISH. The whole tier column is a click
+       target, and that works by stretching the CTA's own ::after across the
+       column - which requires .price-tier to remain ONE positioned element
+       wrapping all of its rows. So the rows cannot be split into sibling grid
+       cells. `grid-template-rows: subgrid` lets each tier keep its single
+       element while its rows adopt the parent's tracks, which is what makes them
+       line up with the label rail and with each other. See the CSS note. */
+    ?>
+    <div class="price-grid price-grid--table">
+      <?php
+      /* aria-hidden, and that is deliberate rather than lazy. Each value cell
+         still carries its own label as .screen-reader-text, so a screen reader
+         hears "Voice minutes, 100 min/mo" inside the column it belongs to
+         instead of having to correlate a rail against three columns. Below
+         1040px this rail is hidden and those same in-cell labels become
+         visible, which is why they are in the markup rather than generated. */
+      ?>
+      <div class="price-grid__labels" aria-hidden="true">
+        <p class="price-grid__rail-head">What you get</p>
+        <span class="price-grid__label">Voice minutes</span>
+        <span class="price-grid__label">Blog posts</span>
+        <span class="price-grid__label">AI voices</span>
+        <span class="price-grid__label">Visibility checks</span>
+        <span class="price-grid__label">Autopilot blog</span>
+        <span class="price-grid__label">Custom greeting</span>
+      </div>
+      <?php /* THE TRIAL IS A COLUMN NOW, NOT A STRIP.
+
+               It used to present its specs as five bullets - "30 voice minutes, 1 blog
+               post, 2 AI voices" - while the paid plans presented the same facts as
+               labelled rows. The same information in two incompatible formats, so nobody
+               could actually compare the thing they were being asked to start with. As
+               the first column every row lines up, and it moves the primary conversion
+               path into the most prominent object on the page.
+
+               TREATED AS AN ON-RAMP, NOT A FOURTH PLAN: narrower, muted, "$0 / 30 days",
+               and an explicit end state so it never reads as a permanent free tier.
+
+               ⚠️ VALUES VERIFIED AGAINST THE MIDDLEWARE, not inferred from the old card.
+               included_seconds: 1800 = 30 min and BLOG_POST_LIMITS.trial = 1 are both in
+               config/billing.js. Visibility checks is 3 because routes/visibility.js
+               records "an unknown plan falls back to the smallest paid cap", and trial is
+               not in its per-plan map - writing an em dash there would have been a false
+               claim that the trial gets none. */ ?>
+      <div class="price-tier price-tier--trial">
         <div class="price-tier__identity">
           <div class="price-tier__name">Free Trial</div>
           <div class="price-tier__price">$0</div>
           <div class="price-tier__period">for 30 days</div>
         </div>
-        <div class="price-tier__details">
-          <div class="price-tier__allowances">
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Voice</span>
-              <span class="price-tier__stat-value">30 <small>min</small></span>
-            </div>
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Blog posts</span>
-              <span class="price-tier__stat-value">1 <small>post</small></span>
-            </div>
-          </div>
-          <ul class="price-tier__features">
-            <li>2 AI voices</li>
-            <li>Unlimited text chat</li>
-            <li>No credit card required</li>
-          </ul>
-          <p class="price-tier__best-for">Try SiteStaffr free for 30 days</p>
-          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Start Free Trial</a>
+        <div class="price-tier__row price-tier__row--lead">
+          <span class="price-tier__row-label">Voice minutes</span>
+          <span class="price-tier__row-value">30 <small>min</small></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Blog posts</span>
+          <span class="price-tier__row-value">1</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">AI voices</span>
+          <span class="price-tier__row-value">2</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Visibility checks</span>
+          <span class="price-tier__row-value">3</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Autopilot blog</span>
+          <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Custom greeting</span>
+          <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
+        </div>
+        <div class="price-tier__foot">
+          <p class="price-tier__best-for">No credit card. Ends after 30 days unless you pick a plan.</p>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline js-cta" data-cta="trial">Start Free Trial</a>
         </div>
       </div>
       <div class="price-tier">
@@ -1237,23 +1384,33 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           <div class="price-tier__price">$29</div>
           <div class="price-tier__period">per month</div>
         </div>
-        <div class="price-tier__details">
-          <div class="price-tier__allowances">
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Voice</span>
-              <span class="price-tier__stat-value">100 <small>min/mo</small></span>
-            </div>
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Blog posts</span>
-              <span class="price-tier__stat-value">2 <small>per mo</small></span>
-            </div>
-          </div>
-          <ul class="price-tier__features">
-            <li>2 AI voices</li>
-            <li>3 AI visibility checks</li>
-          </ul>
+        <div class="price-tier__row price-tier__row--lead">
+          <span class="price-tier__row-label">Voice minutes</span>
+          <span class="price-tier__row-value">100 <small>min/mo</small></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Blog posts</span>
+          <span class="price-tier__row-value">2</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">AI voices</span>
+          <span class="price-tier__row-value">2</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Visibility checks</span>
+          <span class="price-tier__row-value">3</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Autopilot blog</span>
+          <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Custom greeting</span>
+          <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
+        </div>
+        <div class="price-tier__foot">
           <p class="price-tier__best-for">Best for businesses getting started</p>
-          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline js-cta" data-cta="plan">Get Started</a>
         </div>
       </div>
       <div class="price-tier price-tier--popular">
@@ -1263,24 +1420,33 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           <div class="price-tier__price">$69</div>
           <div class="price-tier__period">per month</div>
         </div>
-        <div class="price-tier__details">
-          <div class="price-tier__allowances">
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Voice</span>
-              <span class="price-tier__stat-value">300 <small>min/mo</small></span>
-            </div>
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Blog posts</span>
-              <span class="price-tier__stat-value">4 <small>per mo</small></span>
-            </div>
-          </div>
-          <ul class="price-tier__features">
-            <li>5 AI voices</li>
-            <li>Autopilot blog publishing</li>
-            <li>10 AI visibility checks</li>
-          </ul>
+        <div class="price-tier__row price-tier__row--lead">
+          <span class="price-tier__row-label">Voice minutes</span>
+          <span class="price-tier__row-value">300 <small>min/mo</small></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Blog posts</span>
+          <span class="price-tier__row-value">4</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">AI voices</span>
+          <span class="price-tier__row-value">5</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Visibility checks</span>
+          <span class="price-tier__row-value">10</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Autopilot blog</span>
+          <span class="price-tier__row-value price-tier__row-value--yes"><span aria-hidden="true">&#10003;</span><span class="screen-reader-text">Included</span></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Custom greeting</span>
+          <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
+        </div>
+        <div class="price-tier__foot">
           <p class="price-tier__best-for">Best for growing local businesses</p>
-          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary js-cta" data-cta="plan">Get Started</a>
         </div>
       </div>
       <div class="price-tier">
@@ -1289,42 +1455,63 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[0] : null;
           <div class="price-tier__price">$129</div>
           <div class="price-tier__period">per month</div>
         </div>
-        <div class="price-tier__details">
-          <div class="price-tier__allowances">
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Voice</span>
-              <span class="price-tier__stat-value">600 <small>min/mo</small></span>
-            </div>
-            <div class="price-tier__stat">
-              <span class="price-tier__stat-label">Blog posts</span>
-              <span class="price-tier__stat-value">8 <small>per mo</small></span>
-            </div>
-          </div>
-          <ul class="price-tier__features">
-            <li>All 10 AI voices</li>
-            <li>Autopilot blog publishing</li>
-            <li>Custom greeting + 4 tones</li>
-            <li>25 AI visibility checks</li>
-          </ul>
+        <div class="price-tier__row price-tier__row--lead">
+          <span class="price-tier__row-label">Voice minutes</span>
+          <span class="price-tier__row-value">600 <small>min/mo</small></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Blog posts</span>
+          <span class="price-tier__row-value">8</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">AI voices</span>
+          <span class="price-tier__row-value">All 10</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Visibility checks</span>
+          <span class="price-tier__row-value">25</span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Autopilot blog</span>
+          <span class="price-tier__row-value price-tier__row-value--yes"><span aria-hidden="true">&#10003;</span><span class="screen-reader-text">Included</span></span>
+        </div>
+        <div class="price-tier__row">
+          <span class="price-tier__row-label">Custom greeting</span>
+          <span class="price-tier__row-value price-tier__row-value--yes"><span aria-hidden="true">&#10003;</span><span class="screen-reader-text">Included</span></span>
+        </div>
+        <div class="price-tier__foot">
           <p class="price-tier__best-for">Best for multi-location or high-traffic sites</p>
-          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline">Get Started</a>
+          <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline js-cta" data-cta="plan">Get Started</a>
         </div>
       </div>
+      <?php
+      /* THE RAIL'S STUB HEAD, and it earns its place by fixing a real imbalance
+         rather than by labelling something obvious. The label column is ~286px
+         wide, so leaving its top cell empty left a dead corner that size and
+         pushed the three shopfronts visibly right of the axis the centred
+         section header sits on. A stub head is what a comparison table puts
+         there anyway.
+
+         LAST IN THE MARKUP, not first, and that is deliberate: the tiers are
+         placed by `:nth-child(2|3|4)`, so inserting an element ahead of them
+         would silently move every column one to the right. Grid placement is
+         explicit, so DOM order costs nothing here. */
+      ?>
     </div>
-    <div class="pricing-assurance">
-      <p class="pricing-assurance__eyebrow">Simple, predictable pricing</p>
-      <div class="pricing-assurance__grid">
-        <div class="pricing-assurance__item">
-          <span class="pricing-assurance__icon" aria-hidden="true">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-          </span>
-          <div class="pricing-assurance__body">
-            <h3 class="pricing-assurance__label">Voice minutes, your way</h3>
-            <p>Need more? Add <strong>60 minutes for $20</strong> anytime. They never expire, and there are no automatic overage charges.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <?php
+    /* THE ADD-ON FACT, AS A FOOTNOTE TO THE TABLE RATHER THAN A BLOCK UNDER IT.
+       It replaces the two-column "Simple, predictable pricing" reassurance row,
+       which Mario removed on 2026-08-24: the two items in it were never a pair,
+       so an eyebrow claiming they were made the whole block read as filler.
+
+       This half stays because it answers the one question the Voice row raises,
+       and it now sits directly beneath that table as a footnote does — one rule,
+       one line, no eyebrow, no icon, no box. The other half moved up to the
+       inclusions panel; see the note there. */
+    ?>
+    <p class="price-footnote">
+      Run out of voice minutes? Add <strong>60 minutes for $20</strong> anytime. They roll over, never expire, and there are no automatic overage charges.
+    </p>
   </div>
 </section>
 
