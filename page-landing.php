@@ -188,10 +188,20 @@ $get_started_url = home_url( '/#get-started' );
        that amber was doing semantic work across every section and becoming a second accent
        competing with teal, and one confined use on the element you most want people to stop
        on is a different thing. Confined is the whole reason it is allowed. */
+    /* `mark` IS THE WATERMARK, AND IT IS NOT `label` (Mario, 2026-08-27: "very
+       light/almost transparent... big and bold... a very obscure sort of signal of the
+       industry for the cards and not meant to be imposing").
+
+       They are separate fields on purpose and must stay separate. `label` is prose and
+       is spoken — it builds the source button's aria-label ("Source for the Auto repair
+       figure"). `mark` is a four-to-six character stamp sized to a card. Collapsing them
+       would either put "Auto repair" in the watermark, which no longer fits or reads as
+       a stamp, or put "AUTO" into a screen reader as the name of the industry. */
     $job_values = array(
         array(
             'img'    => 'ind-hvac',
             'label'  => 'HVAC',
+            'mark'   => 'HVAC',
             'amount' => '$5,500',
             'note'   => 'Median cost of one HVAC project',
             'source' => 'U.S. Census Bureau, 2023 Home Improvements, from the American Housing Survey (2021-23). Median cost by project type, as published.',
@@ -199,6 +209,7 @@ $get_started_url = home_url( '/#get-started' );
         array(
             'img'    => 'ind-wrench',
             'label'  => 'Auto repair',
+            'mark'   => 'AUTO',
             'amount' => '$494',
             'note'   => 'Average customer-pay repair order',
             'source' => 'NADA, 2025 Annual Financial Profile of America\'s Franchised New-Car Dealerships. Franchised dealer service departments, full-year 2025.',
@@ -206,6 +217,7 @@ $get_started_url = home_url( '/#get-started' );
         array(
             'img'    => 'ind-tooth',
             'label'  => 'Dental',
+            'mark'   => 'DENTAL',
             'amount' => '$391',
             'note'   => 'Average spend per dental visit',
             /* ⚠️ THE ONLY DERIVED FIGURE ON THE PAGE, and the tooltip says so. AHRQ publishes
@@ -218,6 +230,7 @@ $get_started_url = home_url( '/#get-started' );
         array(
             'img'    => 'ind-paw',
             'label'  => 'Veterinary',
+            'mark'   => 'VET',
             'amount' => '$200',
             'note'   => 'What owners report paying at their last visit',
             'source' => 'AVMA, 2025 Pet Ownership and Demographics Sourcebook. Owner self-reported, published October 2025.',
@@ -578,6 +591,24 @@ get_template_part( 'template-parts/site-nav', null, array(
         <ul class="job-values__grid">
 <?php foreach ( $job_values as $jv ) : ?>
           <li class="job-value">
+            <?php
+            /* THE WATERMARK, and it is wrapped in its own clip layer rather than clipped
+               by the card.
+
+               `overflow: hidden` on .job-value itself would have been the obvious way to
+               contain oversized type, and it would have silently broken the source
+               tooltip: that tooltip is absolutely positioned inside this same card and is
+               taller than the space below the info button, so clipping the card clips the
+               tooltip's text. The wordmark gets its own `inset: 0; overflow: hidden` box,
+               which contains the type and leaves the tooltip's stacking alone.
+
+               aria-hidden because it is decoration that repeats information the card
+               already carries — the icon shows the industry, and `label` states it to
+               assistive tech through the source button. Read aloud it would announce a
+               bare "HVAC" with no context, between an icon and a dollar amount. */
+            ?>
+            <span class="job-value__mark" aria-hidden="true"><span><?php echo esc_html( $jv['mark'] ); ?></span></span>
+
             <?php
             /* The sprite fallback from the V2 branch was dropped in this port, deliberately.
                There it read `<use href="#i-ind-…">` against template-parts/icon-sprite.php,
