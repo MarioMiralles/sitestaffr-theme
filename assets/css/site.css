@@ -2214,10 +2214,24 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
    louder than the thing it introduces, and it would fight the table for
    attention now the table is the heavy object in this section.
    Nothing here draws a box. The only fill in section 8 is the table. */
+/* ⚠️ ONE LEFT AXIS. NOTHING IN THIS STRIP IS CENTRED.
+
+   The first attempt at removing the panel centred the label, centred the lead
+   row and centred the footer while the six items stayed left-aligned — four
+   different axes in a block about 200px tall. The teal panel had been hiding
+   that, because a fill gives a grid an edge to be read against and forgives
+   almost any internal alignment. Take the fill away and the alignment is the
+   only structure left, so it has to be exact.
+
+   ⚠️ THE WIDTH MATCHES THE TABLE'S 1080px, and it is not a free choice. This
+   strip and the table are the only two objects in the light part of section 8;
+   set to different measures they present two left edges and two right edges
+   under one centred heading, and the eye reads that as one of them being
+   misplaced. Change one, change both. */
 .price-includes--homepage {
   padding: 0;
-  max-width: 900px;
-  margin: 0 auto 40px;
+  max-width: 1080px;
+  margin: 0 auto 44px;
 }
 .price-includes--homepage .price-includes__grid {
   position: relative;
@@ -2226,7 +2240,8 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   border-radius: 0;
   padding: 0;
   max-width: 100%;
-  gap: 12px 30px;
+  gap: 14px 28px;
+  text-align: left;
 }
 /* The label survives as type. It is the sentence the strip completes - the
    items below it are the predicate - so removing the tab must not remove the
@@ -2237,19 +2252,21 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
 .price-includes--homepage .price-includes__grid::before {
   content: attr(data-label);
   grid-column: 1 / -1;
-  justify-self: center;
+  justify-self: start;
+  margin-bottom: 2px;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--teal-deep);
 }
 .price-includes--homepage .price-includes__item {
   background: none;
   border: 0;
   border-radius: 0;
-  padding: 4px 0;
-  gap: 10px;
+  padding: 3px 0;
+  gap: 11px;
+  align-items: center;
 }
 .price-includes--homepage .price-includes__item:hover {
   box-shadow: none;
@@ -2262,11 +2279,28 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   border-radius: 0;
   color: var(--teal-deep);
 }
-.price-includes--homepage .price-includes__icon svg { width: 18px; height: 18px; }
+.price-includes--homepage .price-includes__icon svg { width: 19px; height: 19px; }
+/* ⚠️ ALL SIX ITEMS CARRY THE SAME WEIGHT AND THE SAME COLOUR, and that is a
+   correctness rule rather than a preference. Two of them are links. Styled as
+   teal-and-bold against five grey siblings, a link does not read as "clickable"
+   — it reads as "this one is selected", and the visitor spends their attention
+   working out why one inclusion is special. Uniform type, and the link says it
+   is a link by underlining. */
 .price-includes--homepage .price-includes__label {
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.price-includes--homepage .price-includes__label .price-includes__link {
+  color: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(0,131,143,0.35);
+  text-underline-offset: 3px;
+}
+.price-includes--homepage .price-includes__label .price-includes__link:hover {
+  color: var(--teal-deep);
+  text-decoration-color: var(--teal-deep);
 }
 
 /* The flat-rate promise is the reason the pricing works at all, so it stays a
@@ -2274,13 +2308,13 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
    the one place in this strip allowed display type. */
 .price-includes--homepage .price-includes__item--lead {
   grid-column: 1 / -1;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: 12px;
-  padding: 2px 0 16px;
-  margin-bottom: 4px;
+  padding: 2px 0 18px;
+  margin-bottom: 6px;
   border-bottom: 1px solid var(--border-light);
-  text-align: center;
+  text-align: left;
 }
 .price-includes--homepage .price-includes__item--lead .price-includes__icon {
   color: var(--teal-deep);
@@ -2311,17 +2345,24 @@ button.lang-pill:hover { border-color: var(--teal-mid); color: var(--teal-deep);
   line-height: 1.45;
   color: var(--text-secondary);
 }
+/* No second rule here. One divider in the strip, under the lead row, because
+   that is the only real division: a promise, then the list it introduces. The
+   footer is a footnote to the list and sits on the same axis as it. */
 .price-includes__footer {
   grid-column: 1 / -1;
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border-light);
-  text-align: center;
+  margin-top: 16px;
+  text-align: left;
   font-size: 0.85rem;
   color: var(--text-muted);
 }
-.price-includes__link { color: var(--teal-deep); font-weight: 600; }
-.price-includes__link:hover { text-decoration: underline; }
+.price-includes__footer .price-includes__link {
+  color: var(--teal-deep);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: rgba(0,131,143,0.35);
+  text-underline-offset: 3px;
+}
+.price-includes__footer .price-includes__link:hover { text-decoration-color: var(--teal-deep); }
 
 @media (max-width: 600px) {
   .price-includes--homepage .price-includes__grid { gap: 10px 18px; }
