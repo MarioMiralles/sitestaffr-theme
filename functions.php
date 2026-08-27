@@ -298,8 +298,14 @@ add_action( 'wp_enqueue_scripts', function () {
 	// was never extended. Any template using .reveal has to be here.
 	$is_for_index  = is_page_template( 'page-for.php' ) || is_page( 'for' );
 	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
+	/* The agencies page uses the FAQ accordion and the shared nav, both of which are
+	   driven by site.js. Adding the template here rather than relying on the landing
+	   page's enqueue - a template that renders interactive components and is not in
+	   this list ships them dead, which is how the /for/ index once shipped with its
+	   entire directory invisible. */
+	$is_agencies   = is_page_template( 'page-agencies.php' );
 
-	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat ) {
+	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat || $is_agencies ) {
 		/* Section 3's demo script and timings. Landing page only — no other template has
 		   the panels, and loading the timings elsewhere would be dead weight.
 
