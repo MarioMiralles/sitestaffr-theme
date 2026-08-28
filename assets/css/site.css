@@ -3307,13 +3307,14 @@ body.sitestaffr-landing-page .hero__visual > * {
 
      Four cards each repeating the same six labels is twenty-four lines in which the only
      thing that differs is a number sitting at the far right edge, behind a label the
-     reader has now read four times. Putting the value first in a fixed 92px column lines
-     every number up down the card and demotes the label to what it is — a caption on the
-     number, not a heading for it. `order: -1` rather than reordering the markup, because
-     the DOM order label-then-value is what the desktop rail and the screen reader want.
+     reader has now read four times. Putting the value first demotes the label to what it
+     is — a caption on the number, not a heading for it. `order: -1` rather than
+     reordering the markup, because the DOM order label-then-value is what the desktop
+     rail and a screen reader want.
 
      The type was also set for a four-across table read at arm's length and then inherited
-     by a card a phone holds at 30cm. Value goes to 1rem, label to 0.88rem. */
+     by a card a phone holds at 30cm. Both value and label go to 1rem.
+
      ⚠️ NO FIXED COLUMN FOR THE VALUE, AND NO RULE BETWEEN THE ROWS. Both were tried on
      2026-08-28 and both looked worse than what they replaced (Mario: "the price cards
      look really bad"). A 92px value column is a dead gutter, because most of these values
