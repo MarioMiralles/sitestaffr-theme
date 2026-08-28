@@ -2331,6 +2331,14 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        prop is ever moved, re-count — this is the kind of thing that drifts one edit at a
        time.
 
+       ⚠️ THE BOTTOM ROW TUCKS UNDER THE CARD'S EDGE, it does not sit down near the
+       section's bottom border. Raised 2026-08-27: the props were low enough that their
+       overlapping bounding boxes stacked across the section's whole bottom band, and with
+       any residual haze in the transparent areas that band read as a broken shadow under
+       the card. Grouped up against the card the field is tighter AND there is nothing
+       spanning that strip to stack in the first place. The empty cream below them is
+       deliberate breathing room, not a gap to fill.
+
        ⚠️ THE FRONT LAYER STRADDLES BOTH SIDES (Mario, 2026-08-27: "make a few of them
        overlap on the left side as well"). It was three props, all on the right, because
        the right is the only part of the card with no text ANYWHERE down its height.
@@ -2359,15 +2367,15 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        the viewport edge and read as cropped images. Measured, not guessed. Raise the
        breakpoint before raising these. */
     array( 'laptop',      'back',  'top:4%;left:-8%;',      242 , 0, -3 ),   /* left  */
-    array( 'swatches',    'front', 'bottom:13%;left:-6%;',  172 , 0, -5 ),
+    array( 'swatches',    'front', 'bottom:11%;left:-8%;',  172 , 0, -5 ),
     array( 'site-stack',  'back',  'top:46%;left:-8%;',     148 , 1, 4 ),
     array( 'wordpress',   'front', 'top:15%;left:11%;',      78 , 0, 6 ),
     array( 'browser',     'back',  'top:3%;left:24%;',      118 , 1, 5 ),   /* middle */
-    array( 'analytics',   'back',  'bottom:1%;left:33%;',   186 , 0, -4 ),
-    array( 'notes',       'back',  'bottom:6%;left:59%;',   112 , 1, 9 ),
+    array( 'analytics',   'back',  'bottom:5%;left:33%;',   186 , 0, -4 ),
+    array( 'notes',       'back',  'bottom:13%;left:59%;',  112 , 1, 9 ),
     array( 'wireframe',   'back',  'top:2%;right:4%;',      178 , 1, -4 ),   /* right */
-    array( 'plugin',      'back',  'bottom:5%;left:14%;',   102 , 0, 7 ),
-    array( 'cutting-mat', 'back',  'bottom:2%;right:2%;',   196 , 1, -6 ),
+    array( 'plugin',      'back',  'bottom:14%;left:14%;',  102 , 0, 7 ),
+    array( 'cutting-mat', 'back',  'bottom:8%;right:2%;',   196 , 1, -6 ),
     /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
        the only part of the card with no text: the heading, the three columns and the
        button all sit left of it. All three are also light-bodied, so they read against
