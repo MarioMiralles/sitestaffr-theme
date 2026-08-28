@@ -226,6 +226,8 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   /* The cream run, sections 4-9 — see the .block:not(.block--dark) rule for why this is
      a second value and not a regression to the old two-clamp scale. */
   --block-pad-light: 96px;
+  /* The beat between two blocks inside ONE dark run; see .block--dark + .block--dark. */
+  --block-pad-run: 32px;
 
   /* Matches .container so the restored container is one number site-wide.
      V2 broke hero content to 40px from the raw viewport edge; V1 sits at ~150px
@@ -267,6 +269,38 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    inconsistency this collapse was asked for. */
 .block--tight { padding-block: var(--block-pad); }
 
+/* ⚠️ THE SCALE STEPS DOWN TWICE BELOW THE DESKTOP LAYOUT (Mario, 2026-08-28: "the
+   spacing between the cream sections is too much... tighten it up for tablet and
+   mobile").
+
+   A fixed 96px is deliberately not a clamp — see the note above — but "64px is 64px
+   everywhere" was reasoned about a 1440px screen. The same 96px top and 96px bottom is
+   192px of empty cream between two sections, which is half a phone screen and reads as
+   the page having ended. Held against the desktop proportion the old values were
+   actually MORE airy the narrower it got: 192 of 1440 is 13% of the width, 192 of 390
+   is 49%.
+
+   Two steps, not a formula, so each one can be looked at:
+
+     desktop   96 light / 64 dark   192px between cream sections
+     <=1024    60 / 44              120px
+     <=620     44 / 32               88px
+
+   ⚠️ LIGHT MUST STAY CLEARLY LARGER THAN DARK at every step, and the reason is the same
+   one that created the second token: nothing marks where one cream section ends and the
+   next begins except the gap. The ratio is held near 1.4 throughout. Shrinking these
+   toward each other is what makes the cream run read as one long section again.
+
+   ⚠️ ANY HARDCODED 64 OR 96 IN A SECTION'S OWN PADDING DEFEATS THIS. Two existed and are
+   now `var()` calls — .block.what-you-get and .block.final-cta, both of which add a
+   seam's height on top of the scale. Grep before adding a third. */
+@media (max-width: 1024px) {
+  :root { --block-pad: 44px; --block-pad-light: 60px; --block-pad-run: 24px; }
+}
+@media (max-width: 620px) {
+  :root { --block-pad: 32px; --block-pad-light: 44px; --block-pad-run: 20px; }
+}
+
 .block__inner {
   width: 100%;
   max-width: var(--block-max);
@@ -291,7 +325,7 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    32px here plus the previous block's 64px gives 96px, which matches the cream run's own
    figure. Still asymmetric on purpose: a full 64 would read as two stacked sections
    rather than one run with a beat in it. */
-.block--dark + .block--dark { padding-block-start: 32px; }
+.block--dark + .block--dark { padding-block-start: var(--block-pad-run); }
 
 /* ---- Statement: centered eyebrow + heading + one paragraph. Type only. ---- */
 .block-statement { text-align: center; }
@@ -4201,7 +4235,7 @@ body.sitestaffr-landing-page .hero__visual > * {
      0.95 is 114/120 of the seam's own height clamp. Re-derive both if the Book path's
      apex or .seam-curtain's height ever changes — and note the depth is only this deep
      AT CENTER, which is exactly where a centered heading sits. */
-  padding-top: calc(64px + clamp(53px, 6.65vw, 114px));
+  padding-top: calc(var(--block-pad) + clamp(53px, 6.65vw, 114px));
 }
 .what-you-get__header { text-align: center; margin-bottom: 32px; }
 .what-you-get__subtitle {
@@ -7443,9 +7477,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: var(--cream);
   position: relative;
   overflow: hidden;
-  /* 96px of scale plus the closing curtain's peak height, so the gap below the last line
-     matches every other section. 0.95 is 114/120 of the seam's own height clamp. */
-  padding-bottom: calc(96px + clamp(53px, 6.65vw, 114px));
+  /* The light scale plus the closing curtain's peak height, so the gap below the last
+     line matches every other section. 0.95 is 114/120 of the seam's own height clamp.
+     The var() is load-bearing: the scale steps down at 1024 and 620. */
+  padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
 }
 .final-cta::before {
   content: '';
