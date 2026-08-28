@@ -39,6 +39,9 @@ $post_index    = 0;
 	</header>
 
 	<section class="blog-index__posts">
+		<?php // dark hero above -> 'close'; dark footer below -> 'open'. ?>
+		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
+		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 		<div class="container">
 			<?php if ( $blog_query->have_posts() ) : ?>
 

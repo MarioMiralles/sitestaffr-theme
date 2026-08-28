@@ -10997,7 +10997,12 @@ a.ind-problem-card .ind-problem-card__icon--art {
 
 /* --- Body --- */
 .blog-post__body {
-  padding: 96px 0;
+  /* The curtain is an ABSOLUTE OVERLAY (see template-parts/seam-curtain.php), so
+     its host needs position and must not clip it. The seam's own height is added
+     ON TOP of the 96px block padding, exactly as the homepage does it, so the
+     visible gap below the divider is still 96px rather than 96 minus the curve. */
+  position: relative;
+  padding: calc(96px + clamp(56px, 7vw, 120px)) 0 96px;
   background: var(--cream);
 }
 /* One column. The sticky Contents rail that used to sit at 210px on the left was
@@ -11701,7 +11706,10 @@ a.ind-problem-card .ind-problem-card__icon--art {
 
 /* --- Posts section --- */
 .blog-index__posts {
-  padding: clamp(48px, 7vw, 80px) 0 clamp(72px, 10vw, 120px);
+  position: relative;
+  /* dark hero above, dark footer below: this one section carries both halves of
+     the gesture, so both paddings absorb a curtain height. */
+  padding: calc(80px + clamp(56px, 7vw, 120px)) 0 calc(96px + clamp(56px, 7vw, 120px));
   background: var(--cream);
 }
 
@@ -11843,18 +11851,29 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Single post: CTA banner --- */
-/* --footer-dark, not the teal gradient: this section sits directly above the
-   footer, and one step darker than --block-dark makes it read as the footer
-   opening rather than as a third dark tone appearing on the page. */
+/* A dark PANEL on the cream, not a full-width dark band.
+
+   ⚠️ This changed when the curtains went in, and it had to. The page runs
+   hero(dark) -> body(cream) -> CTA -> related(cream) -> footer(dark). A
+   full-bleed dark CTA in that middle position makes the page dark-light-dark
+   -light-dark, so the two curtains would bracket a run that is not actually
+   continuous, and the CTA would keep two hard horizontal edges of its own —
+   the exact thing the seams exist to remove.
+
+   As a panel it still carries the emphasis, and a dark panel sitting on the
+   cream run is an established pattern here: the homepage pricing table is
+   built the same way. */
 .blog-post__cta-banner {
   margin: 0;
-  padding: 64px 0;
-  background: var(--footer-dark);
+  padding: 0 0 96px;
+  background: var(--cream);
 }
 .blog-post__cta-inner {
-  max-width: 720px;
   margin: 0 auto;
   text-align: center;
+  background: var(--footer-dark);
+  border-radius: var(--radius-xl);
+  padding: clamp(40px, 5vw, 64px) clamp(24px, 4vw, 56px);
 }
 .blog-post__cta-inner h2 {
   color: #fff;
@@ -11887,9 +11906,24 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Single post: Keep Reading + pager --- */
+/* --cream, matching the body, NOT --cream-dark. The point of the two curtains is
+   that everything between them is ONE light run; a second cream tone here put a
+   hard horizontal edge in the middle of it, which is the kind of seam the
+   curtains were added to replace. The dark CTA panel already separates Keep
+   Reading from the article. */
 .blog-post__related {
-  padding: 96px 0;
-  background: var(--cream-dark);
+  position: relative;
+  padding: 96px 0 calc(96px + clamp(56px, 7vw, 120px));
+  background: var(--cream);
+}
+/* ⚠️ This curtain pours the FOOTER in, not a section, so it fills --footer-dark.
+   Filling it with --block-dark would paint #00323A directly above a #00232A
+   footer: a 16-point step across the full viewport width, which is the exact
+   hairline the seam exists to remove. Same reasoning as .final-cta on the
+   homepage; scoped by parent because the seam cannot know what sits below it. */
+.blog-post__related .seam-curtain path,
+.blog-index__posts .seam-curtain--open path {
+  fill: var(--footer-dark);
 }
 /* Was centred teal at up to 1.8rem, which was the only heading on the page
    still following the old blog styling once the body h2s went dark and left. */

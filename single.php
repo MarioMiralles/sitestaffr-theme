@@ -110,6 +110,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</header>
 
 		<div class="blog-post__body">
+			<?php // dark hero pours DOWN into the cream body -> 'close'. ?>
+			<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 			<div class="container">
 				<div class="blog-post__layout">
 					<div class="blog-post__prose">
@@ -163,6 +165,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 	<?php if ( ! empty( $related_ids ) || $prev_post || $next_post ) : ?>
 	<section class="blog-post__related" aria-label="More from the blog">
+		<?php // cream run gives way to the dark footer below -> 'open'. ?>
+		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 		<div class="container">
 			<h2 class="blog-post__related-title"><?php esc_html_e( 'Keep Reading', 'sitestaffr' ); ?></h2>
 
