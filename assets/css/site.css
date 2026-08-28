@@ -8451,15 +8451,34 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 
    The trap is that the curtain's height varies ACROSS the width — it peaks at center and
    sits low at the edges, and the robot is on the right, which is the shallowest part. So
-   the number that matters is the curtain's y AT THE ROBOT, not the seam element's top.
-   Re-measure if the robot's `top`, the seam's height clamp, or the Book path's edge
-   value (104 of 120) changes. Screenshot it; do not re-read the stylesheet. */
+   the curtain is not what is actually covering him there: `.hero`'s own `overflow: hidden`
+   is, by clipping him at the hero's bottom edge, where the dark block begins. The curtain
+   only shapes the middle of that edge.
+
+   BOTH VALUES BELOW EXIST TO STOP A DIFFERENT FAILURE:
+
+   `bottom` anchors him to the HERO's bottom edge rather than the stage's. The stage is
+   centered in the grid row, so its bottom sits exactly one `padding-bottom` above the
+   hero's — which is why the clamp here repeats that padding verbatim. Read the whole
+   expression as "17px past the bottom of the hero". If
+   `body.sitestaffr-landing-page .hero`'s padding-bottom changes, change it here too.
+
+   `min(161%, 53vw)` caps a runaway. 161% is a percentage of the STAGE, and the stage's
+   height is set by the TEXT column beside it — so as the viewport narrows the headline
+   wraps to more lines, the column grows, and the robot grows with it. At 1024 that put a
+   833px robot in a 790px hero with the float cards landing on his face. The two
+   expressions are equal at 1440 and 53vw wins below it, so the desktop composition is
+   unchanged (verified pixel-identical at 1920 and 1440) while everything narrower scales
+   with the viewport instead of with the copy.
+
+   Re-measure if the seam's height clamp or the Book path's edge value (104 of 120)
+   changes. Screenshot it; do not re-read the stylesheet. */
 .hero__robot-img {
   position: absolute;
   left: 50%;
-  top: -22%;
+  bottom: calc(-1 * clamp(112px, 13vw, 168px) - 17px);
   transform: translateX(-50%);
-  height: 161%;
+  height: min(161%, 53vw);
   width: auto;
   max-width: none;
   filter: drop-shadow(0 28px 50px rgba(0,77,64,0.30));
@@ -8502,79 +8521,80 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero__float-card { animation: none; }
 }
-/* The float cards' mobile layout lives AFTER the 900px block below, because that
-   block re-positions .hero__robot-img and would otherwise win the cascade. */
-@media (max-width: 900px) {
+/* ---- THE HERO BELOW 1025px: ONE COLUMN, CARDS FIRST, ROBOT LAST ---------
+   This replaces a 900px block and a 980px block that between them produced three
+   different heroes across the tablet range, two of which were broken (2026-08-28).
+
+   ⚠️ 1024, NOT 980 OR 900. 981-1024 kept two columns while the float cards had
+   already dropped into the flow, so the robot was sized off a very tall text column
+   and rendered 833px tall with the cards sitting on his face. 1024 is also iPad
+   landscape, which is the width Mario reviews tablet at.
+
+   ⚠️ THE CARDS GO ABOVE THE ROBOT, and that is the whole fix (Mario, 2026-08-28: he
+   "is cut off at the waist here"). The artwork ends on a hard edge at the waist. On
+   desktop that edge is invisible because the robot runs past the hero's bottom and
+   `.hero { overflow: hidden }` clips him against the dark block below — dark meeting
+   dark. Stacked, the cards were the last thing in the hero, so the robot stopped in
+   the middle of a light section and the hard edge was simply on show.
+
+   Putting the cards first makes the ROBOT last, which lets the desktop mechanism work
+   here too: hero padding-bottom goes to 0, the image overshoots by 2px, and he is
+   clipped exactly where the light ends. He is centered at these widths, which is where
+   the curtain PEAKS, so the seam rises into his torso instead of cutting across it.
+
+   Two alternatives were on the table and both were dropped: a bottom fade on the
+   artwork (already tried and rejected on desktop on 2026-08-27 — see the note on
+   `.hero::after` — and running two treatments for one edge is what produced the
+   cut-off waist in the first place), and a dark card behind the cards for him to stand
+   on (a new component invented for one breakpoint).
+
+   THE ROBOT IMAGE HAS TO JOIN THE FLOW FOR ANY OF THIS. It is absolutely positioned so
+   it can bleed out of the hero on desktop; left that way the in-flow cards render on
+   top of its head, because an absolute element leaves no space for its siblings.
+
+   The five cards are not decoration to be dropped here. They used to be
+   `display: none` below 980px, and they are the thing testers meant by "the hero
+   explains the product instantly" — they, not the headline, carry the category. In
+   flow they are a fixed 2-2-1 grid, always five, never ragged. */
+@media (max-width: 1024px) {
   .hero { min-height: 0; }
-  /* NOT zero. It was zero while the curtain was an in-flow band that added its own
-     height below the hero; as an overlay it adds none, so a zero here puts the dark
-     straight over whatever the hero ends on.
-
-     ⚠️ IT MUST CLEAR THE SEAM'S FULL HEIGHT, and the desktop reasoning does NOT carry
-     over. On desktop the last thing in the hero is the ROBOT, whose hard bottom edge
-     is meant to be swallowed by the dark, so the padding can sit inside the curtain.
-     Below 980px the float cards drop out of their absolute positions and become an
-     in-flow 2-2-1 grid BELOW the robot — so the last thing in the hero is text, and
-     text under the curtain is just text the dark eats.
-
-     Measured at 390 before this was raised: the fifth card's bottom sat 18px BELOW the
-     apex. Seam height here is clamp(56px, 7vw, 120px) = 56px at phone widths, and the
-     apex is within 3px of the seam's top, so anything under ~60px collides. */
-  body.sitestaffr-landing-page .hero { padding-bottom: clamp(76px, 10vw, 104px); }
-  .hero__robot-stage {
-    min-height: 380px;
-    overflow: hidden;
+  body.sitestaffr-landing-page .hero {
+    text-align: center;
+    /* 0 so the robot's own bottom edge IS the hero's bottom edge. The old value here
+       was clamp(76px, 10vw, 104px), sized to keep the cards clear of the seam apex
+       back when the cards were last; nothing is last but the robot now, and he is
+       meant to be cropped. */
+    padding-bottom: 0;
   }
-  /* The stage clips overflow here, so the blurred glow and drop-shadow get cut
-     in straight lines at the stage edges — reads as a faint box around the robot. */
-  .hero__robot-img { top: auto; bottom: 0; height: 100%; filter: none; }
-  .hero__robot-glow { display: none; }
-}
+  body.sitestaffr-landing-page .hero__grid { grid-template-columns: 1fr; gap: 40px; }
+  body.sitestaffr-landing-page .hero__subtitle { margin-left: auto; margin-right: auto; }
+  body.sitestaffr-landing-page .hero__actions { justify-content: center; }
+  /* The soundwave is masked to fade in from 30% to 65% of the width — a device for a
+     two-column composition, where it sits behind the robot on the right. Centered and
+     stacked it reads as a stray band of texture off to one side. Already hidden below
+     768px for the same reason; this only moves that decision up to where the layout
+     actually changes. */
+  .hero__canvas { display: none; }
 
-/* ---- Hero float cards on mobile ---------------------------------------
-   These five cards used to be `display: none` below 980px.
-
-   They are the thing testers meant by "the hero explains the product
-   instantly" — they, not the headline, were carrying the category. Hiding them
-   on phones removed that work entirely, on the traffic that needs it most:
-   most SMB traffic is phones.
-
-   Below 980px they stop being absolutely-positioned decoration floating over
-   the robot and become an in-flow 2-2-1 grid — two, two, and the fifth centered
-   across both columns. Fixed rather than ragged, and always five.
-
-   THE ROBOT IMAGE HAS TO JOIN THE FLOW FOR THIS TO WORK. It is absolutely
-   positioned so it can bleed out of the hero on desktop; left that way, the
-   in-flow cards render on top of its head, because an absolute element occupies
-   no space for its siblings to sit after. Measured, not guessed: the cards
-   landed at y=785 inside a stage whose image also started at y=761.
-
-   This block sits after the 900px block deliberately — that block re-positions
-   .hero__robot-img, so anything earlier loses the cascade at phone widths. */
-@media (max-width: 980px) {
   .hero__robot-stage {
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 0;
-    overflow: visible;   /* the 900px block clips; in-flow cards must not be cut */
+    overflow: visible;   /* clipping here squares off the drop-shadow into a faint box */
   }
-  .hero__robot-img {
-    position: static;
-    height: 380px;
-    width: auto;
-    max-width: 100%;
-    transform: none;
-    margin: 0 auto;
-  }
+  .hero__robot-glow { display: none; }
+
   .hero__float-cards {
+    order: -1;           /* ⚠️ this is the fix; see the note above */
     position: static;
     inset: auto;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
     width: 100%;
-    margin-top: 20px;
+    max-width: 640px;
+    margin: 0 auto 34px;
   }
   .hero__float-card {
     position: static;
@@ -8591,6 +8611,18 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
     grid-column: 1 / -1;
     justify-self: center;
     min-width: 62%;
+  }
+
+  .hero__robot-img {
+    position: static;
+    transform: none;
+    height: clamp(340px, 46vw, 470px);
+    width: auto;
+    max-width: 100%;
+    /* -2px, not 0: sub-pixel rounding otherwise leaves a hairline of hero background
+       under the artwork's hard bottom edge, which is the edge this is hiding. */
+    margin: 0 auto -2px;
+    filter: none;        /* the shadow has nothing to fall on once he meets the dark */
   }
 }
 @media (max-width: 520px) {
