@@ -327,6 +327,37 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    rather than one run with a beat in it. */
 .block--dark + .block--dark { padding-block-start: var(--block-pad-run); }
 
+/* ⚠️ EVERY DARK BLOCK OVERLAPS WHAT IS ABOVE IT BY 2px, AND THIS IS A RENDERING FIX, NOT
+   A SPACING ONE (Mario, 2026-08-28: the dark sections "seem to have a random
+   spacing/line in between" on mobile).
+
+   Layout positions are fractional — the hero's bottom measures 1193.984375, not 1194 —
+   and Chromium snaps each painted box edge to a device pixel INDEPENDENTLY. When the
+   device pixel ratio is also fractional, the two sides of a shared edge can round apart
+   and one device-pixel row ends up painted by neither, showing the page background
+   through as a pale hairline. Sampled at the hero/section-2 boundary: 81 points per
+   channel lighter than #00323A at 1.25, 1.75, 2.25, 2.625 and 2.75, and pixel-perfect at
+   1.5, 2, 2.5 and 3. Integer ratios clean, fractional ratios dirty — that signature is
+   the whole diagnosis, and it is why this looks fine on a laptop and wrong on a phone.
+
+   ⚠️ 2px, MEASURED, NOT 1. A single pixel of overlap only moved the seam (243 -> 163 at
+   1.75); 2px clears it at every ratio tested except a faint 23/channel residue at 1.75.
+   Do not raise it further: at 4px the low ratios got WORSE, because the overlap starts
+   pulling the block up past the shallow edges of the hero's curtain.
+
+   The padding adds the same 2px back so nothing inside the block moves. */
+.hero + .block--dark {
+  margin-block-start: -2px;
+  padding-block-start: calc(var(--block-pad) + 2px);
+}
+.block--dark + .block--dark {
+  margin-block-start: -2px;
+  padding-block-start: calc(var(--block-pad-run) + 2px);
+}
+/* The footer is the same shape of problem as the hero: a light section with `overflow:
+   hidden` and a closing curtain, meeting a dark box below it. */
+.footer { margin-block-start: -2px; }
+
 /* ---- Statement: centered eyebrow + heading + one paragraph. Type only. ---- */
 .block-statement { text-align: center; }
 .block-statement .block__inner { max-width: 760px; }
@@ -2552,8 +2583,30 @@ body.sitestaffr-landing-page .hero__visual > * {
      on the right: a highlight visibly out of register with the list it is in.
      Everything now sits on one edge — separators, fill, names, group headings, and the
      expanded detail all start at the same x. */
-  .industries__name { width: 100%; margin-left: 0; padding: 12px; }
-  .industries__group-heading { padding-left: 12px; }
+  .industries__name { width: 100%; margin-left: 0; padding: 14px; border-radius: 0; }
+  /* ⚠️ EACH CATEGORY IS A CARD, AND THAT IS THE FIX FOR "OVERWHELMING" (Mario,
+     2026-08-28: "the categories and the items all feel very compressed and bundled up
+     together so it feels like an overwhelming list").
+
+     Air alone would not have done it. The problem was not that the rows were tight, it
+     was that five headings and sixteen names shared ONE flat rhythm — every row the same
+     height with the same hairline under it, so the headings did not read as breaks and
+     the eye saw twenty-one undifferentiated lines. Boxing each group turns that into
+     five objects of three to five items, which is a countable list rather than a long
+     one, and it reuses the card the overnight inbox already established.
+
+     The heading sits OUTSIDE its card so it labels the group rather than joining it.
+     `overflow: hidden` is what lets the open row's full-bleed teal follow the card's
+     rounding instead of squaring off its top corners. */
+  .industries__list { gap: 30px; }
+  .industries__group-heading { padding-left: 2px; margin-bottom: 10px; }
+  .industries__names {
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .industries__names li:last-child { border-bottom: 0; }
   /* ⚠️ ON A PHONE ONLY `is-open` PAINTS, AND `is-active` MUST BE NEUTRALIZED.
      `is-active` is the DESKTOP selection — the randomly featured industry, whose panel
      and excerpt are both hidden at this width. Left styled it put a solid teal row into
@@ -2582,7 +2635,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
   .industries__mobile-detail {
     display: block;
-    padding: 10px 12px 18px;
+    padding: 12px 14px 20px;
   }
   /* Centered, not left-aligned. At 200px hard left in a 348px column the isometric read
      as a stray thumbnail with a hole beside it; the paragraph under it is full width, so
