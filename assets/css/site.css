@@ -280,8 +280,18 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 }
 .block--dark h1, .block--dark h2, .block--dark h3, .block--dark h4 { color: #FFFFFF; }
 /* Adjacent dark blocks must not draw a line between themselves — they are one
-   dark run visually, two blocks structurally. */
-.block--dark + .block--dark { padding-block-start: 0; }
+   dark run visually, two blocks structurally.
+
+   ⚠️ ZERO WAS TOO LITTLE (Mario, 2026-08-27: "add a bit more spacing between section 2
+   and 3"). At `0` the whole gap between the two was the FIRST block's 64px bottom
+   padding, and 64px is what separates a section from a section it has a colour change
+   against. These two share one dark background, so — exactly as with the cream run — the
+   spacing is doing the entire job of separating them and has to be larger, not smaller.
+
+   32px here plus the previous block's 64px gives 96px, which matches the cream run's own
+   figure. Still asymmetric on purpose: a full 64 would read as two stacked sections
+   rather than one run with a beat in it. */
+.block--dark + .block--dark { padding-block-start: 32px; }
 
 /* ---- Statement: centered eyebrow + heading + one paragraph. Type only. ---- */
 .block-statement { text-align: center; }
