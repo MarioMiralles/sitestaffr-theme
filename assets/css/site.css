@@ -3526,7 +3526,13 @@ body.sitestaffr-landing-page .hero__visual > * {
     border-color: transparent;
     box-shadow: inset 3px 0 0 0 var(--teal-deep);
   }
-  .faq-list__set .faq-item--open .faq-item__question { background: var(--teal-pale); }
+  /* ⚠️ THE TINT COVERS THE ANSWER TOO (Mario, 2026-08-28). Held to the question alone it
+     drew a pale band across the top of a white block and the two read as separate things,
+     when the whole point of the highlight is that the question and its answer are ONE
+     open item. The earlier worry — body text on --teal-pale being a wash — measured fine:
+     --text-secondary on #E0F7FA is well past 4.5:1. */
+  .faq-list__set .faq-item--open .faq-item__question,
+  .faq-list__set .faq-item--open .faq-item__answer { background: var(--teal-pale); }
 }
 
 /* ---- Section 10: the agency door --------------------------------------
@@ -4213,11 +4219,16 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    Quieter than the label above it by design: it is support, not a third claim. At the
    same weight it competes with the number it exists to prop up. */
+/* ⚠️ INLINE WITH THE LABEL, NOT STACKED UNDER IT (Mario, 2026-08-28). It is a child of
+   .proof-section__lead-label now, so it flows as part of the same sentence — "23 qualified
+   leads out of 72 conversations" — rather than reading as a third line under a two-line
+   stat. `display: inline` is what keeps that true when the phrase wraps: as a block it
+   would break onto its own line again at any narrow width and silently undo this. */
 .proof-section__lead-sub {
+  display: inline;
   font-size: 0.85rem;
   line-height: 1.4;
   color: var(--text-muted);
-  margin-top: 2px;
 }
 .proof-section__lead-sub strong {
   color: var(--text-secondary);
@@ -4780,6 +4791,29 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ---- The four callouts, now a Cards row rather than annotations ---- */
 .what-you-get__callouts { max-width: 980px; margin-inline: auto; }
+/* ⚠️ V1's DOCUMENT ICONS, WHICH ARE THE PRICING PANEL'S ICONS (Mario, 2026-08-28: "I
+   want them to have those icons that we used in V1 for the document... it's the same
+   style icons as the ones used in pricing section").
+
+   One Feather set at 24 viewBox, stroke 2, round caps, --teal-deep, no container. The
+   live reference is `.price-includes--homepage .price-includes__icon` in this file, not
+   the V1 branch — a branch cannot be checked when someone adds a fifth card.
+
+   Two of the four are byte-identical to V1's: the bolt from "Instant Delivery" and the
+   speech bubble from "Conversation Recap". The other two are new drawings in the same set
+   because V1 had no card for a share link or an inbox. Anything added here comes from
+   that set; a mixed icon family is what makes a row of four look assembled rather than
+   designed.
+
+   ⚠️ NOT EMOJI. The hero's capability cards use emoji deliberately, and this is the one
+   place on the page that deviates — these are annotations on a document, and both V1 and
+   the pricing panel draw them as line art. Keeping both is the decision, not an
+   inconsistency to tidy up later. */
+.what-you-get__callout-icon {
+  margin-bottom: 10px;
+  color: var(--teal-deep);
+  line-height: 0;
+}
 .what-you-get__callout-title {
   font-size: 1rem;
   margin-bottom: 6px;
@@ -12991,4 +13025,21 @@ a.ind-problem-card .ind-problem-card__icon--art {
    are one phrase and the card around them is already centered end to end. */
 @media (max-width: 1040px) {
   .pricing-section .price-tier__row { justify-content: center; }
+}
+
+/* ⚠️ AND THE CLOSING CTA, WHICH MARIO ASKED FOR SEPARATELY on 2026-08-28 after the
+   blanket pass was reverted ("we should probably center the CTA section"). It is here
+   rather than beside the other .final-cta rules for the reason this whole block is at the
+   end of the file: `.final-cta__copy { text-align: left }` lives ~4,000 lines up at the
+   same specificity, and anything earlier loses to it.
+
+   THIS IS THE SECTION-BY-SECTION REVIEW STARTING, not the blanket rule coming back. One
+   section, asked for by name. Add the next one the same way — by name, after it has been
+   looked at — and never by widening this selector list on a hunch.
+
+   `margin-inline: auto` because the copy column is capped at 30rem: centering the TEXT
+   inside a block that is still pinned left just moves the ragging around. */
+@media (max-width: 1024px) {
+  .final-cta__copy { text-align: center; margin-inline: auto; }
+  .final-cta__concierge { justify-content: center; }
 }

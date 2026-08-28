@@ -1235,6 +1235,9 @@ get_template_part( 'template-parts/site-nav', null, array(
              were: four short claims about how the recap reaches you. */ ?>
     <div class="block-cards__grid what-you-get__callouts" style="--cards: 4;">
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">Sent in Seconds</h3>
         <p class="what-you-get__callout-desc">It reaches your inbox while the visitor is still on your site.</p>
       </div>
@@ -1242,10 +1245,16 @@ get_template_part( 'template-parts/site-nav', null, array(
                which did NOT turn into a lead are still reported, and that is the
                difference between a lead tool and a record of everything that happened. */ ?>
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">Every Conversation</h3>
         <p class="what-you-get__callout-desc">Voice and text alike, whether or not it turned into a lead.</p>
       </div>
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">One Link to Share</h3>
         <p class="what-you-get__callout-desc">Send the whole thing to whoever is doing the job.</p>
       </div>
@@ -1255,6 +1264,9 @@ get_template_part( 'template-parts/site-nav', null, array(
                a convenience point. The claim intended was always "you don't have to",
                which is both true and a better sell. */ ?>
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">Nothing to Check</h3>
         <p class="what-you-get__callout-desc">The details come to where you already work. There&rsquo;s a dashboard too, if you want it.</p>
       </div>
@@ -1730,8 +1742,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
                      carries its own denominator in its own label ("of their
                      conversations"), so nothing was taken from it. */ ?>
             <span class="proof-section__lead-number">23</span>
-            <span class="proof-section__lead-label"><strong>qualified leads</strong></span>
-            <span class="proof-section__lead-sub">out of <strong>72</strong> conversations</span>
+            <span class="proof-section__lead-label"><strong>qualified leads</strong> <span class="proof-section__lead-sub">out of <strong>72</strong> conversations</span></span>
           </div>
         </div>
 
