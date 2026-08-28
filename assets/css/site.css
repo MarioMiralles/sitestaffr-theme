@@ -346,7 +346,13 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    pulling the block up past the shallow edges of the hero's curtain.
 
    The padding adds the same 2px back so nothing inside the block moves. */
+/* ⚠️ `position: relative` IS HALF THE FIX, not tidying. The overlap alone left the seam
+   at 1.25 and 1.75 because an unpositioned block's background paints in an earlier phase
+   than the hero's clipped contents; positioned, this section paints in the
+   positioned-descendants phase and lands ON TOP of the hero's rounded-off bottom edge
+   instead of under it. Removing it brings the hairline straight back. */
 .hero + .block--dark {
+  position: relative;
   margin-block-start: -2px;
   padding-block-start: calc(var(--block-pad) + 2px);
 }
