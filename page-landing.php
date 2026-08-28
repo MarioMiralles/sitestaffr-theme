@@ -2232,9 +2232,35 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
              and read as an interruption on the way to the list. See the CSS note for the
              full history of this element's position — it has moved three times. */ ?>
     <div class="faq-section__ask">
-      <p class="faq-section__ask-lead">Still have a question?</p>
-      <button type="button" class="btn btn--outline js-open-chat" data-cta="chat">Ask Our AI</button>
-      <p class="faq-section__ask-note">It&rsquo;s the same one you&rsquo;d install.</p>
+      <?php /* The texting robot, not the language one or the hero one: this card is about
+               asking a question in a chat, and robot-text.webp is the render of exactly
+               that — typing, with message bubbles. Decorative, so aria-hidden; the card's
+               own copy and the button carry the meaning. */ ?>
+      <img class="faq-section__ask-robot"
+           src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-text.webp' ) ); ?>"
+           alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
+      <div class="faq-section__ask-copy">
+        <p class="faq-section__ask-lead">Still have a question?</p>
+        <p class="faq-section__ask-note">Ask ours &mdash; it&rsquo;s the same one you&rsquo;d install, answering from this very site.</p>
+        <?php
+        /* ⚠️ A REAL [sitestaffr_button], REPLACING A BUTTON THAT DID NOTHING. The old
+           markup was `<button class="btn btn--outline js-open-chat">` and NOTHING IN THE
+           THEME BINDS js-open-chat — grepped: one occurrence, the button itself. So the
+           section's only call to action has been inert. A dead control is worse here than
+           anywhere else on the page, because the whole claim is that the widget answers
+           questions.
+
+           NO persona/button key. The other shortcode on this page passes
+           persona="onboarding", which the plugin's configurable-buttons work is currently
+           migrating and which nothing seeds yet; this is a support question, so the
+           default button is the correct one and also the one guaranteed to exist.
+
+           Two known traps deliberately avoided (both render as an ordinary button, so
+           they cannot be spotted by reading the attribute): border_width="1" draws NO
+           border, and full_width="on" leaves the container shrink-wrapped. */
+        echo do_shortcode( '[sitestaffr_button text="Ask Our AI" icon="sitestaffr"]' );
+        ?>
+      </div>
     </div>
   </div>
 </section>
