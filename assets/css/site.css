@@ -7493,26 +7493,41 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* The shortcode renders its own widget button and its attributes are not
    trustworthy - border_width="1" is a documented no-op, so the border is set
    here rather than passed in. Measure the render; do not read the attribute. */
+/* ⚠️ THE WIDGET IS THEMED THROUGH ITS OWN CUSTOM PROPERTIES, NOT THROUGH `color`. The
+   shortcode writes them INLINE on the button — `--btn-icon-color: #ffffff`,
+   `--btn-text-color: #ffffff`, `--btn-background: #1FB6CC` — and its stylesheet reads
+   those. So setting `color` here recoloured the label (which happens to inherit) and left
+   the ICON white, because the icon's SVG is `fill="currentColor"` inside an element whose
+   colour comes from `--btn-icon-color`. On this outline button that is a white mark on a
+   white surface: invisible.
+
+   ⚠️ TWO WRONG DIAGNOSES BEFORE THIS ONE, both from probing the wrong element. I measured
+   `.sitestaffr-button-soundwave`, found its bars already teal, and concluded the icon was
+   an animation too small to see — then hid the soundwave, which was not the thing on
+   screen at all. The visible icon is `.sitestaffr-button-icon`. Dump the button's
+   outerHTML before theorising about it.
+
+   The custom properties need `!important` because they are set inline; a plain
+   declaration loses to the style attribute. Nothing here touches the plugin or any other
+   instance of the widget — every selector is scoped to .final-cta__concierge. */
 .final-cta__concierge .sitestaffr-button-widget {
   display: inline-flex;
   border: 1px solid var(--border-light) !important;
   background: transparent !important;
   box-shadow: none !important;
+  --btn-background: transparent !important;
+  --btn-hover-background: var(--teal-pale) !important;
+  --btn-text-color: var(--teal-deep) !important;
+  --btn-icon-color: var(--teal-deep) !important;
   color: var(--teal-deep) !important;
 }
+.final-cta__concierge .sitestaffr-button-icon,
+.final-cta__concierge .sitestaffr-button-icon svg { color: var(--teal-deep) !important; }
 .final-cta__concierge .sitestaffr-button-widget:hover {
   border-color: var(--teal-deep) !important;
   background: var(--teal-pale) !important;
 }
-/* ⚠️ THE SHORTCODE'S ICON IS HIDDEN HERE, and it is not a colour problem. `icon="sitestaffr"`
-   renders `.sitestaffr-button-soundwave` — three animated bars that scale their own height,
-   so at rest they are a couple of pixels tall. On the FILLED button in the FAQ card that
-   still reads as a mark; on this outline button it is a faint smudge to the left of the
-   label, which is what Mario saw. Recolouring it does not help — the bars are already
-   teal-deep here; the problem is their resting size.
-   Hidden rather than restyled: this is the demoted secondary action, and a bare text
-   button is the correct weight for it anyway. */
-.final-cta__concierge .sitestaffr-button-soundwave { display: none !important; }
+
 .final-cta__note {
   margin-top: 12px;
   font-size: 0.85rem;
