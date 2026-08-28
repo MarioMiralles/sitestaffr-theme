@@ -7488,6 +7488,15 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-color: var(--teal-deep) !important;
   background: var(--teal-pale) !important;
 }
+/* ⚠️ THE SHORTCODE'S ICON IS HIDDEN HERE, and it is not a colour problem. `icon="sitestaffr"`
+   renders `.sitestaffr-button-soundwave` — three animated bars that scale their own height,
+   so at rest they are a couple of pixels tall. On the FILLED button in the FAQ card that
+   still reads as a mark; on this outline button it is a faint smudge to the left of the
+   label, which is what Mario saw. Recolouring it does not help — the bars are already
+   teal-deep here; the problem is their resting size.
+   Hidden rather than restyled: this is the demoted secondary action, and a bare text
+   button is the correct weight for it anyway. */
+.final-cta__concierge .sitestaffr-button-soundwave { display: none !important; }
 .final-cta__note {
   margin-top: 12px;
   font-size: 0.85rem;
@@ -7519,6 +7528,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    a transform here would create a stacking context and lift the figure over the copy. */
 .final-cta__robot {
   position: absolute;
+  top: 0;
   left: 0;
   right: 0;
   bottom: -24px;
@@ -7529,18 +7539,27 @@ body.sitestaffr-landing-page .hero__visual > * {
   z-index: 0;
   pointer-events: none;
 }
+/* Full section height rather than a fixed clamp (Mario, 2026-08-27: "make the CTA Robot
+   bigger so that it goes to the top of the section"). Driving it off the wrapper's
+   top/bottom means the figure scales with whatever the copy makes the section, instead of
+   a number that has to be re-tuned every time a line of copy is added or removed. */
 .final-cta__robot img {
   display: block;
   width: auto;
-  height: clamp(430px, 44vw, 660px);
+  height: 100%;
 }
 /* The copy is a column in its own right now that the grid is gone. Capped so it can never
    run under the figure as the viewport widens. */
-.final-cta__copy { max-width: 34rem; }
+/* ⚠️ NARROWED WHEN THE ROBOT GREW. At 34rem the copy box and the full-height figure
+   overlapped at every width — measured 8px at 1440 and worse below. The figure is now
+   ~604px wide, so the container has to hold copy + gap + figure: 1140 - 480 - 40 = 620,
+   which clears it. Re-check this if either the robot's height or --block-max changes. */
+.final-cta__copy { max-width: 30rem; }
 
-@media (max-width: 1100px) {
-  /* Below this the copy column and the figure start competing for the same space; the
-     figure is the one that gives way. */
+@media (max-width: 1240px) {
+  /* Below this the copy column and the figure compete for the same space and the figure
+     gives way. 1240 rather than 1100: the robot is full-section-height now and therefore
+     much wider than the fixed-clamp version this breakpoint was set for. */
   .final-cta__robot { display: none; }
   .final-cta__copy { max-width: none; }
 }
@@ -7628,8 +7647,18 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ========== FOOTER ========== */
+/* ⚠️ DARKER THAN --block-dark, DELIBERATELY (Mario, 2026-08-27: "the same dark background
+   that we've been using or maybe even a bit darker so that it's a darker footer background
+   than everything else"). #00232A against the page's #00323A.
+
+   It matters more now than it used to: with sections 10 and 11 turned cream, the footer is
+   the ONLY dark thing left on the page, so it has no neighbour to be distinguished from —
+   it just needs to read as the floor. Going a step darker than any section that came
+   before makes the page settle rather than end on a repeat of a shade already used.
+
+   The old #0a2e33 was a slightly blue-green off-tone that matched nothing in the palette. */
 .footer {
-  background: #0a2e33;
+  background: #00232A;
   color: rgba(240,250,250,0.75);
   font-size: 0.85rem;
   position: relative;
@@ -7647,15 +7676,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   position: relative;
   padding: 48px 0 36px;
 }
-.footer__main::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(ellipse at 15% 50%, rgba(31,182,204,0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 85% 40%, rgba(16,185,129,0.05) 0%, transparent 45%);
-  pointer-events: none;
-}
+/* ⚠️ THE EMERALD WASH IS GONE. This carried two radial gradients, one teal and one
+   rgba(16,185,129) — emerald. Emerald is reserved on this site for capture/success states
+   and the recommended pricing tier; a decorative wash in it spends the signal that makes
+   "Lead captured" mean something. The teal one goes too: the point of the new footer
+   colour is a flat, settled floor, and a gradient works against that. */
+.footer__main::before { content: none; }
 .footer__grid {
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr 1fr;

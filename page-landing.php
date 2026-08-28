@@ -2557,12 +2557,13 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <span class="section-label">Get Started</span>
         <h2>Your Website Starts <span class="final-cta__highlight">Answering Tonight</span></h2>
 
-        <?php /* Second attempt. "Then it works while you don't" was cut — a clever line
-                 that makes the reader do a double-take at the exact moment they should be
-                 clicking, and "you don't work" is not a flattering thing to tell a business
-                 owner about themselves. This states the time-to-value plainly, which is
-                 what the heading has just promised. */ ?>
-        <p class="final-cta__subtitle">A few minutes to install. It starts answering the moment it goes live.</p>
+        <?php /* Third version, Mario's own wording. The two before it both described a
+                 TIMELINE ("then it works while you don't", "it starts answering the moment
+                 it goes live") when the heading had already promised tonight. This one
+                 names the THING the reader is getting instead, and echoes the H1 at the top
+                 of the page — the reader arrives at the close on the same phrase they
+                 landed on. */ ?>
+        <p class="final-cta__subtitle">Set up your website&rsquo;s new AI Receptionist in minutes.</p>
 
         <?php /* PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded
                  link: the target funnel is pricing -> checkout modal -> purchase, with
