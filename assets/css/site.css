@@ -10895,9 +10895,10 @@ a.ind-problem-card .ind-problem-card__icon--art {
    image is a wide band the full width of the container, which is what a blog
    hero should be, and the body can sit at a comfortable measure beneath it
    without the page looking like a narrow strip. */
-.blog-post__body .container {
-  max-width: 860px; /* 820px of text at ~85 characters */
-}
+/* The article body runs the FULL container, same as every other section of the
+   site — Mario's call, 2026-08-28. It was briefly 860px for an ~85-character
+   measure; at 1140 the lines run ~118 characters. Type is bumped a step to take
+   some of that back. */
 .blog-post__label {
   display: inline-block;
   font-size: 0.72rem;
@@ -11008,9 +11009,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .blog-post__layout {
   display: block;
 }
-/* The 720px container carries the measure — 680px of text, ~72 characters. It
-   was 1100px (~129 characters) against a 600-720px range across every blog
-   measured for this redesign. */
 .blog-post__prose {
   min-width: 0;
 }
@@ -11055,10 +11053,12 @@ a.ind-problem-card .ind-problem-card__icon--art {
   line-height: 1.3;
 }
 .blog-post__body p {
-  font-size: 1.1875rem;
-  line-height: 1.75;
+  /* 20px, up from 19px: at a 1100px measure a longer line needs a slightly
+     larger face and more leading to stay trackable from one line to the next. */
+  font-size: 1.25rem;
+  line-height: 1.8;
   color: var(--text-primary);
-  margin: 0 0 24px;
+  margin: 0 0 26px;
 }
 .blog-post__body p:last-child {
   margin-bottom: 0;
@@ -11103,10 +11103,14 @@ a.ind-problem-card .ind-problem-card__icon--art {
   counter-reset: blog-ol;
 }
 .blog-post__body li {
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   padding-left: 28px;
   position: relative;
-  font-size: 1.02rem;
+  /* Matches .blog-post__body p. It was 1.02rem against a 1.1875rem paragraph,
+     which only became obvious once the paragraph went to 1.25rem for the full
+     -width measure — a list is body copy and should not read as a footnote. */
+  font-size: 1.25rem;
+  line-height: 1.7;
 }
 .blog-post__body ul > li::before {
   content: '';
