@@ -2241,7 +2241,10 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
       <div class="faq-section__ask-copy">
         <p class="faq-section__ask-lead">Still have a question?</p>
-        <p class="faq-section__ask-note">Ask ours &mdash; it&rsquo;s the same one you&rsquo;d install, answering from this very site.</p>
+        <?php /* The supporting line is gone (Mario, 2026-08-27). It was trying to make the
+                 dogfooding point — same widget, answering from this site — and doing it in
+                 a sentence that had to introduce itself before it got there. The robot and
+                 the SiteStaffr-branded button already say "this is the product". */ ?>
         <?php
         /* ⚠️ A REAL [sitestaffr_button], REPLACING A BUTTON THAT DID NOTHING. The old
            markup was `<button class="btn btn--outline js-open-chat">` and NOTHING IN THE
@@ -2263,6 +2266,20 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
       </div>
     </div>
   </div>
+
+  <?php /* THE CURTAIN OPENS AGAIN for the second dark block (Mario, 2026-08-27). Sections
+           10 and 11 are the page's other dark run, and they met the FAQ on a hard
+           horizontal rule — the exact edge the hero's curtain exists to remove, left in
+           place two screens further down.
+
+           SAME 'open' VARIANT as the hero's, and it belongs to THIS section for the same
+           reason: an overlay always sits on the LIGHT side of the boundary, so the light
+           section is its background and the two can never disagree on color. Section 10
+           needs no cooperation at all.
+
+           No closing curtain at the far end — that dark run ends in the footer, not in
+           light, so there is no boundary there to close. */ ?>
+  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </section>
 
 <?php /* SECTION 10 — the agency door. The one section that did not exist in any form.

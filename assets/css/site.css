@@ -3194,7 +3194,22 @@ body.sitestaffr-landing-page .hero__visual > * {
    The sticky rail is gone with it. It existed to keep the deflection CTA beside a very
    long single column; the list is half as tall now, and a third column beside two would
    squeeze the questions to ~390px each. The CTA sits in the header instead. */
-.faq-section { background: var(--cream); }
+/* `.block.faq-section` for the same specificity reason as .block.what-you-get above —
+   see that note before changing this selector. */
+.block.faq-section {
+  background: var(--cream);
+  position: relative;   /* the opening curtain for section 10 is absolute against this */
+
+  /* ⚠️ BOTTOM PADDING IS THE 96px SCALE **PLUS THE PEAK'S HEIGHT**, exactly as on
+     .what-you-get, and for exactly the same reason: the seam is an overlay and costs no
+     height, so a bare 96px would be measured from the section's box while the curtain's
+     point rises 95% of the way up through it — landing on the ask card, which is
+     centered and therefore sits directly under the apex.
+
+     0.95 is 114/120 of the seam's own height clamp (the path peaks at y=6 of 120).
+     Re-derive both if the Book path's apex or .seam-curtain's height changes. */
+  padding-bottom: calc(96px + clamp(53px, 6.65vw, 114px));
+}
 .faq-section__head {
   text-align: center;
   max-width: 44rem;
@@ -4052,7 +4067,15 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    --cream is the survivor because Your Morning is the section Mario signed off on.
    Adding a second light tone back reopens this. */
-.what-you-get {
+/* ⚠️ `.block.what-you-get`, NOT `.what-you-get` — THE SELECTOR IS LOAD-BEARING.
+   `.block:not(.block--dark)` sets padding-block for the whole cream run, and :not()
+   CONTRIBUTES ITS ARGUMENT'S SPECIFICITY, making that rule 0,2,0. A bare `.what-you-get`
+   is 0,1,0 and loses no matter how far down the file it sits — so the seam-clearing
+   padding below was silently replaced by the flat run value the moment that rule landed,
+   and the closing curtain's spike started creeping toward the heading at wide viewports.
+   Nothing about either rule looks wrong in isolation. Matching 0,2,0 and declaring later
+   is what makes this win. */
+.block.what-you-get {
   background: var(--cream);
   /* The top/bottom hairlines are gone: this section now follows the dark block, and a
      border between a dark section and a cream one is a line drawn on a boundary that is
