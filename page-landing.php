@@ -2331,6 +2331,13 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        prop is ever moved, re-count — this is the kind of thing that drifts one edit at a
        time.
 
+       ⚠️ SIZES ARE DELIBERATELY UNEVEN (Mario, 2026-08-27: "I want the laptop asset to be
+       a bit bigger and I want all the assets to have varying sizes"). They previously sat
+       between 116 and 182 — a 1.6x spread, which at a glance reads as one size. The range
+       is now 74 to 242, a 3.3x spread, with the laptop as the single hero prop and the
+       WordPress tile and git node as the smallest. Depth in a scattered field comes from
+       scale variance; uniform props read as a pattern rather than as objects.
+
        ⚠️ NO OUTWARD OFFSET MAY EXCEED -8%, AND THAT IS A HARD CEILING SET BY THE NARROWEST
        WIDTH THE FIELD IS SHOWN AT. The layer is 1140px, so at the 1360px breakpoint there
        is only (1360-1140)/2 = 110px of gutter either side — and 8% of 1140 is 91px. An
@@ -2338,22 +2345,22 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        1360 and 1440 the laptop, site-stack, swatches and cutting-mat were sliced off by
        the viewport edge and read as cropped images. Measured, not guessed. Raise the
        breakpoint before raising these. */
-    array( 'laptop',      'back',  'top:6%;left:-8%;',      182 ),   /* left  */
-    array( 'wordpress',   'back',  'top:2%;left:4%;',        84 ),
-    array( 'site-stack',  'back',  'top:44%;left:-8%;',     156 ),
-    array( 'swatches',    'back',  'bottom:9%;left:-7%;',   172 ),
-    array( 'browser',     'back',  'top:2%;left:21%;',      116 ),   /* middle */
-    array( 'analytics',   'back',  'bottom:2%;left:34%;',   164 ),
-    array( 'notes',       'back',  'bottom:5%;left:59%;',   124 ),
-    array( 'wireframe',   'back',  'top:3%;right:5%;',      156 ),   /* right */
-    array( 'plugin',      'back',  'bottom:4%;left:14%;',   120 ),
-    array( 'cutting-mat', 'back',  'bottom:3%;right:3%;',   150 ),
+    array( 'laptop',      'back',  'top:4%;left:-8%;',      242 , 0, -3 ),   /* left  */
+    array( 'wordpress',   'back',  'top:1%;left:14%;',       74 , 0, 6 ),
+    array( 'site-stack',  'back',  'top:46%;left:-8%;',     148 , 1, 4 ),
+    array( 'swatches',    'back',  'bottom:10%;left:-7%;',  168 , 0, -5 ),
+    array( 'browser',     'back',  'top:3%;left:24%;',      118 , 1, 5 ),   /* middle */
+    array( 'analytics',   'back',  'bottom:1%;left:33%;',   186 , 0, -4 ),
+    array( 'notes',       'back',  'bottom:6%;left:59%;',   112 , 1, 9 ),
+    array( 'wireframe',   'back',  'top:2%;right:4%;',      178 , 1, -4 ),   /* right */
+    array( 'plugin',      'back',  'bottom:5%;left:14%;',   102 , 0, 7 ),
+    array( 'cutting-mat', 'back',  'bottom:2%;right:2%;',   196 , 1, -6 ),
     /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
        the only part of the card with no text: the heading, the three columns and the
        button all sit left of it. All three are also light-bodied, so they read against
        #00323A — the dark props stay in the back layer on cream. */
-    array( 'git',         'front', 'top:22%;right:-3%;',     90 ),
-    array( 'coffee',      'front', 'bottom:21%;right:-6%;', 142 ),
+    array( 'git',         'front', 'top:23%;right:-3%;',     82 , 0, 11 ),
+    array( 'coffee',      'front', 'bottom:20%;right:-5%;', 132 , 1, -5 ),
   );
   ?>
   <div class="agency-door__props" aria-hidden="true">
@@ -2361,7 +2368,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
       <img class="agency-door__prop agency-door__prop--<?php echo esc_attr( $ap[1] ); ?>"
            src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/agency/' . $ap[0] . '.webp' ) ); ?>"
            alt="" loading="lazy" decoding="async"
-           style="<?php echo esc_attr( $ap[2] ); ?>width:<?php echo (int) $ap[3]; ?>px;">
+           style="<?php echo esc_attr( $ap[2] ); ?>width:<?php echo (int) $ap[3]; ?>px;transform:<?php echo $ap[4] ? 'scaleX(-1) ' : ''; ?>rotate(<?php echo (int) $ap[5]; ?>deg);">
     <?php endforeach; ?>
   </div>
 
