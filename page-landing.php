@@ -2331,12 +2331,16 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        prop is ever moved, re-count — this is the kind of thing that drifts one edit at a
        time.
 
-       ⚠️ THE CARD'S BOTTOM-RIGHT QUADRANT IS EMPTY, and that is where the front props
-       actually sit ON it rather than just nicking its edges. The button is bottom-LEFT,
-       the three columns end well above the card's lower edge, so everything right of the
-       button and below the columns is bare surface — roughly 740x115 of it. plugin, notes
-       and coffee live there. Anywhere else on the card, a prop can only overlap the top
-       band (above the eyebrow) or the outer edges without hitting type.
+       ⚠️ ONLY `analytics` SITS ON THE CARD'S FACE. Putting plugin, notes AND coffee up
+       there too was tried on 2026-08-27 and reverted — three props crowded onto one
+       quadrant read as clutter, and the two small ones lost most of their silhouette
+       behind the card's edge. One larger prop overlapping reads as depth; three small
+       ones read as a mistake.
+
+       plugin and notes are back in the cream, sat LOW so their full shape is visible
+       rather than half-swallowed by the card. The card's bottom-right quadrant is the
+       only large bare surface on it — the button is bottom-LEFT and the columns end well
+       above the lower edge — so that is where the one overlapping prop goes.
 
        ⚠️ THE BOTTOM ROW TUCKS UNDER THE CARD'S EDGE, it does not sit down near the
        section's bottom border. Raised 2026-08-27: the props were low enough that their
@@ -2378,17 +2382,17 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
     array( 'site-stack',  'back',  'top:46%;left:-8%;',     148 , 1, 4 ),
     array( 'wordpress',   'front', 'top:15%;left:11%;',      78 , 0, 6 ),
     array( 'browser',     'back',  'top:3%;left:24%;',      118 , 1, 5 ),   /* middle */
-    array( 'analytics',   'back',  'bottom:5%;left:33%;',   186 , 0, -4 ),
-    array( 'notes',       'front', 'bottom:22%;left:57%;',  116 , 1, 9 ),
+    array( 'analytics',   'front', 'bottom:13%;left:45%;',  190 , 0, -4 ),
+    array( 'notes',       'back',  'bottom:6%;left:60%;',   116 , 1, 9 ),
     array( 'wireframe',   'back',  'top:2%;right:4%;',      178 , 1, -4 ),   /* right */
-    array( 'plugin',      'front', 'bottom:21%;left:37%;',  104 , 0, 7 ),
+    array( 'plugin',      'back',  'bottom:7%;left:15%;',   104 , 0, 7 ),
     array( 'cutting-mat', 'back',  'bottom:8%;right:2%;',   196 , 1, -6 ),
     /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
        the only part of the card with no text: the heading, the three columns and the
        button all sit left of it. All three are also light-bodied, so they read against
        #00323A — the dark props stay in the back layer on cream. */
     array( 'git',         'front', 'top:23%;right:-3%;',     82 , 0, 11 ),
-    array( 'coffee',      'front', 'bottom:19%;right:2%;',  138 , 1, -5 ),
+    array( 'coffee',      'front', 'bottom:19%;right:-5%;', 134 , 1, -5 ),
   );
   ?>
   <div class="agency-door__props" aria-hidden="true">
