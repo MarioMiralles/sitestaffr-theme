@@ -4118,26 +4118,28 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   z-index: 0;
 }
-/* ⚠️ BOTTOM RIGHT, NOT TOP RIGHT (Mario, 2026-08-28: improve the positioning "so that
-   it's not under the corner info tooltip (make sure this is not the case for desktop
-   too)").
+/* ⚠️ STILL TOP RIGHT — IT JUST CLEARS THE ⓘ NOW. `right: 46px`, not 14px.
 
-   It was `top: 10px; right: 14px`, and `.job-value__src` — the ⓘ that opens the source
-   tooltip — is at `top: 12px; right: 12px`. Measured, the button covered the last 20px of
-   the word, identically at 1440 and at 390, so every stamp read as a truncated one:
-   "HVAC" as HVA, "DENTAL" as DENTA. It was never clipped; the ⓘ was simply sitting on the
-   final letter. This was a desktop bug that happened to be reported from a phone.
+   `.job-value__src`, the button that opens the source tooltip, is at `top: 12px;
+   right: 12px` and is 22px wide, so its left edge is 34px in. At the old `right: 14px`
+   the button covered the last 20px of every word — identically at 1440 and at 390, so
+   every stamp read as a truncated one: "HVAC" as HVA, "DENTAL" as DENTA. Nothing was ever
+   clipped; the ⓘ was sitting on the final letter. A desktop bug that happened to be
+   reported from a phone. 46 is the button's 34 plus 12 of air.
 
-   The bottom-right corner is the only one free of both the ⓘ and the icon, and it is
-   where a stamp belongs anyway. It now sits behind the note's last line instead, which is
-   the sanctioned overlap below — at 3.8% ink that costs the note nothing.
+   ⚠️ IT WAS BRIEFLY MOVED TO THE BOTTOM-RIGHT AND THAT WAS WRONG (Mario, 2026-08-28: "why
+   did you put the industry names in the bottom right corner? I never asked for that"). The
+   ask was to clear the icon, not to re-place the stamp. Top right is the position; the
+   offset is the fix.
 
    Bigger with it, as asked: 1.9/5vw/3.2rem, up from 1.65/4.2vw/2.6rem. Check "DENTAL",
-   the longest of the four — at 3.2rem it is 189px inside a 251px card. */
+   the longest of the four — at 3.2rem it is 189px, so with the 46px offset it starts 18px
+   into a 251px card. Any longer word, or a larger size, starts colliding with the card's
+   own icon — which is sanctioned overlap, but check it rather than assume it. */
 .job-value__mark span {
   position: absolute;
-  bottom: 10px;
-  right: 14px;
+  top: 10px;
+  right: 46px;
   font-family: var(--font-body);
   font-weight: 700;
   font-size: clamp(1.9rem, 5vw, 3.2rem);
