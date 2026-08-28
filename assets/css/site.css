@@ -4286,6 +4286,32 @@ body.sitestaffr-landing-page .hero__visual > * {
   opacity: 1;
 }
 
+/* ⚠️ "VIEW RECAP" IS A MOUSE FLOURISH AND NOTHING ELSE (Mario, 2026-08-28: "hover
+   doesn't work on tablet or mobile so we should remove the view recap appearing or do
+   something different with that").
+
+   Hidden-until-hover on a touch screen is hidden forever: the row's only signal that it
+   opens a document never fires, and the element still reserves its column. On touch the
+   text is dropped entirely and a chevron takes its place — same message, ~12px instead
+   of ~90px, and the affordance a phone reader already knows.
+
+   Declared here and switched on below rather than declared inside each block, because
+   it is needed in two situations that no single media query can express: any touch
+   device at any width, AND any device under 620px. */
+.what-you-get.is-interactive .morning-inbox__row::after {
+  content: '\203A';
+  display: none;
+  align-self: center;
+  justify-self: end;
+  font-size: 1.3rem;
+  line-height: 1;
+  color: var(--text-muted);
+}
+@media (hover: none) {
+  .what-you-get.is-interactive .morning-inbox__view { display: none; }
+  .what-you-get.is-interactive .morning-inbox__row::after { display: block; }
+}
+
 /* ---- The recap document ----------------------------------------------
    V1's artifact, ported rather than re-imagined (Mario, 2026-08-27: "I just want that
    full document that we created in v1"). Bordered cards for the recap and the
@@ -4458,36 +4484,50 @@ body.sitestaffr-landing-page .hero__visual > * {
 .recap-doc__msg p { margin: 0; color: var(--text-secondary); font-size: 0.92rem; }
 
 @media (max-width: 620px) {
-  /* The row's five columns cannot survive a phone. Three lines instead: time and name,
-     the one-liner under them, then the tag and the "View recap" affordance SHARING a
-     third line rather than taking one each.
+  /* The row's five columns cannot survive a phone. TWO LINES, and two is the number
+     (Mario, 2026-08-28: the inbox "still looks very spaced out and weird on mobile").
+     It was four lines — time+name, message, pill, and an invisible "View recap" — which
+     is 132px of row for two facts, and three identical pills stacked down the card.
 
-     ⚠️ EVERY PLACEMENT BELOW IS EXPLICIT, rows included. Give `.morning-inbox__view` a
-     column and no row and auto-placement puts it in the first row with a free cell —
-     which is row 1, next to the name.
+       6:03 AM  Tom Byrne          [Lead captured]  ›
+       Gluten-free cupcakes, 40 for Friday
 
-     ⚠️ "View recap" IS ALWAYS VISIBLE HERE, not revealed on hover. There is no hover on
-     a touch screen, so the desktop reveal can never fire — yet the element still took a
-     full grid row at opacity 0. That was the ~24px of dead space under every pill
-     (Mario, 2026-08-28). Shown, it earns its line and tells a thumb the row opens. */
+     77px, and it reads like a mail app because that is the shape a phone reader already
+     has for a list of messages.
+
+     ⚠️ EVERY PLACEMENT BELOW IS EXPLICIT, rows included. Give an item a column and no
+     row and auto-placement drops it in the first row with a free cell — which for the
+     chevron is row 1, wedged against the pill instead of centered beside both lines.
+
+     ⚠️ THE NAME IS THE ONLY ELASTIC TRACK, and it must be allowed to lose. `minmax(0,
+     1fr)` plus the ellipsis is what stops the pill being pushed off the right edge on a
+     320px phone; a grid item's automatic minimum size is its CONTENT, so a plain `1fr`
+     refuses to shrink and overflows the card instead. */
   .morning-inbox__row {
-    grid-template-columns: 78px 1fr auto;
-    row-gap: 4px;
-    padding: 13px 14px;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    column-gap: 10px;
+    row-gap: 3px;
+    padding: 12px 14px;
   }
   .morning-inbox__time { grid-column: 1; grid-row: 1; }
-  .morning-inbox__who  { grid-column: 2 / -1; grid-row: 1; }
-  .morning-inbox__what { grid-column: 1 / -1; grid-row: 2; }
-  /* Spans the first two tracks so the pill is never squeezed into the 78px time
-     column; the third track collapses to nothing when JS never runs and the view
-     affordance stays display:none. */
-  .morning-inbox__tag { grid-column: 1 / 3; grid-row: 3; justify-self: start; }
-  .what-you-get.is-interactive .morning-inbox__view {
-    grid-column: 3;
-    grid-row: 3;
-    justify-self: end;
-    align-self: center;
-    opacity: 1;
+  .morning-inbox__who {
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .morning-inbox__tag { grid-column: 3; grid-row: 1; justify-self: end; }
+  /* Stops at track 4 so it never runs under the chevron. */
+  .morning-inbox__what { grid-column: 1 / 4; grid-row: 2; }
+  /* The chevron replaces the text at this width whether or not the device has hover —
+     "View recap →" costs a whole line here even on a narrow desktop window. */
+  .what-you-get.is-interactive .morning-inbox__view { display: none; }
+  .what-you-get.is-interactive .morning-inbox__row::after {
+    display: block;
+    grid-column: 4;
+    grid-row: 1 / -1;
   }
   .recap-doc__body { padding: 4px 16px 20px; }
   .recap-doc__bar { padding: 12px 16px; }
