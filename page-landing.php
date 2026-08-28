@@ -496,9 +496,9 @@ get_template_part( 'template-parts/site-nav', null, array(
                  Still no "small and medium-sized businesses": nobody self-identifies that
                  way, and it would tell an agency this page is not for them. */ ?>
         <p class="hero__subtitle">
-          SiteStaffr answers from your own pages &mdash; your services, your hours, your prices. Nothing to write, nothing to train.
+          Set up in minutes. SiteStaffr answers from your own pages, so there is nothing to write and nothing to train.
         </p>
-        <span class="hero__no-cc">Free for 30 days &bull; Installs in minutes &bull; No code required</span>
+        <span class="hero__no-cc">Free for 30 days &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
              These two were previously reversed: the big button went to the onboarding
              form and the actual trial was a small text link. Same two elements, same
@@ -1281,17 +1281,26 @@ get_template_part( 'template-parts/site-nav', null, array(
         <h3 class="what-you-get__callout-title">One Link to Share</h3>
         <p class="what-you-get__callout-desc">Send the whole thing to whoever is doing the job.</p>
       </div>
-      <?php /* ⚠️ REWORDED. This read "No dashboard to log into." The plugin SHIPS a
-               Dashboard with a Follow-ups queue and it is a feature we sell, so as
-               written the card denied the existence of a real feature in order to make
-               a convenience point. The claim intended was always "you don't have to",
-               which is both true and a better sell. */ ?>
+      <?php /* ⚠️ THIRD WORDING, and the two it replaced both failed in the same place —
+               the TITLE, not the description.
+
+               1. "No dashboard to log into." The plugin SHIPS a Dashboard with a
+                  Follow-ups queue and it is a feature we sell, so the card denied a real
+                  feature in order to make a convenience point.
+               2. "Nothing to Check." Fixed the denial and broke the sense (Mario,
+                  2026-08-28: "confusing"). Check what? It reads as "nothing to verify",
+                  which is a claim about accuracy, and then the description immediately
+                  offers a dashboard to check — the title and its own body disagreed.
+
+               "Nothing to Log Into" names the actual friction, and the description gives
+               the dashboard back rather than denying it. The claim was always "you don't
+               have to", which is both true and the better sell. */ ?>
       <div class="what-you-get__callout">
         <div class="what-you-get__callout-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
         </div>
-        <h3 class="what-you-get__callout-title">Nothing to Check</h3>
-        <p class="what-you-get__callout-desc">The details come to where you already work. There&rsquo;s a dashboard too, if you want it.</p>
+        <h3 class="what-you-get__callout-title">Nothing to Log Into</h3>
+        <p class="what-you-get__callout-desc">It arrives in the inbox you already use. The dashboard is there when you want it.</p>
       </div>
     </div>
 

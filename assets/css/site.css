@@ -2266,6 +2266,34 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: flex;
   justify-content: center;
 }
+/* ⚠️ THE SAME BLOOM AS THE VOICE DEMO'S ROBOT (Mario, 2026-08-28: "can we add the same
+   sort of circle glow around the robot that we have for the robot in the demo?"). Same
+   gradient, same `closest-side`, same blur — see `.see-it__stage::before`, which carries
+   the full reasoning; if that one is ever retuned, retune this with it.
+
+   ⚠️ IT IS DOING A DIFFERENT JOB HERE, which is why the numbers are not identical. There
+   it is a legibility fix: a dark robot on a dark section needs something to be seen
+   against. This robot is dark on cream and already has all the contrast it needs, so the
+   bloom is decoration and is pulled back accordingly — narrower, and roughly half the
+   ink, because at the demo's strength it read as a teal smear on a light section rather
+   than a glow behind a figure.
+
+   `z-index: 0` puts it under the robot (z-index 1) and under the haze, which is also 0
+   but earlier in source. Nothing here needs to move for it. */
+.lang-orbit::before {
+  content: '';
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(560px, 78%);
+  aspect-ratio: 1 / 0.94;
+  background: radial-gradient(ellipse closest-side,
+              rgba(31,182,204,0.20) 0%, rgba(31,182,204,0.09) 52%, rgba(31,182,204,0) 78%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
+}
 /* ---- The haze: more languages, receding behind the robot ---------------
    Texture, not content — the twelve chips carry the claim and stay readable; this is
    4-7% ink that tells you the list keeps going. See page-landing.php for why it is a
@@ -4089,13 +4117,29 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   z-index: 0;
 }
+/* ⚠️ BOTTOM RIGHT, NOT TOP RIGHT (Mario, 2026-08-28: improve the positioning "so that
+   it's not under the corner info tooltip (make sure this is not the case for desktop
+   too)").
+
+   It was `top: 10px; right: 14px`, and `.job-value__src` — the ⓘ that opens the source
+   tooltip — is at `top: 12px; right: 12px`. Measured, the button covered the last 20px of
+   the word, identically at 1440 and at 390, so every stamp read as a truncated one:
+   "HVAC" as HVA, "DENTAL" as DENTA. It was never clipped; the ⓘ was simply sitting on the
+   final letter. This was a desktop bug that happened to be reported from a phone.
+
+   The bottom-right corner is the only one free of both the ⓘ and the icon, and it is
+   where a stamp belongs anyway. It now sits behind the note's last line instead, which is
+   the sanctioned overlap below — at 3.8% ink that costs the note nothing.
+
+   Bigger with it, as asked: 1.9/5vw/3.2rem, up from 1.65/4.2vw/2.6rem. Check "DENTAL",
+   the longest of the four — at 3.2rem it is 189px inside a 251px card. */
 .job-value__mark span {
   position: absolute;
-  top: 10px;
+  bottom: 10px;
   right: 14px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(1.65rem, 4.2vw, 2.6rem);
+  font-size: clamp(1.9rem, 5vw, 3.2rem);
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
