@@ -520,12 +520,24 @@ get_template_part( 'template-parts/site-nav', null, array(
              src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/hero-robot-v2.webp' ) ); ?>"
              alt="SiteStaffr, the AI assistant for WordPress websites"
              width="1080" height="1350" fetchpriority="high" decoding="async">
-        <div class="hero__float-cards" aria-hidden="true">
-          <span class="hero__float-card hero__float-card--chat"><span class="hero__float-emoji">💬</span> Responding by text</span>
-          <span class="hero__float-card hero__float-card--voice"><span class="hero__float-emoji">🎙️</span> Answering by voice</span>
-          <span class="hero__float-card hero__float-card--lead"><span class="hero__float-emoji">✅</span> Lead captured</span>
-          <span class="hero__float-card hero__float-card--recap"><span class="hero__float-emoji">✉️</span> Recap sent</span>
-          <span class="hero__float-card hero__float-card--blog"><span class="hero__float-emoji">✍️</span> Blog post published</span>
+        <?php /* FIVE THINGS IT DOES, IN THE PRESENT TENSE (Mario, 2026-08-28).
+                 These used to mix two grammars: "Responding by text" is something in
+                 progress, "Lead captured" is something finished. As notifications
+                 floating past a robot's head that reads as a live feed; as the in-flow
+                 2-2-1 grid they become below 1024px it reads as an inconsistent list.
+                 One subject — SiteStaffr — and every line answers "what does it do?",
+                 which is the hero's actual job.
+
+                 ⚠️ NOT aria-hidden. It was, back when a separate .hero__capabilities
+                 list carried the same five claims for small screens. That list is gone
+                 with V3, so hiding these hides the only place the product's capabilities
+                 are stated on the first screen. */ ?>
+        <div class="hero__float-cards">
+          <span class="hero__float-card hero__float-card--chat"><span class="hero__float-emoji" aria-hidden="true">💬</span> Responds by text</span>
+          <span class="hero__float-card hero__float-card--voice"><span class="hero__float-emoji" aria-hidden="true">🎙️</span> Answers by voice</span>
+          <span class="hero__float-card hero__float-card--lead"><span class="hero__float-emoji" aria-hidden="true">✅</span> Captures the lead</span>
+          <span class="hero__float-card hero__float-card--recap"><span class="hero__float-emoji" aria-hidden="true">✉️</span> Sends you the recap</span>
+          <span class="hero__float-card hero__float-card--blog"><span class="hero__float-emoji" aria-hidden="true">✍️</span> Publishes blog posts</span>
         </div>
       </div>
     </div>
