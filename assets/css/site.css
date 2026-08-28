@@ -4263,53 +4263,38 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOR IT. `.is-interactive` is added by
    the script after the dialogs are wired, so with no JS these read as plain rows — no
-   pointer cursor, no hover, no "View recap". A button that looks clickable and does
-   nothing is worse than a row that never claimed to be one. */
-.what-you-get .morning-inbox__view { display: none; }
+   pointer cursor, no chevron. A button that looks clickable and does nothing is worse
+   than a row that never claimed to be one. */
 .what-you-get.is-interactive .morning-inbox__row { cursor: pointer; }
 .what-you-get.is-interactive .morning-inbox__row:hover,
 .what-you-get.is-interactive .morning-inbox__row:focus-visible {
   background: var(--teal-pale);
 }
-.what-you-get.is-interactive .morning-inbox__view {
-  display: inline;
-  justify-self: end;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--teal-deep);
-  opacity: 0;
-  transition: opacity 0.16s ease;
-  white-space: nowrap;
-}
-.what-you-get.is-interactive .morning-inbox__row:hover .morning-inbox__view,
-.what-you-get.is-interactive .morning-inbox__row:focus-visible .morning-inbox__view {
-  opacity: 1;
-}
 
-/* ⚠️ "VIEW RECAP" IS A MOUSE FLOURISH AND NOTHING ELSE (Mario, 2026-08-28: "hover
-   doesn't work on tablet or mobile so we should remove the view recap appearing or do
-   something different with that").
+/* ⚠️ THE CHEVRON IS THE WHOLE AFFORDANCE, AT EVERY WIDTH, ON EVERY DEVICE (Mario,
+   2026-08-28: "I actually want this for all the viewports, remove the view recap
+   completely and only keep this version for all").
 
-   Hidden-until-hover on a touch screen is hidden forever: the row's only signal that it
-   opens a document never fires, and the element still reserves its column. On touch the
-   text is dropped entirely and a chevron takes its place — same message, ~12px instead
-   of ~90px, and the affordance a phone reader already knows.
+   It replaced a "View recap →" label that only appeared on hover. Two problems, and
+   the first is the one that killed it: hidden-until-hover on a touch screen is hidden
+   forever, so the row's only signal that it opens a document never fired for most of
+   the traffic. The second is that it cost ~90px of a phone row to say what a chevron
+   says in 12px. There is no `(hover: none)` branch here any more and there should not
+   be one — one row, one affordance, no device-dependent copy.
 
-   Declared here and switched on below rather than declared inside each block, because
-   it is needed in two situations that no single media query can express: any touch
-   device at any width, AND any device under 620px. */
+   `/ ''` is the alt-text form of `content`: the glyph is drawn, and a screen reader
+   that supports it announces nothing rather than "single right-pointing angle
+   quotation mark". The row's own aria-label already says what it opens. Browsers that
+   do not support the syntax ignore the whole declaration, so the fallback on the line
+   below has to stay. */
 .what-you-get.is-interactive .morning-inbox__row::after {
   content: '\203A';
-  display: none;
+  content: '\203A' / '';
   align-self: center;
   justify-self: end;
   font-size: 1.3rem;
   line-height: 1;
   color: var(--text-muted);
-}
-@media (hover: none) {
-  .what-you-get.is-interactive .morning-inbox__view { display: none; }
-  .what-you-get.is-interactive .morning-inbox__row::after { display: block; }
 }
 
 /* ---- The recap document ----------------------------------------------
@@ -4521,11 +4506,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   .morning-inbox__tag { grid-column: 3; grid-row: 1; justify-self: end; }
   /* Stops at track 4 so it never runs under the chevron. */
   .morning-inbox__what { grid-column: 1 / 4; grid-row: 2; }
-  /* The chevron replaces the text at this width whether or not the device has hover —
-     "View recap →" costs a whole line here even on a narrow desktop window. */
-  .what-you-get.is-interactive .morning-inbox__view { display: none; }
+  /* Spans both lines and centers between them, rather than sitting on the pill's row. */
   .what-you-get.is-interactive .morning-inbox__row::after {
-    display: block;
     grid-column: 4;
     grid-row: 1 / -1;
   }

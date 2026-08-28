@@ -1107,7 +1107,11 @@ get_template_part( 'template-parts/site-nav', null, array(
             <span class="morning-inbox__who"><?php echo esc_html( $ml['who'] ); ?></span>
             <span class="morning-inbox__what"><?php echo wp_kses_post( $ml['what'] ); ?></span>
             <span class="morning-inbox__tag">Lead captured</span>
-            <span class="morning-inbox__view" aria-hidden="true">View recap &rarr;</span>
+            <?php /* No "View recap →" span here any more (Mario, 2026-08-28). The row's
+                     affordance is a chevron drawn as `.morning-inbox__row::after`, at
+                     every width and on every device. Do not add a label back: it only
+                     ever appeared on hover, which is a state most of this page's traffic
+                     cannot produce. */ ?>
           </button>
         </li>
         <?php endforeach; ?>
