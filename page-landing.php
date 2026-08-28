@@ -218,22 +218,37 @@ $get_started_url = home_url( '/#get-started' );
             'img'    => 'ind-tooth',
             'label'  => 'Dental',
             'mark'   => 'DENTAL',
-            'amount' => '$391',
-            'note'   => 'Average spend per dental visit',
-            /* ⚠️ THE ONLY DERIVED FIGURE ON THE PAGE, and the tooltip says so. AHRQ publishes
-               total dental expenditures and total dental visits in the same brief but no
-               per-visit line; this is one divided by the other. Disclosed rather than
-               presented as published, because "computed from" and "reported as" are not the
-               same claim. Cross-checks at $386 against the brief's own per-person figures. */
-            'source' => 'Computed from AHRQ MEPS Statistical Brief #555 (March 2024, 2021 data): total U.S. dental expenditures divided by total dental visits. AHRQ does not publish a per-visit figure for this period.',
+            'amount' => '$887',
+            'note'   => 'Average yearly spend per dental patient',
+            /* ⚠️ PER YEAR, NOT PER VISIT, AND THAT CHANGE IS THE POINT (Mario, 2026-08-27:
+               "a dentist likely makes more than just $391 average per patient... we might be
+               showing very small numbers when they're actually much more significant for a
+               business owner"). He was right, and the defect was a UNIT MISMATCH rather than
+               a wrong number: $391 was one VISIT, sitting beside an HVAC figure that is one
+               PROJECT. But a website enquiry to a dentist is not one visit — it is a new
+               patient, worth a year of them.
+
+               This also RETIRES THE ONLY DERIVED FIGURE ON THE PAGE. $391 was total dental
+               expenditures divided by total visits, because AHRQ publishes no per-visit
+               line. $887 is published directly in the same brief, so the new number is both
+               the right unit and better sourced than the one it replaces.
+
+               Still total expenditure — out-of-pocket plus insurance — which is what the
+               practice actually bills, not what the patient pays at the desk. */
+            'source' => 'AHRQ MEPS Statistical Brief #555, dental utilization and expenditures 2019-2021. Average annual dental expenditure per person with any dental visit, 2021, out-of-pocket and insurance combined.',
         ),
         array(
             'img'    => 'ind-paw',
             'label'  => 'Veterinary',
             'mark'   => 'VET',
-            'amount' => '$200',
-            'note'   => 'What owners report paying at their last visit',
-            'source' => 'AVMA, 2025 Pet Ownership and Demographics Sourcebook. Owner self-reported, published October 2025.',
+            'amount' => '$598',
+            'note'   => 'Average yearly vet spend per dog owner',
+            /* Per year, for the same reason as the dental card above. Same AVMA source
+               and same edition as before — only the metric moved from "last visit" to the
+               annual figure. ⚠️ It is VETERINARY spend specifically, not total pet spend:
+               AVMA reports ~$1,700 a year on pets overall, of which veterinary care is
+               32.4%. Quoting the $1,700 here would be a different and much weaker claim. */
+            'source' => 'AVMA, 2025 Pet Ownership and Demographics Sourcebook. Mean annual veterinary expenditure per dog-owning household; excludes food, grooming and other non-veterinary pet spending.',
         ),
     );
 
@@ -2382,7 +2397,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
     array( 'site-stack',  'back',  'top:46%;left:-8%;',     148 , 1, 4 ),
     array( 'wordpress',   'front', 'top:15%;left:11%;',      78 , 0, 6 ),
     array( 'browser',     'back',  'top:3%;left:24%;',      118 , 1, 5 ),   /* middle */
-    array( 'analytics',   'front', 'bottom:13%;left:45%;',  190 , 0, -4 ),
+    array( 'analytics',   'front', 'bottom:13%;left:38%;',  190 , 0, -4 ),
     array( 'notes',       'back',  'bottom:6%;left:60%;',   116 , 1, 9 ),
     array( 'wireframe',   'back',  'top:2%;right:4%;',      178 , 1, -4 ),   /* right */
     array( 'plugin',      'back',  'bottom:7%;left:15%;',   104 , 0, 7 ),
@@ -2489,13 +2504,28 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
   <div class="block__inner">
     <div class="block-split__grid final-cta__grid">
       <div class="final-cta__copy">
-        <h2>Be the One That&rsquo;s Still Open<br><span class="final-cta__highlight">When Everyone Else Has Closed</span></h2>
+        <?php /* ⚠️ REWRITTEN 2026-08-27 (Mario: "major redesign here with styling and
+                 wording"). It read "Be the One That's Still Open / When Everyone Else Has
+                 Closed" — evocative, and it argued the SAME POINT the page has already made
+                 twice by this scroll position: section 2 says 86% of conversations arrive
+                 after business hours, section 4 shows three leads landing overnight. A
+                 close that re-states the problem asks the reader to be convinced again
+                 rather than to act.
 
-        <?php /* "answers every call, chat and question" became "answers your visitors".
-                 "call" invites the phone-line misreading, which is worse now the H1 says
-                 receptionist and the product has no phone line. "every" is the word commit
-                 f73108a recorded as untrue - it had come back. */ ?>
-        <p class="final-cta__subtitle">SiteStaffr answers your visitors around the clock &mdash; nights, weekends, holidays.</p>
+                 So the close now answers the last objection instead: HOW SOON. "Tonight"
+                 is the promise that matters at this point, and it is true — install is
+                 minutes and the widget answers immediately.
+
+                 An eyebrow was added to match every other section on the page; this was
+                 the only one opening on a bare heading. */ ?>
+        <span class="section-label">Get Started</span>
+        <h2>Your Website Starts <span class="final-cta__highlight">Answering Tonight</span></h2>
+
+        <?php /* Short on purpose. The old subtitle listed "nights, weekends, holidays",
+                 which the section-2 statistic and the Your Morning inbox have both already
+                 established. This one closes the loop on those instead of repeating them,
+                 and "while you don't" is the whole product in three words. */ ?>
+        <p class="final-cta__subtitle">A few minutes to install. Then it works while you don&rsquo;t.</p>
 
         <?php /* PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded
                  link: the target funnel is pricing -> checkout modal -> purchase, with
@@ -2520,24 +2550,33 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         </div>
         <p class="final-cta__note">We reply within 3 business days.</p>
 
-        <?php /* TERTIARY. Kept because it converts the support widget from a help link into
-                 proof: it is the same AI the visitor would install. */ ?>
-        <p class="final-cta__tertiary">Questions? Ask our AI &mdash; it&rsquo;s the same one you&rsquo;d install.</p>
-
-        <p class="final-cta__privacy">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
+        <?php /* THE TERTIARY LINE IS GONE. It read "Questions? Ask our AI — it's the same
+                 one you'd install", which is now word-for-word the job of the ask card at
+                 the end of the FAQ directly above this section — same claim, same widget,
+                 two screens apart. The FAQ card does it better: it has the robot and a real
+                 branded button, where this was a grey sentence. Removing it also takes the
+                 closing stack from nine stacked blocks down to six. */ ?>
+        <p class="final-cta__privacy">Details you share go to setting up your assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
       </div>
 
-      <?php /* Robot on the right, matching section 1 and section 5 - three appearances on
-               the same side make him a motif rather than floating decoration.
-               robot-cta.webp is pending: Mario is re-running the prompt, attempt 1 failed
-               the pose check. The cell is reserved at the final ratio so dropping the file
-               in needs no layout change, and it collapses on mobile either way. */ ?>
-      <?php /* Robot on the right, matching section 1 and section 5 - three appearances on
-               the same side make him a motif rather than floating decoration.
-               robot-cta.webp is pending: Mario is re-running the prompt, attempt 1 failed
-               the pose check. The cell is reserved at the final ratio so dropping the file
-               in needs no layout change, and it collapses on mobile either way. */ ?>
-      <div class="block-split__art final-cta__art" aria-hidden="true"></div>
+      <?php /* ⚠️ THE ROBOT IS FINALLY IN. The cell sat EMPTY with a comment saying the
+               render was "pending" — but robot-cta.webp has been committed in this repo
+               the whole time. The placeholder outlived the thing it was waiting for, so
+               the closing section shipped with a reserved 340px hole in it. If a comment
+               ever says an asset is pending, check the directory before believing it.
+
+               Right-hand side, matching the hero and section 5 — three appearances on the
+               same side make him a motif rather than floating decoration. Open-handed
+               pose, which is the right gesture for an ask.
+
+               ⚠️ MASKED AT THE BOTTOM like every other robot on this page. The render was
+               made for a dark background and its alpha runs to the frame edge, so on cream
+               the legs end on a hard horizontal cut. Its own stops, not the language
+               section's — this figure is framed tighter, so it fades later. */ ?>
+      <div class="block-split__art final-cta__art">
+        <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-cta.webp' ) ); ?>"
+             alt="" aria-hidden="true" width="975" height="1380" loading="lazy" decoding="async">
+      </div>
     </div>
   </div>
 

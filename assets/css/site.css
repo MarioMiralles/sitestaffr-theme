@@ -7394,6 +7394,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-bottom: 16px;
   font-size: clamp(2rem, 4.5vw, 3.2rem);
 }
+.final-cta .section-label { display: block; margin-bottom: 14px; }
+
 /* ---- Section 11 ink, re-tuned for cream 2026-08-27 ---------------------
    Every color below was an rgba(240,250,250,…) written for the dark block, where it was
    light ink at low alpha. On cream those are all but invisible, so each is re-stated
@@ -7497,11 +7499,33 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--text-secondary);
 }
 
-/* Reserved for robot-cta.webp. Holds its cell so the layout does not move when
-   the render lands; hidden on one column, where the copy is the whole point. */
-.final-cta__art { min-height: 340px; }
+/* ---- The closing robot -------------------------------------------------
+   The cell held a `min-height: 340px` placeholder "reserved for robot-cta.webp" while
+   that file sat committed in the repo the whole time — so this section shipped with a
+   340px hole. The placeholder is gone with the thing it was holding space for.
+
+   ⚠️ MASKED AT THE BOTTOM, with its own stops. Every robot render on this site was made
+   for a dark background and runs opaque to the frame edge, so on cream the legs end on a
+   hard horizontal cut. This figure is framed tighter than the language one, so it holds
+   to 88% before fading rather than that section's 66%. Re-measure per render; the numbers
+   are not transferable between them. */
+.final-cta__art {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.final-cta__art img {
+  width: auto;
+  height: clamp(340px, 34vw, 470px);
+  max-width: 100%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 99%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 99%);
+}
 @media (max-width: 900px) {
-  .final-cta__art { display: none; min-height: 0; }
+  /* On one column the copy is the whole point and the robot costs a screen of scroll
+     directly before the only button that matters. */
+  .final-cta__art { display: none; }
 }
 
 .final-cta__privacy {
