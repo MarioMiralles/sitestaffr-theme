@@ -542,11 +542,17 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
     </div>
   </div>
-  <?php /* INSIDE the hero, not between the sections. It is an absolute overlay pinned to
-           the hero's bottom edge so the robot can stand BEHIND it — that underlap is the
-           whole point, and an in-flow sibling cannot provide it. See the template part
-           for why the overlay is safe here when the V2 wave was not. */ ?>
-  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
+  <?php /* THE OPENING CURTAIN MOVED OUT OF THE HERO ON 2026-08-28 and is now the first
+           child of section 2 below, hanging upward into this section. It is still an
+           absolute overlay and the robot still stands behind it — that underlap is the
+           whole point and has not changed.
+
+           What changed is which box OWNS it. Inside the hero it was clipped by
+           `.hero { overflow: hidden }` (the rule that crops the robot), so its bottom
+           edge landed exactly on the hero/section boundary — a boundary at a fractional
+           layout position, which at a fractional device pixel ratio rounds apart and
+           leaves a pale hairline. Owned by the dark section it can overlap 3px DOWN into
+           it, and there is no shared edge left to round. See .seam-curtain--open. */ ?>
 </section>
 
 <?php /* THE FIVE-CAPABILITY RIBBON WAS DELETED HERE, 2026-08-26.
@@ -576,6 +582,11 @@ get_template_part( 'template-parts/site-nav', null, array(
          here ($500+/$3,000+/$2,000/$800) are gone: they were invented, and this section's
          whole argument is that the numbers are real and cited. */ ?>
 <section class="block block--dark block-split cost-section">
+  <?php /* ⚠️ THE HERO'S CURTAIN LIVES HERE, not in the hero — see the note at the end of
+           the hero for why. It hangs upward out of this section by its own height minus
+           3px, so the shape reads exactly as before and the last 3px of it sit INSIDE
+           this section, covering the boundary row at every device pixel ratio. */ ?>
+  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
   <div class="block__inner">
     <div class="block-split__grid cost-section__grid">
       <div class="cost-section__copy">

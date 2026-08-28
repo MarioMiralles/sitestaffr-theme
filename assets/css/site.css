@@ -341,16 +341,18 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    the whole diagnosis, and it is why this looks fine on a laptop and wrong on a phone.
 
    ⚠️ 2px, MEASURED, NOT 1. A single pixel of overlap only moved the seam (243 -> 163 at
-   1.75); 2px clears it at every ratio tested except a faint 23/channel residue at 1.75.
-   Do not raise it further: at 4px the low ratios got WORSE, because the overlap starts
-   pulling the block up past the shallow edges of the hero's curtain.
+   1.75). The padding adds the same 2px back so nothing inside the block moves.
 
-   The padding adds the same 2px back so nothing inside the block moves. */
-/* ⚠️ `position: relative` IS HALF THE FIX, not tidying. The overlap alone left the seam
-   at 1.25 and 1.75 because an unpositioned block's background paints in an earlier phase
-   than the hero's clipped contents; positioned, this section paints in the
-   positioned-descendants phase and lands ON TOP of the hero's rounded-off bottom edge
-   instead of under it. Removing it brings the hairline straight back. */
+   ⚠️ THE HERO BOUNDARY NEEDED MORE THAN THIS. Overlap plus `position: relative` got it
+   from 81 points per channel down to 23, which is faint but still a line Mario could
+   see. That one is now covered properly by the opening curtain, which was moved into
+   this section so it can overlap downward — see .seam-curtain--open. The overlap below
+   stays as the general defense for every dark boundary that has no curtain over it. */
+/* ⚠️ `position: relative` IS LOAD-BEARING TWICE. It is the containing block for the
+   opening curtain, which now lives inside this section — remove it and the curtain
+   positions itself against the viewport. It also puts this section's background in the
+   positioned-descendants paint phase, so the 2px overlap lands ON TOP of the hero's
+   rounded-off bottom edge rather than under it. */
 .hero + .block--dark {
   position: relative;
   margin-block-start: -2px;
@@ -3781,7 +3783,25 @@ body.sitestaffr-landing-page .hero__visual > * {
    leaves a hairline of the light section's background between the seam and the dark
    block it meets — a pale line across the full width, which is the exact edge these
    elements exist to remove. */
-.seam-curtain--open  { bottom: -1px; }
+/* ⚠️ THE OPENING CURTAIN HANGS UPWARD OUT OF THE DARK SECTION (moved 2026-08-28). It used
+   to sit at the bottom of the HERO with `bottom: -1px`, and that 1px was there to kill a
+   hairline of hero background at the boundary. It could not do the job: the hero has
+   `overflow: hidden` to crop the robot, so the overhang was clipped straight off and the
+   curtain's bottom edge landed exactly ON the boundary — which sits at a fractional
+   layout position (1193.984375) and, at a fractional device pixel ratio, rounds apart and
+   shows the page background through as a pale line (Mario saw it three times).
+
+   Owned by the dark section instead, the same shape can overlap DOWNWARD into its own
+   parent, and a boundary that nothing has to share cannot round apart. The offset is its
+   own height less 3px, so the shape sits exactly where it always did and only the last
+   3px are new — inside the dark, over the dark, invisible.
+
+   The `--close` variant is unchanged: it already lives on the LIGHT section below the
+   dark run and overlaps upward by 1px for the same reason, and that one is not clipped. */
+.seam-curtain--open {
+  bottom: auto;
+  top: calc(-1 * (clamp(56px, 7vw, 120px) - 3px));
+}
 .seam-curtain--close { top: -1px; }
 .seam-curtain svg { display: block; width: 100%; height: 100%; }
 .seam-curtain path { fill: var(--block-dark); }
