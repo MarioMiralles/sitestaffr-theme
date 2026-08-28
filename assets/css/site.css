@@ -3489,6 +3489,15 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-weight: 600;
   margin-bottom: 0;
 }
+/* ⚠️ THE BUTTON MUST NOT EXCEED ITS COLUMN, and left alone it does. The shortcode renders
+   an inline-flex sized to its label, which at 320px stuck out 41px past the card's right
+   edge — measured, and it also pushed the document into horizontal scroll. Clamping it
+   here rather than in a breakpoint because the failure is "column narrower than label",
+   which is a relationship, not a width: a longer label would reproduce it at 390. */
+.faq-section__ask .sitestaffr-button-widget {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
 
 /* ⚠️ NOTHING STACKS HERE, IT ONLY GETS SMALLER. The robot stays on the left at 320px, so
    the phone treatment is a shrink, not a re-layout.
