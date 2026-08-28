@@ -234,6 +234,10 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   --block-gutter: 20px;
 
   --block-dark: #00323A;
+  /* The footer, one step darker than any section — see the .footer rule. It is a token
+     because TWO things have to agree on it: the footer's own background and the fill of
+     the curtain that meets it. */
+  --footer-dark: #00232A;
   --block-dark-raised: #0A424A;   /* the elevated panel in section 10 */
 }
 
@@ -3649,6 +3653,18 @@ body.sitestaffr-landing-page .hero__visual > * {
 .seam-curtain--close { top: -1px; }
 .seam-curtain svg { display: block; width: 100%; height: 100%; }
 .seam-curtain path { fill: var(--block-dark); }
+
+/* ⚠️ THE CLOSING CURTAIN FILLS WITH THE FOOTER'S COLOR, NOT THE BLOCK COLOR. Every other
+   seam on this page pours a dark SECTION into a light one, so --block-dark is right. The
+   last one pours the FOOTER in — and the footer went a step darker than the sections on
+   2026-08-27, which left the curtain painting #00323A directly above a #00232A footer: a
+   16-point step across the full viewport width, exactly the hairline these seams exist to
+   remove.
+
+   Scoped by parent rather than a modifier class because the seam has no knowledge of what
+   sits below it; the SECTION does. Both sides now read the same token, so they cannot
+   drift apart again. */
+.final-cta .seam-curtain path { fill: var(--footer-dark); }
 
 /* ---- Section 2: the job-value grid ------------------------------------
    Padding, background and color come from .block .block--dark. The old
@@ -7658,7 +7674,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    The old #0a2e33 was a slightly blue-green off-tone that matched nothing in the palette. */
 .footer {
-  background: #00232A;
+  background: var(--footer-dark);
   color: rgba(240,250,250,0.75);
   font-size: 0.85rem;
   position: relative;
