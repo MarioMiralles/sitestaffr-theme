@@ -2029,10 +2029,10 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">30 <small>min</small></span>
+          <span class="price-tier__row-value">30</span>
         </div>
         <div class="price-tier__row">
-          <span class="price-tier__row-label">Blog posts</span>
+          <span class="price-tier__row-label">Blog post</span>
           <span class="price-tier__row-value">1</span>
         </div>
         <div class="price-tier__row">
@@ -2069,7 +2069,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">100 <small>min/mo</small></span>
+          <span class="price-tier__row-value">100</span>
         </div>
         <div class="price-tier__row">
           <span class="price-tier__row-label">Blog posts</span>
@@ -2105,7 +2105,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">300 <small>min/mo</small></span>
+          <span class="price-tier__row-value">300</span>
         </div>
         <div class="price-tier__row">
           <span class="price-tier__row-label">Blog posts</span>
@@ -2140,7 +2140,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">600 <small>min/mo</small></span>
+          <span class="price-tier__row-value">600</span>
         </div>
         <div class="price-tier__row">
           <span class="price-tier__row-label">Blog posts</span>
