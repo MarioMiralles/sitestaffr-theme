@@ -3489,15 +3489,27 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-weight: 600;
   margin-bottom: 0;
 }
-/* ⚠️ THE BUTTON MUST NOT EXCEED ITS COLUMN, and left alone it does. The shortcode renders
-   an inline-flex sized to its label, which at 320px stuck out 41px past the card's right
-   edge — measured, and it also pushed the document into horizontal scroll. Clamping it
-   here rather than in a breakpoint because the failure is "column narrower than label",
-   which is a relationship, not a width: a longer label would reproduce it at 390. */
+/* ⚠️ THE BUTTON MUST NOT EXCEED ITS COLUMN, and it takes THREE selectors because the
+   shortcode emits three nested boxes. At 320px it stuck out 41px past the card's right
+   edge and pushed the whole document into horizontal scroll.
+
+   The first attempt clamped `.sitestaffr-button-widget` alone and changed nothing, for a
+   reason worth remembering: `max-width: 100%` on the BUTTON resolves against its parent
+   `.sitestaffr-button-container`, and the container was the box that was 199px wide
+   inside a 158px column. Clamping a child to 100% of an already-overflowing parent is a
+   no-op. The container is the one that has to be told.
+
+   `.sitestaffr-button-text` carries `white-space: nowrap` from the plugin, so even a
+   clamped container could not reflow the label. All three, or none of them work.
+
+   Outside a breakpoint because the failure is "column narrower than label" — a
+   relationship, not a width. A longer label would reproduce it at 390. */
+.faq-section__ask .sitestaffr-button-container { max-width: 100%; }
 .faq-section__ask .sitestaffr-button-widget {
   max-width: 100% !important;
   min-width: 0 !important;
 }
+.faq-section__ask .sitestaffr-button-text { white-space: normal !important; }
 
 /* ⚠️ NOTHING STACKS HERE, IT ONLY GETS SMALLER. The robot stays on the left at 320px, so
    the phone treatment is a shrink, not a re-layout.
