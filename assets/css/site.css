@@ -3325,9 +3325,36 @@ body.sitestaffr-landing-page .hero__visual > * {
    See page-landing.php for why these are twelve separate images rather than one scene.
    The layer is inert and decorative; the props carry empty alt and the wrapper is
    aria-hidden, so none of this reaches the accessibility tree. */
+/* ⚠️ THE LAYER IS THE CARD'S WIDTH, NOT THE SECTION'S — this is the whole reason the
+   props stay glued to the card. It was `inset: 0`, i.e. the full-bleed section, so every
+   percentage resolved against the VIEWPORT: at 1440 the props hugged the card and by
+   2000 they had drifted far out into the cream, because the box they were measured
+   against had grown by 560px while the card had not.
+
+   Matching the container makes every offset a distance FROM THE CARD, so the arrangement
+   is identical at 1360 and at 2560. Props still bleed outward past this box on purpose —
+   the section clips them, the layer does not.
+
+   Anchoring to the card's CONTAINER is fine, and is not the trap that killed the crowd
+   render. That trap was measuring against pixels INSIDE an image; this is a layout box
+   the stylesheet owns. */
+/* ⚠️ CENTERED WITH AUTO MARGINS, NOT `left:50% + translateX(-50%)`. A TRANSFORM CREATES A
+   STACKING CONTEXT, and this element has children that must sit on BOTH sides of the card
+   — so the moment it was centered with a transform, every prop got trapped inside it and
+   the three "front" props rendered behind the card no matter what z-index they carried.
+   The symptom was subtle: the coffee cup simply disappeared except for its saucer.
+
+   `left:0; right:0; width:…; margin-inline:auto` centers an absolutely positioned box
+   with no transform, so the layer stays a plain z-index:auto parent and its children
+   compete with .block__inner directly, which is what makes the two depths work. */
 .agency-door__props {
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: min(var(--block-max), 100%);
+  margin-inline: auto;
   pointer-events: none;
 }
 .agency-door__prop {

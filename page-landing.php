@@ -2324,22 +2324,22 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        prop nearer the edge than that gets sliced off flat and reads as a broken image
        rather than as a prop peeking in. Bleeding off the LEFT and RIGHT is fine and
        intended — that is horizontal, and there is nothing above or below to bleed into. */
-    array( 'laptop',      'back',  'top:9%;left:-3%;',      185 ),
-    array( 'wordpress',   'back',  'top:7%;left:15%;',       86 ),
-    array( 'wireframe',   'back',  'top:6%;right:13%;',     162 ),
-    array( 'browser',     'back',  'top:13%;right:-2%;',    120 ),
-    array( 'swatches',    'back',  'bottom:9%;left:-2%;',   175 ),
-    array( 'plugin',      'back',  'bottom:7%;left:20%;',   124 ),
-    array( 'analytics',   'back',  'bottom:8%;left:41%;',   168 ),
-    array( 'notes',       'back',  'bottom:9%;left:62%;',   126 ),
-    array( 'cutting-mat', 'back',  'bottom:9%;right:1%;',   158 ),
+    array( 'laptop',      'back',  'top:9%;left:-15%;',     185 ),
+    array( 'wordpress',   'back',  'top:5%;left:2%;',        86 ),
+    array( 'wireframe',   'back',  'top:3%;right:6%;',      162 ),
+    array( 'browser',     'back',  'top:14%;right:-13%;',   120 ),
+    array( 'swatches',    'back',  'bottom:10%;left:-14%;', 175 ),
+    array( 'plugin',      'back',  'bottom:4%;left:7%;',    124 ),
+    array( 'analytics',   'back',  'bottom:2%;left:37%;',   168 ),
+    array( 'notes',       'back',  'bottom:4%;left:63%;',   126 ),
+    array( 'cutting-mat', 'back',  'bottom:8%;right:-13%;', 158 ),
     /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
        the only part of the card with no text: the heading, the three columns and the
        button all sit left of it. All three are also light-bodied, so they read against
        #00323A — the dark props stay in the back layer on cream. */
-    array( 'git',         'front', 'top:17%;right:3%;',      92 ),
-    array( 'site-stack',  'front', 'top:41%;right:-3%;',    162 ),
-    array( 'coffee',      'front', 'bottom:19%;right:6%;',  145 ),
+    array( 'git',         'front', 'top:15%;right:-2%;',     92 ),
+    array( 'site-stack',  'front', 'top:40%;right:-9%;',    162 ),
+    array( 'coffee',      'front', 'bottom:17%;right:-1%;', 145 ),
   );
   ?>
   <div class="agency-door__props" aria-hidden="true">
