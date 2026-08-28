@@ -2500,10 +2500,30 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
          Every rgba(240,250,250,...) in this section's CSS was tuned for dark ink and had
          to be re-tuned rather than inherited; see the .final-cta block in site.css. */ ?>
-<section class="block block-split final-cta" id="get-started">
+<section class="block final-cta" id="get-started">
+  <?php /* ⚠️ A BACKGROUND FIGURE, NOT A GRID CELL (Mario, 2026-08-27: "I want the robot to
+           look huge like in the hero... it should be part of the background and its legs
+           should be just like the robot in the hero where it's flush with the bottom").
+
+           It was the art column of a two-column Split, which caps it at the column's width
+           and leaves it floating mid-section. Absolutely positioned against the section
+           instead, it can be as large as it likes and sit on the bottom edge.
+
+           ⚠️ THE CURTAIN CROPS HIM, WHICH IS WHY NO MASK IS NEEDED. The artwork ends on a
+           hard cut through the thighs. `.final-cta` clips its overflow, so that cut lands
+           at the section's bottom edge — and the Book path's baseline is y=120, its full
+           depth, at EVERY x. The last row of the section is therefore dark everywhere, and
+           the cut sits under it whatever the viewport width. Same mechanism as the hero.
+           Pushed past the edge so the cut is comfortably outside the visible area.
+
+           z-index 0, below `.block__inner` and below the curtain, so the copy always wins. */ ?>
+  <div class="final-cta__robot" aria-hidden="true">
+    <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-cta.webp' ) ); ?>"
+         alt="" width="975" height="1380" loading="lazy" decoding="async">
+  </div>
+
   <div class="block__inner">
-    <div class="block-split__grid final-cta__grid">
-      <div class="final-cta__copy">
+    <div class="final-cta__copy">
         <?php /* ⚠️ REWRITTEN 2026-08-27 (Mario: "major redesign here with styling and
                  wording"). It read "Be the One That's Still Open / When Everyone Else Has
                  Closed" — evocative, and it argued the SAME POINT the page has already made
@@ -2521,11 +2541,12 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <span class="section-label">Get Started</span>
         <h2>Your Website Starts <span class="final-cta__highlight">Answering Tonight</span></h2>
 
-        <?php /* Short on purpose. The old subtitle listed "nights, weekends, holidays",
-                 which the section-2 statistic and the Your Morning inbox have both already
-                 established. This one closes the loop on those instead of repeating them,
-                 and "while you don't" is the whole product in three words. */ ?>
-        <p class="final-cta__subtitle">A few minutes to install. Then it works while you don&rsquo;t.</p>
+        <?php /* Second attempt. "Then it works while you don't" was cut — a clever line
+                 that makes the reader do a double-take at the exact moment they should be
+                 clicking, and "you don't work" is not a flattering thing to tell a business
+                 owner about themselves. This states the time-to-value plainly, which is
+                 what the heading has just promised. */ ?>
+        <p class="final-cta__subtitle">A few minutes to install. It starts answering the moment it goes live.</p>
 
         <?php /* PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded
                  link: the target funnel is pricing -> checkout modal -> purchase, with
@@ -2546,7 +2567,25 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                  treatment and stripped of the shimmer. */ ?>
         <div class="final-cta__concierge">
           <span class="final-cta__concierge-label">Rather have us set it up?</span>
-          <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Let\'s Get Started" background_color="transparent" hover_background="#0A424A" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
+          <?php
+          /* ⚠️ THE ATTRIBUTES WERE WRITTEN FOR A DARK SECTION and stayed behind when this
+             one turned cream: background_color="transparent" over a dark panel, plus
+             hover_background="#0A424A" — a near-black. On cream that hover flips the button
+             to a dark slab under the pointer. Colour is handed to the stylesheet instead
+             (see .final-cta__concierge .sitestaffr-button-widget), because this shortcode's
+             colour attributes cannot be trusted anyway — border_width="1" is a documented
+             no-op. Measure the render; do not read the attribute.
+
+             "Request Assistance", not "Let's Get Started" (Mario, 2026-08-27). The old
+             label made the same promise as the primary button beside it, so the two read as
+             alternative routes to one thing rather than self-serve versus done-for-you.
+
+             ⚠️ persona="onboarding" IS LEFT ALONE deliberately. The plugin's
+             configurable-buttons work is migrating personas to button keys and nothing
+             seeds this one yet — tracked on the wiki task board as a production blocker.
+             Changing it here would be guessing at the far side of a migration in flight. */
+          echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Request Assistance" gradient="off" icon="sitestaffr" box_shadow="off"]' );
+          ?>
         </div>
         <p class="final-cta__note">We reply within 3 business days.</p>
 
@@ -2559,24 +2598,6 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <p class="final-cta__privacy">Details you share go to setting up your assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
       </div>
 
-      <?php /* ⚠️ THE ROBOT IS FINALLY IN. The cell sat EMPTY with a comment saying the
-               render was "pending" — but robot-cta.webp has been committed in this repo
-               the whole time. The placeholder outlived the thing it was waiting for, so
-               the closing section shipped with a reserved 340px hole in it. If a comment
-               ever says an asset is pending, check the directory before believing it.
-
-               Right-hand side, matching the hero and section 5 — three appearances on the
-               same side make him a motif rather than floating decoration. Open-handed
-               pose, which is the right gesture for an ask.
-
-               ⚠️ MASKED AT THE BOTTOM like every other robot on this page. The render was
-               made for a dark background and its alpha runs to the frame edge, so on cream
-               the legs end on a hard horizontal cut. Its own stops, not the language
-               section's — this figure is framed tighter, so it fades later. */ ?>
-      <div class="block-split__art final-cta__art">
-        <img src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-cta.webp' ) ); ?>"
-             alt="" aria-hidden="true" width="975" height="1380" loading="lazy" decoding="async">
-      </div>
     </div>
   </div>
 

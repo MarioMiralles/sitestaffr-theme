@@ -7500,32 +7500,35 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ---- The closing robot -------------------------------------------------
-   The cell held a `min-height: 340px` placeholder "reserved for robot-cta.webp" while
-   that file sat committed in the repo the whole time — so this section shipped with a
-   340px hole. The placeholder is gone with the thing it was holding space for.
+   ⚠️ A BACKGROUND FIGURE, NOT A COLUMN. It was the art cell of a Split, capped at the
+   column width and floating mid-section; now it is absolute against `.final-cta` and can
+   be as large as the section. See page-landing.php for why no bottom mask is needed —
+   the curtain's baseline is full depth at every x, so the section's clipped bottom edge
+   hides the artwork's hard leg cut at any viewport width, exactly as in the hero.
 
-   ⚠️ MASKED AT THE BOTTOM, with its own stops. Every robot render on this site was made
-   for a dark background and runs opaque to the frame edge, so on cream the legs end on a
-   hard horizontal cut. This figure is framed tighter than the language one, so it holds
-   to 88% before fading rather than that section's 66%. Re-measure per render; the numbers
-   are not transferable between them. */
-.final-cta__art {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  align-self: stretch;
+   `bottom: -24px` pushes that cut clear of the visible area rather than resting it
+   exactly on the boundary, where a fractional-pixel zoom could expose a row of it. */
+.final-cta__robot {
+  position: absolute;
+  right: clamp(0px, 4vw, 90px);
+  bottom: -24px;
+  z-index: 0;
+  pointer-events: none;
 }
-.final-cta__art img {
+.final-cta__robot img {
+  display: block;
   width: auto;
-  height: clamp(340px, 34vw, 470px);
-  max-width: 100%;
-  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 99%);
-          mask-image: linear-gradient(to bottom, #000 0%, #000 88%, transparent 99%);
+  height: clamp(430px, 44vw, 660px);
 }
-@media (max-width: 900px) {
-  /* On one column the copy is the whole point and the robot costs a screen of scroll
-     directly before the only button that matters. */
-  .final-cta__art { display: none; }
+/* The copy is a column in its own right now that the grid is gone. Capped so it can never
+   run under the figure as the viewport widens. */
+.final-cta__copy { max-width: 34rem; }
+
+@media (max-width: 1100px) {
+  /* Below this the copy column and the figure start competing for the same space; the
+     figure is the one that gives way. */
+  .final-cta__robot { display: none; }
+  .final-cta__copy { max-width: none; }
 }
 
 .final-cta__privacy {
