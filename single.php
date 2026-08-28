@@ -94,7 +94,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<?php endif; ?>
 
 						<div class="blog-post__meta">
-							<span class="blog-post__author">By <a href="<?php echo esc_url( $display_author_url ); ?>"><?php echo esc_html( $display_author_name ); ?></a></span>
+							<?php // An author with no display_name rendered a bare "By ·". ?>
+							<?php if ( '' !== trim( (string) $display_author_name ) ) : ?>
+								<span class="blog-post__author">By <a href="<?php echo esc_url( $display_author_url ); ?>"><?php echo esc_html( $display_author_name ); ?></a></span>
+							<?php endif; ?>
 							<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></time>
 							<span class="blog-post__readtime"><?php echo esc_html( $read_time ); ?> min read</span>
 							<?php if ( get_the_modified_date() !== get_the_date() ) : ?>
@@ -191,6 +194,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php endif; ?>
 					<div class="blog-card__content">
 						<h3 class="blog-card__title"><?php echo esc_html( get_the_title( $related_id ) ); ?></h3>
+						<?php
+						// Without this the card has nothing between title and meta, and
+						// `margin-top: auto` on the meta opens a hole the height of the
+						// tallest sibling. The index cards never showed it because they
+						// all carry an excerpt.
+						$rel_excerpt = get_the_excerpt( $related_id );
+						if ( '' !== trim( (string) $rel_excerpt ) ) :
+						?>
+							<p class="blog-card__excerpt"><?php echo esc_html( wp_trim_words( $rel_excerpt, 20 ) ); ?></p>
+						<?php endif; ?>
 						<div class="blog-card__meta">
 							<time datetime="<?php echo esc_attr( get_the_date( 'c', $related_id ) ); ?>"><?php echo esc_html( get_the_date( 'M j, Y', $related_id ) ); ?></time>
 							<span class="blog-card__readtime"><?php echo esc_html( $rel_read ); ?> min read</span>
@@ -224,6 +237,66 @@ if ( ! defined( 'ABSPATH' ) ) {
 </main>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
+
+<script>
+/* Marks the Contents rail entry for the section being read.
+
+   Inline, like the nav's own script in site-nav.php, rather than in site.js:
+   site.js is enqueued by TEMPLATE in functions.php and that list deliberately
+   does not include single.php — so a block added there on a blog post ships
+   dead. Adding this template to the list would pull 1,400 lines of homepage
+   JS onto every article to change one color, which is the worse trade.
+
+   The rail is fully rendered and fully clickable from PHP. This only adds a
+   class, so if it throws the rail is exactly as usable as it was. */
+(function () {
+  var rail = document.querySelector('.blog-post__toc');
+  if (!rail || !('IntersectionObserver' in window)) return;
+
+  var links = {};
+  var headings = [];
+
+  Array.prototype.forEach.call(rail.querySelectorAll('a[href^="#"]'), function (a) {
+    var id = decodeURIComponent(a.getAttribute('href').slice(1));
+    var h = id && document.getElementById(id);
+    if (!h) return;
+    links[id] = a;
+    headings.push(h);
+  });
+  if (!headings.length) return;
+
+  var current = null;
+  function mark(id) {
+    if (id === current) return;
+    if (current && links[current]) links[current].classList.remove('is-current');
+    if (links[id]) links[id].classList.add('is-current');
+    current = id;
+  }
+
+  /* Recompute from every heading's position rather than trusting the last
+     entry to fire: headings scrolled past ABOVE the viewport stop
+     intersecting, so "most recent intersection" picks the wrong one as soon
+     as you scroll quickly. */
+  function update() {
+    var active = null;
+    for (var i = 0; i < headings.length; i++) {
+      if (headings[i].getBoundingClientRect().top - 140 <= 0) active = headings[i].id;
+    }
+    if (!active) active = headings[0].id;
+    mark(active);
+  }
+
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(function () { update(); ticking = false; });
+  }, { passive: true });
+
+  update();
+})();
+</script>
+
 <?php wp_footer(); ?>
 </body>
 </html>

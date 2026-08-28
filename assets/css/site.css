@@ -11579,7 +11579,12 @@ a.ind-problem-card .ind-problem-card__icon--art {
 /* --- Mobile responsive --- */
 @media (max-width: 768px) {
   .blog-post__header {
-    padding: 56px 0 44px;
+    /* The nav is FIXED, so it does not consume flow and the hero's top padding
+       is the only thing holding the eyebrow off it. 56px put the eyebrow within
+       a few pixels of the nav's bottom edge at 768 and 390 — visible in a
+       screenshot, invisible in the CSS, because at 1440 the 96px desktop value
+       hid it. */
+    padding: 100px 0 44px;
   }
   .blog-post__title {
     max-width: none;
@@ -11915,14 +11920,19 @@ a.ind-problem-card .ind-problem-card__icon--art {
 
 /* --- Single post: Keep Reading + pager --- */
 .blog-post__related {
-  padding: clamp(40px, 6vw, 64px) 0;
-  background: #FAF8F4;
+  padding: 96px 0;
+  background: var(--cream-dark);
 }
+/* Was centred teal at up to 1.8rem, which was the only heading on the page
+   still following the old blog styling once the body h2s went dark and left. */
 .blog-post__related-title {
-  text-align: center;
-  font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+  font-family: var(--font-display);
+  font-size: 2.05rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
   margin: 0 0 32px;
-  color: var(--teal-deep);
+  color: var(--text-primary);
 }
 .blog-post__pager {
   display: flex;
