@@ -1199,3 +1199,46 @@ function sitestaffr_blog_toc( $content ) {
 		'items'   => $items,
 	);
 }
+
+/**
+ * 16:9 crops of the blog featured images.
+ *
+ * Every featured image ever published here is 1024x1024, and the blog templates
+ * are 16:9 throughout. Mario's call (2026-08-28) is to CROP the existing twelve
+ * rather than regenerate them, and to fix the ratio upstream in the Blog Agent's
+ * image settings for everything after that.
+ *
+ * Centre crop was checked against all twelve before committing to it: none loses
+ * its subject, and five improve, because what the crop removes is the garbled
+ * AI-generated headline text along the top edge.
+ *
+ * `true` = hard crop, centred.
+ *
+ * ⚠️ THE DIMENSIONS MUST FIT INSIDE THE SOURCE OR THE RATIO IS SILENTLY WRONG.
+ * WordPress does NOT return a smaller correct crop when the target is bigger than
+ * the source — it clamps the width and KEEPS the requested height. Probed against
+ * `image_resize_dimensions()` with a 1024x1024 source:
+ *
+ *     target 1600x900 -> 1024x900  (ratio 1.138)  <-- not 16:9 at all
+ *     target 1200x675 -> 1024x675  (ratio 1.517)  <-- not 16:9
+ *     target 1024x576 -> 1024x576  (ratio 1.778)  correct
+ *     target  800x450 ->  800x450  (ratio 1.778)  correct
+ *
+ * 1600x900 was the obvious first choice and it shipped a 1.14 crop that the CSS
+ * then cropped AGAIN, losing twice as much of the picture. Both values below fit
+ * inside 1024x1024, which is why they are the sizes they are.
+ *
+ * 👉 When the Blog Agent starts emitting 1920x1080, raise the hero to 1600x900 —
+ * it becomes valid at that point and the hero renders at 1100 CSS px, so 1024 is
+ * currently just under 1x.
+ *
+ * ⚠️ These sizes only exist for images uploaded AFTER this ships. Existing posts
+ * need `wp media regenerate --only-missing`. Until that runs the templates fall
+ * back to the full square and `.blog-post__figure`'s own `aspect-ratio: 16/9`
+ * still crops it visually — so the page looks correct either way, and
+ * regeneration is a payload/quality win rather than a prerequisite.
+ */
+add_action( 'after_setup_theme', function () {
+	add_image_size( 'sitestaffr-hero-wide', 1024, 576, true );
+	add_image_size( 'sitestaffr-card-wide', 800, 450, true );
+} );

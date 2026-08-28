@@ -86,11 +86,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<p class="blog-post__standfirst"><?php echo esc_html( get_the_excerpt() ); ?></p>
 					<?php endif; ?>
 
-					<?php if ( $has_thumb ) : ?>
-						<figure class="blog-post__figure">
-							<?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?>
-						</figure>
-					<?php endif; ?>
 
 					<div class="blog-post__lede-side">
 						<div class="blog-post__meta">
@@ -105,6 +100,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 							<?php endif; ?>
 						</div>
 					</div>
+
+					<?php if ( $has_thumb ) : ?>
+						<figure class="blog-post__figure">
+							<?php the_post_thumbnail( 'sitestaffr-hero-wide', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?>
+						</figure>
+					<?php endif; ?>
 				</div>
 			</div>
 		</header>
@@ -178,7 +179,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<a href="<?php echo esc_url( get_permalink( $related_id ) ); ?>" class="blog-card">
 					<?php if ( has_post_thumbnail( $related_id ) ) : ?>
 						<div class="blog-card__image">
-							<?php echo get_the_post_thumbnail( $related_id, 'medium_large' ); ?>
+							<?php echo get_the_post_thumbnail( $related_id, 'sitestaffr-card-wide' ); ?>
 						</div>
 					<?php else : ?>
 						<div class="blog-card__image blog-card__image--placeholder">

@@ -58,7 +58,7 @@ $post_index    = 0;
 					<a href="<?php the_permalink(); ?>" class="blog-card<?php echo $is_lead ? ' blog-card--lead' : ''; ?>">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<div class="blog-card__image">
-								<?php the_post_thumbnail( $is_lead ? 'large' : 'medium_large', $eager ); ?>
+								<?php the_post_thumbnail( $is_lead ? 'sitestaffr-hero-wide' : 'sitestaffr-card-wide', $eager ); ?>
 							</div>
 						<?php else : ?>
 							<div class="blog-card__image blog-card__image--placeholder">
