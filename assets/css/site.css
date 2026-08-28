@@ -3378,6 +3378,49 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .price-footnote strong { color: var(--text-primary); font-weight: 600; }
 
+/* ---- EVERYTHING CENTERS ONCE THE TWO-COLUMN LAYOUTS COLLAPSE ------------
+   (Mario, 2026-08-28: "let's center everything for tablet and mobile".)
+
+   Every one of these blocks was aligned left because it was the copy half of a
+   side-by-side, with an image or a list holding the other half. Below 1024 that
+   partner is gone — the block is alone in a single column with its own left edge and
+   nothing across from it — and left alignment then reads as an accident rather than a
+   decision. The hero, the section headers and the price identity already centered here;
+   this is the rest of the page catching up with them.
+
+   ⚠️ THREE THINGS DELIBERATELY STAY LEFT, and they are not oversights:
+
+   - THE LISTS. The overnight inbox rows, the industry names and the FAQ questions all
+     carry a right-edge affordance — a chevron, a plus, a status pill — and centering the
+     text pulls it off the edge that affordance is measured against. A centered row with a
+     chevron pinned right is not centered, it is lopsided.
+   - THE TESTIMONIAL QUOTE. Eight lines of running prose. Centering a paragraph that long
+     gives every line a different starting x and the eye loses the left edge on the return
+     sweep. Short copy centers fine; this is not short copy.
+   - ANYTHING ALREADY CENTERED. Not repeated here.
+
+   1024 to match the hero's stack, so tablet and phone read the same. */
+@media (max-width: 1024px) {
+  .cost-section__copy,
+  .job-value,
+  .what-you-get__callout,
+  .proof-section__header,
+  .proof-section__lead-stat,
+  .proof-section__stats-source,
+  .agency-door__panel,
+  .final-cta__copy {
+    text-align: center;
+  }
+  /* Flex/grid children ignore the inherited text-align, so the containers that lay their
+     own contents out need the axis said explicitly. */
+  .proof-section__lead-stat,
+  .agency-door__points { align-items: center; }
+  .agency-door__points { justify-items: center; }
+  /* The price card's spec rows are the reason this came up. Value and label are one
+     phrase, so the phrase centers as a unit rather than each part finding its own edge. */
+  .pricing-section .price-tier__row { justify-content: center; }
+}
+
 /* ---- Section 9: the FAQ ------------------------------------------------
    ⚠️ TWO COLUMNS, WHICH REVERSES THE "never two columns of questions" NOTE THAT USED TO
    BE HERE (Mario, 2026-08-27: "It's way too vertical"). Read the reasoning in
@@ -3889,7 +3932,8 @@ body.sitestaffr-landing-page .hero__visual > * {
    3px are new — inside the dark, over the dark, invisible.
 
    The `--close` variant is unchanged: it already lives on the LIGHT section below the
-   dark run and overlaps upward by 1px for the same reason, and that one is not clipped. */
+   dark run and overlaps upward by 1px for the same reason, and that one is not clipped.
+
    ⚠️ SCOPED TO THE ONE INSIDE A DARK BLOCK, AND IT HAS TO BE. There are TWO `--open`
    curtains on the homepage: this one, and the one at the bottom of the final CTA that
    pours into the footer. Restyling the bare class moved both, which put a dark shape
