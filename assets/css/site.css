@@ -3420,33 +3420,30 @@ body.sitestaffr-landing-page .hero__visual > * {
    everyone, and it arrives after the questions have had their chance rather than before.
    The old "only finishers see it" objection does not apply, because a two-column list is
    half as tall and its end is on screen with the columns. */
-/* ⚠️ ONE ROW: ROBOT, HEADING, BUTTON (Mario, 2026-08-28: "there's a lot of white-space
-   because of it in this card, can we put everything in a row and have it stack as the
-   viewport gets smaller?").
+/* ⚠️ ROBOT ON THE LEFT AT EVERY WIDTH, BUTTON UNDER THE HEADING (Mario, 2026-08-28: "I
+   want the robot always on the left side and I want the button to stack under the Still
+   Have a Question?"). Two rules follow from that and neither is optional:
 
-   It was a two-column grid — robot in one, a stacked heading-and-button in the other —
-   which was right when a supporting line sat between them. That line was deleted the same
-   day, and a two-item stack in a 436px column left ~200px of empty card beside it and 150
-   of empty card under it. Removing an element is property-by-property, and this is the
-   second property that had to move with it (the first was the 16px margin).
+   `flex-wrap: nowrap` — the robot must never drop to its own line, so the card cannot be
+   allowed to wrap at all. There is no stacked variant of this card any more; the earlier
+   560px and 640px breakpoints that made one are gone.
 
-   ⚠️ `display: contents` ON THE COPY WRAPPER IS WHAT MAKES THIS ONE ROW. The heading and
-   the button are inside `.faq-section__ask-copy`; a flex row on the card alone would lay
-   out robot | wrapper and stack the two again inside it. `display: contents` drops the
-   wrapper's own box so its children become flex items of the card. Delete that line and
-   the card silently goes back to two columns. */
+   `width: fit-content` — this is the actual fix for the complaint that started this
+   ("there's a lot of white-space because of it in this card"). The card was a fixed
+   44rem, and once the supporting line between the heading and the button was deleted the
+   copy no longer filled it: ~200px of empty card to the right of a 436px column. Sized to
+   its contents there is no right-hand emptiness to fill, and no layout has to change to
+   get rid of it. `max-width: 100%` keeps that honest on a phone.
+
+   A one-row robot|heading|button version shipped in between and was rejected. Do not
+   reach for it again — the robot is the left edge of this card. */
 .faq-section__ask {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  justify-content: center;
-  /* ⚠️ 52rem AND A SMALLER ROBOT, BOTH MEASURED. At the old 44rem with a 150px robot and
-     40px gaps the three items came to 705px inside a 628px content box, so the button
-     wrapped to its own line and the card was two rows pretending to be one. 52rem gives
-     756px of content box against 663px of content. Shrink the card or grow the robot
-     again and it silently goes back to wrapping — check the render, not the rule. */
-  gap: clamp(16px, 2.4vw, 30px);
-  max-width: 52rem;
+  gap: clamp(14px, 2.4vw, 30px);
+  width: fit-content;
+  max-width: 100%;
   margin: clamp(34px, 4.5vw, 56px) auto 0;
   padding: clamp(20px, 2.6vw, 30px) clamp(24px, 3vw, 38px);
   border: 1px solid var(--border-light);
@@ -3460,6 +3457,9 @@ body.sitestaffr-landing-page .hero__visual > * {
    are on the keyboard low in the frame, so the fade cannot start as high as the language
    one's — 82% keeps the hands whole and still lands the figure before the edge. */
 .faq-section__ask-robot {
+  /* `flex: none` so it never shrinks below its width when the copy is wide. A flex item's
+     default is to shrink, and a squeezed robot is worse than a wrapped heading. */
+  flex: none;
   width: clamp(96px, 13vw, 128px);
   height: auto;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
@@ -3470,10 +3470,19 @@ body.sitestaffr-landing-page .hero__visual > * {
    lived on `.faq-section__ask-note`. That line was deleted on 2026-08-28 and its spacing
    had to come with it, or the button sits 6px under the heading. Removing an element is
    property-by-property, never just a deletion. */
-.faq-section__ask-copy { display: contents; }
-/* No bottom margin: the heading is a flex item beside the button now, not above it. It
-   was 6px when a supporting line sat under it, then 16px when that line went and the gap
-   to the button had to come from somewhere. The row makes the gap the card's own. */
+/* The copy column: heading, then the button under it. `min-width: 0` so the heading may
+   wrap on a phone instead of forcing the card past `max-width: 100%` and pushing the
+   robot off its left edge. */
+.faq-section__ask-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+/* The 14px gap above owns the space to the button now. This margin has been 6px, then
+   16px, then 0 across three shapes of this card in two days — if the button ever looks
+   glued to the heading again, it is the gap that moved, not this. */
 .faq-section__ask-lead {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
@@ -3481,13 +3490,22 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-bottom: 0;
 }
 
-/* ⚠️ 640, RAISED FROM 560. Three items in a row need more width than two columns did:
-   left to wrap on its own the button dropped under a robot-and-heading pair, which is a
-   worse shape than a clean stack. Below this it is one centered column, which is the
-   "stack as the viewport gets smaller" half of the ask. */
-@media (max-width: 640px) {
-  .faq-section__ask { flex-direction: column; text-align: center; }
-  .faq-section__ask-robot { width: 110px; }
+/* ⚠️ NOTHING STACKS HERE, IT ONLY GETS SMALLER. The robot stays on the left at 320px, so
+   the phone treatment is a shrink, not a re-layout.
+
+   The button is the constraint. It is shortcode-rendered at a fixed 230px, and at 390 the
+   card has 302px of content box: a 76px robot plus a 14px gap leaves 212. So the button's
+   own type and padding come down here — it is the only element in the card that can give
+   width back. Without this the card blows past its max-width and the robot is pushed off
+   its own left edge, which is the one thing this layout exists to prevent. */
+@media (max-width: 560px) {
+  .faq-section__ask { padding: 18px 16px; gap: 12px; }
+  .faq-section__ask-robot { width: 76px; }
+  .faq-section__ask-copy { gap: 10px; }
+  .faq-section__ask .sitestaffr-button-widget {
+    font-size: 0.9rem !important;
+    padding: 11px 16px !important;
+  }
 }
 
 .faq-list { max-width: none; margin: 0; }
