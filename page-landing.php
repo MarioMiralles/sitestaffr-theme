@@ -2324,22 +2324,36 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        prop nearer the edge than that gets sliced off flat and reads as a broken image
        rather than as a prop peeking in. Bleeding off the LEFT and RIGHT is fine and
        intended — that is horizontal, and there is nothing above or below to bleed into. */
-    array( 'laptop',      'back',  'top:9%;left:-15%;',     185 ),
-    array( 'wordpress',   'back',  'top:5%;left:2%;',        86 ),
-    array( 'wireframe',   'back',  'top:3%;right:6%;',      162 ),
-    array( 'browser',     'back',  'top:14%;right:-13%;',   120 ),
-    array( 'swatches',    'back',  'bottom:10%;left:-14%;', 175 ),
-    array( 'plugin',      'back',  'bottom:4%;left:7%;',    124 ),
-    array( 'analytics',   'back',  'bottom:2%;left:37%;',   168 ),
-    array( 'notes',       'back',  'bottom:4%;left:63%;',   126 ),
-    array( 'cutting-mat', 'back',  'bottom:8%;right:-13%;', 158 ),
+    /* ⚠️ BALANCE IS A COUNT PER SIDE, and the first arrangement failed it: six props on
+       the right against four on the left and two in the middle, so the right crowded and
+       collided while the middle read as a hole. Now 4 left / 3 middle / 3 right / 2 front,
+       with the right-hand three spaced top / middle / bottom so none of them touch. If a
+       prop is ever moved, re-count — this is the kind of thing that drifts one edit at a
+       time.
+
+       ⚠️ NO OUTWARD OFFSET MAY EXCEED -8%, AND THAT IS A HARD CEILING SET BY THE NARROWEST
+       WIDTH THE FIELD IS SHOWN AT. The layer is 1140px, so at the 1360px breakpoint there
+       is only (1360-1140)/2 = 110px of gutter either side — and 8% of 1140 is 91px. An
+       earlier pass used -16% and -17%, which is 182px of bleed into a 110px gutter: at
+       1360 and 1440 the laptop, site-stack, swatches and cutting-mat were sliced off by
+       the viewport edge and read as cropped images. Measured, not guessed. Raise the
+       breakpoint before raising these. */
+    array( 'laptop',      'back',  'top:6%;left:-8%;',      182 ),   /* left  */
+    array( 'wordpress',   'back',  'top:2%;left:4%;',        84 ),
+    array( 'site-stack',  'back',  'top:44%;left:-8%;',     156 ),
+    array( 'swatches',    'back',  'bottom:9%;left:-7%;',   172 ),
+    array( 'browser',     'back',  'top:2%;left:21%;',      116 ),   /* middle */
+    array( 'analytics',   'back',  'bottom:2%;left:34%;',   164 ),
+    array( 'notes',       'back',  'bottom:5%;left:59%;',   124 ),
+    array( 'wireframe',   'back',  'top:3%;right:5%;',      156 ),   /* right */
+    array( 'plugin',      'back',  'bottom:4%;left:14%;',   120 ),
+    array( 'cutting-mat', 'back',  'bottom:3%;right:3%;',   150 ),
     /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
        the only part of the card with no text: the heading, the three columns and the
        button all sit left of it. All three are also light-bodied, so they read against
        #00323A — the dark props stay in the back layer on cream. */
-    array( 'git',         'front', 'top:15%;right:-2%;',     92 ),
-    array( 'site-stack',  'front', 'top:40%;right:-9%;',    162 ),
-    array( 'coffee',      'front', 'bottom:17%;right:-1%;', 145 ),
+    array( 'git',         'front', 'top:22%;right:-3%;',     90 ),
+    array( 'coffee',      'front', 'bottom:21%;right:-6%;', 142 ),
   );
   ?>
   <div class="agency-door__props" aria-hidden="true">
