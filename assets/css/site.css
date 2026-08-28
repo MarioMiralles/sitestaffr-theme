@@ -4155,6 +4155,18 @@ body.sitestaffr-landing-page .hero__visual > * {
   transition: color 0.3s ease;
 }
 
+/* ⚠️ THE FLOOR IS TOO HIGH FOR A 320px PHONE. The cards stay two-across down there, so
+   each is about 131px wide, and "DENTAL" at the 1.9rem floor is 112 — with the 46px
+   offset that is a left inset of minus 25 and the word clips to "ENTAL". Swept 1920 down
+   to 320: this is the only width that fails, and it fails on DENTAL alone.
+
+   The offset comes down with the size, to 38px, which still clears the ⓘ's left edge at
+   34. Four pixels of air rather than twelve, on a viewport where nothing else has twelve
+   either. */
+@media (max-width: 380px) {
+  .job-value__mark span { right: 38px; font-size: 1.5rem; }
+}
+
 /* EVERY CARD CHILD HAS TO BE RAISED ABOVE THE WATERMARK. The watermark is z-index 0 and
    the rest of the card's children are static, so without this they paint in source order
    underneath it — the amount would sit *behind* the stamp rather than on it. */
