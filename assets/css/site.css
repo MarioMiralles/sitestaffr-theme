@@ -3440,8 +3440,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: clamp(18px, 3vw, 40px);
-  max-width: 44rem;
+  /* ⚠️ 52rem AND A SMALLER ROBOT, BOTH MEASURED. At the old 44rem with a 150px robot and
+     40px gaps the three items came to 705px inside a 628px content box, so the button
+     wrapped to its own line and the card was two rows pretending to be one. 52rem gives
+     756px of content box against 663px of content. Shrink the card or grow the robot
+     again and it silently goes back to wrapping — check the render, not the rule. */
+  gap: clamp(16px, 2.4vw, 30px);
+  max-width: 52rem;
   margin: clamp(34px, 4.5vw, 56px) auto 0;
   padding: clamp(20px, 2.6vw, 30px) clamp(24px, 3vw, 38px);
   border: 1px solid var(--border-light);
@@ -3455,7 +3460,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    are on the keyboard low in the frame, so the fade cannot start as high as the language
    one's — 82% keeps the hands whole and still lands the figure before the edge. */
 .faq-section__ask-robot {
-  width: clamp(96px, 13vw, 150px);
+  width: clamp(96px, 13vw, 128px);
   height: auto;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
           mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
