@@ -468,12 +468,35 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-prefix">Put an AI Receptionist</span>
           <span class="hero__headline-focus">on Your Website</span>
         </h1>
-        <?php /* Ends on SITUATION, not category. "while you're on a job, with a client, or
-                 asleep" is audience signalling a dentist recognizes instantly. Never write
-                 "small and medium-sized businesses" - nobody self-identifies that way, and
-                 it would tell an agency this page is not for them. */ ?>
+        <?php /* ⚠️ THE "ON A JOB, WITH A CLIENT, OR ASLEEP" ENDING IS GONE, AND THIS
+                 REVERSES A RULE THAT USED TO SIT IN THIS EXACT COMMENT (Mario, 2026-08-28).
+                 The old note read: 'Ends on SITUATION, not category. "while you're on a
+                 job, with a client, or asleep" is audience signalling a dentist recognizes
+                 instantly.'
+
+                 It is a FALSE CONTRAST and Mario named it: "it's not like they even have
+                 an opportunity to answer while they're on a job, asleep, or with a client
+                 because SiteStaffr is in its own digital world outside of the real world."
+                 The clause implies the owner would otherwise be answering the website. He
+                 never was. A visitor at 2pm on a Tuesday got exactly the same nothing as
+                 one at 2am, so his calendar was never the variable.
+
+                 ⚠️ THIS DOES NOT CONDEMN THE OTHER TWO INSTANCES, and they stay. Section
+                 4's "You Were Asleep. Your Website Wasn't." is about what happened while he
+                 was not WATCHING, which is true. Section 2's "a shift you are not there
+                 for" is about the website's hours, not his availability. The test is
+                 whether the line implies he would have answered.
+
+                 WHAT REPLACED IT is the one thing nothing else on the first screen says.
+                 The five float cards carry what it does; section 2 carries the stake. The
+                 gap was credibility — where the answers come from — and it is also the top
+                 install objection, which the FAQ asks outright as "Do I need to train it or
+                 write scripts?".
+
+                 Still no "small and medium-sized businesses": nobody self-identifies that
+                 way, and it would tell an agency this page is not for them. */ ?>
         <p class="hero__subtitle">
-          Visitors type or talk. SiteStaffr answers from your own pages, takes their name and number, and emails you the lead &mdash; while you&rsquo;re on a job, with a client, or asleep.
+          SiteStaffr answers from your own pages &mdash; your services, your hours, your prices. Nothing to write, nothing to train.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; Installs in minutes &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
@@ -2356,7 +2379,10 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
          There were ZERO occurrences of "agency" on the homepage or in any template part,
          and lines like "while you're on a job, with a client, or asleep" actively tell an
-         agency this product is not for them. An agency visitor has just read an entire
+         agency this product is not for them. (That particular line left the hero on
+         2026-08-28 for an unrelated reason — see the note there — but the argument holds:
+         the page is still written to the plumber throughout.) An agency visitor has just
+         read an entire
          page written to a plumber; this is where the page says "and if you're the person
          who BUILDS the plumber's site, here's your version."
 

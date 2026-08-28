@@ -3420,10 +3420,26 @@ body.sitestaffr-landing-page .hero__visual > * {
    everyone, and it arrives after the questions have had their chance rather than before.
    The old "only finishers see it" objection does not apply, because a two-column list is
    half as tall and its end is on screen with the columns. */
+/* ⚠️ ONE ROW: ROBOT, HEADING, BUTTON (Mario, 2026-08-28: "there's a lot of white-space
+   because of it in this card, can we put everything in a row and have it stack as the
+   viewport gets smaller?").
+
+   It was a two-column grid — robot in one, a stacked heading-and-button in the other —
+   which was right when a supporting line sat between them. That line was deleted the same
+   day, and a two-item stack in a 436px column left ~200px of empty card beside it and 150
+   of empty card under it. Removing an element is property-by-property, and this is the
+   second property that had to move with it (the first was the 16px margin).
+
+   ⚠️ `display: contents` ON THE COPY WRAPPER IS WHAT MAKES THIS ONE ROW. The heading and
+   the button are inside `.faq-section__ask-copy`; a flex row on the card alone would lay
+   out robot | wrapper and stack the two again inside it. `display: contents` drops the
+   wrapper's own box so its children become flex items of the card. Delete that line and
+   the card silently goes back to two columns. */
 .faq-section__ask {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  display: flex;
+  flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   gap: clamp(18px, 3vw, 40px);
   max-width: 44rem;
   margin: clamp(34px, 4.5vw, 56px) auto 0;
@@ -3449,17 +3465,23 @@ body.sitestaffr-landing-page .hero__visual > * {
    lived on `.faq-section__ask-note`. That line was deleted on 2026-08-28 and its spacing
    had to come with it, or the button sits 6px under the heading. Removing an element is
    property-by-property, never just a deletion. */
+.faq-section__ask-copy { display: contents; }
+/* No bottom margin: the heading is a flex item beside the button now, not above it. It
+   was 6px when a supporting line sat under it, then 16px when that line went and the gap
+   to the button had to come from somewhere. The row makes the gap the card's own. */
 .faq-section__ask-lead {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
   font-weight: 600;
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
-@media (max-width: 560px) {
-  /* Robot above the copy rather than beside it — at this width a side-by-side leaves the
-     text about 150px wide and the button wraps to three lines. */
-  .faq-section__ask { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
+/* ⚠️ 640, RAISED FROM 560. Three items in a row need more width than two columns did:
+   left to wrap on its own the button dropped under a robot-and-heading pair, which is a
+   worse shape than a clean stack. Below this it is one centered column, which is the
+   "stack as the viewport gets smaller" half of the ask. */
+@media (max-width: 640px) {
+  .faq-section__ask { flex-direction: column; text-align: center; }
   .faq-section__ask-robot { width: 110px; }
 }
 
