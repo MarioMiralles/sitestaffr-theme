@@ -4132,17 +4132,22 @@ body.sitestaffr-landing-page .hero__visual > * {
    ask was to clear the icon, not to re-place the stamp. Top right is the position; the
    offset is the fix.
 
-   Bigger with it, as asked: 1.9/5vw/3.2rem, up from 1.65/4.2vw/2.6rem. Check "DENTAL",
-   the longest of the four — at 3.2rem it is 189px, so with the 46px offset it starts 18px
-   into a 251px card. Any longer word, or a larger size, starts colliding with the card's
-   own icon — which is sanctioned overlap, but check it rather than assume it. */
+   Bigger with it, as asked: 1.9/4vw/3.2rem, up from 1.65/4.2vw/2.6rem.
+
+   ⚠️ THE MIDDLE TERM IS 4vw AND IT IS NOT COSMETIC. "DENTAL" is the longest of the four
+   and the only one that can outgrow its card. At 5vw it measured 189px against a 225px
+   card at 1024 — with the 46px offset that is a left inset of MINUS 10, and the mark's
+   `overflow: hidden` clipped it to "ENTAL". 4vw is unchanged at 1440 (the 3.2rem cap
+   already wins there) and at 390 (the 1.9rem floor already wins), so it only bites in the
+   middle, which is exactly where the clipping was. Re-measure DENTAL, not HVAC, if any of
+   these three numbers change. */
 .job-value__mark span {
   position: absolute;
   top: 10px;
   right: 46px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(1.9rem, 5vw, 3.2rem);
+  font-size: clamp(1.9rem, 4vw, 3.2rem);
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
