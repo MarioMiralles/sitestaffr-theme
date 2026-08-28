@@ -10880,18 +10880,23 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--text-on-dark);
 }
 
-/* ONE column, the same width as the body's measure, for the whole article.
+/* The hero runs the FULL container; the body runs a reading measure under it.
 
-   The first build put the square image in a 640px column with the standfirst
-   and byline beside it. That leaves ~350px of empty dark under the side column,
-   and anchoring the byline to the image's baseline only FRAMED the hole rather
-   than removing it (Mario, 2026-08-28: "there's still the empty space"). A
-   square leaves a gap beside whatever sits next to it — the only structural fix
-   is to have nothing beside it. So the hero column, the image and the body
-   measure are all one width and one axis. */
-.blog-post__header .container,
+   Revision history matters here, because two earlier shapes were rejected and
+   the reasons are not obvious from the result:
+
+   1. Image in a 640px column with the standfirst beside it -> a square leaves a
+      gap beside whatever sits next to it, and anchoring the byline to the
+      image's baseline only framed the hole. ("There's still the empty space.")
+   2. Everything in one 720px column -> no empty space, but the page reads narrow
+      and vertical at 1440 and the square image became ~680px tall.
+
+   Both were symptoms of the SQUARE, not of the layout. With 16:9 sources the
+   image is a wide band the full width of the container, which is what a blog
+   hero should be, and the body can sit at a comfortable measure beneath it
+   without the page looking like a narrow strip. */
 .blog-post__body .container {
-  max-width: 720px;
+  max-width: 860px; /* 820px of text at ~85 characters */
 }
 .blog-post__label {
   display: inline-block;
@@ -10906,13 +10911,15 @@ a.ind-problem-card .ind-problem-card__icon--art {
   /* 72px at 1440. Do NOT chase Figma's 90px: their face is a 400-weight sans
      and Fraunces at 700 is far heavier per pixel — past ~72px it reads as a
      brick rather than a headline. */
-  /* 60px, not 72px: the column is 720px now, and 72px Fraunces in 720px breaks
-     a normal headline into too many short lines. */
-  font-size: clamp(2.2rem, 4.4vw, 3.75rem);
+  /* 72px. The hero is the full 1140px container again, so the headline has the
+     room for it. Still do NOT chase Figma's 90px — Fraunces at 700 is far
+     heavier per pixel and reads as a brick. */
+  font-size: clamp(2.4rem, 5vw, 4.5rem);
   font-weight: 700;
   color: var(--text-on-dark);
-  line-height: 1.06;
+  line-height: 1.04;
   letter-spacing: -0.02em;
+  max-width: 18ch;
   margin-top: 20px;
   text-wrap: balance;
 }
@@ -10920,8 +10927,8 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .blog-post__lede {
   display: flex;
   flex-direction: column;
-  gap: 28px;
-  margin-top: 28px;
+  gap: 32px;
+  margin-top: 26px;
 }
 .blog-post__figure {
   margin: 8px 0 0;
@@ -10929,11 +10936,18 @@ a.ind-problem-card .ind-problem-card__icon--art {
   overflow: hidden;
   background: var(--footer-dark);
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.42);
+  /* Stated on the FRAME, not left to the file, so the hero's height is the same
+     on every post and does not jump while the backfill to 16:9 is in progress.
+     ⚠️ Legacy 1024x1024 posts are centre-cropped by this until they are
+     regenerated — that is the transitional cost, and it is smaller than a
+     1140px-tall square. */
+  aspect-ratio: 16 / 9;
 }
 .blog-post__figure img {
   display: block;
   width: 100%;
-  height: auto; /* never crop — sources are square */
+  height: 100%;
+  object-fit: cover;
 }
 .blog-post__lede-side {
   display: flex;
@@ -10942,10 +10956,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 .blog-post__standfirst {
   font-family: var(--font-body);
-  font-size: 1.35rem;
+  font-size: 1.4rem;
   font-weight: 400;
   line-height: 1.55;
   color: rgba(240, 250, 250, 0.82);
+  max-width: 62ch; /* the image is 1140 wide; the deck should not be */
 }
 .blog-post__meta {
   display: flex;
@@ -11024,6 +11039,12 @@ a.ind-problem-card .ind-problem-card__icon--art {
   background: linear-gradient(to right, var(--teal-light), transparent);
   border-radius: 2px;
   margin-bottom: 18px;
+}
+/* The first block's own top margin stacks on the body's 96px padding, which put
+   ~180px between the dark hero and the first line of the article. */
+.blog-post__prose > :first-child {
+  margin-top: 0;
+  padding-top: 0;
 }
 .blog-post__body h3 {
   font-family: var(--font-display);
@@ -11702,11 +11723,13 @@ a.ind-problem-card .ind-problem-card__icon--art {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
-/* 1 / 1, because every featured image this site has ever published is
-   1024x1024. A 16/10 box cropped 37% off a square and usually took the
-   subjects with it. If sources ever become 16/9 this is the one line to change. */
+/* 16 / 9, matching the hero and the featured-image backfill. This was 1/1 for
+   one build, when every published image was 1024x1024 and cropping a square to
+   a wide box threw away the subjects at its edges. Regenerating the artwork at
+   16/9 is the upstream fix, so the card follows the artwork rather than the
+   other way round. */
 .blog-card__image {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--cream-dark);
 }
@@ -11762,7 +11785,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   align-items: stretch;
 }
 .blog-card--lead .blog-card__image {
-  flex: 0 0 42%;
+  flex: 0 0 50%;
   aspect-ratio: auto;
 }
 .blog-card--lead .blog-card__content {
