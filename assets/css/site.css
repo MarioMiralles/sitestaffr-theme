@@ -10879,6 +10879,20 @@ a.ind-problem-card .ind-problem-card__icon--art {
   padding: 96px 0 64px;
   color: var(--text-on-dark);
 }
+
+/* ONE column, the same width as the body's measure, for the whole article.
+
+   The first build put the square image in a 640px column with the standfirst
+   and byline beside it. That leaves ~350px of empty dark under the side column,
+   and anchoring the byline to the image's baseline only FRAMED the hole rather
+   than removing it (Mario, 2026-08-28: "there's still the empty space"). A
+   square leaves a gap beside whatever sits next to it — the only structural fix
+   is to have nothing beside it. So the hero column, the image and the body
+   measure are all one width and one axis. */
+.blog-post__header .container,
+.blog-post__body .container {
+  max-width: 720px;
+}
 .blog-post__label {
   display: inline-block;
   font-size: 0.72rem;
@@ -10892,30 +10906,25 @@ a.ind-problem-card .ind-problem-card__icon--art {
   /* 72px at 1440. Do NOT chase Figma's 90px: their face is a 400-weight sans
      and Fraunces at 700 is far heavier per pixel — past ~72px it reads as a
      brick rather than a headline. */
-  font-size: clamp(2.4rem, 5vw, 4.5rem);
+  /* 60px, not 72px: the column is 720px now, and 72px Fraunces in 720px breaks
+     a normal headline into too many short lines. */
+  font-size: clamp(2.2rem, 4.4vw, 3.75rem);
   font-weight: 700;
   color: var(--text-on-dark);
-  line-height: 1.04;
+  line-height: 1.06;
   letter-spacing: -0.02em;
-  max-width: 17ch;
   margin-top: 20px;
   text-wrap: balance;
 }
 
-/* the square image left, standfirst + byline right */
 .blog-post__lede {
-  display: grid;
-  grid-template-columns: 640px minmax(0, 1fr);
-  gap: 60px;
-  /* stretch, NOT start: the figure is 640px tall and the side column's text is
-     ~250px, which left a visibly dead ~350px hole under the byline. Stretching
-     the column and pushing the byline to the bottom lands it on the image's
-     baseline, so the gap reads as deliberate air anchored at both ends. */
-  align-items: stretch;
-  margin-top: 52px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-top: 28px;
 }
 .blog-post__figure {
-  margin: 0;
+  margin: 8px 0 0;
   border-radius: 20px;
   overflow: hidden;
   background: var(--footer-dark);
@@ -10929,17 +10938,14 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .blog-post__lede-side {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 28px;
-  padding-top: 4px;
+  gap: 24px;
 }
 .blog-post__standfirst {
   font-family: var(--font-body);
-  font-size: 1.6rem;
+  font-size: 1.35rem;
   font-weight: 400;
-  line-height: 1.48;
+  line-height: 1.55;
   color: rgba(240, 250, 250, 0.82);
-  max-width: 30ch;
 }
 .blog-post__meta {
   display: flex;
@@ -10978,70 +10984,20 @@ a.ind-problem-card .ind-problem-card__icon--art {
   padding: 96px 0;
   background: var(--cream);
 }
+/* One column. The sticky Contents rail that used to sit at 210px on the left was
+   removed on Mario's call (2026-08-28: "the sticky table of content on the side
+   is kind of distracting") — a element that moves in the margin competes with
+   the sentence you are reading. Heading ids are still injected by
+   sitestaffr_blog_toc() so in-page anchors and search-result jump links keep
+   working; only the rail is gone. */
 .blog-post__layout {
-  display: grid;
-  grid-template-columns: 210px minmax(0, 700px);
-  gap: 72px;
-  justify-content: center;
+  display: block;
 }
-/* the prose column carries the measure; it was 1100px (~129 characters) against
-   a 600-720px range across every blog measured */
+/* The 720px container carries the measure — 680px of text, ~72 characters. It
+   was 1100px (~129 characters) against a 600-720px range across every blog
+   measured for this redesign. */
 .blog-post__prose {
   min-width: 0;
-}
-
-/* --- Contents rail ---
-   ⚠️ Every rule here is prefixed with .blog-post__body deliberately. The rail
-   lives INSIDE .blog-post__body, and the prose rules for ul / li::before / a
-   sit LATER in this file at equal specificity — a bare `.blog-post__toc ul`
-   loses on source order and the rail renders as a bulleted teal list. The
-   prefix buys a second class so order stops mattering. */
-.blog-post__body .blog-post__toc {
-  position: sticky;
-  top: 40px;
-  align-self: start;
-}
-.blog-post__body .blog-post__toc-label {
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  padding-bottom: 12px;
-  border-bottom: 1px solid var(--border-light);
-}
-.blog-post__body .blog-post__toc ul {
-  list-style: none;
-  margin: 16px 0 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 13px;
-}
-.blog-post__body .blog-post__toc li {
-  margin: 0;
-  padding: 0;
-}
-.blog-post__body .blog-post__toc li::before {
-  content: none;
-  display: none;
-}
-.blog-post__body .blog-post__toc a {
-  display: block;
-  font-size: 0.88rem;
-  line-height: 1.4;
-  color: var(--text-secondary);
-  text-decoration: none;
-  border-bottom: 0;
-  transition: color 0.2s;
-}
-.blog-post__body .blog-post__toc a:hover,
-.blog-post__body .blog-post__toc a:focus-visible,
-.blog-post__body .blog-post__toc a.is-current {
-  color: var(--teal-deep);
-}
-.blog-post__body .blog-post__toc a.is-current {
-  font-weight: 600;
 }
 
 /* --- Typography --- */
@@ -11558,23 +11514,8 @@ a.ind-problem-card .ind-problem-card__icon--art {
   margin-top: 36px;
 }
 
-/* --- Tablet: the Contents rail has nowhere to sit --- */
-@media (max-width: 1080px) {
-  .blog-post__lede {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 36px;
-  }
-  .blog-post__standfirst {
-    max-width: none;
-  }
-  .blog-post__layout {
-    grid-template-columns: minmax(0, 700px);
-    gap: 0;
-  }
-  .blog-post__body .blog-post__toc {
-    display: none;
-  }
-}
+/* No tablet breakpoint: the article is one 720px column at every width above
+   mobile, so there is nothing to collapse. */
 
 /* --- Mobile responsive --- */
 @media (max-width: 768px) {

@@ -64,10 +64,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$cat_name   = ! empty( $categories ) ? esc_html( $categories[0]->name ) : 'Blog';
 		$has_thumb  = has_post_thumbnail();
 
-		// One pass over the rendered content: it ids the h2s for the Contents
-		// rail and gives us the word count for the read time. Doing this here
-		// rather than calling the_content() means the rail and the body cannot
-		// disagree about what the headings are.
+		// One pass over the rendered content: it gives every h2 a stable id, so
+		// in-page anchors and Google's jump-to-section links keep working, and
+		// it gives us the word count for the read time. (The Contents rail this
+		// originally fed was removed; the ids are worth keeping on their own.)
 		$rendered  = apply_filters( 'the_content', get_the_content() );
 		$toc       = sitestaffr_blog_toc( $rendered );
 		$read_time = sitestaffr_read_time( $rendered );
@@ -82,6 +82,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<h1 class="blog-post__title"><?php the_title(); ?></h1>
 
 				<div class="blog-post__lede">
+					<?php if ( has_excerpt() ) : ?>
+						<p class="blog-post__standfirst"><?php echo esc_html( get_the_excerpt() ); ?></p>
+					<?php endif; ?>
+
 					<?php if ( $has_thumb ) : ?>
 						<figure class="blog-post__figure">
 							<?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?>
@@ -89,10 +93,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php endif; ?>
 
 					<div class="blog-post__lede-side">
-						<?php if ( has_excerpt() ) : ?>
-							<p class="blog-post__standfirst"><?php echo esc_html( get_the_excerpt() ); ?></p>
-						<?php endif; ?>
-
 						<div class="blog-post__meta">
 							<?php // An author with no display_name rendered a bare "By ·". ?>
 							<?php if ( '' !== trim( (string) $display_author_name ) ) : ?>
@@ -112,17 +112,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="blog-post__body">
 			<div class="container">
 				<div class="blog-post__layout">
-					<?php if ( count( $toc['items'] ) > 2 ) : ?>
-					<aside class="blog-post__toc" aria-labelledby="blog-toc-label">
-						<div class="blog-post__toc-label" id="blog-toc-label"><?php esc_html_e( 'Contents', 'sitestaffr' ); ?></div>
-						<ul>
-							<?php foreach ( $toc['items'] as $item ) : ?>
-								<li><a href="#<?php echo esc_attr( $item['id'] ); ?>"><?php echo esc_html( $item['text'] ); ?></a></li>
-							<?php endforeach; ?>
-						</ul>
-					</aside>
-					<?php endif; ?>
-
 					<div class="blog-post__prose">
 						<?php echo $toc['content']; // phpcs:ignore WordPress.Security.EscapeOutput -- already run through the_content filters ?>
 					</div>
@@ -237,65 +226,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 </main>
 
 <?php get_template_part( 'template-parts/site-footer' ); ?>
-
-<script>
-/* Marks the Contents rail entry for the section being read.
-
-   Inline, like the nav's own script in site-nav.php, rather than in site.js:
-   site.js is enqueued by TEMPLATE in functions.php and that list deliberately
-   does not include single.php — so a block added there on a blog post ships
-   dead. Adding this template to the list would pull 1,400 lines of homepage
-   JS onto every article to change one color, which is the worse trade.
-
-   The rail is fully rendered and fully clickable from PHP. This only adds a
-   class, so if it throws the rail is exactly as usable as it was. */
-(function () {
-  var rail = document.querySelector('.blog-post__toc');
-  if (!rail || !('IntersectionObserver' in window)) return;
-
-  var links = {};
-  var headings = [];
-
-  Array.prototype.forEach.call(rail.querySelectorAll('a[href^="#"]'), function (a) {
-    var id = decodeURIComponent(a.getAttribute('href').slice(1));
-    var h = id && document.getElementById(id);
-    if (!h) return;
-    links[id] = a;
-    headings.push(h);
-  });
-  if (!headings.length) return;
-
-  var current = null;
-  function mark(id) {
-    if (id === current) return;
-    if (current && links[current]) links[current].classList.remove('is-current');
-    if (links[id]) links[id].classList.add('is-current');
-    current = id;
-  }
-
-  /* Recompute from every heading's position rather than trusting the last
-     entry to fire: headings scrolled past ABOVE the viewport stop
-     intersecting, so "most recent intersection" picks the wrong one as soon
-     as you scroll quickly. */
-  function update() {
-    var active = null;
-    for (var i = 0; i < headings.length; i++) {
-      if (headings[i].getBoundingClientRect().top - 140 <= 0) active = headings[i].id;
-    }
-    if (!active) active = headings[0].id;
-    mark(active);
-  }
-
-  var ticking = false;
-  window.addEventListener('scroll', function () {
-    if (ticking) return;
-    ticking = true;
-    window.requestAnimationFrame(function () { update(); ticking = false; });
-  }, { passive: true });
-
-  update();
-})();
-</script>
 
 <?php wp_footer(); ?>
 </body>
