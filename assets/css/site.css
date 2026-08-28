@@ -4129,26 +4129,39 @@ body.sitestaffr-landing-page .hero__visual > * {
    both rejected. If it looks wrong to you, it is not, and the sanctioned-overlap note
    above covers the same ground for the card's icon.
 
-   ⚠️ ONLY THE FLOOR CHANGED: 1.95rem, up from 1.65 ("make it a bit bigger font size for
-   mobile"). The cap and the vw term are untouched, so every width from about 743px up
-   renders exactly what it did before — desktop is byte-identical.
-
-   The floor is where it is because of DENTAL, the longest of the four and the only one
-   that can outgrow its card. At 320px the cards are still two-across at ~131px wide, and
-   DENTAL at 1.95rem is 115 — with the 14px offset that leaves 2px. 2.1rem clips it. Swept
-   1920 to 320; re-measure DENTAL, not HVAC, if this number ever moves. */
+   ⚠️ DESKTOP IS UNTOUCHED. The phone values are set in their own block below; this rule
+   is exactly what it was before 2026-08-28 apart from the floor, which no longer bites
+   anywhere the block below does not already override. */
 .job-value__mark span {
   position: absolute;
   top: 10px;
   right: 14px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(1.95rem, 4.2vw, 2.6rem);
+  font-size: clamp(1.65rem, 4.2vw, 2.6rem);
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
   color: rgba(240,250,250,0.038);
   transition: color 0.3s ease;
+}
+
+/* ⚠️ MARIO'S EXACT NUMBERS FOR THE PHONE (2026-08-28: "For mobile, make the top: 12px,
+   right: 20px, font-size: 2.6rem"). 2.6rem here is the same 41.6px the desktop clamp caps
+   at, so the stamp is one size everywhere and only its offset changes.
+
+   ⚠️ "DENTAL" CLIPS BELOW ABOUT 410px AND THAT IS KNOWN, NOT AN OVERSIGHT. It is the
+   longest of the four; at 41.6px it is 153px wide, and the cards stay two-across down to
+   320 — 169px at a 390 viewport, 131px at 320. With the 20px offset that is 4px short at
+   390 and 42px short at 320, so the D loses a sliver on a phone and more on a small one.
+   Mario was told and chose the size. Do not "fix" this by shrinking the font or moving
+   the offset; if it is ever revisited it is his call, not a cleanup. */
+@media (max-width: 768px) {
+  .job-value__mark span {
+    top: 12px;
+    right: 20px;
+    font-size: 2.6rem;
+  }
 }
 
 /* EVERY CARD CHILD HAS TO BE RAISED ABOVE THE WATERMARK. The watermark is z-index 0 and
@@ -4922,15 +4935,33 @@ body.sitestaffr-landing-page .hero__visual > * {
    place on the page that deviates — these are annotations on a document, and both V1 and
    the pricing panel draw them as line art. Keeping both is the decision, not an
    inconsistency to tidy up later. */
+/* ⚠️ CENTERED, WITH THE ICON BESIDE THE HEADING (Mario, 2026-08-28: "center it and place
+   the icons to the left of the heading"). The icon sat above the title, which put three
+   left-aligned things in a column and read as a list item rather than a card.
+
+   Flex-wrap rather than a two-column grid, and the reason is the description. As a grid
+   it would have to span both tracks, and a spanning item distributes its extra width
+   across the tracks it spans — so a long description silently widens the ICON's column
+   and the icon stops being next to the heading. `flex: 1 0 100%` forces it onto its own
+   line without ever influencing the two above it. */
+.what-you-get__callout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
+}
 .what-you-get__callout-icon {
-  margin-bottom: 10px;
+  margin-bottom: 0;
   color: var(--teal-deep);
   line-height: 0;
 }
 .what-you-get__callout-title {
   font-size: 1rem;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
+.what-you-get__callout-desc { flex: 1 0 100%; }
 .what-you-get__callout-desc {
   font-size: 0.86rem;
   color: var(--text-secondary);
