@@ -13008,8 +13008,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
   /* Flex/grid children ignore the inherited text-align, so the containers that lay their
      own contents out need the axis said explicitly. */
   .proof-section__lead-stat,
-  .agency-door__points { align-items: center; }
-  .agency-door__points { justify-items: center; }
+  .agency-door__points { align-items: center; justify-items: center; }
+  /* The teal rule down the left of each point was the spine of a left-aligned list.
+     Against centered text it stops being a spine and becomes a stray line sitting off to
+     one side of the words it is supposed to be holding. Centered copy does not need one. */
+  .agency-door__points li { padding-left: 0; border-left: 0; }
   /* The price card's spec rows are the reason this came up. Value and label are one
      phrase, so the phrase centers as a unit rather than each part finding its own edge. */
   .pricing-section .price-tier__row { justify-content: center; }
