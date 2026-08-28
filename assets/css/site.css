@@ -4118,53 +4118,37 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   z-index: 0;
 }
-/* ⚠️ STILL TOP RIGHT — IT JUST CLEARS THE ⓘ NOW. `right: 46px`, not 14px.
+/* ⚠️ `top: 10px; right: 14px` IS THE POSITION AND IT IS NOT TO BE MOVED (Mario,
+   2026-08-28, after two attempts to relocate it: "I think it was perfect where it was on
+   desktop so move it back. Just place it back exactly where it was").
 
-   `.job-value__src`, the button that opens the source tooltip, is at `top: 12px;
-   right: 12px` and is 22px wide, so its left edge is 34px in. At the old `right: 14px`
-   the button covered the last 20px of every word — identically at 1440 and at 390, so
-   every stamp read as a truncated one: "HVAC" as HVA, "DENTAL" as DENTA. Nothing was ever
-   clipped; the ⓘ was sitting on the final letter. A desktop bug that happened to be
-   reported from a phone. 46 is the button's 34 plus 12 of air.
+   The record, so nobody re-derives it: the ⓘ that opens the source tooltip sits at
+   `top: 12px; right: 12px` and is 22px wide, so it covers the last 20px of every word —
+   "HVAC" reads as HVA, "DENTAL" as DENTA. That was raised as a bug and it is not one; the
+   overlap is accepted. A bottom-right move and a `right: 46px` shift were both tried and
+   both rejected. If it looks wrong to you, it is not, and the sanctioned-overlap note
+   above covers the same ground for the card's icon.
 
-   ⚠️ IT WAS BRIEFLY MOVED TO THE BOTTOM-RIGHT AND THAT WAS WRONG (Mario, 2026-08-28: "why
-   did you put the industry names in the bottom right corner? I never asked for that"). The
-   ask was to clear the icon, not to re-place the stamp. Top right is the position; the
-   offset is the fix.
+   ⚠️ ONLY THE FLOOR CHANGED: 1.95rem, up from 1.65 ("make it a bit bigger font size for
+   mobile"). The cap and the vw term are untouched, so every width from about 743px up
+   renders exactly what it did before — desktop is byte-identical.
 
-   Bigger with it, as asked: 1.9/4vw/3.2rem, up from 1.65/4.2vw/2.6rem.
-
-   ⚠️ THE MIDDLE TERM IS 4vw AND IT IS NOT COSMETIC. "DENTAL" is the longest of the four
-   and the only one that can outgrow its card. At 5vw it measured 189px against a 225px
-   card at 1024 — with the 46px offset that is a left inset of MINUS 10, and the mark's
-   `overflow: hidden` clipped it to "ENTAL". 4vw is unchanged at 1440 (the 3.2rem cap
-   already wins there) and at 390 (the 1.9rem floor already wins), so it only bites in the
-   middle, which is exactly where the clipping was. Re-measure DENTAL, not HVAC, if any of
-   these three numbers change. */
+   The floor is where it is because of DENTAL, the longest of the four and the only one
+   that can outgrow its card. At 320px the cards are still two-across at ~131px wide, and
+   DENTAL at 1.95rem is 115 — with the 14px offset that leaves 2px. 2.1rem clips it. Swept
+   1920 to 320; re-measure DENTAL, not HVAC, if this number ever moves. */
 .job-value__mark span {
   position: absolute;
   top: 10px;
-  right: 46px;
+  right: 14px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: clamp(1.9rem, 4vw, 3.2rem);
+  font-size: clamp(1.95rem, 4.2vw, 2.6rem);
   line-height: 1;
   letter-spacing: -0.02em;
   white-space: nowrap;
   color: rgba(240,250,250,0.038);
   transition: color 0.3s ease;
-}
-
-/* ⚠️ THE FLOOR IS TOO HIGH FOR A 320px PHONE. The cards stay two-across down there, so
-   each is about 131px wide, and "DENTAL" at the 1.9rem floor is 112 — with the 46px
-   offset that is a left inset of minus 25 and the word clips to "ENTAL". Swept 1920 down
-   to 320: this is the only width that fails, and it fails on DENTAL alone.
-
-   The offset comes down with the size, to 38px, which still clears the ⓘ's left edge at
-   34. Four pixels of air rather than twelve, on a viewport where nothing else has twelve
-   either. */
-@media (max-width: 380px) {
-  .job-value__mark span { right: 38px; font-size: 1.5rem; }
 }
 
 /* EVERY CARD CHILD HAS TO BE RAISED ABOVE THE WATERMARK. The watermark is z-index 0 and
