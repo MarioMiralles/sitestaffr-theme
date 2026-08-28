@@ -2545,7 +2545,32 @@ body.sitestaffr-landing-page .hero__visual > * {
   .industries__excerpt { display: none; }
   .industries__stage { display: block; }
   .industries__list { margin-top: 0; grid-template-columns: minmax(0, 1fr); }
-  .industries__name { padding: 11px 10px; }
+  /* ⚠️ THE NEGATIVE MARGIN COMES OFF HERE. On desktop `margin-left: -10px` with 10px of
+     padding is what lets a pill bleed left of its column while its TEXT stays on the
+     column's edge — correct for a pill sized to its own text. In one full-width column
+     it made the fill start 10px left of the row separators and stop 10px short of them
+     on the right: a highlight visibly out of register with the list it is in.
+     Everything now sits on one edge — separators, fill, names, group headings, and the
+     expanded detail all start at the same x. */
+  .industries__name { width: 100%; margin-left: 0; padding: 12px; }
+  .industries__group-heading { padding-left: 12px; }
+  /* ⚠️ ON A PHONE ONLY `is-open` PAINTS, AND `is-active` MUST BE NEUTRALIZED.
+     `is-active` is the DESKTOP selection — the randomly featured industry, whose panel
+     and excerpt are both hidden at this width. Left styled it put a solid teal row into
+     a list where nothing was expanded, and then a SECOND teal row the moment the visitor
+     opened a different one. Two selected-looking rows, neither of them the open one. */
+  .industries__name.is-active,
+  .industries__name.is-active:hover {
+    background: none;
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+  .industries__name.is-open,
+  .industries__name.is-open:hover {
+    background: var(--teal-deep);
+    color: #fff;
+    font-weight: 600;
+  }
   .industries__name::after {
     content: "+";
     float: right;
@@ -2557,12 +2582,16 @@ body.sitestaffr-landing-page .hero__visual > * {
 
   .industries__mobile-detail {
     display: block;
-    padding: 4px 0 16px;
+    padding: 10px 12px 18px;
   }
+  /* Centered, not left-aligned. At 200px hard left in a 348px column the isometric read
+     as a stray thumbnail with a hole beside it; the paragraph under it is full width, so
+     nothing was holding the right half. The % keeps it in proportion on a wide tablet. */
   .industries__mobile-detail img {
-    width: 200px;          /* ~200px here, not 440 */
+    display: block;
+    width: min(260px, 72%);
     height: auto;
-    margin: 0 0 10px;
+    margin: 0 auto 14px;
   }
   .industries__mobile-detail p {
     color: var(--text-secondary);
