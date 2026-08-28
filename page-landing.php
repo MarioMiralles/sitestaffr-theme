@@ -2331,6 +2331,19 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        prop is ever moved, re-count — this is the kind of thing that drifts one edit at a
        time.
 
+       ⚠️ THE FRONT LAYER STRADDLES BOTH SIDES (Mario, 2026-08-27: "make a few of them
+       overlap on the left side as well"). It was three props, all on the right, because
+       the right is the only part of the card with no text ANYWHERE down its height.
+
+       The left works differently: the heading, the three columns and the button occupy
+       the middle of the card, but its TOP band (above the eyebrow) and BOTTOM band (below
+       the button) are empty across the full width. So the two left-hand front props cross
+       the card's top and bottom EDGES rather than its side — wordpress over the top edge,
+       swatches over the bottom edge. Verified against real text ink, not block boxes.
+
+       ⚠️ Do not promote `laptop` to the front layer. At 242px it reaches ~150px past the
+       card's left edge, which lands squarely on the heading.
+
        ⚠️ SIZES ARE DELIBERATELY UNEVEN (Mario, 2026-08-27: "I want the laptop asset to be
        a bit bigger and I want all the assets to have varying sizes"). They previously sat
        between 116 and 182 — a 1.6x spread, which at a glance reads as one size. The range
@@ -2346,9 +2359,9 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        the viewport edge and read as cropped images. Measured, not guessed. Raise the
        breakpoint before raising these. */
     array( 'laptop',      'back',  'top:4%;left:-8%;',      242 , 0, -3 ),   /* left  */
-    array( 'wordpress',   'back',  'top:1%;left:14%;',       74 , 0, 6 ),
+    array( 'swatches',    'front', 'bottom:13%;left:-6%;',  172 , 0, -5 ),
     array( 'site-stack',  'back',  'top:46%;left:-8%;',     148 , 1, 4 ),
-    array( 'swatches',    'back',  'bottom:10%;left:-7%;',  168 , 0, -5 ),
+    array( 'wordpress',   'front', 'top:15%;left:11%;',      78 , 0, 6 ),
     array( 'browser',     'back',  'top:3%;left:24%;',      118 , 1, 5 ),   /* middle */
     array( 'analytics',   'back',  'bottom:1%;left:33%;',   186 , 0, -4 ),
     array( 'notes',       'back',  'bottom:6%;left:59%;',   112 , 1, 9 ),
