@@ -3310,7 +3310,61 @@ body.sitestaffr-landing-page .hero__visual > * {
    is the only inverted object left on the page, and that is exactly what makes it read
    as an aside rather than as the reader's path. Repainting it light merges it into the
    cream run and loses the distinction the section exists to draw. */
-.agency-door { background: var(--cream); }
+.agency-door {
+  background: var(--cream);
+  position: relative;
+  /* ⚠️ ROOMIER THAN THE RUN, ON PURPOSE. This is the one light section with decoration
+     ABOVE and BELOW its content, and at the standard 96px the props had nowhere to live
+     but on top of the card. `.block.agency-door` because `.block:not(.block--dark)` is
+     0,2,0 and beats a bare class regardless of order — see .block.what-you-get. */
+  overflow: hidden;   /* props bleed past the viewport edges; nothing may scroll the page */
+}
+.block.agency-door { padding-block: 150px; }
+
+/* ---- The prop field ----------------------------------------------------
+   See page-landing.php for why these are twelve separate images rather than one scene.
+   The layer is inert and decorative; the props carry empty alt and the wrapper is
+   aria-hidden, so none of this reaches the accessibility tree. */
+.agency-door__props {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.agency-door__prop {
+  position: absolute;
+  height: auto;
+  /* Shadows live here, not in the artwork, so the same prop can sit on cream or on the
+     dark card and cast something appropriate to each. */
+  filter: drop-shadow(0 10px 18px rgba(0,50,58,0.14));
+}
+/* BEHIND the card. `.block__inner` is not positioned, so it would paint over these
+   anyway — stating z-index makes the intent survive someone adding a position later. */
+.agency-door__prop--back { z-index: 0; }
+/* IN FRONT of the card, which sits at z-index auto inside .block__inner. A deeper, harder
+   shadow because these are the props actually casting onto a surface rather than lying on
+   the page behind everything. */
+.agency-door__prop--front {
+  z-index: 3;
+  filter: drop-shadow(0 16px 26px rgba(0,0,0,0.34));
+}
+.agency-door .block__inner { position: relative; z-index: 1; }
+
+/* ⚠️ THE WHOLE FIELD GOES BELOW 1320px, AND THE NUMBER WAS MEASURED, NOT GUESSED. The
+   card is full width, so the only place the back layer can live is the cream gutter
+   outside the 1140px container — and that gutter shrinks as the viewport does until the
+   props are forced onto the heading and the three columns.
+
+   Counted props overlapping text, sweeping widths with the field forced visible:
+     1200px -> 4    1260px -> 3    1320px -> 0    1380px -> 0    1440px -> 0
+   A first attempt at 1100px looked reasonable and was wrong by 220px; at 1150 five props
+   sat on the copy. Decoration must never cost legibility, and a half-placed field reads
+   as a bug rather than as a lighter treatment — so all of it goes at once.
+
+   Re-measure this if the card's width, the container, or any prop's size changes. */
+@media (max-width: 1320px) {
+  .agency-door__props { display: none; }
+  .block.agency-door { padding-block: var(--block-pad-light); }
+}
 .agency-door__panel {
   /* Full width. The 860px cap made it a contained aside INSIDE the dark run; on cream
      the inversion already does that, and the cap only made it look like a narrow

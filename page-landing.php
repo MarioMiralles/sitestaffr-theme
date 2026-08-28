@@ -2297,6 +2297,60 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
          footer territory. The nav item catches the ones who self-classify in the first
          three seconds; this catches the ones who read to the end. */ ?>
 <section class="block agency-door">
+  <?php
+  /* THE PROP FIELD (Mario, 2026-08-27: "a background of props and a few that overlap").
+
+     TWO DEPTH LAYERS, which is the whole effect: nine props sit BEHIND the card out in
+     the cream, and three come FORWARD over its edges, so the card is sandwiched rather
+     than pasted onto a backdrop.
+
+     ⚠️ TWELVE SEPARATE PNGs, NOT ONE COMPOSITION, and that is deliberate. A single baked
+     scene is locked to the aspect ratio it was drawn at — which is exactly what killed
+     the crowd render in the language slot twice. Each prop is positioned against the
+     SECTION, so re-placing one cannot invalidate the others and none of them are measured
+     against the card.
+
+     ⚠️ THE FRONT THREE MUST READ ON #00323A. The sheet contains dark props (the cutting
+     mat, half the puzzle, the laptop screen) that vanish against the card — those stay in
+     the back layer on cream. Only light-bodied props come forward.
+
+     Shadows are CSS, not baked into the art, so a prop on cream and the same prop on the
+     dark card can cast appropriately different ones.
+
+     Each entry: file, layer, CSS edge pairs, width. Percentages are the SECTION's. */
+  $agency_props = array(
+    /* Back layer — out in the cream, several bleeding off the viewport edges.
+       ⚠️ Keep every `top`/`bottom` clear of 0-4%: the section clips its overflow, so a
+       prop nearer the edge than that gets sliced off flat and reads as a broken image
+       rather than as a prop peeking in. Bleeding off the LEFT and RIGHT is fine and
+       intended — that is horizontal, and there is nothing above or below to bleed into. */
+    array( 'laptop',      'back',  'top:9%;left:-3%;',      185 ),
+    array( 'wordpress',   'back',  'top:7%;left:15%;',       86 ),
+    array( 'wireframe',   'back',  'top:6%;right:13%;',     162 ),
+    array( 'browser',     'back',  'top:13%;right:-2%;',    120 ),
+    array( 'swatches',    'back',  'bottom:9%;left:-2%;',   175 ),
+    array( 'plugin',      'back',  'bottom:7%;left:20%;',   124 ),
+    array( 'analytics',   'back',  'bottom:8%;left:41%;',   168 ),
+    array( 'notes',       'back',  'bottom:9%;left:62%;',   126 ),
+    array( 'cutting-mat', 'back',  'bottom:9%;right:1%;',   158 ),
+    /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
+       the only part of the card with no text: the heading, the three columns and the
+       button all sit left of it. All three are also light-bodied, so they read against
+       #00323A — the dark props stay in the back layer on cream. */
+    array( 'git',         'front', 'top:17%;right:3%;',      92 ),
+    array( 'site-stack',  'front', 'top:41%;right:-3%;',    162 ),
+    array( 'coffee',      'front', 'bottom:19%;right:6%;',  145 ),
+  );
+  ?>
+  <div class="agency-door__props" aria-hidden="true">
+    <?php foreach ( $agency_props as $ap ) : ?>
+      <img class="agency-door__prop agency-door__prop--<?php echo esc_attr( $ap[1] ); ?>"
+           src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/agency/' . $ap[0] . '.webp' ) ); ?>"
+           alt="" loading="lazy" decoding="async"
+           style="<?php echo esc_attr( $ap[2] ); ?>width:<?php echo (int) $ap[3]; ?>px;">
+    <?php endforeach; ?>
+  </div>
+
   <div class="block__inner">
     <div class="agency-door__panel">
       <?php /* THE EYEBROW IS LOAD-BEARING. It tells a plumber to skip this, which is what
