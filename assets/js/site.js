@@ -1387,3 +1387,56 @@ if (langExpandBtn) {
      mobile details, so a throw above leaves every blurb and link readable. */
   root.classList.add('is-interactive');
 })();
+
+/* --- Blog post: mark the Contents rail entry for the section you are reading ---
+
+   The rail is fully rendered and fully clickable in PHP. This only adds
+   .is-current, which is a colour change, so if anything below throws the rail
+   is exactly as usable as it was — the same resilience rule every interactive
+   section on this site follows. */
+(function () {
+  var rail = document.querySelector('.blog-post__toc');
+  if (!rail || !('IntersectionObserver' in window)) return;
+
+  var links = {};
+  var headings = [];
+
+  Array.prototype.forEach.call(rail.querySelectorAll('a[href^="#"]'), function (a) {
+    var id = decodeURIComponent(a.getAttribute('href').slice(1));
+    var h = id && document.getElementById(id);
+    if (!h) return;
+    links[id] = a;
+    headings.push(h);
+  });
+  if (!headings.length) return;
+
+  var current = null;
+  function mark(id) {
+    if (id === current) return;
+    if (current && links[current]) links[current].classList.remove('is-current');
+    if (links[id]) links[id].classList.add('is-current');
+    current = id;
+  }
+
+  /* Track every heading's position rather than the last one to fire: headings
+     scrolled past ABOVE the viewport stop intersecting, so "most recent
+     intersection" picks the wrong one as soon as you scroll fast. */
+  var seen = {};
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { seen[e.target.id] = e.isIntersecting; });
+
+    var active = null;
+    for (var i = 0; i < headings.length; i++) {
+      var top = headings[i].getBoundingClientRect().top;
+      if (top - 120 <= 0) active = headings[i].id;
+    }
+    if (!active) {
+      for (var j = 0; j < headings.length; j++) {
+        if (seen[headings[j].id]) { active = headings[j].id; break; }
+      }
+    }
+    if (active) mark(active);
+  }, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
+
+  headings.forEach(function (h) { io.observe(h); });
+})();

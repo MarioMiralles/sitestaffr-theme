@@ -1129,3 +1129,73 @@ add_action( 'template_redirect', function () {
 	}
 }, -10 );
 
+
+/**
+ * Estimated reading time in whole minutes.
+ *
+ * Shown in the blog hero and on every index card. Four of the five reference
+ * blogs measured for the 2026-08-28 redesign show one; none of ours did.
+ * 225 wpm is the usual figure for online prose.
+ */
+function sitestaffr_read_time( $content ) {
+	$words = preg_match_all( '/\S+/', wp_strip_all_tags( $content ) );
+	return max( 1, (int) round( $words / 225 ) );
+}
+
+/**
+ * Give every <h2> in post content a stable id and return the list, so the
+ * single-post template can build a Contents rail without a second pass over
+ * the HTML.
+ *
+ * Returns array( 'content' => string, 'items' => array of id/text ).
+ *
+ * Headings that already carry an id keep it — post HTML is hand-pasted from
+ * docs/blog-posts/ and some of it is already anchored.
+ */
+function sitestaffr_blog_toc( $content ) {
+	$items = array();
+	$seen  = array();
+
+	$content = preg_replace_callback(
+		'/<h2\b([^>]*)>(.*?)<\/h2>/is',
+		function ( $m ) use ( &$items, &$seen ) {
+			$text = trim( wp_strip_all_tags( $m[2] ) );
+			if ( '' === $text ) {
+				return $m[0];
+			}
+			$attrs = $m[1];
+
+			if ( preg_match( '/\bid=["\']([^"\']+)["\']/', $attrs, $found ) ) {
+				$id = $found[1];
+			} else {
+				$id = sanitize_title( $text );
+				if ( '' === $id ) {
+					$id = 'section';
+				}
+				// sanitize_title() collapses punctuation, so two headings can
+				// land on the same slug and the rail would scroll to the wrong
+				// one. Suffix duplicates.
+				if ( isset( $seen[ $id ] ) ) {
+					$seen[ $id ]++;
+					$id .= '-' . $seen[ $id ];
+				} else {
+					$seen[ $id ] = 1;
+				}
+				$attrs .= ' id="' . esc_attr( $id ) . '"';
+			}
+
+			$items[] = array(
+				'id'   => $id,
+				'text' => $text,
+			);
+
+			return '<h2' . $attrs . '>' . $m[2] . '</h2>';
+		},
+		$content
+	);
+
+	return array(
+		'content' => $content,
+		'items'   => $items,
+	);
+}

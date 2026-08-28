@@ -45,31 +45,31 @@ $post_index    = 0;
 				<div class="blog-grid">
 					<?php while ( $blog_query->have_posts() ) : $blog_query->the_post();
 						$post_index++;
-						$categories = get_the_category();
-						$cat_name   = ! empty( $categories ) ? esc_html( $categories[0]->name ) : '';
-						$eager      = ( $is_first_page && $post_index <= 3 ) ? array( 'loading' => 'eager' ) : array();
+						// On page one the newest post runs as a wide lead card —
+						// square image left, title and deck right — mirroring the
+						// post hero so the index and the article read as one system.
+						$is_lead  = ( $is_first_page && 1 === $post_index );
+						$eager    = ( $is_first_page && $post_index <= 3 ) ? array( 'loading' => 'eager' ) : array();
+						$read     = sitestaffr_read_time( get_the_content() );
 					?>
-					<a href="<?php the_permalink(); ?>" class="blog-card">
+					<a href="<?php the_permalink(); ?>" class="blog-card<?php echo $is_lead ? ' blog-card--lead' : ''; ?>">
 						<?php if ( has_post_thumbnail() ) : ?>
 							<div class="blog-card__image">
-								<?php the_post_thumbnail( 'medium_large', $eager ); ?>
+								<?php the_post_thumbnail( $is_lead ? 'large' : 'medium_large', $eager ); ?>
 							</div>
 						<?php else : ?>
 							<div class="blog-card__image blog-card__image--placeholder">
-								<span>📝</span>
+								<span><?php the_title(); ?></span>
 							</div>
 						<?php endif; ?>
 						<div class="blog-card__content">
-							<?php if ( $cat_name ) : ?>
-								<span class="blog-card__category"><?php echo $cat_name; ?></span>
-							<?php endif; ?>
 							<h3 class="blog-card__title"><?php the_title(); ?></h3>
 							<?php if ( has_excerpt() ) : ?>
-								<p class="blog-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), 20 ) ); ?></p>
+								<p class="blog-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt(), $is_lead ? 34 : 20 ) ); ?></p>
 							<?php endif; ?>
 							<div class="blog-card__meta">
 								<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'M j, Y' ) ); ?></time>
-								<span class="blog-card__read-more">Read &rarr;</span>
+								<span class="blog-card__readtime"><?php echo esc_html( $read ); ?> min read</span>
 							</div>
 						</div>
 					</a>

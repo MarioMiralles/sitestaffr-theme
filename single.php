@@ -63,47 +63,75 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$categories = get_the_category();
 		$cat_name   = ! empty( $categories ) ? esc_html( $categories[0]->name ) : 'Blog';
 		$has_thumb  = has_post_thumbnail();
+
+		// One pass over the rendered content: it ids the h2s for the Contents
+		// rail and gives us the word count for the read time. Doing this here
+		// rather than calling the_content() means the rail and the body cannot
+		// disagree about what the headings are.
+		$rendered  = apply_filters( 'the_content', get_the_content() );
+		$toc       = sitestaffr_blog_toc( $rendered );
+		$read_time = sitestaffr_read_time( $rendered );
+
+		$display_author_name = get_the_author_meta( 'display_name' );
+		$display_author_url  = get_author_posts_url( get_the_author_meta( 'ID' ) );
 	?>
 	<article class="blog-post__article">
-		<header class="blog-post__header<?php echo $has_thumb ? ' blog-post__header--has-image' : ''; ?>">
+		<header class="blog-post__header">
 			<div class="container">
-				<div class="blog-post__header-content">
-					<span class="blog-post__label"><?php echo $cat_name; ?></span>
-					<h1 class="blog-post__title"><?php the_title(); ?></h1>
-					<?php if ( has_excerpt() ) : ?>
-						<p class="blog-post__excerpt"><?php echo esc_html( get_the_excerpt() ); ?></p>
+				<span class="blog-post__label"><?php echo $cat_name; ?></span>
+				<h1 class="blog-post__title"><?php the_title(); ?></h1>
+
+				<div class="blog-post__lede">
+					<?php if ( $has_thumb ) : ?>
+						<figure class="blog-post__figure">
+							<?php the_post_thumbnail( 'large', array( 'loading' => 'eager', 'fetchpriority' => 'high' ) ); ?>
+						</figure>
 					<?php endif; ?>
-					<div class="blog-post__meta">
-						<?php
-						$display_author_name = get_the_author_meta( 'display_name' );
-						$display_author_url  = get_author_posts_url( get_the_author_meta( 'ID' ) );
-						?>
-						<span class="blog-post__author">By <a href="<?php echo esc_url( $display_author_url ); ?>"><?php echo esc_html( $display_author_name ); ?></a></span>
-						<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></time>
-						<?php if ( get_the_modified_date() !== get_the_date() ) : ?>
-							<span class="blog-post__updated">Updated <?php echo esc_html( get_the_modified_date( 'F j, Y' ) ); ?></span>
+
+					<div class="blog-post__lede-side">
+						<?php if ( has_excerpt() ) : ?>
+							<p class="blog-post__standfirst"><?php echo esc_html( get_the_excerpt() ); ?></p>
 						<?php endif; ?>
+
+						<div class="blog-post__meta">
+							<span class="blog-post__author">By <a href="<?php echo esc_url( $display_author_url ); ?>"><?php echo esc_html( $display_author_name ); ?></a></span>
+							<time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date( 'F j, Y' ) ); ?></time>
+							<span class="blog-post__readtime"><?php echo esc_html( $read_time ); ?> min read</span>
+							<?php if ( get_the_modified_date() !== get_the_date() ) : ?>
+								<span class="blog-post__updated">Updated <?php echo esc_html( get_the_modified_date( 'F j, Y' ) ); ?></span>
+							<?php endif; ?>
+						</div>
 					</div>
 				</div>
-				<?php if ( $has_thumb ) : ?>
-					<div class="blog-post__hero-image">
-						<?php the_post_thumbnail( 'full', array( 'loading' => 'eager' ) ); ?>
-					</div>
-				<?php endif; ?>
 			</div>
 		</header>
 
 		<div class="blog-post__body">
 			<div class="container">
-				<?php the_content(); ?>
+				<div class="blog-post__layout">
+					<?php if ( count( $toc['items'] ) > 2 ) : ?>
+					<aside class="blog-post__toc" aria-labelledby="blog-toc-label">
+						<div class="blog-post__toc-label" id="blog-toc-label"><?php esc_html_e( 'Contents', 'sitestaffr' ); ?></div>
+						<ul>
+							<?php foreach ( $toc['items'] as $item ) : ?>
+								<li><a href="#<?php echo esc_attr( $item['id'] ); ?>"><?php echo esc_html( $item['text'] ); ?></a></li>
+							<?php endforeach; ?>
+						</ul>
+					</aside>
+					<?php endif; ?>
+
+					<div class="blog-post__prose">
+						<?php echo $toc['content']; // phpcs:ignore WordPress.Security.EscapeOutput -- already run through the_content filters ?>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<section class="blog-post__cta-banner" aria-label="Try SiteStaffr">
 			<div class="container">
 				<div class="blog-post__cta-inner">
-					<h2><?php esc_html_e( 'Put an AI voice agent on your website', 'sitestaffr' ); ?></h2>
-					<p><?php esc_html_e( 'SiteStaffr answers visitor questions, captures contact details, and speaks 57+ languages — trained on your own website. Set up in minutes, free trial included.', 'sitestaffr' ); ?></p>
+					<h2><?php esc_html_e( 'Put an AI Receptionist on Your Website', 'sitestaffr' ); ?></h2>
+					<p><?php esc_html_e( 'One AI hire that answers by voice and text, captures the lead, and emails you the recap — trained on your own website. Set up in minutes, free trial included.', 'sitestaffr' ); ?></p>
 					<a class="blog-post__cta-button" href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>"><?php esc_html_e( 'Get Started Free', 'sitestaffr' ); ?></a>
 				</div>
 			</div>
@@ -149,8 +177,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<?php if ( ! empty( $related_ids ) ) : ?>
 			<div class="blog-grid">
 				<?php foreach ( $related_ids as $related_id ) :
-					$rel_cats     = get_the_category( $related_id );
-					$rel_cat_name = ! empty( $rel_cats ) ? esc_html( $rel_cats[0]->name ) : '';
+					$rel_read = sitestaffr_read_time( get_post_field( 'post_content', $related_id ) );
 				?>
 				<a href="<?php echo esc_url( get_permalink( $related_id ) ); ?>" class="blog-card">
 					<?php if ( has_post_thumbnail( $related_id ) ) : ?>
@@ -159,17 +186,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 						</div>
 					<?php else : ?>
 						<div class="blog-card__image blog-card__image--placeholder">
-							<span>📝</span>
+							<span><?php echo esc_html( get_the_title( $related_id ) ); ?></span>
 						</div>
 					<?php endif; ?>
 					<div class="blog-card__content">
-						<?php if ( $rel_cat_name ) : ?>
-							<span class="blog-card__category"><?php echo $rel_cat_name; ?></span>
-						<?php endif; ?>
 						<h3 class="blog-card__title"><?php echo esc_html( get_the_title( $related_id ) ); ?></h3>
 						<div class="blog-card__meta">
 							<time datetime="<?php echo esc_attr( get_the_date( 'c', $related_id ) ); ?>"><?php echo esc_html( get_the_date( 'M j, Y', $related_id ) ); ?></time>
-							<span class="blog-card__read-more">Read &rarr;</span>
+							<span class="blog-card__readtime"><?php echo esc_html( $rel_read ); ?> min read</span>
 						</div>
 					</div>
 				</a>
