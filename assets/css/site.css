@@ -11568,7 +11568,21 @@ a.ind-problem-card .ind-problem-card__icon--art {
     font-size: 1.15rem;
   }
   .blog-post__body {
-    padding: 56px 0;
+    /* ⚠️ This is a `padding` SHORTHAND and it sits later in the file, so it beats
+       the desktop rule outright — including the seam allowance baked into it.
+       Written as 56px flat, the curtain overlaid the first heading's air and the
+       article opened tight under the spike. The seam height has to be re-added
+       at every breakpoint that restates this padding. */
+    padding: calc(56px + clamp(56px, 7vw, 120px)) 0 56px;
+  }
+  .blog-post__related {
+    padding: 56px 0 calc(56px + clamp(56px, 7vw, 120px));
+  }
+  .blog-index__posts {
+    padding: calc(48px + clamp(56px, 7vw, 120px)) 0 calc(56px + clamp(56px, 7vw, 120px));
+  }
+  .blog-post__cta-banner {
+    padding: 0 0 56px;
   }
   .blog-post__body p {
     font-size: 1.0625rem;
