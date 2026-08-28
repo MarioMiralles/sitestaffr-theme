@@ -7508,10 +7508,24 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    `bottom: -24px` pushes that cut clear of the visible area rather than resting it
    exactly on the boundary, where a fractional-pixel zoom could expose a row of it. */
+/* ⚠️ CONFINED TO THE CONTAINER, LIKE THE HERO'S ROBOT (Mario, 2026-08-27: "the CTA
+   Robot should be within the same confines as the robot in the Hero"). It was pinned to
+   the VIEWPORT's right edge, so on a wide screen it drifted away from the content and
+   read as a sticker on the browser rather than part of the layout — the same defect the
+   agency props had, from the same cause.
+
+   Centred to --block-max with auto margins and flushed right inside that, so it sits
+   against the content column at every width. Auto margins rather than a transform, since
+   a transform here would create a stacking context and lift the figure over the copy. */
 .final-cta__robot {
   position: absolute;
-  right: clamp(0px, 4vw, 90px);
+  left: 0;
+  right: 0;
   bottom: -24px;
+  width: min(var(--block-max), 100%);
+  margin-inline: auto;
+  display: flex;
+  justify-content: flex-end;
   z-index: 0;
   pointer-events: none;
 }

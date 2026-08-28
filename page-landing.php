@@ -1319,10 +1319,19 @@ $lang_greetings = array(
 <section class="block lang-section" id="languages">
   <div class="block__inner">
     <div class="lang-section__header">
-      <span class="section-label">Speaks Their Language</span>
+      <?php /* ⚠️ THE EYEBROW, THE HEADING AND THE SUBTITLE ALL SAID THE SAME SENTENCE
+               (Mario, 2026-08-27: "it's repetitive"). The label read "Speaks Their
+               Language" directly above a heading reading "SiteStaffr Speaks Their
+               Language", and the subtitle then added "and so does SiteStaffr" — the same
+               claim a third time before the reader reached a single greeting.
+
+               The heading is the line worth keeping, so the other two now do different
+               jobs: the label names the OBJECTION (a visitor who does not read English),
+               and the subtitle supplies the number and the fact that it needs no setup. */ ?>
+      <span class="section-label">No Language Barrier</span>
       <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
       <p class="lang-section__text">
-        Your visitors speak 57+ languages, and so does SiteStaffr. It answers in whatever language they open with.
+        Your visitors open in 57+ languages. It replies in whichever one they use, with nothing for you to set up.
       </p>
     </div>
 
@@ -1810,7 +1819,12 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         // below this already says, so the heading was the one place still overclaiming.
         // This is a correctness fix, not a style one. ?>
       <h2>One Flat Price. Unlimited Text Chat.</h2>
-      <p class="pricing-section__subtitle">Start free for 30 days, no credit card. After that a busy month costs the same as a quiet one. Only voice minutes change between plans.</p>
+      <?php /* ⚠️ THE MIDDLE SENTENCE RESTATED THE HEADING. It read "After that a busy
+               month costs the same as a quiet one" — which is exactly what "One Flat Price"
+               says two lines above, in more words and less plainly. Cut. What is left is
+               the two things the heading does NOT cover: the trial terms, and the single
+               axis that actually varies between plans. */ ?>
+      <p class="pricing-section__subtitle">Start free for 30 days, no credit card. Only voice minutes change between plans.</p>
     </div>
     <div class="price-includes price-includes--homepage">
       <div class="price-includes__grid" data-label="Every plan includes">
@@ -2256,11 +2270,13 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
       <div class="faq-section__ask-copy">
         <p class="faq-section__ask-lead">Still have a question?</p>
-        <?php /* SECOND ATTEMPT AT THIS LINE. The first read "Ask ours — it's the same one
-                 you'd install, answering from this very site", which was cut as weird: it
-                 spent its opening words introducing itself before reaching the point. This
-                 one leads with what the assistant does and lets the button do the asking. */ ?>
-        <p class="faq-section__ask-note">It answers from these pages, day or night &mdash; the same assistant you&rsquo;d install.</p>
+        <?php /* THIRD ATTEMPT, and the lesson from the first two is that this line kept
+                 EXPLAINING ITSELF. "Ask ours — it's the same one you'd install, answering
+                 from this very site" and then "It answers from these pages, day or night —
+                 the same assistant you'd install" both spent their length describing the
+                 widget rather than saying anything the reader gains. It is one short claim
+                 now: the thing is live, right here, try it. */ ?>
+        <p class="faq-section__ask-note">It&rsquo;s already answering on this page. Ask it anything.</p>
         <?php
         /* ⚠️ A REAL [sitestaffr_button], REPLACING A BUTTON THAT DID NOTHING. The old
            markup was `<button class="btn btn--outline js-open-chat">` and NOTHING IN THE
