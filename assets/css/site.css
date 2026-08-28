@@ -4565,16 +4565,16 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.55;
 }
 
-@media (max-width: 760px) {
-  /* Two rows on phones. The tag drops to its own line rather than squeezing the
-     "what" column to nothing. */
-  .morning-inbox__item {
-    grid-template-columns: 76px 1fr;
-    row-gap: 4px;
-  }
-  .morning-inbox__what { grid-column: 1 / -1; }
-  .morning-inbox__tag { grid-column: 1 / -1; justify-self: start; }
-}
+/* A @media (max-width: 760px) block sat here and was deleted on 2026-08-28. It set
+   `grid-template-columns` on `.morning-inbox__item`, which stopped being the grid when
+   the row became a <button> — the `<li>` only draws a border now, so that declaration
+   had been doing nothing for some time and read as if the block were dead.
+
+   Its other two lines were very much alive, and being later in the file they silently
+   beat the 620px block above: `.morning-inbox__tag { grid-column: 1 / -1; justify-self:
+   start }` dragged the pill across the whole row and parked it on top of the time and
+   the name. The phone layout looked correct in an injected stylesheet and wrong on
+   staging, which is the tell for a cascade fight rather than a bad rule. */
 .what-you-get__header {
   text-align: center;
   margin-bottom: 56px;
