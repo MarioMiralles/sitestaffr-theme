@@ -2274,9 +2274,10 @@ body.sitestaffr-landing-page .hero__visual > * {
    ⚠️ IT IS DOING A DIFFERENT JOB HERE, which is why the numbers are not identical. There
    it is a legibility fix: a dark robot on a dark section needs something to be seen
    against. This robot is dark on cream and already has all the contrast it needs, so the
-   bloom is decoration and is pulled back accordingly — narrower, and roughly half the
-   ink, because at the demo's strength it read as a teal smear on a light section rather
-   than a glow behind a figure.
+   bloom is decoration and is pulled back — but only a little. First attempt halved the
+   demo's ink (0.20/0.09) on the theory that a light section needs less, and it rendered
+   as nothing at all: teal at 20% over cream is a paler step than teal at 38% over
+   #00323A. A tint reads by its DISTANCE from what is behind it, not by its own alpha.
 
    `z-index: 0` puts it under the robot (z-index 1) and under the haze, which is also 0
    but earlier in source. Nothing here needs to move for it. */
@@ -2286,10 +2287,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(560px, 78%);
+  width: min(620px, 84%);
   aspect-ratio: 1 / 0.94;
   background: radial-gradient(ellipse closest-side,
-              rgba(31,182,204,0.20) 0%, rgba(31,182,204,0.09) 52%, rgba(31,182,204,0) 78%);
+              rgba(31,182,204,0.34) 0%, rgba(31,182,204,0.15) 52%, rgba(31,182,204,0) 78%);
   filter: blur(26px);
   pointer-events: none;
   z-index: 0;
