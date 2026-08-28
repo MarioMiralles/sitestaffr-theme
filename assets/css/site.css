@@ -3890,7 +3890,15 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    The `--close` variant is unchanged: it already lives on the LIGHT section below the
    dark run and overlaps upward by 1px for the same reason, and that one is not clipped. */
-.seam-curtain--open {
+   ⚠️ SCOPED TO THE ONE INSIDE A DARK BLOCK, AND IT HAS TO BE. There are TWO `--open`
+   curtains on the homepage: this one, and the one at the bottom of the final CTA that
+   pours into the footer. Restyling the bare class moved both, which put a dark shape
+   across the TOP of the CTA section (Mario caught it within the hour). The relocated one
+   is the only curtain that is a child of a DARK block — every other instance sits on the
+   light side of its boundary — so that is the selector, and it cannot pick up a third
+   instance by accident. */
+.seam-curtain--open { bottom: -1px; }
+.block--dark > .seam-curtain--open {
   bottom: auto;
   top: calc(-1 * (clamp(56px, 7vw, 120px) - 3px));
 }
