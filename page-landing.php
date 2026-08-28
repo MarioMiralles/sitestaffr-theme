@@ -2256,6 +2256,13 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <div class="faq-list">
           <?php foreach ( $faq_col as $faq_group ) : ?>
             <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
+            <?php /* ⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px
+                     (Mario, 2026-08-28: the FAQ "is a lot and could be difficult to
+                     scan"). The items used to be flat siblings of their heading, which
+                     on a phone made sixteen identical white cards with three small gray
+                     labels lost among them. It is inert on desktop — see .faq-list__set,
+                     which does nothing until the columns collapse. */ ?>
+            <div class="faq-list__set">
             <?php foreach ( $faq_grouped[ $faq_group ] as $entry ) :
                 $faq = $entry['item'];
                 /* ⚠️ NOTHING SHIPS OPEN (Mario, 2026-08-27). The first question used to,
@@ -2279,6 +2286,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                 </div>
               </div>
             <?php endforeach; ?>
+            </div>
           <?php endforeach; ?>
         </div>
       <?php endforeach; ?>

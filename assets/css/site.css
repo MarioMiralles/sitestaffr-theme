@@ -3302,21 +3302,47 @@ body.sitestaffr-landing-page .hero__visual > * {
     background: #073E42;
     border-color: rgba(52,211,153,0.4);
   }
-  /* Set for a four-across table read at arm's length, then inherited by a card a
-     phone holds at 30cm (Mario, 2026-08-28: "the information is very small and
-     difficult to look at"). The value is the thing being compared, so it takes the
-     step up and the label stays a step behind it. */
+  /* ⚠️ THE VALUE LEADS, AND THE ROW IS NOT A TABLE ROW ANY MORE (Mario, 2026-08-28: the
+     cards are "repetitive and the information is very small and difficult to look at").
+
+     Four cards each repeating the same six labels is twenty-four lines in which the only
+     thing that differs is a number sitting at the far right edge, behind a label the
+     reader has now read four times. Putting the value first in a fixed 92px column lines
+     every number up down the card and demotes the label to what it is — a caption on the
+     number, not a heading for it. `order: -1` rather than reordering the markup, because
+     the DOM order label-then-value is what the desktop rail and the screen reader want.
+
+     The type was also set for a four-across table read at arm's length and then inherited
+     by a card a phone holds at 30cm. Value goes to 1rem, label to 0.88rem. */
   .price-tier__row {
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 12px;
     text-align: left;
     padding: 12px 16px;
     font-size: 1rem;
+  }
+  .price-tier__row-value {
+    order: -1;
+    flex: 0 0 auto;
+    min-width: 92px;
+    font-weight: 600;
   }
   .price-grid--table .price-tier__row-label {
     display: block;               /* now the only label this value has */
     font-size: 0.88rem;
     color: rgba(240,250,250,0.62);
   }
+  /* ⚠️ A ROW THE PLAN DOES NOT INCLUDE IS NOT A ROW HERE (Mario's call, 2026-08-28,
+     choosing this over keeping the em-dashes: "Value first, hide what's absent").
+
+     On desktop the dash is doing real work — it is the empty cell in a comparison, read
+     across four columns at once. Stacked, nobody is comparing across anything; a dash is
+     just a line about a thing you are not getting, and there are four of them. Dropping
+     them makes Free Trial and Starter visibly shorter cards, which is itself information.
+
+     `:has()` is the only way to hide a row from the state of its child. Browsers without
+     it fall back to showing the dash, which is exactly the previous behavior. */
+  .price-tier__row:has(.price-tier__row-value--none) { display: none; }
   .price-tier__identity { padding: 18px 14px 14px; }
 }
 @media (max-width: 620px) {
@@ -3451,6 +3477,41 @@ body.sitestaffr-landing-page .hero__visual > * {
   /* The second column's first heading needs the same separation from the item above it
      that it would have had inside its own column. */
   .faq-section__columns .faq-list + .faq-list .faq-list__group:first-child { margin-top: 26px; }
+
+  /* ⚠️ ONE CARD PER GROUP (Mario, 2026-08-28: the FAQ "is a lot and could be difficult to
+     scan"). In one column this is sixteen identical white cards with three small gray
+     labels lost among them — the same failure the industries list had, and this is the
+     same fix, deliberately: three bordered sets of three to six questions, heading
+     outside. Mario's first idea was a colour per group; that would have put a second and
+     third accent on a page whose whole system is one teal with emerald reserved for
+     capture states, and he chose this instead. If colour-coding is ever revisited, the
+     rule it breaks is the thing to decide, not this component.
+
+     Kept to this breakpoint on purpose. Desktop is two columns of free-standing cards and
+     is signed off; the wrapper above is inert there. */
+  .faq-list__set {
+    gap: 0;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .faq-list__set .faq-item {
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .faq-list__set .faq-item + .faq-item { border-top: 1px solid var(--border-light); }
+  .faq-list__set .faq-item:hover { box-shadow: none; }
+  /* The open item still has to read as selected, but it cannot do it by lifting off the
+     page any more — it is a row inside a card, not a card. A teal edge and a tinted head
+     say the same thing without breaking the card's outline. The tint is on the QUESTION
+     only: the answer runs several lines and body text on --teal-pale is a wash. */
+  .faq-list__set .faq-item--open {
+    border-color: transparent;
+    box-shadow: inset 3px 0 0 0 var(--teal-deep);
+  }
+  .faq-list__set .faq-item--open .faq-item__question { background: var(--teal-pale); }
 }
 
 /* ---- Section 10: the agency door --------------------------------------
@@ -7505,6 +7566,15 @@ body.sitestaffr-landing-page .hero__visual > * {
 .faq-list {
   max-width: 740px;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+/* ⚠️ THIS CARRIES THE 12px THAT .faq-list USED TO GIVE THE ITEMS DIRECTLY. The items are
+   inside a per-group wrapper now, so .faq-list's gap separates HEADINGS from SETS and no
+   longer reaches the questions. Same value, so desktop renders exactly as before — the
+   wrapper exists for the phone treatment below and must be invisible above it. */
+.faq-list__set {
   display: flex;
   flex-direction: column;
   gap: 12px;
