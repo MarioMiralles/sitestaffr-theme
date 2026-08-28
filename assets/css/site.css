@@ -3444,17 +3444,16 @@ body.sitestaffr-landing-page .hero__visual > * {
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
           mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
 }
+/* ⚠️ 16px, INHERITED FROM AN ELEMENT THAT NO LONGER EXISTS. This was 6px, which was the
+   gap to the supporting line under it; the 16px that separated the copy from the BUTTON
+   lived on `.faq-section__ask-note`. That line was deleted on 2026-08-28 and its spacing
+   had to come with it, or the button sits 6px under the heading. Removing an element is
+   property-by-property, never just a deletion. */
 .faq-section__ask-lead {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
   font-weight: 600;
-  margin-bottom: 6px;
-}
-.faq-section__ask-note {
   margin-bottom: 16px;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
 }
 
 @media (max-width: 560px) {

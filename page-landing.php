@@ -2316,13 +2316,18 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
       <div class="faq-section__ask-copy">
         <p class="faq-section__ask-lead">Still have a question?</p>
-        <?php /* THIRD ATTEMPT, and the lesson from the first two is that this line kept
-                 EXPLAINING ITSELF. "Ask ours — it's the same one you'd install, answering
-                 from this very site" and then "It answers from these pages, day or night —
-                 the same assistant you'd install" both spent their length describing the
-                 widget rather than saying anything the reader gains. It is one short claim
-                 now: the thing is live, right here, try it. */ ?>
-        <p class="faq-section__ask-note">It&rsquo;s already answering on this page. Ask it anything.</p>
+        <?php /* ⚠️ THERE IS NO SUPPORTING LINE HERE, AND THAT IS THE FOURTH AND FINAL
+                 ANSWER (Mario, 2026-08-28: "you keep adding random things I don't really
+                 like... let's delete it").
+
+                 Three were written and all three failed the same way — they spent their
+                 length describing the widget instead of saying anything the reader gains:
+                   1. "Ask ours — it's the same one you'd install, answering from this very site"
+                   2. "It answers from these pages, day or night — the same assistant you'd install"
+                   3. "It's already answering on this page. Ask it anything."
+                 The heading asks the question and the button says what to do. A line
+                 between them has to earn its place against that, and three attempts could
+                 not. Do not write a fourth without a reason that is not "it looks empty". */ ?>
         <?php
         /* ⚠️ A REAL [sitestaffr_button], REPLACING A BUTTON THAT DID NOTHING. The old
            markup was `<button class="btn btn--outline js-open-chat">` and NOTHING IN THE
