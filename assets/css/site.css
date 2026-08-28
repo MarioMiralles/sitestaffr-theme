@@ -3194,22 +3194,9 @@ body.sitestaffr-landing-page .hero__visual > * {
    The sticky rail is gone with it. It existed to keep the deflection CTA beside a very
    long single column; the list is half as tall now, and a third column beside two would
    squeeze the questions to ~390px each. The CTA sits in the header instead. */
-/* `.block.faq-section` for the same specificity reason as .block.what-you-get above —
-   see that note before changing this selector. */
-.block.faq-section {
-  background: var(--cream);
-  position: relative;   /* the opening curtain for section 10 is absolute against this */
-
-  /* ⚠️ BOTTOM PADDING IS THE 96px SCALE **PLUS THE PEAK'S HEIGHT**, exactly as on
-     .what-you-get, and for exactly the same reason: the seam is an overlay and costs no
-     height, so a bare 96px would be measured from the section's box while the curtain's
-     point rises 95% of the way up through it — landing on the ask card, which is
-     centered and therefore sits directly under the apex.
-
-     0.95 is 114/120 of the seam's own height clamp (the path peaks at y=6 of 120).
-     Re-derive both if the Book path's apex or .seam-curtain's height changes. */
-  padding-bottom: calc(96px + clamp(53px, 6.65vw, 114px));
-}
+/* No seam here any more — it moved down to section 11, so this is a plain cream
+   section again and takes the light run's padding untouched. */
+.faq-section { background: var(--cream); }
 .faq-section__head {
   text-align: center;
   max-width: 44rem;
@@ -3313,18 +3300,31 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ---- Section 10: the agency door --------------------------------------
-   A CONTAINED PANEL ON THE DARK, not a full-bleed section. Sections 10 and 11
-   are both dark and adjacent; two full-bleed dark sections would end the page on
-   an undifferentiated slab. The panel says "aside, not your path" - right for
-   ~90% of readers - and lets section 11 open full-width as the ending. */
+   A DARK CARD ON A LIGHT SECTION — the inverse of what was here, which was a dark card
+   inside a dark section. The old note argued that two full-bleed dark sections would end
+   the page on an undifferentiated slab; that still holds, and this serves it better,
+   because a dark card on cream is MORE separated from what follows than dark-on-dark
+   ever was.
+
+   ⚠️ THE CARD KEEPS ITS DARK SURFACE ON PURPOSE. With sections 10 and 11 both light, it
+   is the only inverted object left on the page, and that is exactly what makes it read
+   as an aside rather than as the reader's path. Repainting it light merges it into the
+   cream run and loses the distinction the section exists to draw. */
+.agency-door { background: var(--cream); }
 .agency-door__panel {
-  max-width: 860px;
-  margin-inline: auto;
-  padding: clamp(28px, 4vw, 44px);
-  background: var(--block-dark-raised);
-  border: 1px solid rgba(240,250,250,0.14);
+  /* Full width. The 860px cap made it a contained aside INSIDE the dark run; on cream
+     the inversion already does that, and the cap only made it look like a narrow
+     interruption. */
+  max-width: none;
+  padding: clamp(30px, 4vw, 48px);
+  background: var(--block-dark);
+  border: 1px solid rgba(240,250,250,0.10);
   border-radius: var(--radius-xl);
+  box-shadow: 0 18px 44px rgba(0,50,58,0.16);
 }
+/* The card is dark inside a light section, so its type no longer inherits light ink from
+   .block--dark and has to be stated. */
+.agency-door h2 { color: var(--text-on-dark); }
 /* Load-bearing: it tells a plumber to skip this, which protects the SMB path. */
 .agency-door__eyebrow {
   display: block;
@@ -7288,20 +7288,24 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ========== SECTION 10: FINAL CTA ========== */
-.final-cta {
-  /* Padding, background and color now come from .block .block--dark. The old
-     gradient and centered text are deliberately not declared here: this section
-     is a dark Split, and re-declaring them would silently override the block
-     system from further down the file. */
+/* ⚠️ `.block.final-cta` FOR THE PADDING — `.block:not(.block--dark)` is 0,2,0 and beats
+   a bare class regardless of source order. Same trap documented on .block.what-you-get. */
+.block.final-cta {
+  background: var(--cream);
   position: relative;
   overflow: hidden;
+  /* 96px of scale plus the closing curtain's peak height, so the gap below the last line
+     matches every other section. 0.95 is 114/120 of the seam's own height clamp. */
+  padding-bottom: calc(96px + clamp(53px, 6.65vw, 114px));
 }
 .final-cta::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.55;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2300323A' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  /* ⚠️ THE DOTS WERE WHITE AT 4%. On cream they vanished rather than looking wrong,
+     which is how a repaint loses a texture silently. Dark ink at the same weight. */
+  opacity: 0.7;
   pointer-events: none;
 }
 .final-cta .container { position: relative; z-index: 1; }
@@ -7309,9 +7313,14 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-bottom: 16px;
   font-size: clamp(2rem, 4.5vw, 3.2rem);
 }
+/* ---- Section 11 ink, re-tuned for cream 2026-08-27 ---------------------
+   Every color below was an rgba(240,250,250,…) written for the dark block, where it was
+   light ink at low alpha. On cream those are all but invisible, so each is re-stated
+   against light rather than left to inherit. Grep this section for 240,250,250 before
+   assuming any of the old values still apply. */
 .final-cta__subtitle {
   font-size: 1.15rem;
-  color: rgba(240,250,250,0.75);
+  color: var(--text-secondary);
   margin-bottom: 32px;
   max-width: var(--subtext-measure);
   /* No auto margins: this is a left column in a Split now, not a centered stack. */
@@ -7327,7 +7336,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .final-cta__note {
   margin-top: 16px;
   font-size: 0.85rem;
-  color: rgba(240,250,250,0.5);
+  color: var(--text-muted);
 }
 /* ---- Section 11 hierarchy, corrected 2026-08-26 -------------------------
    The trial is the primary conversion path (site-nav.php:53) and is now styled
@@ -7351,7 +7360,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .final-cta__reassure {
   margin-top: 12px;
   font-size: 0.9rem;
-  color: rgba(240,250,250,0.75);
+  color: var(--text-secondary);
 }
 
 /* The rule that keeps the demotion honest: the concierge action must not be
@@ -7361,9 +7370,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   align-items: center;
   gap: 16px;
   margin: 28px 0 20px;
-  color: rgba(240,250,250,0.4);
+  color: var(--border-light);      /* the rules either side use currentColor */
   font-size: 0.85rem;
 }
+.final-cta__or span { color: var(--text-muted); }
 .final-cta__or::before,
 .final-cta__or::after {
   content: "";
@@ -7379,30 +7389,31 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .final-cta__concierge-label {
   font-size: 0.95rem;
-  color: rgba(240,250,250,0.8);
+  color: var(--text-secondary);
 }
 /* The shortcode renders its own widget button and its attributes are not
    trustworthy - border_width="1" is a documented no-op, so the border is set
    here rather than passed in. Measure the render; do not read the attribute. */
 .final-cta__concierge .sitestaffr-button-widget {
   display: inline-flex;
-  border: 1px solid rgba(240,250,250,0.45) !important;
+  border: 1px solid var(--border-light) !important;
   background: transparent !important;
   box-shadow: none !important;
+  color: var(--teal-deep) !important;
 }
 .final-cta__concierge .sitestaffr-button-widget:hover {
-  border-color: rgba(240,250,250,0.8) !important;
-  background: var(--block-dark-raised) !important;
+  border-color: var(--teal-deep) !important;
+  background: var(--teal-pale) !important;
 }
 .final-cta__note {
   margin-top: 12px;
   font-size: 0.85rem;
-  color: rgba(240,250,250,0.5);
+  color: var(--text-muted);
 }
 .final-cta__tertiary {
   margin-top: 24px;
   font-size: 0.9rem;
-  color: rgba(240,250,250,0.65);
+  color: var(--text-secondary);
 }
 
 /* Reserved for robot-cta.webp. Holds its cell so the layout does not move when
@@ -7414,14 +7425,14 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 .final-cta__privacy {
   font-size: 0.8rem;
-  color: rgba(240,250,250,0.45);
+  color: var(--text-muted);
 }
 .final-cta__privacy a {
-  color: rgba(240,250,250,0.6);
+  color: var(--text-secondary);
   text-decoration: underline;
 }
 .final-cta__privacy a:hover {
-  color: var(--text-on-dark);
+  color: var(--teal-deep);
 }
 
 /* ========== DEFAULT PAGE TEMPLATE LAYOUT ========== */
@@ -9330,9 +9341,13 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
    strictly for capture/success states and the recommended pricing tier. A
    heading highlight is neither, so a green one reads as a second accent and
    spends the signal that makes "Lead captured" mean something.
-   --teal-light holds its own against #00323A at display size. */
+   ⚠️ --teal-DEEP, NOT --teal-light. This note used to end "--teal-light holds its own
+   against #00323A at display size" — true, and it stopped being the relevant test the
+   moment section 11 turned cream on 2026-08-27. #1FB6CC on #FDFBF7 is a pale wash at
+   display size: the same word that carried the heading on dark nearly disappears on
+   light. The teal decision is unchanged, only the step within it. */
 .final-cta__highlight {
-  color: var(--teal-light);
+  color: var(--teal-deep);
 }
 
 /* ========== HOMEPAGE V2: RESPONSIVE HERO GRID ========== */

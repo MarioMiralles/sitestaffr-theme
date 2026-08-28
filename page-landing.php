@@ -2241,10 +2241,11 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
       <div class="faq-section__ask-copy">
         <p class="faq-section__ask-lead">Still have a question?</p>
-        <?php /* The supporting line is gone (Mario, 2026-08-27). It was trying to make the
-                 dogfooding point — same widget, answering from this site — and doing it in
-                 a sentence that had to introduce itself before it got there. The robot and
-                 the SiteStaffr-branded button already say "this is the product". */ ?>
+        <?php /* SECOND ATTEMPT AT THIS LINE. The first read "Ask ours — it's the same one
+                 you'd install, answering from this very site", which was cut as weird: it
+                 spent its opening words introducing itself before reaching the point. This
+                 one leads with what the assistant does and lets the button do the asking. */ ?>
+        <p class="faq-section__ask-note">It answers from these pages, day or night &mdash; the same assistant you&rsquo;d install.</p>
         <?php
         /* ⚠️ A REAL [sitestaffr_button], REPLACING A BUTTON THAT DID NOTHING. The old
            markup was `<button class="btn btn--outline js-open-chat">` and NOTHING IN THE
@@ -2261,25 +2262,12 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
            Two known traps deliberately avoided (both render as an ordinary button, so
            they cannot be spotted by reading the attribute): border_width="1" draws NO
            border, and full_width="on" leaves the container shrink-wrapped. */
-        echo do_shortcode( '[sitestaffr_button text="Ask Our AI" icon="sitestaffr"]' );
+        echo do_shortcode( '[sitestaffr_button text="Ask Our AI Assistant" icon="sitestaffr"]' );
         ?>
       </div>
     </div>
   </div>
 
-  <?php /* THE CURTAIN OPENS AGAIN for the second dark block (Mario, 2026-08-27). Sections
-           10 and 11 are the page's other dark run, and they met the FAQ on a hard
-           horizontal rule — the exact edge the hero's curtain exists to remove, left in
-           place two screens further down.
-
-           SAME 'open' VARIANT as the hero's, and it belongs to THIS section for the same
-           reason: an overlay always sits on the LIGHT side of the boundary, so the light
-           section is its background and the two can never disagree on color. Section 10
-           needs no cooperation at all.
-
-           No closing curtain at the far end — that dark run ends in the footer, not in
-           light, so there is no boundary there to close. */ ?>
-  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </section>
 
 <?php /* SECTION 10 — the agency door. The one section that did not exist in any form.
@@ -2290,11 +2278,17 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
          page written to a plumber; this is where the page says "and if you're the person
          who BUILDS the plumber's site, here's your version."
 
-         ⚠️ SHAPE: A CONTAINED PANEL, NOT A FULL SECTION. Sections 10 and 11 are both dark
-         and adjacent, and two full-bleed dark sections end the page on an undifferentiated
-         slab that deflates the run-up to the close. This is an elevated panel on the dark;
-         section 11 then opens full-width. That says "this is an aside, not your path" —
-         correct for ~90% of readers — and lets section 11 read as the ending.
+         ⚠️ SHAPE, REVISED 2026-08-27 (Mario: "make part of the cream background and keep
+         the styling on the card + make the card full width"). THE SECTION IS LIGHT AND THE
+         CARD IS THE DARK THING — an inversion of what was here, not a repaint.
+
+         The old note argued two full-bleed dark sections would end the page on an
+         undifferentiated slab. That still holds, and this serves it better: a dark card on
+         cream is MORE separated from what follows than a dark card on dark ever was.
+
+         The card still says "aside, not your path" — right for ~90% of readers — because
+         it is a bounded object rather than a full-bleed band. Full width only stops it
+         reading as a narrow interruption.
 
          NO ROBOT. Three appearances is the ceiling and section 11 owns the third.
 
@@ -2302,7 +2296,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
          nothing for them bounces, and putting the door after the final ask buries it in
          footer territory. The nav item catches the ones who self-classify in the first
          three seconds; this catches the ones who read to the end. */ ?>
-<section class="block block--dark block--tight agency-door">
+<section class="block agency-door">
   <div class="block__inner">
     <div class="agency-door__panel">
       <?php /* THE EYEBROW IS LOAD-BEARING. It tells a plumber to skip this, which is what
@@ -2313,8 +2307,11 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                offer instantly, and "every client site" is the phrase that makes it
                theirs rather than their client's. */ ?>
       <h2>Give Every Client Site a Receptionist</h2>
+      <?php /* CUT (Mario, 2026-08-27: "it feels too wordy"). It ran on into "— and what
+               makes renewal conversations easier", which the third point below makes
+               properly; a lead that previews the list makes the reader read it twice. */ ?>
       <p class="agency-door__lead">
-        You build the sites. This is what makes them answer &mdash; and what makes renewal conversations easier.
+        You build the sites. This is what makes them answer.
       </p>
 
       <?php /* ⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE ON 2026-08-26, and what
@@ -2324,7 +2321,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
       <ul class="agency-door__points">
         <li>
           <strong>Minutes per site, not hours</strong>
-          A plugin and a connect step. No snippet to maintain, no separate platform for a client to lose access to.
+          A plugin and a connect step. No snippet to maintain.
         </li>
         <li>
           <?php /* ⚠️ THIS POINT WAS CORRECTED AFTER A CODE CHECK. It originally read
@@ -2337,11 +2334,11 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                    phrase to billing — the first agency to sign up finds out in ten
                    minutes, and this is exactly the audience that would say so publicly. */ ?>
           <strong>One login for every client&rsquo;s plan</strong>
-          Manage billing, plans and minutes across every site you look after, from a single sign-in.
+          Billing, plans and minutes across every site you manage, from one sign-in.
         </li>
         <li>
           <strong>Something to show at renewal</strong>
-          Their site starts producing named leads with full transcripts. That&rsquo;s the hardest number in agency work, and it arrives on its own.
+          Named leads with full transcripts, arriving on their own.
         </li>
       </ul>
 
@@ -2370,7 +2367,18 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
      So on the page that closes the sale, the one action the business wants was
      the faintest thing in the section. This is copy and hierarchy only; no new
      functionality. Order is now trial > concierge > chat. -->
-<section class="block block--dark block-split final-cta" id="get-started">
+<?php /* ⚠️ LIGHT NOW (Mario, 2026-08-27: "let's also make the CTA cream and just place
+         the shape divider for the Footer"). The page's only remaining dark run is the
+         FOOTER.
+
+         That is a real change of intent, not a repaint: the dark used to mark the close,
+         and it now marks the chrome. What carries the ending instead is the CARD in
+         section 10 above and the curtain at the bottom of this section — the same gesture
+         that opened the page under the hero, closing it above the footer.
+
+         Every rgba(240,250,250,...) in this section's CSS was tuned for dark ink and had
+         to be re-tuned rather than inherited; see the .final-cta block in site.css. */ ?>
+<section class="block block-split final-cta" id="get-started">
   <div class="block__inner">
     <div class="block-split__grid final-cta__grid">
       <div class="final-cta__copy">
@@ -2417,9 +2425,23 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                robot-cta.webp is pending: Mario is re-running the prompt, attempt 1 failed
                the pose check. The cell is reserved at the final ratio so dropping the file
                in needs no layout change, and it collapses on mobile either way. */ ?>
+      <?php /* Robot on the right, matching section 1 and section 5 - three appearances on
+               the same side make him a motif rather than floating decoration.
+               robot-cta.webp is pending: Mario is re-running the prompt, attempt 1 failed
+               the pose check. The cell is reserved at the final ratio so dropping the file
+               in needs no layout change, and it collapses on mobile either way. */ ?>
       <div class="block-split__art final-cta__art" aria-hidden="true"></div>
     </div>
   </div>
+
+  <?php /* THE CURTAIN CLOSES THE PAGE. Same 'open' variant as the hero's — dark rising out
+           of the light — and it belongs to THIS section for the usual reason: an overlay
+           sits on the LIGHT side of a boundary, so the light section is its background and
+           the two cannot disagree on color. The footer needs no cooperation.
+
+           The page now opens and ends on the same shape, with the footer as the only dark
+           thing below it. */ ?>
+  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </section>
 
 </main>
