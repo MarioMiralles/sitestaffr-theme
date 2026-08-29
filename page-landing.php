@@ -668,7 +668,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                assistive tech through the source button. Read aloud it would announce a
                bare "HVAC" with no context, between an icon and a dollar amount. */
             ?>
-            <span class="job-value__mark" aria-hidden="true"><span><?php echo esc_html( $jv['mark'] ); ?></span></span>
+            <span class="job-value__mark" aria-hidden="true" data-mark="<?php echo esc_attr( $jv['mark'] ); ?>"></span>
 
             <?php
             /* The sprite fallback from the V2 branch was dropped in this port, deliberately.
@@ -1256,7 +1256,7 @@ get_template_part( 'template-parts/site-nav', null, array(
              sense as annotations flanking the artifact they pointed at. With the
              document gone they have nothing to flank, so they become what they always
              were: four short claims about how the recap reaches you. */ ?>
-    <div class="block-cards__grid what-you-get__callouts" style="--cards: 4;">
+    <div class="block-cards__grid what-you-get__callouts" style="--cards: 2;">
       <div class="what-you-get__callout">
         <div class="what-you-get__callout-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
