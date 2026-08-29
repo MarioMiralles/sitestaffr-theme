@@ -817,10 +817,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-size: 0.9rem;
   font-weight: 500;
-  opacity: 0.85;
+  /* ⚠️ NO OPACITY. It was 0.85, which is a contrast reduction dressed as a style: the
+     colour passes at full strength and fails at 85%. Hover raises it back to 1, so the
+     "quieter than the primary" job was being done by the one property that also degrades
+     legibility. Weight and size already carry that job. */
   transition: opacity 0.2s ease, gap 0.2s ease;
 }
 .hero__download-link:hover {
@@ -1658,7 +1661,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, var(--teal-light), var(--teal-deep));
-  color: white;
+  /* ⚠️ DARK ON THE EMERALD, NOT WHITE. White measured 2.54:1 on #10b981 and was the
+     worst remaining failure on the page — and the first audit script MISSED it, reporting
+     11.05, because it resolved the background by walking `background-color` up the tree
+     and this badge is painted by a gradient. Sample what is actually there.
+     The emerald is not negotiable: it is the reserved recommended-tier signal. So the
+     TEXT flips instead — --block-dark on emerald is 5.46. */
+  color: var(--block-dark);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -4393,7 +4402,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-width: 46ch;
 }
 .proof-section__stats-source a {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: rgba(0,131,143,0.35);
@@ -4487,7 +4496,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.62;
   color: var(--text-primary);
 }
-.proof-section__quote p strong { font-weight: 600; color: var(--teal-deep); }
+.proof-section__quote p strong { font-weight: 600; color: var(--teal-text); }
 
 /* Portrait, name and role on one row, so the face lands at the moment you read
    who said it. */
@@ -4868,7 +4877,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .recap-doc__msg-meta { font-size: 0.74rem; color: var(--text-muted); margin-bottom: 4px; }
 .recap-doc__msg-meta strong { color: var(--text-primary); }
-.recap-doc__msg--visitor .recap-doc__msg-meta strong { color: var(--teal-deep); }
+.recap-doc__msg--visitor .recap-doc__msg-meta strong { color: var(--teal-text); }
 .recap-doc__msg p { margin: 0; color: var(--text-secondary); font-size: 0.92rem; }
 
 @media (max-width: 620px) {
@@ -8027,12 +8036,15 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: none !important;
   --btn-background: transparent !important;
   --btn-hover-background: var(--teal-pale) !important;
-  --btn-text-color: var(--teal-deep) !important;
-  --btn-icon-color: var(--teal-deep) !important;
-  color: var(--teal-deep) !important;
+  /* --teal-text, not --teal-deep: this button is outlined on the cream, so its label is
+     teal TEXT on a light background and lands in the same 4.38:1 failure as every other
+     teal text on the page. The icon follows it so the two do not drift apart. */
+  --btn-text-color: var(--teal-text) !important;
+  --btn-icon-color: var(--teal-text) !important;
+  color: var(--teal-text) !important;
 }
 .final-cta__concierge .sitestaffr-button-icon,
-.final-cta__concierge .sitestaffr-button-icon svg { color: var(--teal-deep) !important; }
+.final-cta__concierge .sitestaffr-button-icon svg { color: var(--teal-text) !important; }
 .final-cta__concierge .sitestaffr-button-widget:hover {
   border-color: var(--teal-deep) !important;
   background: var(--teal-pale) !important;
@@ -8280,9 +8292,17 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.35;
   margin-bottom: 7px;
 }
+/* ⚠️ THE PADDING IS THE TAP TARGET (Lighthouse best-practices, 2026-08-28: "Touch
+   targets do not have sufficient size or spacing", flagging the Support mailto). An
+   inline <a> is only as tall as its text — about 19px here — and the requirement is 24.
+   Inline-block plus vertical padding gets there without moving anything visually, because
+   the row spacing below absorbs it. */
 .footer__col a {
   font-size: 0.875rem;
+  display: inline-block;
+  padding-block: 5px;
 }
+.footer__col li { margin-bottom: 2px; }
 .footer__account-mobile {
   display: none;
 }
@@ -8309,7 +8329,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   justify-content: space-between;
 }
 .footer__login {
-  padding: 6px 20px;
+  /* 10px vertical, up from 6: the control measured 32px tall and Lighthouse wants 24 of
+     target plus clearance from its neighbours. */
+  padding: 10px 20px;
   border: 1px solid rgba(31, 182, 204, 0.3);
   border-radius: 8px;
   font-size: 0.78rem;
