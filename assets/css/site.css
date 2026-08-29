@@ -4939,7 +4939,11 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ---- The four callouts, now a Cards row rather than annotations ---- */
-.what-you-get__callouts { max-width: 980px; margin-inline: auto; }
+/* ⚠️ 820, NARROWED WITH THE 2x2 (Mario, 2026-08-28). At 980 across two columns each cell
+   is ~480px wide holding a centered icon-and-heading cluster of about 240 — the pair
+   floated in the middle of a lot of nothing, and only the longest description ever
+   reached the edges. Narrowing the grid is the fix rather than widening the type. */
+.what-you-get__callouts { max-width: 820px; margin-inline: auto; row-gap: clamp(22px, 3vw, 32px); }
 /* ⚠️ V1's DOCUMENT ICONS, WHICH ARE THE PRICING PANEL'S ICONS (Mario, 2026-08-28: "I
    want them to have those icons that we used in V1 for the document... it's the same
    style icons as the ones used in pricing section").
