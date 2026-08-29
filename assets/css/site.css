@@ -3299,7 +3299,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: 999px;
   background: var(--emerald);
   background-image: none;
-  color: #fff;
+  /* ⚠️ THE BADGE'S COLOUR IS DECIDED HERE, NOT ON `.price-tier__badge`. That rule sets
+     white on a teal gradient; this one repaints it emerald and won on source order, so a
+     fix applied up there did nothing and shipped still failing. Dark text on the emerald
+     is 5.46:1; white was 2.54. If the two ever disagree again, this is the one that
+     renders. */
+  color: var(--block-dark);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;

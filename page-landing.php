@@ -1134,13 +1134,23 @@ get_template_part( 'template-parts/site-nav', null, array(
                    Enter and Space for free, and announces as a control. The row was a
                    plain <li> before, so nothing about the no-JS rendering regresses if
                    the script never runs — see the CSS note on .is-interactive. */ ?>
+          <?php /* ⚠️ NO aria-label ON THIS BUTTON, and that is a fix rather than an
+                   omission. It carried `aria-label="Open the recap for Tom Byrne"`, which
+                   REPLACES the accessible name — so the name no longer contained the
+                   button's own visible text, and Lighthouse failed it on
+                   label-content-name-mismatch. That rule exists for voice control: a user
+                   who says "click 6:03 AM" has to be able to match what they can see.
+
+                   The visible content is the name now, with the purpose appended in a
+                   screen-reader-only span at the end. Same information, and the name still
+                   starts with what is on screen. */ ?>
           <button type="button" class="morning-inbox__row"
-                  data-morning-open="<?php echo esc_attr( $ml['id'] ); ?>"
-                  aria-label="<?php echo esc_attr( 'Open the recap for ' . wp_strip_all_tags( $ml['who'] ) ); ?>">
+                  data-morning-open="<?php echo esc_attr( $ml['id'] ); ?>">
             <span class="morning-inbox__time"><?php echo esc_html( $ml['time'] ); ?></span>
             <span class="morning-inbox__who"><?php echo esc_html( $ml['who'] ); ?></span>
             <span class="morning-inbox__what"><?php echo wp_kses_post( $ml['what'] ); ?></span>
             <span class="morning-inbox__tag">Lead captured</span>
+            <span class="screen-reader-text">&mdash; open the recap</span>
             <?php /* No "View recap →" span here any more (Mario, 2026-08-28). The row's
                      affordance is a chevron drawn as `.morning-inbox__row::after`, at
                      every width and on every device. Do not add a label back: it only
