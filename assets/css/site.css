@@ -11464,13 +11464,23 @@ a.ind-problem-card .ind-problem-card__icon--art {
    --block-dark is the same pairing the design system already mandates for
    .price-tier__badge on emerald. 5.7:1. The drop shadow goes with the gradient it
    was lifting the button off. */
-.ind-cta__btn {
+/* ⚠️ THE FEATURE PAGES SHARE THIS RULE RATHER THAN COPYING IT. `.sf-cta__btn` and
+   `.ba-cta__btn` are listed here, not redefined in each page's inline <style>, because
+   two definitions of one treatment is how a "primary button on dark" ends up meaning
+   three different colours. They arrived carrying plain `.btn--primary`, which is
+   --teal-deep — #00838F on #00323A is 3.06:1, scraping the UI-component floor and
+   reading as a hole in the block rather than as the page's one action. */
+.ind-cta__btn,
+.sf-cta__btn,
+.ba-cta__btn {
   font-size: 1.1rem;
   padding: 20px 48px;
   background: var(--teal-light);
   color: var(--block-dark);
 }
-.ind-cta__btn:hover {
+.ind-cta__btn:hover,
+.sf-cta__btn:hover,
+.ba-cta__btn:hover {
   background: #15a3b8;
   box-shadow: 0 6px 24px rgba(0,0,0,0.25);
   transform: translateY(-2px);

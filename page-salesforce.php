@@ -566,7 +566,7 @@ $sf_faqs = array(
             <div class="sf-cta__inner reveal">
                 <h2 class="sf-cta__title">Stop retyping your own leads</h2>
                 <p class="sf-cta__text">Start free for 30 days. Let your website answer visitors, qualify them, and put them straight into Salesforce.</p>
-                <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
+                <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn sf-cta__btn">
                     Get Started
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
