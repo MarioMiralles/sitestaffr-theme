@@ -273,13 +273,27 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
-	$is_page        = is_page();
-	$is_default     = is_home() || is_single() || is_archive() || is_search();
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_page && ! $is_default ) {
-		return;
-	}
-
+	/**
+	 * site.css is the theme's stylesheet, so every front-end view gets it.
+	 *
+	 * This used to be gated on a list: is_page() || is_home() || is_single() ||
+	 * is_archive() || is_search(), plus four named templates. A view the list did
+	 * not anticipate rendered with no CSS at all, and the failure is silent — the
+	 * page returns 200 and looks broken rather than erroring anywhere a test or a
+	 * deploy would catch it.
+	 *
+	 * That cost content three times. The /for/ index shipped with its whole
+	 * directory invisible (see the site.js note below, which is the same bug in
+	 * the sibling list), and every 404 on the site rendered completely unstyled
+	 * until 2026-08-30, because a 404 satisfies none of the six conditions.
+	 *
+	 * wp_enqueue_scripts only fires on front-end requests, so there is nothing the
+	 * guard was protecting — it bought no performance and one recurring outage
+	 * class. Removing it fixes the default instead of extending the list a fourth
+	 * time. The per-template flags below stay: those add things to specific pages,
+	 * which is a genuine allowlist. This one was subtracting the baseline.
+	 */
 	wp_enqueue_style(
 		'sitestaffr-website-style',
 		sitestaffr_asset_url( 'assets/css/site.css' ),
