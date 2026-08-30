@@ -10926,13 +10926,30 @@ a.ind-problem-card .ind-problem-card__icon--art {
   line-height: 1.7;
   color: var(--text-secondary);
 }
-/* /for/ index: group headings link through to their category hub. */
-.ind-problems__header h2 a {
+/* ---- /for/: five groups inside ONE section ------------------------------
+   ⚠️ THIS REPLACES `.ind-problems__header` AND `.ind-problems__grid`, both of
+   which were deleted when `page-industry.php` converted — while `/for/` and the
+   five category hubs still carried them. The grid class outliving its rule is
+   why twenty-one directory tiles were rendering as a full-width stack.
+
+   The group gap is deliberately SMALLER than `--block-pad-light` doubled. Five
+   groups used to be five `<section>`s, which put 192px of empty cream between
+   "Health & Medical" and "Beauty & Wellness". That figure separates two
+   different ideas on a cream run; these are one directory, and the page's job is
+   to get someone to their own trade. */
+.ind-directory__group + .ind-directory__group {
+  margin-top: clamp(56px, 7vw, 88px);
+}
+/* Group headings link through to their category hub. `--teal-text`, not
+   `--teal-deep`: the hover state is display type on cream, where --teal-deep
+   measures 4.38:1. Part of the same teal-deep-as-text sweep the conversion
+   carries. */
+.ind-directory__group h2 a {
   color: inherit;
   text-decoration: none;
 }
-.ind-problems__header h2 a:hover {
-  color: var(--teal-deep);
+.ind-directory__group h2 a:hover {
+  color: var(--teal-text);
 }
 
 /* Category hubs: the "not listed above?" line under the card grid. */
@@ -10945,7 +10962,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--text-secondary);
 }
 .ind-problems__footnote a {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -11464,13 +11481,9 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Industry responsive --- */
-@media (max-width: 900px) {
-  .ind-problems__grid {
-    grid-template-columns: 1fr;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-}
+/* The `.ind-problems__grid` collapse that lived here is gone with the class.
+   `.block-cards__grid` carries the whole responsive story now: 3 -> 2 at 900,
+   2 -> 1 at 560. */
 @media (max-width: 768px) {
   .ind-hero__grid {
     grid-template-columns: 1fr;

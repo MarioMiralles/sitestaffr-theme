@@ -41,9 +41,16 @@ $cta_url               = home_url( '/#get-started' );
 
 <main class="ind-page">
 
+	<?php /* ---- HERO: a V3 block, not a Split -----------------------------------
+	         Same reasoning as `/for/`: no isometric on a hub, so no second column.
+	         ⚠️ `.block.ind-hero` — TWO CLASSES. The padding is owned by
+	         `.block:not(.block--dark)` at (0,2,0) and a bare `.ind-hero` at (0,1,0)
+	         loses to it whatever the source order; `:not()` contributes its
+	         argument's specificity. Written as one class this changes nothing and
+	         looks correct in the diff. */ ?>
 	<!-- Hero -->
-	<section class="ind-hero">
-		<div class="container">
+	<section class="block ind-hero">
+		<div class="block__inner">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label"><?php echo esc_html( $sitestaffr_category['heading'] ); ?></span>
 				<?php
@@ -85,13 +92,24 @@ $cta_url               = home_url( '/#get-started' );
 		</div>
 	</section>
 
+	<?php /* ---- THE CATEGORY'S INDUSTRIES: a V3 Cards block --------------------
+	         ⚠️ `.ind-problems__grid` HAD NO RULE LEFT. It was deleted from site.css
+	         when the industry page's pain points moved onto `.block-cards__grid`,
+	         and these tiles kept the dead class — so the grid on all five hubs had
+	         silently collapsed to a full-width stack.
+
+	         ⚠️ THE TILES KEEP THEIR BOX. `.ind-problem-card` is two components: the
+	         three unboxed statements on `page-industry.php` (now `.ind-problem`) and
+	         these, which are LINKS. The box is the affordance; unboxing the shared
+	         class would have stripped it from twenty-one tiles across six pages. */ ?>
 	<!-- Industries in this category -->
-	<section class="ind-problems">
-		<div class="container">
-			<div class="ind-problems__header reveal">
+	<section class="block block-cards ind-problems">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
+				<span class="section-label">In this category</span>
 				<h2>Where SiteStaffr Fits</h2>
 			</div>
-			<div class="ind-problems__grid">
+			<div class="block-cards__grid" style="--cards: 3;">
 				<?php foreach ( $sitestaffr_industries as $sitestaffr_i => $sitestaffr_item ) : ?>
 					<?php $sitestaffr_item_art = sitestaffr_industry_art_thumb_url( $sitestaffr_item['slug'] ); ?>
 					<a class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $sitestaffr_i + 1 ); ?>" href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_item['slug'] . '/' ) ); ?>">
