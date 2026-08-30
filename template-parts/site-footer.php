@@ -17,8 +17,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
          Fill is --footer-dark rather than --block-dark, so it matches the footer it
          rises out of. Both sides read the same token and cannot drift. */ ?>
-<footer class="footer">
+<?php /* ⚠️ THE CURTAIN SITS OUTSIDE <footer>, IN A ZERO-HEIGHT WRAPPER, AND IT HAS TO.
+         Rendered as the footer's first child it was completely invisible while being
+         perfectly positioned — right size, right fill, offsetParent correct, rect 98px
+         above the footer's top edge. `.footer` carries `overflow: hidden`, so an
+         absolutely-positioned child hanging ABOVE the box is clipped away entirely.
+         Nothing about that shows up in a diff, and elementFromPoint cannot detect it
+         either because the seam is pointer-events:none.
+
+         .footer-seam is height:0 and position:relative, so it sits exactly on the
+         footer's top edge and the curtain's own `bottom: -1px` hangs it upward over
+         the section above. Not clipped, because this wrapper has no overflow of its
+         own — and the footer's overflow:hidden is left alone rather than removed,
+         since it is load-bearing for the footer's own content. */ ?>
+<div class="footer-seam" aria-hidden="true">
   <?php get_template_part( 'template-parts/seam-curtain' ); ?>
+</div>
+<footer class="footer">
   <div class="footer__main">
     <div class="container">
       <div class="footer__grid">

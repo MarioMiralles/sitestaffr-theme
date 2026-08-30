@@ -4130,12 +4130,24 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    ⚠️ HANGS UPWARD out of the footer, like .block--dark > .seam-curtain--open. The
    footer is not a .block, so it needs its own copy of that rule. */
-.footer { position: relative; }
-.footer > .seam-curtain--open {
-  bottom: auto;
-  top: calc(-1 * (clamp(56px, 7vw, 120px) - 3px));
-}
-.footer .seam-curtain path { fill: var(--footer-dark); }
+/* ⚠️ A ZERO-HEIGHT WRAPPER OUTSIDE <footer>, NOT A CHILD OF IT. As the footer's
+   first child the curtain was invisible while measuring perfectly — correct size,
+   correct fill, offsetParent correct, rect exactly 98px above the footer's top
+   edge. `.footer` sets `overflow: hidden`, which clips an absolutely-positioned
+   child hanging above the box out of existence.
+
+   That failure is invisible three ways: nothing in the diff suggests it, the
+   element passes every geometry assertion, and elementFromPoint cannot see it
+   because the seam is pointer-events:none. Only sampling the rendered pixels
+   found it.
+
+   height:0 + position:relative puts this wrapper exactly on the footer's top
+   edge, so the curtain's own `bottom: -1px` hangs it upward over the section
+   above. The footer's overflow:hidden is left alone — it is load-bearing for the
+   footer's own content, and removing shared chrome to fix something outside it
+   is how the next bug gets made. */
+.footer-seam { position: relative; height: 0; }
+.footer-seam .seam-curtain path { fill: var(--footer-dark); }
 
 /* Room for the peak in whatever section ends the page, on every template. Two
    rules because the dark and light padding scales differ, and the last section is
