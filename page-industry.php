@@ -109,7 +109,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Dana Whitfield.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Dana. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0134.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Dana Whitfield',
@@ -190,7 +190,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Renee Castillo.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Renee. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0148.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Renee Castillo',
@@ -271,7 +271,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Marcus Bell.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Marcus. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0119.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Marcus Bell',
@@ -352,7 +352,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Sydney Park.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Sydney. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0176.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Sydney Park',
@@ -433,7 +433,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Owen Bradley.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Owen. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0163.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Owen Bradley',
@@ -514,7 +514,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Priya Nair.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Priya. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0192.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Priya Nair',
@@ -595,7 +595,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Trevor Nash.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Trevor. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0157.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Trevor Nash',
@@ -676,7 +676,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Alicia Moreno.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Alicia. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0184.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Alicia Moreno',
@@ -759,7 +759,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => '555-0138.' ),
 			array( 'from' => 'ai',    'text' => 'Got it. And what&rsquo;s the year and model of the vehicle?' ),
 			array( 'from' => 'visitor', 'text' => '2019 Honda Accord.' ),
-			array( 'from' => 'ai',    'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Jordan Vance',
@@ -840,7 +840,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Whitney Ortiz.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Whitney. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0125.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Whitney Ortiz',
@@ -921,7 +921,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Renata Kowalski.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Renata. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0171.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Renata Kowalski',
@@ -1008,7 +1008,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Desmond Farrow.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Desmond. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0166.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Desmond Farrow',
@@ -1089,7 +1089,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Camille Reyes.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Camille. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0142.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Camille Reyes',
@@ -1170,7 +1170,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Talia Brennan.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Talia. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0159.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Talia Brennan',
@@ -1251,7 +1251,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Holly Ferris.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Holly. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0113.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Holly Ferris',
@@ -1368,7 +1368,7 @@ $industries = array(
 			array( 'from' => 'visitor', 'text' => 'Renee Alvarado, Mercy General.' ),
 			array( 'from' => 'ai',    'text' => 'Thanks, Renee. What&rsquo;s the best number for our team to reach you at?' ),
 			array( 'from' => 'visitor', 'text' => '555-0178.' ),
-			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the staffing team with the shift details and marked it time-sensitive &mdash; they&rsquo;ll be in touch as soon as they can.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the staffing team with the shift details and marked it time-sensitive &mdash; they&rsquo;ll be in touch as soon as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Renee Alvarado',
