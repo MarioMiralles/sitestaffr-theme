@@ -342,6 +342,22 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'group'    => 'What it does',
+            /* NEW 2026-08-30, and it is the FAQ half of the hero's 24/7 edit. The page
+               had seventeen questions and not one of them asked about hours, which is
+               the reassurance a service-business owner actually wants and the phrasing
+               people search. It is also the only place the claim can be made
+               PRECISELY: "24/7" on its own invites "so someone is on call?", and the
+               honest answer — nobody is, which is the entire point — is a selling
+               point rather than a caveat.
+
+               ⚠️ NO PHONE LANGUAGE. Same rule as the industry templates: "after hours"
+               and "overnight" are fine, "answers calls" is not. This one sits directly
+               above the no-phone-number question on purpose — hours, then channel. */
+            'question' => 'Does SiteStaffr answer visitors 24/7?',
+            'answer'   => 'Yes. SiteStaffr answers every visitor the moment they arrive, at 2 AM on a Sunday exactly as it does at 2 PM on a Tuesday. There is no schedule to set, no after-hours mode to switch on, and nobody waiting on call — it is the same AI answering from the same pages at every hour. You get the recap by email either way, so an overnight conversation is waiting for you in the morning rather than lost.',
+        ),
+        array(
+            'group'    => 'What it does',
             /* NEW. Protects the positioning: with "receptionist" in the H1, people will
                assume phone answering, which is a different and more expensive category. */
             'question' => 'Can visitors really talk to my website without calling a phone number?',
@@ -495,8 +511,25 @@ get_template_part( 'template-parts/site-nav', null, array(
 
                  Still no "small and medium-sized businesses": nobody self-identifies that
                  way, and it would tell an agency this page is not for them. */ ?>
+        <?php /* ⚠️ "24/7" IS LOAD-BEARING AND IT IS NEW (Mario, 2026-08-30): "I'm not
+                 seeing anything that says 24/7 on the homepage or elsewhere. I know that
+                 it's implied but people would likely like to see that to be reassured and
+                 it might also help with SEO."
+
+                 He was right and the sweep confirmed it — before this edit the string
+                 appeared ZERO times in this file. It was only ever in Yoast meta
+                 descriptions, /about/, /download/ and /for/, i.e. everywhere except the
+                 page that has to make the promise. Sections 2 and 5 both dramatize
+                 after-hours ("a shift you are not there for", "You Were Asleep") without
+                 either of them ever stating the hours.
+
+                 It goes FIRST here, ahead of the credibility clause, because it is the
+                 reassurance; "nothing to write and nothing to train" is the objection
+                 handler and still follows. Every idea in the previous version survives —
+                 set up in minutes, answers from your own pages, nothing to write or
+                 train. Nothing was traded for it. */ ?>
         <p class="hero__subtitle">
-          Set up in minutes. SiteStaffr answers from your own pages, so there is nothing to write and nothing to train.
+          SiteStaffr answers your visitors 24/7 from your own pages. Set up in minutes, with nothing to write and nothing to train.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).

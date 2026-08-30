@@ -2558,25 +2558,58 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* LEFT-ALIGNED NOW, not centered. It used to sit under the image as a caption, where
    centering was right; beside the image it is a column of prose, and centered prose in a
-   column reads as a pull-quote rather than as a description. */
-.industries__excerpt-item { display: none; margin-top: 0; }
-.industries__excerpt-item.is-active { display: block; }
-.industries__excerpt-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+   column reads as a pull-quote rather than as a description.
+
+   ---- IT IS A DARK CARD (Mario, 2026-08-30) ----------------------------------
+   The heading, the blurb and the link now sit on --block-dark instead of loose on the
+   cream. It is the one thing in the section that CHANGES when you pick a name, and as
+   bare prose beside a picture nothing said so; a surface does.
+
+   ⚠️ USE --block-dark (#00323A), NOT a new near-black. Same tone as sections 2-3 and
+   10-11 — this is a card wearing the page's dark, not a second dark.
+
+   ⚠️ THE CARD IS ON THE CONTAINER AND THE ITEMS ARE STACKED IN ONE GRID CELL, which is
+   a change from display:none. Sixteen blurbs are different lengths, so a card sized by
+   whichever one is showing resized on every click, next to a fixed 440px image — a jump
+   that loose text on cream hid completely and a painted box cannot. Stacked, the
+   container is the height of the LONGEST blurb and nothing moves.
+
+   `visibility` rather than `display` is what makes the hidden ones still contribute
+   that height. It still takes them out of the tab order and the accessibility tree, so
+   the sixteen links do not all become tab stops. */
+.industries__excerpt {
+  display: grid;
+  background: var(--block-dark);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-xl);
+  padding: clamp(28px, 3.2vw, 40px);
+}
+.industries__excerpt-item {
+  grid-area: 1 / 1;
+  margin-top: 0;
+  visibility: hidden;
+}
+.industries__excerpt-item.is-active { visibility: visible; }
+.industries__excerpt-item h3 { font-size: 1.4rem; margin-bottom: 10px; color: #FFFFFF; }
 .industries__excerpt-item p {
-  color: var(--text-secondary);
+  color: var(--text-on-dark);
   font-size: 1rem;
   line-height: 1.65;
   max-width: 42ch;
 }
+/* ⚠️ --teal-light ON DARK, NOT --teal-text. --teal-text (#00747E) exists to clear the
+   CREAM and is 1.6:1 here; --teal-light is 5.7:1 on #00323A. Same swap the design
+   system already mandates for .block--dark .section-label — contrast is a relationship,
+   so this link goes lighter for exactly the reason it went darker on cream. */
 .industries__link {
   display: inline-block;
   margin-top: 10px;
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--teal-text);
-  border-bottom: 1px solid rgba(0,131,143,0.35);
+  color: var(--teal-light);
+  border-bottom: 1px solid rgba(31,182,204,0.4);
 }
-.industries__link:hover { border-bottom-color: var(--teal-deep); }
+.industries__link:hover { border-bottom-color: var(--teal-light); }
 
 /* ⚠️ THE LIST IS FIVE COLUMNS, ONE PER GROUP — this is what actually fixes the
    complaint. Stacked in a single column the five groups were the tallest thing in the
