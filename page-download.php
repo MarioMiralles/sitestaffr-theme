@@ -153,7 +153,7 @@ $download_url = home_url( '/download/' );
 						<span class="dl-steps__number">3</span>
 					</div>
 					<h3>You&rsquo;re Live</h3>
-					<p>The voice and text agent widget appears on your site automatically. Visitors can start a conversation, and you&rsquo;ll get email recaps and full transcripts in your WordPress dashboard.</p>
+					<p>The AI receptionist widget appears on your site automatically. Visitors can start a conversation, and you&rsquo;ll get email recaps and full transcripts in your WordPress dashboard.</p>
 					<div class="dl-steps__card-accent" aria-hidden="true"></div>
 				</div>
 
@@ -176,7 +176,7 @@ $download_url = home_url( '/download/' );
 					</button>
 					<div class="dl-faq__answer">
 						<div class="dl-faq__answer-inner">
-							SiteStaffr is an AI voice and text agent that greets your website visitors, answers their questions using your own content, captures their contact info, and emails you a full recap after every conversation &mdash; 24/7, in over 57 languages.
+							SiteStaffr is an AI receptionist that greets your website visitors, answers their questions using your own content, captures their contact info, and emails you a full recap after every conversation &mdash; 24/7, in over 57 languages.
 						</div>
 					</div>
 				</div>
@@ -224,7 +224,7 @@ $download_url = home_url( '/download/' );
 					</button>
 					<div class="dl-faq__answer">
 						<div class="dl-faq__answer-inner">
-							Manage your AI agent&rsquo;s knowledge base, review call transcripts, adjust business hours, and handle billing &mdash; all from your WordPress dashboard. You can also manage your subscription anytime at <a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>">sitestaffr.com/manage</a>.
+							Manage your AI receptionist&rsquo;s knowledge base, review conversation transcripts, adjust business hours, and handle billing &mdash; all from your WordPress dashboard. You can also manage your subscription anytime at <a href="<?php echo esc_url( home_url( '/manage/' ) ); ?>">sitestaffr.com/manage</a>.
 						</div>
 					</div>
 				</div>
@@ -279,7 +279,7 @@ $download_url = home_url( '/download/' );
 	'@type'               => 'SoftwareApplication',
 	'@id'                 => home_url( '/' ) . '#software',
 	'name'                => 'SiteStaffr',
-	'description'         => 'AI voice and text agent plugin for WordPress. Greets visitors, answers questions, captures leads, and sends email recaps — 24/7.',
+	'description'         => 'AI receptionist plugin for WordPress. Greets visitors, answers questions, captures leads, and sends email recaps — 24/7.',
 	'applicationCategory' => 'BusinessApplication',
 	'operatingSystem'     => 'WordPress ' . $plugin['requires'] . '+',
 	'softwareVersion'     => $version,
@@ -304,7 +304,7 @@ $download_url = home_url( '/download/' );
 $faq_items = array(
 	array(
 		'question' => 'What does SiteStaffr do?',
-		'answer'   => 'SiteStaffr is an AI voice and text agent that greets your website visitors, answers their questions using your own content, captures their contact info, and emails you a full recap after every conversation — 24/7, in over 57 languages.',
+		'answer'   => 'SiteStaffr is an AI receptionist that greets your website visitors, answers their questions using your own content, captures their contact info, and emails you a full recap after every conversation — 24/7, in over 57 languages.',
 	),
 	array(
 		'question' => 'Do I need to create an account separately?',
@@ -320,7 +320,7 @@ $faq_items = array(
 	),
 	array(
 		'question' => 'What can I do after setup?',
-		'answer'   => 'Manage your AI agent\'s knowledge base, review call transcripts, adjust business hours, and handle billing — all from your WordPress dashboard. You can also manage your subscription anytime at sitestaffr.com/manage.',
+		'answer'   => 'Manage your AI receptionist\'s knowledge base, review conversation transcripts, adjust business hours, and handle billing — all from your WordPress dashboard. You can also manage your subscription anytime at sitestaffr.com/manage.',
 	),
 );
 
