@@ -11312,7 +11312,23 @@ a.ind-problem-card .ind-problem-card__icon--art {
    - `position: relative` + `z-index: 1` on __content, which only existed to lift
      the card above the pattern. Both go with the thing they were stacking
      against, not left behind as inert insurance. */
-.ind-cta { }
+.ind-cta {
+  /* The curtain is position:absolute; without this it would resolve against the
+     nearest positioned ancestor instead of this section. */
+  position: relative;
+}
+/* ⚠️ THE CURTAIN HANGS UP OUT OF THE CTA AND OVERLAPS THE SECTION ABOVE, so that
+   section has to give it room or the peak lands on the last line of copy. The peak
+   is 114/120 of the seam's height clamp; the var() is load-bearing because the
+   padding scale steps down at 1024 and 620. Same calculation as .block.final-cta
+   on the homepage.
+
+   `:has()` rather than a class, because the section above the CTA is a different
+   one in each of the three templates (.ind-siblings, .ind-problems) and one of
+   them is inside a foreach loop, so there is no single element to label. */
+.ind-page > section:has(+ .ind-cta) {
+  padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
+}
 .ind-cta h2 {
   color: white;
   margin-bottom: 16px;
@@ -11347,21 +11363,22 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 .ind-cta__btn:hover {
   background: #15a3b8;
-  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
   transform: translateY(-2px);
 }
-.ind-cta__btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  animation: cta-shimmer 3s ease-in-out infinite;
-  pointer-events: none;
-  will-change: transform;
-}
+/* ⚠️ THE SHIMMER ::before IS DELETED (Mario, 2026-08-30: "a weird hover animation").
+   It was a white gradient sweeping the button on a 3s infinite loop — not a hover
+   effect at all, it ran constantly.
+
+   IT WAS ALSO ALREADY BROKEN BY THIS CONVERSION AND THAT IS WHY IT SUDDENLY LOOKED
+   WRONG. It is position:absolute, and it was contained by `position: relative` +
+   `overflow: hidden` on .ind-cta__btn — two properties removed earlier in this
+   conversion as leftovers of the old gradient background. Without them the
+   pseudo-element resolved against a different ancestor and escaped its clip, so a
+   white band swept across the section instead of across the button.
+
+   Not restored, because V3's primary buttons do not shimmer: the hover is now
+   exactly .btn--primary's — same lift, same shadow weight. */
 
 .ind-cta__actions {
   display: flex;

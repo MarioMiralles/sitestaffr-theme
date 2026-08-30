@@ -1096,7 +1096,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '6:04:24 AM', 'text' => 'Tom Byrne.' ),
           array( 'who' => 'ai',      'at' => '6:04:27 AM', 'text' => 'Thanks Tom. What&rsquo;s the best number for our team to reach you at?' ),
           array( 'who' => 'visitor', 'at' => '6:04:56 AM', 'text' => '(216) 555-0176.' ),
-          array( 'who' => 'ai',      'at' => '6:04:59 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch to confirm the flavors and pickup time. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '6:04:59 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch to confirm the flavors and pickup time. Is there anything else I can assist you with?' ),
         ),
       ),
       array(
@@ -1125,7 +1125,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '2:15:48 AM', 'text' => '555-0123.' ),
           array( 'who' => 'ai',      'at' => '2:15:51 AM', 'text' => 'That&rsquo;s seven digits &mdash; could I get the area code as well?' ),
           array( 'who' => 'visitor', 'at' => '2:16:09 AM', 'text' => 'Sorry, 216.' ),
-          array( 'who' => 'ai',      'at' => '2:16:12 AM', 'text' => 'Got it &mdash; a two-tier unicorn cake for 25 guests on April 12. I&rsquo;ve passed that to the team and someone will be in touch with designs and pricing. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '2:16:12 AM', 'text' => 'Got it &mdash; a two-tier unicorn cake for 25 guests on April 12. I&rsquo;ve passed that to the team and someone will be in touch with designs and pricing. Is there anything else I can assist you with?' ),
         ),
       ),
       array(
@@ -1149,7 +1149,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '11:48:14 PM', 'text' => 'Camila Reyes.' ),
           array( 'who' => 'ai',      'at' => '11:48:17 PM', 'text' => 'Thanks Camila. What&rsquo;s the best number for our team to reach you at?' ),
           array( 'who' => 'visitor', 'at' => '11:48:49 PM', 'text' => 'Email is easier &mdash; camila.reyes@example.com' ),
-          array( 'who' => 'ai',      'at' => '11:48:52 PM', 'text' => 'Got it. I&rsquo;ve passed along your question about Sunday tastings for a September wedding, and someone from the team will follow up by email. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '11:48:52 PM', 'text' => 'Got it. I&rsquo;ve passed along your question about Sunday tastings for a September wedding, and someone from the team will follow up by email. Is there anything else I can assist you with?' ),
         ),
       ),
     );
