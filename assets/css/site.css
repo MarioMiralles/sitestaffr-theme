@@ -11303,16 +11303,25 @@ a.ind-problem-card .ind-problem-card__icon--art {
   max-width: 560px;
   margin: 0 auto 36px;
 }
-/* ⚠️ `color: white` ON --teal-light IS 1.9:1 AND HAS TO GO. It was designed
-   against the old teal gradient and was already failing there. --text-on-cyan
-   (#06222C) is the token that exists for exactly this — a solid label on the
-   light-teal fill — and measures 9.4:1. The drop shadow goes with the gradient
-   it was lifting the button off. */
+/* ⚠️ `color: white` ON --teal-light IS 1.9:1 AND HAD TO GO. It was designed
+   against the old teal gradient and was already failing there.
+
+   ⚠️ THE FIRST FIX FOR IT WAS --text-on-cyan, AND THAT TOKEN DOES NOT EXIST IN
+   THIS STYLESHEET. It is documented as #06222C and used "in ~30 places" — on the
+   night-world branch, not this one. An undefined var() is invalid at computed
+   value time, so `color` fell back to the INHERITED value, which inside
+   .block--dark is --text-on-dark. The button rendered #F0FAFA on #1FB6CC at
+   2.29:1: a contrast fix that made the contrast worse, silently, with no invalid
+   property anywhere in devtools.
+
+   --block-dark is the same pairing the design system already mandates for
+   .price-tier__badge on emerald. 5.7:1. The drop shadow goes with the gradient it
+   was lifting the button off. */
 .ind-cta__btn {
   font-size: 1.1rem;
   padding: 20px 48px;
   background: var(--teal-light);
-  color: var(--text-on-cyan);
+  color: var(--block-dark);
 }
 .ind-cta__btn:hover {
   background: #15a3b8;
