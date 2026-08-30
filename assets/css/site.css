@@ -621,7 +621,12 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: rgba(26,35,50,0.45);
+  /* ⚠️ WAS 0.45 ALPHA, WHICH IS 2.74:1 ON WHITE. Tolerable-ish on a label; not
+     on a control. This is 10.56px, so 4.5:1 is the bar, not the large-text 3:1 —
+     bold does not make 10px large. 0.62 measures 4.55:1 and is still clearly
+     subordinate to the near-black industry links under it, which is the whole
+     job of the heading. */
+  color: rgba(26,35,50,0.62);
 }
 /* ---- The category heading is now a LINK to its hub ----------------------
    ⚠️ IT STAYS LOOKING LIKE A HEADING at rest, and that is the whole design
