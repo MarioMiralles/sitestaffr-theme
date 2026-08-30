@@ -10609,50 +10609,38 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 /* ========== INDUSTRY PAGES ========== */
 
 /* --- Hero --- */
+/* ---- HERO: a V3 Split block (converted 2026-08-30) -------------------------
+   ⚠️ NO `padding` HERE ANY MORE, AND THAT IS THE POINT. It carried
+   `clamp(120px,15vw,180px) 0 clamp(70px,10vw,120px)` — a third spacing system
+   alongside `--section-padding` and `.ind-page > section`. `.block` owns the
+   padding now. A `padding` shorthand written here would silently beat
+   `.block`'s `padding-block` and put it straight back, which is the trap the V3
+   build already hit on three homepage sections that passed a class-list audit.
+
+   DELETED, not overridden, and each for its own reason:
+   - `::before`, a 120px gradient fading the hero into the cream below. It was a
+     SEAM. V3 has one seam on the entire site because a seam is a colour contract
+     between two neighbours that fails silently at widths nobody sampled.
+   - `.ind-hero__accent` and `.ind-hero__glow`, two absolutely-positioned teal
+     radial gradients at 7% and 5% alpha. Decoration doing no work; V3 carries
+     emphasis with a dark block, not a wash. Their markup is deleted too — a
+     hidden div is a thing the next person has to re-decide.
+   - `position: relative` and `overflow: hidden`, which existed ONLY to contain
+     those three. Removing shared chrome is property-by-property: these two look
+     like generic hygiene and were load-bearing for the layers above, so they go
+     WITH them rather than being left behind as inert insurance. */
 .ind-hero {
-  padding: clamp(120px, 15vw, 180px) 0 clamp(70px, 10vw, 120px);
-  position: relative;
   background: var(--warm-white);
-  overflow: hidden;
 }
-.ind-hero::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent 0%, var(--cream) 100%);
-  pointer-events: none;
-}
-.ind-hero__accent {
-  position: absolute;
-  top: -40%;
-  right: -15%;
-  width: 60%;
-  height: 130%;
-  background: radial-gradient(ellipse at center, rgba(31,182,204,0.07) 0%, transparent 60%);
-  pointer-events: none;
-}
-.ind-hero__glow {
-  position: absolute;
-  top: -20%;
-  left: -10%;
-  width: 50%;
-  height: 120%;
-  background: radial-gradient(ellipse at center, rgba(0,131,143,0.05) 0%, transparent 55%);
-  pointer-events: none;
-}
+/* ⚠️ KEPT, AND NOT REDUNDANT NEXT TO .block-split__grid. It overrides that rule's
+   1fr 1fr. Was 1fr 1fr here too, which gave a 51px display headline only ~498px —
+   about sixteen characters a line, so a 79-character headline broke over five
+   lines. The visual is one isometric and never needed half the page.
+   minmax(0, 1fr) matters: a plain 1fr floors at the image's intrinsic width,
+   which was 522px and was what actually squeezed the text column. */
 .ind-hero__grid {
-  display: grid;
-  /* Was 1fr 1fr, which gave a 51px display headline only ~498px — about sixteen
-     characters a line, so a 79-character headline broke over five lines. The
-     visual is a single icon and never needed half the page.
-     minmax(0, 1fr) matters: a plain 1fr floors at the icon's intrinsic width,
-     which was 522px and was what actually squeezed the text column. */
   grid-template-columns: 1.35fr minmax(0, 1fr);
   gap: clamp(40px, 6vw, 80px);
-  align-items: center;
 }
 .ind-hero__visual img,
 .ind-hero__visual svg,
@@ -11178,7 +11166,20 @@ a.ind-problem-card .ind-problem-card__icon--art {
 /* Sections ran 650-950px tall for roughly 400px of content: 120px of padding
    each side meant 240px of dead space between every block. Scoped to the
    industry page type so all fifteen and the hubs move together. */
-.ind-page > section {
+/* ⚠️ `:not(.block)` IS WHAT MAKES THE CONVERSION SAFE ONE SECTION AT A TIME.
+
+   This is a `padding` SHORTHAND, it sits ~10,900 lines after `.block`, and
+   `.ind-page > section` (0,1,1) out-specifies `.block` (0,1,0). So without the
+   `:not()` it would beat `.block`'s `padding-block` on every section converted
+   to the block system — the section would carry the right class, pass a
+   class-list audit, and still render on the old scale. That is exactly how three
+   homepage sections shipped wrong during the V3 build.
+
+   Scoping it to sections that are NOT yet blocks means each conversion moves one
+   section off this rule and onto the token, with no flag day. ⚠️ DELETE THIS
+   RULE ENTIRELY once the last ind-* section carries `.block`; leaving it would
+   be dead CSS waiting to win an argument nobody knew it was in. */
+.ind-page > section:not(.block) {
   padding: clamp(52px, 6.5vw, 88px) 0;
 }
 

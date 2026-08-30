@@ -43,8 +43,6 @@ $cta_url               = home_url( '/#get-started' );
 
 	<!-- Hero -->
 	<section class="ind-hero">
-		<div class="ind-hero__accent" aria-hidden="true"></div>
-		<div class="ind-hero__glow" aria-hidden="true"></div>
 		<div class="container">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label"><?php echo esc_html( $sitestaffr_category['heading'] ); ?></span>

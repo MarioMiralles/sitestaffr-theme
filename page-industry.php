@@ -1481,12 +1481,34 @@ get_template_part( 'template-parts/site-nav' );
 
 <main class="ind-page">
 
-	<!-- Hero -->
-	<section class="ind-hero">
-		<div class="ind-hero__accent" aria-hidden="true"></div>
-		<div class="ind-hero__glow" aria-hidden="true"></div>
-		<div class="container">
-			<div class="ind-hero__grid">
+	<?php /* ---- HERO: now a V3 Split block ------------------------------------------
+	         First section of the ind-* conversion. Three things changed and none of
+	         them is the copy:
+
+	         1. `.block .block-split` + `.block__inner` + `.block-split__grid` replace
+	            the bespoke `.ind-hero` padding, `.container` and `.ind-hero__grid`.
+	            That is the whole point — the page had a THIRD spacing system
+	            (`.ind-page > section`, `--section-padding`, and this hero's own
+	            clamp) where V3 has one token per context.
+
+	         2. `.ind-hero__accent` and `.ind-hero__glow` are DELETED, not hidden. Two
+	            absolutely-positioned radial gradients in teal at 5% and 7% alpha,
+	            which is decoration doing no work — V3 carries emphasis with a dark
+	            block, not with a wash.
+
+	         3. The `::before` gradient that faded the hero's last 120px into the
+	            cream is gone with them. It was a SEAM, and V3 has exactly one seam on
+	            the whole site (the homepage hero curtain) because a seam is a colour
+	            contract between neighbours that fails silently at widths nobody
+	            sampled. Whitespace has no contract.
+
+	         ⚠️ `.ind-hero__grid` STAYS on the element alongside `.block-split__grid`.
+	         It is not redundant: it overrides the 1fr 1fr to 1.35fr, which was
+	         measured for headlines of 60-79 characters. Dropping it would give the
+	         isometric half the page and break the H1 over five lines again. */ ?>
+	<section class="block block-split ind-hero">
+		<div class="block__inner">
+			<div class="block-split__grid ind-hero__grid">
 				<div class="ind-hero__content reveal">
 					<span class="ind-hero__label"><?php echo esc_html( $ind['label'] ); ?></span>
 					<h1><?php echo wp_kses_post( $ind['headline'] ); ?></h1>
@@ -1499,7 +1521,7 @@ get_template_part( 'template-parts/site-nav' );
 					</div>
 					<span class="ind-hero__trust">Free for 30 days &bull; No credit card required</span>
 				</div>
-				<div class="ind-hero__visual reveal reveal-delay-2"<?php echo $hero_image_url ? '' : ' aria-hidden="true"'; ?>>
+				<div class="block-split__art ind-hero__visual reveal reveal-delay-2"<?php echo $hero_image_url ? '' : ' aria-hidden="true"'; ?>>
 					<?php if ( $hero_image_url ) : ?>
 						<img
 							class="ind-hero__image"
