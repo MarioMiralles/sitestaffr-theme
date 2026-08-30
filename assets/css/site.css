@@ -4118,7 +4118,30 @@ body.sitestaffr-landing-page .hero__visual > * {
    Scoped by parent rather than a modifier class because the seam has no knowledge of what
    sits below it; the SECTION does. Both sides now read the same token, so they cannot
    drift apart again. */
-.final-cta .seam-curtain path { fill: var(--footer-dark); }
+/* ⚠️ THE CLOSING CURTAIN IS THE FOOTER'S NOW (Mario, 2026-08-30), so this is scoped
+   to .footer rather than to one section on one template. It used to live in
+   .final-cta on the homepage and nowhere else, which is why every other template
+   ended on a hard horizontal rule.
+
+   Fill is --footer-dark, not --block-dark: the footer went a step darker than the
+   sections on 2026-08-27, and a curtain painting #00323A directly above a #00232A
+   footer is a 16-point step across the full viewport — exactly the hairline these
+   seams exist to remove. Both sides read the same token so they cannot drift.
+
+   ⚠️ HANGS UPWARD out of the footer, like .block--dark > .seam-curtain--open. The
+   footer is not a .block, so it needs its own copy of that rule. */
+.footer { position: relative; }
+.footer > .seam-curtain--open {
+  bottom: auto;
+  top: calc(-1 * (clamp(56px, 7vw, 120px) - 3px));
+}
+.footer .seam-curtain path { fill: var(--footer-dark); }
+
+/* Room for the peak in whatever section ends the page, on every template. Two
+   rules because the dark and light padding scales differ, and the last section is
+   dark on the industry pages and cream on the homepage. */
+main > section:last-child { padding-bottom: calc(var(--block-pad) + clamp(53px, 6.65vw, 114px)); }
+main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px)); }
 
 /* ---- Section 2: the job-value grid ------------------------------------
    Padding, background and color come from .block .block--dark. The old
@@ -11312,22 +11335,24 @@ a.ind-problem-card .ind-problem-card__icon--art {
    - `position: relative` + `z-index: 1` on __content, which only existed to lift
      the card above the pattern. Both go with the thing they were stacking
      against, not left behind as inert insurance. */
-.ind-cta {
-  /* The curtain is position:absolute; without this it would resolve against the
-     nearest positioned ancestor instead of this section. */
-  position: relative;
-}
-/* ⚠️ THE CURTAIN HANGS UP OUT OF THE CTA AND OVERLAPS THE SECTION ABOVE, so that
-   section has to give it room or the peak lands on the last line of copy. The peak
-   is 114/120 of the seam's height clamp; the var() is load-bearing because the
-   padding scale steps down at 1024 and 620. Same calculation as .block.final-cta
-   on the homepage.
+/* ---- Any section that carries a curtain, on every ind-* template ---------
+   ⚠️ SELF-SCOPING BY `:has()` RATHER THAN BY A MODIFIER CLASS, deliberately. The
+   sections that need this are different elements on each of the three templates,
+   one of them is inside a foreach loop, and which sections carry a curtain will
+   change again as the conversion continues. Keying off the curtain's own presence
+   means adding one to a section is a single markup edit that cannot be half-done —
+   there is no second place to remember.
 
-   `:has()` rather than a class, because the section above the CTA is a different
-   one in each of the three templates (.ind-siblings, .ind-problems) and one of
-   them is inside a foreach loop, so there is no single element to label. */
-.ind-page > section:has(+ .ind-cta) {
+   The peak is 114/120 of the seam's height clamp, so the section has to give it
+   that much room or the shape lands on the last line of copy. The var() is
+   load-bearing: the padding scale steps down at 1024 and 620. Same calculation
+   .block.final-cta already uses on the homepage. */
+.ind-page > section:has(> .seam-curtain) { position: relative; }
+.ind-page > section:has(> .seam-curtain--open) {
   padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
+}
+.ind-page > section:has(> .seam-curtain--close) {
+  padding-top: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
 }
 .ind-cta h2 {
   color: white;

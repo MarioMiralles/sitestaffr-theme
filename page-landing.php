@@ -2767,14 +2767,6 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
     </div>
   </div>
 
-  <?php /* THE CURTAIN CLOSES THE PAGE. Same 'open' variant as the hero's — dark rising out
-           of the light — and it belongs to THIS section for the usual reason: an overlay
-           sits on the LIGHT side of a boundary, so the light section is its background and
-           the two cannot disagree on color. The footer needs no cooperation.
-
-           The page now opens and ends on the same shape, with the footer as the only dark
-           thing below it. */ ?>
-  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </section>
 
 </main>

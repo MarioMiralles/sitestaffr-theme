@@ -3,7 +3,22 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 ?>
+<?php /* THE SHAPE DIVIDER BELONGS TO THE FOOTER (Mario, 2026-08-30: "The Shape
+         Divider should be on the Footer not the CTA").
+
+         It used to be the closing section's: page-landing.php rendered it as the last
+         child of .final-cta, and the ind-* conversion had briefly copied that idea onto
+         each CTA. That meant every template that wanted the gesture had to remember to
+         add it, and three of them did not have it at all. Here it is rendered once and
+         appears on every page that uses the footer.
+
+         ⚠️ THE HOMEPAGE COPY WAS DELETED IN THE SAME COMMIT. Two curtains stacked on
+         one boundary is not a subtle bug — it is the shape drawn twice.
+
+         Fill is --footer-dark rather than --block-dark, so it matches the footer it
+         rises out of. Both sides read the same token and cannot drift. */ ?>
 <footer class="footer">
+  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
   <div class="footer__main">
     <div class="container">
       <div class="footer__grid">

@@ -122,21 +122,6 @@ $cta_url               = home_url( '/#get-started' );
 	         background onto .block--dark would have left whichever template still
 	         carried the old markup with no background at all. */ ?>
 	<section class="block block--dark ind-cta">
-		<?php /* THE SHAPE DIVIDER (Mario, 2026-08-30). Same curtain as the homepage,
-		         and it hangs UPWARD out of the top of this dark block via
-		         `.block--dark > .seam-curtain--open`, so the dark CTA rises out of the
-		         cream above it.
-
-		         ⚠️ IT GOES HERE, NOT BETWEEN THE CTA AND THE FOOTER. The homepage puts
-		         its curtain at the bottom of a CREAM closing section and fills it with
-		         --footer-dark, which is what makes it visible. This CTA is already dark,
-		         so the same placement would paint #00323A on #00232A — a 16-point step
-		         nobody would see. The cream/dark boundary above is where it reads.
-
-		         ⚠️ MUST BE A DIRECT CHILD of the section: the rule that flips it from
-		         bottom to top is `.block--dark > .seam-curtain--open`. Nested one level
-		         deeper it silently reverts to hanging off the bottom. */ ?>
-		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">
 				<h2>Stop Losing Customers to an Unanswered Message</h2>

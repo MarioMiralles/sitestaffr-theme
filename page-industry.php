@@ -1606,6 +1606,15 @@ get_template_part( 'template-parts/site-nav' );
 				<?php endforeach; ?>
 			</div>
 		</div>
+		<?php /* OPEN: the dark run rises out of the cream. Bottom of section 2, over it,
+		         because an overlay sits on the LIGHT side of a boundary — the light section
+		         is its background, so the two cannot disagree on colour.
+
+		         ⚠️ DIRECT CHILD OF THE SECTION, not of .block__inner. .block__inner is
+		         width-capped and gutter-padded; positioned inside it the curtain would be
+		         1140px wide on a full-bleed boundary, leaving the shape short of both edges
+		         at every width above the cap. */ ?>
+		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 	</section>
 
 	<?php /* ---- SOLUTIONS: the first half of the dark run ----------------------
@@ -1753,6 +1762,11 @@ get_template_part( 'template-parts/site-nav' );
 
 	<!-- FAQ -->
 	<section class="block ind-faq">
+		<?php /* CLOSE: the dark run comes back down into the cream. Top of section 5,
+		         over it. Same curve as the open one, mirrored — the pair brackets the
+		         dark run as ONE gesture rather than decorating it with two shapes.
+		         ⚠️ If either path is ever edited, mirror the other in the same commit. */ ?>
+		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 		<div class="block__inner">
 			<div class="ind-section__head reveal">
 				<span class="section-label">FAQ</span>
@@ -1878,21 +1892,6 @@ get_template_part( 'template-parts/site-nav' );
 	         the subpage audit lists as its fifth system break. */ ?>
 	<!-- CTA -->
 	<section class="block block--dark ind-cta">
-		<?php /* THE SHAPE DIVIDER (Mario, 2026-08-30). Same curtain as the homepage,
-		         and it hangs UPWARD out of the top of this dark block via
-		         `.block--dark > .seam-curtain--open`, so the dark CTA rises out of the
-		         cream above it.
-
-		         ⚠️ IT GOES HERE, NOT BETWEEN THE CTA AND THE FOOTER. The homepage puts
-		         its curtain at the bottom of a CREAM closing section and fills it with
-		         --footer-dark, which is what makes it visible. This CTA is already dark,
-		         so the same placement would paint #00323A on #00232A — a 16-point step
-		         nobody would see. The cream/dark boundary above is where it reads.
-
-		         ⚠️ MUST BE A DIRECT CHILD of the section: the rule that flips it from
-		         bottom to top is `.block--dark > .seam-curtain--open`. Nested one level
-		         deeper it silently reverts to hanging off the bottom. */ ?>
-		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">
 				<h2><?php echo wp_kses_post( $ind['cta_headline'] ); ?></h2>
