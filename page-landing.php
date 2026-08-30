@@ -1444,22 +1444,28 @@ $lang_greetings = array(
                and the subtitle supplies the number and the fact that it needs no setup. */ ?>
       <span class="section-label">No Language Barrier</span>
       <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
-      <?php /* ⚠️ NOT "open" (Mario, 2026-08-30: "it's kind of an odd thing to say here").
-               It was our word for starting a conversation — internal vocabulary that
-               reads as a typo to anyone who has not seen the widget, right at the point
-               the sentence is supposed to be effortless.
+      <?php /* ⚠️ THIS LINE TOOK TWO GOES AND BOTH FAILURES WERE THE SAME ONE.
 
-               "Start" carries the same meaning and needs no glossary. The rewrite also
-               drops the dangling "It replies": the subject of the previous clause was
-               "your visitors", so "it" had nothing in the sentence to refer back to.
-               Naming SiteStaffr again was the obvious fix and the wrong one — the H2
-               directly above already says it, and saying it a third time is the
-               repetition this section was rewritten on 2026-08-27 to remove. Passive
-               keeps the visitor as the subject throughout.
+               It read "Your visitors open in 57+ languages" — "open" being our word for
+               starting a conversation, internal vocabulary that reads as a typo to
+               anyone who has not seen the widget (Mario, 2026-08-30: "it's kind of an
+               odd thing to say here").
 
-               Both jobs the line was given survive: the NUMBER, and no setup. */ ?>
+               The fix I shipped was "can start in any of 57+ languages and get an answer
+               in the same one", which Mario rejected too: "No this is odd as well. It
+               should speak plainly and say something like 'Your visitors speak 57+
+               languages'". Swapping one construction for another slightly-less-odd
+               construction was still translating FROM product-speak instead of just
+               writing the sentence — and the wording he supplied is shorter than either
+               attempt.
+
+               ⚠️ THE SUBJECT IS THE VISITOR AND THAT IS THE POINT. "SiteStaffr supports
+               57+ languages" is the same fact as a spec; "your visitors speak 57+
+               languages" is the same fact as a situation the reader recognizes.
+
+               Both jobs the line was given still survive: the NUMBER, and no setup. */ ?>
       <p class="lang-section__text">
-        Your visitors can start in any of 57+ languages and get an answer in the same one, with nothing for you to set up.
+        Your visitors speak 57+ languages. SiteStaffr answers in all of them, with nothing for you to set up.
       </p>
     </div>
 
