@@ -2561,12 +2561,21 @@ body.sitestaffr-landing-page .hero__visual > * {
    column reads as a pull-quote rather than as a description.
 
    ---- IT IS A DARK CARD (Mario, 2026-08-30) ----------------------------------
-   The heading, the blurb and the link now sit on --block-dark instead of loose on the
+   The heading, the blurb and the link now sit on a dark surface instead of loose on the
    cream. It is the one thing in the section that CHANGES when you pick a name, and as
    bare prose beside a picture nothing said so; a surface does.
 
-   ⚠️ USE --block-dark (#00323A), NOT a new near-black. Same tone as sections 2-3 and
-   10-11 — this is a card wearing the page's dark, not a second dark.
+   ⚠️ --block-dark-raised (#0A424A), NOT --block-dark and NOT a new tone. It shipped on
+   --block-dark first; Mario, 2026-08-30: "can we use a less dark background color
+   instead?" The token already existed for section 10's elevated panel — its whole job
+   is "a card that is lighter than the section dark" — so this is a reuse rather than a
+   fourth tone. Inventing a shade here is the exact thing the subpage audit lists as the
+   site's second-commonest system break.
+
+   ⚠️ IT IS ALSO THE CEILING FOR --teal-light ON THIS CARD. The link measures 4.56:1
+   here against 5.69:1 on --block-dark; one more step lighter and the link fails AA and
+   has to move to --teal-pale. Lightening this card is therefore never just a background
+   change — re-check the link with it.
 
    ⚠️ THE CARD IS ON THE CONTAINER AND THE ITEMS ARE STACKED IN ONE GRID CELL, which is
    a change from display:none. Sixteen blurbs are different lengths, so a card sized by
@@ -2579,7 +2588,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    the sixteen links do not all become tab stops. */
 .industries__excerpt {
   display: grid;
-  background: var(--block-dark);
+  background: var(--block-dark-raised);
   color: var(--text-on-dark);
   border-radius: var(--radius-xl);
   padding: clamp(28px, 3.2vw, 40px);
