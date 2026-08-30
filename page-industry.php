@@ -35,7 +35,7 @@ $industries = array(
 
 	'dental-practices' => array(
 		'hero_icon' => '🦷',
-		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI agent answering a visitor on the practice website',
+		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI receptionist answering a visitor on the practice website',
 		'label'    => 'For Dental Practices',
 		/* ⚠️ WAS "Your Front Desk Can't Answer Every Call. Your AI Agent Can." Two problems
 		   and the first is the serious one: it claims the product answers CALLS. SiteStaffr
@@ -68,7 +68,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s patients compare practices online. If your website can&rsquo;t answer basic questions about cleanings, cosmetic options, or insurance acceptance, they move on.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Dental Practice',
+		'solutions_headline' => 'What an AI Receptionist Does for a Dental Practice',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your services',
@@ -132,7 +132,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most dental practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most dental practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing Patients to Silence',
@@ -141,7 +141,7 @@ $industries = array(
 
 	'law-firms' => array(
 		'hero_icon' => '⚖️',
-		'hero_alt'  => 'Isometric illustration of a law office desk stacked with case files and a set of scales, with a floating browser window and speech bubble showing the AI agent taking a new inquiry on the firm website',
+		'hero_alt'  => 'Isometric illustration of a law office desk stacked with case files and a set of scales, with a floating browser window and speech bubble showing the AI receptionist taking a new inquiry on the firm website',
 		'label'    => 'For Law Firms',
 		'headline' => 'Every Missed Inquiry Is a Case That Goes to Another&nbsp;Firm',
 		'subtitle' => 'SiteStaffr captures potential client inquiries on your website around the clock, qualifying leads, collecting case details, and delivering a full intake recap to your inbox before the prospect moves on.',
@@ -164,7 +164,7 @@ $industries = array(
 				'desc'  => 'In legal intake, the first firm to respond usually gets the client. If your competitors answer faster &mdash; even with a simple conversation &mdash; they win the case before you know it existed.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Handles Legal Intake',
+		'solutions_headline' => 'How an AI Receptionist Handles Legal Intake',
 		'solutions' => array(
 			array(
 				'title' => 'A prospect describes their situation',
@@ -220,7 +220,7 @@ $industries = array(
 
 	'home-services' => array(
 		'hero_icon' => '🏠',
-		'hero_alt'  => 'Isometric illustration of a home with a service van parked out front and a technician loading tools, with a floating browser window and speech bubble showing the AI agent capturing a job inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a home with a service van parked out front and a technician loading tools, with a floating browser window and speech bubble showing the AI receptionist capturing a job inquiry on the company website',
 		'label'    => 'For Home Services',
 		'headline' => 'You&rsquo;re on the Job. Your Website Should Be&nbsp;Too.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re on a roof, under a sink, or in an attic. It captures every lead with name, email, phone, and job details, 24/7.',
@@ -243,7 +243,7 @@ $industries = array(
 				'desc'  => 'Homeowners in a bind call the first business that picks up. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, you lose &mdash; even if you&rsquo;re better at the job.',
 			),
 		),
-		'solutions_headline' => 'An AI Agent That Answers While You Work',
+		'solutions_headline' => 'An AI Receptionist That Answers While You Work',
 		'solutions' => array(
 			array(
 				'title' => 'A homeowner describes their problem',
@@ -299,7 +299,7 @@ $industries = array(
 
 	'med-spas' => array(
 		'hero_icon' => '✨',
-		'hero_alt'  => 'Isometric illustration of a med spa treatment room with a facial bed and product shelf, with a floating browser window and speech bubble showing the AI agent answering a consultation inquiry on the spa website',
+		'hero_alt'  => 'Isometric illustration of a med spa treatment room with a facial bed and product shelf, with a floating browser window and speech bubble showing the AI receptionist answering a consultation inquiry on the spa website',
 		'label'    => 'For Med Spas &amp; Aesthetics',
 		'headline' => 'Your Website Visitor Wants to Know What Botox Costs. Right&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about treatments, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
@@ -322,7 +322,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s clients compare med spas online before they ever call. If your website can&rsquo;t answer basic questions about laser hair removal, fillers, or membership pricing, they move on.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Med Spa',
+		'solutions_headline' => 'What an AI Receptionist Does for a Med Spa',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a treatment',
@@ -369,7 +369,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most med spas are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most med spas are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing Consultations to Silence',
@@ -378,7 +378,7 @@ $industries = array(
 
 	'medical-practices' => array(
 		'hero_icon' => '🩺',
-		'hero_alt'  => 'Isometric illustration of a medical exam room with an examination table, blood pressure monitor and weighing scale, with a floating browser window and speech bubble showing the AI agent answering a patient inquiry on the practice website',
+		'hero_alt'  => 'Isometric illustration of a medical exam room with an examination table, blood pressure monitor and weighing scale, with a floating browser window and speech bubble showing the AI receptionist answering a patient inquiry on the practice website',
 		'label'    => 'For Medical Practices',
 		'headline' => 'A New Patient Is Checking If You Take Their Insurance. At&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7, answering questions about services, insurance, and appointment availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -401,7 +401,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s patients compare practices online before calling. If your website can&rsquo;t answer basic questions about services, insurance, or wait times, they move on to a practice that can.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Supports a Medical Front Desk',
+		'solutions_headline' => 'How an AI Receptionist Supports a Medical Front Desk',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your practice',
@@ -448,7 +448,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most medical practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most medical practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing New Patients to Silence',
@@ -457,7 +457,7 @@ $industries = array(
 
 	'veterinary-clinics' => array(
 		'hero_icon' => '🐾',
-		'hero_alt'  => 'Isometric illustration of a veterinary exam room with a dog on the table and a check-in desk, with a floating browser window and speech bubble showing the AI agent answering a pet owner on the clinic website',
+		'hero_alt'  => 'Isometric illustration of a veterinary exam room with a dog on the table and a check-in desk, with a floating browser window and speech bubble showing the AI receptionist answering a pet owner on the clinic website',
 		'label'    => 'For Veterinary Clinics',
 		'headline' => 'It&rsquo;s Midnight and Their Dog Ate Something It&nbsp;Shouldn&rsquo;t&nbsp;Have.',
 		'subtitle' => 'SiteStaffr greets worried pet owners on your website 24/7, answering questions about services and availability, capturing urgent inquiries, and sending you a full recap before they even leave the page.',
@@ -480,7 +480,7 @@ $industries = array(
 				'desc'  => 'A worried owner won&rsquo;t wait until morning to find help. If your website can&rsquo;t tell them whether you&rsquo;re taking new patients or handling urgent cases, they call somewhere else.',
 			),
 		),
-		'solutions_headline' => 'An AI Agent for Vet Clinics, Answering When You Can&rsquo;t',
+		'solutions_headline' => 'An AI Receptionist for Vet Clinics, Answering When You Can&rsquo;t',
 		'solutions' => array(
 			array(
 				'title' => 'A pet owner describes what happened',
@@ -536,7 +536,7 @@ $industries = array(
 
 	'chiropractors' => array(
 		'hero_icon' => '🦴',
-		'hero_alt'  => 'Isometric illustration of a chiropractic clinic with an adjustment table and spine model, with a floating browser window and speech bubble showing the AI agent capturing a new patient inquiry on the clinic website',
+		'hero_alt'  => 'Isometric illustration of a chiropractic clinic with an adjustment table and spine model, with a floating browser window and speech bubble showing the AI receptionist capturing a new patient inquiry on the clinic website',
 		'label'    => 'For Chiropractic &amp; Physical Therapy',
 		'headline' => 'They Threw Out Their Back Moving a Couch. They&rsquo;re Looking for Relief&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about treatments, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -559,7 +559,7 @@ $industries = array(
 				'desc'  => 'Someone in pain compares practices before calling. If your website can&rsquo;t answer basic questions about treatment approach, insurance, or same-day availability, they move on.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Works for Chiropractic and PT Practices',
+		'solutions_headline' => 'How an AI Receptionist Works for Chiropractic and PT Practices',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor describes their pain',
@@ -606,7 +606,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most chiropractic and physical therapy practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most chiropractic and physical therapy practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Every Unanswered Question Is a Patient Who Called Someone Else',
@@ -615,7 +615,7 @@ $industries = array(
 
 	'real-estate' => array(
 		'hero_icon' => '🏡',
-		'hero_alt'  => 'Isometric illustration of a listed home with a yard sign and floating listing cards, with a floating browser window and speech bubble showing the AI agent qualifying a buyer on the agency website',
+		'hero_alt'  => 'Isometric illustration of a listed home with a yard sign and floating listing cards, with a floating browser window and speech bubble showing the AI receptionist qualifying a buyer on the agency website',
 		'label'    => 'For Real Estate',
 		'headline' => 'A Buyer Is Looking at Your Listing Right Now. It&rsquo;s Sunday at&nbsp;3&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors browsing your listings 24/7, answering questions about price, square footage, and showings, capturing buyer and seller inquiries, and sending you a full recap before they leave the page.',
@@ -638,7 +638,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s buyers browse listings at all hours and compare agents online. If your website can&rsquo;t answer basic questions about price, condition, or availability, they move on to the next listing.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Real Estate Agent',
+		'solutions_headline' => 'What an AI Receptionist Does for a Real Estate Agent',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a listing',
@@ -694,7 +694,7 @@ $industries = array(
 
 	'auto-repair' => array(
 		'hero_icon' => '🔧',
-		'hero_alt'  => 'Isometric illustration of an auto repair bay with a car on a lift and a rolling toolbox, with a floating browser window and speech bubble showing the AI agent capturing a service inquiry on the shop website',
+		'hero_alt'  => 'Isometric illustration of an auto repair bay with a car on a lift and a rolling toolbox, with a floating browser window and speech bubble showing the AI receptionist capturing a service inquiry on the shop website',
 		'label'    => 'For Auto Repair Shops',
 		'headline' => 'The Check Engine Light Just Came On. They&rsquo;re Picking a Shop Before&nbsp;Morning.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re under a hood or on the lift. It captures every lead with name, email, phone, and vehicle details, 24/7.',
@@ -717,7 +717,7 @@ $industries = array(
 				'desc'  => 'A driver with a dead battery or a grinding brake calls the first shop that responds. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, you lose the job &mdash; even if you&rsquo;re the better mechanic.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Answers for Your Auto Shop',
+		'solutions_headline' => 'How an AI Receptionist Answers for Your Auto Shop',
 		'solutions' => array(
 			array(
 				'title' => 'A driver describes the problem',
@@ -773,7 +773,7 @@ $industries = array(
 
 	'salons-barbershops' => array(
 		'hero_icon' => '💈',
-		'hero_alt'  => 'Isometric illustration of a salon floor with styling chairs, mirrors and a barber pole, with a floating browser window and speech bubble showing the AI agent answering a visitor on the salon website',
+		'hero_alt'  => 'Isometric illustration of a salon floor with styling chairs, mirrors and a barber pole, with a floating browser window and speech bubble showing the AI receptionist answering a visitor on the salon website',
 		'label'    => 'For Salons &amp; Barbershops',
 		'headline' => 'Saturday&rsquo;s Last Color Slot Is Open. They&rsquo;re Deciding at&nbsp;9&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about services, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
@@ -796,7 +796,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s clients check pricing and availability online before they call. If your website can&rsquo;t tell them when a chair opens up, they book somewhere that can.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Salon or Barbershop',
+		'solutions_headline' => 'What an AI Receptionist Does for a Salon or Barbershop',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a service',
@@ -843,7 +843,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most salons and barbershops are up and running in under five minutes. Install the WordPress plugin, enter your business details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most salons and barbershops are up and running in under five minutes. Install the WordPress plugin, enter your business details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing Bookings to Silence',
@@ -852,7 +852,7 @@ $industries = array(
 
 	'hvac-plumbing' => array(
 		'hero_icon' => '🚿',
-		'hero_alt'  => 'Isometric illustration of a utility room with an HVAC unit, pipework and a technician, with a floating browser window and speech bubble showing the AI agent capturing a service inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a utility room with an HVAC unit, pipework and a technician, with a floating browser window and speech bubble showing the AI receptionist capturing a service inquiry on the company website',
 		'label'    => 'For HVAC &amp; Plumbing',
 		'headline' => 'No Heat at 11&nbsp;PM in January. Whoever Answers First Gets the&nbsp;Call.',
 		'subtitle' => 'SiteStaffr answers your website visitors the instant the heat goes out or a pipe bursts. It captures name, email, phone, and the problem, 24/7, so you&rsquo;re the first call back, not the third.',
@@ -875,7 +875,7 @@ $industries = array(
 				'desc'  => 'A homeowner with no heat or a flooding basement calls down the list until someone picks up. If your website goes quiet at night, you lose the job before you even know it existed &mdash; even if you&rsquo;re the better crew.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Handles HVAC and Plumbing Emergencies',
+		'solutions_headline' => 'How an AI Receptionist Handles HVAC and Plumbing Emergencies',
 		'solutions' => array(
 			array(
 				'title' => 'A homeowner describes the emergency',
@@ -937,7 +937,7 @@ $industries = array(
 
 	'accounting-tax' => array(
 		'hero_icon' => '📊',
-		'hero_alt'  => 'Isometric illustration of an accountant desk with ledgers, a calculator and floating charts, with a floating browser window and speech bubble showing the AI agent screening a client inquiry on the firm website',
+		'hero_alt'  => 'Isometric illustration of an accountant desk with ledgers, a calculator and floating charts, with a floating browser window and speech bubble showing the AI receptionist screening a client inquiry on the firm website',
 		'label'    => 'For Accounting &amp; Tax',
 		'headline' => 'Two Weeks to the Filing Deadline. A New Client Needs Catch-Up&nbsp;Bookkeeping.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about services and new client availability, capturing inquiries, and sending you a full recap before they even leave the page.',
@@ -960,7 +960,7 @@ $industries = array(
 				'desc'  => 'Business owners research accountants the same way they research everything else. If your website can&rsquo;t answer basic questions about services or new client availability, they move to the next firm on the list.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for an Accounting or Tax Firm',
+		'solutions_headline' => 'What an AI Receptionist Does for an Accounting or Tax Firm',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your services',
@@ -1016,7 +1016,7 @@ $industries = array(
 
 	'insurance-agencies' => array(
 		'hero_icon' => '🛡️',
-		'hero_alt'  => 'Isometric illustration of an insurance agency desk with policy folders and a shield emblem, with a floating browser window and speech bubble showing the AI agent capturing a quote request on the agency website',
+		'hero_alt'  => 'Isometric illustration of an insurance agency desk with policy folders and a shield emblem, with a floating browser window and speech bubble showing the AI receptionist capturing a quote request on the agency website',
 		'label'    => 'For Insurance Agencies',
 		'headline' => 'A Homeowner Just Opened Their Renewal Notice. The Rate Went&nbsp;Up.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about coverage types and availability, capturing new policy inquiries, and sending you a full recap before they even leave the page.',
@@ -1039,7 +1039,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s shoppers compare coverage and carriers online before they ever call an agent. If your website can&rsquo;t answer basic questions about what you offer, they request a quote somewhere that can.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Works for an Insurance Agency',
+		'solutions_headline' => 'How an AI Receptionist Works for an Insurance Agency',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about coverage',
@@ -1095,7 +1095,7 @@ $industries = array(
 
 	'fitness-studios' => array(
 		'hero_icon' => '🏋️',
-		'hero_alt'  => 'Isometric illustration of a fitness studio floor with dumbbell racks and a class schedule board, with a floating browser window and speech bubble showing the AI agent answering a prospective member on the studio website',
+		'hero_alt'  => 'Isometric illustration of a fitness studio floor with dumbbell racks and a class schedule board, with a floating browser window and speech bubble showing the AI receptionist answering a prospective member on the studio website',
 		'label'    => 'For Fitness Studios',
 		'headline' => 'Does Tomorrow&rsquo;s 6 AM Class Have Room? They&rsquo;re Asking at&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about class times, trial passes, and membership, capturing new member inquiries, and sending you a full recap before they even leave the page.',
@@ -1118,7 +1118,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s prospects compare studios online before they ever show up. If your website can&rsquo;t answer basic questions about class types, trial passes, or drop-in rates, they move on.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Fitness Studio',
+		'solutions_headline' => 'What an AI Receptionist Does for a Fitness Studio',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about classes or membership',
@@ -1165,7 +1165,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most fitness studios are up and running in under five minutes. Install the WordPress plugin, enter your studio details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most fitness studios are up and running in under five minutes. Install the WordPress plugin, enter your studio details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing New Members to Silence',
@@ -1174,7 +1174,7 @@ $industries = array(
 
 	'pest-control' => array(
 		'hero_icon' => '🐜',
-		'hero_alt'  => 'Isometric illustration of a pest control van with a large molded ant mounted on its roof rack, a sprayer and bait stations laid out beside it, with a floating browser window and speech bubble showing the AI agent capturing an inspection inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a pest control van with a large molded ant mounted on its roof rack, a sprayer and bait stations laid out beside it, with a floating browser window and speech bubble showing the AI receptionist capturing an inspection inquiry on the company website',
 		'label'    => 'For Pest Control',
 		'headline' => 'Someone Just Saw a Wasp Nest by the Front Door. They Want Someone Out&nbsp;Tomorrow.',
 		'subtitle' => 'SiteStaffr answers your website visitors the moment they spot roaches, a wasp nest, or something worse. It captures name, email, phone, and the problem, 24/7, so you&rsquo;re the first call back.',
@@ -1197,7 +1197,7 @@ $industries = array(
 				'desc'  => 'Someone who just saw a roach or found a wasp nest by the door wants it handled fast. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, they book the next name on the list &mdash; even if you&rsquo;re better at the job.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Answers for a Pest Control Company',
+		'solutions_headline' => 'How an AI Receptionist Answers for a Pest Control Company',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor describes what they found',
@@ -1277,7 +1277,7 @@ $industries = array(
 	   need rewriting whichever way that lands. */
 	'medical-staffing' => array(
 		'hero_icon' => '🩺',
-		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI agent answering a facility scheduler on the agency website',
+		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI receptionist answering a facility scheduler on the agency website',
 		'label'    => 'For Medical Staffing Agencies',
 		/* House pattern: a situational scene, not a product claim, and the second
 		   sentence is the one that stings. No telephony — the recruiters going home is
@@ -1307,7 +1307,7 @@ $industries = array(
 				'desc'  => 'Between credentialing packets, compliance paperwork, and the placements already in flight, your team cannot give every website inquiry the fast reply that is the whole reason it wins.',
 			),
 		),
-		'solutions_headline' => 'What SiteStaffr Does for a Medical Staffing Agency',
+		'solutions_headline' => 'What an AI Receptionist Does for a Medical Staffing Agency',
 		'solutions' => array(
 			array(
 				'title' => 'A facility or a candidate asks what you cover',
@@ -1375,6 +1375,34 @@ if ( ! isset( $industries[ $page_slug ] ) ) {
 $ind       = $industries[ $page_slug ];
 $site_name = get_bloginfo( 'name' );
 $cta_url   = home_url( '/#get-started' );
+
+/* ---- THE ONE SHARED FAQ, APPENDED TO ALL SIXTEEN ---------------------------
+   Mario, 2026-08-30: Search Console shows more impressions for "virtual assistant"
+   than for "AI receptionist", and he chose to keep receptionist as the primary term
+   and carry virtual assistant as a supporting one rather than repositioning on
+   impression counts alone.
+
+   ⚠️ IMPRESSIONS ARE NOT THE SAME BID. Production has never said "receptionist" —
+   the V3 homepage is staging-only — so that comparison scores a bid we never placed.
+   This entry is the cheap half of the response: it earns the adjacent term without
+   moving the H1, and it is trivial to re-weight if the click and position data later
+   says virtual assistant deserves the lead.
+
+   ⚠️ IT ANSWERS THE QUESTION HONESTLY RATHER THAN CLAIMING THE TERM. "Virtual
+   assistant" mostly means hiring a PERSON, so a page that simply asserts the phrase
+   would pull traffic that bounces. Saying plainly which one we are is what makes the
+   answer useful to the reader who meant the other thing — and a genuinely useful
+   answer is the only kind worth ranking.
+
+   Appended HERE, before both consumers, because the schema block and the visible
+   accordion each iterate $ind['faqs'] separately. Added in one place it appears in
+   both; added in the markup it would have shipped without its schema entry.
+
+   ⚠️ NO PHONE LANGUAGE, same rule as every other string in this file. */
+$ind['faqs'][] = array(
+	'q' => 'Is SiteStaffr an AI receptionist or a virtual assistant?',
+	'a' => 'Both descriptions fit, and the difference worth knowing is that SiteStaffr is software rather than a person. A virtual assistant you hire is someone who works set hours and needs briefing; SiteStaffr is an AI receptionist that lives on your website, answers every visitor instantly from your own published pages 24/7, captures their details, and emails you a recap. There is nobody to onboard, no hours to cover, and no per-hour cost.',
+);
 
 // Per-industry hero art lives at assets/images/industries/<slug>.webp. The file
 // is optional: until one is dropped in, the hero falls back to the emoji it has
