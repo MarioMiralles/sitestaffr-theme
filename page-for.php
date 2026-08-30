@@ -93,10 +93,14 @@ $cta_url = home_url( '/#get-started' );
 	<?php endforeach; ?>
 
 	<!-- CTA -->
-	<section class="ind-cta">
-		<div class="ind-cta__pattern" aria-hidden="true"></div>
-		<div class="container container--narrow">
-			<div class="ind-cta__content cta-spotlight reveal">
+	<?php /* Closing CTA is a V3 dark block running into the footer, same as
+	         page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
+	         .ind-cta is shared across all three ind-* templates, so moving its
+	         background onto .block--dark would have left whichever template still
+	         carried the old markup with no background at all. */ ?>
+	<section class="block block--dark ind-cta">
+		<div class="block__inner block-statement">
+			<div class="ind-cta__content reveal">
 				<h2>Don&rsquo;t See Your Industry?</h2>
 				<p>SiteStaffr learns from the content already on your website, so it works for any service business that loses customers to an unanswered message. Try it free for 30 days &mdash; no credit card required.</p>
 				<div class="ind-cta__actions">

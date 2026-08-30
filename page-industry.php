@@ -1542,30 +1542,50 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
+	<?php /* ---- PAIN POINTS: a V3 Cards block, UNBOXED --------------------------
+	         ⚠️ NEW CLASSES (.ind-problem) RATHER THAN RESTYLING .ind-problem-card,
+	         and that is deliberate. The same class name is used for two different
+	         components: three STATIC statements here, and the clickable directory
+	         tiles on /for/ and the five category hubs. Unboxing a link removes its
+	         affordance, so a shared restyle would have fixed this section and
+	         quietly broken twenty-one tiles on six other pages. One class name was
+	         hiding the fact that these were never the same thing.
+
+	         The box goes because that is the V3 rule the pricing table already
+	         proved: "the moment a border or a panel appears they become three
+	         offers standing side by side". Three problems the reader is supposed to
+	         recognise are not three offers. */ ?>
 	<!-- Pain Points -->
-	<section class="ind-problems">
-		<div class="container">
-			<div class="ind-problems__header reveal">
+	<section class="block block-cards ind-problems">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
 				<span class="section-label">The problem</span>
 				<h2><?php echo wp_kses_post( $ind['problems_headline'] ); ?></h2>
 			</div>
-			<div class="ind-problems__grid">
+			<div class="block-cards__grid" style="--cards: 3;">
 				<?php foreach ( $ind['problems'] as $i => $problem ) : ?>
-					<div class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $i + 1 ); ?>">
-						<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $problem['icon']; ?></div>
-						<h3 class="ind-problem-card__title"><?php echo wp_kses_post( $problem['title'] ); ?></h3>
-						<p class="ind-problem-card__desc"><?php echo wp_kses_post( $problem['desc'] ); ?></p>
+					<div class="ind-problem reveal reveal-delay-<?php echo esc_attr( $i + 1 ); ?>">
+						<div class="ind-problem__icon" aria-hidden="true"><?php echo $problem['icon']; ?></div>
+						<h3 class="ind-problem__title"><?php echo wp_kses_post( $problem['title'] ); ?></h3>
+						<p class="ind-problem__desc"><?php echo wp_kses_post( $problem['desc'] ); ?></p>
 					</div>
 				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
 
+	<?php /* ---- SOLUTIONS: the first half of the dark run ----------------------
+	         Was #0a2e33, a SECOND dark tone three uses deep. V3's dark is V1's deep
+	         teal --block-dark (#00323A) specifically, because testers rejected the
+	         night world's near-black and drifting back toward it reintroduces the
+	         exact tone the redesign exists to drop.
+
+	         .ind-solutions__bg is deleted with the same reasoning as the hero's two
+	         glows: decoration that existed to soften a background V3 states once. */ ?>
 	<!-- Solutions -->
-	<section class="ind-solutions">
-		<div class="ind-solutions__bg" aria-hidden="true"></div>
-		<div class="container">
-			<div class="ind-solutions__header reveal">
+	<section class="block block--dark ind-solutions">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
 				<span class="section-label">How SiteStaffr helps</span>
 				<h2><?php echo wp_kses_post( $ind['solutions_headline'] ); ?></h2>
 			</div>
@@ -1593,8 +1613,25 @@ get_template_part( 'template-parts/site-nav' );
 		$ind_recap_stamp = $ind_tm[1] . gmdate( 'g:i A', $ind_ts );
 	}
 	?>
-	<section class="ind-scenario">
-		<div class="container">
+	<?php /* ---- SCENARIO: the second half of the dark run ---------------------
+	         Was a pale-blue gradient (#eef8fa -> #e4f3f7), a fourth background with
+	         no place in a three-tone palette. Its own comment said it was tinted
+	         "so it reads as a distinct panel between the dark band above and the
+	         cream FAQ below" — i.e. it existed to solve a problem created by having
+	         five backgrounds in the first place.
+
+	         It becomes the SECOND dark block instead, so this and Solutions read as
+	         one continuous dark run exactly like homepage sections 2-3. .block--dark
+	         + .block--dark already handles the join with --block-pad-run; there is
+	         nothing to align by hand.
+
+	         ⚠️ THE CHAT AND RECAP MOCKUPS NOW SIT ON DARK. They are the most
+	         detailed things on the page and they are real product surfaces, so this
+	         is the one part of the conversion worth looking at rather than reasoning
+	         about. If it fails, the fix is this section going cream and Solutions
+	         standing alone as a single dark block. */ ?>
+	<section class="block block--dark ind-scenario">
+		<div class="block__inner">
 			<div class="ind-scenario__story reveal">
 				<span class="section-label"><?php echo esc_html( $ind['scenario_label'] ); ?></span>
 				<p><?php echo wp_kses_post( $ind['scenario'] ); ?></p>
@@ -1655,9 +1692,9 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<!-- FAQ -->
-	<section class="ind-faq">
-		<div class="container container--narrow">
-			<div class="ind-faq__header reveal">
+	<section class="block ind-faq">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
 				<span class="section-label">FAQ</span>
 				<?php
 				// Keyphrase-bearing subheading: no H2 carried the page's own target
@@ -1701,31 +1738,88 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<!-- Related Resources -->
-	<section class="ind-related">
-		<div class="container container--narrow">
-			<div class="ind-related__content reveal">
-				<h2>Explore More</h2>
-				<ul class="ind-related__links">
-					<?php
-					foreach ( $industries as $slug => $industry ) {
-						if ( $slug === $page_slug ) {
-							continue;
-						}
-						echo '<li><a href="' . esc_url( home_url( '/for/' . $slug . '/' ) ) . '">' . esc_html( str_replace( '&rsquo;', "'", $industry['label'] ) ) . '</a></li>';
-					}
-					?>
-					<li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">AI Voice Agents for WordPress: A Buyer's Guide</a></li>
-				</ul>
+	<?php
+	/* ---- "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------
+	   Mario, 2026-08-30: "I don't like the Explore More." It was fifteen industry
+	   names plus a blog post title in one centred flex-wrap with no separators,
+	   which at 390 read as a ragged word cloud — the same failure homepage section
+	   6 was rebuilt to fix.
+
+	   Re-decided rather than restyled, starting from what a cross-link block at the
+	   bottom of an industry page is FOR. Two jobs, and the old one did neither
+	   well: a reader who has scrolled a dental page either recognises they are in
+	   the wrong trade and wants a near neighbour, or they are done. Fifteen exits
+	   serve the first badly and the second not at all.
+
+	   So: the SIBLINGS IN THIS CATEGORY ONLY, as rows with their own blurbs, plus
+	   one link to /for/. A dentist sees Medical, Chiropractic, Veterinary and
+	   Medical Staffing — the four pages a mis-landed visitor plausibly wanted —
+	   and everything else stays one click away on the hub that already lists all
+	   sixteen. Nothing loses a crawl path.
+
+	   ⚠️ ROWS, LEFT-ALIGNED, NOT CENTRED. Each carries a name and a blurb, which
+	   is a list, and the design system's rule is that lists keep their left edge.
+	   Centring these is how the word cloud happened in the first place.
+
+	   Derived from the registry, so a seventeenth industry appears here by itself.
+	   The block renders only when the category actually has siblings. */
+	$ind_siblings = array();
+	$ind_group    = null;
+	foreach ( sitestaffr_industry_registry() as $ind_reg_group ) {
+		foreach ( $ind_reg_group['industries'] as $ind_reg_item ) {
+			if ( $ind_reg_item['slug'] === $page_slug ) {
+				$ind_group = $ind_reg_group;
+				break 2;
+			}
+		}
+	}
+	if ( $ind_group ) {
+		foreach ( $ind_group['industries'] as $ind_reg_item ) {
+			if ( $ind_reg_item['slug'] !== $page_slug ) {
+				$ind_siblings[] = $ind_reg_item;
+			}
+		}
+	}
+	?>
+	<?php if ( $ind_siblings ) : ?>
+	<!-- More in this category -->
+	<section class="block ind-siblings">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
+				<span class="section-label">More in <?php echo esc_html( $ind_group['heading'] ); ?></span>
+				<h2>Not Quite Your Line of Work?</h2>
 			</div>
+			<ul class="ind-siblings__list reveal">
+				<?php foreach ( $ind_siblings as $ind_sib ) : ?>
+					<li>
+						<a href="<?php echo esc_url( home_url( '/for/' . $ind_sib['slug'] . '/' ) ); ?>">
+							<span class="ind-siblings__name"><?php echo esc_html( $ind_sib['title'] ); ?></span>
+							<span class="ind-siblings__blurb"><?php echo wp_kses_post( $ind_sib['blurb'] ); ?></span>
+							<span class="ind-siblings__arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<p class="ind-siblings__all reveal">
+				<a href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all sixteen industries &rarr;</a>
+			</p>
 		</div>
 	</section>
+	<?php endif; ?>
 
+	<?php /* ---- CLOSING CTA: a dark block into the footer ---------------------
+	         Was a bordered card floating on cream, inside a section carrying a teal
+	         gradient and a dotted SVG pattern the card then covered up. V3 ends on
+	         a dark block that runs into the footer as one continuous run, which is
+	         what the homepage and /for/agencies/ both do.
+
+	         .ind-cta__pattern and .cta-spotlight are both gone: the pattern was
+	         painting under an opaque card, and the card is the "bordered CTA card"
+	         the subpage audit lists as its fifth system break. */ ?>
 	<!-- CTA -->
-	<section class="ind-cta">
-		<div class="ind-cta__pattern" aria-hidden="true"></div>
-		<div class="container container--narrow">
-			<div class="ind-cta__content cta-spotlight reveal">
+	<section class="block block--dark ind-cta">
+		<div class="block__inner block-statement">
+			<div class="ind-cta__content reveal">
 				<h2><?php echo wp_kses_post( $ind['cta_headline'] ); ?></h2>
 				<p><?php echo wp_kses_post( $ind['cta_text'] ); ?></p>
 				<div class="ind-cta__actions">
