@@ -273,20 +273,34 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
-	$is_page        = is_page();
-	/* ⚠️ is_404() IS IN THIS LIST BECAUSE IT WAS MISSING AND PRODUCTION SHIPPED AN
-	   UNSTYLED 404. Verified 2026-08-30 against https://sitestaffr.com/ — a request for
-	   any unknown URL returned 404 with ZERO occurrences of assets/css/site.css in the
-	   body, so the visitor got raw browser defaults: an unstyled nav list, an unstyled
-	   footer, no logo lockup. It is not a redesign regression; the guard has never
-	   covered 404 and no template check ever visits one.
+	/* ⚠️ THERE IS NO GUARD HERE ANY MORE, AND ONE MUST NOT BE ADDED BACK. Deleted
+	   2026-08-30. It read:
 
-	   The 404 is the one page nobody screenshots and every broken inbound link lands on. */
-	$is_default     = is_home() || is_single() || is_archive() || is_search() || is_404();
+	     $is_page    = is_page();
+	     $is_default = is_home() || is_single() || is_archive() || is_search();
+	     if ( ! $is_landing && ! $is_maintenance && ! $is_get_started
+	          && ! $is_manage && ! $is_page && ! $is_default ) { return; }
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_page && ! $is_default ) {
-		return;
-	}
+	   Any front-end view nobody thought to enumerate got NO CSS AT ALL — HTTP 200, no
+	   error, nothing a test or a deploy would catch. It cost content three times: the
+	   /for/ index shipped with its entire directory invisible (the sibling site.js list,
+	   same bug), and EVERY 404 ON sitestaffr.com RENDERED UNSTYLED. Verified 2026-08-30:
+	   a request to any unknown URL returned 404 with zero occurrences of
+	   assets/css/site.css in the body — raw browser defaults, an unstyled <ul> nav, no
+	   logo lockup. The 404 is the one page nobody screenshots and every broken inbound
+	   link lands on.
+
+	   ⚠️ THE FIX IS DELETING THE LIST, NOT ADDING is_404() TO IT. That was the first
+	   attempt here and it was wrong in the same way the two fixes before it were wrong:
+	   the third recurrence is the signal that the list itself is the defect. The
+	   direction a list runs is what matters — the per-template wp_enqueue_script flags
+	   BELOW are a real allowlist, because they ADD a script to named pages. This one
+	   SUBTRACTED the baseline stylesheet from unnamed ones, so it could only ever be
+	   discovered by someone finding a broken page in production.
+
+	   And it was protecting nothing: wp_enqueue_scripts fires on front-end requests
+	   only. Admin uses admin_enqueue_scripts, login uses login_enqueue_scripts. There
+	   is no front-end view that should render without the theme's own stylesheet. */
 
 	wp_enqueue_style(
 		'sitestaffr-website-style',
