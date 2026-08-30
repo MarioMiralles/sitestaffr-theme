@@ -119,19 +119,23 @@ $sf_faqs = array(
 .sf-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
-.sf-hero {
-    position: relative;
-    padding: clamp(96px, 13vw, 150px) 0 clamp(56px, 8vw, 96px);
-    background:
-        radial-gradient(1100px 520px at 80% -8%, rgba(31,182,204,0.14), transparent 60%),
-        radial-gradient(760px 420px at 8% 0%, rgba(0,131,143,0.10), transparent 62%),
-        var(--cream);
-}
+/* ⚠️ THE TWO RADIAL GRADIENTS ARE DELETED, NOT HIDDEN — same call as the industry
+   hero's __accent and __glow. Teal washes at 14% and 10% are decoration doing no
+   work; V3 carries emphasis with a dark block. They also made this the only cream
+   on the site that was not flat, so the boundary into section 2 was a fade rather
+   than a decision. */
+.sf-hero { background: var(--cream); }
+/* ⚠️ `.block.sf-hero`, TWO CLASSES. The padding is owned by
+   `.block:not(.block--dark)` at (0,2,0) and a bare `.sf-hero` at (0,1,0) loses to
+   it whatever the source order — `:not()` contributes its argument's specificity.
+   The extra top is the same first-section-under-the-nav exception the industry
+   hero carries, and the same value, so the two open identically. */
+.block.sf-hero { padding-block-start: clamp(120px, 15vw, 140px); }
+/* Kept next to .block-split__grid, which it overrides: the Lead card is a tall
+   artifact and needs more than the 1fr the generic Split gives it. */
 .sf-hero__grid {
-    display: grid;
     grid-template-columns: 1.05fr 0.95fr;
     gap: clamp(32px, 5vw, 64px);
-    align-items: center;
 }
 .sf-hero__eyebrow {
     display: inline-block;
@@ -140,7 +144,9 @@ $sf_faqs = array(
     font-weight: 700;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    color: var(--teal-deep);
+    /* --teal-text, not --teal-deep: 4.06:1 on the pale-teal pill at 0.78rem
+       failed AA. Same swap already made on .ind-recap__section-head span. */
+    color: var(--teal-text);
     background: var(--teal-pale);
     border-radius: 999px;
     padding: 7px 15px;
@@ -175,7 +181,8 @@ $sf_faqs = array(
     align-items: center;
     gap: 7px;
     font-weight: 600;
-    color: var(--teal-deep);
+    /* --teal-text: #00838F on cream is 4.03:1 at body size. */
+    color: var(--teal-text);
     text-decoration: none;
 }
 .sf-hero__seclink:hover { color: var(--teal-mid); }
@@ -247,8 +254,15 @@ $sf_faqs = array(
 .sf-card__foot svg { width: 17px; height: 17px; flex: 0 0 auto; }
 
 /* Shared section furniture */
-.sf-section { padding: var(--section-padding); }
-.sf-section--alt { background: var(--cream-dark); }
+/* ⚠️ NO `padding` HERE ANY MORE. `.block` owns it, and a `padding` SHORTHAND
+   written on `.sf-section` would beat `.block`'s `padding-block` from anywhere.
+   This page had a THIRD spacing system (--section-padding) where V3 has one token
+   per context.
+   ⚠️ `.sf-section--alt` IS GONE WITH ITS MARKUP. It was --cream-dark, a FIFTH
+   background tone on a site whose whole redesign was five tones down to three. The
+   section it painted is now the page's one dark run, which is the V3 way of saying
+   "this part matters" — a slightly different beige is not. */
+.sf-section { background: var(--cream); }
 .sf-section__head { text-align: center; max-width: 720px; margin: 0 auto clamp(38px, 5vw, 58px); }
 .sf-section__title {
     font-family: var(--font-display);
@@ -263,88 +277,65 @@ $sf_faqs = array(
     color: var(--text-secondary);
     margin: 0;
 }
+/* The dark run. `.block--dark h2` already whitens the title; the deck and the
+   eyebrow have to be told. */
+.block--dark .sf-section__lead { color: rgba(240,250,250,0.8); }
+.block--dark .section-label { color: var(--teal-light); }
 
-/* Steps */
+/* ---- Steps: a V3 Cards block, UNBOXED ----------------------------------
+   Same rule the industry page's pain points moved onto. The white card, the
+   border, the shadow and the hover lift all go: four steps in a sequence are not
+   four offers standing side by side, and the box was the only thing saying they
+   were. The pale icon tile goes with them — an icon on a coloured square is
+   chrome around chrome once the card is gone.
+
+   ⚠️ `.sf-step__num` IS DELETED, MARKUP AND CSS. A 2.4rem numeral at 14% alpha
+   pinned to the top-right corner of a card only reads as a step number while the
+   corner exists. Unboxed it is a grey smudge floating beside the icon. The order
+   is carried by the grid and by the heading above it, which is how the industry
+   page's three problems do it. */
 .sf-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: clamp(18px, 2.4vw, 28px);
 }
-.sf-step {
-    position: relative;
-    background: var(--warm-white);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    padding: 30px 26px 28px;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.sf-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
-.sf-step__num {
-    position: absolute;
-    top: 22px;
-    right: 24px;
-    font-family: var(--font-display);
-    font-size: 2.4rem;
-    line-height: 1;
-    color: rgba(0,131,143,0.14);
-}
 .sf-step__icon {
-    width: 46px;
-    height: 46px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-md);
-    background: var(--teal-pale);
-    color: var(--teal-deep);
-    margin-bottom: 18px;
+    color: var(--teal-text);
+    line-height: 0;
+    margin-bottom: 14px;
 }
-.sf-step__icon svg { width: 23px; height: 23px; }
+.sf-step__icon svg { width: 26px; height: 26px; }
 .sf-step__title { font-size: 1.06rem; font-weight: 700; margin: 0 0 9px; }
 .sf-step__desc { font-size: 0.95rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
 
-/* Feature grid */
+/* Feature grid — on the dark run */
 .sf-features__grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: clamp(18px, 2.4vw, 28px);
+    gap: clamp(22px, 2.8vw, 34px);
 }
 .sf-feature {
     display: flex;
     gap: 16px;
-    background: var(--warm-white);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    padding: 26px 24px;
-    box-shadow: var(--shadow-sm);
 }
 .sf-feature__icon {
     flex: 0 0 auto;
-    width: 42px;
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border-radius: var(--radius-md);
-    background: var(--teal-pale);
-    color: var(--teal-deep);
+    color: var(--teal-light);
+    line-height: 0;
 }
-.sf-feature__icon svg { width: 21px; height: 21px; }
-.sf-feature__title { font-size: 1.02rem; font-weight: 700; margin: 2px 0 8px; }
-.sf-feature__desc { font-size: 0.94rem; line-height: 1.6; color: var(--text-secondary); margin: 0; }
+.sf-feature__icon svg { width: 24px; height: 24px; }
+.sf-feature__title { font-size: 1.02rem; font-weight: 700; margin: 0 0 8px; }
+.sf-feature__desc { font-size: 0.94rem; line-height: 1.6; color: rgba(240,250,250,0.8); margin: 0; }
 
 /* Setup strip */
+/* Unboxed like the steps. ⚠️ THE NUMBERED DISC STAYS: it is a FILL, not a box, and
+   it is the only thing that makes three parallel instructions read as an ordered
+   sequence — which is the section's entire claim ("connected in about a minute"). */
 .sf-setup {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: clamp(16px, 2.2vw, 26px);
+    gap: clamp(20px, 2.6vw, 32px);
     counter-reset: sfsetup;
-}
-.sf-setup__item {
-    background: var(--warm-white);
-    border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg);
-    padding: 26px 24px;
-    box-shadow: var(--shadow-sm);
 }
 .sf-setup__item::before {
     counter-increment: sfsetup;
@@ -371,8 +362,33 @@ $sf_faqs = array(
     color: var(--text-secondary);
 }
 
-/* Final CTA */
-.sf-cta { padding: var(--section-padding); }
+/* ---- Final CTA: a dark block into the footer ---------------------------
+   Was a bordered `.cta-spotlight` card floating on cream — the "bordered CTA card"
+   the subpage audit lists as a system break, and the same one deleted from
+   page-industry.php. The page now ends on the dark the footer sits under, so the
+   CTA and the footer read as one closing run. `.block--dark` + `.block-statement`
+   supply the background, the white type and the centring; nothing local is left. */
+.sf-cta__title { color: #fff; margin: 0 0 14px; font-size: clamp(1.8rem, 4vw, 2.6rem); }
+.sf-cta__text { color: rgba(240,250,250,0.8); font-size: 1.08rem; line-height: 1.7; margin: 0 0 32px; }
+
+/* ---- The curtain bracket, on the feature pages -------------------------
+   ⚠️ SCOPED TO `.feature-page` RATHER THAN GENERALISED TO `main`. The homepage's
+   two curtained sections (.block.what-you-get, .block.final-cta) already add the
+   seam's height in their own rules, so a `main > section:has(...)` selector would
+   put a second helping on them — and whether it landed would come down to
+   comparing (0,1,2) against (0,2,0), which is exactly the specificity coin-flip
+   that has already shipped two silent bugs on this branch.
+
+   Same calculation as `.ind-page`'s copy: the peak is 114/120 of the seam's height
+   clamp, so the section must give it that much room or the shape lands on the last
+   line of copy. */
+.feature-page > section:has(> .seam-curtain) { position: relative; }
+.feature-page > section:has(> .seam-curtain--open) {
+    padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
+}
+.feature-page > section:has(> .seam-curtain--close) {
+    padding-top: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
+}
 
 @media (max-width: 900px) {
     .sf-hero__grid { grid-template-columns: 1fr; }
@@ -390,12 +406,12 @@ $sf_faqs = array(
 
 <?php get_template_part( 'template-parts/site-nav' ); ?>
 
-<main>
+<main class="feature-page">
 
     <!-- Hero -->
-    <section class="sf-hero">
-        <div class="container">
-            <div class="sf-hero__grid">
+    <section class="block block-split sf-hero">
+        <div class="block__inner">
+            <div class="block-split__grid sf-hero__grid">
                 <div class="sf-hero__content reveal">
                     <span class="sf-hero__eyebrow">Included in every plan</span>
                     <h1 class="sf-hero__title">Your Website Fills Your&nbsp;<em>Salesforce</em></h1>
@@ -437,8 +453,8 @@ $sf_faqs = array(
     </section>
 
     <!-- How it works -->
-    <section class="sf-section" id="sf-how">
-        <div class="container">
+    <section class="block block-cards sf-section" id="sf-how">
+        <div class="block__inner">
             <div class="sf-section__head reveal">
                 <span class="section-label">How It Works</span>
                 <h2 class="sf-section__title">From a conversation to a Lead your team can work</h2>
@@ -447,7 +463,6 @@ $sf_faqs = array(
             <div class="sf-steps">
                 <?php foreach ( $sf_steps as $step ) : ?>
                     <div class="sf-step reveal">
-                        <span class="sf-step__num"><?php echo esc_html( $step['num'] ); ?></span>
                         <div class="sf-step__icon"><?php echo wp_kses( $step['icon'], array( 'svg' => array( 'viewbox' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true ), 'path' => array( 'd' => true ), 'circle' => array( 'cx' => true, 'cy' => true, 'r' => true ), 'rect' => array( 'x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true ) ) ); ?></div>
                         <h3 class="sf-step__title"><?php echo wp_kses_post( $step['title'] ); ?></h3>
                         <p class="sf-step__desc"><?php echo wp_kses_post( $step['desc'] ); ?></p>
@@ -455,11 +470,21 @@ $sf_faqs = array(
                 <?php endforeach; ?>
             </div>
         </div>
+        <?php /* OPEN: the dark run rises out of the cream. Direct child of the
+                 SECTION, not of .block__inner — the inner is width-capped and
+                 gutter-padded, so inside it the curtain would be 1140px wide on a
+                 full-bleed boundary and stop short of both edges above the cap. */ ?>
+        <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
+    <?php /* ---- WHY IT IS DIFFERENT: the page's one dark run ------------------
+             Was `.sf-section--alt`, i.e. --cream-dark, a FIFTH background tone on a
+             site whose redesign was five tones down to three. It is also the page's
+             argument — "native, not bolted on" — so it is the right place for the
+             emphasis the dark block exists to give. */ ?>
     <!-- Why it is different -->
-    <section class="sf-section sf-section--alt sf-features">
-        <div class="container">
+    <section class="block block--dark sf-features">
+        <div class="block__inner">
             <div class="sf-section__head reveal">
                 <span class="section-label">Why It Is Different</span>
                 <h2 class="sf-section__title">Built into SiteStaffr, not bolted on</h2>
@@ -480,8 +505,12 @@ $sf_faqs = array(
     </section>
 
     <!-- Setup -->
-    <section class="sf-section">
-        <div class="container">
+    <section class="block block-cards sf-section">
+        <?php /* CLOSE: the dark run comes back down into the cream. Same curve
+                 mirrored, so the pair brackets the run as ONE gesture. ⚠️ If either
+                 path is edited, mirror the other in the same commit. */ ?>
+        <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
+        <div class="block__inner">
             <div class="sf-section__head reveal">
                 <span class="section-label">Setup</span>
                 <h2 class="sf-section__title">Connected in about a minute</h2>
@@ -506,9 +535,12 @@ $sf_faqs = array(
     </section>
 
     <!-- FAQ -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <div class="faq-section__header reveal">
+    <?php /* ⚠️ `.faq-section__head`, NOT `__header`. The `__header` spelling has no
+             rule anywhere in site.css — another class that outlived its rule, so
+             this header was rendering unstyled and left-aligned. */ ?>
+    <section class="block faq-section" id="faq">
+        <div class="block__inner">
+            <div class="faq-section__head reveal">
                 <span class="section-label">Common Questions</span>
                 <h2>Salesforce integration FAQ</h2>
             </div>
@@ -529,9 +561,9 @@ $sf_faqs = array(
     </section>
 
     <!-- Final CTA -->
-    <section class="sf-cta">
-        <div class="container">
-            <div class="sf-cta__inner cta-spotlight reveal">
+    <section class="block block--dark sf-cta">
+        <div class="block__inner block-statement">
+            <div class="sf-cta__inner reveal">
                 <h2 class="sf-cta__title">Stop retyping your own leads</h2>
                 <p class="sf-cta__text">Start free for 30 days. Let your website answer visitors, qualify them, and put them straight into Salesforce.</p>
                 <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
