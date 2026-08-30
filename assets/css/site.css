@@ -10667,17 +10667,24 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
      those three. Removing shared chrome is property-by-property: these two look
      like generic hygiene and were load-bearing for the layers above, so they go
      WITH them rather than being left behind as inert insurance. */
-.ind-hero {
-  background: var(--warm-white);
-  /* ⚠️ padding-block-START ONLY, never the `padding` shorthand — a shorthand here
-     would clobber `.block`'s padding-block and put this section back on its own
-     scale, which is the whole thing the conversion removed.
+.ind-hero { background: var(--warm-white); }
+/* ⚠️ `.block.ind-hero`, NOT `.ind-hero` — TWO CLASSES, AND THAT IS THE WHOLE RULE.
+   The padding is owned by `.block:not(.block--dark)`, which is (0,2,0); a bare
+   `.ind-hero` is (0,1,0) and loses to it regardless of source order. Written as one
+   class this shipped and changed nothing, and looked correct in the diff — the same
+   `:not()` trap already recorded for two per-section paddings on the homepage.
+   `:not()` contributes its argument's specificity.
 
-     The extra top is a real exception rather than a third spacing system: this is
-     the FIRST section under the nav, and 96px leaves the eyebrow sitting on the
-     menu (Mario, 2026-08-30: "a bit too tight up with the nav menu"). The value is
-     the homepage hero's own clamp, so the two first screens open identically
-     instead of by coincidence. Bottom padding stays .block's. */
+   ⚠️ padding-block-START only, never the `padding` shorthand: a shorthand here
+   would clobber the bottom too and put this section back on its own scale, which is
+   exactly what the conversion removed.
+
+   The extra top is a genuine exception rather than a third spacing system — this is
+   the FIRST section under the nav, and 96px left the eyebrow sitting on the menu
+   (Mario, 2026-08-30: "a bit too tight up with the nav menu"). The value is the
+   homepage hero's own clamp, so the two first screens open identically instead of
+   by coincidence. */
+.block.ind-hero {
   padding-block-start: clamp(120px, 15vw, 140px);
 }
 /* ⚠️ KEPT, AND NOT REDUNDANT NEXT TO .block-split__grid. It overrides that rule's
