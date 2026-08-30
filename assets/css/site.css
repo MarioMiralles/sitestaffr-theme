@@ -10993,8 +10993,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--teal-deep);
-  opacity: 0.75;
+  /* ⚠️ --teal-light, and NO opacity. --teal-deep measured 3.06:1 on the dark
+     block; opacity: 0.75 then reduced whatever it was by another quarter, which
+     is a contrast cut dressed as a style — the caption is already quieter than
+     its neighbours by size, weight and letter-spacing. 5.7:1 now. */
+  color: var(--teal-light);
 }
 
 /* --- Recap document ---
@@ -11042,12 +11045,17 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-size: 0.82rem;
   color: var(--text-primary);
 }
+/* ⚠️ --teal-text, not --teal-deep: 4.06:1 on the pale-teal pill, so it failed AA
+   at 0.64rem. PRE-EXISTING and nothing to do with the dark conversion — it is on
+   a white card either way — but it surfaced in the contrast pass over these
+   sections and it is one word of the same ~144-declaration teal-deep-as-text
+   sweep this conversion is carrying. 5.0:1 now. */
 .ind-recap__section-head span {
   font-size: 0.64rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--teal-deep);
+  color: var(--teal-text);
   background: var(--teal-pale);
   padding: 3px 9px;
   border-radius: 50px;
@@ -11156,10 +11164,14 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-weight: 600;
   margin-bottom: 24px;
 }
+/* ⚠️ INHERIT, NOT --text-secondary. That token (#4A5568) is a light-background
+   colour and measured 1.84:1 once this section became dark. Inheriting picks up
+   `.block--dark`'s --text-on-dark, so the paragraph follows the section it is in
+   instead of naming a colour that is only right on one of them. */
 .ind-scenario__story > p {
   font-size: 1.02rem;
   line-height: 1.8;
-  color: var(--text-secondary);
+  color: inherit;
   margin: 0;
   /* ⚠️ THE PARAGRAPH IS LEFT WHILE ITS BLOCK STAYS CENTERED, and the label above it
      stays centered too — header centered, content left, exactly as the homepage's §6
@@ -13286,15 +13298,31 @@ a.ind-problem-card .ind-problem-card__icon--art {
    cream spotlight, and this rule is the only thing giving it to them. Deleting
    the whole block to fix the homepage would have silently restyled three other
    templates. */
+/* ⚠️ .ind-cta IS OUT OF THIS LIST AS OF 2026-08-30, AND REMOVING IT IS THE FIX
+   FOR AN INVISIBLE SECTION. This rule sits ~2,000 lines after `.block--dark`, at
+   the same specificity, so it won the cascade and repainted the converted CTA
+   cream — while `.ind-cta h2` kept `color: white`. Measured on staging: 1.03:1.
+   The heading, the body and the outline button were all there and all unreadable.
+
+   The comment above still holds for the other two: /about/ and /download/ have
+   NOT been converted and this rule is the only thing giving them their cream
+   spotlight. Which is exactly why `.ind-cta` had to be removed from the selector
+   rather than the block being deleted — the reverse mistake would have taken out
+   two templates nobody was looking at.
+
+   ⚠️ WHEN /about/ AND /download/ CONVERT, DELETE THIS WHOLE BLOCK. It has no
+   other purpose, and a two-selector version of it left behind is the next
+   cascade fight.
+
+   `.ind-cta__pattern` also leaves the display:none list below: the element no
+   longer exists in any of the three ind-* templates. */
 .about-cta,
-.ind-cta,
 .dl-cta {
   background: var(--cream);
   color: var(--text-primary);
 }
 .final-cta::before,
 .about-cta::before,
-.ind-cta__pattern,
 .dl-cta__pattern,
 .dl-cta__glow {
   display: none;
