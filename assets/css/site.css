@@ -13255,3 +13255,26 @@ a.ind-problem-card .ind-problem-card__icon--art {
   .final-cta__copy { text-align: center; margin-inline: auto; }
   .final-cta__concierge { justify-content: center; }
 }
+
+/* ============================================================================
+   THE REVIEW RAN, 2026-08-30, AND IT ADDED NOTHING HERE. That is the result, not a
+   gap. All eleven sections were screenshotted individually at 390 on staging and
+   looked at; the page was already correct and one defect was found elsewhere
+   (§4's assurance pill, fixed at .lang-section__english, not here).
+
+   THE RULE THE PAGE ALREADY FOLLOWED, now written down so it stops being re-derived:
+
+     A section's header block centers when the section is FULL-WIDTH. It stays left
+     when the header tops a COPY COLUMN. Content underneath is left wherever it is a
+     list or running prose, and centers only where the composition is symmetric
+     around art (§3, §4) or where Mario named it (§5's callouts, §8's spec rows,
+     §11).
+
+   ⚠️ §2 COST, §7 PROOF AND §10 AGENCY DOOR KEEP THEIR HEADERS LEFT, AND THAT IS A
+   DECISION. They are the two Splits and the Panel. Centering their header block
+   alone — content still left — was sketched and put to Mario on 2026-08-30 and he
+   rejected it: one left edge, top to bottom, beats a consistent section opening.
+   That is the reverted pass's reasoning holding a second time. Do not re-open it,
+   and do not "finish the job" by adding them below. Full audit table is in the wiki
+   at website/wiki/concepts/homepage-design-system.md.
+   ============================================================================ */
