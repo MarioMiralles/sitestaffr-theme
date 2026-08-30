@@ -1250,6 +1250,121 @@ $industries = array(
 		'cta_headline' => 'The Job Goes to Whoever Answers. Make That You.',
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
+
+	/* ⚠️ THIS ENTRY EXISTED NOWHERE AND /for/medical-staffing/ 404ed IN PRODUCTION.
+	   Medical Staffing was added to the registry in functions.php — so it has a Yoast
+	   title and description, it is in the Industries dropdown, it is in the homepage
+	   picker, and it is on the /for/ hub — but nothing was ever written here, and the
+	   guard below sends an unknown slug to the 404 template. Four links to nowhere.
+
+	   Verified against production, not inferred: /for/medical-staffing/ returns 404 on
+	   sitestaffr.com AND on staging, and `git log ..origin/main` is empty, so this is not
+	   something another session had already fixed.
+
+	   ⚠️ IT IS THE ONLY B2B PAGE IN THE FILE, and that changes the shape of the copy
+	   rather than just its nouns. The other fifteen have ONE visitor — a patient, an
+	   owner, a client. A staffing agency's site is read by two people with opposite
+	   needs: a facility that has a hole in tomorrow's schedule, and a clinician looking
+	   for placement. The page has to be legible to both without picking one, which is
+	   why the chat, the recap and the FAQs all name both sides explicitly.
+
+	   ⚠️ IT IS ALSO THE INDUSTRY OUR ONE REAL TESTIMONIAL COMES FROM. Synergy Scribes is
+	   medical staffing and it is quoted on the homepage, so this page 404ing meant the
+	   only named customer on the site pointed at a category with no page.
+
+	   The category noun here is deliberately SiteStaffr rather than "AI agent": the term
+	   ladder is still open with Mario, and writing this one neutrally means it does not
+	   need rewriting whichever way that lands. */
+	'medical-staffing' => array(
+		'hero_icon' => '🩺',
+		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI agent answering a facility scheduler on the agency website',
+		'label'    => 'For Medical Staffing Agencies',
+		/* House pattern: a situational scene, not a product claim, and the second
+		   sentence is the one that stings. No telephony — the recruiters going home is
+		   the problem, not an unanswered switchboard. */
+		'headline' => 'A Unit Is Short Two Nurses for Tuesday. Your Recruiters Left at&nbsp;Six.',
+		'subtitle' => 'SiteStaffr greets facilities and candidates on your website 24/7, answering questions about your specialties, coverage areas, and credentialing, capturing the inquiry, and sending you a full recap before they leave the page.',
+		/* schema.org EmploymentAgency. ⚠️ NOT a Medical* type — the agency places
+		   clinicians, it does not treat anyone, and typing it as a medical business
+		   would misdescribe it. (This field is currently set on all sixteen entries and
+		   read by nothing; kept for consistency, flagged separately.) */
+		'specialty' => 'EmploymentAgency',
+		'problems_headline' => 'Staffing Agencies Lose Placements to Whoever Replies First',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'Coverage requests go cold overnight',
+				'desc'  => 'A scheduler has a call-out at 9 PM for a shift starting at seven the next morning. Your desk is empty. By the time anyone reads it, they have already placed the request with the agency that replied.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+				'title' => 'Candidates compare agencies at midnight',
+				'desc'  => 'A travel nurse or a scribe weighing three agencies has a question about pay packages, license reciprocity, or how long credentialing takes. If your site cannot answer it, they fill in the next agency&rsquo;s form instead.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+				'title' => 'Your recruiters are already at capacity',
+				'desc'  => 'Between credentialing packets, compliance paperwork, and the placements already in flight, your team cannot give every website inquiry the fast reply that is the whole reason it wins.',
+			),
+		),
+		'solutions_headline' => 'What SiteStaffr Does for a Medical Staffing Agency',
+		'solutions' => array(
+			array(
+				'title' => 'A facility or a candidate asks what you cover',
+				'desc'  => 'Specialties, regions, shift types, credentialing requirements &mdash; SiteStaffr answers from what is already published on your site, accurately and naturally, in 57+ languages.',
+			),
+			array(
+				'title' => 'The AI captures who they are and which side they are on',
+				'desc'  => 'Facility name, contact number, and the roles and shifts to fill &mdash; or a candidate&rsquo;s discipline, license state, and availability. SiteStaffr collects what a recruiter would ask before the first call back, without anyone waiting.',
+			),
+			array(
+				'title' => 'You get a complete recap by email',
+				'desc'  => 'Within seconds of the conversation ending, a full summary with contact details, what they need, and a suggested follow-up lands in your inbox &mdash; ready for whoever is at a desk first.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Sunday, 9:40 PM',
+		/* Same rules as every other chat in this file: answers from site content,
+		   captures name + number + reason, says a human will follow up, and PROMISES NO
+		   TIME. Note what it refuses to do — it confirms the coverage AREA, which the
+		   site publishes, and says nothing about whether anyone is actually free, which
+		   only the bench can answer. That restraint is the FAQ below made visible. */
+		'chat' => array(
+			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about the agency or pass a message to the staffing team. What do you need?' ),
+			array( 'from' => 'visitor', 'text' => 'We&rsquo;re short two night-shift RNs for Tuesday. Do you cover Sacramento?' ),
+			array( 'from' => 'ai',      'text' => 'Yes, the agency staffs the Sacramento area. What&rsquo;s your name and the best number to reach you?' ),
+			array( 'from' => 'visitor', 'text' => 'Renee Alvarado, 555-0178, Mercy General.' ),
+			array( 'from' => 'ai',      'text' => 'Thanks, Renee. I&rsquo;ve passed this to the staffing team with the shift details and marked it time-sensitive &mdash; they&rsquo;ll be in touch as soon as they can.' ),
+		),
+		'recap' => array(
+			'name'     => 'Renee Alvarado',
+			'phone'    => '555-0178',
+			'reason'   => 'Two night-shift RNs needed for Tuesday, Sacramento',
+			'summary'  => '<strong>Renee</strong> at Mercy General is short two night-shift RNs for Tuesday and is asking whether you cover Sacramento.',
+			'followup' => 'Call Renee to confirm which RNs you can place and how quickly you can have them credentialed.',
+		),
+		'scenario'       => 'A scheduler at a hospital loses two night-shift nurses for Tuesday and starts working through agency websites on a Sunday evening. SiteStaffr greets them straight away. They explain the gap and ask whether you staff their region. The AI confirms your coverage area from your own site, takes their name, number, and the shifts they need, and tells them the staffing team will follow up. By 9:42 PM you have an email with every detail &mdash; facility, contact, roles, dates, and how urgent it is. Your first recruiter in on Monday calls a scheduler who has not yet committed to anyone else.',
+		'faqs' => array(
+			array(
+				'q' => 'Does SiteStaffr store clinician or patient information?',
+				'a' => 'No. SiteStaffr captures contact details and the reason for the inquiry &mdash; the same information a recruiter would take on a first call. It does not collect credentialing files, license documents, or any protected health information. All conversation data is stored in your own WordPress database, not on external servers.',
+			),
+			array(
+				'q' => 'Can it tell a facility whether we have someone available?',
+				'a' => 'No, and it does not try. SiteStaffr has no view of your bench or your schedule, so it answers from what your website publishes &mdash; specialties, regions, shift types, credentialing timelines &mdash; and captures the request so a recruiter can answer the availability question directly. It never commits you to a placement or a callback time.',
+			),
+			array(
+				'q' => 'Can it handle inquiries from both facilities and candidates?',
+				'a' => 'Yes, and it records which one it is talking to. A facility gets asked about roles, shifts, and location; a clinician gets asked about discipline, license state, and availability. Your recap says which side of the placement the inquiry came from before you open it, so it goes to the right person on your team.',
+			),
+			array(
+				'q' => 'What languages does it support?',
+				'a' => 'SiteStaffr supports 57+ languages. If a candidate writes in Spanish or Tagalog, the AI responds fluently in the same language. Your recap always arrives in English with every detail intact.',
+			),
+		),
+		'cta_headline' => 'The Shift Goes to the Agency That Replies First',
+		'cta_text'     => 'SiteStaffr captures facility requests and candidate inquiries 24/7, so nothing sits in an empty inbox until Monday. Try it free for 30 days &mdash; no credit card required.',
+	),
 );
 
 if ( ! isset( $industries[ $page_slug ] ) ) {
