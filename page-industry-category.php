@@ -48,7 +48,31 @@ $cta_url               = home_url( '/#get-started' );
 		<div class="container">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label"><?php echo esc_html( $sitestaffr_category['heading'] ); ?></span>
-				<h1>AI Voice and Text Agents for <?php echo esc_html( $sitestaffr_category['heading'] ); ?></h1>
+				<?php
+				/* ⚠️ THE H1 IS REGISTRY COPY NOW, NOT A TEMPLATE PATTERN.
+
+				   It read "AI Voice and Text Agents for <heading>" on all five hubs. Two
+				   problems. The term is the one the V3 positioning superseded — the
+				   homepage H1 is "Put an AI Receptionist on Your Website" and these five
+				   pages were still naming the product the old way. And a pattern
+				   concatenated onto the group heading cannot read well for five different
+				   headings: "for Health & Medical" and "for Property & Auto" are category
+				   labels from a browse menu, not the words anyone would call their own
+				   business.
+
+				   Per-group copy fixes both — "Healthcare Practices", "Home Service
+				   Businesses", "Real Estate and Auto Businesses". The fallback keeps the
+				   old behaviour if a sixth group is ever added without an 'h1', so a
+				   missing field degrades to a heading rather than to a blank H1.
+
+				   ⚠️ 'h1' RENDERS FROM THE REGISTRY AT REQUEST TIME, so unlike seo_title
+				   and metadesc it is NOT behind $provision_version and needs no bump.
+				   Those two still are — see the note on that gate. */
+				$sitestaffr_cat_h1 = ! empty( $sitestaffr_category['h1'] )
+					? $sitestaffr_category['h1']
+					: 'AI Voice and Text Agents for ' . $sitestaffr_category['heading'];
+				?>
+				<h1><?php echo esc_html( $sitestaffr_cat_h1 ); ?></h1>
 				<?php if ( ! empty( $sitestaffr_category['intro'] ) ) : ?>
 				<p class="ind-hero__subtitle"><?php echo wp_kses_post( $sitestaffr_category['intro'] ); ?></p>
 				<?php endif; ?>

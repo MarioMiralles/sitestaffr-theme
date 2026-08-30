@@ -593,6 +593,7 @@ function sitestaffr_industry_registry() {
 	return array(
 		array(
 			'heading'    => 'Health & Medical',
+			'h1'         => 'An AI Receptionist for Healthcare Practices',
 			'slug'       => 'health-medical',
 			'icon'       => '🏥',
 			'seo_title'  => 'AI Chat & Voice Agents for Healthcare Practices | SiteStaffr',
@@ -663,6 +664,7 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Beauty & Wellness',
+			'h1'         => 'An AI Receptionist for Salons, Spas and Studios',
 			'slug'       => 'beauty-wellness',
 			'icon'       => '💆',
 			'seo_title'  => 'AI Chat & Voice Agents for Salons & Spas | SiteStaffr',
@@ -700,6 +702,7 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Home & Trades',
+			'h1'         => 'An AI Receptionist for Home Service Businesses',
 			'slug'       => 'home-trades',
 			'icon'       => '🔧',
 			'seo_title'  => 'AI Chat & Voice Agents for Home Services | SiteStaffr',
@@ -737,6 +740,7 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Professional Services',
+			'h1'         => 'An AI Receptionist for Professional Firms',
 			'slug'       => 'professional-services',
 			'icon'       => '💼',
 			'seo_title'  => 'AI Chat & Voice Agents for Professional Firms | SiteStaffr',
@@ -774,6 +778,7 @@ function sitestaffr_industry_registry() {
 		),
 		array(
 			'heading'    => 'Property & Auto',
+			'h1'         => 'An AI Receptionist for Real Estate and Auto Businesses',
 			'slug'       => 'property-auto',
 			'icon'       => '🚗',
 			'seo_title'  => 'AI Chat & Voice Agents for Real Estate & Auto | SiteStaffr',
