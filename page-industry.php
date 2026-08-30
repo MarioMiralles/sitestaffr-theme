@@ -1638,10 +1638,25 @@ get_template_part( 'template-parts/site-nav' );
 			<div class="ind-faq__header reveal">
 				<span class="section-label">FAQ</span>
 				<?php
-				// Keyphrase-bearing subheading: the Yoast title carries
-				// "AI Chat & Voice Agent for <vertical>" but no H2 did, so the
-				// page's own target phrase never appeared in its structure.
-				// Keep this in step with the seo_title pattern in functions.php.
+				// Keyphrase-bearing subheading: no H2 carried the page's own target
+				// phrase, so it never appeared in the page's structure.
+				//
+				// ⚠️ THIS DELIBERATELY NO LONGER MATCHES THE seo_title, AND THAT IS THE
+				// POINT. It used to say "keep this in step with the seo_title pattern in
+				// functions.php"; on 2026-08-30 the Yoast titles moved to "AI
+				// Receptionist for <vertical>" and this H2 stayed on "AI Chat & Voice
+				// Agents for <vertical>".
+				//
+				// Retitling 22 indexed pages is the one edit in the positioning sweep
+				// that can LOSE rankings rather than just fail to gain them — these
+				// pages currently earn their traffic on the chat/voice-agent phrasing.
+				// Keeping that phrase in an on-page H2 means the new term takes the
+				// title tag, which is the strongest signal, while the proven one stays
+				// on the page instead of being deleted from the site in a single day.
+				//
+				// If the receptionist bet is confirmed by real click and position data,
+				// this H2 is the next thing to move. If it is not, the phrase is still
+				// here to fall back to.
 				$faq_vertical = preg_replace( '/^For\s+/', '', html_entity_decode( $ind['label'], ENT_QUOTES, 'UTF-8' ) );
 				?>
 				<h2><?php echo esc_html( sprintf( 'AI Chat & Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
