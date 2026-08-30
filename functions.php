@@ -274,7 +274,15 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
 	$is_page        = is_page();
-	$is_default     = is_home() || is_single() || is_archive() || is_search();
+	/* ⚠️ is_404() IS IN THIS LIST BECAUSE IT WAS MISSING AND PRODUCTION SHIPPED AN
+	   UNSTYLED 404. Verified 2026-08-30 against https://sitestaffr.com/ — a request for
+	   any unknown URL returned 404 with ZERO occurrences of assets/css/site.css in the
+	   body, so the visitor got raw browser defaults: an unstyled nav list, an unstyled
+	   footer, no logo lockup. It is not a redesign regression; the guard has never
+	   covered 404 and no template check ever visits one.
+
+	   The 404 is the one page nobody screenshots and every broken inbound link lands on. */
+	$is_default     = is_home() || is_single() || is_archive() || is_search() || is_404();
 
 	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_page && ! $is_default ) {
 		return;
