@@ -2478,7 +2478,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    section, and buried in a paragraph it did none of that work. */
 .lang-section__english {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
   margin: clamp(18px, 3vw, 30px) auto 0;
   padding: 11px 16px;
@@ -2487,7 +2487,21 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: #065f46;
   font-size: 0.9rem;
   font-weight: 500;
+  /* ⚠️ THE TEXT IS LEFT WHILE THE PILL STAYS CENTERED, and the two are not the same
+     thing. Below ~420px this line wraps, and with the inherited `text-align: center`
+     the second line ("you.") sat centered under the first while the check mark floated
+     alone at the vertical middle of the left edge — the same lopsided shape the design
+     system already rejects for a centered row with a chevron pinned right, only
+     mirrored. Sampled at 390: confirmed in the pixels, not inferred from the CSS.
+
+     Section-by-section review, 2026-08-30. One element, looked at on its own terms.
+     This does NOT generalise to the rest of the page — see the last block of this file. */
+  text-align: left;
 }
+/* Pins the check to the FIRST line instead of the middle of the wrapped block. 3px is
+   (21.6px line box - 16px icon) / 2 at this font size, so the single-line desktop
+   rendering is pixel-identical to the `align-items: center` it replaces. */
+.lang-section__english svg { flex: none; margin-top: 3px; }
 /* The wrapper is centered, not the text: an inline-flex pill cannot center itself. */
 .lang-section .block__inner { text-align: center; }
 .lang-orbit, .lang-orbit__item { text-align: left; }
