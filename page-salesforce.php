@@ -14,7 +14,7 @@ $sf_steps = array(
         'num'   => '1',
         'icon'  => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M12 7v5l3 2"/></svg>',
         'title' => 'Someone talks to your agent',
-        'desc'  => 'A visitor lands on your site and asks about your services by voice or by text. Your AI agent answers, then collects their name and how to reach them.',
+        'desc'  => 'A visitor lands on your site and asks about your services by voice or by text. Your AI receptionist answers, then collects their name and how to reach them.',
     ),
     array(
         'num'   => '2',
@@ -399,7 +399,7 @@ $sf_faqs = array(
                 <div class="sf-hero__content reveal">
                     <span class="sf-hero__eyebrow">Included in every plan</span>
                     <h1 class="sf-hero__title">Your Website Fills Your&nbsp;<em>Salesforce</em></h1>
-                    <p class="sf-hero__sub">SiteStaffr answers your visitors by voice and text, captures the ones who are serious, and creates the Lead in your Salesforce automatically. No exporting, no copy and paste, no lead sitting in an inbox.</p>
+                    <p class="sf-hero__sub">SiteStaffr answers your visitors by voice and text 24/7, captures the ones who are serious, and creates the Lead in your Salesforce automatically. No exporting, no copy and paste, no lead sitting in an inbox.</p>
                     <div class="sf-hero__actions">
                         <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
                             Get Started

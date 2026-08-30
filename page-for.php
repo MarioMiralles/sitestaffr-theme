@@ -42,7 +42,20 @@ $cta_url = home_url( '/#get-started' );
 		<div class="container">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label">Industries</span>
-				<h1>Built for Businesses Where a Missed Message Is a Lost&nbsp;Customer</h1>
+				<?php /* ⚠️ THIS H1 WAS THE HOMEPAGE'S SECTION 6 H2, WORD FOR WORD.
+				         "Built for Businesses Where a Missed Message Is a Lost Customer"
+				         is still that section's heading, and having our own two pages
+				         compete for one phrase helps neither. It also never named the
+				         product: before this edit the /for/ hub did not contain
+				         "receptionist", "agent" or "assistant" anywhere in its body copy,
+				         so the page listing all sixteen industries never said what the
+				         thing being offered actually is.
+
+				         "Line of work" is picked up directly from the subtitle below it,
+				         which already ends "here's what that looks like in your line of
+				         work" — the hub's job is to route you to your own trade, and the
+				         H1 now says so. */ ?>
+				<h1>An AI Receptionist for Your Line of&nbsp;Work</h1>
 				<p class="ind-hero__subtitle">SiteStaffr answers your website visitors by voice and text 24/7, captures who they are and what they need, and emails you a full recap. Here&rsquo;s what that looks like in your line of work.</p>
 			</div>
 		</div>

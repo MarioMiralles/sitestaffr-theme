@@ -86,7 +86,7 @@ if ( ! defined( 'ABSPATH' ) ) {
   <div class="container">
     <div class="intake__header">
       <span class="section-label">Guided setup</span>
-      <h1>Let&rsquo;s Get Your SiteStaffr Assistant Ready to Go Live</h1>
+      <h1>Let&rsquo;s Get Your AI Receptionist Ready to Go Live</h1>
       <p class="intake__subtitle">Talk to our onboarding assistant to get started, or send your details below if you prefer to type.</p>
     </div>
 
@@ -103,7 +103,7 @@ if ( ! defined( 'ABSPATH' ) ) {
           </div>
           <div class="intake__next-step">
             <span class="intake__next-step-number">2</span>
-            <p>We shape the assistant around your website content.</p>
+            <p>We shape your AI receptionist around your website content.</p>
           </div>
           <div class="intake__next-step">
             <span class="intake__next-step-number">3</span>
@@ -119,7 +119,7 @@ if ( ! defined( 'ABSPATH' ) ) {
             <?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Tell Us About Your Business" background_color="#1FB6CC" hover_background="#00838F" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
         </div>
 
-        <p class="privacy-notice">Your information will be used to set up your SiteStaffr assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
+        <p class="privacy-notice">Your information will be used to set up your AI receptionist. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
     </div>
 
     <div class="section-divider" id="formToggle">
@@ -172,7 +172,7 @@ if ( ! defined( 'ABSPATH' ) ) {
                  disagreed - this said "one business day" while the current promise is three.
                  A commitment stated in two places drifts; if it changes again, grep for
                  "business day" and change both. */ ?>
-        <p class="form-success__text">Thanks for your interest in SiteStaffr. We&rsquo;ll reach out within three business days to help get your assistant ready to go live.</p>
+        <p class="form-success__text">Thanks for your interest in SiteStaffr. We&rsquo;ll reach out within three business days to help get your AI receptionist ready to go live.</p>
       </div>
     </div>
     </div>
