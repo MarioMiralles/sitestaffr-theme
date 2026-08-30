@@ -623,8 +623,29 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   text-transform: uppercase;
   color: rgba(26,35,50,0.45);
 }
+/* ---- The category heading is now a LINK to its hub ----------------------
+   ⚠️ IT STAYS LOOKING LIKE A HEADING at rest, and that is the whole design
+   problem. Making it read as a link would put a sixth entry at the top of every
+   column and turn a grouped menu into a flat list of twenty-one — the grouping
+   is what makes sixteen industries scannable. So: same size, same weight, same
+   muted colour, and the affordance arrives on hover.
+
+   `text-decoration: none` is written here rather than inherited: the mega
+   heading is the only <a> in the panel that is not a `.nav__dropdown-link`, so
+   nothing else was resetting it and it underlined by default. */
+.nav__mega-heading--link {
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.nav__mega-heading--link:hover,
+.nav__mega-heading--link:focus-visible {
+  color: var(--teal-text);
+}
+/* --teal-text, not --teal-deep: #00838F on white is 4.03:1 and this is 0.9rem
+   text, so it failed AA. Part of the same teal-deep-as-text sweep the ind-*
+   conversion is carrying. */
 .nav__mega-all .nav__dropdown-link {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-weight: 600;
 }
 @media (min-width: 769px) {

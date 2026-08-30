@@ -30,6 +30,16 @@ $primary_menu = array(
             function ( $group ) {
                 return array(
                     'heading' => $group['heading'],
+                    // ⚠️ THE HEADING IS A LINK, AND WITHOUT THIS THE FIVE CATEGORY
+                    // HUBS HAD NO PATH FROM THE NAV AT ALL (Mario, 2026-08-30:
+                    // "I'm unable to access the /for or the /health-medical from
+                    // the nav"). They were plain <span>s, so /for/health-medical/
+                    // and its four siblings existed, were provisioned, were
+                    // indexed and were linked from the footer — and the one menu
+                    // that lists every industry could not reach them. The heading
+                    // is the only element in the panel that names a category, so
+                    // it is the only place the link belongs.
+                    'href'    => ! empty( $group['slug'] ) ? home_url( '/for/' . $group['slug'] . '/' ) : '',
                     'items'   => array_map(
                         function ( $industry ) {
                             return array(
@@ -98,7 +108,11 @@ $cta = array(
           <ul class="nav__dropdown-menu<?php echo ! empty( $item['menu_class'] ) ? ' ' . esc_attr( $item['menu_class'] ) : ''; ?>">
             <?php foreach ( $item['groups'] as $group ) : ?>
             <li class="nav__mega-group">
+              <?php if ( ! empty( $group['href'] ) ) : ?>
+              <a class="nav__mega-heading nav__mega-heading--link" href="<?php echo esc_url( $group['href'] ); ?>"><?php echo esc_html( $group['heading'] ); ?></a>
+              <?php else : ?>
               <span class="nav__mega-heading"><?php echo esc_html( $group['heading'] ); ?></span>
+              <?php endif; ?>
               <ul class="nav__mega-list">
                 <?php foreach ( $group['items'] as $child ) : ?>
                 <li><a class="nav__dropdown-link" href="<?php echo esc_url( $child['href'] ); ?>"><?php echo esc_html( $child['label'] ); ?></a></li>
@@ -106,7 +120,12 @@ $cta = array(
               </ul>
             </li>
             <?php endforeach; ?>
-            <li class="nav__mega-all"><a class="nav__dropdown-link" href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all industries</a></li>
+            <?php /* The arrow is not decoration: this row sits below sixteen
+                     industry names and read as a seventeenth one. Mario could not
+                     find /for/ from the nav even though this link has always been
+                     here. An arrow is the one mark that says "this goes somewhere
+                     else", which is what separates it from the list above it. */ ?>
+            <li class="nav__mega-all"><a class="nav__dropdown-link" href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all industries <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </li>
           <?php elseif ( ! empty( $item['children'] ) ) : ?>
