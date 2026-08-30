@@ -13227,6 +13227,105 @@ a.ind-problem-card .ind-problem-card__icon--art {
   border: 0 !important;
 }
 
+/* ========== 404 — PAGE NOT FOUND ==========
+   Paired with 404.php. Before both existed, WordPress fell back to index.php and
+   rendered an unstyled "Blog / No content found." on every bad URL.
+
+   --teal-deep is used ONLY on .nf__code. It measures 4.38:1 on warm-white, which
+   clears AA for large text (3:1) and fails it for body copy (4.5:1) — so the
+   number can carry it and nothing else here may. Body copy uses --text-secondary.
+   The V3 branch introduces a --teal-text token for exactly this; it is deliberately
+   NOT backported here, because that branch owns it and duplicating it would
+   collide on merge. */
+.nf {
+  padding: clamp(120px, 15vw, 160px) 0 clamp(60px, 8vw, 100px);
+  text-align: center;
+  background: var(--warm-white);
+}
+
+.nf__code {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--teal-deep);
+  letter-spacing: 0.02em;
+  margin: 0 0 12px;
+}
+
+.nf__title {
+  font-family: var(--font-display);
+  font-size: var(--hero-title-size);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.nf__text {
+  color: var(--text-secondary);
+  max-width: var(--subtext-measure);
+  margin: 0 auto 36px;
+}
+
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: clamp(48px, 7vw, 72px);
+}
+
+.nf__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.nf__link {
+  display: block;
+  height: 100%;
+  padding: 18px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.nf__link:hover,
+.nf__link:focus-visible {
+  border-color: var(--teal-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.nf__link-label {
+  display: block;
+  font-weight: 600;
+  color: var(--teal-deep);
+  margin-bottom: 2px;
+}
+
+.nf__link-desc {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .nf__links {
+    grid-template-columns: 1fr;
+  }
+  .nf__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
 
 /* ============================================================================
    LAST BLOCK IN THE FILE, ON PURPOSE. It is here because the reverted centering pass

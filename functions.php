@@ -273,35 +273,27 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
-	/* ⚠️ THERE IS NO GUARD HERE ANY MORE, AND ONE MUST NOT BE ADDED BACK. Deleted
-	   2026-08-30. It read:
 
-	     $is_page    = is_page();
-	     $is_default = is_home() || is_single() || is_archive() || is_search();
-	     if ( ! $is_landing && ! $is_maintenance && ! $is_get_started
-	          && ! $is_manage && ! $is_page && ! $is_default ) { return; }
-
-	   Any front-end view nobody thought to enumerate got NO CSS AT ALL — HTTP 200, no
-	   error, nothing a test or a deploy would catch. It cost content three times: the
-	   /for/ index shipped with its entire directory invisible (the sibling site.js list,
-	   same bug), and EVERY 404 ON sitestaffr.com RENDERED UNSTYLED. Verified 2026-08-30:
-	   a request to any unknown URL returned 404 with zero occurrences of
-	   assets/css/site.css in the body — raw browser defaults, an unstyled <ul> nav, no
-	   logo lockup. The 404 is the one page nobody screenshots and every broken inbound
-	   link lands on.
-
-	   ⚠️ THE FIX IS DELETING THE LIST, NOT ADDING is_404() TO IT. That was the first
-	   attempt here and it was wrong in the same way the two fixes before it were wrong:
-	   the third recurrence is the signal that the list itself is the defect. The
-	   direction a list runs is what matters — the per-template wp_enqueue_script flags
-	   BELOW are a real allowlist, because they ADD a script to named pages. This one
-	   SUBTRACTED the baseline stylesheet from unnamed ones, so it could only ever be
-	   discovered by someone finding a broken page in production.
-
-	   And it was protecting nothing: wp_enqueue_scripts fires on front-end requests
-	   only. Admin uses admin_enqueue_scripts, login uses login_enqueue_scripts. There
-	   is no front-end view that should render without the theme's own stylesheet. */
-
+	/**
+	 * site.css is the theme's stylesheet, so every front-end view gets it.
+	 *
+	 * This used to be gated on a list: is_page() || is_home() || is_single() ||
+	 * is_archive() || is_search(), plus four named templates. A view the list did
+	 * not anticipate rendered with no CSS at all, and the failure is silent — the
+	 * page returns 200 and looks broken rather than erroring anywhere a test or a
+	 * deploy would catch it.
+	 *
+	 * That cost content three times. The /for/ index shipped with its whole
+	 * directory invisible (see the site.js note below, which is the same bug in
+	 * the sibling list), and every 404 on the site rendered completely unstyled
+	 * until 2026-08-30, because a 404 satisfies none of the six conditions.
+	 *
+	 * wp_enqueue_scripts only fires on front-end requests, so there is nothing the
+	 * guard was protecting — it bought no performance and one recurring outage
+	 * class. Removing it fixes the default instead of extending the list a fourth
+	 * time. The per-template flags below stay: those add things to specific pages,
+	 * which is a genuine allowlist. This one was subtracting the baseline.
+	 */
 	wp_enqueue_style(
 		'sitestaffr-website-style',
 		sitestaffr_asset_url( 'assets/css/site.css' ),
