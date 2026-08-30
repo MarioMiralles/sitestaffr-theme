@@ -11060,6 +11060,28 @@ a.ind-problem-card .ind-problem-card__icon--art {
   padding: 3px 9px;
   border-radius: 50px;
 }
+/* The transcript stub. Quieter than the recap section above it: no badge colour,
+   a muted count, one line of explanatory text. It is a signpost, not a second
+   block of content competing with the summary. */
+.ind-recap__transcript { margin-top: 10px; }
+/* ⚠️ TWO CLASSES, because `.ind-recap__section-head span` (0,1,1) out-specifies a
+   bare `.ind-recap__count` (0,1,0) regardless of source order, and would have
+   rendered the message count as the teal "New lead" pill. */
+.ind-recap__section-head .ind-recap__count {
+  font-size: 0.64rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  background: none;
+  padding: 0;
+}
+.ind-recap__transcript-note {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 .ind-recap__section p {
   margin: 0 0 9px;
   line-height: 1.65;

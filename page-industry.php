@@ -103,11 +103,13 @@ $industries = array(
 		// 8 AM. That is what the business did, and it is the actual selling
 		// point — the constraint is only on what the agent itself promises.
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about the practice or pass a message to the team. What do you need?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the practice or pass a message to the team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'I chipped a tooth at dinner. Can someone see me tomorrow?' ),
-			array( 'from' => 'ai',      'text' => 'That sounds painful &mdash; sorry. The practice does handle dental emergencies. What&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Dana Whitfield, 555-0134.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Dana. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can.' ),
+			array( 'from' => 'ai',    'text' => 'That sounds painful &mdash; sorry. The practice does handle dental emergencies. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Dana Whitfield.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Dana. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0134.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can.' ),
 		),
 		'recap' => array(
 			'name'     => 'Dana Whitfield',
@@ -182,11 +184,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Saturday, 11:42 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions about the firm or take down your information for our team. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions about the firm or take down your information for our team. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'I was in a car accident tonight and I&rsquo;m not sure what to do. I have photos of the damage.' ),
-			array( 'from' => 'ai',      'text' => 'I&rsquo;m sorry to hear that. The firm does handle auto injury cases &mdash; can I get your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Renee Castillo, 555-0148.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Renee. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'I&rsquo;m sorry to hear that. The firm does handle auto injury cases. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Renee Castillo.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Renee. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0148.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Renee Castillo',
@@ -261,11 +265,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Wednesday, 6:48 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our services or pass along a message. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our services or pass along a message. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'My AC just stopped working &mdash; no cold air, and it&rsquo;s making a clicking sound.' ),
-			array( 'from' => 'ai',      'text' => 'That&rsquo;s rough in this heat. We do handle AC repairs &mdash; what&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Marcus Bell, 555-0119.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Marcus. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time.' ),
+			array( 'from' => 'ai',    'text' => 'That&rsquo;s rough in this heat. We do handle AC repairs. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Marcus Bell.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Marcus. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0119.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time.' ),
 		),
 		'recap' => array(
 			'name'     => 'Marcus Bell',
@@ -340,11 +346,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Thursday, 9:07 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our treatments or pass along a message to the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our treatments or pass along a message to the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'I&rsquo;m curious about Botox for forehead lines &mdash; how much does it cost, and does it hurt?' ),
-			array( 'from' => 'ai',      'text' => 'Great question &mdash; pricing and what to expect are best confirmed with our team directly. Can I get your name and best number so someone can reach out?' ),
-			array( 'from' => 'visitor', 'text' => 'Sydney Park, 555-0176.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Sydney. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions.' ),
+			array( 'from' => 'ai',    'text' => 'Great question &mdash; pricing and what to expect are best confirmed with our team directly. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Sydney Park.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Sydney. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0176.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions.' ),
 		),
 		'recap' => array(
 			'name'     => 'Sydney Park',
@@ -419,11 +427,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 7:15 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions about the practice or take a message for our staff. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions about the practice or take a message for our staff. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'I&rsquo;ve had a cough that won&rsquo;t clear up. Are you accepting new patients, and do you take my insurance?' ),
-			array( 'from' => 'ai',      'text' => 'We are accepting new patients, and our team can confirm insurance details with you directly. What&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Owen Bradley, 555-0163.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Owen. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'We are accepting new patients, and our team can confirm insurance details with you directly. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Owen Bradley.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Owen. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0163.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Owen Bradley',
@@ -498,11 +508,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Friday, 12:20 AM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
 			array( 'from' => 'visitor', 'text' => 'My dog got into a bag of chocolate about an hour ago. I don&rsquo;t know what to do.' ),
-			array( 'from' => 'ai',      'text' => 'That sounds scary. The clinic does handle urgent cases like this &mdash; can I get your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Priya Nair, 555-0192.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Priya. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+			array( 'from' => 'ai',    'text' => 'That sounds scary. The clinic does handle urgent cases like this. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Priya Nair.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Priya. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0192.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
 		),
 		'recap' => array(
 			'name'     => 'Priya Nair',
@@ -577,11 +589,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Saturday, 5:52 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or pass a message to the office. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or pass a message to the office. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'I threw out my lower back moving a couch this afternoon. Do you have anything open tomorrow?' ),
-			array( 'from' => 'ai',      'text' => 'Ouch, sorry to hear that. We do treat this kind of injury &mdash; what&rsquo;s your name and best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Trevor Nash, 555-0157.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Trevor. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Ouch, sorry to hear that. We do treat this kind of injury. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Trevor Nash.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Trevor. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0157.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Trevor Nash',
@@ -656,11 +670,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 3:04 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about this listing or take a message for the agent. What would you like to know?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about this listing or take a message for the agent. What would you like to know?' ),
 			array( 'from' => 'visitor', 'text' => 'What&rsquo;s the asking price, and is it still available? I&rsquo;d love to see it this week.' ),
-			array( 'from' => 'ai',      'text' => 'It&rsquo;s still on the market &mdash; I can pull up the price and details from the listing. What&rsquo;s your name and best number so the agent can follow up?' ),
-			array( 'from' => 'visitor', 'text' => 'Alicia Moreno, 555-0184.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Alicia. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon.' ),
+			array( 'from' => 'ai',    'text' => 'It&rsquo;s still on the market &mdash; I can pull up the price and details from the listing. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Alicia Moreno.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Alicia. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0184.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Alicia Moreno',
@@ -735,11 +751,15 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Monday, 7:38 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or take a message for the shop. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or take a message for the shop. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'My check engine light just started flashing, and I feel a shudder at highway speed.' ),
-			array( 'from' => 'ai',      'text' => 'That&rsquo;s worth getting checked out. We do handle this kind of issue &mdash; what&rsquo;s your name, phone number, and the vehicle&rsquo;s year and model?' ),
-			array( 'from' => 'visitor', 'text' => 'Jordan Vance, 2019 Honda Accord, 555-0138.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'That&rsquo;s worth getting checked out. We do handle this kind of issue. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Jordan Vance.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Jordan. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0138.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. And what&rsquo;s the year and model of the vehicle?' ),
+			array( 'from' => 'visitor', 'text' => '2019 Honda Accord.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Jordan Vance',
@@ -814,11 +834,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Thursday, 9:12 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our services or take a message for the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our services or take a message for the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'I need a color appointment before my sister&rsquo;s wedding Saturday. Is anything open before then?' ),
-			array( 'from' => 'ai',      'text' => 'Let&rsquo;s see what we can do &mdash; what&rsquo;s your name and best number so our team can check availability?' ),
-			array( 'from' => 'visitor', 'text' => 'Whitney Ortiz, 555-0125.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Whitney. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Let&rsquo;s see what we can do. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Whitney Ortiz.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Whitney. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0125.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Whitney Ortiz',
@@ -893,11 +915,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Tuesday, 11:20 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
 			array( 'from' => 'visitor', 'text' => 'Our furnace stopped working and the house is dropping fast &mdash; we have kids here.' ),
-			array( 'from' => 'ai',      'text' => 'I&rsquo;m sorry, that sounds stressful. We do handle emergency heating calls &mdash; what&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Renata Kowalski, 555-0171.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Renata. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+			array( 'from' => 'ai',    'text' => 'I&rsquo;m sorry, that sounds stressful. We do handle emergency heating calls. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Renata Kowalski.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Renata. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0171.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
 		),
 		'recap' => array(
 			'name'     => 'Renata Kowalski',
@@ -978,11 +1002,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 8:36 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions about our services or pass a message to the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions about our services or pass a message to the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'My bookkeeping is a year behind and my extension deadline is three weeks out. Can you help?' ),
-			array( 'from' => 'ai',      'text' => 'We do handle catch-up bookkeeping &mdash; let me get your name and best number so our team can follow up.' ),
-			array( 'from' => 'visitor', 'text' => 'Desmond Farrow, 555-0166.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Desmond. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'We do handle catch-up bookkeeping. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Desmond Farrow.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Desmond. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0166.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Desmond Farrow',
@@ -1057,11 +1083,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Wednesday, 8:51 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our coverage options or pass along a message. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our coverage options or pass along a message. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'My renewal notice just went up again. What do you offer for home and auto bundles?' ),
-			array( 'from' => 'ai',      'text' => 'We do offer home and auto bundles &mdash; an agent can put together the specifics for you. What&rsquo;s your name and best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Camille Reyes, 555-0142.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Camille. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options.' ),
+			array( 'from' => 'ai',    'text' => 'We do offer home and auto bundles &mdash; an agent can put together the specifics for you. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Camille Reyes.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Camille. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0142.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options.' ),
 		),
 		'recap' => array(
 			'name'     => 'Camille Reyes',
@@ -1136,11 +1164,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 7:40 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about classes or membership, or take a message for the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about classes or membership, or take a message for the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'What&rsquo;s the 6 AM class like, and is there a free trial?' ),
-			array( 'from' => 'ai',      'text' => 'We do offer a trial pass &mdash; our team can get you set up. What&rsquo;s your name and best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Talia Brennan, 555-0159.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Talia. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up.' ),
+			array( 'from' => 'ai',    'text' => 'We do offer a trial pass &mdash; our team can get you set up. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Talia Brennan.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Talia. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0159.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up.' ),
 		),
 		'recap' => array(
 			'name'     => 'Talia Brennan',
@@ -1215,11 +1245,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Friday, 6:15 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or take a message for the team. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or take a message for the team. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'There&rsquo;s a wasp nest under the eaves right where our kids play. How soon can someone come out?' ),
-			array( 'from' => 'ai',      'text' => 'That sounds concerning. We do handle wasp removal &mdash; what&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Holly Ferris, 555-0113.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Holly. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'That sounds concerning. We do handle wasp removal. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Holly Ferris.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Holly. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0113.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon.' ),
 		),
 		'recap' => array(
 			'name'     => 'Holly Ferris',
@@ -1330,11 +1362,13 @@ $industries = array(
 		   site publishes, and says nothing about whether anyone is actually free, which
 		   only the bench can answer. That restraint is the FAQ below made visible. */
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about the agency or pass a message to the staffing team. What do you need?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the agency or pass a message to the staffing team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'We&rsquo;re short two night-shift RNs for Tuesday. Do you cover Sacramento?' ),
-			array( 'from' => 'ai',      'text' => 'Yes, the agency staffs the Sacramento area. What&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Renee Alvarado, 555-0178, Mercy General.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Renee. I&rsquo;ve passed this to the staffing team with the shift details and marked it time-sensitive &mdash; they&rsquo;ll be in touch as soon as they can.' ),
+			array( 'from' => 'ai',    'text' => 'Yes, the agency staffs the Sacramento area. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Renee Alvarado, Mercy General.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Renee. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0178.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the staffing team with the shift details and marked it time-sensitive &mdash; they&rsquo;ll be in touch as soon as they can.' ),
 		),
 		'recap' => array(
 			'name'     => 'Renee Alvarado',
@@ -1683,6 +1717,32 @@ get_template_part( 'template-parts/site-nav' );
 						</ul>
 						<p class="ind-recap__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ind['recap']['followup'] ); ?></p>
 					</div>
+					<?php /* ⚠️ INDICATES THE TRANSCRIPT, DOES NOT REPRODUCE IT (Mario,
+					         2026-08-30: "just like a thing that shows that this is where
+					         it would go"). The real recap email carries the full
+					         transcript, and the mockup said nothing about it, so the
+					         email looked shorter than the product's.
+
+					         Deliberately NOT the real exchange: the visitor thread is
+					         already shown in full in the card immediately to the left, and
+					         repeating it here would double the tallest element on the page
+					         to say something the reader has just read. A collapsed row is
+					         the honest shape — it is what the email actually looks like
+					         before you open it.
+
+					         Turn count is COUNTED from the same array that renders the
+					         thread, so it cannot drift from it. Not interactive: this is a
+					         picture of an email, and a control that does nothing is worse
+					         than a label that says what is there. */ ?>
+					<?php if ( ! empty( $ind['chat'] ) ) : ?>
+					<div class="ind-recap__section ind-recap__transcript">
+						<div class="ind-recap__section-head">
+							<strong>Conversation Transcript</strong>
+							<span class="ind-recap__count"><?php echo (int) count( $ind['chat'] ); ?> messages</span>
+						</div>
+						<p class="ind-recap__transcript-note">Full transcript included below in the email.</p>
+					</div>
+					<?php endif; ?>
 				</div>
 				<figcaption class="ind-scenario__caption">What lands in your inbox</figcaption>
 				</figure>
