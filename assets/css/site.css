@@ -8461,13 +8461,16 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   background: linear-gradient(90deg, transparent 0%, rgba(31,182,204,0.2) 30%, rgba(31,182,204,0.2) 70%, transparent 100%);
 }
 
-/* --- Footer responsive --- */
+/* --- Footer responsive ---
+   ⚠️ THE `1fr 1fr` STEP AT 900 IS DELETED (Mario, 2026-08-30). With four grid
+   items it produced a 2x2: brand, Product, then Industries and Company on a second
+   row — which reads as two unrelated pairs and puts half the nav below a block of
+   prose. The stacked layout that already existed below 768 is the right answer at
+   this width too, so it simply starts earlier: brand and tagline centered across
+   the top, then Product / Industries / Company as three equal columns.
+
+   Nothing here is new; the breakpoint moved from 768 to 900 and one rule went. */
 @media (max-width: 900px) {
-  .footer__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 768px) {
   .footer__grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -10666,6 +10669,16 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
      WITH them rather than being left behind as inert insurance. */
 .ind-hero {
   background: var(--warm-white);
+  /* ⚠️ padding-block-START ONLY, never the `padding` shorthand — a shorthand here
+     would clobber `.block`'s padding-block and put this section back on its own
+     scale, which is the whole thing the conversion removed.
+
+     The extra top is a real exception rather than a third spacing system: this is
+     the FIRST section under the nav, and 96px leaves the eyebrow sitting on the
+     menu (Mario, 2026-08-30: "a bit too tight up with the nav menu"). The value is
+     the homepage hero's own clamp, so the two first screens open identically
+     instead of by coincidence. Bottom padding stays .block's. */
+  padding-block-start: clamp(120px, 15vw, 140px);
 }
 /* ⚠️ KEPT, AND NOT REDUNDANT NEXT TO .block-split__grid. It overrides that rule's
    1fr 1fr. Was 1fr 1fr here too, which gave a 51px display headline only ~498px —
