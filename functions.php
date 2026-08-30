@@ -915,7 +915,23 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '11';
+	/* ⚠️ BUMPED 11 -> 12 TO CREATE /for/medical-staffing/, WHICH 404ed ON PRODUCTION.
+	   Medical Staffing was added to the registry above without bumping this, so the
+	   guard below returned early on every request and the page was never inserted. The
+	   industry still appeared everywhere the registry drives — the Industries dropdown,
+	   the homepage picker, the /for/ hub, its own Yoast title and description — all
+	   pointing at a URL that did not exist.
+
+	   ⚠️ THIS IS THE SECOND HALF OF THE FIX AND NEITHER HALF WORKS ALONE. The other is
+	   the missing content array in page-industry.php: with the array and no page you get
+	   a 404 from WordPress, and with the page and no array you get one from the template
+	   guard. Adding an industry is therefore always three edits — registry, array,
+	   version — and only the first two are anywhere near each other in the code.
+
+	   ⚠️ ADDING AN INDUSTRY IS NOT THE ONLY THING THIS GATE CATCHES. It also gates the
+	   SEO healing for all sixteen pages, so any registry edit to a seo_title or metadesc
+	   is equally inert until this number moves. */
+	$provision_version = '12';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
