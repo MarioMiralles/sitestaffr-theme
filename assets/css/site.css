@@ -10667,7 +10667,16 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
      those three. Removing shared chrome is property-by-property: these two look
      like generic hygiene and were load-bearing for the layers above, so they go
      WITH them rather than being left behind as inert insurance. */
-.ind-hero { background: var(--warm-white); }
+/* ⚠️ CREAM, NOT --warm-white (Mario, 2026-08-30: "shouldn't be white like the
+   homepage style"). The white hero is section 1 of the HOMEPAGE specifically — the
+   brightest thing on the site and its clarity moment. An industry page is not that
+   page, and copying its tone spent the contrast without the reason.
+
+   It also removes a boundary that could only ever look like a bug: #FFFDF9 above
+   #FDFBF7 is a two-point step across the full viewport — too small to read as a
+   decision, too large to be nothing. Hero, Problems, FAQ and the siblings block are
+   one cream run now, and the dark blocks do all the dividing. */
+.ind-hero { background: var(--cream); }
 /* ⚠️ `.block.ind-hero`, NOT `.ind-hero` — TWO CLASSES, AND THAT IS THE WHOLE RULE.
    The padding is owned by `.block:not(.block--dark)`, which is (0,2,0); a bare
    `.ind-hero` is (0,1,0) and loses to it regardless of source order. Written as one
