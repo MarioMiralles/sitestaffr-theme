@@ -11106,6 +11106,22 @@ a.ind-problem-card .ind-problem-card__icon--art {
   line-height: 1.8;
   color: var(--text-secondary);
   margin: 0;
+  /* ⚠️ THE PARAGRAPH IS LEFT WHILE ITS BLOCK STAYS CENTERED, and the label above it
+     stays centered too — header centered, content left, exactly as the homepage's §6
+     and §9 do it.
+
+     This is the one narrative paragraph on the template and it was inheriting
+     `text-align: center` from .ind-scenario__story. Measured on staging: SIX centered
+     lines at 1440 and at 768 (the block is capped at 720px, so those two widths render
+     identically), and TEN at 390. The design system's rule is that long running prose
+     keeps its left edge; a centered six-line block is already past a deck and a
+     centered ten-line one is a wall of ragged text on a phone.
+
+     Section-by-section review, 2026-08-30. Left at EVERY width rather than below a
+     breakpoint: six lines is not better than ten, and this template had never had an
+     alignment pass at any width, so there is no signed-off desktop rendering to
+     preserve here. */
+  text-align: left;
 }
 
 /* Sections ran 650-950px tall for roughly 400px of content: 120px of padding
