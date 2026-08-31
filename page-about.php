@@ -28,7 +28,7 @@ get_template_part( 'template-parts/site-nav' );
 			<div class="reveal">
 				<span class="about-hero__label">About SiteStaffr</span>
 				<h1>Every Visitor Deserves a Real Conversation. Every Business Deserves to Be There for It.</h1>
-				<p>SiteStaffr is an AI voice and text agent that bridges the gap between businesses and the people they serve &mdash; answering questions, capturing leads, and making sure no visitor leaves empty-handed, 24/7, in over 57 languages.</p>
+				<p>SiteStaffr is an AI receptionist that bridges the gap between businesses and the people they serve &mdash; answering questions, capturing leads, and making sure no visitor leaves empty-handed, 24/7, in over 57 languages.</p>
 			</div>
 		</div>
 	</section>
@@ -60,7 +60,7 @@ get_template_part( 'template-parts/site-nav' );
 				<div class="about-founder__text">
 					<h2>Built by Someone Who&rsquo;s Been on Both Sides of the Conversation</h2>
 					<p>SiteStaffr was founded in 2025 by Mario Miralles, a South Florida-based engineer with over 18 years of experience in customer-facing roles across retail, transportation, fintech, mortgage lending, and more. That time on the front lines taught him something that most technology overlooks: the way you make someone feel matters just as much as the information you give them.</p>
-					<p>After earning a Software Engineering diploma from BrainStation, Mario pivoted into full-stack development &mdash; building over 100 websites across 34 industries. The pattern he kept seeing was the same one he&rsquo;d lived: businesses pouring effort into their websites, but still losing visitors who couldn&rsquo;t find what they needed fast enough. SiteStaffr is his answer to that problem &mdash; an AI agent with the warmth and attentiveness of a great front-desk hire, available around the clock.</p>
+					<p>After earning a Software Engineering diploma from BrainStation, Mario pivoted into full-stack development &mdash; building over 100 websites across 34 industries. The pattern he kept seeing was the same one he&rsquo;d lived: businesses pouring effort into their websites, but still losing visitors who couldn&rsquo;t find what they needed fast enough. SiteStaffr is his answer to that problem &mdash; an AI receptionist with the warmth and attentiveness of a great front-desk hire, available around the clock.</p>
 				</div>
 				<div class="about-founder__logos">
 					<span class="about-founder__logos-label">Where I&rsquo;ve worked</span>

@@ -41,14 +41,43 @@ $cta_url               = home_url( '/#get-started' );
 
 <main class="ind-page">
 
+	<?php /* ---- HERO: a V3 block, not a Split -----------------------------------
+	         Same reasoning as `/for/`: no isometric on a hub, so no second column.
+	         ⚠️ `.block.ind-hero` — TWO CLASSES. The padding is owned by
+	         `.block:not(.block--dark)` at (0,2,0) and a bare `.ind-hero` at (0,1,0)
+	         loses to it whatever the source order; `:not()` contributes its
+	         argument's specificity. Written as one class this changes nothing and
+	         looks correct in the diff. */ ?>
 	<!-- Hero -->
-	<section class="ind-hero">
-		<div class="ind-hero__accent" aria-hidden="true"></div>
-		<div class="ind-hero__glow" aria-hidden="true"></div>
-		<div class="container">
+	<section class="block ind-hero">
+		<div class="block__inner">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label"><?php echo esc_html( $sitestaffr_category['heading'] ); ?></span>
-				<h1>AI Voice and Text Agents for <?php echo esc_html( $sitestaffr_category['heading'] ); ?></h1>
+				<?php
+				/* ⚠️ THE H1 IS REGISTRY COPY NOW, NOT A TEMPLATE PATTERN.
+
+				   It read "AI Voice and Text Agents for <heading>" on all five hubs. Two
+				   problems. The term is the one the V3 positioning superseded — the
+				   homepage H1 is "Put an AI Receptionist on Your Website" and these five
+				   pages were still naming the product the old way. And a pattern
+				   concatenated onto the group heading cannot read well for five different
+				   headings: "for Health & Medical" and "for Property & Auto" are category
+				   labels from a browse menu, not the words anyone would call their own
+				   business.
+
+				   Per-group copy fixes both — "Healthcare Practices", "Home Service
+				   Businesses", "Real Estate and Auto Businesses". The fallback keeps the
+				   old behaviour if a sixth group is ever added without an 'h1', so a
+				   missing field degrades to a heading rather than to a blank H1.
+
+				   ⚠️ 'h1' RENDERS FROM THE REGISTRY AT REQUEST TIME, so unlike seo_title
+				   and metadesc it is NOT behind $provision_version and needs no bump.
+				   Those two still are — see the note on that gate. */
+				$sitestaffr_cat_h1 = ! empty( $sitestaffr_category['h1'] )
+					? $sitestaffr_category['h1']
+					: 'AI Voice and Text Agents for ' . $sitestaffr_category['heading'];
+				?>
+				<h1><?php echo esc_html( $sitestaffr_cat_h1 ); ?></h1>
 				<?php if ( ! empty( $sitestaffr_category['intro'] ) ) : ?>
 				<p class="ind-hero__subtitle"><?php echo wp_kses_post( $sitestaffr_category['intro'] ); ?></p>
 				<?php endif; ?>
@@ -63,13 +92,24 @@ $cta_url               = home_url( '/#get-started' );
 		</div>
 	</section>
 
+	<?php /* ---- THE CATEGORY'S INDUSTRIES: a V3 Cards block --------------------
+	         ⚠️ `.ind-problems__grid` HAD NO RULE LEFT. It was deleted from site.css
+	         when the industry page's pain points moved onto `.block-cards__grid`,
+	         and these tiles kept the dead class — so the grid on all five hubs had
+	         silently collapsed to a full-width stack.
+
+	         ⚠️ THE TILES KEEP THEIR BOX. `.ind-problem-card` is two components: the
+	         three unboxed statements on `page-industry.php` (now `.ind-problem`) and
+	         these, which are LINKS. The box is the affordance; unboxing the shared
+	         class would have stripped it from twenty-one tiles across six pages. */ ?>
 	<!-- Industries in this category -->
-	<section class="ind-problems">
-		<div class="container">
-			<div class="ind-problems__header reveal">
+	<section class="block block-cards ind-problems">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
+				<span class="section-label">In this category</span>
 				<h2>Where SiteStaffr Fits</h2>
 			</div>
-			<div class="ind-problems__grid">
+			<div class="block-cards__grid" style="--cards: 3;">
 				<?php foreach ( $sitestaffr_industries as $sitestaffr_i => $sitestaffr_item ) : ?>
 					<?php $sitestaffr_item_art = sitestaffr_industry_art_thumb_url( $sitestaffr_item['slug'] ); ?>
 					<a class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $sitestaffr_i + 1 ); ?>" href="<?php echo esc_url( home_url( '/for/' . $sitestaffr_item['slug'] . '/' ) ); ?>">
@@ -94,10 +134,14 @@ $cta_url               = home_url( '/#get-started' );
 	</section>
 
 	<!-- CTA -->
-	<section class="ind-cta">
-		<div class="ind-cta__pattern" aria-hidden="true"></div>
-		<div class="container container--narrow">
-			<div class="ind-cta__content cta-spotlight reveal">
+	<?php /* Closing CTA is a V3 dark block running into the footer, same as
+	         page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
+	         .ind-cta is shared across all three ind-* templates, so moving its
+	         background onto .block--dark would have left whichever template still
+	         carried the old markup with no background at all. */ ?>
+	<section class="block block--dark ind-cta">
+		<div class="block__inner block-statement">
+			<div class="ind-cta__content reveal">
 				<h2>Stop Losing Customers to an Unanswered Message</h2>
 				<p>SiteStaffr answers your website visitors by voice and text 24/7, captures who they are and what they need, and emails you a full recap. Try it free for 30 days &mdash; no credit card required.</p>
 				<div class="ind-cta__actions">

@@ -1,0 +1,94 @@
+<?php
+/**
+ * 404 — page not found.
+ *
+ * Without this file WordPress falls back to index.php, which renders a 404 as
+ * though it were an empty blog archive: an <h1> reading "Blog" above the words
+ * "No content found." That is what sitestaffr.com served on every bad URL until
+ * 2026-08-30, and it was unstyled as well, because the stylesheet was gated on a
+ * list of contexts a 404 satisfies none of (see the note in functions.php).
+ *
+ * No hardcoded meta tags here: Yoast owns the site's metadata, and the 404 HTTP
+ * status is what actually keeps this out of search results.
+ *
+ * The nav and footer carry their own inline JS, and nothing on this page uses
+ * .reveal, so site.css alone renders it fully. Do not add .reveal markup without
+ * also enqueueing site.js for this template — those elements sit at opacity 0
+ * forever otherwise.
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+$site_name = get_bloginfo( 'name' );
+
+/*
+ * Where a lost visitor is most likely to be headed. Ordered by commercial
+ * intent, not by nav order: someone who mistyped a URL is further along than
+ * someone reading About.
+ */
+$nf_links = array(
+	array(
+		'label' => 'Pricing',
+		'url'   => home_url( '/#pricing' ),
+		'desc'  => 'Three plans, unlimited text chat',
+	),
+	array(
+		'label' => 'Browse by Industry',
+		'url'   => home_url( '/for/' ),
+		'desc'  => 'How it works for your trade',
+	),
+	array(
+		'label' => 'Download the Plugin',
+		'url'   => home_url( '/download/' ),
+		'desc'  => 'Install it on your WordPress site',
+	),
+	array(
+		'label' => 'Blog',
+		'url'   => home_url( '/blog/' ),
+		'desc'  => 'Guides for service businesses',
+	),
+);
+?><!doctype html>
+<html <?php language_attributes(); ?>>
+<head>
+	<meta charset="<?php bloginfo( 'charset' ); ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<?php wp_head(); ?>
+</head>
+<body <?php body_class( 'sitestaffr-page sitestaffr-page--404' ); ?>>
+<?php wp_body_open(); ?>
+
+<?php get_template_part( 'template-parts/site-nav' ); ?>
+
+<main class="nf" id="main">
+	<div class="container container--narrow">
+		<p class="nf__code">404</p>
+		<h1 class="nf__title">We Can&rsquo;t Find That Page</h1>
+		<p class="nf__text">
+			The link may be out of date, or the page may have moved. Everything below is still where it should be.
+		</p>
+
+		<div class="nf__actions">
+			<a class="btn btn--primary" href="<?php echo esc_url( home_url( '/' ) ); ?>">Go to Homepage</a>
+			<a class="btn btn--outline" href="<?php echo esc_url( home_url( '/#get-started' ) ); ?>">Get Started</a>
+		</div>
+
+		<ul class="nf__links">
+			<?php foreach ( $nf_links as $nf_link ) : ?>
+				<li class="nf__link-item">
+					<a class="nf__link" href="<?php echo esc_url( $nf_link['url'] ); ?>">
+						<span class="nf__link-label"><?php echo esc_html( $nf_link['label'] ); ?></span>
+						<span class="nf__link-desc"><?php echo esc_html( $nf_link['desc'] ); ?></span>
+					</a>
+				</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+</main>
+
+<?php get_template_part( 'template-parts/site-footer' ); ?>
+<?php wp_footer(); ?>
+</body>
+</html>

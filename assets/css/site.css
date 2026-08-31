@@ -66,7 +66,24 @@
   --warm-white: #FFFDF9;
   --text-primary: #1a2332;
   --text-secondary: #4a5568;
-  --text-muted: #718096;
+  /* ⚠️ #677488, DARKENED FROM #718096 FOR CONTRAST (2026-08-28 accessibility pass).
+     At the old value it measured 3.88:1 on the cream and 4.02:1 on white, against a 4.5
+     requirement — it failed everywhere it was used, which is most of the small print on
+     the page: inbox timestamps, group headings, stat captions, the pricing footnote.
+     #677488 is the FIRST step dark enough to clear 4.5 on both (4.56 and 4.61); anything
+     lighter fails the cream, which is the harder of the two backgrounds. */
+  --text-muted: #677488;
+  /* ⚠️ TEAL AS TEXT ON A LIGHT BACKGROUND, and it is deliberately NOT --teal-deep.
+     #00838F is the brand fill and it stays exactly that — buttons, pills, the seam. As
+     TEXT it measures 4.38:1 on the cream, which fails. Rather than darken the brand
+     colour everywhere a fill uses it, this is a separate token for the text case only.
+     ⚠️ #00747E, NOT #007A85, AND THE REASON IS THE INBOX. #007A85 cleared the cream at
+     4.93 but landed on 4.49 for `.morning-inbox__count` — one hundredth short, because
+     that one sits on the inbox card's beige chrome rather than on the section. The token
+     is set by its WORST background, not its most common one. If teal text turns up
+     somewhere new and fails an audit, point it here rather than widening --teal-deep's
+     job — and re-check every existing use, since this value is a floor for all of them. */
+  --teal-text: #00747E;
   --text-on-dark: #F0FAFA;
   --border-light: #e8e2d8;
   --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
@@ -126,10 +143,15 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--teal-deep);
+  color: var(--teal-text);
   margin-bottom: 16px;
   display: block;
 }
+/* ⚠️ ON A DARK BLOCK THE LABEL HAS TO GO LIGHTER, NOT DARKER. --teal-text is tuned
+   against cream; on #00323A the same colour measures 3.06:1, the worst contrast failure
+   on the page. --teal-light is 5.68 there. One label, two directions, because the
+   requirement is a relationship with the background and not a property of the label. */
+.block--dark .section-label { color: var(--teal-light); }
 
 /* ========== BUTTONS ========== */
 .btn {
@@ -226,6 +248,8 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   /* The cream run, sections 4-9 — see the .block:not(.block--dark) rule for why this is
      a second value and not a regression to the old two-clamp scale. */
   --block-pad-light: 96px;
+  /* The beat between two blocks inside ONE dark run; see .block--dark + .block--dark. */
+  --block-pad-run: 32px;
 
   /* Matches .container so the restored container is one number site-wide.
      V2 broke hero content to 40px from the raw viewport edge; V1 sits at ~150px
@@ -267,6 +291,38 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    inconsistency this collapse was asked for. */
 .block--tight { padding-block: var(--block-pad); }
 
+/* ⚠️ THE SCALE STEPS DOWN TWICE BELOW THE DESKTOP LAYOUT (Mario, 2026-08-28: "the
+   spacing between the cream sections is too much... tighten it up for tablet and
+   mobile").
+
+   A fixed 96px is deliberately not a clamp — see the note above — but "64px is 64px
+   everywhere" was reasoned about a 1440px screen. The same 96px top and 96px bottom is
+   192px of empty cream between two sections, which is half a phone screen and reads as
+   the page having ended. Held against the desktop proportion the old values were
+   actually MORE airy the narrower it got: 192 of 1440 is 13% of the width, 192 of 390
+   is 49%.
+
+   Two steps, not a formula, so each one can be looked at:
+
+     desktop   96 light / 64 dark   192px between cream sections
+     <=1024    60 / 44              120px
+     <=620     44 / 32               88px
+
+   ⚠️ LIGHT MUST STAY CLEARLY LARGER THAN DARK at every step, and the reason is the same
+   one that created the second token: nothing marks where one cream section ends and the
+   next begins except the gap. The ratio is held near 1.4 throughout. Shrinking these
+   toward each other is what makes the cream run read as one long section again.
+
+   ⚠️ ANY HARDCODED 64 OR 96 IN A SECTION'S OWN PADDING DEFEATS THIS. Two existed and are
+   now `var()` calls — .block.what-you-get and .block.final-cta, both of which add a
+   seam's height on top of the scale. Grep before adding a third. */
+@media (max-width: 1024px) {
+  :root { --block-pad: 44px; --block-pad-light: 60px; --block-pad-run: 24px; }
+}
+@media (max-width: 620px) {
+  :root { --block-pad: 32px; --block-pad-light: 44px; --block-pad-run: 20px; }
+}
+
 .block__inner {
   width: 100%;
   max-width: var(--block-max);
@@ -291,7 +347,46 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
    32px here plus the previous block's 64px gives 96px, which matches the cream run's own
    figure. Still asymmetric on purpose: a full 64 would read as two stacked sections
    rather than one run with a beat in it. */
-.block--dark + .block--dark { padding-block-start: 32px; }
+.block--dark + .block--dark { padding-block-start: var(--block-pad-run); }
+
+/* ⚠️ EVERY DARK BLOCK OVERLAPS WHAT IS ABOVE IT BY 2px, AND THIS IS A RENDERING FIX, NOT
+   A SPACING ONE (Mario, 2026-08-28: the dark sections "seem to have a random
+   spacing/line in between" on mobile).
+
+   Layout positions are fractional — the hero's bottom measures 1193.984375, not 1194 —
+   and Chromium snaps each painted box edge to a device pixel INDEPENDENTLY. When the
+   device pixel ratio is also fractional, the two sides of a shared edge can round apart
+   and one device-pixel row ends up painted by neither, showing the page background
+   through as a pale hairline. Sampled at the hero/section-2 boundary: 81 points per
+   channel lighter than #00323A at 1.25, 1.75, 2.25, 2.625 and 2.75, and pixel-perfect at
+   1.5, 2, 2.5 and 3. Integer ratios clean, fractional ratios dirty — that signature is
+   the whole diagnosis, and it is why this looks fine on a laptop and wrong on a phone.
+
+   ⚠️ 2px, MEASURED, NOT 1. A single pixel of overlap only moved the seam (243 -> 163 at
+   1.75). The padding adds the same 2px back so nothing inside the block moves.
+
+   ⚠️ THE HERO BOUNDARY NEEDED MORE THAN THIS. Overlap plus `position: relative` got it
+   from 81 points per channel down to 23, which is faint but still a line Mario could
+   see. That one is now covered properly by the opening curtain, which was moved into
+   this section so it can overlap downward — see .seam-curtain--open. The overlap below
+   stays as the general defense for every dark boundary that has no curtain over it. */
+/* ⚠️ `position: relative` IS LOAD-BEARING TWICE. It is the containing block for the
+   opening curtain, which now lives inside this section — remove it and the curtain
+   positions itself against the viewport. It also puts this section's background in the
+   positioned-descendants paint phase, so the 2px overlap lands ON TOP of the hero's
+   rounded-off bottom edge rather than under it. */
+.hero + .block--dark {
+  position: relative;
+  margin-block-start: -2px;
+  padding-block-start: calc(var(--block-pad) + 2px);
+}
+.block--dark + .block--dark {
+  margin-block-start: -2px;
+  padding-block-start: calc(var(--block-pad-run) + 2px);
+}
+/* The footer is the same shape of problem as the hero: a light section with `overflow:
+   hidden` and a closing curtain, meeting a dark box below it. */
+.footer { margin-block-start: -2px; }
 
 /* ---- Statement: centered eyebrow + heading + one paragraph. Type only. ---- */
 .block-statement { text-align: center; }
@@ -526,10 +621,36 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   font-weight: 700;
   letter-spacing: 0.09em;
   text-transform: uppercase;
-  color: rgba(26,35,50,0.45);
+  /* ⚠️ WAS 0.45 ALPHA, WHICH IS 2.74:1 ON WHITE. Tolerable-ish on a label; not
+     on a control. This is 10.56px, so 4.5:1 is the bar, not the large-text 3:1 —
+     bold does not make 10px large. 0.62 measures 4.55:1 and is still clearly
+     subordinate to the near-black industry links under it, which is the whole
+     job of the heading. */
+  color: rgba(26,35,50,0.62);
 }
+/* ---- The category heading is now a LINK to its hub ----------------------
+   ⚠️ IT STAYS LOOKING LIKE A HEADING at rest, and that is the whole design
+   problem. Making it read as a link would put a sixth entry at the top of every
+   column and turn a grouped menu into a flat list of twenty-one — the grouping
+   is what makes sixteen industries scannable. So: same size, same weight, same
+   muted colour, and the affordance arrives on hover.
+
+   `text-decoration: none` is written here rather than inherited: the mega
+   heading is the only <a> in the panel that is not a `.nav__dropdown-link`, so
+   nothing else was resetting it and it underlined by default. */
+.nav__mega-heading--link {
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.nav__mega-heading--link:hover,
+.nav__mega-heading--link:focus-visible {
+  color: var(--teal-text);
+}
+/* --teal-text, not --teal-deep: #00838F on white is 4.03:1 and this is 0.9rem
+   text, so it failed AA. Part of the same teal-deep-as-text sweep the ind-*
+   conversion is carrying. */
 .nav__mega-all .nav__dropdown-link {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-weight: 600;
 }
 @media (min-width: 769px) {
@@ -722,10 +843,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-size: 0.9rem;
   font-weight: 500;
-  opacity: 0.85;
+  /* ⚠️ NO OPACITY. It was 0.85, which is a contrast reduction dressed as a style: the
+     colour passes at full strength and fails at 85%. Hover raises it back to 1, so the
+     "quieter than the primary" job was being done by the one property that also degrades
+     legibility. Weight and size already carry that job. */
   transition: opacity 0.2s ease, gap 0.2s ease;
 }
 .hero__download-link:hover {
@@ -1563,7 +1687,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, var(--teal-light), var(--teal-deep));
-  color: white;
+  /* ⚠️ DARK ON THE EMERALD, NOT WHITE. White measured 2.54:1 on #10b981 and was the
+     worst remaining failure on the page — and the first audit script MISSED it, reporting
+     11.05, because it resolved the background by walking `background-color` up the tree
+     and this badge is painted by a gradient. Sample what is actually there.
+     The emerald is not negotiable: it is the reserved recommended-tier signal. So the
+     TEXT flips instead — --block-dark on emerald is 5.46. */
+  color: var(--block-dark);
   font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -2001,7 +2131,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.63rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(240,250,250,0.45);
+  color: rgba(240,250,250,0.58);
   margin-bottom: 3px;
 }
 /* The link between the two panels: the line that produced a field flashes at
@@ -2085,7 +2215,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(240,250,250,0.45);
+  color: rgba(240,250,250,0.58);
   margin-bottom: 2px;
 }
 .see-it__field dd {
@@ -2110,7 +2240,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.66rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(240,250,250,0.45);
+  color: rgba(240,250,250,0.58);
   margin-bottom: 4px;
 }
 .see-it__gen p { font-size: 0.86rem; color: rgba(240,250,250,0.85); }
@@ -2171,7 +2301,11 @@ body.sitestaffr-landing-page .hero__visual > * {
    to fix: they positioned bubbles over artwork, so swapping the image silently
    invalidated all twelve, and they had already been re-measured twice. */
 .lang-section { background: var(--cream); }
-.lang-section__text { color: var(--text-secondary); margin-top: 14px; }
+/* ⚠️ The duplicate .lang-section__text that sat here is DELETED, not left. It was
+   byte-identical to the one below and therefore invisible in a diff, but the later copy
+   won — so an edit made here would have done nothing at all and looked correct doing it.
+   That is the "dead CSS later in the file wins" trap the design system already lists
+   twice; the fix is to remove the loser, never to override it. */
 
 /* ---- Section 5: the language orbit ------------------------------------
    Mario, 2026-08-27: "I'd rather see the robot super big with many different languages
@@ -2184,7 +2318,12 @@ body.sitestaffr-landing-page .hero__visual > * {
    stage's height; the greetings are placed against the STAGE, in two side bands the
    centered figure never reaches. Swapping the render cannot invalidate a single one. */
 .lang-section__header { text-align: center; max-width: 46rem; margin: 0 auto; }
-.lang-section__text { color: var(--text-secondary); margin-top: 14px; }
+/* `balance` because this is a two-sentence subtitle in a 46rem centered column, which is
+   exactly the case it exists for: at 1440 the plain-English rewrite landed one word past
+   the line and left "up." alone on row two. Balancing the wrap rather than trimming the
+   copy to fit keeps it clean at every width instead of just at the one I screenshotted.
+   Already used in three other places in this file. */
+.lang-section__text { color: var(--text-secondary); margin-top: 14px; text-wrap: balance; }
 
 .lang-orbit {
   position: relative;
@@ -2192,6 +2331,35 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin: clamp(16px, 3vw, 34px) auto 0;
   display: flex;
   justify-content: center;
+}
+/* ⚠️ THE SAME BLOOM AS THE VOICE DEMO'S ROBOT (Mario, 2026-08-28: "can we add the same
+   sort of circle glow around the robot that we have for the robot in the demo?"). Same
+   gradient, same `closest-side`, same blur — see `.see-it__stage::before`, which carries
+   the full reasoning; if that one is ever retuned, retune this with it.
+
+   ⚠️ IT IS DOING A DIFFERENT JOB HERE, which is why the numbers are not identical. There
+   it is a legibility fix: a dark robot on a dark section needs something to be seen
+   against. This robot is dark on cream and already has all the contrast it needs, so the
+   bloom is decoration and is pulled back — but only a little. First attempt halved the
+   demo's ink (0.20/0.09) on the theory that a light section needs less, and it rendered
+   as nothing at all: teal at 20% over cream is a paler step than teal at 38% over
+   #00323A. A tint reads by its DISTANCE from what is behind it, not by its own alpha.
+
+   `z-index: 0` puts it under the robot (z-index 1) and under the haze, which is also 0
+   but earlier in source. Nothing here needs to move for it. */
+.lang-orbit::before {
+  content: '';
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(620px, 84%);
+  aspect-ratio: 1 / 0.94;
+  background: radial-gradient(ellipse closest-side,
+              rgba(31,182,204,0.34) 0%, rgba(31,182,204,0.15) 52%, rgba(31,182,204,0) 78%);
+  filter: blur(26px);
+  pointer-events: none;
+  z-index: 0;
 }
 /* ---- The haze: more languages, receding behind the robot ---------------
    Texture, not content — the twelve chips carry the claim and stay readable; this is
@@ -2345,7 +2513,7 @@ body.sitestaffr-landing-page .hero__visual > * {
    section, and buried in a paragraph it did none of that work. */
 .lang-section__english {
   display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 9px;
   margin: clamp(18px, 3vw, 30px) auto 0;
   padding: 11px 16px;
@@ -2354,7 +2522,21 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: #065f46;
   font-size: 0.9rem;
   font-weight: 500;
+  /* ⚠️ THE TEXT IS LEFT WHILE THE PILL STAYS CENTERED, and the two are not the same
+     thing. Below ~420px this line wraps, and with the inherited `text-align: center`
+     the second line ("you.") sat centered under the first while the check mark floated
+     alone at the vertical middle of the left edge — the same lopsided shape the design
+     system already rejects for a centered row with a chevron pinned right, only
+     mirrored. Sampled at 390: confirmed in the pixels, not inferred from the CSS.
+
+     Section-by-section review, 2026-08-30. One element, looked at on its own terms.
+     This does NOT generalise to the rest of the page — see the last block of this file. */
+  text-align: left;
 }
+/* Pins the check to the FIRST line instead of the middle of the wrapped block. 3px is
+   (21.6px line box - 16px icon) / 2 at this font size, so the single-line desktop
+   rendering is pixel-identical to the `align-items: center` it replaces. */
+.lang-section__english svg { flex: none; margin-top: 3px; }
 /* The wrapper is centered, not the text: an inline-flex pill cannot center itself. */
 .lang-section .block__inner { text-align: center; }
 .lang-orbit, .lang-orbit__item { text-align: left; }
@@ -2411,25 +2593,67 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* LEFT-ALIGNED NOW, not centered. It used to sit under the image as a caption, where
    centering was right; beside the image it is a column of prose, and centered prose in a
-   column reads as a pull-quote rather than as a description. */
-.industries__excerpt-item { display: none; margin-top: 0; }
-.industries__excerpt-item.is-active { display: block; }
-.industries__excerpt-item h3 { font-size: 1.4rem; margin-bottom: 10px; }
+   column reads as a pull-quote rather than as a description.
+
+   ---- IT IS A DARK CARD (Mario, 2026-08-30) ----------------------------------
+   The heading, the blurb and the link now sit on a dark surface instead of loose on the
+   cream. It is the one thing in the section that CHANGES when you pick a name, and as
+   bare prose beside a picture nothing said so; a surface does.
+
+   ⚠️ --block-dark-raised (#0A424A), NOT --block-dark and NOT a new tone. It shipped on
+   --block-dark first; Mario, 2026-08-30: "can we use a less dark background color
+   instead?" The token already existed for section 10's elevated panel — its whole job
+   is "a card that is lighter than the section dark" — so this is a reuse rather than a
+   fourth tone. Inventing a shade here is the exact thing the subpage audit lists as the
+   site's second-commonest system break.
+
+   ⚠️ IT IS ALSO THE CEILING FOR --teal-light ON THIS CARD. The link measures 4.56:1
+   here against 5.69:1 on --block-dark; one more step lighter and the link fails AA and
+   has to move to --teal-pale. Lightening this card is therefore never just a background
+   change — re-check the link with it.
+
+   ⚠️ THE CARD IS ON THE CONTAINER AND THE ITEMS ARE STACKED IN ONE GRID CELL, which is
+   a change from display:none. Sixteen blurbs are different lengths, so a card sized by
+   whichever one is showing resized on every click, next to a fixed 440px image — a jump
+   that loose text on cream hid completely and a painted box cannot. Stacked, the
+   container is the height of the LONGEST blurb and nothing moves.
+
+   `visibility` rather than `display` is what makes the hidden ones still contribute
+   that height. It still takes them out of the tab order and the accessibility tree, so
+   the sixteen links do not all become tab stops. */
+.industries__excerpt {
+  display: grid;
+  background: var(--block-dark-raised);
+  color: var(--text-on-dark);
+  border-radius: var(--radius-xl);
+  padding: clamp(28px, 3.2vw, 40px);
+}
+.industries__excerpt-item {
+  grid-area: 1 / 1;
+  margin-top: 0;
+  visibility: hidden;
+}
+.industries__excerpt-item.is-active { visibility: visible; }
+.industries__excerpt-item h3 { font-size: 1.4rem; margin-bottom: 10px; color: #FFFFFF; }
 .industries__excerpt-item p {
-  color: var(--text-secondary);
+  color: var(--text-on-dark);
   font-size: 1rem;
   line-height: 1.65;
   max-width: 42ch;
 }
+/* ⚠️ --teal-light ON DARK, NOT --teal-text. --teal-text (#00747E) exists to clear the
+   CREAM and is 1.6:1 here; --teal-light is 5.7:1 on #00323A. Same swap the design
+   system already mandates for .block--dark .section-label — contrast is a relationship,
+   so this link goes lighter for exactly the reason it went darker on cream. */
 .industries__link {
   display: inline-block;
   margin-top: 10px;
   font-size: 0.88rem;
   font-weight: 600;
-  color: var(--teal-deep);
-  border-bottom: 1px solid rgba(0,131,143,0.35);
+  color: var(--teal-light);
+  border-bottom: 1px solid rgba(31,182,204,0.4);
 }
-.industries__link:hover { border-bottom-color: var(--teal-deep); }
+.industries__link:hover { border-bottom-color: var(--teal-light); }
 
 /* ⚠️ THE LIST IS FIVE COLUMNS, ONE PER GROUP — this is what actually fixes the
    complaint. Stacked in a single column the five groups were the tallest thing in the
@@ -2511,7 +2735,54 @@ body.sitestaffr-landing-page .hero__visual > * {
   .industries__excerpt { display: none; }
   .industries__stage { display: block; }
   .industries__list { margin-top: 0; grid-template-columns: minmax(0, 1fr); }
-  .industries__name { padding: 11px 10px; }
+  /* ⚠️ THE NEGATIVE MARGIN COMES OFF HERE. On desktop `margin-left: -10px` with 10px of
+     padding is what lets a pill bleed left of its column while its TEXT stays on the
+     column's edge — correct for a pill sized to its own text. In one full-width column
+     it made the fill start 10px left of the row separators and stop 10px short of them
+     on the right: a highlight visibly out of register with the list it is in.
+     Everything now sits on one edge — separators, fill, names, group headings, and the
+     expanded detail all start at the same x. */
+  .industries__name { width: 100%; margin-left: 0; padding: 14px; border-radius: 0; }
+  /* ⚠️ EACH CATEGORY IS A CARD, AND THAT IS THE FIX FOR "OVERWHELMING" (Mario,
+     2026-08-28: "the categories and the items all feel very compressed and bundled up
+     together so it feels like an overwhelming list").
+
+     Air alone would not have done it. The problem was not that the rows were tight, it
+     was that five headings and sixteen names shared ONE flat rhythm — every row the same
+     height with the same hairline under it, so the headings did not read as breaks and
+     the eye saw twenty-one undifferentiated lines. Boxing each group turns that into
+     five objects of three to five items, which is a countable list rather than a long
+     one, and it reuses the card the overnight inbox already established.
+
+     The heading sits OUTSIDE its card so it labels the group rather than joining it.
+     `overflow: hidden` is what lets the open row's full-bleed teal follow the card's
+     rounding instead of squaring off its top corners. */
+  .industries__list { gap: 30px; }
+  .industries__group-heading { padding-left: 2px; margin-bottom: 10px; }
+  .industries__names {
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .industries__names li:last-child { border-bottom: 0; }
+  /* ⚠️ ON A PHONE ONLY `is-open` PAINTS, AND `is-active` MUST BE NEUTRALIZED.
+     `is-active` is the DESKTOP selection — the randomly featured industry, whose panel
+     and excerpt are both hidden at this width. Left styled it put a solid teal row into
+     a list where nothing was expanded, and then a SECOND teal row the moment the visitor
+     opened a different one. Two selected-looking rows, neither of them the open one. */
+  .industries__name.is-active,
+  .industries__name.is-active:hover {
+    background: none;
+    color: var(--text-primary);
+    font-weight: 400;
+  }
+  .industries__name.is-open,
+  .industries__name.is-open:hover {
+    background: var(--teal-deep);
+    color: #fff;
+    font-weight: 600;
+  }
   .industries__name::after {
     content: "+";
     float: right;
@@ -2523,12 +2794,16 @@ body.sitestaffr-landing-page .hero__visual > * {
 
   .industries__mobile-detail {
     display: block;
-    padding: 4px 0 16px;
+    padding: 12px 14px 20px;
   }
+  /* Centered, not left-aligned. At 200px hard left in a 348px column the isometric read
+     as a stray thumbnail with a hole beside it; the paragraph under it is full width, so
+     nothing was holding the right half. The % keeps it in proportion on a wide tablet. */
   .industries__mobile-detail img {
-    width: 200px;          /* ~200px here, not 440 */
+    display: block;
+    width: min(260px, 72%);
     height: auto;
-    margin: 0 0 10px;
+    margin: 0 auto 14px;
   }
   .industries__mobile-detail p {
     color: var(--text-secondary);
@@ -2867,7 +3142,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.68rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(240,250,250,0.45);
+  color: rgba(240,250,250,0.58);
   align-self: end;
 }
 
@@ -2975,7 +3250,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .price-grid--table .price-tier__period {
   font-size: 0.75rem;
-  color: rgba(240,250,250,0.5);
+  color: rgba(240,250,250,0.58);
   margin-bottom: 0;
 }
 
@@ -3115,7 +3390,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: 999px;
   background: var(--emerald);
   background-image: none;
-  color: #fff;
+  /* ⚠️ THE BADGE'S COLOUR IS DECIDED HERE, NOT ON `.price-tier__badge`. That rule sets
+     white on a teal gradient; this one repaints it emerald and won on source order, so a
+     fix applied up there did nothing and shipped still failing. Dark text on the emerald
+     is 5.46:1; white was 2.54. If the two ever disagree again, this is the one that
+     renders. */
+  color: var(--block-dark);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -3136,6 +3416,17 @@ body.sitestaffr-landing-page .hero__visual > * {
      panel goes; the treatment does not. */
   .pricing-section .price-grid.price-grid--table {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    /* ⚠️ THE EXPLICIT ROWS HAVE TO GO WITH THE COLUMNS, and forgetting them is what
+       made the footnote look detached (Mario, 2026-08-28: "Run out of minutes?" is
+       "very spaced out and far apart from the cards for some reason").
+
+       The desktop panel declares `grid-template-rows: auto repeat(6, auto) 1fr` so the
+       rail and the four columns can share rows through subgrid. Those eight rows
+       survived into the stacked layout, where four cards fill rows 1-4 and rows 5-8 sit
+       empty. Empty auto rows cost no height — but the GAPS BETWEEN THEM still do, and
+       at 26px that is four phantom gaps, 104px of nothing, measured. The footnote's own
+       margin was never the problem: it is 22px and always was. */
+    grid-template-rows: none;
     background: transparent;
     border: 0;
     box-shadow: none;
@@ -3167,17 +3458,63 @@ body.sitestaffr-landing-page .hero__visual > * {
     background: #073E42;
     border-color: rgba(52,211,153,0.4);
   }
+  /* ⚠️ THE VALUE LEADS, AND THE ROW IS NOT A TABLE ROW ANY MORE (Mario, 2026-08-28: the
+     cards are "repetitive and the information is very small and difficult to look at").
+
+     Four cards each repeating the same six labels is twenty-four lines in which the only
+     thing that differs is a number sitting at the far right edge, behind a label the
+     reader has now read four times. Putting the value first demotes the label to what it
+     is — a caption on the number, not a heading for it. `order: -1` rather than
+     reordering the markup, because the DOM order label-then-value is what the desktop
+     rail and a screen reader want.
+
+     The type was also set for a four-across table read at arm's length and then inherited
+     by a card a phone holds at 30cm. Both value and label go to 1rem.
+
+     ⚠️ NO FIXED COLUMN FOR THE VALUE, AND NO RULE BETWEEN THE ROWS. Both were tried on
+     2026-08-28 and both looked worse than what they replaced (Mario: "the price cards
+     look really bad"). A 92px value column is a dead gutter, because most of these values
+     are one character — "2" sat alone with 70px of nothing before its label, and the
+     hairlines under each row turned that gutter into an empty third table column. A
+     pricing card is a spec LIST, not a table fragment: value and label are one phrase,
+     9px apart, and the only rule left is the one under the price itself. */
   .price-tier__row {
-    justify-content: space-between;
+    border-top: 0;
+    justify-content: flex-start;
+    gap: 9px;
     text-align: left;
-    padding: 9px 14px;
+    padding: 8px 18px;
+    font-size: 1rem;
+  }
+  .price-tier__identity + .price-tier__row { padding-top: 16px; }
+  .price-tier__row-value {
+    order: -1;
+    flex: 0 0 auto;
+    font-weight: 700;
   }
   .price-grid--table .price-tier__row-label {
     display: block;               /* now the only label this value has */
-    font-size: 0.8rem;
-    color: rgba(240,250,250,0.62);
+    font-size: 1rem;
+    color: rgba(240,250,250,0.72);
   }
-  .price-tier__identity { padding: 18px 14px 14px; }
+  /* ⚠️ A ROW THE PLAN DOES NOT INCLUDE IS NOT A ROW HERE (Mario's call, 2026-08-28,
+     choosing this over keeping the em-dashes: "Value first, hide what's absent").
+
+     On desktop the dash is doing real work — it is the empty cell in a comparison, read
+     across four columns at once. Stacked, nobody is comparing across anything; a dash is
+     just a line about a thing you are not getting, and there are four of them. Dropping
+     them makes Free Trial and Starter visibly shorter cards, which is itself information.
+
+     `:has()` is the only way to hide a row from the state of its child. Browsers without
+     it fall back to showing the dash, which is exactly the previous behavior. */
+  .price-tier__row:has(.price-tier__row-value--none) { display: none; }
+  /* The one rule that survives: it separates the price from the spec list. With the
+     per-row hairlines gone this is the card's only internal division, which is what
+     stops the numbers reading as a continuation of the price. */
+  .price-tier__identity {
+    padding: 18px 18px 16px;
+    border-bottom: 1px solid var(--table-rule);
+  }
 }
 @media (max-width: 620px) {
   .pricing-section .price-grid.price-grid--table { grid-template-columns: 1fr; }
@@ -3239,12 +3576,30 @@ body.sitestaffr-landing-page .hero__visual > * {
    everyone, and it arrives after the questions have had their chance rather than before.
    The old "only finishers see it" objection does not apply, because a two-column list is
    half as tall and its end is on screen with the columns. */
+/* ⚠️ ROBOT ON THE LEFT AT EVERY WIDTH, BUTTON UNDER THE HEADING (Mario, 2026-08-28: "I
+   want the robot always on the left side and I want the button to stack under the Still
+   Have a Question?"). Two rules follow from that and neither is optional:
+
+   `flex-wrap: nowrap` — the robot must never drop to its own line, so the card cannot be
+   allowed to wrap at all. There is no stacked variant of this card any more; the earlier
+   560px and 640px breakpoints that made one are gone.
+
+   `width: fit-content` — this is the actual fix for the complaint that started this
+   ("there's a lot of white-space because of it in this card"). The card was a fixed
+   44rem, and once the supporting line between the heading and the button was deleted the
+   copy no longer filled it: ~200px of empty card to the right of a 436px column. Sized to
+   its contents there is no right-hand emptiness to fill, and no layout has to change to
+   get rid of it. `max-width: 100%` keeps that honest on a phone.
+
+   A one-row robot|heading|button version shipped in between and was rejected. Do not
+   reach for it again — the robot is the left edge of this card. */
 .faq-section__ask {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
+  display: flex;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: clamp(18px, 3vw, 40px);
-  max-width: 44rem;
+  gap: clamp(14px, 2.4vw, 30px);
+  width: fit-content;
+  max-width: 100%;
   margin: clamp(34px, 4.5vw, 56px) auto 0;
   padding: clamp(20px, 2.6vw, 30px) clamp(24px, 3vw, 38px);
   border: 1px solid var(--border-light);
@@ -3258,29 +3613,76 @@ body.sitestaffr-landing-page .hero__visual > * {
    are on the keyboard low in the frame, so the fade cannot start as high as the language
    one's — 82% keeps the hands whole and still lands the figure before the edge. */
 .faq-section__ask-robot {
-  width: clamp(96px, 13vw, 150px);
+  /* `flex: none` so it never shrinks below its width when the copy is wide. A flex item's
+     default is to shrink, and a squeezed robot is worse than a wrapped heading. */
+  flex: none;
+  width: clamp(96px, 13vw, 128px);
   height: auto;
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
           mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
 }
+/* ⚠️ 16px, INHERITED FROM AN ELEMENT THAT NO LONGER EXISTS. This was 6px, which was the
+   gap to the supporting line under it; the 16px that separated the copy from the BUTTON
+   lived on `.faq-section__ask-note`. That line was deleted on 2026-08-28 and its spacing
+   had to come with it, or the button sits 6px under the heading. Removing an element is
+   property-by-property, never just a deletion. */
+/* The copy column: heading, then the button under it. `min-width: 0` so the heading may
+   wrap on a phone instead of forcing the card past `max-width: 100%` and pushing the
+   robot off its left edge. */
+.faq-section__ask-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  min-width: 0;
+}
+/* The 14px gap above owns the space to the button now. This margin has been 6px, then
+   16px, then 0 across three shapes of this card in two days — if the button ever looks
+   glued to the heading again, it is the gap that moved, not this. */
 .faq-section__ask-lead {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
   font-weight: 600;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
-.faq-section__ask-note {
-  margin-bottom: 16px;
-  font-size: 0.9rem;
-  line-height: 1.6;
-  color: var(--text-secondary);
-}
+/* ⚠️ THE BUTTON MUST NOT EXCEED ITS COLUMN, and it takes THREE selectors because the
+   shortcode emits three nested boxes. At 320px it stuck out 41px past the card's right
+   edge and pushed the whole document into horizontal scroll.
 
+   The first attempt clamped `.sitestaffr-button-widget` alone and changed nothing, for a
+   reason worth remembering: `max-width: 100%` on the BUTTON resolves against its parent
+   `.sitestaffr-button-container`, and the container was the box that was 199px wide
+   inside a 158px column. Clamping a child to 100% of an already-overflowing parent is a
+   no-op. The container is the one that has to be told.
+
+   `.sitestaffr-button-text` carries `white-space: nowrap` from the plugin, so even a
+   clamped container could not reflow the label. All three, or none of them work.
+
+   Outside a breakpoint because the failure is "column narrower than label" — a
+   relationship, not a width. A longer label would reproduce it at 390. */
+.faq-section__ask .sitestaffr-button-container { max-width: 100%; }
+.faq-section__ask .sitestaffr-button-widget {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+.faq-section__ask .sitestaffr-button-text { white-space: normal !important; }
+
+/* ⚠️ NOTHING STACKS HERE, IT ONLY GETS SMALLER. The robot stays on the left at 320px, so
+   the phone treatment is a shrink, not a re-layout.
+
+   The button is the constraint. It is shortcode-rendered at a fixed 230px, and at 390 the
+   card has 302px of content box: a 76px robot plus a 14px gap leaves 212. So the button's
+   own type and padding come down here — it is the only element in the card that can give
+   width back. Without this the card blows past its max-width and the robot is pushed off
+   its own left edge, which is the one thing this layout exists to prevent. */
 @media (max-width: 560px) {
-  /* Robot above the copy rather than beside it — at this width a side-by-side leaves the
-     text about 150px wide and the button wraps to three lines. */
-  .faq-section__ask { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; }
-  .faq-section__ask-robot { width: 110px; }
+  .faq-section__ask { padding: 18px 16px; gap: 12px; }
+  .faq-section__ask-robot { width: 76px; }
+  .faq-section__ask-copy { gap: 10px; }
+  .faq-section__ask .sitestaffr-button-widget {
+    font-size: 0.9rem !important;
+    padding: 11px 16px !important;
+  }
 }
 
 .faq-list { max-width: none; margin: 0; }
@@ -3311,6 +3713,47 @@ body.sitestaffr-landing-page .hero__visual > * {
   /* The second column's first heading needs the same separation from the item above it
      that it would have had inside its own column. */
   .faq-section__columns .faq-list + .faq-list .faq-list__group:first-child { margin-top: 26px; }
+
+  /* ⚠️ ONE CARD PER GROUP (Mario, 2026-08-28: the FAQ "is a lot and could be difficult to
+     scan"). In one column this is sixteen identical white cards with three small gray
+     labels lost among them — the same failure the industries list had, and this is the
+     same fix, deliberately: three bordered sets of three to six questions, heading
+     outside. Mario's first idea was a colour per group; that would have put a second and
+     third accent on a page whose whole system is one teal with emerald reserved for
+     capture states, and he chose this instead. If colour-coding is ever revisited, the
+     rule it breaks is the thing to decide, not this component.
+
+     Kept to this breakpoint on purpose. Desktop is two columns of free-standing cards and
+     is signed off; the wrapper above is inert there. */
+  .faq-list__set {
+    gap: 0;
+    background: #fff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .faq-list__set .faq-item {
+    border: 0;
+    border-radius: 0;
+    background: none;
+  }
+  .faq-list__set .faq-item + .faq-item { border-top: 1px solid var(--border-light); }
+  .faq-list__set .faq-item:hover { box-shadow: none; }
+  /* The open item still has to read as selected, but it cannot do it by lifting off the
+     page any more — it is a row inside a card, not a card. A teal edge and a tinted head
+     say the same thing without breaking the card's outline. The tint is on the QUESTION
+     only: the answer runs several lines and body text on --teal-pale is a wash. */
+  .faq-list__set .faq-item--open {
+    border-color: transparent;
+    box-shadow: inset 3px 0 0 0 var(--teal-deep);
+  }
+  /* ⚠️ THE TINT COVERS THE ANSWER TOO (Mario, 2026-08-28). Held to the question alone it
+     drew a pale band across the top of a white block and the two read as separate things,
+     when the whole point of the highlight is that the question and its answer are ONE
+     open item. The earlier worry — body text on --teal-pale being a wash — measured fine:
+     --text-secondary on #E0F7FA is well past 4.5:1. */
+  .faq-list__set .faq-item--open .faq-item__question,
+  .faq-list__set .faq-item--open .faq-item__answer { background: var(--teal-pale); }
 }
 
 /* ---- Section 10: the agency door --------------------------------------
@@ -3430,6 +3873,14 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--teal-light);
   margin-bottom: 10px;
 }
+/* ⚠️ ONE CLASS, TWO SKINS — DO NOT "FIX" THE RULE ABOVE. `.agency-door__eyebrow` sits
+   inside `.agency-door__panel` on the HOMEPAGE, where the background is --block-dark
+   and --teal-light is right at 5.68:1. `/for/agencies/` reuses the same class in its
+   HERO, which is a light block, where the identical declaration measures 2.4:1.
+   Repointing the shared rule to --teal-text would fix this page and paint the
+   homepage's eyebrow out at ~2.3:1 on the dark panel — the same shape as the
+   !important-written-for-one-skin trap already recorded. Scope the light context. */
+.agency-hero .agency-door__eyebrow { color: var(--teal-text); }
 .agency-door h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
 .agency-door__lead {
   margin-top: 10px;
@@ -3489,7 +3940,8 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .agency-hero__secondary {
   font-size: 0.92rem;
-  color: var(--teal-deep);
+  /* --teal-text: --teal-deep on warm-white measured 4.45:1 at 14.7px. */
+  color: var(--teal-text);
   border-bottom: 1px solid rgba(0,131,143,0.35);
 }
 .agency-hero__note { margin-top: 12px; font-size: 0.85rem; color: var(--text-muted); }
@@ -3531,7 +3983,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-sm);
   border-bottom-left-radius: 3px;
   background: var(--teal-pale);
-  color: var(--teal-deep);
+  /* #0d3f45, the colour `.ind-chat__row.is-ai .ind-chat__bubble` already uses for this
+     exact pairing, so the two chat mockups on the site agree. --teal-deep was 4.06:1. */
+  color: #0d3f45;
   font-size: 0.72rem;
 }
 
@@ -3566,7 +4020,11 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: 50%;
   background: rgba(31,182,204,0.18);
   border: 1px solid rgba(31,182,204,0.45);
-  color: var(--teal-light);
+  /* ⚠️ WHITE, NOT --teal-light. The disc's own translucent teal fill lightens the dark
+     panel underneath it, so the numeral measured 4.09:1 against its own background —
+     the same self-lightening shape as the Salesforce Lead Source pill. White also
+     matches `.ind-step__number`, which is the other numbered step on the site. */
+  color: #fff;
   font-size: 0.78rem;
   font-weight: 600;
 }
@@ -3603,7 +4061,8 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 .agency-pricing__lead { color: var(--text-secondary); margin-top: 8px; }
-.agency-pricing__lead a { color: var(--teal-deep); border-bottom: 1px solid rgba(0,131,143,0.35); }
+/* --teal-text: --teal-deep on warm-white is 4.45:1 at 17px. */
+.agency-pricing__lead a { color: var(--teal-text); border-bottom: 1px solid rgba(0,131,143,0.35); }
 /* The gap, stated out loud. This box IS the demand-validation mechanism. */
 .agency-partner {
   margin-top: 22px;
@@ -3659,7 +4118,34 @@ body.sitestaffr-landing-page .hero__visual > * {
    leaves a hairline of the light section's background between the seam and the dark
    block it meets — a pale line across the full width, which is the exact edge these
    elements exist to remove. */
-.seam-curtain--open  { bottom: -1px; }
+/* ⚠️ THE OPENING CURTAIN HANGS UPWARD OUT OF THE DARK SECTION (moved 2026-08-28). It used
+   to sit at the bottom of the HERO with `bottom: -1px`, and that 1px was there to kill a
+   hairline of hero background at the boundary. It could not do the job: the hero has
+   `overflow: hidden` to crop the robot, so the overhang was clipped straight off and the
+   curtain's bottom edge landed exactly ON the boundary — which sits at a fractional
+   layout position (1193.984375) and, at a fractional device pixel ratio, rounds apart and
+   shows the page background through as a pale line (Mario saw it three times).
+
+   Owned by the dark section instead, the same shape can overlap DOWNWARD into its own
+   parent, and a boundary that nothing has to share cannot round apart. The offset is its
+   own height less 3px, so the shape sits exactly where it always did and only the last
+   3px are new — inside the dark, over the dark, invisible.
+
+   The `--close` variant is unchanged: it already lives on the LIGHT section below the
+   dark run and overlaps upward by 1px for the same reason, and that one is not clipped.
+
+   ⚠️ SCOPED TO THE ONE INSIDE A DARK BLOCK, AND IT HAS TO BE. There are TWO `--open`
+   curtains on the homepage: this one, and the one at the bottom of the final CTA that
+   pours into the footer. Restyling the bare class moved both, which put a dark shape
+   across the TOP of the CTA section (Mario caught it within the hour). The relocated one
+   is the only curtain that is a child of a DARK block — every other instance sits on the
+   light side of its boundary — so that is the selector, and it cannot pick up a third
+   instance by accident. */
+.seam-curtain--open { bottom: -1px; }
+.block--dark > .seam-curtain--open {
+  bottom: auto;
+  top: calc(-1 * (clamp(56px, 7vw, 120px) - 3px));
+}
 .seam-curtain--close { top: -1px; }
 .seam-curtain svg { display: block; width: 100%; height: 100%; }
 .seam-curtain path { fill: var(--block-dark); }
@@ -3674,7 +4160,42 @@ body.sitestaffr-landing-page .hero__visual > * {
    Scoped by parent rather than a modifier class because the seam has no knowledge of what
    sits below it; the SECTION does. Both sides now read the same token, so they cannot
    drift apart again. */
-.final-cta .seam-curtain path { fill: var(--footer-dark); }
+/* ⚠️ THE CLOSING CURTAIN IS THE FOOTER'S NOW (Mario, 2026-08-30), so this is scoped
+   to .footer rather than to one section on one template. It used to live in
+   .final-cta on the homepage and nowhere else, which is why every other template
+   ended on a hard horizontal rule.
+
+   Fill is --footer-dark, not --block-dark: the footer went a step darker than the
+   sections on 2026-08-27, and a curtain painting #00323A directly above a #00232A
+   footer is a 16-point step across the full viewport — exactly the hairline these
+   seams exist to remove. Both sides read the same token so they cannot drift.
+
+   ⚠️ HANGS UPWARD out of the footer, like .block--dark > .seam-curtain--open. The
+   footer is not a .block, so it needs its own copy of that rule. */
+/* ⚠️ A ZERO-HEIGHT WRAPPER OUTSIDE <footer>, NOT A CHILD OF IT. As the footer's
+   first child the curtain was invisible while measuring perfectly — correct size,
+   correct fill, offsetParent correct, rect exactly 98px above the footer's top
+   edge. `.footer` sets `overflow: hidden`, which clips an absolutely-positioned
+   child hanging above the box out of existence.
+
+   That failure is invisible three ways: nothing in the diff suggests it, the
+   element passes every geometry assertion, and elementFromPoint cannot see it
+   because the seam is pointer-events:none. Only sampling the rendered pixels
+   found it.
+
+   height:0 + position:relative puts this wrapper exactly on the footer's top
+   edge, so the curtain's own `bottom: -1px` hangs it upward over the section
+   above. The footer's overflow:hidden is left alone — it is load-bearing for the
+   footer's own content, and removing shared chrome to fix something outside it
+   is how the next bug gets made. */
+.footer-seam { position: relative; height: 0; }
+.footer-seam .seam-curtain path { fill: var(--footer-dark); }
+
+/* Room for the peak in whatever section ends the page, on every template. Two
+   rules because the dark and light padding scales differ, and the last section is
+   dark on the industry pages and cream on the homepage. */
+main > section:last-child { padding-bottom: calc(var(--block-pad) + clamp(53px, 6.65vw, 114px)); }
+main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px)); }
 
 /* ---- Section 2: the job-value grid ------------------------------------
    Padding, background and color come from .block .block--dark. The old
@@ -3742,8 +4263,8 @@ body.sitestaffr-landing-page .hero__visual > * {
 /* The watermark comes up with the card. It stays FAR below legibility — this is 0.055
    to 0.09, not a reveal. Mario's brief was that it is "not meant to be imposing"; a
    hover that turns it into a readable word makes it the loudest thing on the card. */
-.job-value:hover .job-value__mark span,
-.job-value:focus-within .job-value__mark span {
+.job-value:hover .job-value__mark::after,
+.job-value:focus-within .job-value__mark::after {
   color: rgba(240,250,250,0.065);
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3775,7 +4296,22 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   z-index: 0;
 }
-.job-value__mark span {
+/* ⚠️ `top: 10px; right: 14px` IS THE POSITION AND IT IS NOT TO BE MOVED (Mario,
+   2026-08-28, after two attempts to relocate it: "I think it was perfect where it was on
+   desktop so move it back. Just place it back exactly where it was").
+
+   The record, so nobody re-derives it: the ⓘ that opens the source tooltip sits at
+   `top: 12px; right: 12px` and is 22px wide, so it covers the last 20px of every word —
+   "HVAC" reads as HVA, "DENTAL" as DENTA. That was raised as a bug and it is not one; the
+   overlap is accepted. A bottom-right move and a `right: 46px` shift were both tried and
+   both rejected. If it looks wrong to you, it is not, and the sanctioned-overlap note
+   above covers the same ground for the card's icon.
+
+   ⚠️ DESKTOP IS UNTOUCHED. The phone values are set in their own block below; this rule
+   is exactly what it was before 2026-08-28 apart from the floor, which no longer bites
+   anywhere the block below does not already override. */
+.job-value__mark::after {
+  content: attr(data-mark);
   position: absolute;
   top: 10px;
   right: 14px;
@@ -3787,6 +4323,24 @@ body.sitestaffr-landing-page .hero__visual > * {
   white-space: nowrap;
   color: rgba(240,250,250,0.038);
   transition: color 0.3s ease;
+}
+
+/* ⚠️ MARIO'S EXACT NUMBERS FOR THE PHONE (2026-08-28: "For mobile, make the top: 12px,
+   right: 20px, font-size: 2.6rem"). 2.6rem here is the same 41.6px the desktop clamp caps
+   at, so the stamp is one size everywhere and only its offset changes.
+
+   ⚠️ "DENTAL" CLIPS BELOW ABOUT 410px AND THAT IS KNOWN, NOT AN OVERSIGHT. It is the
+   longest of the four; at 41.6px it is 153px wide, and the cards stay two-across down to
+   320 — 169px at a 390 viewport, 131px at 320. With the 20px offset that is 4px short at
+   390 and 42px short at 320, so the D loses a sliver on a phone and more on a small one.
+   Mario was told and chose the size. Do not "fix" this by shrinking the font or moving
+   the offset; if it is ever revisited it is his call, not a cleanup. */
+@media (max-width: 768px) {
+  .job-value__mark::after {
+    top: 12px;
+    right: 20px;
+    font-size: 2.6rem;
+  }
 }
 
 /* EVERY CARD CHILD HAS TO BE RAISED ABOVE THE WATERMARK. The watermark is z-index 0 and
@@ -3831,7 +4385,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   place-items: center;
   border-radius: 50%;
   background: transparent;
-  color: rgba(240,250,250,0.45);
+  color: rgba(240,250,250,0.58);
   transition: color 0.2s ease, background 0.2s ease;
 }
 .job-value__src:hover,
@@ -3970,11 +4524,16 @@ body.sitestaffr-landing-page .hero__visual > * {
 
    Quieter than the label above it by design: it is support, not a third claim. At the
    same weight it competes with the number it exists to prop up. */
+/* ⚠️ INLINE WITH THE LABEL, NOT STACKED UNDER IT (Mario, 2026-08-28). It is a child of
+   .proof-section__lead-label now, so it flows as part of the same sentence — "23 qualified
+   leads out of 72 conversations" — rather than reading as a third line under a two-line
+   stat. `display: inline` is what keeps that true when the phrase wraps: as a block it
+   would break onto its own line again at any narrow width and silently undo this. */
 .proof-section__lead-sub {
+  display: inline;
   font-size: 0.85rem;
   line-height: 1.4;
   color: var(--text-muted);
-  margin-top: 2px;
 }
 .proof-section__lead-sub strong {
   color: var(--text-secondary);
@@ -3990,7 +4549,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-width: 46ch;
 }
 .proof-section__stats-source a {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-weight: 600;
   text-decoration: underline;
   text-decoration-color: rgba(0,131,143,0.35);
@@ -4084,7 +4643,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.62;
   color: var(--text-primary);
 }
-.proof-section__quote p strong { font-weight: 600; color: var(--teal-deep); }
+.proof-section__quote p strong { font-weight: 600; color: var(--teal-text); }
 
 /* Portrait, name and role on one row, so the face lands at the moment you read
    who said it. */
@@ -4128,7 +4687,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 .proof-section__role { font-weight: 400; color: var(--text-secondary); }
 .proof-section__company {
   font-size: 0.88rem;
-  color: var(--teal-deep);
+  color: var(--teal-text);
   font-weight: 600;
 }
 .proof-section__company:hover { text-decoration: underline; }
@@ -4201,7 +4760,7 @@ body.sitestaffr-landing-page .hero__visual > * {
      0.95 is 114/120 of the seam's own height clamp. Re-derive both if the Book path's
      apex or .seam-curtain's height ever changes — and note the depth is only this deep
      AT CENTER, which is exactly where a centered heading sits. */
-  padding-top: calc(64px + clamp(53px, 6.65vw, 114px));
+  padding-top: calc(var(--block-pad) + clamp(53px, 6.65vw, 114px));
 }
 .what-you-get__header { text-align: center; margin-bottom: 32px; }
 .what-you-get__subtitle {
@@ -4236,7 +4795,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   text-transform: uppercase;
   color: var(--text-secondary);
 }
-.morning-inbox__count { color: var(--teal-deep); font-weight: 600; }
+.morning-inbox__count { color: var(--teal-text); font-weight: 600; }
 .morning-inbox__list { list-style: none; margin: 0; padding: 0; }
 .morning-inbox__item { border-bottom: 1px solid var(--border-light); }
 .morning-inbox__item:last-child { border-bottom: 0; }
@@ -4263,53 +4822,38 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 /* ⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOR IT. `.is-interactive` is added by
    the script after the dialogs are wired, so with no JS these read as plain rows — no
-   pointer cursor, no hover, no "View recap". A button that looks clickable and does
-   nothing is worse than a row that never claimed to be one. */
-.what-you-get .morning-inbox__view { display: none; }
+   pointer cursor, no chevron. A button that looks clickable and does nothing is worse
+   than a row that never claimed to be one. */
 .what-you-get.is-interactive .morning-inbox__row { cursor: pointer; }
 .what-you-get.is-interactive .morning-inbox__row:hover,
 .what-you-get.is-interactive .morning-inbox__row:focus-visible {
   background: var(--teal-pale);
 }
-.what-you-get.is-interactive .morning-inbox__view {
-  display: inline;
-  justify-self: end;
-  font-size: 0.76rem;
-  font-weight: 600;
-  color: var(--teal-deep);
-  opacity: 0;
-  transition: opacity 0.16s ease;
-  white-space: nowrap;
-}
-.what-you-get.is-interactive .morning-inbox__row:hover .morning-inbox__view,
-.what-you-get.is-interactive .morning-inbox__row:focus-visible .morning-inbox__view {
-  opacity: 1;
-}
 
-/* ⚠️ "VIEW RECAP" IS A MOUSE FLOURISH AND NOTHING ELSE (Mario, 2026-08-28: "hover
-   doesn't work on tablet or mobile so we should remove the view recap appearing or do
-   something different with that").
+/* ⚠️ THE CHEVRON IS THE WHOLE AFFORDANCE, AT EVERY WIDTH, ON EVERY DEVICE (Mario,
+   2026-08-28: "I actually want this for all the viewports, remove the view recap
+   completely and only keep this version for all").
 
-   Hidden-until-hover on a touch screen is hidden forever: the row's only signal that it
-   opens a document never fires, and the element still reserves its column. On touch the
-   text is dropped entirely and a chevron takes its place — same message, ~12px instead
-   of ~90px, and the affordance a phone reader already knows.
+   It replaced a "View recap →" label that only appeared on hover. Two problems, and
+   the first is the one that killed it: hidden-until-hover on a touch screen is hidden
+   forever, so the row's only signal that it opens a document never fired for most of
+   the traffic. The second is that it cost ~90px of a phone row to say what a chevron
+   says in 12px. There is no `(hover: none)` branch here any more and there should not
+   be one — one row, one affordance, no device-dependent copy.
 
-   Declared here and switched on below rather than declared inside each block, because
-   it is needed in two situations that no single media query can express: any touch
-   device at any width, AND any device under 620px. */
+   `/ ''` is the alt-text form of `content`: the glyph is drawn, and a screen reader
+   that supports it announces nothing rather than "single right-pointing angle
+   quotation mark". The row's own aria-label already says what it opens. Browsers that
+   do not support the syntax ignore the whole declaration, so the fallback on the line
+   below has to stay. */
 .what-you-get.is-interactive .morning-inbox__row::after {
   content: '\203A';
-  display: none;
+  content: '\203A' / '';
   align-self: center;
   justify-self: end;
   font-size: 1.3rem;
   line-height: 1;
   color: var(--text-muted);
-}
-@media (hover: none) {
-  .what-you-get.is-interactive .morning-inbox__view { display: none; }
-  .what-you-get.is-interactive .morning-inbox__row::after { display: block; }
 }
 
 /* ---- The recap document ----------------------------------------------
@@ -4480,7 +5024,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .recap-doc__msg-meta { font-size: 0.74rem; color: var(--text-muted); margin-bottom: 4px; }
 .recap-doc__msg-meta strong { color: var(--text-primary); }
-.recap-doc__msg--visitor .recap-doc__msg-meta strong { color: var(--teal-deep); }
+.recap-doc__msg--visitor .recap-doc__msg-meta strong { color: var(--teal-text); }
 .recap-doc__msg p { margin: 0; color: var(--text-secondary); font-size: 0.92rem; }
 
 @media (max-width: 620px) {
@@ -4521,11 +5065,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   .morning-inbox__tag { grid-column: 3; grid-row: 1; justify-self: end; }
   /* Stops at track 4 so it never runs under the chevron. */
   .morning-inbox__what { grid-column: 1 / 4; grid-row: 2; }
-  /* The chevron replaces the text at this width whether or not the device has hover —
-     "View recap →" costs a whole line here even on a narrow desktop window. */
-  .what-you-get.is-interactive .morning-inbox__view { display: none; }
+  /* Spans both lines and centers between them, rather than sitting on the pill's row. */
   .what-you-get.is-interactive .morning-inbox__row::after {
-    display: block;
     grid-column: 4;
     grid-row: 1 / -1;
   }
@@ -4554,27 +5095,72 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 /* ---- The four callouts, now a Cards row rather than annotations ---- */
-.what-you-get__callouts { max-width: 980px; margin-inline: auto; }
+/* ⚠️ 820, NARROWED WITH THE 2x2 (Mario, 2026-08-28). At 980 across two columns each cell
+   is ~480px wide holding a centered icon-and-heading cluster of about 240 — the pair
+   floated in the middle of a lot of nothing, and only the longest description ever
+   reached the edges. Narrowing the grid is the fix rather than widening the type. */
+.what-you-get__callouts { max-width: 820px; margin-inline: auto; row-gap: clamp(22px, 3vw, 32px); }
+/* ⚠️ V1's DOCUMENT ICONS, WHICH ARE THE PRICING PANEL'S ICONS (Mario, 2026-08-28: "I
+   want them to have those icons that we used in V1 for the document... it's the same
+   style icons as the ones used in pricing section").
+
+   One Feather set at 24 viewBox, stroke 2, round caps, --teal-deep, no container. The
+   live reference is `.price-includes--homepage .price-includes__icon` in this file, not
+   the V1 branch — a branch cannot be checked when someone adds a fifth card.
+
+   Two of the four are byte-identical to V1's: the bolt from "Instant Delivery" and the
+   speech bubble from "Conversation Recap". The other two are new drawings in the same set
+   because V1 had no card for a share link or an inbox. Anything added here comes from
+   that set; a mixed icon family is what makes a row of four look assembled rather than
+   designed.
+
+   ⚠️ NOT EMOJI. The hero's capability cards use emoji deliberately, and this is the one
+   place on the page that deviates — these are annotations on a document, and both V1 and
+   the pricing panel draw them as line art. Keeping both is the decision, not an
+   inconsistency to tidy up later. */
+/* ⚠️ CENTERED, WITH THE ICON BESIDE THE HEADING (Mario, 2026-08-28: "center it and place
+   the icons to the left of the heading"). The icon sat above the title, which put three
+   left-aligned things in a column and read as a list item rather than a card.
+
+   Flex-wrap rather than a two-column grid, and the reason is the description. As a grid
+   it would have to span both tracks, and a spanning item distributes its extra width
+   across the tracks it spans — so a long description silently widens the ICON's column
+   and the icon stops being next to the heading. `flex: 1 0 100%` forces it onto its own
+   line without ever influencing the two above it. */
+.what-you-get__callout {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
+}
+.what-you-get__callout-icon {
+  margin-bottom: 0;
+  color: var(--teal-deep);
+  line-height: 0;
+}
 .what-you-get__callout-title {
   font-size: 1rem;
-  margin-bottom: 6px;
+  margin-bottom: 0;
 }
+.what-you-get__callout-desc { flex: 1 0 100%; }
 .what-you-get__callout-desc {
   font-size: 0.86rem;
   color: var(--text-secondary);
   line-height: 1.55;
 }
 
-@media (max-width: 760px) {
-  /* Two rows on phones. The tag drops to its own line rather than squeezing the
-     "what" column to nothing. */
-  .morning-inbox__item {
-    grid-template-columns: 76px 1fr;
-    row-gap: 4px;
-  }
-  .morning-inbox__what { grid-column: 1 / -1; }
-  .morning-inbox__tag { grid-column: 1 / -1; justify-self: start; }
-}
+/* A @media (max-width: 760px) block sat here and was deleted on 2026-08-28. It set
+   `grid-template-columns` on `.morning-inbox__item`, which stopped being the grid when
+   the row became a <button> — the `<li>` only draws a border now, so that declaration
+   had been doing nothing for some time and read as if the block were dead.
+
+   Its other two lines were very much alive, and being later in the file they silently
+   beat the 620px block above: `.morning-inbox__tag { grid-column: 1 / -1; justify-self:
+   start }` dragged the pill across the whole row and parked it on top of the time and
+   the name. The phone layout looked correct in an injected stylesheet and wrong on
+   staging, which is the tell for a cascade fight rather than a bad rule. */
 .what-you-get__header {
   text-align: center;
   margin-bottom: 56px;
@@ -7369,6 +7955,15 @@ body.sitestaffr-landing-page .hero__visual > * {
   flex-direction: column;
   gap: 12px;
 }
+/* ⚠️ THIS CARRIES THE 12px THAT .faq-list USED TO GIVE THE ITEMS DIRECTLY. The items are
+   inside a per-group wrapper now, so .faq-list's gap separates HEADINGS from SETS and no
+   longer reaches the questions. Same value, so desktop renders exactly as before — the
+   wrapper exists for the phone treatment below and must be invisible above it. */
+.faq-list__set {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 .faq-item {
   background: white;
   border: 1px solid var(--border-light);
@@ -7461,9 +8056,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: var(--cream);
   position: relative;
   overflow: hidden;
-  /* 96px of scale plus the closing curtain's peak height, so the gap below the last line
-     matches every other section. 0.95 is 114/120 of the seam's own height clamp. */
-  padding-bottom: calc(96px + clamp(53px, 6.65vw, 114px));
+  /* The light scale plus the closing curtain's peak height, so the gap below the last
+     line matches every other section. 0.95 is 114/120 of the seam's own height clamp.
+     The var() is load-bearing: the scale steps down at 1024 and 620. */
+  padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
 }
 .final-cta::before {
   content: '';
@@ -7587,12 +8183,15 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: none !important;
   --btn-background: transparent !important;
   --btn-hover-background: var(--teal-pale) !important;
-  --btn-text-color: var(--teal-deep) !important;
-  --btn-icon-color: var(--teal-deep) !important;
-  color: var(--teal-deep) !important;
+  /* --teal-text, not --teal-deep: this button is outlined on the cream, so its label is
+     teal TEXT on a light background and lands in the same 4.38:1 failure as every other
+     teal text on the page. The icon follows it so the two do not drift apart. */
+  --btn-text-color: var(--teal-text) !important;
+  --btn-icon-color: var(--teal-text) !important;
+  color: var(--teal-text) !important;
 }
 .final-cta__concierge .sitestaffr-button-icon,
-.final-cta__concierge .sitestaffr-button-icon svg { color: var(--teal-deep) !important; }
+.final-cta__concierge .sitestaffr-button-icon svg { color: var(--teal-text) !important; }
 .final-cta__concierge .sitestaffr-button-widget:hover {
   border-color: var(--teal-deep) !important;
   background: var(--teal-pale) !important;
@@ -7810,7 +8409,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-top: 14px;
   font-size: 0.86rem;
   line-height: 1.6;
-  color: rgba(240,250,250,0.38);
+  color: rgba(240,250,250,0.55);
   max-width: 34ch;
   text-wrap: balance;
 }
@@ -7825,7 +8424,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(31, 182, 204, 0.5);
+  color: var(--teal-light);
   margin-bottom: 16px;
 }
 .footer__col ul {
@@ -7840,9 +8439,17 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.35;
   margin-bottom: 7px;
 }
+/* ⚠️ THE PADDING IS THE TAP TARGET (Lighthouse best-practices, 2026-08-28: "Touch
+   targets do not have sufficient size or spacing", flagging the Support mailto). An
+   inline <a> is only as tall as its text — about 19px here — and the requirement is 24.
+   Inline-block plus vertical padding gets there without moving anything visually, because
+   the row spacing below absorbs it. */
 .footer__col a {
   font-size: 0.875rem;
+  display: inline-block;
+  padding-block: 5px;
 }
+.footer__col li { margin-bottom: 2px; }
 .footer__account-mobile {
   display: none;
 }
@@ -7869,7 +8476,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   justify-content: space-between;
 }
 .footer__login {
-  padding: 6px 20px;
+  /* 10px vertical, up from 6: the control measured 32px tall and Lighthouse wants 24 of
+     target plus clearance from its neighbours. */
+  padding: 10px 20px;
   border: 1px solid rgba(31, 182, 204, 0.3);
   border-radius: 8px;
   font-size: 0.78rem;
@@ -7894,13 +8503,16 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: linear-gradient(90deg, transparent 0%, rgba(31,182,204,0.2) 30%, rgba(31,182,204,0.2) 70%, transparent 100%);
 }
 
-/* --- Footer responsive --- */
+/* --- Footer responsive ---
+   ⚠️ THE `1fr 1fr` STEP AT 900 IS DELETED (Mario, 2026-08-30). With four grid
+   items it produced a 2x2: brand, Product, then Industries and Company on a second
+   row — which reads as two unrelated pairs and puts half the nav below a block of
+   prose. The stacked layout that already existed below 768 is the right answer at
+   this width too, so it simply starts earlier: brand and tagline centered across
+   the top, then Product / Industries / Company as three equal columns.
+
+   Nothing here is new; the breakpoint moved from 768 to 900 and one rule went. */
 @media (max-width: 900px) {
-  .footer__grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-@media (max-width: 768px) {
   .footer__grid {
     grid-template-columns: 1fr;
     gap: 32px;
@@ -10077,50 +10689,64 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 /* ========== INDUSTRY PAGES ========== */
 
 /* --- Hero --- */
-.ind-hero {
-  padding: clamp(120px, 15vw, 180px) 0 clamp(70px, 10vw, 120px);
-  position: relative;
-  background: var(--warm-white);
-  overflow: hidden;
+/* ---- HERO: a V3 Split block (converted 2026-08-30) -------------------------
+   ⚠️ NO `padding` HERE ANY MORE, AND THAT IS THE POINT. It carried
+   `clamp(120px,15vw,180px) 0 clamp(70px,10vw,120px)` — a third spacing system
+   alongside `--section-padding` and `.ind-page > section`. `.block` owns the
+   padding now. A `padding` shorthand written here would silently beat
+   `.block`'s `padding-block` and put it straight back, which is the trap the V3
+   build already hit on three homepage sections that passed a class-list audit.
+
+   DELETED, not overridden, and each for its own reason:
+   - `::before`, a 120px gradient fading the hero into the cream below. It was a
+     SEAM. V3 has one seam on the entire site because a seam is a colour contract
+     between two neighbours that fails silently at widths nobody sampled.
+   - `.ind-hero__accent` and `.ind-hero__glow`, two absolutely-positioned teal
+     radial gradients at 7% and 5% alpha. Decoration doing no work; V3 carries
+     emphasis with a dark block, not a wash. Their markup is deleted too — a
+     hidden div is a thing the next person has to re-decide.
+   - `position: relative` and `overflow: hidden`, which existed ONLY to contain
+     those three. Removing shared chrome is property-by-property: these two look
+     like generic hygiene and were load-bearing for the layers above, so they go
+     WITH them rather than being left behind as inert insurance. */
+/* ⚠️ CREAM, NOT --warm-white (Mario, 2026-08-30: "shouldn't be white like the
+   homepage style"). The white hero is section 1 of the HOMEPAGE specifically — the
+   brightest thing on the site and its clarity moment. An industry page is not that
+   page, and copying its tone spent the contrast without the reason.
+
+   It also removes a boundary that could only ever look like a bug: #FFFDF9 above
+   #FDFBF7 is a two-point step across the full viewport — too small to read as a
+   decision, too large to be nothing. Hero, Problems, FAQ and the siblings block are
+   one cream run now, and the dark blocks do all the dividing. */
+.ind-hero { background: var(--cream); }
+/* ⚠️ `.block.ind-hero`, NOT `.ind-hero` — TWO CLASSES, AND THAT IS THE WHOLE RULE.
+   The padding is owned by `.block:not(.block--dark)`, which is (0,2,0); a bare
+   `.ind-hero` is (0,1,0) and loses to it regardless of source order. Written as one
+   class this shipped and changed nothing, and looked correct in the diff — the same
+   `:not()` trap already recorded for two per-section paddings on the homepage.
+   `:not()` contributes its argument's specificity.
+
+   ⚠️ padding-block-START only, never the `padding` shorthand: a shorthand here
+   would clobber the bottom too and put this section back on its own scale, which is
+   exactly what the conversion removed.
+
+   The extra top is a genuine exception rather than a third spacing system — this is
+   the FIRST section under the nav, and 96px left the eyebrow sitting on the menu
+   (Mario, 2026-08-30: "a bit too tight up with the nav menu"). The value is the
+   homepage hero's own clamp, so the two first screens open identically instead of
+   by coincidence. */
+.block.ind-hero {
+  padding-block-start: clamp(120px, 15vw, 140px);
 }
-.ind-hero::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 120px;
-  background: linear-gradient(to bottom, transparent 0%, var(--cream) 100%);
-  pointer-events: none;
-}
-.ind-hero__accent {
-  position: absolute;
-  top: -40%;
-  right: -15%;
-  width: 60%;
-  height: 130%;
-  background: radial-gradient(ellipse at center, rgba(31,182,204,0.07) 0%, transparent 60%);
-  pointer-events: none;
-}
-.ind-hero__glow {
-  position: absolute;
-  top: -20%;
-  left: -10%;
-  width: 50%;
-  height: 120%;
-  background: radial-gradient(ellipse at center, rgba(0,131,143,0.05) 0%, transparent 55%);
-  pointer-events: none;
-}
+/* ⚠️ KEPT, AND NOT REDUNDANT NEXT TO .block-split__grid. It overrides that rule's
+   1fr 1fr. Was 1fr 1fr here too, which gave a 51px display headline only ~498px —
+   about sixteen characters a line, so a 79-character headline broke over five
+   lines. The visual is one isometric and never needed half the page.
+   minmax(0, 1fr) matters: a plain 1fr floors at the image's intrinsic width,
+   which was 522px and was what actually squeezed the text column. */
 .ind-hero__grid {
-  display: grid;
-  /* Was 1fr 1fr, which gave a 51px display headline only ~498px — about sixteen
-     characters a line, so a 79-character headline broke over five lines. The
-     visual is a single icon and never needed half the page.
-     minmax(0, 1fr) matters: a plain 1fr floors at the icon's intrinsic width,
-     which was 522px and was what actually squeezed the text column. */
   grid-template-columns: 1.35fr minmax(0, 1fr);
   gap: clamp(40px, 6vw, 80px);
-  align-items: center;
 }
 .ind-hero__visual img,
 .ind-hero__visual svg,
@@ -10214,25 +10840,58 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 }
 
 /* --- Pain Points --- */
-.ind-problems {
-  padding: var(--section-padding);
-  background: var(--cream);
-  position: relative;
-}
-.ind-problems__header {
+/* ⚠️ NO `padding` HERE. `.block` owns it — a shorthand written here beats
+   `.block`'s `padding-block` from anywhere later in the file. Same for every
+   converted ind-* section below. */
+.ind-problems { background: var(--cream); }
+
+/* ---- The shared section header for every converted ind-* section --------
+   ⚠️ THE H2 IS NEAR-BLACK, NOT --teal-deep. Teal is a FILL on this system —
+   buttons, pills, the seam — and teal display type was the single most visible
+   thing marking these pages as pre-V3. It also sat right on the contrast problem
+   --teal-text was created for: --teal-deep as TEXT measures 4.38 on cream.
+
+   Centred, and that IS the rule rather than an exception: a section header
+   centres when the section is full-width and stays left when it is the top of a
+   copy column. Every converted section here is full-width. */
+.ind-section__head {
   text-align: center;
-  margin-bottom: clamp(40px, 6vw, 64px);
+  margin-bottom: clamp(32px, 5vw, 52px);
 }
-.ind-problems__header h2 {
-  color: var(--teal-deep);
-  max-width: 700px;
+.ind-section__head h2 {
+  color: var(--text-primary);
+  max-width: 760px;
   margin: 0 auto;
+  text-wrap: balance;
 }
-.ind-problems__grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+.block--dark .ind-section__head h2 { color: #FFFFFF; }
+/* ---- .ind-problem: the UNBOXED V3 statement card ------------------------
+   Three static statements on the industry page. No background, no border, no
+   hover lift — same treatment as .agency-card, which is V3's card and carries no
+   chrome at all.
+
+   ⚠️ .ind-problem-card BELOW IS STILL LIVE and is a DIFFERENT COMPONENT: the
+   clickable directory tiles on /for/ and the five category hubs. A box on a link
+   is an affordance, so those keep theirs. One class name was doing both jobs,
+   which is why unboxing "the card" would have broken twenty-one tiles on six
+   pages that nobody was looking at. */
+.ind-problem__icon {
+  color: var(--teal-text);
+  margin-bottom: 14px;
+  line-height: 0;
 }
+.ind-problem__title {
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+.ind-problem__desc {
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
 .ind-problem-card {
   background: white;
   border: 1px solid var(--border-light);
@@ -10309,13 +10968,30 @@ a.ind-problem-card .ind-problem-card__icon--art {
   line-height: 1.7;
   color: var(--text-secondary);
 }
-/* /for/ index: group headings link through to their category hub. */
-.ind-problems__header h2 a {
+/* ---- /for/: five groups inside ONE section ------------------------------
+   ⚠️ THIS REPLACES `.ind-problems__header` AND `.ind-problems__grid`, both of
+   which were deleted when `page-industry.php` converted — while `/for/` and the
+   five category hubs still carried them. The grid class outliving its rule is
+   why twenty-one directory tiles were rendering as a full-width stack.
+
+   The group gap is deliberately SMALLER than `--block-pad-light` doubled. Five
+   groups used to be five `<section>`s, which put 192px of empty cream between
+   "Health & Medical" and "Beauty & Wellness". That figure separates two
+   different ideas on a cream run; these are one directory, and the page's job is
+   to get someone to their own trade. */
+.ind-directory__group + .ind-directory__group {
+  margin-top: clamp(56px, 7vw, 88px);
+}
+/* Group headings link through to their category hub. `--teal-text`, not
+   `--teal-deep`: the hover state is display type on cream, where --teal-deep
+   measures 4.38:1. Part of the same teal-deep-as-text sweep the conversion
+   carries. */
+.ind-directory__group h2 a {
   color: inherit;
   text-decoration: none;
 }
-.ind-problems__header h2 a:hover {
-  color: var(--teal-deep);
+.ind-directory__group h2 a:hover {
+  color: var(--teal-text);
 }
 
 /* Category hubs: the "not listed above?" line under the card grid. */
@@ -10328,7 +11004,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--text-secondary);
 }
 .ind-problems__footnote a {
-  color: var(--teal-deep);
+  color: var(--teal-text);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
@@ -10338,17 +11014,17 @@ a.ind-problem-card .ind-problem-card__icon--art {
    #FDFBF7 — a two-point difference nobody can see — so 5,000px of page read as
    one uninterrupted cream scroll with no signal that a new idea had started.
    Reuses the footer's surface rather than introducing another color. */
+/* ⚠️ WAS #0a2e33 — A SECOND DARK TONE. V3's dark is V1's deep teal --block-dark
+   (#00323A) specifically: testers rejected the night world's near-black, and
+   drifting back toward it quietly reintroduces the tone the redesign exists to
+   drop. `.block--dark` supplies both the background and the text colour now, so
+   this rule only survives to hold what is genuinely local. */
 .ind-solutions {
-  padding: var(--section-padding);
-  background: #0a2e33;
   color: rgba(240, 250, 250, 0.8);
-  position: relative;
-  overflow: hidden;
 }
 .ind-solutions .section-label {
   color: var(--teal-light);
 }
-.ind-solutions__header h2,
 .ind-solutions .ind-step__content h3 {
   color: #ffffff;
 }
@@ -10358,27 +11034,10 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .ind-solutions .ind-step:not(:last-child)::after {
   background: linear-gradient(to bottom, var(--teal-light), rgba(31, 182, 204, 0.12));
 }
-.ind-solutions__bg {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 200%;
-  height: 100%;
-  transform: translateX(-50%);
-  background:
-    radial-gradient(ellipse at 25% 50%, rgba(31,182,204,0.04) 0%, transparent 50%),
-    radial-gradient(ellipse at 75% 50%, rgba(0,131,143,0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-.ind-solutions__header {
-  text-align: center;
-  margin-bottom: clamp(40px, 6vw, 64px);
-  position: relative;
-}
-.ind-solutions__header h2 {
-  max-width: 700px;
-  margin: 0 auto;
-}
+/* DELETED with their markup: .ind-solutions__bg (two 3-4% radial gradients over
+   a flat dark background) and .ind-solutions__header (superseded by the shared
+   .ind-section__head). Removed rather than left, so the next person does not have
+   to work out which of two header rules is the live one. */
 .ind-solutions__steps {
   max-width: 680px;
   margin: 0 auto;
@@ -10433,11 +11092,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Scenario --- */
+/* ⚠️ THE PALE-BLUE GRADIENT IS GONE. Its own comment said it was tinted "so it
+   reads as a distinct panel between the dark band above and the cream FAQ below"
+   — a fourth background solving a problem that only existed because the page had
+   five. It is the second half of the dark run now; `.block--dark` paints it. */
 .ind-scenario {
-  padding: var(--section-padding);
-  /* Tinted, so it reads as a distinct panel between the dark band above and the
-     cream FAQ below rather than merging into both. */
-  background: linear-gradient(180deg, #eef8fa 0%, #e4f3f7 100%);
   position: relative;
 }
 .ind-scenario__grid {
@@ -10457,8 +11116,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--teal-deep);
-  opacity: 0.75;
+  /* ⚠️ --teal-light, and NO opacity. --teal-deep measured 3.06:1 on the dark
+     block; opacity: 0.75 then reduced whatever it was by another quarter, which
+     is a contrast cut dressed as a style — the caption is already quieter than
+     its neighbours by size, weight and letter-spacing. 5.7:1 now. */
+  color: var(--teal-light);
 }
 
 /* --- Recap document ---
@@ -10506,16 +11168,43 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-size: 0.82rem;
   color: var(--text-primary);
 }
+/* ⚠️ --teal-text, not --teal-deep: 4.06:1 on the pale-teal pill, so it failed AA
+   at 0.64rem. PRE-EXISTING and nothing to do with the dark conversion — it is on
+   a white card either way — but it surfaced in the contrast pass over these
+   sections and it is one word of the same ~144-declaration teal-deep-as-text
+   sweep this conversion is carrying. 5.0:1 now. */
 .ind-recap__section-head span {
   font-size: 0.64rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.07em;
-  color: var(--teal-deep);
+  color: var(--teal-text);
   background: var(--teal-pale);
   padding: 3px 9px;
   border-radius: 50px;
 }
+/* The transcript stub. Quieter than the recap section above it: no badge colour,
+   a muted count, one line of explanatory text. It is a signpost, not a second
+   block of content competing with the summary. */
+.ind-recap__transcript { margin-top: 10px; }
+/* ⚠️ TWO CLASSES, because `.ind-recap__section-head span` (0,1,1) out-specifies a
+   bare `.ind-recap__count` (0,1,0) regardless of source order, and would have
+   rendered the message count as the teal "New lead" pill. */
+.ind-recap__section-head .ind-recap__count {
+  font-size: 0.64rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  background: none;
+  padding: 0;
+}
+.ind-recap__transcript-note {
+  margin: 0;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
 .ind-recap__section p {
   margin: 0 0 9px;
   line-height: 1.65;
@@ -10620,19 +11309,51 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-weight: 600;
   margin-bottom: 24px;
 }
+/* ⚠️ INHERIT, NOT --text-secondary. That token (#4A5568) is a light-background
+   colour and measured 1.84:1 once this section became dark. Inheriting picks up
+   `.block--dark`'s --text-on-dark, so the paragraph follows the section it is in
+   instead of naming a colour that is only right on one of them. */
 .ind-scenario__story > p {
   font-size: 1.02rem;
   line-height: 1.8;
-  color: var(--text-secondary);
+  color: inherit;
   margin: 0;
+  /* ⚠️ THE PARAGRAPH IS LEFT WHILE ITS BLOCK STAYS CENTERED, and the label above it
+     stays centered too — header centered, content left, exactly as the homepage's §6
+     and §9 do it.
+
+     This is the one narrative paragraph on the template and it was inheriting
+     `text-align: center` from .ind-scenario__story. Measured on staging: SIX centered
+     lines at 1440 and at 768 (the block is capped at 720px, so those two widths render
+     identically), and TEN at 390. The design system's rule is that long running prose
+     keeps its left edge; a centered six-line block is already past a deck and a
+     centered ten-line one is a wall of ragged text on a phone.
+
+     Section-by-section review, 2026-08-30. Left at EVERY width rather than below a
+     breakpoint: six lines is not better than ten, and this template had never had an
+     alignment pass at any width, so there is no signed-off desktop rendering to
+     preserve here. */
+  text-align: left;
 }
 
-/* Sections ran 650-950px tall for roughly 400px of content: 120px of padding
-   each side meant 240px of dead space between every block. Scoped to the
-   industry page type so all fifteen and the hubs move together. */
-.ind-page > section {
-  padding: clamp(52px, 6.5vw, 88px) 0;
-}
+/* ---- `.ind-page > section:not(.block)` IS DELETED (2026-08-30) -----------
+   It was the scaffold that made the ind-* conversion safe one section at a time: a
+   `padding` SHORTHAND sitting ~10,900 lines after `.block`, where
+   `.ind-page > section` (0,1,1) out-specifies `.block` (0,1,0) — so without the
+   `:not()` it would have beaten `.block`'s `padding-block` on every converted
+   section, which would have carried the right class, passed a class-list audit and
+   still rendered on the old scale. That is exactly how three homepage sections
+   shipped wrong during the V3 build.
+
+   ⚠️ THE GATE IT WAS WAITING FOR IS MET. `.ind-page` is on exactly three templates
+   (`page-for.php`, `page-industry.php`, `page-industry-category.php`) and every
+   `<section>` in all three now carries `.block`, so the selector matched nothing.
+   Removing it was verified by DIFFING the computed padding of every section on all
+   three page types at 1440, 768 and 390 before and after — byte-identical.
+
+   Dead CSS with (0,1,1) and a shorthand is not neutral; it is a rule waiting to win
+   an argument nobody knows it is in. Its removal is why a future ind-* section can
+   be added without inheriting a spacing system that no longer exists. */
 
 @media (max-width: 900px) {
   .ind-scenario__grid {
@@ -10642,65 +11363,95 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- FAQ --- */
-.ind-faq {
-  padding: var(--section-padding);
-  background: var(--warm-white);
-}
-.ind-faq__header {
-  text-align: center;
-  margin-bottom: clamp(32px, 5vw, 48px);
-}
-.ind-faq__header h2 {
-  color: var(--teal-deep);
-}
-
-/* --- Related Resources --- */
-.ind-related {
-  padding: 48px 0;
-  text-align: center;
-}
-.ind-related h2 {
-  font-size: 1.25rem;
-  color: var(--teal-deep);
-  margin-bottom: 16px;
-}
-.ind-related__links {
+/* Cream, not --warm-white: the FAQ and the siblings block are one light run
+   between two dark ones, and two near-identical off-whites two units apart read
+   as a rendering artefact rather than as a decision. */
+.ind-faq { background: var(--cream); }
+/* `.container--narrow` went with `.container`; the measure moves onto the inner. */
+.ind-faq .block__inner { max-width: 820px; }
+/* --- More in this category ------------------------------------------------
+   Replaced "Explore More" (.ind-related), whose rules are deleted with it: a
+   centred flex-wrap of 17 links with no separators. ROWS, LEFT-ALIGNED — each
+   carries a name and a blurb, which makes it a list, and lists keep their left
+   edge. The arrow is a right-edge affordance, which is the other half of the
+   same rule: a centred row with an arrow pinned right is not centred, it is
+   lopsided. */
+.ind-siblings { background: var(--cream); }
+.ind-siblings .block__inner { max-width: 820px; }
+.ind-siblings__list {
   list-style: none;
-  padding: 0;
   margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px 24px;
+  padding: 0;
+  display: grid;
+  gap: 2px;
 }
-.ind-related__links a {
-  color: var(--teal-primary);
+.ind-siblings__list a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 4px 20px;
+  padding: 18px 20px;
+  border-radius: var(--radius-lg);
   text-decoration: none;
-  font-weight: 500;
+  transition: background 0.2s ease;
 }
-.ind-related__links a:hover {
-  text-decoration: underline;
+.ind-siblings__list a:hover { background: rgba(0,131,143,0.055); }
+.ind-siblings__name {
+  font-weight: 600;
+  color: var(--teal-text);
 }
+.ind-siblings__blurb {
+  grid-column: 1;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.ind-siblings__arrow {
+  grid-row: 1;
+  grid-column: 2;
+  color: var(--teal-text);
+}
+.ind-siblings__all {
+  margin: 22px 0 0;
+  padding-inline: 20px;
+  font-size: 0.92rem;
+}
+.ind-siblings__all a { color: var(--teal-text); font-weight: 600; }
 
 /* --- CTA --- */
-.ind-cta {
-  padding: clamp(80px, 12vw, 140px) 0;
-  background: linear-gradient(135deg, rgba(0,131,143,0.92) 0%, rgba(0,77,64,0.95) 100%);
-  color: white;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* ⚠️ EVERYTHING THIS RULE USED TO DO IS NOW .block--dark's JOB. It carried its
+   own padding clamp (a third spacing system), a two-stop teal gradient (a fifth
+   background), and `text-align: center` (now .block-statement). The section ends
+   on the same dark the footer sits under, so the CTA and the footer read as one
+   closing run rather than a card floating above a boundary.
+
+   DELETED with their markup:
+   - .ind-cta__pattern, a dotted SVG at 4% white over 55% opacity, which was
+     painting UNDER an opaque .cta-spotlight card and had been invisible for as
+     long as that card has existed.
+   - the .cta-spotlight card itself — the "bordered CTA card floating on cream"
+     the subpage audit lists as the fifth system break.
+   - `position: relative` + `z-index: 1` on __content, which only existed to lift
+     the card above the pattern. Both go with the thing they were stacking
+     against, not left behind as inert insurance. */
+/* ---- Any section that carries a curtain, on every ind-* template ---------
+   ⚠️ SELF-SCOPING BY `:has()` RATHER THAN BY A MODIFIER CLASS, deliberately. The
+   sections that need this are different elements on each of the three templates,
+   one of them is inside a foreach loop, and which sections carry a curtain will
+   change again as the conversion continues. Keying off the curtain's own presence
+   means adding one to a section is a single markup edit that cannot be half-done —
+   there is no second place to remember.
+
+   The peak is 114/120 of the seam's height clamp, so the section has to give it
+   that much room or the shape lands on the last line of copy. The var() is
+   load-bearing: the padding scale steps down at 1024 and 620. Same calculation
+   .block.final-cta already uses on the homepage. */
+.ind-page > section:has(> .seam-curtain) { position: relative; }
+.ind-page > section:has(> .seam-curtain--open) {
+  padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
 }
-.ind-cta__pattern {
-  position: absolute;
-  inset: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='1.5'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.55;
-  pointer-events: none;
-}
-.ind-cta__content {
-  position: relative;
-  z-index: 1;
+.ind-page > section:has(> .seam-curtain--close) {
+  padding-top: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
 }
 .ind-cta h2 {
   color: white;
@@ -10714,32 +11465,54 @@ a.ind-problem-card .ind-problem-card__icon--art {
   max-width: 560px;
   margin: 0 auto 36px;
 }
-.ind-cta__btn {
-  position: relative;
-  overflow: hidden;
+/* ⚠️ `color: white` ON --teal-light IS 1.9:1 AND HAD TO GO. It was designed
+   against the old teal gradient and was already failing there.
+
+   ⚠️ THE FIRST FIX FOR IT WAS --text-on-cyan, AND THAT TOKEN DOES NOT EXIST IN
+   THIS STYLESHEET. It is documented as #06222C and used "in ~30 places" — on the
+   night-world branch, not this one. An undefined var() is invalid at computed
+   value time, so `color` fell back to the INHERITED value, which inside
+   .block--dark is --text-on-dark. The button rendered #F0FAFA on #1FB6CC at
+   2.29:1: a contrast fix that made the contrast worse, silently, with no invalid
+   property anywhere in devtools.
+
+   --block-dark is the same pairing the design system already mandates for
+   .price-tier__badge on emerald. 5.7:1. The drop shadow goes with the gradient it
+   was lifting the button off. */
+/* ⚠️ THE FEATURE PAGES SHARE THIS RULE RATHER THAN COPYING IT. `.sf-cta__btn` and
+   `.ba-cta__btn` are listed here, not redefined in each page's inline <style>, because
+   two definitions of one treatment is how a "primary button on dark" ends up meaning
+   three different colours. They arrived carrying plain `.btn--primary`, which is
+   --teal-deep — #00838F on #00323A is 3.06:1, scraping the UI-component floor and
+   reading as a hole in the block rather than as the page's one action. */
+.ind-cta__btn,
+.sf-cta__btn,
+.ba-cta__btn {
   font-size: 1.1rem;
   padding: 20px 48px;
   background: var(--teal-light);
-  color: white;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  color: var(--block-dark);
 }
-.ind-cta__btn:hover {
+.ind-cta__btn:hover,
+.sf-cta__btn:hover,
+.ba-cta__btn:hover {
   background: #15a3b8;
-  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.25);
   transform: translateY(-2px);
 }
-.ind-cta__btn::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
-  animation: cta-shimmer 3s ease-in-out infinite;
-  pointer-events: none;
-  will-change: transform;
-}
+/* ⚠️ THE SHIMMER ::before IS DELETED (Mario, 2026-08-30: "a weird hover animation").
+   It was a white gradient sweeping the button on a 3s infinite loop — not a hover
+   effect at all, it ran constantly.
+
+   IT WAS ALSO ALREADY BROKEN BY THIS CONVERSION AND THAT IS WHY IT SUDDENLY LOOKED
+   WRONG. It is position:absolute, and it was contained by `position: relative` +
+   `overflow: hidden` on .ind-cta__btn — two properties removed earlier in this
+   conversion as leftovers of the old gradient background. Without them the
+   pseudo-element resolved against a different ancestor and escaped its clip, so a
+   white band swept across the section instead of across the button.
+
+   Not restored, because V3's primary buttons do not shimmer: the hover is now
+   exactly .btn--primary's — same lift, same shadow weight. */
 
 .ind-cta__actions {
   display: flex;
@@ -10759,13 +11532,9 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Industry responsive --- */
-@media (max-width: 900px) {
-  .ind-problems__grid {
-    grid-template-columns: 1fr;
-    max-width: 520px;
-    margin: 0 auto;
-  }
-}
+/* The `.ind-problems__grid` collapse that lived here is gone with the class.
+   `.block-cards__grid` carries the whole responsive story now: 3 -> 2 at 900,
+   2 -> 1 at 560. */
 @media (max-width: 768px) {
   .ind-hero__grid {
     grid-template-columns: 1fr;
@@ -12791,15 +13560,31 @@ a.ind-problem-card .ind-problem-card__icon--art {
    cream spotlight, and this rule is the only thing giving it to them. Deleting
    the whole block to fix the homepage would have silently restyled three other
    templates. */
+/* ⚠️ .ind-cta IS OUT OF THIS LIST AS OF 2026-08-30, AND REMOVING IT IS THE FIX
+   FOR AN INVISIBLE SECTION. This rule sits ~2,000 lines after `.block--dark`, at
+   the same specificity, so it won the cascade and repainted the converted CTA
+   cream — while `.ind-cta h2` kept `color: white`. Measured on staging: 1.03:1.
+   The heading, the body and the outline button were all there and all unreadable.
+
+   The comment above still holds for the other two: /about/ and /download/ have
+   NOT been converted and this rule is the only thing giving them their cream
+   spotlight. Which is exactly why `.ind-cta` had to be removed from the selector
+   rather than the block being deleted — the reverse mistake would have taken out
+   two templates nobody was looking at.
+
+   ⚠️ WHEN /about/ AND /download/ CONVERT, DELETE THIS WHOLE BLOCK. It has no
+   other purpose, and a two-selector version of it left behind is the next
+   cascade fight.
+
+   `.ind-cta__pattern` also leaves the display:none list below: the element no
+   longer exists in any of the three ind-* templates. */
 .about-cta,
-.ind-cta,
 .dl-cta {
   background: var(--cream);
   color: var(--text-primary);
 }
 .final-cta::before,
 .about-cta::before,
-.ind-cta__pattern,
 .dl-cta__pattern,
 .dl-cta__glow {
   display: none;
@@ -12813,3 +13598,170 @@ a.ind-problem-card .ind-problem-card__icon--art {
 #sitestaffr-widget {
   border: 0 !important;
 }
+
+/* ========== 404 — PAGE NOT FOUND ==========
+   Paired with 404.php. Before both existed, WordPress fell back to index.php and
+   rendered an unstyled "Blog / No content found." on every bad URL.
+
+   --teal-deep is used ONLY on .nf__code. It measures 4.38:1 on warm-white, which
+   clears AA for large text (3:1) and fails it for body copy (4.5:1) — so the
+   number can carry it and nothing else here may. Body copy uses --text-secondary.
+   The V3 branch introduces a --teal-text token for exactly this; it is deliberately
+   NOT backported here, because that branch owns it and duplicating it would
+   collide on merge. */
+.nf {
+  padding: clamp(120px, 15vw, 160px) 0 clamp(60px, 8vw, 100px);
+  text-align: center;
+  background: var(--warm-white);
+}
+
+.nf__code {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 9vw, 5rem);
+  font-weight: 600;
+  line-height: 1;
+  color: var(--teal-deep);
+  letter-spacing: 0.02em;
+  margin: 0 0 12px;
+}
+
+.nf__title {
+  font-family: var(--font-display);
+  font-size: var(--hero-title-size);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--text-primary);
+  margin: 0 0 16px;
+}
+
+.nf__text {
+  color: var(--text-secondary);
+  max-width: var(--subtext-measure);
+  margin: 0 auto 36px;
+}
+
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: clamp(48px, 7vw, 72px);
+}
+
+.nf__links {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.nf__link {
+  display: block;
+  height: 100%;
+  padding: 18px 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  background: var(--cream);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.nf__link:hover,
+.nf__link:focus-visible {
+  border-color: var(--teal-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.nf__link-label {
+  display: block;
+  font-weight: 600;
+  color: var(--teal-deep);
+  margin-bottom: 2px;
+}
+
+.nf__link-desc {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+@media (max-width: 640px) {
+  .nf__links {
+    grid-template-columns: 1fr;
+  }
+  .nf__actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================================================
+   LAST BLOCK IN THE FILE, ON PURPOSE. It is here because the reverted centering pass
+   that used to live at this address sat next to the FAQ rules for one deploy and lost
+   `.final-cta__copy` to a bare `text-align: left` 4,000 lines further down — same
+   specificity, later in the file, so it won. Anything added below this beats it.
+   ============================================================================ */
+
+/* ---- THE PRICE CARD'S SPEC ROWS CENTER. NOTHING ELSE DOES. ---------------
+   A page-wide centering pass shipped on 2026-08-28 and was reverted the same day
+   (Mario: "I don't like that you centered some of the things that you did... only center
+   the price card"). It had centered section 2's copy and stat cards, section 4's
+   callouts, the proof figures, the agency panel and the whole closing CTA, on the
+   argument that each of those was the copy half of a side-by-side whose partner is gone
+   below 1024. That argument is not wrong about the layout and it was still the wrong
+   call: a page of centered blocks loses the single left edge a reader tracks down a
+   phone screen, and the sections had not been re-decided individually.
+
+   ⚠️ IF ALIGNMENT IS REVISITED, IT IS A SECTION-BY-SECTION REVIEW, NOT A SELECTOR LIST.
+   Mario's own read: "we might need to review the site for this." Do not reinstate a
+   blanket rule here — that is the exact shape of the thing that was reverted.
+
+   What survives is the one Mario asked for: the price card's rows, where value and label
+   are one phrase and the card around them is already centered end to end. */
+@media (max-width: 1040px) {
+  .pricing-section .price-tier__row { justify-content: center; }
+}
+
+/* ⚠️ AND THE CLOSING CTA, WHICH MARIO ASKED FOR SEPARATELY on 2026-08-28 after the
+   blanket pass was reverted ("we should probably center the CTA section"). It is here
+   rather than beside the other .final-cta rules for the reason this whole block is at the
+   end of the file: `.final-cta__copy { text-align: left }` lives ~4,000 lines up at the
+   same specificity, and anything earlier loses to it.
+
+   THIS IS THE SECTION-BY-SECTION REVIEW STARTING, not the blanket rule coming back. One
+   section, asked for by name. Add the next one the same way — by name, after it has been
+   looked at — and never by widening this selector list on a hunch.
+
+   `margin-inline: auto` because the copy column is capped at 30rem: centering the TEXT
+   inside a block that is still pinned left just moves the ragging around. */
+@media (max-width: 1024px) {
+  .final-cta__copy { text-align: center; margin-inline: auto; }
+  .final-cta__concierge { justify-content: center; }
+}
+
+/* ============================================================================
+   THE REVIEW RAN, 2026-08-30, AND IT ADDED NOTHING HERE. That is the result, not a
+   gap. All eleven sections were screenshotted individually at 390 on staging and
+   looked at; the page was already correct and one defect was found elsewhere
+   (§4's assurance pill, fixed at .lang-section__english, not here).
+
+   THE RULE THE PAGE ALREADY FOLLOWED, now written down so it stops being re-derived:
+
+     A section's header block centers when the section is FULL-WIDTH. It stays left
+     when the header tops a COPY COLUMN. Content underneath is left wherever it is a
+     list or running prose, and centers only where the composition is symmetric
+     around art (§3, §4) or where Mario named it (§5's callouts, §8's spec rows,
+     §11).
+
+   ⚠️ §2 COST, §7 PROOF AND §10 AGENCY DOOR KEEP THEIR HEADERS LEFT, AND THAT IS A
+   DECISION. They are the two Splits and the Panel. Centering their header block
+   alone — content still left — was sketched and put to Mario on 2026-08-30 and he
+   rejected it: one left edge, top to bottom, beats a consistent section opening.
+   That is the reverted pass's reasoning holding a second time. Do not re-open it,
+   and do not "finish the job" by adding them below. Full audit table is in the wiki
+   at website/wiki/concepts/homepage-design-system.md.
+   ============================================================================ */

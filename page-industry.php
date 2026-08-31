@@ -35,7 +35,7 @@ $industries = array(
 
 	'dental-practices' => array(
 		'hero_icon' => '🦷',
-		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI agent answering a visitor on the practice website',
+		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI receptionist answering a visitor on the practice website',
 		'label'    => 'For Dental Practices',
 		/* ⚠️ WAS "Your Front Desk Can't Answer Every Call. Your AI Agent Can." Two problems
 		   and the first is the serious one: it claims the product answers CALLS. SiteStaffr
@@ -68,7 +68,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s patients compare practices online. If your website can&rsquo;t answer basic questions about cleanings, cosmetic options, or insurance acceptance, they move on.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Dental Practice',
+		'solutions_headline' => 'What an AI Receptionist Does for a Dental Practice',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your services',
@@ -103,11 +103,13 @@ $industries = array(
 		// 8 AM. That is what the business did, and it is the actual selling
 		// point — the constraint is only on what the agent itself promises.
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about the practice or pass a message to the team. What do you need?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the practice or pass a message to the team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'I chipped a tooth at dinner. Can someone see me tomorrow?' ),
-			array( 'from' => 'ai',      'text' => 'That sounds painful &mdash; sorry. The practice does handle dental emergencies. What&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Dana Whitfield, 555-0134.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Dana. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can.' ),
+			array( 'from' => 'ai',    'text' => 'That sounds painful &mdash; sorry. The practice does handle dental emergencies. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Dana Whitfield.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Dana. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0134.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the front desk and marked it urgent &mdash; they&rsquo;ll be in touch as soon as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Dana Whitfield',
@@ -132,7 +134,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most dental practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most dental practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing Patients to Silence',
@@ -141,7 +143,7 @@ $industries = array(
 
 	'law-firms' => array(
 		'hero_icon' => '⚖️',
-		'hero_alt'  => 'Isometric illustration of a law office desk stacked with case files and a set of scales, with a floating browser window and speech bubble showing the AI agent taking a new inquiry on the firm website',
+		'hero_alt'  => 'Isometric illustration of a law office desk stacked with case files and a set of scales, with a floating browser window and speech bubble showing the AI receptionist taking a new inquiry on the firm website',
 		'label'    => 'For Law Firms',
 		'headline' => 'Every Missed Inquiry Is a Case That Goes to Another&nbsp;Firm',
 		'subtitle' => 'SiteStaffr captures potential client inquiries on your website around the clock, qualifying leads, collecting case details, and delivering a full intake recap to your inbox before the prospect moves on.',
@@ -164,7 +166,7 @@ $industries = array(
 				'desc'  => 'In legal intake, the first firm to respond usually gets the client. If your competitors answer faster &mdash; even with a simple conversation &mdash; they win the case before you know it existed.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Handles Legal Intake',
+		'solutions_headline' => 'How an AI Receptionist Handles Legal Intake',
 		'solutions' => array(
 			array(
 				'title' => 'A prospect describes their situation',
@@ -182,11 +184,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Saturday, 11:42 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions about the firm or take down your information for our team. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions about the firm or take down your information for our team. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'I was in a car accident tonight and I&rsquo;m not sure what to do. I have photos of the damage.' ),
-			array( 'from' => 'ai',      'text' => 'I&rsquo;m sorry to hear that. The firm does handle auto injury cases &mdash; can I get your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Renee Castillo, 555-0148.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Renee. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'I&rsquo;m sorry to hear that. The firm does handle auto injury cases. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Renee Castillo.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Renee. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0148.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our intake team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Renee Castillo',
@@ -220,7 +224,7 @@ $industries = array(
 
 	'home-services' => array(
 		'hero_icon' => '🏠',
-		'hero_alt'  => 'Isometric illustration of a home with a service van parked out front and a technician loading tools, with a floating browser window and speech bubble showing the AI agent capturing a job inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a home with a service van parked out front and a technician loading tools, with a floating browser window and speech bubble showing the AI receptionist capturing a job inquiry on the company website',
 		'label'    => 'For Home Services',
 		'headline' => 'You&rsquo;re on the Job. Your Website Should Be&nbsp;Too.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re on a roof, under a sink, or in an attic. It captures every lead with name, email, phone, and job details, 24/7.',
@@ -243,7 +247,7 @@ $industries = array(
 				'desc'  => 'Homeowners in a bind call the first business that picks up. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, you lose &mdash; even if you&rsquo;re better at the job.',
 			),
 		),
-		'solutions_headline' => 'An AI Agent That Answers While You Work',
+		'solutions_headline' => 'An AI Receptionist That Answers While You Work',
 		'solutions' => array(
 			array(
 				'title' => 'A homeowner describes their problem',
@@ -261,11 +265,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Wednesday, 6:48 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our services or pass along a message. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our services or pass along a message. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'My AC just stopped working &mdash; no cold air, and it&rsquo;s making a clicking sound.' ),
-			array( 'from' => 'ai',      'text' => 'That&rsquo;s rough in this heat. We do handle AC repairs &mdash; what&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Marcus Bell, 555-0119.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Marcus. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time.' ),
+			array( 'from' => 'ai',    'text' => 'That&rsquo;s rough in this heat. We do handle AC repairs. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Marcus Bell.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Marcus. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0119.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team and marked it urgent &mdash; they&rsquo;ll reach out to sort out a time. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Marcus Bell',
@@ -299,7 +305,7 @@ $industries = array(
 
 	'med-spas' => array(
 		'hero_icon' => '✨',
-		'hero_alt'  => 'Isometric illustration of a med spa treatment room with a facial bed and product shelf, with a floating browser window and speech bubble showing the AI agent answering a consultation inquiry on the spa website',
+		'hero_alt'  => 'Isometric illustration of a med spa treatment room with a facial bed and product shelf, with a floating browser window and speech bubble showing the AI receptionist answering a consultation inquiry on the spa website',
 		'label'    => 'For Med Spas &amp; Aesthetics',
 		'headline' => 'Your Website Visitor Wants to Know What Botox Costs. Right&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about treatments, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
@@ -322,7 +328,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s clients compare med spas online before they ever call. If your website can&rsquo;t answer basic questions about laser hair removal, fillers, or membership pricing, they move on.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Med Spa',
+		'solutions_headline' => 'What an AI Receptionist Does for a Med Spa',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a treatment',
@@ -340,11 +346,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Thursday, 9:07 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our treatments or pass along a message to the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our treatments or pass along a message to the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'I&rsquo;m curious about Botox for forehead lines &mdash; how much does it cost, and does it hurt?' ),
-			array( 'from' => 'ai',      'text' => 'Great question &mdash; pricing and what to expect are best confirmed with our team directly. Can I get your name and best number so someone can reach out?' ),
-			array( 'from' => 'visitor', 'text' => 'Sydney Park, 555-0176.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Sydney. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions.' ),
+			array( 'from' => 'ai',    'text' => 'Great question &mdash; pricing and what to expect are best confirmed with our team directly. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Sydney Park.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Sydney. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0176.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve noted your interest in Botox and passed it to our team &mdash; they&rsquo;ll reach out to answer your questions. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Sydney Park',
@@ -369,7 +377,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most med spas are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most med spas are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing Consultations to Silence',
@@ -378,7 +386,7 @@ $industries = array(
 
 	'medical-practices' => array(
 		'hero_icon' => '🩺',
-		'hero_alt'  => 'Isometric illustration of a medical exam room with an examination table, blood pressure monitor and weighing scale, with a floating browser window and speech bubble showing the AI agent answering a patient inquiry on the practice website',
+		'hero_alt'  => 'Isometric illustration of a medical exam room with an examination table, blood pressure monitor and weighing scale, with a floating browser window and speech bubble showing the AI receptionist answering a patient inquiry on the practice website',
 		'label'    => 'For Medical Practices',
 		'headline' => 'A New Patient Is Checking If You Take Their Insurance. At&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7, answering questions about services, insurance, and appointment availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -401,7 +409,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s patients compare practices online before calling. If your website can&rsquo;t answer basic questions about services, insurance, or wait times, they move on to a practice that can.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Supports a Medical Front Desk',
+		'solutions_headline' => 'How an AI Receptionist Supports a Medical Front Desk',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your practice',
@@ -419,11 +427,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 7:15 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions about the practice or take a message for our staff. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions about the practice or take a message for our staff. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'I&rsquo;ve had a cough that won&rsquo;t clear up. Are you accepting new patients, and do you take my insurance?' ),
-			array( 'from' => 'ai',      'text' => 'We are accepting new patients, and our team can confirm insurance details with you directly. What&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Owen Bradley, 555-0163.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Owen. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'We are accepting new patients, and our team can confirm insurance details with you directly. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Owen Bradley.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Owen. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0163.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our office &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Owen Bradley',
@@ -448,7 +458,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most medical practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most medical practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing New Patients to Silence',
@@ -457,7 +467,7 @@ $industries = array(
 
 	'veterinary-clinics' => array(
 		'hero_icon' => '🐾',
-		'hero_alt'  => 'Isometric illustration of a veterinary exam room with a dog on the table and a check-in desk, with a floating browser window and speech bubble showing the AI agent answering a pet owner on the clinic website',
+		'hero_alt'  => 'Isometric illustration of a veterinary exam room with a dog on the table and a check-in desk, with a floating browser window and speech bubble showing the AI receptionist answering a pet owner on the clinic website',
 		'label'    => 'For Veterinary Clinics',
 		'headline' => 'It&rsquo;s Midnight and Their Dog Ate Something It&nbsp;Shouldn&rsquo;t&nbsp;Have.',
 		'subtitle' => 'SiteStaffr greets worried pet owners on your website 24/7, answering questions about services and availability, capturing urgent inquiries, and sending you a full recap before they even leave the page.',
@@ -480,7 +490,7 @@ $industries = array(
 				'desc'  => 'A worried owner won&rsquo;t wait until morning to find help. If your website can&rsquo;t tell them whether you&rsquo;re taking new patients or handling urgent cases, they call somewhere else.',
 			),
 		),
-		'solutions_headline' => 'An AI Agent for Vet Clinics, Answering When You Can&rsquo;t',
+		'solutions_headline' => 'An AI Receptionist for Vet Clinics, Answering When You Can&rsquo;t',
 		'solutions' => array(
 			array(
 				'title' => 'A pet owner describes what happened',
@@ -498,11 +508,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Friday, 12:20 AM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
 			array( 'from' => 'visitor', 'text' => 'My dog got into a bag of chocolate about an hour ago. I don&rsquo;t know what to do.' ),
-			array( 'from' => 'ai',      'text' => 'That sounds scary. The clinic does handle urgent cases like this &mdash; can I get your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Priya Nair, 555-0192.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Priya. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+			array( 'from' => 'ai',    'text' => 'That sounds scary. The clinic does handle urgent cases like this. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Priya Nair.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Priya. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0192.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Priya Nair',
@@ -536,7 +548,7 @@ $industries = array(
 
 	'chiropractors' => array(
 		'hero_icon' => '🦴',
-		'hero_alt'  => 'Isometric illustration of a chiropractic clinic with an adjustment table and spine model, with a floating browser window and speech bubble showing the AI agent capturing a new patient inquiry on the clinic website',
+		'hero_alt'  => 'Isometric illustration of a chiropractic clinic with an adjustment table and spine model, with a floating browser window and speech bubble showing the AI receptionist capturing a new patient inquiry on the clinic website',
 		'label'    => 'For Chiropractic &amp; Physical Therapy',
 		'headline' => 'They Threw Out Their Back Moving a Couch. They&rsquo;re Looking for Relief&nbsp;Now.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about treatments, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
@@ -559,7 +571,7 @@ $industries = array(
 				'desc'  => 'Someone in pain compares practices before calling. If your website can&rsquo;t answer basic questions about treatment approach, insurance, or same-day availability, they move on.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Works for Chiropractic and PT Practices',
+		'solutions_headline' => 'How an AI Receptionist Works for Chiropractic and PT Practices',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor describes their pain',
@@ -577,11 +589,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Saturday, 5:52 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or pass a message to the office. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or pass a message to the office. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'I threw out my lower back moving a couch this afternoon. Do you have anything open tomorrow?' ),
-			array( 'from' => 'ai',      'text' => 'Ouch, sorry to hear that. We do treat this kind of injury &mdash; what&rsquo;s your name and best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Trevor Nash, 555-0157.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Trevor. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Ouch, sorry to hear that. We do treat this kind of injury. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Trevor Nash.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Trevor. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0157.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the office &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Trevor Nash',
@@ -606,7 +620,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most chiropractic and physical therapy practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most chiropractic and physical therapy practices are up and running in under five minutes. Install the WordPress plugin, enter your practice details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Every Unanswered Question Is a Patient Who Called Someone Else',
@@ -615,7 +629,7 @@ $industries = array(
 
 	'real-estate' => array(
 		'hero_icon' => '🏡',
-		'hero_alt'  => 'Isometric illustration of a listed home with a yard sign and floating listing cards, with a floating browser window and speech bubble showing the AI agent qualifying a buyer on the agency website',
+		'hero_alt'  => 'Isometric illustration of a listed home with a yard sign and floating listing cards, with a floating browser window and speech bubble showing the AI receptionist qualifying a buyer on the agency website',
 		'label'    => 'For Real Estate',
 		'headline' => 'A Buyer Is Looking at Your Listing Right Now. It&rsquo;s Sunday at&nbsp;3&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors browsing your listings 24/7, answering questions about price, square footage, and showings, capturing buyer and seller inquiries, and sending you a full recap before they leave the page.',
@@ -638,7 +652,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s buyers browse listings at all hours and compare agents online. If your website can&rsquo;t answer basic questions about price, condition, or availability, they move on to the next listing.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Real Estate Agent',
+		'solutions_headline' => 'What an AI Receptionist Does for a Real Estate Agent',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a listing',
@@ -656,11 +670,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 3:04 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about this listing or take a message for the agent. What would you like to know?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about this listing or take a message for the agent. What would you like to know?' ),
 			array( 'from' => 'visitor', 'text' => 'What&rsquo;s the asking price, and is it still available? I&rsquo;d love to see it this week.' ),
-			array( 'from' => 'ai',      'text' => 'It&rsquo;s still on the market &mdash; I can pull up the price and details from the listing. What&rsquo;s your name and best number so the agent can follow up?' ),
-			array( 'from' => 'visitor', 'text' => 'Alicia Moreno, 555-0184.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Alicia. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon.' ),
+			array( 'from' => 'ai',    'text' => 'It&rsquo;s still on the market &mdash; I can pull up the price and details from the listing. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Alicia Moreno.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Alicia. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0184.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the agent &mdash; they&rsquo;ll be in touch soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Alicia Moreno',
@@ -694,7 +710,7 @@ $industries = array(
 
 	'auto-repair' => array(
 		'hero_icon' => '🔧',
-		'hero_alt'  => 'Isometric illustration of an auto repair bay with a car on a lift and a rolling toolbox, with a floating browser window and speech bubble showing the AI agent capturing a service inquiry on the shop website',
+		'hero_alt'  => 'Isometric illustration of an auto repair bay with a car on a lift and a rolling toolbox, with a floating browser window and speech bubble showing the AI receptionist capturing a service inquiry on the shop website',
 		'label'    => 'For Auto Repair Shops',
 		'headline' => 'The Check Engine Light Just Came On. They&rsquo;re Picking a Shop Before&nbsp;Morning.',
 		'subtitle' => 'SiteStaffr answers your website visitors while you&rsquo;re under a hood or on the lift. It captures every lead with name, email, phone, and vehicle details, 24/7.',
@@ -717,7 +733,7 @@ $industries = array(
 				'desc'  => 'A driver with a dead battery or a grinding brake calls the first shop that responds. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, you lose the job &mdash; even if you&rsquo;re the better mechanic.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Answers for Your Auto Shop',
+		'solutions_headline' => 'How an AI Receptionist Answers for Your Auto Shop',
 		'solutions' => array(
 			array(
 				'title' => 'A driver describes the problem',
@@ -735,11 +751,15 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Monday, 7:38 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or take a message for the shop. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or take a message for the shop. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'My check engine light just started flashing, and I feel a shudder at highway speed.' ),
-			array( 'from' => 'ai',      'text' => 'That&rsquo;s worth getting checked out. We do handle this kind of issue &mdash; what&rsquo;s your name, phone number, and the vehicle&rsquo;s year and model?' ),
-			array( 'from' => 'visitor', 'text' => 'Jordan Vance, 2019 Honda Accord, 555-0138.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'That&rsquo;s worth getting checked out. We do handle this kind of issue. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Jordan Vance.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Jordan. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0138.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. And what&rsquo;s the year and model of the vehicle?' ),
+			array( 'from' => 'visitor', 'text' => '2019 Honda Accord.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Jordan. I&rsquo;ve passed this to the shop with your vehicle details &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Jordan Vance',
@@ -773,7 +793,7 @@ $industries = array(
 
 	'salons-barbershops' => array(
 		'hero_icon' => '💈',
-		'hero_alt'  => 'Isometric illustration of a salon floor with styling chairs, mirrors and a barber pole, with a floating browser window and speech bubble showing the AI agent answering a visitor on the salon website',
+		'hero_alt'  => 'Isometric illustration of a salon floor with styling chairs, mirrors and a barber pole, with a floating browser window and speech bubble showing the AI receptionist answering a visitor on the salon website',
 		'label'    => 'For Salons &amp; Barbershops',
 		'headline' => 'Saturday&rsquo;s Last Color Slot Is Open. They&rsquo;re Deciding at&nbsp;9&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about services, pricing, and availability, capturing new client inquiries, and sending you a full recap before they even leave the page.',
@@ -796,7 +816,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s clients check pricing and availability online before they call. If your website can&rsquo;t tell them when a chair opens up, they book somewhere that can.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Salon or Barbershop',
+		'solutions_headline' => 'What an AI Receptionist Does for a Salon or Barbershop',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about a service',
@@ -814,11 +834,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Thursday, 9:12 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our services or take a message for the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our services or take a message for the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'I need a color appointment before my sister&rsquo;s wedding Saturday. Is anything open before then?' ),
-			array( 'from' => 'ai',      'text' => 'Let&rsquo;s see what we can do &mdash; what&rsquo;s your name and best number so our team can check availability?' ),
-			array( 'from' => 'visitor', 'text' => 'Whitney Ortiz, 555-0125.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Whitney. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'Let&rsquo;s see what we can do. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Whitney Ortiz.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Whitney. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0125.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Whitney Ortiz',
@@ -843,7 +865,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most salons and barbershops are up and running in under five minutes. Install the WordPress plugin, enter your business details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most salons and barbershops are up and running in under five minutes. Install the WordPress plugin, enter your business details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing Bookings to Silence',
@@ -852,7 +874,7 @@ $industries = array(
 
 	'hvac-plumbing' => array(
 		'hero_icon' => '🚿',
-		'hero_alt'  => 'Isometric illustration of a utility room with an HVAC unit, pipework and a technician, with a floating browser window and speech bubble showing the AI agent capturing a service inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a utility room with an HVAC unit, pipework and a technician, with a floating browser window and speech bubble showing the AI receptionist capturing a service inquiry on the company website',
 		'label'    => 'For HVAC &amp; Plumbing',
 		'headline' => 'No Heat at 11&nbsp;PM in January. Whoever Answers First Gets the&nbsp;Call.',
 		'subtitle' => 'SiteStaffr answers your website visitors the instant the heat goes out or a pipe bursts. It captures name, email, phone, and the problem, 24/7, so you&rsquo;re the first call back, not the third.',
@@ -875,7 +897,7 @@ $industries = array(
 				'desc'  => 'A homeowner with no heat or a flooding basement calls down the list until someone picks up. If your website goes quiet at night, you lose the job before you even know it existed &mdash; even if you&rsquo;re the better crew.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Handles HVAC and Plumbing Emergencies',
+		'solutions_headline' => 'How an AI Receptionist Handles HVAC and Plumbing Emergencies',
 		'solutions' => array(
 			array(
 				'title' => 'A homeowner describes the emergency',
@@ -893,11 +915,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Tuesday, 11:20 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or get your information to our on-call team. What&rsquo;s happening?' ),
 			array( 'from' => 'visitor', 'text' => 'Our furnace stopped working and the house is dropping fast &mdash; we have kids here.' ),
-			array( 'from' => 'ai',      'text' => 'I&rsquo;m sorry, that sounds stressful. We do handle emergency heating calls &mdash; what&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Renata Kowalski, 555-0171.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Renata. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can.' ),
+			array( 'from' => 'ai',    'text' => 'I&rsquo;m sorry, that sounds stressful. We do handle emergency heating calls. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Renata Kowalski.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Renata. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0171.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this urgent and sent it to our on-call team &mdash; they&rsquo;ll be in touch as quickly as they can. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Renata Kowalski',
@@ -937,7 +961,7 @@ $industries = array(
 
 	'accounting-tax' => array(
 		'hero_icon' => '📊',
-		'hero_alt'  => 'Isometric illustration of an accountant desk with ledgers, a calculator and floating charts, with a floating browser window and speech bubble showing the AI agent screening a client inquiry on the firm website',
+		'hero_alt'  => 'Isometric illustration of an accountant desk with ledgers, a calculator and floating charts, with a floating browser window and speech bubble showing the AI receptionist screening a client inquiry on the firm website',
 		'label'    => 'For Accounting &amp; Tax',
 		'headline' => 'Two Weeks to the Filing Deadline. A New Client Needs Catch-Up&nbsp;Bookkeeping.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about services and new client availability, capturing inquiries, and sending you a full recap before they even leave the page.',
@@ -960,7 +984,7 @@ $industries = array(
 				'desc'  => 'Business owners research accountants the same way they research everything else. If your website can&rsquo;t answer basic questions about services or new client availability, they move to the next firm on the list.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for an Accounting or Tax Firm',
+		'solutions_headline' => 'What an AI Receptionist Does for an Accounting or Tax Firm',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about your services',
@@ -978,11 +1002,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 8:36 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions about our services or pass a message to the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions about our services or pass a message to the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'My bookkeeping is a year behind and my extension deadline is three weeks out. Can you help?' ),
-			array( 'from' => 'ai',      'text' => 'We do handle catch-up bookkeeping &mdash; let me get your name and best number so our team can follow up.' ),
-			array( 'from' => 'visitor', 'text' => 'Desmond Farrow, 555-0166.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Desmond. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'We do handle catch-up bookkeeping. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Desmond Farrow.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Desmond. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0166.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve marked this as time-sensitive for the team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Desmond Farrow',
@@ -1016,7 +1042,7 @@ $industries = array(
 
 	'insurance-agencies' => array(
 		'hero_icon' => '🛡️',
-		'hero_alt'  => 'Isometric illustration of an insurance agency desk with policy folders and a shield emblem, with a floating browser window and speech bubble showing the AI agent capturing a quote request on the agency website',
+		'hero_alt'  => 'Isometric illustration of an insurance agency desk with policy folders and a shield emblem, with a floating browser window and speech bubble showing the AI receptionist capturing a quote request on the agency website',
 		'label'    => 'For Insurance Agencies',
 		'headline' => 'A Homeowner Just Opened Their Renewal Notice. The Rate Went&nbsp;Up.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about coverage types and availability, capturing new policy inquiries, and sending you a full recap before they even leave the page.',
@@ -1039,7 +1065,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s shoppers compare coverage and carriers online before they ever call an agent. If your website can&rsquo;t answer basic questions about what you offer, they request a quote somewhere that can.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Works for an Insurance Agency',
+		'solutions_headline' => 'How an AI Receptionist Works for an Insurance Agency',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about coverage',
@@ -1057,11 +1083,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Wednesday, 8:51 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about our coverage options or pass along a message. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about our coverage options or pass along a message. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'My renewal notice just went up again. What do you offer for home and auto bundles?' ),
-			array( 'from' => 'ai',      'text' => 'We do offer home and auto bundles &mdash; an agent can put together the specifics for you. What&rsquo;s your name and best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Camille Reyes, 555-0142.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Camille. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options.' ),
+			array( 'from' => 'ai',    'text' => 'We do offer home and auto bundles &mdash; an agent can put together the specifics for you. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Camille Reyes.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Camille. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0142.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to our agents &mdash; they&rsquo;ll reach out to go over your options. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Camille Reyes',
@@ -1095,7 +1123,7 @@ $industries = array(
 
 	'fitness-studios' => array(
 		'hero_icon' => '🏋️',
-		'hero_alt'  => 'Isometric illustration of a fitness studio floor with dumbbell racks and a class schedule board, with a floating browser window and speech bubble showing the AI agent answering a prospective member on the studio website',
+		'hero_alt'  => 'Isometric illustration of a fitness studio floor with dumbbell racks and a class schedule board, with a floating browser window and speech bubble showing the AI receptionist answering a prospective member on the studio website',
 		'label'    => 'For Fitness Studios',
 		'headline' => 'Does Tomorrow&rsquo;s 6 AM Class Have Room? They&rsquo;re Asking at&nbsp;10&nbsp;PM.',
 		'subtitle' => 'SiteStaffr greets visitors on your website 24/7, answering questions about class times, trial passes, and membership, capturing new member inquiries, and sending you a full recap before they even leave the page.',
@@ -1118,7 +1146,7 @@ $industries = array(
 				'desc'  => 'Today&rsquo;s prospects compare studios online before they ever show up. If your website can&rsquo;t answer basic questions about class types, trial passes, or drop-in rates, they move on.',
 			),
 		),
-		'solutions_headline' => 'What an AI Agent Does for a Fitness Studio',
+		'solutions_headline' => 'What an AI Receptionist Does for a Fitness Studio',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor asks about classes or membership',
@@ -1136,11 +1164,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 7:40 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi! I can answer questions about classes or membership, or take a message for the team. What can I help with?' ),
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about classes or membership, or take a message for the team. What can I help with?' ),
 			array( 'from' => 'visitor', 'text' => 'What&rsquo;s the 6 AM class like, and is there a free trial?' ),
-			array( 'from' => 'ai',      'text' => 'We do offer a trial pass &mdash; our team can get you set up. What&rsquo;s your name and best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Talia Brennan, 555-0159.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Talia. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up.' ),
+			array( 'from' => 'ai',    'text' => 'We do offer a trial pass &mdash; our team can get you set up. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Talia Brennan.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Talia. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0159.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed your interest to the team &mdash; they&rsquo;ll reach out to get you set up. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Talia Brennan',
@@ -1165,7 +1195,7 @@ $industries = array(
 			),
 			array(
 				'q' => 'How long does setup take?',
-				'a' => 'Most fitness studios are up and running in under five minutes. Install the WordPress plugin, enter your studio details, and the AI agent goes live on your website immediately.',
+				'a' => 'Most fitness studios are up and running in under five minutes. Install the WordPress plugin, enter your studio details, and your AI receptionist goes live on your website immediately.',
 			),
 		),
 		'cta_headline' => 'Stop Losing New Members to Silence',
@@ -1174,7 +1204,7 @@ $industries = array(
 
 	'pest-control' => array(
 		'hero_icon' => '🐜',
-		'hero_alt'  => 'Isometric illustration of a pest control van with a large molded ant mounted on its roof rack, a sprayer and bait stations laid out beside it, with a floating browser window and speech bubble showing the AI agent capturing an inspection inquiry on the company website',
+		'hero_alt'  => 'Isometric illustration of a pest control van with a large molded ant mounted on its roof rack, a sprayer and bait stations laid out beside it, with a floating browser window and speech bubble showing the AI receptionist capturing an inspection inquiry on the company website',
 		'label'    => 'For Pest Control',
 		'headline' => 'Someone Just Saw a Wasp Nest by the Front Door. They Want Someone Out&nbsp;Tomorrow.',
 		'subtitle' => 'SiteStaffr answers your website visitors the moment they spot roaches, a wasp nest, or something worse. It captures name, email, phone, and the problem, 24/7, so you&rsquo;re the first call back.',
@@ -1197,7 +1227,7 @@ $industries = array(
 				'desc'  => 'Someone who just saw a roach or found a wasp nest by the door wants it handled fast. If your competitor&rsquo;s website answers instantly and yours doesn&rsquo;t, they book the next name on the list &mdash; even if you&rsquo;re better at the job.',
 			),
 		),
-		'solutions_headline' => 'How an AI Agent Answers for a Pest Control Company',
+		'solutions_headline' => 'How an AI Receptionist Answers for a Pest Control Company',
 		'solutions' => array(
 			array(
 				'title' => 'A visitor describes what they found',
@@ -1215,11 +1245,13 @@ $industries = array(
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Friday, 6:15 PM',
 		'chat' => array(
-			array( 'from' => 'ai',      'text' => 'Hi, I can answer questions or take a message for the team. What&rsquo;s going on?' ),
+			array( 'from' => 'ai',    'text' => 'Hi, I can answer questions or take a message for the team. What&rsquo;s going on?' ),
 			array( 'from' => 'visitor', 'text' => 'There&rsquo;s a wasp nest under the eaves right where our kids play. How soon can someone come out?' ),
-			array( 'from' => 'ai',      'text' => 'That sounds concerning. We do handle wasp removal &mdash; what&rsquo;s your name and the best number to reach you?' ),
-			array( 'from' => 'visitor', 'text' => 'Holly Ferris, 555-0113.' ),
-			array( 'from' => 'ai',      'text' => 'Thanks, Holly. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon.' ),
+			array( 'from' => 'ai',    'text' => 'That sounds concerning. We do handle wasp removal. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Holly Ferris.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Holly. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0113.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the team &mdash; they&rsquo;ll reach out to you soon. Is there anything else I can assist you with?' ),
 		),
 		'recap' => array(
 			'name'     => 'Holly Ferris',
@@ -1250,6 +1282,123 @@ $industries = array(
 		'cta_headline' => 'The Job Goes to Whoever Answers. Make That You.',
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
+
+	/* ⚠️ THIS ENTRY EXISTED NOWHERE AND /for/medical-staffing/ 404ed IN PRODUCTION.
+	   Medical Staffing was added to the registry in functions.php — so it has a Yoast
+	   title and description, it is in the Industries dropdown, it is in the homepage
+	   picker, and it is on the /for/ hub — but nothing was ever written here, and the
+	   guard below sends an unknown slug to the 404 template. Four links to nowhere.
+
+	   Verified against production, not inferred: /for/medical-staffing/ returns 404 on
+	   sitestaffr.com AND on staging, and `git log ..origin/main` is empty, so this is not
+	   something another session had already fixed.
+
+	   ⚠️ IT IS THE ONLY B2B PAGE IN THE FILE, and that changes the shape of the copy
+	   rather than just its nouns. The other fifteen have ONE visitor — a patient, an
+	   owner, a client. A staffing agency's site is read by two people with opposite
+	   needs: a facility that has a hole in tomorrow's schedule, and a clinician looking
+	   for placement. The page has to be legible to both without picking one, which is
+	   why the chat, the recap and the FAQs all name both sides explicitly.
+
+	   ⚠️ IT IS ALSO THE INDUSTRY OUR ONE REAL TESTIMONIAL COMES FROM. Synergy Scribes is
+	   medical staffing and it is quoted on the homepage, so this page 404ing meant the
+	   only named customer on the site pointed at a category with no page.
+
+	   The category noun here is deliberately SiteStaffr rather than "AI agent": the term
+	   ladder is still open with Mario, and writing this one neutrally means it does not
+	   need rewriting whichever way that lands. */
+	'medical-staffing' => array(
+		'hero_icon' => '🩺',
+		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI receptionist answering a facility scheduler on the agency website',
+		'label'    => 'For Medical Staffing Agencies',
+		/* House pattern: a situational scene, not a product claim, and the second
+		   sentence is the one that stings. No telephony — the recruiters going home is
+		   the problem, not an unanswered switchboard. */
+		'headline' => 'A Unit Is Short Two Nurses for Tuesday. Your Recruiters Left at&nbsp;Six.',
+		'subtitle' => 'SiteStaffr greets facilities and candidates on your website 24/7, answering questions about your specialties, coverage areas, and credentialing, capturing the inquiry, and sending you a full recap before they leave the page.',
+		/* schema.org EmploymentAgency. ⚠️ NOT a Medical* type — the agency places
+		   clinicians, it does not treat anyone, and typing it as a medical business
+		   would misdescribe it. (This field is currently set on all sixteen entries and
+		   read by nothing; kept for consistency, flagged separately.) */
+		'specialty' => 'EmploymentAgency',
+		'problems_headline' => 'Staffing Agencies Lose Placements to Whoever Replies First',
+		'problems'  => array(
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+				'title' => 'Coverage requests go cold overnight',
+				'desc'  => 'A scheduler has a call-out at 9 PM for a shift starting at seven the next morning. Your desk is empty. By the time anyone reads it, they have already placed the request with the agency that replied.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+				'title' => 'Candidates compare agencies at midnight',
+				'desc'  => 'A travel nurse or a scribe weighing three agencies has a question about pay packages, license reciprocity, or how long credentialing takes. If your site cannot answer it, they fill in the next agency&rsquo;s form instead.',
+			),
+			array(
+				'icon'  => '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>',
+				'title' => 'Your recruiters are already at capacity',
+				'desc'  => 'Between credentialing packets, compliance paperwork, and the placements already in flight, your team cannot give every website inquiry the fast reply that is the whole reason it wins.',
+			),
+		),
+		'solutions_headline' => 'What an AI Receptionist Does for a Medical Staffing Agency',
+		'solutions' => array(
+			array(
+				'title' => 'A facility or a candidate asks what you cover',
+				'desc'  => 'Specialties, regions, shift types, credentialing requirements &mdash; SiteStaffr answers from what is already published on your site, accurately and naturally, in 57+ languages.',
+			),
+			array(
+				'title' => 'The AI captures who they are and which side they are on',
+				'desc'  => 'Facility name, contact number, and the roles and shifts to fill &mdash; or a candidate&rsquo;s discipline, license state, and availability. SiteStaffr collects what a recruiter would ask before the first call back, without anyone waiting.',
+			),
+			array(
+				'title' => 'You get a complete recap by email',
+				'desc'  => 'Within seconds of the conversation ending, a full summary with contact details, what they need, and a suggested follow-up lands in your inbox &mdash; ready for whoever is at a desk first.',
+			),
+		),
+		'scenario_label' => 'See it in action',
+		'scenario_title' => 'Sunday, 9:40 PM',
+		/* Same rules as every other chat in this file: answers from site content,
+		   captures name + number + reason, says a human will follow up, and PROMISES NO
+		   TIME. Note what it refuses to do — it confirms the coverage AREA, which the
+		   site publishes, and says nothing about whether anyone is actually free, which
+		   only the bench can answer. That restraint is the FAQ below made visible. */
+		'chat' => array(
+			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the agency or pass a message to the staffing team. What do you need?' ),
+			array( 'from' => 'visitor', 'text' => 'We&rsquo;re short two night-shift RNs for Tuesday. Do you cover Sacramento?' ),
+			array( 'from' => 'ai',    'text' => 'Yes, the agency staffs the Sacramento area. May I have your name?' ),
+			array( 'from' => 'visitor', 'text' => 'Renee Alvarado, Mercy General.' ),
+			array( 'from' => 'ai',    'text' => 'Thanks, Renee. What&rsquo;s the best number for our team to reach you at?' ),
+			array( 'from' => 'visitor', 'text' => '555-0178.' ),
+			array( 'from' => 'ai',    'text' => 'Got it. I&rsquo;ve passed this to the staffing team with the shift details and marked it time-sensitive &mdash; they&rsquo;ll be in touch as soon as they can. Is there anything else I can assist you with?' ),
+		),
+		'recap' => array(
+			'name'     => 'Renee Alvarado',
+			'phone'    => '555-0178',
+			'reason'   => 'Two night-shift RNs needed for Tuesday, Sacramento',
+			'summary'  => '<strong>Renee</strong> at Mercy General is short two night-shift RNs for Tuesday and is asking whether you cover Sacramento.',
+			'followup' => 'Call Renee to confirm which RNs you can place and how quickly you can have them credentialed.',
+		),
+		'scenario'       => 'A scheduler at a hospital loses two night-shift nurses for Tuesday and starts working through agency websites on a Sunday evening. SiteStaffr greets them straight away. They explain the gap and ask whether you staff their region. The AI confirms your coverage area from your own site, takes their name, number, and the shifts they need, and tells them the staffing team will follow up. By 9:42 PM you have an email with every detail &mdash; facility, contact, roles, dates, and how urgent it is. Your first recruiter in on Monday calls a scheduler who has not yet committed to anyone else.',
+		'faqs' => array(
+			array(
+				'q' => 'Does SiteStaffr store clinician or patient information?',
+				'a' => 'No. SiteStaffr captures contact details and the reason for the inquiry &mdash; the same information a recruiter would take on a first call. It does not collect credentialing files, license documents, or any protected health information. All conversation data is stored in your own WordPress database, not on external servers.',
+			),
+			array(
+				'q' => 'Can it tell a facility whether we have someone available?',
+				'a' => 'No, and it does not try. SiteStaffr has no view of your bench or your schedule, so it answers from what your website publishes &mdash; specialties, regions, shift types, credentialing timelines &mdash; and captures the request so a recruiter can answer the availability question directly. It never commits you to a placement or a callback time.',
+			),
+			array(
+				'q' => 'Can it handle inquiries from both facilities and candidates?',
+				'a' => 'Yes, and it records which one it is talking to. A facility gets asked about roles, shifts, and location; a clinician gets asked about discipline, license state, and availability. Your recap says which side of the placement the inquiry came from before you open it, so it goes to the right person on your team.',
+			),
+			array(
+				'q' => 'What languages does it support?',
+				'a' => 'SiteStaffr supports 57+ languages. If a candidate writes in Spanish or Tagalog, the AI responds fluently in the same language. Your recap always arrives in English with every detail intact.',
+			),
+		),
+		'cta_headline' => 'The Shift Goes to the Agency That Replies First',
+		'cta_text'     => 'SiteStaffr captures facility requests and candidate inquiries 24/7, so nothing sits in an empty inbox until Monday. Try it free for 30 days &mdash; no credit card required.',
+	),
 );
 
 if ( ! isset( $industries[ $page_slug ] ) ) {
@@ -1260,6 +1409,34 @@ if ( ! isset( $industries[ $page_slug ] ) ) {
 $ind       = $industries[ $page_slug ];
 $site_name = get_bloginfo( 'name' );
 $cta_url   = home_url( '/#get-started' );
+
+/* ---- THE ONE SHARED FAQ, APPENDED TO ALL SIXTEEN ---------------------------
+   Mario, 2026-08-30: Search Console shows more impressions for "virtual assistant"
+   than for "AI receptionist", and he chose to keep receptionist as the primary term
+   and carry virtual assistant as a supporting one rather than repositioning on
+   impression counts alone.
+
+   ⚠️ IMPRESSIONS ARE NOT THE SAME BID. Production has never said "receptionist" —
+   the V3 homepage is staging-only — so that comparison scores a bid we never placed.
+   This entry is the cheap half of the response: it earns the adjacent term without
+   moving the H1, and it is trivial to re-weight if the click and position data later
+   says virtual assistant deserves the lead.
+
+   ⚠️ IT ANSWERS THE QUESTION HONESTLY RATHER THAN CLAIMING THE TERM. "Virtual
+   assistant" mostly means hiring a PERSON, so a page that simply asserts the phrase
+   would pull traffic that bounces. Saying plainly which one we are is what makes the
+   answer useful to the reader who meant the other thing — and a genuinely useful
+   answer is the only kind worth ranking.
+
+   Appended HERE, before both consumers, because the schema block and the visible
+   accordion each iterate $ind['faqs'] separately. Added in one place it appears in
+   both; added in the markup it would have shipped without its schema entry.
+
+   ⚠️ NO PHONE LANGUAGE, same rule as every other string in this file. */
+$ind['faqs'][] = array(
+	'q' => 'Is SiteStaffr an AI receptionist or a virtual assistant?',
+	'a' => 'Both descriptions fit, and the difference worth knowing is that SiteStaffr is software rather than a person. A virtual assistant you hire is someone who works set hours and needs briefing; SiteStaffr is an AI receptionist that lives on your website, answers every visitor instantly from your own published pages 24/7, captures their details, and emails you a recap. There is nobody to onboard, no hours to cover, and no per-hour cost.',
+);
 
 // Per-industry hero art lives at assets/images/industries/<slug>.webp. The file
 // is optional: until one is dropped in, the hero falls back to the emoji it has
@@ -1338,12 +1515,34 @@ get_template_part( 'template-parts/site-nav' );
 
 <main class="ind-page">
 
-	<!-- Hero -->
-	<section class="ind-hero">
-		<div class="ind-hero__accent" aria-hidden="true"></div>
-		<div class="ind-hero__glow" aria-hidden="true"></div>
-		<div class="container">
-			<div class="ind-hero__grid">
+	<?php /* ---- HERO: now a V3 Split block ------------------------------------------
+	         First section of the ind-* conversion. Three things changed and none of
+	         them is the copy:
+
+	         1. `.block .block-split` + `.block__inner` + `.block-split__grid` replace
+	            the bespoke `.ind-hero` padding, `.container` and `.ind-hero__grid`.
+	            That is the whole point — the page had a THIRD spacing system
+	            (`.ind-page > section`, `--section-padding`, and this hero's own
+	            clamp) where V3 has one token per context.
+
+	         2. `.ind-hero__accent` and `.ind-hero__glow` are DELETED, not hidden. Two
+	            absolutely-positioned radial gradients in teal at 5% and 7% alpha,
+	            which is decoration doing no work — V3 carries emphasis with a dark
+	            block, not with a wash.
+
+	         3. The `::before` gradient that faded the hero's last 120px into the
+	            cream is gone with them. It was a SEAM, and V3 has exactly one seam on
+	            the whole site (the homepage hero curtain) because a seam is a colour
+	            contract between neighbours that fails silently at widths nobody
+	            sampled. Whitespace has no contract.
+
+	         ⚠️ `.ind-hero__grid` STAYS on the element alongside `.block-split__grid`.
+	         It is not redundant: it overrides the 1fr 1fr to 1.35fr, which was
+	         measured for headlines of 60-79 characters. Dropping it would give the
+	         isometric half the page and break the H1 over five lines again. */ ?>
+	<section class="block block-split ind-hero">
+		<div class="block__inner">
+			<div class="block-split__grid ind-hero__grid">
 				<div class="ind-hero__content reveal">
 					<span class="ind-hero__label"><?php echo esc_html( $ind['label'] ); ?></span>
 					<h1><?php echo wp_kses_post( $ind['headline'] ); ?></h1>
@@ -1356,7 +1555,7 @@ get_template_part( 'template-parts/site-nav' );
 					</div>
 					<span class="ind-hero__trust">Free for 30 days &bull; No credit card required</span>
 				</div>
-				<div class="ind-hero__visual reveal reveal-delay-2"<?php echo $hero_image_url ? '' : ' aria-hidden="true"'; ?>>
+				<div class="block-split__art ind-hero__visual reveal reveal-delay-2"<?php echo $hero_image_url ? '' : ' aria-hidden="true"'; ?>>
 					<?php if ( $hero_image_url ) : ?>
 						<img
 							class="ind-hero__image"
@@ -1377,30 +1576,59 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
+	<?php /* ---- PAIN POINTS: a V3 Cards block, UNBOXED --------------------------
+	         ⚠️ NEW CLASSES (.ind-problem) RATHER THAN RESTYLING .ind-problem-card,
+	         and that is deliberate. The same class name is used for two different
+	         components: three STATIC statements here, and the clickable directory
+	         tiles on /for/ and the five category hubs. Unboxing a link removes its
+	         affordance, so a shared restyle would have fixed this section and
+	         quietly broken twenty-one tiles on six other pages. One class name was
+	         hiding the fact that these were never the same thing.
+
+	         The box goes because that is the V3 rule the pricing table already
+	         proved: "the moment a border or a panel appears they become three
+	         offers standing side by side". Three problems the reader is supposed to
+	         recognise are not three offers. */ ?>
 	<!-- Pain Points -->
-	<section class="ind-problems">
-		<div class="container">
-			<div class="ind-problems__header reveal">
+	<section class="block block-cards ind-problems">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
 				<span class="section-label">The problem</span>
 				<h2><?php echo wp_kses_post( $ind['problems_headline'] ); ?></h2>
 			</div>
-			<div class="ind-problems__grid">
+			<div class="block-cards__grid" style="--cards: 3;">
 				<?php foreach ( $ind['problems'] as $i => $problem ) : ?>
-					<div class="ind-problem-card reveal reveal-delay-<?php echo esc_attr( $i + 1 ); ?>">
-						<div class="ind-problem-card__icon" aria-hidden="true"><?php echo $problem['icon']; ?></div>
-						<h3 class="ind-problem-card__title"><?php echo wp_kses_post( $problem['title'] ); ?></h3>
-						<p class="ind-problem-card__desc"><?php echo wp_kses_post( $problem['desc'] ); ?></p>
+					<div class="ind-problem reveal reveal-delay-<?php echo esc_attr( $i + 1 ); ?>">
+						<div class="ind-problem__icon" aria-hidden="true"><?php echo $problem['icon']; ?></div>
+						<h3 class="ind-problem__title"><?php echo wp_kses_post( $problem['title'] ); ?></h3>
+						<p class="ind-problem__desc"><?php echo wp_kses_post( $problem['desc'] ); ?></p>
 					</div>
 				<?php endforeach; ?>
 			</div>
 		</div>
+		<?php /* OPEN: the dark run rises out of the cream. Bottom of section 2, over it,
+		         because an overlay sits on the LIGHT side of a boundary — the light section
+		         is its background, so the two cannot disagree on colour.
+
+		         ⚠️ DIRECT CHILD OF THE SECTION, not of .block__inner. .block__inner is
+		         width-capped and gutter-padded; positioned inside it the curtain would be
+		         1140px wide on a full-bleed boundary, leaving the shape short of both edges
+		         at every width above the cap. */ ?>
+		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 	</section>
 
+	<?php /* ---- SOLUTIONS: the first half of the dark run ----------------------
+	         Was #0a2e33, a SECOND dark tone three uses deep. V3's dark is V1's deep
+	         teal --block-dark (#00323A) specifically, because testers rejected the
+	         night world's near-black and drifting back toward it reintroduces the
+	         exact tone the redesign exists to drop.
+
+	         .ind-solutions__bg is deleted with the same reasoning as the hero's two
+	         glows: decoration that existed to soften a background V3 states once. */ ?>
 	<!-- Solutions -->
-	<section class="ind-solutions">
-		<div class="ind-solutions__bg" aria-hidden="true"></div>
-		<div class="container">
-			<div class="ind-solutions__header reveal">
+	<section class="block block--dark ind-solutions">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
 				<span class="section-label">How SiteStaffr helps</span>
 				<h2><?php echo wp_kses_post( $ind['solutions_headline'] ); ?></h2>
 			</div>
@@ -1428,8 +1656,25 @@ get_template_part( 'template-parts/site-nav' );
 		$ind_recap_stamp = $ind_tm[1] . gmdate( 'g:i A', $ind_ts );
 	}
 	?>
-	<section class="ind-scenario">
-		<div class="container">
+	<?php /* ---- SCENARIO: the second half of the dark run ---------------------
+	         Was a pale-blue gradient (#eef8fa -> #e4f3f7), a fourth background with
+	         no place in a three-tone palette. Its own comment said it was tinted
+	         "so it reads as a distinct panel between the dark band above and the
+	         cream FAQ below" — i.e. it existed to solve a problem created by having
+	         five backgrounds in the first place.
+
+	         It becomes the SECOND dark block instead, so this and Solutions read as
+	         one continuous dark run exactly like homepage sections 2-3. .block--dark
+	         + .block--dark already handles the join with --block-pad-run; there is
+	         nothing to align by hand.
+
+	         ⚠️ THE CHAT AND RECAP MOCKUPS NOW SIT ON DARK. They are the most
+	         detailed things on the page and they are real product surfaces, so this
+	         is the one part of the conversion worth looking at rather than reasoning
+	         about. If it fails, the fix is this section going cream and Solutions
+	         standing alone as a single dark block. */ ?>
+	<section class="block block--dark ind-scenario">
+		<div class="block__inner">
 			<div class="ind-scenario__story reveal">
 				<span class="section-label"><?php echo esc_html( $ind['scenario_label'] ); ?></span>
 				<p><?php echo wp_kses_post( $ind['scenario'] ); ?></p>
@@ -1481,6 +1726,32 @@ get_template_part( 'template-parts/site-nav' );
 						</ul>
 						<p class="ind-recap__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ind['recap']['followup'] ); ?></p>
 					</div>
+					<?php /* ⚠️ INDICATES THE TRANSCRIPT, DOES NOT REPRODUCE IT (Mario,
+					         2026-08-30: "just like a thing that shows that this is where
+					         it would go"). The real recap email carries the full
+					         transcript, and the mockup said nothing about it, so the
+					         email looked shorter than the product's.
+
+					         Deliberately NOT the real exchange: the visitor thread is
+					         already shown in full in the card immediately to the left, and
+					         repeating it here would double the tallest element on the page
+					         to say something the reader has just read. A collapsed row is
+					         the honest shape — it is what the email actually looks like
+					         before you open it.
+
+					         Turn count is COUNTED from the same array that renders the
+					         thread, so it cannot drift from it. Not interactive: this is a
+					         picture of an email, and a control that does nothing is worse
+					         than a label that says what is there. */ ?>
+					<?php if ( ! empty( $ind['chat'] ) ) : ?>
+					<div class="ind-recap__section ind-recap__transcript">
+						<div class="ind-recap__section-head">
+							<strong>Conversation Transcript</strong>
+							<span class="ind-recap__count"><?php echo (int) count( $ind['chat'] ); ?> messages</span>
+						</div>
+						<p class="ind-recap__transcript-note">Full transcript included below in the email.</p>
+					</div>
+					<?php endif; ?>
 				</div>
 				<figcaption class="ind-scenario__caption">What lands in your inbox</figcaption>
 				</figure>
@@ -1490,15 +1761,35 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<!-- FAQ -->
-	<section class="ind-faq">
-		<div class="container container--narrow">
-			<div class="ind-faq__header reveal">
+	<section class="block ind-faq">
+		<?php /* CLOSE: the dark run comes back down into the cream. Top of section 5,
+		         over it. Same curve as the open one, mirrored — the pair brackets the
+		         dark run as ONE gesture rather than decorating it with two shapes.
+		         ⚠️ If either path is ever edited, mirror the other in the same commit. */ ?>
+		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
 				<span class="section-label">FAQ</span>
 				<?php
-				// Keyphrase-bearing subheading: the Yoast title carries
-				// "AI Chat & Voice Agent for <vertical>" but no H2 did, so the
-				// page's own target phrase never appeared in its structure.
-				// Keep this in step with the seo_title pattern in functions.php.
+				// Keyphrase-bearing subheading: no H2 carried the page's own target
+				// phrase, so it never appeared in the page's structure.
+				//
+				// ⚠️ THIS DELIBERATELY NO LONGER MATCHES THE seo_title, AND THAT IS THE
+				// POINT. It used to say "keep this in step with the seo_title pattern in
+				// functions.php"; on 2026-08-30 the Yoast titles moved to "AI
+				// Receptionist for <vertical>" and this H2 stayed on "AI Chat & Voice
+				// Agents for <vertical>".
+				//
+				// Retitling 22 indexed pages is the one edit in the positioning sweep
+				// that can LOSE rankings rather than just fail to gain them — these
+				// pages currently earn their traffic on the chat/voice-agent phrasing.
+				// Keeping that phrase in an on-page H2 means the new term takes the
+				// title tag, which is the strongest signal, while the proven one stays
+				// on the page instead of being deleted from the site in a single day.
+				//
+				// If the receptionist bet is confirmed by real click and position data,
+				// this H2 is the next thing to move. If it is not, the phrase is still
+				// here to fall back to.
 				$faq_vertical = preg_replace( '/^For\s+/', '', html_entity_decode( $ind['label'], ENT_QUOTES, 'UTF-8' ) );
 				?>
 				<h2><?php echo esc_html( sprintf( 'AI Chat & Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
@@ -1521,31 +1812,88 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<!-- Related Resources -->
-	<section class="ind-related">
-		<div class="container container--narrow">
-			<div class="ind-related__content reveal">
-				<h2>Explore More</h2>
-				<ul class="ind-related__links">
-					<?php
-					foreach ( $industries as $slug => $industry ) {
-						if ( $slug === $page_slug ) {
-							continue;
-						}
-						echo '<li><a href="' . esc_url( home_url( '/for/' . $slug . '/' ) ) . '">' . esc_html( str_replace( '&rsquo;', "'", $industry['label'] ) ) . '</a></li>';
-					}
-					?>
-					<li><a href="<?php echo esc_url( home_url( '/blog/' ) ); ?>">AI Voice Agents for WordPress: A Buyer's Guide</a></li>
-				</ul>
+	<?php
+	/* ---- "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------
+	   Mario, 2026-08-30: "I don't like the Explore More." It was fifteen industry
+	   names plus a blog post title in one centred flex-wrap with no separators,
+	   which at 390 read as a ragged word cloud — the same failure homepage section
+	   6 was rebuilt to fix.
+
+	   Re-decided rather than restyled, starting from what a cross-link block at the
+	   bottom of an industry page is FOR. Two jobs, and the old one did neither
+	   well: a reader who has scrolled a dental page either recognises they are in
+	   the wrong trade and wants a near neighbour, or they are done. Fifteen exits
+	   serve the first badly and the second not at all.
+
+	   So: the SIBLINGS IN THIS CATEGORY ONLY, as rows with their own blurbs, plus
+	   one link to /for/. A dentist sees Medical, Chiropractic, Veterinary and
+	   Medical Staffing — the four pages a mis-landed visitor plausibly wanted —
+	   and everything else stays one click away on the hub that already lists all
+	   sixteen. Nothing loses a crawl path.
+
+	   ⚠️ ROWS, LEFT-ALIGNED, NOT CENTRED. Each carries a name and a blurb, which
+	   is a list, and the design system's rule is that lists keep their left edge.
+	   Centring these is how the word cloud happened in the first place.
+
+	   Derived from the registry, so a seventeenth industry appears here by itself.
+	   The block renders only when the category actually has siblings. */
+	$ind_siblings = array();
+	$ind_group    = null;
+	foreach ( sitestaffr_industry_registry() as $ind_reg_group ) {
+		foreach ( $ind_reg_group['industries'] as $ind_reg_item ) {
+			if ( $ind_reg_item['slug'] === $page_slug ) {
+				$ind_group = $ind_reg_group;
+				break 2;
+			}
+		}
+	}
+	if ( $ind_group ) {
+		foreach ( $ind_group['industries'] as $ind_reg_item ) {
+			if ( $ind_reg_item['slug'] !== $page_slug ) {
+				$ind_siblings[] = $ind_reg_item;
+			}
+		}
+	}
+	?>
+	<?php if ( $ind_siblings ) : ?>
+	<!-- More in this category -->
+	<section class="block ind-siblings">
+		<div class="block__inner">
+			<div class="ind-section__head reveal">
+				<span class="section-label">More in <?php echo esc_html( $ind_group['heading'] ); ?></span>
+				<h2>Not Quite Your Line of Work?</h2>
 			</div>
+			<ul class="ind-siblings__list reveal">
+				<?php foreach ( $ind_siblings as $ind_sib ) : ?>
+					<li>
+						<a href="<?php echo esc_url( home_url( '/for/' . $ind_sib['slug'] . '/' ) ); ?>">
+							<span class="ind-siblings__name"><?php echo esc_html( $ind_sib['title'] ); ?></span>
+							<span class="ind-siblings__blurb"><?php echo wp_kses_post( $ind_sib['blurb'] ); ?></span>
+							<span class="ind-siblings__arrow" aria-hidden="true">&rarr;</span>
+						</a>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+			<p class="ind-siblings__all reveal">
+				<a href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all sixteen industries &rarr;</a>
+			</p>
 		</div>
 	</section>
+	<?php endif; ?>
 
+	<?php /* ---- CLOSING CTA: a dark block into the footer ---------------------
+	         Was a bordered card floating on cream, inside a section carrying a teal
+	         gradient and a dotted SVG pattern the card then covered up. V3 ends on
+	         a dark block that runs into the footer as one continuous run, which is
+	         what the homepage and /for/agencies/ both do.
+
+	         .ind-cta__pattern and .cta-spotlight are both gone: the pattern was
+	         painting under an opaque card, and the card is the "bordered CTA card"
+	         the subpage audit lists as its fifth system break. */ ?>
 	<!-- CTA -->
-	<section class="ind-cta">
-		<div class="ind-cta__pattern" aria-hidden="true"></div>
-		<div class="container container--narrow">
-			<div class="ind-cta__content cta-spotlight reveal">
+	<section class="block block--dark ind-cta">
+		<div class="block__inner block-statement">
+			<div class="ind-cta__content reveal">
 				<h2><?php echo wp_kses_post( $ind['cta_headline'] ); ?></h2>
 				<p><?php echo wp_kses_post( $ind['cta_text'] ); ?></p>
 				<div class="ind-cta__actions">

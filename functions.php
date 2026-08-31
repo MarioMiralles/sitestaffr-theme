@@ -273,13 +273,27 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_legal       = is_page_template( 'page-privacy-policy.php' ) || is_page_template( 'page-terms-of-service.php' );
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
-	$is_page        = is_page();
-	$is_default     = is_home() || is_single() || is_archive() || is_search();
 
-	if ( ! $is_landing && ! $is_maintenance && ! $is_get_started && ! $is_manage && ! $is_page && ! $is_default ) {
-		return;
-	}
-
+	/**
+	 * site.css is the theme's stylesheet, so every front-end view gets it.
+	 *
+	 * This used to be gated on a list: is_page() || is_home() || is_single() ||
+	 * is_archive() || is_search(), plus four named templates. A view the list did
+	 * not anticipate rendered with no CSS at all, and the failure is silent — the
+	 * page returns 200 and looks broken rather than erroring anywhere a test or a
+	 * deploy would catch it.
+	 *
+	 * That cost content three times. The /for/ index shipped with its whole
+	 * directory invisible (see the site.js note below, which is the same bug in
+	 * the sibling list), and every 404 on the site rendered completely unstyled
+	 * until 2026-08-30, because a 404 satisfies none of the six conditions.
+	 *
+	 * wp_enqueue_scripts only fires on front-end requests, so there is nothing the
+	 * guard was protecting — it bought no performance and one recurring outage
+	 * class. Removing it fixes the default instead of extending the list a fourth
+	 * time. The per-template flags below stay: those add things to specific pages,
+	 * which is a genuine allowlist. This one was subtracting the baseline.
+	 */
 	wp_enqueue_style(
 		'sitestaffr-website-style',
 		sitestaffr_asset_url( 'assets/css/site.css' ),
@@ -579,9 +593,10 @@ function sitestaffr_industry_registry() {
 	return array(
 		array(
 			'heading'    => 'Health & Medical',
+			'h1'         => 'An AI Receptionist for Healthcare Practices',
 			'slug'       => 'health-medical',
 			'icon'       => '🏥',
-			'seo_title'  => 'AI Chat & Voice Agents for Healthcare Practices | SiteStaffr',
+			'seo_title'  => 'AI Receptionist for Healthcare Practices | SiteStaffr',
 			'metadesc'   => 'Patient questions answered on your website 24/7, for dental, medical, chiropractic and veterinary practices. Every inquiry captured. Free 30-day trial.',
 			'intro'      => 'Patients look for care outside office hours, and the practice that answers first usually gets the appointment. SiteStaffr picks up on your website day, night and weekend, and sends you every detail.',
 			'industries' => array(
@@ -591,7 +606,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🦷',
 					'blurb'     => 'Emergency questions and new-patient inquiries answered while your front desk is with a patient.',
 					'llms'      => 'AI chat and voice agent for dental offices',
-					'seo_title' => 'AI Chat & Voice Agent for Dental Practices | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Dental Practices | SiteStaffr',
 					'metadesc'  => 'SiteStaffr greets dental patients on your website 24/7, answering questions, capturing new patient inquiries, and sending you a full recap. Free 30-day trial.',
 				),
 				array(
@@ -600,7 +615,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🩺',
 					'blurb'     => 'Insurance and new-patient questions handled after hours, with the details in your inbox.',
 					'llms'      => 'AI chat and voice agent for medical practices',
-					'seo_title' => 'AI Chat & Voice Agent for Medical Practices | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Medical Practices | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers medical practice website visitors 24/7, captures new patient and insurance inquiries, and emails a full recap. Free 30-day trial.',
 				),
 				array(
@@ -610,7 +625,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🦴',
 					'blurb'     => 'Turn evening pain-relief searches into booked consultations instead of missed forms.',
 					'llms'      => 'AI chat and voice agent for chiropractic and physical therapy practices',
-					'seo_title' => 'AI Chat & Voice Agent for Chiropractors & PT | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Chiropractors & PT | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers chiropractic and physical therapy website visitors 24/7, captures new patient inquiries, and emails you a full recap. Free 30-day trial.',
 				),
 				array(
@@ -619,7 +634,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🐾',
 					'blurb'     => 'Worried pet owners get an answer at midnight and you get their details right away.',
 					'llms'      => 'AI chat and voice agent for veterinary clinics',
-					'seo_title' => 'AI Chat & Voice Agent for Veterinary Clinics | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Veterinary Clinics | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
 				/* THE SIXTEENTH INDUSTRY, added 2026-08-26. It exists so section 7's
@@ -642,16 +657,17 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🩺',
 					'blurb'     => 'After-hours facility inquiries answered and captured, with the details ready on Monday.',
 					'llms'      => 'AI chat and voice agent for medical staffing agencies',
-					'seo_title' => 'AI Chat & Voice Agent for Medical Staffing | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Medical Staffing | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers medical staffing website visitors 24/7, captures facility and scribe inquiries after hours, and emails a full recap. Free 30-day trial.',
 				),
 			),
 		),
 		array(
 			'heading'    => 'Beauty & Wellness',
+			'h1'         => 'An AI Receptionist for Salons, Spas and Studios',
 			'slug'       => 'beauty-wellness',
 			'icon'       => '💆',
-			'seo_title'  => 'AI Chat & Voice Agents for Salons & Spas | SiteStaffr',
+			'seo_title'  => 'AI Receptionist for Salons & Spas | SiteStaffr',
 			'metadesc'   => 'Answer pricing and availability questions on your website 24/7, for med spas, salons, barbershops and fitness studios. Free 30-day trial.',
 			'intro'      => 'Most bookings start with a question about price, availability or what a treatment involves. SiteStaffr answers from your own website content and takes the client\'s details before they move on.',
 			'industries' => array(
@@ -661,7 +677,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '✨',
 					'blurb'     => 'Answer treatment and pricing questions the moment someone is ready to book.',
 					'llms'      => 'AI chat and voice agent for med spas and aesthetics practices',
-					'seo_title' => 'AI Chat & Voice Agent for Med Spas & Aesthetics | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Med Spas & Aesthetics | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers med spa website visitors 24/7, capturing Botox and treatment inquiries with instant recaps by email. Free 30-day trial.',
 				),
 				array(
@@ -670,7 +686,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '💈',
 					'blurb'     => 'Capture appointment requests that arrive long after the last chair is empty.',
 					'llms'      => 'AI chat and voice agent for salons and barbershops',
-					'seo_title' => 'AI Chat & Voice Agent for Salons & Barbershops | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Salons & Barbershops | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers salon and barbershop website visitors 24/7, captures booking inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
 				array(
@@ -679,16 +695,22 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🏋️',
 					'blurb'     => 'Class times, trial passes, and membership questions answered around the clock.',
 					'llms'      => 'AI chat and voice agent for fitness studios',
-					'seo_title' => 'AI Chat & Voice Agent for Fitness Studios | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Fitness Studios | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers fitness studio website visitors 24/7, captures class and trial pass inquiries, and emails a recap instantly. Free 30-day trial.',
 				),
 			),
 		),
 		array(
 			'heading'    => 'Home & Trades',
+			'h1'         => 'An AI Receptionist for Home Service Businesses',
 			'slug'       => 'home-trades',
 			'icon'       => '🔧',
-			'seo_title'  => 'AI Chat & Voice Agents for Home Services | SiteStaffr',
+			/* ⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the
+			   /for/home-services/ industry page below it are two different URLs, and the
+			   old titles told them apart only by the plural in "Agents"/"Agent". Moving
+			   both to "AI Receptionist for ..." collapsed that distinction into two
+			   identical title tags. Matches this group's h1. */
+			'seo_title'  => 'AI Receptionist for Home Service Businesses | SiteStaffr',
 			'metadesc'   => 'Capture urgent home service jobs around the clock, for HVAC, plumbing, pest control and general contracting. Every lead in your inbox. Free 30-day trial.',
 			'intro'      => 'Home service work is urgent and competitive: whoever answers first usually wins the job. SiteStaffr responds on your website at any hour and gets the name, number and problem to you right away.',
 			'industries' => array(
@@ -698,7 +720,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🏠',
 					'blurb'     => 'Quote requests captured while you are on a job instead of going to whoever answers first.',
 					'llms'      => 'AI chat and voice agent for contractors',
-					'seo_title' => 'AI Chat & Voice Agent for Home Services | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Home Services | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers your website visitors while you&rsquo;re on the job. It captures every lead with name, email, phone, and job details, 24/7. Free 30-day trial.',
 				),
 				array(
@@ -707,7 +729,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🚿',
 					'blurb'     => 'No heat at 11 PM, a pipe letting go on a Sunday. These go to whoever answers first.',
 					'llms'      => 'AI chat and voice agent for HVAC and plumbing companies',
-					'seo_title' => 'AI Chat & Voice Agent for HVAC & Plumbing | SiteStaffr',
+					'seo_title' => 'AI Receptionist for HVAC & Plumbing | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers HVAC and plumbing website visitors 24/7, captures no-heat and leak emergencies, and emails a recap instantly. Free 30-day trial.',
 				),
 				array(
@@ -716,16 +738,17 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🐜',
 					'blurb'     => 'Someone who just saw a roach wants a visit tomorrow, not a callback next week.',
 					'llms'      => 'AI chat and voice agent for pest control companies',
-					'seo_title' => 'AI Chat & Voice Agent for Pest Control | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Pest Control | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers pest control website visitors 24/7, captures urgent pest inquiries with full details, and emails a recap instantly. Free 30-day trial.',
 				),
 			),
 		),
 		array(
 			'heading'    => 'Professional Services',
+			'h1'         => 'An AI Receptionist for Professional Firms',
 			'slug'       => 'professional-services',
 			'icon'       => '💼',
-			'seo_title'  => 'AI Chat & Voice Agents for Professional Firms | SiteStaffr',
+			'seo_title'  => 'AI Receptionist for Professional Firms | SiteStaffr',
 			'metadesc'   => 'Qualify new client inquiries on your website 24/7, for law firms, accounting and tax practices, and insurance agencies. Free 30-day trial.',
 			'intro'      => 'New clients research quietly, then reach out once. SiteStaffr answers their first questions on your site, captures what they need, and sends you a full recap before they contact anyone else.',
 			'industries' => array(
@@ -735,7 +758,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '⚖️',
 					'blurb'     => 'Intake questions answered and case details captured before the next firm replies.',
 					'llms'      => 'AI chat and voice agent for legal practices',
-					'seo_title' => 'AI Chat & Voice Agent for Law Firms | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Law Firms | SiteStaffr',
 					'metadesc'  => 'SiteStaffr captures client inquiries on your law firm&rsquo;s website around the clock, qualifying leads and sending you a full intake recap. Free 30-day trial.',
 				),
 				array(
@@ -744,7 +767,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '📊',
 					'blurb'     => 'Deadline-week inquiries collected in full so nothing waits on a voicemail.',
 					'llms'      => 'AI chat and voice agent for accounting and tax firms',
-					'seo_title' => 'AI Chat & Voice Agent for Accounting & Tax | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Accounting & Tax | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers accounting and tax website visitors 24/7, captures new client inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
 				array(
@@ -753,16 +776,17 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🛡️',
 					'blurb'     => 'Quote and coverage questions captured while prospects are still comparing.',
 					'llms'      => 'AI chat and voice agent for insurance agencies',
-					'seo_title' => 'AI Chat & Voice Agent for Insurance Agencies | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Insurance Agencies | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers insurance agency website visitors 24/7, captures quote and coverage requests, and emails a full recap instantly. Free 30-day trial.',
 				),
 			),
 		),
 		array(
 			'heading'    => 'Property & Auto',
+			'h1'         => 'An AI Receptionist for Real Estate and Auto Businesses',
 			'slug'       => 'property-auto',
 			'icon'       => '🚗',
-			'seo_title'  => 'AI Chat & Voice Agents for Real Estate & Auto | SiteStaffr',
+			'seo_title'  => 'AI Receptionist for Real Estate & Auto | SiteStaffr',
 			'metadesc'   => 'Answer listing and repair questions the moment they come in, for real estate agents and auto repair shops. Every lead captured. Free 30-day trial.',
 			'intro'      => 'Buyers and drivers make decisions fast and rarely wait for a callback. SiteStaffr answers on your website the moment they ask and passes you the details while they are still interested.',
 			'industries' => array(
@@ -772,7 +796,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🏡',
 					'blurb'     => 'Listing questions answered on a Sunday, with the buyer&rsquo;s details in your inbox.',
 					'llms'      => 'AI chat and voice agent for real estate agents',
-					'seo_title' => 'AI Chat & Voice Agent for Real Estate Agents | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Real Estate Agents | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers real estate website visitors 24/7, captures buyer and seller inquiries about your listings, and emails a full recap. Free 30-day trial.',
 				),
 				array(
@@ -781,7 +805,7 @@ function sitestaffr_industry_registry() {
 					'icon'      => '🔧',
 					'blurb'     => 'Vehicle, symptom, and contact details captured before the shop opens.',
 					'llms'      => 'AI chat and voice agent for auto repair shops',
-					'seo_title' => 'AI Chat & Voice Agent for Auto Repair Shops | SiteStaffr',
+					'seo_title' => 'AI Receptionist for Auto Repair Shops | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers auto repair shop website visitors 24/7, captures vehicle repair inquiries with a full recap by email. Free 30-day trial, no credit card.',
 				),
 			),
@@ -901,7 +925,23 @@ function sitestaffr_industry_list() {
  * and heal existing pages.
  */
 add_action( 'init', function () {
-	$provision_version = '11';
+	/* ⚠️ BUMPED 11 -> 12 TO CREATE /for/medical-staffing/, WHICH 404ed ON PRODUCTION.
+	   Medical Staffing was added to the registry above without bumping this, so the
+	   guard below returned early on every request and the page was never inserted. The
+	   industry still appeared everywhere the registry drives — the Industries dropdown,
+	   the homepage picker, the /for/ hub, its own Yoast title and description — all
+	   pointing at a URL that did not exist.
+
+	   ⚠️ THIS IS THE SECOND HALF OF THE FIX AND NEITHER HALF WORKS ALONE. The other is
+	   the missing content array in page-industry.php: with the array and no page you get
+	   a 404 from WordPress, and with the page and no array you get one from the template
+	   guard. Adding an industry is therefore always three edits — registry, array,
+	   version — and only the first two are anywhere near each other in the code.
+
+	   ⚠️ ADDING AN INDUSTRY IS NOT THE ONLY THING THIS GATE CATCHES. It also gates the
+	   SEO healing for all sixteen pages, so any registry edit to a seo_title or metadesc
+	   is equally inert until this number moves. */
+	$provision_version = '13';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
@@ -937,7 +977,7 @@ add_action( 'init', function () {
 	if ( $parent_id ) {
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex' );
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-nofollow' );
-		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Chat & Voice Agent by Industry | SiteStaffr' );
+		update_post_meta( $parent_id, '_yoast_wpseo_title', 'AI Receptionist by Industry | SiteStaffr' );
 		update_post_meta( $parent_id, '_yoast_wpseo_metadesc', 'See how SiteStaffr\'s AI chat and voice agent works for dental, medical, home services, law, auto and 10 more industries. Free 30-day trial.' );
 		sitestaffr_clear_yoast_title_overrides( $parent_id );
 		$provisioned_ids[] = $parent_id;

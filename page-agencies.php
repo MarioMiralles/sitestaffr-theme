@@ -138,7 +138,7 @@ foreach ( $agency_faq as $q ) {
 				<span class="agency-door__eyebrow">For WordPress Agencies</span>
 				<h1>Give Every Client Site a Receptionist</h1>
 				<p class="agency-hero__lead">
-					One plugin makes a client&rsquo;s site answer its visitors by text or voice, capture their name and number, and email the lead straight to them. About five minutes per site, no code, and nothing for you to host or maintain.
+					One plugin makes a client&rsquo;s site answer its visitors 24/7 by text or voice, capture their name and number, and email the lead straight to them. About five minutes per site, no code, and nothing for you to host or maintain.
 				</p>
 				<div class="agency-hero__actions">
 					<a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary js-cta" data-cta="trial">

@@ -342,6 +342,22 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'group'    => 'What it does',
+            /* NEW 2026-08-30, and it is the FAQ half of the hero's 24/7 edit. The page
+               had seventeen questions and not one of them asked about hours, which is
+               the reassurance a service-business owner actually wants and the phrasing
+               people search. It is also the only place the claim can be made
+               PRECISELY: "24/7" on its own invites "so someone is on call?", and the
+               honest answer — nobody is, which is the entire point — is a selling
+               point rather than a caveat.
+
+               ⚠️ NO PHONE LANGUAGE. Same rule as the industry templates: "after hours"
+               and "overnight" are fine, "answers calls" is not. This one sits directly
+               above the no-phone-number question on purpose — hours, then channel. */
+            'question' => 'Does SiteStaffr answer visitors 24/7?',
+            'answer'   => 'Yes. SiteStaffr answers every visitor the moment they arrive, at 2 AM on a Sunday exactly as it does at 2 PM on a Tuesday. There is no schedule to set, no after-hours mode to switch on, and nobody waiting on call — it is the same AI answering from the same pages at every hour. You get the recap by email either way, so an overnight conversation is waiting for you in the morning rather than lost.',
+        ),
+        array(
+            'group'    => 'What it does',
             /* NEW. Protects the positioning: with "receptionist" in the H1, people will
                assume phone answering, which is a different and more expensive category. */
             'question' => 'Can visitors really talk to my website without calling a phone number?',
@@ -468,14 +484,54 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-prefix">Put an AI Receptionist</span>
           <span class="hero__headline-focus">on Your Website</span>
         </h1>
-        <?php /* Ends on SITUATION, not category. "while you're on a job, with a client, or
-                 asleep" is audience signalling a dentist recognizes instantly. Never write
-                 "small and medium-sized businesses" - nobody self-identifies that way, and
-                 it would tell an agency this page is not for them. */ ?>
+        <?php /* ⚠️ THE "ON A JOB, WITH A CLIENT, OR ASLEEP" ENDING IS GONE, AND THIS
+                 REVERSES A RULE THAT USED TO SIT IN THIS EXACT COMMENT (Mario, 2026-08-28).
+                 The old note read: 'Ends on SITUATION, not category. "while you're on a
+                 job, with a client, or asleep" is audience signalling a dentist recognizes
+                 instantly.'
+
+                 It is a FALSE CONTRAST and Mario named it: "it's not like they even have
+                 an opportunity to answer while they're on a job, asleep, or with a client
+                 because SiteStaffr is in its own digital world outside of the real world."
+                 The clause implies the owner would otherwise be answering the website. He
+                 never was. A visitor at 2pm on a Tuesday got exactly the same nothing as
+                 one at 2am, so his calendar was never the variable.
+
+                 ⚠️ THIS DOES NOT CONDEMN THE OTHER TWO INSTANCES, and they stay. Section
+                 4's "You Were Asleep. Your Website Wasn't." is about what happened while he
+                 was not WATCHING, which is true. Section 2's "a shift you are not there
+                 for" is about the website's hours, not his availability. The test is
+                 whether the line implies he would have answered.
+
+                 WHAT REPLACED IT is the one thing nothing else on the first screen says.
+                 The five float cards carry what it does; section 2 carries the stake. The
+                 gap was credibility — where the answers come from — and it is also the top
+                 install objection, which the FAQ asks outright as "Do I need to train it or
+                 write scripts?".
+
+                 Still no "small and medium-sized businesses": nobody self-identifies that
+                 way, and it would tell an agency this page is not for them. */ ?>
+        <?php /* ⚠️ "24/7" IS LOAD-BEARING AND IT IS NEW (Mario, 2026-08-30): "I'm not
+                 seeing anything that says 24/7 on the homepage or elsewhere. I know that
+                 it's implied but people would likely like to see that to be reassured and
+                 it might also help with SEO."
+
+                 He was right and the sweep confirmed it — before this edit the string
+                 appeared ZERO times in this file. It was only ever in Yoast meta
+                 descriptions, /about/, /download/ and /for/, i.e. everywhere except the
+                 page that has to make the promise. Sections 2 and 5 both dramatize
+                 after-hours ("a shift you are not there for", "You Were Asleep") without
+                 either of them ever stating the hours.
+
+                 It goes FIRST here, ahead of the credibility clause, because it is the
+                 reassurance; "nothing to write and nothing to train" is the objection
+                 handler and still follows. Every idea in the previous version survives —
+                 set up in minutes, answers from your own pages, nothing to write or
+                 train. Nothing was traded for it. */ ?>
         <p class="hero__subtitle">
-          Visitors type or talk. SiteStaffr answers from your own pages, takes their name and number, and emails you the lead &mdash; while you&rsquo;re on a job, with a client, or asleep.
+          SiteStaffr answers your visitors 24/7 from your own pages. Set up in minutes, with nothing to write and nothing to train.
         </p>
-        <span class="hero__no-cc">Free for 30 days &bull; Installs in minutes &bull; No code required</span>
+        <span class="hero__no-cc">Free for 30 days &bull; No code required</span>
         <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
              These two were previously reversed: the big button went to the onboarding
              form and the actual trial was a small text link. Same two elements, same
@@ -542,11 +598,17 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
     </div>
   </div>
-  <?php /* INSIDE the hero, not between the sections. It is an absolute overlay pinned to
-           the hero's bottom edge so the robot can stand BEHIND it — that underlap is the
-           whole point, and an in-flow sibling cannot provide it. See the template part
-           for why the overlay is safe here when the V2 wave was not. */ ?>
-  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
+  <?php /* THE OPENING CURTAIN MOVED OUT OF THE HERO ON 2026-08-28 and is now the first
+           child of section 2 below, hanging upward into this section. It is still an
+           absolute overlay and the robot still stands behind it — that underlap is the
+           whole point and has not changed.
+
+           What changed is which box OWNS it. Inside the hero it was clipped by
+           `.hero { overflow: hidden }` (the rule that crops the robot), so its bottom
+           edge landed exactly on the hero/section boundary — a boundary at a fractional
+           layout position, which at a fractional device pixel ratio rounds apart and
+           leaves a pale hairline. Owned by the dark section it can overlap 3px DOWN into
+           it, and there is no shared edge left to round. See .seam-curtain--open. */ ?>
 </section>
 
 <?php /* THE FIVE-CAPABILITY RIBBON WAS DELETED HERE, 2026-08-26.
@@ -576,6 +638,11 @@ get_template_part( 'template-parts/site-nav', null, array(
          here ($500+/$3,000+/$2,000/$800) are gone: they were invented, and this section's
          whole argument is that the numbers are real and cited. */ ?>
 <section class="block block--dark block-split cost-section">
+  <?php /* ⚠️ THE HERO'S CURTAIN LIVES HERE, not in the hero — see the note at the end of
+           the hero for why. It hangs upward out of this section by its own height minus
+           3px, so the shape reads exactly as before and the last 3px of it sit INSIDE
+           this section, covering the boundary row at every device pixel ratio. */ ?>
+  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
   <div class="block__inner">
     <div class="block-split__grid cost-section__grid">
       <div class="cost-section__copy">
@@ -634,7 +701,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                assistive tech through the source button. Read aloud it would announce a
                bare "HVAC" with no context, between an icon and a dollar amount. */
             ?>
-            <span class="job-value__mark" aria-hidden="true"><span><?php echo esc_html( $jv['mark'] ); ?></span></span>
+            <span class="job-value__mark" aria-hidden="true" data-mark="<?php echo esc_attr( $jv['mark'] ); ?>"></span>
 
             <?php
             /* The sprite fallback from the V2 branch was dropped in this port, deliberately.
@@ -1029,7 +1096,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '6:04:24 AM', 'text' => 'Tom Byrne.' ),
           array( 'who' => 'ai',      'at' => '6:04:27 AM', 'text' => 'Thanks Tom. What&rsquo;s the best number for our team to reach you at?' ),
           array( 'who' => 'visitor', 'at' => '6:04:56 AM', 'text' => '(216) 555-0176.' ),
-          array( 'who' => 'ai',      'at' => '6:04:59 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch to confirm the flavors and pickup time. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '6:04:59 AM', 'text' => 'Got it. I&rsquo;ve passed along your request for 40 gluten-free cupcakes for Friday, and someone from the team will be in touch to confirm the flavors and pickup time. Is there anything else I can assist you with?' ),
         ),
       ),
       array(
@@ -1058,7 +1125,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '2:15:48 AM', 'text' => '555-0123.' ),
           array( 'who' => 'ai',      'at' => '2:15:51 AM', 'text' => 'That&rsquo;s seven digits &mdash; could I get the area code as well?' ),
           array( 'who' => 'visitor', 'at' => '2:16:09 AM', 'text' => 'Sorry, 216.' ),
-          array( 'who' => 'ai',      'at' => '2:16:12 AM', 'text' => 'Got it &mdash; a two-tier unicorn cake for 25 guests on April 12. I&rsquo;ve passed that to the team and someone will be in touch with designs and pricing. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '2:16:12 AM', 'text' => 'Got it &mdash; a two-tier unicorn cake for 25 guests on April 12. I&rsquo;ve passed that to the team and someone will be in touch with designs and pricing. Is there anything else I can assist you with?' ),
         ),
       ),
       array(
@@ -1082,7 +1149,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           array( 'who' => 'visitor', 'at' => '11:48:14 PM', 'text' => 'Camila Reyes.' ),
           array( 'who' => 'ai',      'at' => '11:48:17 PM', 'text' => 'Thanks Camila. What&rsquo;s the best number for our team to reach you at?' ),
           array( 'who' => 'visitor', 'at' => '11:48:49 PM', 'text' => 'Email is easier &mdash; camila.reyes@example.com' ),
-          array( 'who' => 'ai',      'at' => '11:48:52 PM', 'text' => 'Got it. I&rsquo;ve passed along your question about Sunday tastings for a September wedding, and someone from the team will follow up by email. Is there anything else I can help you with?' ),
+          array( 'who' => 'ai',      'at' => '11:48:52 PM', 'text' => 'Got it. I&rsquo;ve passed along your question about Sunday tastings for a September wedding, and someone from the team will follow up by email. Is there anything else I can assist you with?' ),
         ),
       ),
     );
@@ -1100,14 +1167,28 @@ get_template_part( 'template-parts/site-nav', null, array(
                    Enter and Space for free, and announces as a control. The row was a
                    plain <li> before, so nothing about the no-JS rendering regresses if
                    the script never runs — see the CSS note on .is-interactive. */ ?>
+          <?php /* ⚠️ NO aria-label ON THIS BUTTON, and that is a fix rather than an
+                   omission. It carried `aria-label="Open the recap for Tom Byrne"`, which
+                   REPLACES the accessible name — so the name no longer contained the
+                   button's own visible text, and Lighthouse failed it on
+                   label-content-name-mismatch. That rule exists for voice control: a user
+                   who says "click 6:03 AM" has to be able to match what they can see.
+
+                   The visible content is the name now, with the purpose appended in a
+                   screen-reader-only span at the end. Same information, and the name still
+                   starts with what is on screen. */ ?>
           <button type="button" class="morning-inbox__row"
-                  data-morning-open="<?php echo esc_attr( $ml['id'] ); ?>"
-                  aria-label="<?php echo esc_attr( 'Open the recap for ' . wp_strip_all_tags( $ml['who'] ) ); ?>">
+                  data-morning-open="<?php echo esc_attr( $ml['id'] ); ?>">
             <span class="morning-inbox__time"><?php echo esc_html( $ml['time'] ); ?></span>
             <span class="morning-inbox__who"><?php echo esc_html( $ml['who'] ); ?></span>
             <span class="morning-inbox__what"><?php echo wp_kses_post( $ml['what'] ); ?></span>
             <span class="morning-inbox__tag">Lead captured</span>
-            <span class="morning-inbox__view" aria-hidden="true">View recap &rarr;</span>
+            <span class="screen-reader-text">&mdash; open the recap</span>
+            <?php /* No "View recap →" span here any more (Mario, 2026-08-28). The row's
+                     affordance is a chevron drawn as `.morning-inbox__row::after`, at
+                     every width and on every device. Do not add a label back: it only
+                     ever appeared on hover, which is a state most of this page's traffic
+                     cannot produce. */ ?>
           </button>
         </li>
         <?php endforeach; ?>
@@ -1218,8 +1299,11 @@ get_template_part( 'template-parts/site-nav', null, array(
              sense as annotations flanking the artifact they pointed at. With the
              document gone they have nothing to flank, so they become what they always
              were: four short claims about how the recap reaches you. */ ?>
-    <div class="block-cards__grid what-you-get__callouts" style="--cards: 4;">
+    <div class="block-cards__grid what-you-get__callouts" style="--cards: 2;">
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">Sent in Seconds</h3>
         <p class="what-you-get__callout-desc">It reaches your inbox while the visitor is still on your site.</p>
       </div>
@@ -1227,21 +1311,39 @@ get_template_part( 'template-parts/site-nav', null, array(
                which did NOT turn into a lead are still reported, and that is the
                difference between a lead tool and a record of everything that happened. */ ?>
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">Every Conversation</h3>
         <p class="what-you-get__callout-desc">Voice and text alike, whether or not it turned into a lead.</p>
       </div>
       <div class="what-you-get__callout">
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        </div>
         <h3 class="what-you-get__callout-title">One Link to Share</h3>
         <p class="what-you-get__callout-desc">Send the whole thing to whoever is doing the job.</p>
       </div>
-      <?php /* ⚠️ REWORDED. This read "No dashboard to log into." The plugin SHIPS a
-               Dashboard with a Follow-ups queue and it is a feature we sell, so as
-               written the card denied the existence of a real feature in order to make
-               a convenience point. The claim intended was always "you don't have to",
-               which is both true and a better sell. */ ?>
+      <?php /* ⚠️ THIRD WORDING, and the two it replaced both failed in the same place —
+               the TITLE, not the description.
+
+               1. "No dashboard to log into." The plugin SHIPS a Dashboard with a
+                  Follow-ups queue and it is a feature we sell, so the card denied a real
+                  feature in order to make a convenience point.
+               2. "Nothing to Check." Fixed the denial and broke the sense (Mario,
+                  2026-08-28: "confusing"). Check what? It reads as "nothing to verify",
+                  which is a claim about accuracy, and then the description immediately
+                  offers a dashboard to check — the title and its own body disagreed.
+
+               "Nothing to Log Into" names the actual friction, and the description gives
+               the dashboard back rather than denying it. The claim was always "you don't
+               have to", which is both true and the better sell. */ ?>
       <div class="what-you-get__callout">
-        <h3 class="what-you-get__callout-title">Nothing to Check</h3>
-        <p class="what-you-get__callout-desc">The details come to where you already work. There&rsquo;s a dashboard too, if you want it.</p>
+        <div class="what-you-get__callout-icon" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>
+        </div>
+        <h3 class="what-you-get__callout-title">Nothing to Log Into</h3>
+        <p class="what-you-get__callout-desc">It arrives in the inbox you already use. The dashboard is there when you want it.</p>
       </div>
     </div>
 
@@ -1342,8 +1444,28 @@ $lang_greetings = array(
                and the subtitle supplies the number and the fact that it needs no setup. */ ?>
       <span class="section-label">No Language Barrier</span>
       <h2>SiteStaffr Speaks <em>Their</em> Language</h2>
+      <?php /* ⚠️ THIS LINE TOOK TWO GOES AND BOTH FAILURES WERE THE SAME ONE.
+
+               It read "Your visitors open in 57+ languages" — "open" being our word for
+               starting a conversation, internal vocabulary that reads as a typo to
+               anyone who has not seen the widget (Mario, 2026-08-30: "it's kind of an
+               odd thing to say here").
+
+               The fix I shipped was "can start in any of 57+ languages and get an answer
+               in the same one", which Mario rejected too: "No this is odd as well. It
+               should speak plainly and say something like 'Your visitors speak 57+
+               languages'". Swapping one construction for another slightly-less-odd
+               construction was still translating FROM product-speak instead of just
+               writing the sentence — and the wording he supplied is shorter than either
+               attempt.
+
+               ⚠️ THE SUBJECT IS THE VISITOR AND THAT IS THE POINT. "SiteStaffr supports
+               57+ languages" is the same fact as a spec; "your visitors speak 57+
+               languages" is the same fact as a situation the reader recognizes.
+
+               Both jobs the line was given still survive: the NUMBER, and no setup. */ ?>
       <p class="lang-section__text">
-        Your visitors open in 57+ languages. It replies in whichever one they use, with nothing for you to set up.
+        Your visitors speak 57+ languages. SiteStaffr answers in all of them, with nothing for you to set up.
       </p>
     </div>
 
@@ -1715,8 +1837,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
                      carries its own denominator in its own label ("of their
                      conversations"), so nothing was taken from it. */ ?>
             <span class="proof-section__lead-number">23</span>
-            <span class="proof-section__lead-label"><strong>qualified leads</strong></span>
-            <span class="proof-section__lead-sub">out of <strong>72</strong> conversations</span>
+            <span class="proof-section__lead-label"><strong>qualified leads</strong> <span class="proof-section__lead-sub">out of <strong>72</strong> conversations</span></span>
           </div>
         </div>
 
@@ -2014,10 +2135,10 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">30 <small>min</small></span>
+          <span class="price-tier__row-value">30</span>
         </div>
         <div class="price-tier__row">
-          <span class="price-tier__row-label">Blog posts</span>
+          <span class="price-tier__row-label">Blog post</span>
           <span class="price-tier__row-value">1</span>
         </div>
         <div class="price-tier__row">
@@ -2054,7 +2175,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">100 <small>min/mo</small></span>
+          <span class="price-tier__row-value">100</span>
         </div>
         <div class="price-tier__row">
           <span class="price-tier__row-label">Blog posts</span>
@@ -2090,7 +2211,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">300 <small>min/mo</small></span>
+          <span class="price-tier__row-value">300</span>
         </div>
         <div class="price-tier__row">
           <span class="price-tier__row-label">Blog posts</span>
@@ -2125,7 +2246,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
         <div class="price-tier__row price-tier__row--lead">
           <span class="price-tier__row-label">Voice minutes</span>
-          <span class="price-tier__row-value">600 <small>min/mo</small></span>
+          <span class="price-tier__row-value">600</span>
         </div>
         <div class="price-tier__row">
           <span class="price-tier__row-label">Blog posts</span>
@@ -2241,6 +2362,13 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <div class="faq-list">
           <?php foreach ( $faq_col as $faq_group ) : ?>
             <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
+            <?php /* ⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px
+                     (Mario, 2026-08-28: the FAQ "is a lot and could be difficult to
+                     scan"). The items used to be flat siblings of their heading, which
+                     on a phone made sixteen identical white cards with three small gray
+                     labels lost among them. It is inert on desktop — see .faq-list__set,
+                     which does nothing until the columns collapse. */ ?>
+            <div class="faq-list__set">
             <?php foreach ( $faq_grouped[ $faq_group ] as $entry ) :
                 $faq = $entry['item'];
                 /* ⚠️ NOTHING SHIPS OPEN (Mario, 2026-08-27). The first question used to,
@@ -2264,6 +2392,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                 </div>
               </div>
             <?php endforeach; ?>
+            </div>
           <?php endforeach; ?>
         </div>
       <?php endforeach; ?>
@@ -2282,13 +2411,18 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
       <div class="faq-section__ask-copy">
         <p class="faq-section__ask-lead">Still have a question?</p>
-        <?php /* THIRD ATTEMPT, and the lesson from the first two is that this line kept
-                 EXPLAINING ITSELF. "Ask ours — it's the same one you'd install, answering
-                 from this very site" and then "It answers from these pages, day or night —
-                 the same assistant you'd install" both spent their length describing the
-                 widget rather than saying anything the reader gains. It is one short claim
-                 now: the thing is live, right here, try it. */ ?>
-        <p class="faq-section__ask-note">It&rsquo;s already answering on this page. Ask it anything.</p>
+        <?php /* ⚠️ THERE IS NO SUPPORTING LINE HERE, AND THAT IS THE FOURTH AND FINAL
+                 ANSWER (Mario, 2026-08-28: "you keep adding random things I don't really
+                 like... let's delete it").
+
+                 Three were written and all three failed the same way — they spent their
+                 length describing the widget instead of saying anything the reader gains:
+                   1. "Ask ours — it's the same one you'd install, answering from this very site"
+                   2. "It answers from these pages, day or night — the same assistant you'd install"
+                   3. "It's already answering on this page. Ask it anything."
+                 The heading asks the question and the button says what to do. A line
+                 between them has to earn its place against that, and three attempts could
+                 not. Do not write a fourth without a reason that is not "it looks empty". */ ?>
         <?php
         /* ⚠️ A REAL [sitestaffr_button], REPLACING A BUTTON THAT DID NOTHING. The old
            markup was `<button class="btn btn--outline js-open-chat">` and NOTHING IN THE
@@ -2317,7 +2451,10 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
          There were ZERO occurrences of "agency" on the homepage or in any template part,
          and lines like "while you're on a job, with a client, or asleep" actively tell an
-         agency this product is not for them. An agency visitor has just read an entire
+         agency this product is not for them. (That particular line left the hero on
+         2026-08-28 for an unrelated reason — see the note there — but the argument holds:
+         the page is still written to the plumber throughout.) An agency visitor has just
+         read an entire
          page written to a plumber; this is where the page says "and if you're the person
          who BUILDS the plumber's site, here's your version."
 
@@ -2630,14 +2767,6 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
     </div>
   </div>
 
-  <?php /* THE CURTAIN CLOSES THE PAGE. Same 'open' variant as the hero's — dark rising out
-           of the light — and it belongs to THIS section for the usual reason: an overlay
-           sits on the LIGHT side of a boundary, so the light section is its background and
-           the two cannot disagree on color. The footer needs no cooperation.
-
-           The page now opens and ends on the same shape, with the footer as the only dark
-           thing below it. */ ?>
-  <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </section>
 
 </main>

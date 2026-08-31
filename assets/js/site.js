@@ -1377,11 +1377,25 @@ if (langExpandBtn) {
     });
   });
 
-  /* Crossing the breakpoint with a mobile item left open would leave a stray
-     .is-open on desktop, where it means nothing. */
-  mobile.addEventListener('change', function () {
+  /* ⚠️ ONE ROW STARTS OPEN ON A PHONE, AND IT IS THE FIRST ONE, NOT THE FEATURED ONE.
+     Closed, this section is sixteen bare names: the picture and the one-line answer that
+     are its entire payload sit behind a tap nobody has a reason to make. Desktop
+     preselects an industry for exactly that reason, and this is the same decision.
+
+     $ind_first's random pick (see page-landing.php) stays the desktop behavior and is
+     deliberate. Honoring it here would open a row twelve deep and leave the top of the
+     section bare, which is the problem this is solving. On a phone every name is on
+     screen as text anyway, so the section never reads as being "about" whichever
+     industry happens to be open.
+
+     Also handles crossing the breakpoint, where a mobile item left open would otherwise
+     leave a stray .is-open on desktop, where it means nothing. */
+  function openFirstOnMobile() {
     names.forEach(function (b) { b.classList.remove('is-open'); });
-  });
+    if (mobile.matches) names[0].classList.add('is-open');
+  }
+  mobile.addEventListener('change', openFirstOnMobile);
+  openFirstOnMobile();
 
   /* Last, as everywhere else in this file: only now does CSS start collapsing the
      mobile details, so a throw above leaves every blurb and link readable. */

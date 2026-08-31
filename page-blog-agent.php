@@ -103,23 +103,25 @@ $ba_faqs = array(
 .ba-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
-.ba-hero {
-    position: relative;
-    padding: clamp(96px, 13vw, 150px) 0 clamp(56px, 8vw, 96px);
-    background:
-        radial-gradient(1100px 520px at 80% -8%, rgba(31,182,204,0.14), transparent 60%),
-        linear-gradient(180deg, var(--warm-white) 0%, var(--cream) 100%);
-}
+/* ⚠️ FLAT CREAM. The radial teal wash and the warm-white-to-cream vertical gradient
+   are both DELETED, same call as the industry and Salesforce heroes: decoration doing
+   no work, and a hero that fades into the section below replaces a decision with a
+   smudge. It also stops this being the only cream on the site that is not flat. */
+.ba-hero { background: var(--cream); }
+/* ⚠️ TWO CLASSES. `.block:not(.block--dark)` is (0,2,0) and beats a bare `.ba-hero`
+   whatever the source order. Same first-section-under-the-nav value as the other
+   converted heroes. */
+.block.ba-hero { padding-block-start: clamp(120px, 15vw, 140px); }
+/* Kept next to .block-split__grid, whose 1fr 1fr this overrides. */
 .ba-hero__grid {
-    display: grid;
     grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
     gap: clamp(32px, 5vw, 72px);
-    align-items: center;
 }
 .ba-hero__eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 6px 14px; border-radius: 999px;
-    background: var(--teal-pale); color: var(--teal-deep);
+    /* --teal-text: 4.06:1 on the pale-teal pill at 0.78rem failed AA. */
+    background: var(--teal-pale); color: var(--teal-text);
     font-family: var(--font-body); font-weight: 700;
     font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase;
     border: 1px solid rgba(0,131,143,0.16);
@@ -136,7 +138,8 @@ $ba_faqs = array(
 }
 .ba-hero__actions { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; margin-top: 32px; }
 .ba-hero__seclink {
-    font-family: var(--font-body); font-weight: 600; color: var(--teal-deep);
+    /* --teal-text: #00838F on cream is 4.03:1 at body size. */
+    font-family: var(--font-body); font-weight: 600; color: var(--teal-text);
     text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
 }
 .ba-hero__seclink:hover { color: var(--teal-mid); }
@@ -161,7 +164,11 @@ $ba_faqs = array(
 .ba-draft__chip-status {
     margin-left: auto; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
     letter-spacing: 0.03em; text-transform: uppercase;
-    color: var(--emerald); background: var(--emerald-light);
+    /* ⚠️ #0f6848, NOT --emerald. --emerald (#10b981) on --emerald-light measured
+       2.24:1 at 11.5px bold — the worst contrast anywhere on the converted set. The
+       colour is not new: it is what .sf-card__foot already uses for exactly this
+       pairing on the Salesforce mockup, so the two product mockups now agree. 5.9:1. */
+    color: #0f6848; background: var(--emerald-light);
     padding: 4px 10px; border-radius: 999px;
 }
 .ba-draft__hero {
@@ -177,7 +184,8 @@ $ba_faqs = array(
 .ba-draft__pill {
     font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.03em; text-transform: uppercase;
-    color: var(--teal-deep); background: var(--teal-pale);
+    /* --teal-text: 4.06:1 on the pale-teal pill. Same swap as every other pill. */
+    color: var(--teal-text); background: var(--teal-pale);
     padding: 4px 10px; border-radius: 999px;
 }
 .ba-draft__title {
@@ -195,7 +203,8 @@ $ba_faqs = array(
 }
 .ba-draft__tag {
     font-family: var(--font-body); font-size: 0.74rem; font-weight: 600;
-    color: var(--teal-deep); background: #f3faf9;
+    /* --teal-text: 4.28:1 on #f3faf9 at 11.8px. */
+    color: var(--teal-text); background: #f3faf9;
     border: 1px solid rgba(0,131,143,0.14);
     padding: 5px 11px; border-radius: 8px;
     display: inline-flex; align-items: center; gap: 6px;
@@ -218,8 +227,14 @@ $ba_faqs = array(
 @media (prefers-reduced-motion: reduce) { .ba-float { animation: none; } }
 
 /* Section shell */
-.ba-section { padding: var(--section-padding); }
+/* ⚠️ NO `padding` HERE. `.block` owns it, and a `padding` SHORTHAND on `.ba-section`
+   beats `.block`'s `padding-block` from anywhere in the file. --section-padding was
+   this page's third spacing system. */
+.ba-section { background: var(--cream); }
 .ba-section__head { text-align: center; max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); }
+/* The dark run: `.block--dark h2` already whitens the title; the deck and eyebrow
+   have to be told. */
+.block--dark .ba-section__lead { color: rgba(240,250,250,0.8); }
 .ba-section__title {
     font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem);
     line-height: 1.1; letter-spacing: -0.015em; margin: 12px 0 0; color: var(--text-primary);
@@ -229,64 +244,58 @@ $ba_faqs = array(
     line-height: 1.6; color: var(--text-secondary); margin: 16px auto 0; max-width: 60ch;
 }
 
-/* Pipeline */
-.ba-flow { background: var(--warm-white); }
+/* ---- Pipeline: a V3 Cards block, UNBOXED -------------------------------
+   ⚠️ `.ba-flow`'S OWN --warm-white IS GONE. That white was section 1 of the
+   HOMEPAGE's tone, borrowed here to separate two sections; V3 separates with a dark
+   block or with whitespace, and one cream run is what the industry page converted to.
+
+   Card, border, shadow and hover-lift removed for the same reason as everywhere else
+   in this conversion: four steps in a sequence are not four offers side by side.
+   ⚠️ `.ba-step__num` IS DELETED, MARKUP AND CSS — a 2.4rem numeral in --teal-pale
+   pinned to a card's top-right corner is legible only while the corner exists. */
 .ba-flow__grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; position: relative;
-}
-.ba-step {
-    position: relative; background: #fff; border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg); padding: 30px 24px 28px; box-shadow: var(--shadow-sm);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.ba-step:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
-.ba-step__num {
-    position: absolute; top: 18px; right: 20px;
-    font-family: var(--font-display); font-size: 2.4rem; line-height: 1;
-    color: var(--teal-pale); font-weight: 600;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(18px, 2.4vw, 28px);
 }
 .ba-step__icon {
-    width: 50px; height: 50px; border-radius: 14px;
-    background: var(--teal-pale); color: var(--teal-deep);
-    display: flex; align-items: center; justify-content: center; margin-bottom: 18px;
+    color: var(--teal-text); line-height: 0; margin-bottom: 14px;
 }
-.ba-step__icon svg { width: 25px; height: 25px; }
+.ba-step__icon svg { width: 28px; height: 28px; }
 .ba-step__title {
     font-family: var(--font-display); font-size: 1.18rem; line-height: 1.25;
     color: var(--text-primary); margin: 0 0 8px;
 }
 .ba-step__desc { font-family: var(--font-body); font-size: 0.95rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
 
-/* Feature grid */
-.ba-features__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; }
-.ba-card {
-    display: flex; gap: 18px; background: #fff; border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg); padding: 30px 30px; box-shadow: var(--shadow-sm);
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
-}
-.ba-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+/* Feature grid — unboxed, same rule as the steps above. */
+.ba-features__grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(24px, 3vw, 40px); }
+.ba-card { display: flex; gap: 18px; }
 .ba-card__icon {
-    flex: none; width: 48px; height: 48px; border-radius: 13px;
-    background: linear-gradient(135deg, var(--teal-pale), #f3faf9);
-    color: var(--teal-deep); display: flex; align-items: center; justify-content: center;
+    flex: none; color: var(--teal-text); line-height: 0;
 }
-.ba-card__icon svg { width: 24px; height: 24px; }
+.ba-card__icon svg { width: 26px; height: 26px; }
 .ba-card__title { font-family: var(--font-display); font-size: 1.24rem; color: var(--text-primary); margin: 2px 0 8px; }
 .ba-card__desc { font-family: var(--font-body); font-size: 0.97rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
 
-/* Autopilot spotlight */
-.ba-pilot { background: var(--warm-white); }
+/* ---- Autopilot: the page's one dark run --------------------------------
+   ⚠️ THE DARK ROUNDED PANEL BECOMES THE BLOCK ITSELF. It was a card floating on
+   warm-white, painted in a THREE-STOP GRADIENT (#074651 -> #0a5a66 -> #064450) that
+   matched nothing else on the site — a fourth and fifth dark tone next to
+   --block-dark and --footer-dark. Full-bleed, bracketed by the curtain pair, it says
+   "this part matters" in the vocabulary the rest of the site already uses, and the
+   two retired tones go with it.
+
+   The panel keeps only its GRID. Background, radius, padding, shadow and the
+   text colour are `.block--dark`'s job now. */
 .ba-pilot__panel {
     display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     gap: clamp(32px, 5vw, 64px); align-items: center;
-    background: linear-gradient(155deg, #074651 0%, #0a5a66 55%, #064450 100%);
-    border-radius: var(--radius-xl); padding: clamp(36px, 5vw, 60px);
-    color: var(--text-on-dark); box-shadow: var(--shadow-lg);
 }
 .ba-pilot__eyebrow {
     display: inline-block; font-family: var(--font-body); font-weight: 700;
     font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;
-    color: #8fe8f2; margin-bottom: 14px;
+    /* --teal-light, the token every other eyebrow on a dark block uses (5.68:1).
+       #8fe8f2 was a one-off tuned to the retired panel gradient. */
+    color: var(--teal-light); margin-bottom: 14px;
 }
 .ba-pilot__title {
     font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.12;
@@ -314,41 +323,58 @@ $ba_faqs = array(
 .ba-sched__day {
     width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
     font-family: var(--font-body); font-size: 0.74rem; font-weight: 700;
-    background: rgba(255,255,255,0.08); color: rgba(240,250,250,0.55);
+    background: rgba(255,255,255,0.08); 
+    /* ⚠️ 0.55 MEASURED 3.86:1 ON THE CARD, NOT ON THE BLOCK. The day chip sits on
+       rgba(255,255,255,0.08) over rgba(255,255,255,0.06) over --block-dark, which
+       composites to #224E55 — lighter than the section, so reading the section's
+       colour understates the problem. 0.68 is 4.89:1 and the off days stay clearly
+       quieter than the two lit ones. */
+    color: rgba(240,250,250,0.68);
 }
-.ba-sched__day.is-on { background: #8fe8f2; color: #074651; }
+.ba-sched__day.is-on { background: #8fe8f2; color: var(--block-dark); }
 .ba-sched__toggle { width: 42px; height: 24px; border-radius: 999px; background: #8fe8f2; position: relative; }
-.ba-sched__toggle::after { content: ''; position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: #074651; }
+.ba-sched__toggle::after { content: ''; position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--block-dark); }
 
-/* Plans row */
-.ba-plans__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-.ba-plan {
-    text-align: center; background: #fff; border: 1px solid var(--border-light);
-    border-radius: var(--radius-lg); padding: 30px 18px; box-shadow: var(--shadow-sm);
-    position: relative;
-}
-.ba-plan--pilot { border-color: rgba(0,131,143,0.28); }
+/* ---- Plans row: unboxed figures --------------------------------------
+   ⚠️ THIS IS NOT THE PRICING TABLE AND MUST NOT BECOME ONE. It is four figures
+   answering "how many posts", not four offers to compare — the plan comparison lives
+   on the homepage. Boxing them is exactly what the pricing pass removed: "the moment
+   a border or a panel appears they become three offers standing side by side".
+
+   `.ba-plan--pilot`'s tinted border goes with the box. The `+ Autopilot` pill already
+   says which plans have it, and says it in words. */
+.ba-plans__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 2.6vw, 32px); }
+.ba-plan { text-align: center; }
 .ba-plan__name { font-family: var(--font-body); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--text-muted); }
 .ba-plan__count { font-family: var(--font-display); font-size: 3rem; line-height: 1; color: var(--teal-deep); margin: 12px 0 4px; }
 .ba-plan__unit { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-secondary); }
 .ba-plan__pilot {
     display: inline-block; margin-top: 14px; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
-    letter-spacing: 0.03em; text-transform: uppercase; color: var(--teal-deep);
+    /* --teal-text: 4.06:1 on the pale-teal pill at 0.72rem failed AA. */
+    letter-spacing: 0.03em; text-transform: uppercase; color: var(--teal-text);
     background: var(--teal-pale); padding: 4px 10px; border-radius: 999px;
 }
 .ba-plans__foot { text-align: center; margin-top: 26px; font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); }
 
-/* Final CTA */
-.ba-cta { padding: var(--section-padding); }
-.ba-cta__inner {
-    text-align: center; background:
-        radial-gradient(700px 300px at 50% 0%, rgba(31,182,204,0.16), transparent 65%),
-        var(--warm-white);
-    border: 1px solid var(--border-light); border-radius: var(--radius-xl);
-    padding: clamp(48px, 7vw, 84px) clamp(24px, 5vw, 64px); box-shadow: var(--shadow-md);
+/* ---- Final CTA: a dark block into the footer ---------------------------
+   Was a bordered warm-white card with its own radial teal wash, floating on cream —
+   the "bordered CTA card" the subpage audit lists as a system break, and the third
+   copy of it after page-industry.php and page-salesforce.php. The page now ends on
+   the dark the footer sits under. `.block--dark` + `.block-statement` do the
+   background, the white type and the centring. */
+.ba-cta__title { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.1; margin: 0 0 14px; color: #fff; }
+.ba-cta__text { font-family: var(--font-body); font-size: 1.1rem; color: rgba(240,250,250,0.8); margin: 0 auto 30px; max-width: 52ch; }
+
+/* ---- The curtain bracket. Scoped `.feature-page`, NOT generalised to `main`:
+   the homepage's two curtained sections add the seam's height in their own rules,
+   so a general selector would double it, decided by (0,1,2) vs (0,2,0). */
+.feature-page > section:has(> .seam-curtain) { position: relative; }
+.feature-page > section:has(> .seam-curtain--open) {
+    padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
 }
-.ba-cta__title { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.1; margin: 0 0 14px; color: var(--text-primary); }
-.ba-cta__text { font-family: var(--font-body); font-size: 1.1rem; color: var(--text-secondary); margin: 0 auto 30px; max-width: 52ch; }
+.feature-page > section:has(> .seam-curtain--close) {
+    padding-top: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
+}
 
 /* Responsive */
 @media (max-width: 980px) {
@@ -365,6 +391,24 @@ $ba_faqs = array(
     .ba-sched__days { width: 100%; justify-content: space-between; }
     .ba-sched__day { flex: 1 1 0; max-width: 40px; }
 }
+/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. Checked at 390
+   across the whole converted set: the homepage and all six ind-* pages centre their
+   hero copy once the two columns become one; `/salesforce/` and `/blog-agent/` were
+   the only two still `start`, because the centring lives in `.ind-hero__content`'s
+   own 768 media query and these pages never had one. 768 to match that breakpoint.
+   ⚠️ `.ba-hero__sub` needs `margin-inline: auto` as well as centred text — it is
+   capped at 38ch, so centring the text alone leaves the BOX hard against the left
+   gutter and the block reads as centred-inside-a-left-column. */
+@media (max-width: 768px) {
+    .ba-hero__content { text-align: center; }
+    .ba-hero__sub { margin-inline: auto; }
+    .ba-hero__actions { justify-content: center; }
+    /* ⚠️ `align-self`, NOT `justify-content` — and `text-align: center` does not reach
+       it. Below 560 the actions row is `flex-direction: column` + `align-items:
+       stretch`; the link is `inline-flex`, so it shrinks to its content and parks at
+       the start of a full-width track while everything around it centres. */
+    .ba-hero__seclink { align-self: center; }
+}
 @media (max-width: 560px) {
     .ba-flow__grid { grid-template-columns: 1fr; }
     .ba-float { display: none; }
@@ -379,12 +423,12 @@ $ba_faqs = array(
 
 <?php get_template_part( 'template-parts/site-nav' ); ?>
 
-<main>
+<main class="feature-page">
 
     <!-- Hero -->
-    <section class="ba-hero">
-        <div class="container">
-            <div class="ba-hero__grid">
+    <section class="block block-split ba-hero">
+        <div class="block__inner">
+            <div class="block-split__grid ba-hero__grid">
                 <div class="ba-hero__content reveal">
                     <span class="ba-hero__eyebrow">Included in every plan</span>
                     <h1 class="ba-hero__title">Your Website Writes Its&nbsp;<em>Own Blog</em></h1>
@@ -448,8 +492,8 @@ $ba_faqs = array(
     </section>
 
     <!-- How it works -->
-    <section class="ba-section ba-flow" id="ba-how">
-        <div class="container">
+    <section class="block block-cards ba-section ba-flow" id="ba-how">
+        <div class="block__inner">
             <div class="ba-section__head reveal">
                 <span class="section-label">How it works</span>
                 <h2 class="ba-section__title">From a topic to a polished draft</h2>
@@ -458,7 +502,6 @@ $ba_faqs = array(
             <div class="ba-flow__grid reveal">
                 <?php foreach ( $ba_pipeline as $step ) : ?>
                     <div class="ba-step">
-                        <span class="ba-step__num" aria-hidden="true"><?php echo esc_html( $step['num'] ); ?></span>
                         <div class="ba-step__icon" aria-hidden="true"><?php echo $step['icon']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static inline SVG ?></div>
                         <h3 class="ba-step__title"><?php echo wp_kses_post( $step['title'] ); ?></h3>
                         <p class="ba-step__desc"><?php echo wp_kses_post( $step['desc'] ); ?></p>
@@ -469,8 +512,8 @@ $ba_faqs = array(
     </section>
 
     <!-- Why it's different -->
-    <section class="ba-section ba-features">
-        <div class="container">
+    <section class="block block-cards ba-section ba-features">
+        <div class="block__inner">
             <div class="ba-section__head reveal">
                 <span class="section-label">Why it&rsquo;s different</span>
                 <h2 class="ba-section__title">Not just another AI writer</h2>
@@ -488,11 +531,19 @@ $ba_faqs = array(
                 <?php endforeach; ?>
             </div>
         </div>
+        <?php /* OPEN: the dark run rises out of the cream. Direct child of the SECTION,
+                 not of .block__inner — the inner is width-capped, so inside it the
+                 curtain would stop short of both edges on a full-bleed boundary. */ ?>
+        <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
+    <?php /* ---- AUTOPILOT: the page's one dark run ------------------------
+             Was a dark rounded card floating on warm-white, in a three-stop gradient
+             matching nothing else on the site. Full-bleed now, bracketed by the
+             curtain pair. */ ?>
     <!-- Autopilot -->
-    <section class="ba-section ba-pilot">
-        <div class="container">
+    <section class="block block--dark block-split ba-pilot">
+        <div class="block__inner">
             <div class="ba-pilot__panel reveal">
                 <div class="ba-pilot__copy">
                     <span class="ba-pilot__eyebrow">Autopilot &mdash; Business &amp; Pro</span>
@@ -535,8 +586,11 @@ $ba_faqs = array(
     </section>
 
     <!-- Plans -->
-    <section class="ba-section ba-plans">
-        <div class="container">
+    <section class="block block-cards ba-section ba-plans">
+        <?php /* CLOSE: the same curve mirrored, so the pair brackets the dark run as
+                 ONE gesture. ⚠️ If either path is edited, mirror the other. */ ?>
+        <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
+        <div class="block__inner">
             <div class="ba-section__head reveal">
                 <span class="section-label">Posts per plan</span>
                 <h2 class="ba-section__title">Content that scales with you</h2>
@@ -559,9 +613,11 @@ $ba_faqs = array(
     </section>
 
     <!-- FAQ -->
-    <section class="faq-section" id="faq">
-        <div class="container">
-            <div class="faq-section__header reveal">
+    <?php /* ⚠️ `.faq-section__head`, NOT `__header` — the `__header` spelling has no
+             rule anywhere in site.css, so this header was rendering unstyled. */ ?>
+    <section class="block faq-section" id="faq">
+        <div class="block__inner">
+            <div class="faq-section__head reveal">
                 <span class="section-label">Common Questions</span>
                 <h2>Blog Agent FAQ</h2>
             </div>
@@ -582,12 +638,12 @@ $ba_faqs = array(
     </section>
 
     <!-- Final CTA -->
-    <section class="ba-cta">
-        <div class="container">
+    <section class="block block--dark ba-cta">
+        <div class="block__inner block-statement">
             <div class="ba-cta__inner reveal">
                 <h2 class="ba-cta__title">Give your website a content engine</h2>
                 <p class="ba-cta__text">Start free for 30 days and let Blog Agent write your first post &mdash; grounded in your business, ready for your review.</p>
-                <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn btn--primary btn--large">
+                <a href="<?php echo esc_url( $get_started_url ); ?>" class="btn ba-cta__btn">
                     Get Started
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
