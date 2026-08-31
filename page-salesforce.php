@@ -224,7 +224,16 @@ $sf_faqs = array(
     font-weight: 700;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    background: rgba(255,255,255,0.22);
+    /* ⚠️ A DARK SCRIM, NOT A WHITE ONE, AND ONLY THE FLAT BAR MADE THIS VISIBLE.
+       rgba(255,255,255,0.22) over the bar composites to #389EA8, so white text on
+       this pill measured 3.16:1 while the same white on the bar beside it measured
+       4.52:1 — the pill was lightening its own background out from under its own
+       label. No white alpha can fix it: every value lightens, and even 0.14 only
+       reaches 3.62. rgba(0,0,0,0.18) gives 6.17:1 and reads as the same quiet badge.
+
+       It only surfaced AFTER the gradient was flattened, because the gradient's own
+       failure was larger and masked it. Fixing one layer reveals the next. */
+    background: rgba(0,0,0,0.18);
     border-radius: 999px;
     padding: 5px 11px;
 }
