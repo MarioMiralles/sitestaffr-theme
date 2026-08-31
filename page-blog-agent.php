@@ -379,6 +379,19 @@ $ba_faqs = array(
     .ba-sched__days { width: 100%; justify-content: space-between; }
     .ba-sched__day { flex: 1 1 0; max-width: 40px; }
 }
+/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. Checked at 390
+   across the whole converted set: the homepage and all six ind-* pages centre their
+   hero copy once the two columns become one; `/salesforce/` and `/blog-agent/` were
+   the only two still `start`, because the centring lives in `.ind-hero__content`'s
+   own 768 media query and these pages never had one. 768 to match that breakpoint.
+   ⚠️ `.ba-hero__sub` needs `margin-inline: auto` as well as centred text — it is
+   capped at 38ch, so centring the text alone leaves the BOX hard against the left
+   gutter and the block reads as centred-inside-a-left-column. */
+@media (max-width: 768px) {
+    .ba-hero__content { text-align: center; }
+    .ba-hero__sub { margin-inline: auto; }
+    .ba-hero__actions { justify-content: center; }
+}
 @media (max-width: 560px) {
     .ba-flow__grid { grid-template-columns: 1fr; }
     .ba-float { display: none; }

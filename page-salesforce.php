@@ -394,6 +394,20 @@ $sf_faqs = array(
     .sf-hero__grid { grid-template-columns: 1fr; }
     .sf-hero__sub { max-width: none; }
 }
+/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT.
+   Checked at 390 across the whole converted set: the homepage and all six ind-*
+   pages centre their hero copy once the two columns become one; `/salesforce/` and
+   `/blog-agent/` were the only two still `start`, because the centring lives in
+   `.ind-hero__content`'s own 768 media query and these pages never had one.
+
+   768, matching `.ind-hero__content`'s breakpoint rather than the 900 above, so the
+   two pages change at the same width as the six they now match. Between 769 and 900
+   the grid is already stacked and stays left — that is deliberate, it is the same
+   band where the ind-* pages are also still left. */
+@media (max-width: 768px) {
+    .sf-hero__content { text-align: center; }
+    .sf-hero__actions { justify-content: center; }
+}
 @media (max-width: 560px) {
     .sf-hero__actions { flex-direction: column; align-items: stretch; }
     .sf-hero__actions .btn { justify-content: center; }
