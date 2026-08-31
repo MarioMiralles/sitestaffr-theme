@@ -3873,6 +3873,14 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--teal-light);
   margin-bottom: 10px;
 }
+/* ⚠️ ONE CLASS, TWO SKINS — DO NOT "FIX" THE RULE ABOVE. `.agency-door__eyebrow` sits
+   inside `.agency-door__panel` on the HOMEPAGE, where the background is --block-dark
+   and --teal-light is right at 5.68:1. `/for/agencies/` reuses the same class in its
+   HERO, which is a light block, where the identical declaration measures 2.4:1.
+   Repointing the shared rule to --teal-text would fix this page and paint the
+   homepage's eyebrow out at ~2.3:1 on the dark panel — the same shape as the
+   !important-written-for-one-skin trap already recorded. Scope the light context. */
+.agency-hero .agency-door__eyebrow { color: var(--teal-text); }
 .agency-door h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
 .agency-door__lead {
   margin-top: 10px;
@@ -3932,7 +3940,8 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .agency-hero__secondary {
   font-size: 0.92rem;
-  color: var(--teal-deep);
+  /* --teal-text: --teal-deep on warm-white measured 4.45:1 at 14.7px. */
+  color: var(--teal-text);
   border-bottom: 1px solid rgba(0,131,143,0.35);
 }
 .agency-hero__note { margin-top: 12px; font-size: 0.85rem; color: var(--text-muted); }
@@ -3974,7 +3983,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-sm);
   border-bottom-left-radius: 3px;
   background: var(--teal-pale);
-  color: var(--teal-deep);
+  /* #0d3f45, the colour `.ind-chat__row.is-ai .ind-chat__bubble` already uses for this
+     exact pairing, so the two chat mockups on the site agree. --teal-deep was 4.06:1. */
+  color: #0d3f45;
   font-size: 0.72rem;
 }
 
@@ -4009,7 +4020,11 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: 50%;
   background: rgba(31,182,204,0.18);
   border: 1px solid rgba(31,182,204,0.45);
-  color: var(--teal-light);
+  /* ⚠️ WHITE, NOT --teal-light. The disc's own translucent teal fill lightens the dark
+     panel underneath it, so the numeral measured 4.09:1 against its own background —
+     the same self-lightening shape as the Salesforce Lead Source pill. White also
+     matches `.ind-step__number`, which is the other numbered step on the site. */
+  color: #fff;
   font-size: 0.78rem;
   font-weight: 600;
 }
@@ -4046,7 +4061,8 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 .agency-pricing__lead { color: var(--text-secondary); margin-top: 8px; }
-.agency-pricing__lead a { color: var(--teal-deep); border-bottom: 1px solid rgba(0,131,143,0.35); }
+/* --teal-text: --teal-deep on warm-white is 4.45:1 at 17px. */
+.agency-pricing__lead a { color: var(--teal-text); border-bottom: 1px solid rgba(0,131,143,0.35); }
 /* The gap, stated out loud. This box IS the demand-validation mechanism. */
 .agency-partner {
   margin-top: 22px;
