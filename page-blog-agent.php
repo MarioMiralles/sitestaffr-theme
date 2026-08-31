@@ -164,7 +164,11 @@ $ba_faqs = array(
 .ba-draft__chip-status {
     margin-left: auto; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
     letter-spacing: 0.03em; text-transform: uppercase;
-    color: var(--emerald); background: var(--emerald-light);
+    /* ⚠️ #0f6848, NOT --emerald. --emerald (#10b981) on --emerald-light measured
+       2.24:1 at 11.5px bold — the worst contrast anywhere on the converted set. The
+       colour is not new: it is what .sf-card__foot already uses for exactly this
+       pairing on the Salesforce mockup, so the two product mockups now agree. 5.9:1. */
+    color: #0f6848; background: var(--emerald-light);
     padding: 4px 10px; border-radius: 999px;
 }
 .ba-draft__hero {
@@ -180,7 +184,8 @@ $ba_faqs = array(
 .ba-draft__pill {
     font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.03em; text-transform: uppercase;
-    color: var(--teal-deep); background: var(--teal-pale);
+    /* --teal-text: 4.06:1 on the pale-teal pill. Same swap as every other pill. */
+    color: var(--teal-text); background: var(--teal-pale);
     padding: 4px 10px; border-radius: 999px;
 }
 .ba-draft__title {
@@ -198,7 +203,8 @@ $ba_faqs = array(
 }
 .ba-draft__tag {
     font-family: var(--font-body); font-size: 0.74rem; font-weight: 600;
-    color: var(--teal-deep); background: #f3faf9;
+    /* --teal-text: 4.28:1 on #f3faf9 at 11.8px. */
+    color: var(--teal-text); background: #f3faf9;
     border: 1px solid rgba(0,131,143,0.14);
     padding: 5px 11px; border-radius: 8px;
     display: inline-flex; align-items: center; gap: 6px;
@@ -317,7 +323,13 @@ $ba_faqs = array(
 .ba-sched__day {
     width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
     font-family: var(--font-body); font-size: 0.74rem; font-weight: 700;
-    background: rgba(255,255,255,0.08); color: rgba(240,250,250,0.55);
+    background: rgba(255,255,255,0.08); 
+    /* ⚠️ 0.55 MEASURED 3.86:1 ON THE CARD, NOT ON THE BLOCK. The day chip sits on
+       rgba(255,255,255,0.08) over rgba(255,255,255,0.06) over --block-dark, which
+       composites to #224E55 — lighter than the section, so reading the section's
+       colour understates the problem. 0.68 is 4.89:1 and the off days stay clearly
+       quieter than the two lit ones. */
+    color: rgba(240,250,250,0.68);
 }
 .ba-sched__day.is-on { background: #8fe8f2; color: var(--block-dark); }
 .ba-sched__toggle { width: 42px; height: 24px; border-radius: 999px; background: #8fe8f2; position: relative; }

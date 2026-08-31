@@ -201,7 +201,16 @@ $sf_faqs = array(
     justify-content: space-between;
     gap: 12px;
     padding: 14px 20px;
-    background: linear-gradient(120deg, var(--teal-deep), var(--teal-mid));
+    /* ⚠️ FLAT, WAS A GRADIENT, AND THIS IS A CONTRAST FIX RATHER THAN A STYLE ONE.
+       `linear-gradient(120deg, --teal-deep, --teal-mid)` put white 14.7px and 11.2px
+       text on a background that changed underneath it: sampled from the rendered bar,
+       #00838F at the dark end is 4.52:1 and #00909F at the light end is 3.83:1. The
+       same two labels passed on the left of the bar and failed on the right, which no
+       computed-style check can see — `backgroundColor` is `transparent` on an element
+       painted by `background-image`, so an auditor walks straight past it to the cream
+       and reports 1.02:1 on the wrong background entirely. Only the pixels showed it.
+       Flat --teal-deep is 4.52:1 across the whole bar. */
+    background: var(--teal-deep);
     color: #fff;
 }
 .sf-card__bar strong {
