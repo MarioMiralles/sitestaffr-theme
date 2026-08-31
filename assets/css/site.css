@@ -11320,25 +11320,24 @@ a.ind-problem-card .ind-problem-card__icon--art {
   text-align: left;
 }
 
-/* Sections ran 650-950px tall for roughly 400px of content: 120px of padding
-   each side meant 240px of dead space between every block. Scoped to the
-   industry page type so all fifteen and the hubs move together. */
-/* ⚠️ `:not(.block)` IS WHAT MAKES THE CONVERSION SAFE ONE SECTION AT A TIME.
+/* ---- `.ind-page > section:not(.block)` IS DELETED (2026-08-30) -----------
+   It was the scaffold that made the ind-* conversion safe one section at a time: a
+   `padding` SHORTHAND sitting ~10,900 lines after `.block`, where
+   `.ind-page > section` (0,1,1) out-specifies `.block` (0,1,0) — so without the
+   `:not()` it would have beaten `.block`'s `padding-block` on every converted
+   section, which would have carried the right class, passed a class-list audit and
+   still rendered on the old scale. That is exactly how three homepage sections
+   shipped wrong during the V3 build.
 
-   This is a `padding` SHORTHAND, it sits ~10,900 lines after `.block`, and
-   `.ind-page > section` (0,1,1) out-specifies `.block` (0,1,0). So without the
-   `:not()` it would beat `.block`'s `padding-block` on every section converted
-   to the block system — the section would carry the right class, pass a
-   class-list audit, and still render on the old scale. That is exactly how three
-   homepage sections shipped wrong during the V3 build.
+   ⚠️ THE GATE IT WAS WAITING FOR IS MET. `.ind-page` is on exactly three templates
+   (`page-for.php`, `page-industry.php`, `page-industry-category.php`) and every
+   `<section>` in all three now carries `.block`, so the selector matched nothing.
+   Removing it was verified by DIFFING the computed padding of every section on all
+   three page types at 1440, 768 and 390 before and after — byte-identical.
 
-   Scoping it to sections that are NOT yet blocks means each conversion moves one
-   section off this rule and onto the token, with no flag day. ⚠️ DELETE THIS
-   RULE ENTIRELY once the last ind-* section carries `.block`; leaving it would
-   be dead CSS waiting to win an argument nobody knew it was in. */
-.ind-page > section:not(.block) {
-  padding: clamp(52px, 6.5vw, 88px) 0;
-}
+   Dead CSS with (0,1,1) and a shorthand is not neutral; it is a rule waiting to win
+   an argument nobody knows it is in. Its removal is why a future ind-* section can
+   be added without inheriting a spacing system that no longer exists. */
 
 @media (max-width: 900px) {
   .ind-scenario__grid {
