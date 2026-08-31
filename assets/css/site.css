@@ -11689,9 +11689,21 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--text-on-dark);
   line-height: 1.04;
   letter-spacing: -0.02em;
-  max-width: 18ch;
   margin-top: 20px;
-  text-wrap: balance;
+  /* ⚠️ `max-width: 18ch` DELETED AND `balance` TRADED FOR `pretty` — BOTH, because
+     either one alone leaves the headline narrow (Mario, 2026-08-31: "The title is not
+     full width. I want it full width").
+
+     18ch computed to 905px against the container's 1100px content box, so the title
+     stopped ~195px short of the byline rule directly under it — which is what made it
+     read as misaligned rather than merely narrow.
+
+     `text-wrap: balance` had to go with it. Balance minimises the LONGEST line while
+     keeping the line count, so it deliberately pulls text back from the available
+     width; removing the cap alone would have widened the box and left the text
+     ragged inside it. `pretty` keeps the orphan protection that was actually wanted
+     without fighting the width. */
+  text-wrap: pretty;
 }
 
 .blog-post__lede {
@@ -12327,7 +12339,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
     padding: 100px 0 44px;
   }
   .blog-post__title {
-    max-width: none;
+    /* `max-width: none` removed with the 18ch cap it existed to undo. */
     margin-top: 16px;
   }
   .blog-post__lede {
