@@ -391,6 +391,11 @@ $ba_faqs = array(
     .ba-hero__content { text-align: center; }
     .ba-hero__sub { margin-inline: auto; }
     .ba-hero__actions { justify-content: center; }
+    /* ⚠️ `align-self`, NOT `justify-content` — and `text-align: center` does not reach
+       it. Below 560 the actions row is `flex-direction: column` + `align-items:
+       stretch`; the link is `inline-flex`, so it shrinks to its content and parks at
+       the start of a full-width track while everything around it centres. */
+    .ba-hero__seclink { align-self: center; }
 }
 @media (max-width: 560px) {
     .ba-flow__grid { grid-template-columns: 1fr; }

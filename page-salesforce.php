@@ -407,6 +407,13 @@ $sf_faqs = array(
 @media (max-width: 768px) {
     .sf-hero__content { text-align: center; }
     .sf-hero__actions { justify-content: center; }
+    /* ⚠️ `align-self`, NOT `justify-content`, and `text-align: center` does not reach
+       it either. Below 560 the actions row becomes `flex-direction: column` with
+       `align-items: stretch`; the link is `inline-flex`, so it shrinks to its content
+       and parks at the start of a full-width track while the button above it fills
+       the track and the copy above that centres. It was the one element left at the
+       gutter — visible in the pixels, invisible in the alignment property. */
+    .sf-hero__seclink { align-self: center; }
 }
 @media (max-width: 560px) {
     .sf-hero__actions { flex-direction: column; align-items: stretch; }
