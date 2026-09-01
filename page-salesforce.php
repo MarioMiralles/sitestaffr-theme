@@ -115,7 +115,7 @@ $sf_faqs = array(
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php wp_head(); ?>
     <style>
-/* ===== Salesforce integration landing page (scoped .sf-) ===== */
+/* ===== Salesforce integration landing page (scoped.sf-) ===== */
 .sf-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
@@ -127,11 +127,11 @@ $sf_faqs = array(
 .sf-hero { background: var(--cream); }
 /* ⚠️ `.block.sf-hero`, TWO CLASSES. The padding is owned by
    `.block:not(.block--dark)` at (0,2,0) and a bare `.sf-hero` at (0,1,0) loses to
-   it whatever the source order — `:not()` contributes its argument's specificity.
+   it whatever the source order — `:not` contributes its argument's specificity.
    The extra top is the same first-section-under-the-nav exception the industry
    hero carries, and the same value, so the two open identically. */
 .block.sf-hero { padding-block-start: clamp(120px, 15vw, 140px); }
-/* Kept next to .block-split__grid, which it overrides: the Lead card is a tall
+/* Kept next to.block-split__grid, which it overrides: the Lead card is a tall
    artifact and needs more than the 1fr the generic Split gives it. */
 .sf-hero__grid {
     grid-template-columns: 1.05fr 0.95fr;
@@ -145,7 +145,7 @@ $sf_faqs = array(
     letter-spacing: 0.09em;
     text-transform: uppercase;
     /* --teal-text, not --teal-deep: 4.06:1 on the pale-teal pill at 0.78rem
-       failed AA. Same swap already made on .ind-recap__section-head span. */
+       failed AA. Same swap already made on.ind-recap__section-head span. */
     color: var(--teal-text);
     background: var(--teal-pale);
     border-radius: 999px;
@@ -391,8 +391,8 @@ $sf_faqs = array(
 
 /* ---- The curtain bracket, on the feature pages -------------------------
    ⚠️ SCOPED TO `.feature-page` RATHER THAN GENERALISED TO `main`. The homepage's
-   two curtained sections (.block.what-you-get, .block.final-cta) already add the
-   seam's height in their own rules, so a `main > section:has(...)` selector would
+   two curtained sections (.block.what-you-get,.block.final-cta) already add the
+   seam's height in their own rules, so a `main > section:has(..)` selector would
    put a second helping on them — and whether it landed would come down to
    comparing (0,1,2) against (0,2,0), which is exactly the specificity coin-flip
    that has already shipped two silent bugs on this branch.
@@ -510,7 +510,7 @@ $sf_faqs = array(
             </div>
         </div>
         <?php /* OPEN: the dark run rises out of the cream. Direct child of the
-                 SECTION, not of .block__inner — the inner is width-capped and
+                 SECTION, not of.block__inner — the inner is width-capped and
                  gutter-padded, so inside it the curtain would be 1140px wide on a
                  full-bleed boundary and stop short of both edges above the cap. */ ?>
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>

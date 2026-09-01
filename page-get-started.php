@@ -168,7 +168,7 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
         <h2 class="form-success__title">We'll be in touch!</h2>
         <?php /* Three business days, matching the homepage closing CTA. These two are the
-                 only places the response-time commitment is stated, and on 2026-08-26 they
+                 only places the response-time commitment is stated, and they
                  disagreed - this said "one business day" while the current promise is three.
                  A commitment stated in two places drifts; if it changes again, grep for
                  "business day" and change both. */ ?>

@@ -44,31 +44,17 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 }
 
 /**
- * Purge cached HTML when a new theme build lands.
+ * Purge cached HTML once per theme version.
  *
- * The site sits behind LiteSpeed. Deploying the theme over FTP changes template
- * and copy files but touches nothing WordPress considers "content", so no
- * invalidation hook fires and visitors keep getting the previous HTML — a
- * deploy that succeeds and changes nothing visible. CSS and JS escape this only
- * because sitestaffr_asset_url() appends a filemtime query string; markup has no
- * equivalent.
+ * The site sits behind LiteSpeed. An FTP deploy changes templates but nothing
+ * WordPress calls "content", so no invalidation fires and visitors keep the old
+ * markup. Assets escape this via the filemtime query string; markup does not.
+ * Bumping style.css "Version:" is therefore what publishes a template change.
  *
- * Watch the theme's own version (style.css "Version:") and purge once when it
- * changes. Bumping that header is therefore what publishes a copy or template
- * change — the provisioner purge added alongside this only covers the industry
- * pages, and only when its own version bumps.
- *
- * Purging via the `X-LiteSpeed-Purge` RESPONSE HEADER, which LiteSpeed Web
- * Server itself acts on, rather than the plugin's `litespeed_purge_all` action:
- * the action alone was verified NOT to clear the cache from here (theme 0.2.5
- * shipped a new footer and the homepage kept serving the old markup, while the
- * same URL with a cache-busting query string returned the new one). The action
- * is still fired as a belt-and-braces second path.
- *
- * Runs on send_headers so the header lands on a real front-end response, and
- * only records the version once the header has actually gone out — the previous
- * version marked itself done even when the purge silently failed, so it never
- * retried.
+ * Uses the X-LiteSpeed-Purge response header, which the web server acts on
+ * directly; the plugin action alone does not clear the cache from here and is
+ * fired only as a second path. The version is recorded after the header goes
+ * out, so a failed purge retries on the next request.
  */
 add_action( 'send_headers', function () {
 	if ( is_admin() || headers_sent() ) {
@@ -97,13 +83,13 @@ if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	 * Two separate problems, one call.
 	 *
 	 * 1. Provisioners set post_title only inside wp_insert_post, so a page created before the
-	 *    registry existed keeps its original title forever while every other managed field is
-	 *    rewritten on each version bump.
+	 * registry existed keeps its original title forever while every other managed field is
+	 * rewritten on each version bump.
 	 *
 	 * 2. Yoast does not read post meta at render time. It caches a derived row per post in its
-	 *    own indexable table — breadcrumb title, SEO title, social titles — and only rebuilds
-	 *    it when the post is saved. So writing `_yoast_wpseo_*` meta or deleting an override
-	 *    updates the source of truth while the served output keeps coming from the stale row.
+	 * own indexable table — breadcrumb title, SEO title, social titles — and only rebuilds
+	 * it when the post is saved. So writing `_yoast_wpseo_*` meta or deleting an override
+	 * updates the source of truth while the served output keeps coming from the stale row.
 	 *
 	 * That second point is why this call is deliberately unconditional. An earlier version
 	 * skipped the update when post_title already matched, which looked like a sensible
@@ -115,8 +101,8 @@ if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	 *
 	 * Only post_title is passed, so post_name (and the live URL) is untouched.
 	 *
-	 * @param int    $page_id Post ID.
-	 * @param string $title   Title the registry says it should have.
+	 * @param int $page_id Post ID.
+	 * @param string $title Title the registry says it should have.
 	 */
 	function sitestaffr_heal_post_title( $page_id, $title ) {
 		$page_id = (int) $page_id;
@@ -134,24 +120,15 @@ if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 
 if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 	/**
-	 * Drop a page's stored Yoast title/description overrides so everything falls back to the
+	 * Drop stored Yoast social/breadcrumb overrides so they fall back to the
 	 * SEO title and description the provisioner manages.
 	 *
-	 * Yoast keeps the Open Graph title, Twitter title, their descriptions, and the breadcrumb
-	 * title in meta keys SEPARATE from `_yoast_wpseo_title`. Writing the SEO title alone
-	 * leaves any stored override serving the old string, so the browser tab and Google show
-	 * new copy while a social share or the breadcrumb shows stale copy.
+	 * Yoast keeps Open Graph, Twitter and breadcrumb titles in meta keys separate
+	 * from `_yoast_wpseo_title`. Writing the SEO title alone leaves those overrides
+	 * serving old copy, so the tab and Google update while a social share does not.
 	 *
-	 * This has now bitten three times in the same shape:
-	 *   - homepage, theme 0.6.10 — og:title still "AI Voice Assistant for Websites"
-	 *   - industry pages, 0.6.23 — og:title still "AI Voice Agent for ..." on three pages,
-	 *     plus an og:description on home-services with the old "name, number" copy
-	 *   - the same three pages, 0.6.24 — `_yoast_wpseo_bctitle` still put "AI Voice Agent for
-	 *     Dental Practices" in the BreadcrumbList JSON-LD while the other twelve pages
-	 *     correctly showed their short post title
-	 *
-	 * Delete rather than duplicate the text, so there is one source of truth. Only overrides
-	 * that actually exist are affected, so this is safe to call on every page.
+	 * Deleting rather than rewriting keeps one source of truth. Safe on every page:
+	 * only overrides that exist are touched.
 	 *
 	 * @param int $page_id Post ID to clear.
 	 */
@@ -175,26 +152,20 @@ if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 
 if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	/**
-	 * Live plugin metadata from our own signed release manifest, cached 12 hours.
+	 * Live plugin metadata from our own release manifest, cached 12 hours.
 	 *
-	 * The zip this page serves is the DIRECT-DOWNLOAD build, which updates itself from
-	 * sitestaffr.com. The WordPress.org build cannot: guideline 8 forbids a plugin in the
-	 * directory from updating itself from anywhere else. So anyone who installs from this
-	 * page stays updatable even if the .org listing goes away, and anyone who installs from
-	 * the directory depends on the directory continuing to exist.
-	 *
-	 * This used to read api.wordpress.org and link downloads.wordpress.org. That made the
-	 * download page fail in the one scenario it most needs to survive: if the listing is
-	 * closed, the API call fails, the page falls back to a hardcoded version that was twenty
-	 * releases stale, and the download button 404s. The source of truth is now ours.
+	 * The zip served here is the direct-download build, which self-updates from
+	 * sitestaffr.com; the WordPress.org build cannot, since directory guideline 8
+	 * forbids it. Reading our own manifest rather than api.wordpress.org keeps the
+	 * download page working even if the.org listing goes away.
 	 *
 	 * @return array{version:string,download_url:string,requires:string,requires_php:string,size_mb:string,listing_url:string}
 	 */
 	function sitestaffr_plugin_info() {
 		$listing_url = 'https://wordpress.org/plugins/sitestaffr/';
 
-		// Kept current by the release runbook. Only reached if every endpoint is unreachable,
-		// so it must point at a real, downloadable build rather than a placeholder.
+		// Only reached if every endpoint is unreachable, so it must stay a real,
+		// downloadable build rather than a placeholder.
 		$fallback = array(
 			'version'      => '1.42.7',
 			'download_url' => 'https://storage.googleapis.com/sitestaffr-releases/sitestaffr-v1.42.7-032923ba28ce.zip',
@@ -225,9 +196,8 @@ if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
 
-			// The download URL is prefix-checked rather than merely non-empty. This value goes
-			// straight into a download link on a public page, so a malformed or unexpected
-			// manifest must not be able to point visitors somewhere else.
+			// Prefix-checked, not just non-empty: this goes straight into a public
+			// download link, so an unexpected manifest cannot redirect visitors.
 			if (
 				is_array( $data )
 				&& ! empty( $data['version'] )
@@ -277,22 +247,13 @@ add_action( 'wp_enqueue_scripts', function () {
 	/**
 	 * site.css is the theme's stylesheet, so every front-end view gets it.
 	 *
-	 * This used to be gated on a list: is_page() || is_home() || is_single() ||
-	 * is_archive() || is_search(), plus four named templates. A view the list did
-	 * not anticipate rendered with no CSS at all, and the failure is silent — the
-	 * page returns 200 and looks broken rather than erroring anywhere a test or a
-	 * deploy would catch it.
+	 * Deliberately ungated. An earlier allowlist of conditionals meant any view it
+	 * did not anticipate rendered with no CSS at all, which fails silently: the page
+	 * returns 200 and simply looks broken. wp_enqueue_scripts only fires on the front
+	 * end, so the guard protected nothing.
 	 *
-	 * That cost content three times. The /for/ index shipped with its whole
-	 * directory invisible (see the site.js note below, which is the same bug in
-	 * the sibling list), and every 404 on the site rendered completely unstyled
-	 * until 2026-08-30, because a 404 satisfies none of the six conditions.
-	 *
-	 * wp_enqueue_scripts only fires on front-end requests, so there is nothing the
-	 * guard was protecting — it bought no performance and one recurring outage
-	 * class. Removing it fixes the default instead of extending the list a fourth
-	 * time. The per-template flags below stay: those add things to specific pages,
-	 * which is a genuine allowlist. This one was subtracting the baseline.
+	 * The per-template flags below are a genuine allowlist; they add assets to
+	 * specific pages rather than subtracting the baseline.
 	 */
 	wp_enqueue_style(
 		'sitestaffr-website-style',
@@ -306,10 +267,8 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_download   = is_page_template( 'page-download.php' );
 	$is_blog_agent = is_page_template( 'page-blog-agent.php' );
 	$is_salesforce = is_page_template( 'page-salesforce.php' );
-	// /for/ and the category hubs use the same .reveal markup as the industry
-	// pages. Without site.js those elements stay at opacity 0 forever — the
-	// /for/ index shipped with its entire directory invisible because this list
-	// was never extended. Any template using .reveal has to be here.
+	// Any template using.reveal must be listed here. Without site.js those
+	// elements stay at opacity 0 forever and the content is simply invisible.
 	$is_for_index  = is_page_template( 'page-for.php' ) || is_page( 'for' );
 	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
 	/* The agencies page uses the FAQ accordion and the shared nav, both of which are
@@ -323,9 +282,9 @@ add_action( 'wp_enqueue_scripts', function () {
 		/* Section 3's demo script and timings. Landing page only — no other template has
 		   the panels, and loading the timings elsewhere would be dead weight.
 
-		   It is a SEPARATE FILE from site.js on purpose: it is the one thing that changes
-		   when Mario's auto-repair recording lands, and keeping it separate means that
-		   change never touches the file driving the nav, the FAQ and the accordion. */
+		   Kept separate from site.js on purpose: the demo timings change whenever a new
+		   recording lands, and that change should never touch the file driving the nav,
+		   the FAQ and the accordion. */
 		if ( $is_landing ) {
 			wp_enqueue_script(
 				'sitestaffr-demo-timings',
@@ -378,15 +337,9 @@ add_action( 'after_setup_theme', function () {
 /**
  * Provision the homepage's search title and description.
  *
- * These were the last SEO fields still set by hand in wp-admin, and they had drifted.
- * The title read "SiteStaffr – AI Voice Assistant for Websites | Capture Leads 24/7":
- * voice-only for a product that now leads with unlimited text chat, using "Assistant"
- * (a term the brand tone guide bans), and — on the page most likely to rank for it —
- * omitting "WordPress" altogether. Putting them in code makes the homepage's search
- * listing reviewable in git like every other page.
- *
- * Title tags carry SEARCH vocabulary rather than brand vocabulary. "Plugin" and "chat"
- * are what buyers actually type, even though the hero deliberately avoids them.
+ * Kept in code rather than wp-admin so the homepage's search listing is reviewable
+ * in git like every other page. Title tags carry search vocabulary rather than brand
+ * vocabulary, which is why they use words the hero deliberately avoids.
  *
  * Bump $provision_version to re-apply after an edit.
  */
@@ -417,9 +370,9 @@ add_action( 'init', function () {
 
 /**
  * Provision the /blog-agent marketing page and its SEO metadata.
- * Guarded by a versioned option so it runs once per version bump — bumping the
- * version re-runs it to heal an existing page (e.g. add metadata after launch).
- * Mario never has to create the page or fill in SEO fields by hand.
+ *
+ * Guarded by a versioned option so it runs once per bump; bumping the version
+ * re-runs it to heal an existing page. The page never has to be created by hand.
  */
 add_action( 'init', function () {
 	$provision_version = '2';
@@ -455,8 +408,8 @@ add_action( 'init', function () {
 
 /**
  * Provision the /salesforce marketing page and its SEO metadata.
- * Same versioned-option pattern as the Blog Agent page above — bumping the
- * version re-runs it to heal an existing page (e.g. add metadata after launch).
+ *
+ * Same versioned-option pattern as the Blog Agent page above.
  */
 add_action( 'init', function () {
 	$provision_version = '1';
@@ -493,19 +446,16 @@ add_action( 'init', function () {
 /**
  * Provision /for/agencies/ — the second-audience page.
  *
- * Same versioned-option pattern as the Salesforce and industry pages: Mario never has to
- * touch WP admin, and a bump re-heals the page if someone edits it by hand.
+ * Same versioned-option pattern as the Salesforce and industry pages; a bump re-heals
+ * the page if someone edits it by hand.
  *
- * ⚠️ IT IS A CHILD OF THE "for" PARENT so the URL is /for/agencies/, which is what the
- * homepage nav item and the section 10 CTA both link to. A top-level /agencies/ page would
- * make those two links 404 while the template itself rendered perfectly at another URL —
- * which is exactly what happened on the first staging deploy: the template shipped, no page
- * used it, and /for/agencies/ returned 404.
+ * Must stay a CHILD of the "for" parent so the URL is /for/agencies/, which is what the
+ * nav item and the section 10 CTA link to. A top-level /agencies/ page renders fine at
+ * the wrong URL and leaves both of those links 404.
  *
- * ⚠️ AGENCIES ARE NOT IN sitestaffr_industry_registry() AND MUST NOT BE. They are an
- * audience, not an industry. This provisioner is deliberately separate from the industry
- * one for that reason — putting them in the registry would file them in homepage section
- * 6's list of sixteen businesses and in the Industries dropdown.
+ * Agencies are deliberately NOT in sitestaffr_industry_registry: they are an audience,
+ * not an industry, and adding them there would file them in the homepage industry list
+ * and the Industries dropdown.
  */
 add_action( 'init', function () {
 	$provision_version = '1';
@@ -562,30 +512,22 @@ add_action( 'init', function () {
 } );
 
 /**
- * THE industry registry — one source of truth for which /for/ pages exist and
- * how they present themselves. The nav panel, the footer, the /for/ index, the
- * llms.txt output and the page provisioner all read from here.
+ * The industry registry: one source of truth for which /for/ pages exist and how
+ * they present themselves. The nav, footer, /for/ index, llms.txt output and the
+ * page provisioner all read from here.
  *
- * TO ADD AN INDUSTRY: add an entry here, add its content entry to the
- * $industries array in page-industry.php (same slug), and bump
- * $provision_version below. Two files, one bump — nothing else to wire. Drop it
- * into whichever group it belongs to and its category hub picks it up
- * automatically; no separate wiring per category.
+ * To add an industry: add an entry here, add its content to the $industries array
+ * in page-industry.php under the same slug, and bump $provision_version. Its
+ * category hub picks it up automatically.
  *
- * TO ADD A CATEGORY: add a group here with heading/slug/icon/seo_title/
- * metadesc/intro and bump $provision_version. The hub page, the footer link and
- * the /for/ index section all come from this one entry.
+ * To add a category: add a group here and bump $provision_version. The hub page,
+ * footer link and /for/ index section all come from that one entry.
  *
- * Industry fields: slug · title (WP page title) · label (nav/footer/index,
- * defaults to title) · icon · blurb (one-liner on the /for/ index) · llms
- * (llms.txt description) · seo_title + metadesc (Yoast, written by the
- * provisioner).
+ * Industry fields: slug, title, label (defaults to title), icon, blurb, llms,
+ * seo_title, metadesc.
+ * Group fields: heading, slug, icon, seo_title, metadesc, intro.
  *
- * Group fields: heading · slug (its hub at /for/<slug>/) · icon · seo_title +
- * metadesc (Yoast) · intro (lead paragraph on the hub). Category slugs share
- * the /for/ namespace with industry slugs, so they must not collide — the
- * industries were already indexed under /for/<industry>/ and reparenting them
- * would have changed live URLs.
+ * Category and industry slugs share the /for/ namespace and must not collide.
  *
  * @return array<int,array<string,mixed>> Ordered groups, each with a heading and its industries.
  */
@@ -637,20 +579,13 @@ function sitestaffr_industry_registry() {
 					'seo_title' => 'AI Receptionist for Veterinary Clinics | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
-				/* THE SIXTEENTH INDUSTRY, added 2026-08-26. It exists so section 7's
-				   testimonial belongs to a named industry: Synergy Scribes is medical
-				   staffing, and until now the proof section named a business in a
-				   category the industries section did not list.
+				/* Filed under Health & Medical even though it is B2B: the five groups are
+				   a browse aid rather than a taxonomy, so it belongs under the word people
+				   would look for.
 
-				   IT GOES IN HEALTH & MEDICAL EVEN THOUGH IT IS B2B. Someone searching
-				   for it thinks healthcare, and the five groups are a browse aid rather
-				   than a taxonomy — filing it by business model instead of by the word
-				   people would look under would be technically tidier and less useful.
-
-				   ⚠️ The homepage's industry count is COUNTED from this registry
-				   (page-landing.php derives "+N more" from sitestaffr_industry_list()),
-				   so adding this entry moves that number by itself. The plugin's
-				   "Great For" list is a SEPARATE repo and is not updated by this. */
+				   Note the homepage's industry count is derived from this registry, so
+				   adding an entry moves that number on its own. The plugin's "Great For"
+				   list lives in a separate repo and is not updated from here. */
 				array(
 					'slug'      => 'medical-staffing',
 					'title'     => 'Medical Staffing',
@@ -708,7 +643,7 @@ function sitestaffr_industry_registry() {
 			/* ⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the
 			   /for/home-services/ industry page below it are two different URLs, and the
 			   old titles told them apart only by the plural in "Agents"/"Agent". Moving
-			   both to "AI Receptionist for ..." collapsed that distinction into two
+			   both to "AI Receptionist for.." collapsed that distinction into two
 			   identical title tags. Matches this group's h1. */
 			'seo_title'  => 'AI Receptionist for Home Service Businesses | SiteStaffr',
 			'metadesc'   => 'Capture urgent home service jobs around the clock, for HVAC, plumbing, pest control and general contracting. Every lead in your inbox. Free 30-day trial.',
@@ -888,11 +823,10 @@ function sitestaffr_industry_art_thumb_url( $slug ) {
  * desktop and ~200px inside the mobile accordion, and the thumb set is sized for the
  * small card grids on /for/.
  *
- * ⚠️ RETURNS '' WHEN THE FILE IS ABSENT, exactly like the thumb helper, and callers are
- * expected to branch on that. Medical Staffing was added to the registry on 2026-08-26
- * before its isometric was keyed, so this returning empty is a REAL state today, not a
- * theoretical one. A missing render must degrade to something deliberate rather than to
- * a broken-image box.
+ * Returns '' when the file is absent, exactly like the thumb helper, and callers are
+ * expected to branch on that. An industry can be added to the registry before its art
+ * exists, so empty is a real state: degrade to something deliberate, never to a
+ * broken-image box.
  *
  * @param string $slug Industry slug.
  * @return string URL, or '' if there is no render for this industry yet.
@@ -918,11 +852,11 @@ function sitestaffr_industry_list() {
 
 /**
  * Provision the /for/<slug> industry landing pages and their SEO metadata from
- * the registry above. Same versioned-option pattern as the Blog Agent and
- * Salesforce pages — ensures the parent "For" page exists (it's a real indexed
- * index page now), then heals/creates each child page. Mario never has to touch
- * WP admin to launch a new industry page — bump $provision_version to re-run
- * and heal existing pages.
+ * the registry above.
+ *
+ * Same versioned-option pattern as the Blog Agent and Salesforce pages: ensures
+ * the parent "For" index page exists, then creates or heals each child. Bump
+ * $provision_version to re-run against existing pages.
  */
 add_action( 'init', function () {
 	/* ⚠️ BUMPED 11 -> 12 TO CREATE /for/medical-staffing/, WHICH 404ed ON PRODUCTION.
@@ -948,9 +882,7 @@ add_action( 'init', function () {
 
 	// Pages touched by this run, purged from LiteSpeed at the end. Provisioning
 	// writes post meta rather than saving the post, so none of LiteSpeed's own
-	// invalidation hooks fire and the stale HTML survives the deploy — that is
-	// how the v4 SEO fix looked like a no-op on /for/ until the cache was
-	// bypassed with a query string. Every future bump would hit the same wall.
+	// invalidation hooks fire and the stale HTML would otherwise survive.
 	$provisioned_ids = array();
 
 	$parent    = get_page_by_path( 'for' );
@@ -969,11 +901,8 @@ add_action( 'init', function () {
 		}
 	}
 
-	// The parent is a real index page now, but v3 only wrote SEO fields for the
-	// CHILDREN — so /for/ shipped with WordPress's fallback title ("For -
-	// SiteStaffr"), no meta description, and the stored Yoast noindex left over
-	// from when it was just a URL container. Verified live after the v3 deploy.
-	// Heal all three here; the children are already correct.
+	// The parent is a real index page, so it needs its own title, description and
+	// a cleared noindex left over from when it was only a URL container.
 	if ( $parent_id ) {
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex' );
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-nofollow' );
@@ -983,9 +912,8 @@ add_action( 'init', function () {
 		$provisioned_ids[] = $parent_id;
 	}
 
-	// Category hubs at /for/<category>/ — siblings of the industry pages, not
-	// parents of them. Reparenting the industries would have rewritten fifteen
-	// URLs that are already live and indexed.
+	// Category hubs at /for/<category>/ are siblings of the industry pages, not
+	// parents: reparenting would rewrite URLs that are already live and indexed.
 	foreach ( sitestaffr_industry_registry() as $group ) {
 		if ( empty( $group['slug'] ) ) {
 			continue;
@@ -1017,8 +945,8 @@ add_action( 'init', function () {
 				update_post_meta( $cat_id, '_yoast_wpseo_metadesc', $group['metadesc'] );
 			}
 			sitestaffr_clear_yoast_title_overrides( $cat_id );
-			// Last, same reason as the industry pages below: the save is what rebuilds
-			// Yoast's cached row, so it has to follow the meta writes.
+			// Last: the save is what rebuilds Yoast's cached row, so it must follow
+			// the meta writes.
 			sitestaffr_heal_post_title( $cat_id, $group['heading'] );
 			$provisioned_ids[] = $cat_id;
 		}
@@ -1052,17 +980,16 @@ add_action( 'init', function () {
 			update_post_meta( $page_id, '_yoast_wpseo_metadesc', $data['metadesc'] );
 			sitestaffr_clear_yoast_title_overrides( $page_id );
 
-			// LAST, and the order matters. This saves the post, which is what makes Yoast
-			// rebuild its cached indexable row for the page. Run it before the meta writes
-			// above and the rebuild would read the values we are replacing.
+			// Last, and the order matters: this saves the post, which rebuilds Yoast's
+			// cached row. Run it before the meta writes and it would read stale values.
 			sitestaffr_heal_post_title( $page_id, $data['title'] );
 
 			$provisioned_ids[] = $page_id;
 		}
 	}
 
-	// Drop the cached HTML for everything just provisioned. No-ops when
-	// LiteSpeed is not installed, and runs once per version bump.
+	// Drop the cached HTML for everything just provisioned. No-ops without
+	// LiteSpeed, and runs once per version bump.
 	foreach ( array_unique( $provisioned_ids ) as $purge_id ) {
 		do_action( 'litespeed_purge_post', $purge_id );
 	}
@@ -1173,9 +1100,8 @@ add_action( 'template_redirect', function () {
 /**
  * Estimated reading time in whole minutes.
  *
- * Shown in the blog hero and on every index card. Four of the five reference
- * blogs measured for the 2026-08-28 redesign show one; none of ours did.
- * 225 wpm is the usual figure for online prose.
+ * Shown in the blog hero and on every index card. 225 wpm is the usual figure
+ * for online prose.
  */
 function sitestaffr_read_time( $content ) {
 	$words = preg_match_all( '/\S+/', wp_strip_all_tags( $content ) );
@@ -1212,7 +1138,7 @@ function sitestaffr_blog_toc( $content ) {
 				if ( '' === $id ) {
 					$id = 'section';
 				}
-				// sanitize_title() collapses punctuation, so two headings can
+				// sanitize_title collapses punctuation, so two headings can
 				// land on the same slug and the rail would scroll to the wrong
 				// one. Suffix duplicates.
 				if ( isset( $seen[ $id ] ) ) {
@@ -1243,26 +1169,24 @@ function sitestaffr_blog_toc( $content ) {
 /**
  * 16:9 crops of the blog featured images.
  *
- * Every featured image ever published here is 1024x1024, and the blog templates
- * are 16:9 throughout. Mario's call (2026-08-28) is to CROP the existing twelve
- * rather than regenerate them, and to fix the ratio upstream in the Blog Agent's
- * image settings for everything after that.
+ * Every featured image published here is 1024x1024 and the blog templates are 16:9
+ * throughout, so the existing images are cropped rather than regenerated; the ratio
+ * is fixed upstream in the Blog Agent's image settings for everything after that.
  *
- * Centre crop was checked against all twelve before committing to it: none loses
- * its subject, and five improve, because what the crop removes is the garbled
- * AI-generated headline text along the top edge.
+ * A centre crop was checked against the whole set first: none loses its subject, and
+ * several improve, because what it removes is garbled generated text along the top.
  *
  * `true` = hard crop, centred.
  *
  * ⚠️ THE DIMENSIONS MUST FIT INSIDE THE SOURCE OR THE RATIO IS SILENTLY WRONG.
  * WordPress does NOT return a smaller correct crop when the target is bigger than
  * the source — it clamps the width and KEEPS the requested height. Probed against
- * `image_resize_dimensions()` with a 1024x1024 source:
+ * `image_resize_dimensions` with a 1024x1024 source:
  *
- *     target 1600x900 -> 1024x900  (ratio 1.138)  <-- not 16:9 at all
- *     target 1200x675 -> 1024x675  (ratio 1.517)  <-- not 16:9
- *     target 1024x576 -> 1024x576  (ratio 1.778)  correct
- *     target  800x450 ->  800x450  (ratio 1.778)  correct
+ * target 1600x900 -> 1024x900 (ratio 1.138) <-- not 16:9 at all
+ * target 1200x675 -> 1024x675 (ratio 1.517) <-- not 16:9
+ * target 1024x576 -> 1024x576 (ratio 1.778) correct
+ * target 800x450 -> 800x450 (ratio 1.778) correct
  *
  * 1600x900 was the obvious first choice and it shipped a 1.14 crop that the CSS
  * then cropped AGAIN, losing twice as much of the picture. Both values below fit

@@ -47,38 +47,15 @@ $get_started_url = home_url( '/#get-started' );
             'name'     => 'Mario Miralles',
             'url'      => home_url( '/about/' ),
         ),
-        // Entity disambiguation. Searching "SiteStaffr" currently returns this site 9th of 10 —
-        // the rest belong to "SiteStaff"/"SiteStaff Chat" (ssc.ai, sitestaff.net), an unrelated
-        // live-chat staffing firm. sameAs is how Google is told which third-party profiles are
-        // THIS entity. Only add URLs verified to resolve; a dead sameAs is worse than none.
+        // Entity disambiguation: sameAs tells Google which third-party profiles are
+        // this entity, which matters because a similarly named company competes for
+        // the same query.
         //
-        // "Verified" means verified BY CONTENT, not by status code — Facebook returns 200 with a
-        // generic "Facebook" title for a handle that does not exist. But resolving is only half
-        // the bar: the profile also has to SAY something about the entity. An empty profile
-        // corroborates nothing and just spends crawl trust on a dead end.
-        //
-        // Removed 2026-08-12 after checking what each page actually contains:
-        //   github.com/sitestaffr   — resolves, but "This organization has no public
-        //                             repositories". An empty shell; the org is private.
-        //   youtube.com/@sitestaffr — no channel content.
-        //
-        // Facebook is KEPT despite having almost no posts. Post count is irrelevant here: it is
-        // an indexed business page carrying a name and a location (Miami FL), which is exactly
-        // the corroborating name/place data this list exists to provide. Engagement is a
-        // marketing question, not an entity-graph one.
-        //
-        // G2, Capterra and TikTok were supplied by Mario from his own browser, 2026-08-12. That
-        // is the only workable verification for these three: G2 and Capterra return 403 to every
-        // request whether the URL exists or not, and TikTok returns 200 with the same generic
-        // "TikTok - Make Your Day" title for a real handle and a bogus one alike. In all three
-        // cases the status code carries no information, so a human look is the bar.
-        //
-        // Facebook answers DIFFERENTLY DEPENDING ON USER-AGENT — a full Chrome UA gets 400
-        // "Error" for the same URL that returns 200 "SiteStaffr | Miami FL" under a plain
-        // "Mozilla/5.0". Do not conclude this one is dead without retrying with a simpler agent.
-        //
-        // x.com / twitter.com: no account exists yet (Mario, 2026-08-12). Do not add a URL here
-        // until one does — a dead sameAs is worse than none.
+        // Only list URLs verified BY CONTENT, not by status code. Several of these
+        // hosts return 200 with a generic title for a handle that does not exist, and
+        // some answer differently depending on user-agent. A profile also has to say
+        // something about the entity: an empty one corroborates nothing and spends
+        // crawl trust. A dead or empty sameAs is worse than none.
         'sameAs'           => array(
             // Software directories first: Google treats these as authoritative for software
             // entities, which is exactly the signal the SiteStaff name collision needs.
@@ -178,19 +155,17 @@ $get_started_url = home_url( '/#get-started' );
     </script>
 
     <?php
-    /* SECTION 2's FOUR JOB-VALUE FIGURES. Ported from the V2 branch on 2026-08-26 with the
+    /* SECTION 2's FOUR JOB-VALUE FIGURES. Ported from the V2 branch with the
        figures, notes and sources byte-identical — these are the sourced numbers user testing
        responded to, and retyping them by hand is how a citation quietly becomes wrong.
 
        AMBER APPEARS IN EXACTLY ONE PLACE ON THE SITE: the four `amount` values below. Not on
-       a button, a card, an icon, a heading or a border. Anywhere else is a bug. Mario
-       overruled the objection to keeping amber here on 2026-08-26 — the original concern was
+       a button, a card, an icon, a heading or a border. Anywhere else is a bug. The objection
+       to keeping amber here was overruled — the original concern was
        that amber was doing semantic work across every section and becoming a second accent
        competing with teal, and one confined use on the element you most want people to stop
        on is a different thing. Confined is the whole reason it is allowed. */
-    /* `mark` IS THE WATERMARK, AND IT IS NOT `label` (Mario, 2026-08-27: "very
-       light/almost transparent... big and bold... a very obscure sort of signal of the
-       industry for the cards and not meant to be imposing").
+    /* `mark` IS THE WATERMARK, AND IT IS NOT `label`.
 
        They are separate fields on purpose and must stay separate. `label` is prose and
        is spoken — it builds the source button's aria-label ("Source for the Auto repair
@@ -220,10 +195,7 @@ $get_started_url = home_url( '/#get-started' );
             'mark'   => 'DENTAL',
             'amount' => '$887',
             'note'   => 'Average yearly spend per dental patient',
-            /* ⚠️ PER YEAR, NOT PER VISIT, AND THAT CHANGE IS THE POINT (Mario, 2026-08-27:
-               "a dentist likely makes more than just $391 average per patient... we might be
-               showing very small numbers when they're actually much more significant for a
-               business owner"). He was right, and the defect was a UNIT MISMATCH rather than
+            /* ⚠️ PER YEAR, NOT PER VISIT, AND THAT CHANGE IS THE POINT. The defect was real, and the defect was a UNIT MISMATCH rather than
                a wrong number: $391 was one VISIT, sitting beside an HVAC figure that is one
                PROJECT. But a website enquiry to a dentist is not one visit — it is a new
                patient, worth a year of them.
@@ -342,7 +314,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'group'    => 'What it does',
-            /* NEW 2026-08-30, and it is the FAQ half of the hero's 24/7 edit. The page
+            /* NEW, and it is the FAQ half of the hero's 24/7 edit. The page
                had seventeen questions and not one of them asked about hours, which is
                the reassurance a service-business owner actually wants and the phrasing
                people search. It is also the only place the claim can be made
@@ -426,7 +398,7 @@ $get_started_url = home_url( '/#get-started' );
     ), JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ); ?>
     </script>
 
-    <?php /* THE AudioObject SCHEMA WAS REMOVED HERE, 2026-08-26.
+    <?php /* THE AudioObject SCHEMA WAS REMOVED HERE.
 
              It described a 45-second plumbing demo (demo-conversation.mp3, "kitchen leak
              under the sink") complete with a full transcript, and the page now contains
@@ -450,7 +422,7 @@ $get_started_url = home_url( '/#get-started' );
 
 <!-- ========== NAVIGATION ========== -->
 <?php
-/* "Voices" -> #voices went with the voice showcase on 2026-08-27. A nav item is
+/* "Voices" -> #voices went with the voice showcase. A nav item is
    the one kind of link that cannot survive its target: it is present on every
    scroll position, so a dead anchor here scrolls nowhere and looks like a broken
    page rather than a missing section. Nothing replaces it - the secondary nav is
@@ -475,8 +447,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                  their own. A stranger has to read this once and think "this is a thing I
                  put on my site that talks to my visitors".
 
-                 Teal falls on "on Your Website" deliberately - Mario: "people are searching
-                 to put this on their site", so the accent lands on the phrase that matches
+                 Teal falls on "on Your Website" deliberately -, so the accent lands on the phrase that matches
                  transactional search intent, not on the product noun.
 
                  No trailing period: single sentence, per the heading rule. */ ?>
@@ -485,12 +456,12 @@ get_template_part( 'template-parts/site-nav', null, array(
           <span class="hero__headline-focus">on Your Website</span>
         </h1>
         <?php /* ⚠️ THE "ON A JOB, WITH A CLIENT, OR ASLEEP" ENDING IS GONE, AND THIS
-                 REVERSES A RULE THAT USED TO SIT IN THIS EXACT COMMENT (Mario, 2026-08-28).
+                 REVERSES A RULE THAT USED TO SIT IN THIS EXACT COMMENT.
                  The old note read: 'Ends on SITUATION, not category. "while you're on a
                  job, with a client, or asleep" is audience signalling a dentist recognizes
                  instantly.'
 
-                 It is a FALSE CONTRAST and Mario named it: "it's not like they even have
+                 It is a FALSE CONTRAST and it was named plainly: "it's not like they even have
                  an opportunity to answer while they're on a job, asleep, or with a client
                  because SiteStaffr is in its own digital world outside of the real world."
                  The clause implies the owner would otherwise be answering the website. He
@@ -511,7 +482,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 
                  Still no "small and medium-sized businesses": nobody self-identifies that
                  way, and it would tell an agency this page is not for them. */ ?>
-        <?php /* ⚠️ "24/7" IS LOAD-BEARING AND IT IS NEW (Mario, 2026-08-30): "I'm not
+        <?php /* ⚠️ "24/7" IS LOAD-BEARING AND IT IS NEW: "I'm not
                  seeing anything that says 24/7 on the homepage or elsewhere. I know that
                  it's implied but people would likely like to see that to be reassured and
                  it might also help with SEO."
@@ -532,11 +503,9 @@ get_template_part( 'template-parts/site-nav', null, array(
           SiteStaffr answers your visitors 24/7 from your own pages. Set up in minutes, with nothing to write and nothing to train.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; No code required</span>
-        <!-- Primary = self-serve trial, secondary = white-glove (Mario, 2026-08-11).
-             These two were previously reversed: the big button went to the onboarding
-             form and the actual trial was a small text link. Same two elements, same
-             layout, swapped roles. NOTE: .hero__download-link is now a style hook only
-             — it no longer points at /download/. Rename when the CSS is next touched. -->
+        <!-- Primary action is the self-serve trial, secondary is the white-glove form.
+             .hero__download-link is a style hook only and no longer points at /download/;
+             rename it when the CSS is next touched. -->
         <div class="hero__actions">
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary btn--large">
             Start Free Trial
@@ -576,7 +545,7 @@ get_template_part( 'template-parts/site-nav', null, array(
              src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/hero-robot-v2.webp' ) ); ?>"
              alt="SiteStaffr, the AI assistant for WordPress websites"
              width="1080" height="1350" fetchpriority="high" decoding="async">
-        <?php /* FIVE THINGS IT DOES, IN THE PRESENT TENSE (Mario, 2026-08-28).
+        <?php /* FIVE THINGS IT DOES, IN THE PRESENT TENSE.
                  These used to mix two grammars: "Responding by text" is something in
                  progress, "Lead captured" is something finished. As notifications
                  floating past a robot's head that reads as a live feed; as the in-flow
@@ -584,7 +553,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                  One subject — SiteStaffr — and every line answers "what does it do?",
                  which is the hero's actual job.
 
-                 ⚠️ NOT aria-hidden. It was, back when a separate .hero__capabilities
+                 ⚠️ NOT aria-hidden. It was, back when a separate.hero__capabilities
                  list carried the same five claims for small screens. That list is gone
                  with V3, so hiding these hides the only place the product's capabilities
                  are stated on the first screen. */ ?>
@@ -598,7 +567,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       </div>
     </div>
   </div>
-  <?php /* THE OPENING CURTAIN MOVED OUT OF THE HERO ON 2026-08-28 and is now the first
+  <?php /* THE OPENING CURTAIN MOVED OUT OF THE HERO ON and is now the first
            child of section 2 below, hanging upward into this section. It is still an
            absolute overlay and the robot still stands behind it — that underlap is the
            whole point and has not changed.
@@ -608,10 +577,10 @@ get_template_part( 'template-parts/site-nav', null, array(
            edge landed exactly on the hero/section boundary — a boundary at a fractional
            layout position, which at a fractional device pixel ratio rounds apart and
            leaves a pale hairline. Owned by the dark section it can overlap 3px DOWN into
-           it, and there is no shared edge left to round. See .seam-curtain--open. */ ?>
+           it, and there is no shared edge left to round. See.seam-curtain--open. */ ?>
 </section>
 
-<?php /* THE FIVE-CAPABILITY RIBBON WAS DELETED HERE, 2026-08-26.
+<?php /* THE FIVE-CAPABILITY RIBBON WAS DELETED HERE.
 
    It listed Unlimited Text Chat / Voice Answers / Lead Capture / Email Recaps /
    Blog Writing — the same five things the hero's float cards already say, in
@@ -654,7 +623,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <h2>Busy Owners Miss Website Leads and Often Never Know It</h2>
 
         <?php /* SETS UP THE AUDIT, and does not restate the hero. It also does not attack
-                 "we'll get back to you" (Mario, 2026-08-20) — that would be a self-own,
+                 "we'll get back to you" — that would be a self-own,
                  since SiteStaffr's own conversations end with details captured and a human
                  following up. The difference is WHEN the visitor gets their answer. */ ?>
         <p class="cost-section__text">
@@ -689,7 +658,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             /* THE WATERMARK, and it is wrapped in its own clip layer rather than clipped
                by the card.
 
-               `overflow: hidden` on .job-value itself would have been the obvious way to
+               `overflow: hidden` on.job-value itself would have been the obvious way to
                contain oversized type, and it would have silently broken the source
                tooltip: that tooltip is absolutely positioned inside this same card and is
                taller than the space below the info button, so clipping the card clips the
@@ -717,12 +686,11 @@ get_template_part( 'template-parts/site-nav', null, array(
                  width="64" height="64" alt="" aria-hidden="true" decoding="async" loading="lazy">
 
             <?php
-            /* SOURCE ON DEMAND, not in the card (Mario: "a little I icon for information up
-               at the top right corner… it can have a tool tip for the source").
+            /* SOURCE ON DEMAND, not in the card.
 
                A real <button>, not a hover-only span, and that is the accessibility
                difference: a hover tooltip is unreachable by keyboard and unreachable on
-               touch. As a button it takes focus, opens on :focus-visible as well as :hover,
+               touch. As a button it takes focus, opens on:focus-visible as well as:hover,
                and announces through aria-describedby. `title` is deliberately not used — it
                is invisible on touch, unstyleable, and read inconsistently by screen readers.
 
@@ -740,8 +708,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             </span>
 
             <?php
-            /* NO VISIBLE INDUSTRY LABEL (Mario, 2026-08-25: "remove the industry name under
-               each icon"). The icon carries it, and a wrench captioned "Auto repair" is a
+            /* NO VISIBLE INDUSTRY LABEL. The icon carries it, and a wrench captioned "Auto repair" is a
                caption telling you what the picture already said.
 
                `label` stays in the array and is still USED — it builds the info button's
@@ -753,7 +720,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           </li>
 <?php endforeach; ?>
         </ul>
-        <?php /* The price anchor was REMOVED here (Mario, 2026-08-26: not yet). It read
+        <?php /* The price anchor was REMOVED here, for now. It read
                  "A single repair order covers a year of SiteStaffr."
 
                  ⚠️ IF IT EVER RETURNS, IT STAYS SPECIFIC TO THE REPAIR ORDER. Starter is
@@ -800,8 +767,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     </div>
 
     <?php
-    /* THE AT-REST STAGE (Mario, 2026-08-27: "the two blank panels looks bad so let's hide
-       them and just put a huge play button").
+    /* THE AT-REST STAGE.
 
        WHY THE PANELS WERE BLANK IN THE FIRST PLACE, because it is not a bug and the fix
        must not "repair" it: the panels are rendered FULLY POPULATED by PHP, and the script
@@ -811,9 +777,9 @@ get_template_part( 'template-parts/site-nav', null, array(
        standing by to fill them, and this stage now covers exactly that state.
 
        So there are three states, not two:
-         no JS / reduced motion  -> no stage at all, both panels full. Unchanged.
-         JS, not yet played      -> this stage. Panels hidden, one enormous target.
-         played once             -> stage gone for good, panels take over and animate.
+         no JS / reduced motion -> no stage at all, both panels full. Unchanged.
+         JS, not yet played -> this stage. Panels hidden, one enormous target.
+         played once -> stage gone for good, panels take over and animate.
 
        `hidden` until JS removes it, for the same reason the transport is: with no script
        there is nothing to play, and a dead play button is worse than none.
@@ -844,13 +810,13 @@ get_template_part( 'template-parts/site-nav', null, array(
         <?php /* ⚠️ THE TRIANGLE'S OWN COORDINATES DO THE CENTERING — there is no margin
                  nudge on this icon and there must not be one added back.
 
-                 It was `8,5 20,12 8,19`, whose bounding box runs x=8..20 and is therefore
+                 It was `8,5 20,12 8,19`, whose bounding box runs x=8.20 and is therefore
                  centered on x=14 inside a 24-wide viewBox: two units right of center before
                  any CSS is involved. A `margin-left` was then added on top of that, which
                  is why the glyph sat visibly right in the circle. Two offsets stacking is
                  also why nudging the CSS never fixed it — the error was in the artwork.
 
-                 Now x=7..19: the bounding box is centered on 13, one unit right of the
+                 Now x=7.19: the bounding box is centered on 13, one unit right of the
                  viewBox's 12. That single unit is deliberate and is optical, not
                  geometric — a right-pointing triangle carries its mass on the flat left
                  edge, so a perfectly centered bounding box reads as sitting too far left.
@@ -942,7 +908,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <p class="see-it__dogfood">This site runs it too. Ask it anything.</p>
       </div>
 
-      <?php /* RIGHT: the recap. Mario's idea and the best one in the session — it
+      <?php /* RIGHT: the recap. the strongest idea and the best one in the session — it
                assembles as the conversation plays, which makes the causal link visible:
                you watch the visitor give their email, and the email appears. */ ?>
       <div class="see-it__col">
@@ -1008,9 +974,7 @@ get_template_part( 'template-parts/site-nav', null, array(
          The bridge line went with the document ("Here is what the 2:14 AM one looked
          like when you opened it") — it pointed at the thing that no longer exists. */ ?>
 <section class="block what-you-get" id="your-morning">
-  <?php /* THE CURTAIN CLOSES HERE (Mario, 2026-08-27: "add the same book shape divider
-           for the Your Morning section top so that the dark sections show a completion
-           with the divider"). Same path as the hero's, mirrored — the dark block that
+  <?php /* THE CURTAIN CLOSES HERE. Same path as the hero's, mirrored — the dark block that
            opened with a peak drawn up now comes back down with one.
 
            It belongs to THIS section, not to section 3, for the same reason the opening
@@ -1034,7 +998,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     </div>
 
     <?php
-    /* THE INBOX IS THE EVIDENCE, AND IT IS WHERE THE CLOCK IDEA LANDS. Mario asked
+    /* THE INBOX IS THE EVIDENCE, AND IT IS WHERE THE CLOCK IDEA LANDS. it was asked
        about a large clock or a 24/7 symbol behind the hero robot. Wrong slot — the
        hero's job is identity — but the right instinct, and the better version is not a
        clock at all: it is A REAL TIMESTAMP ON A REAL THING. "6:03 AM" on a captured
@@ -1050,9 +1014,7 @@ get_template_part( 'template-parts/site-nav', null, array(
        morning into a brochure, and the section stops being evidence. */
     ?>
     <?php
-    /* THE THREE LEADS, AND THE DOCUMENT BEHIND EACH ONE (Mario, 2026-08-27: "it would be
-       really cool if we could click on each of those emails and see an example of the
-       document that we have in v1").
+    /* THE THREE LEADS, AND THE DOCUMENT BEHIND EACH ONE.
 
        ⚠️ ONE ARRAY DRIVES BOTH THE ROW AND THE DOCUMENT. The row's name, time and
        one-liner are read from the same entry the recap and transcript are, so a row can
@@ -1060,13 +1022,11 @@ get_template_part( 'template-parts/site-nav', null, array(
        is how "Sarah Mitchell, 25 guests" ends up opening a document about 40 cupcakes.
 
        ⚠️ EVERY TRANSCRIPT OPENS ON THE SAME LINE, and that is the product's real greeting
-       rather than three invented ones (Mario asked for it explicitly). It is also the
-       line V1's document already used. Note the wording is "How can I help you today?" —
-       Mario's message transposed it to "How I can help you today?", which is not
+       rather than three invented ones (it was asked for explicitly). It is also the
+       line V1's document already used. Note the wording is "How can I help you today?" — It was transposed to "How I can help you today?", which is not
        grammatical and is not what V1 shipped.
 
-       PRIYA RAMAN IS GONE FROM THIS SECTION (Mario: "use a different name... a Hispanic
-       woman or something") and that also removes a duplicate: the same fictional person
+       PRIYA RAMAN IS GONE FROM THIS SECTION and that also removes a duplicate: the same fictional person
        was giving her details to a pest control company in section 3 and to a bakery here.
        Section 3 keeps the name; this one is Camila Reyes.
 
@@ -1166,7 +1126,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                    surface, so the row stays one target, but it takes focus, fires on
                    Enter and Space for free, and announces as a control. The row was a
                    plain <li> before, so nothing about the no-JS rendering regresses if
-                   the script never runs — see the CSS note on .is-interactive. */ ?>
+                   the script never runs — see the CSS note on.is-interactive. */ ?>
           <?php /* ⚠️ NO aria-label ON THIS BUTTON, and that is a fix rather than an
                    omission. It carried `aria-label="Open the recap for Tom Byrne"`, which
                    REPLACES the accessible name — so the name no longer contained the
@@ -1184,7 +1144,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <span class="morning-inbox__what"><?php echo wp_kses_post( $ml['what'] ); ?></span>
             <span class="morning-inbox__tag">Lead captured</span>
             <span class="screen-reader-text">&mdash; open the recap</span>
-            <?php /* No "View recap →" span here any more (Mario, 2026-08-28). The row's
+            <?php /* No "View recap →" span here any more. The row's
                      affordance is a chevron drawn as `.morning-inbox__row::after`, at
                      every width and on every device. Do not add a label back: it only
                      ever appeared on hover, which is a state most of this page's traffic
@@ -1203,12 +1163,12 @@ get_template_part( 'template-parts/site-nav', null, array(
        rule exists because PRIMARY content once did. These are worked examples behind a
        row that already states the lead, the time and the outcome in the inbox itself; a
        reader with no script loses the detail view and nothing they were told about.
-       Without JS the rows never gain their affordance (see .is-interactive in the CSS),
+       Without JS the rows never gain their affordance (see.is-interactive in the CSS),
        so there is no button advertising something that cannot happen.
 
        <dialog> rather than a hand-built overlay: focus trapping, Esc, inertness of the
-       page behind and the top layer are all native. showModal() is what activates them —
-       a plain .show() or a CSS-only reveal gets none of it. */
+       page behind and the top layer are all native. showModal is what activates them —
+       a plain.show or a CSS-only reveal gets none of it. */
     ?>
     <?php foreach ( $morning_leads as $ml ) : ?>
     <dialog class="recap-doc" id="recap-<?php echo esc_attr( $ml['id'] ); ?>"
@@ -1263,12 +1223,12 @@ get_template_part( 'template-parts/site-nav', null, array(
             <div class="recap-doc__messages">
               <?php foreach ( $ml['turns'] as $t ) : ?>
                 <?php if ( 'ai' === $t['who'] ) : ?>
-                  <?php /* ⚠️ "SiteStaffr", NOT "AI" (Mario, 2026-08-27). The website is
+                  <?php /* ⚠️ "SiteStaffr", NOT "AI". The website is
                            deliberately AHEAD of the product here: the plugin UI and the
                            emailed transcript both still print "AI", and renaming them is a
                            separate task on the wiki task board. Until that ships this
                            mockup shows the intended label rather than the shipped one —
-                           which is Mario's call, and is why the two differ if anyone
+                           which is a deliberate call, and is why the two differ if anyone
                            compares them. */ ?>
                   <div class="recap-doc__msg recap-doc__msg--ai">
                     <div class="recap-doc__msg-meta"><strong>SiteStaffr</strong> <?php echo esc_html( $t['at'] ); ?></div>
@@ -1330,8 +1290,7 @@ get_template_part( 'template-parts/site-nav', null, array(
                1. "No dashboard to log into." The plugin SHIPS a Dashboard with a
                   Follow-ups queue and it is a feature we sell, so the card denied a real
                   feature in order to make a convenience point.
-               2. "Nothing to Check." Fixed the denial and broke the sense (Mario,
-                  2026-08-28: "confusing"). Check what? It reads as "nothing to verify",
+               2. "Nothing to Check." Fixed the denial and broke the sense. Check what? It reads as "nothing to verify",
                   which is a claim about accuracy, and then the description immediately
                   offers a dashboard to check — the title and its own body disagreed.
 
@@ -1381,7 +1340,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         Mandarin / French, bubbles saying Hola / Hallo / Xin chào.
 
    THE REPLACEMENT COSTS NO NEW ART. robot-languages.webp was generated for this exact
-   slot on 2026-08-25, committed, and never placed.
+   slot, committed, and never placed.
 
    WHY THE ROBOT ARGUES BETTER THAN THE CROWD. A crowd claims "your visitors are
    diverse" — true, but not the product claim, and a picture of a street cannot prove it.
@@ -1394,8 +1353,7 @@ get_template_part( 'template-parts/site-nav', null, array(
    section whose entire subject is other languages. This is not decoration.
 
    ────────────────────────────────────────────────────────────────────────────
-   REBUILT AGAIN, 2026-08-27. Mario: "I hate it. I'd rather see the robot super big with
-   many different languages saying hello around the robot."
+   REBUILT AGAIN.
 
    WHAT WENT: the split layout, the single greeting bubble, and the clickable pills that
    drove it. The pills were a good idea that solved the wrong problem — they let you see
@@ -1433,8 +1391,7 @@ $lang_greetings = array(
 <section class="block lang-section" id="languages">
   <div class="block__inner">
     <div class="lang-section__header">
-      <?php /* ⚠️ THE EYEBROW, THE HEADING AND THE SUBTITLE ALL SAID THE SAME SENTENCE
-               (Mario, 2026-08-27: "it's repetitive"). The label read "Speaks Their
+      <?php /* ⚠️ THE EYEBROW, THE HEADING AND THE SUBTITLE ALL SAID THE SAME SENTENCE. The label read "Speaks Their
                Language" directly above a heading reading "SiteStaffr Speaks Their
                Language", and the subtitle then added "and so does SiteStaffr" — the same
                claim a third time before the reader reached a single greeting.
@@ -1448,13 +1405,10 @@ $lang_greetings = array(
 
                It read "Your visitors open in 57+ languages" — "open" being our word for
                starting a conversation, internal vocabulary that reads as a typo to
-               anyone who has not seen the widget (Mario, 2026-08-30: "it's kind of an
-               odd thing to say here").
+               anyone who has not seen the widget.
 
                The fix I shipped was "can start in any of 57+ languages and get an answer
-               in the same one", which Mario rejected too: "No this is odd as well. It
-               should speak plainly and say something like 'Your visitors speak 57+
-               languages'". Swapping one construction for another slightly-less-odd
+               in the same one". Swapping one construction for another slightly-less-odd
                construction was still translating FROM product-speak instead of just
                writing the sentence — and the wording he supplied is shorter than either
                attempt.
@@ -1480,8 +1434,7 @@ $lang_greetings = array(
        hiding them would leave a screen-reader user with a heading and nothing under it. */
     ?>
     <?php
-    /* THE HAZE — more languages, receding behind the robot (Mario, 2026-08-27: "add more
-       languages behind the robot as if it was in some sort of vortex").
+    /* THE HAZE — more languages, receding behind the robot.
 
        ⚠️ DELIBERATELY NOT A LITERAL VORTEX. A swirl would need the words on a rotated
        ellipse with perspective, and every one of them would then be positioned against
@@ -1562,7 +1515,7 @@ $lang_greetings = array(
 </section>
 
 <?php
-/* SECTION 6 — Who this is for. The section Mario hated most, and the one that
+/* SECTION 6 — Who this is for. The most-reworked section, and the one that
    motivated this review. Rebuilt rather than adjusted.
 
    WHAT WAS WRONG WITH THE OLD FLAT BLOCK:
@@ -1590,8 +1543,7 @@ $lang_greetings = array(
 $ind_groups = sitestaffr_industry_registry();
 $ind_flat   = sitestaffr_industry_list();
 
-/* WHICH INDUSTRY OPENS THE SECTION IS RANDOM (Mario, 2026-08-27: "would be great if a
-   business is picked at random instead of always starting with Dental Practice").
+/* WHICH INDUSTRY OPENS THE SECTION IS RANDOM.
 
    It was $ind_flat[0], so Dental Practices — the first entry in the registry — was the
    permanent face of a section whose whole argument is breadth. Sixteen industries, and a
@@ -1613,8 +1565,7 @@ $ind_flat   = sitestaffr_industry_list();
    choice. Do not re-roll it further down the template. */
 $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null;
 ?>
-<?php /* ⚠️ NOT A block-split ANY MORE (Mario, 2026-08-27: "the side by side looks weird
-         because the industries is too long vertically and doesn't look good").
+<?php /* ⚠️ NOT A block-split ANY MORE.
 
          It was image-left / list-right. The list is five groups and sixteen names in ONE
          column, so it ran far taller than the 440px image beside it and the Split was
@@ -1646,7 +1597,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
             $art = sitestaffr_industry_art_url( $ind['slug'] );
             /* ⚠️ A MISSING RENDER MUST NOT PRODUCE A BROKEN IMAGE. Medical Staffing is
                the sixteenth industry and its isometric is generated but not yet keyed,
-               so the file genuinely is absent right now. sitestaffr_industry_art_url()
+               so the file genuinely is absent right now. sitestaffr_industry_art_url
                returns '' when the file does not exist, and the panel falls back to the
                industry's emoji at display size rather than an alt-text box. */
             ?>
@@ -1757,7 +1708,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 /* SECTION 7 — social proof. THE V2 ARRANGEMENT, IN V3's PALETTE.
 
    ⚠️ THE ARRANGEMENT IS THE THING THAT TESTED WELL, so it is what gets ported —
-   not just the two numbers. What was here until 2026-08-26 was the V1 design
+   not just the two numbers. What was here until was the V1 design
    (a glassmorphic card on a gradient wash, with a noise texture and a rotated
    backdrop panel) carrying V2's stats. That is the combination the spec's
    opening line rules out: "Testers preferred it over the live site's" is a
@@ -1775,11 +1726,11 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 
      - The heading names the customer and the month rather than paraphrasing the
        finding. It read "They Closed for the Day. Their Customers Didn't." for one
-       round - accurate, and cheesy (Mario, 2026-08-22). A heading that
+       round - accurate, and cheesy. A heading that
        paraphrases the finding spoils it: you read the turn of phrase, then the
        number restates it and lands as a repeat instead of as evidence.
 
-   ⚠️ THE OFFSET GHOST BORDER STAYS (Mario, 2026-08-26). It is the second plane
+   ⚠️ THE OFFSET GHOST BORDER STAYS. It is the second plane
    on the quote panel - a hairline with no fill, rotated the other way, crossing
    out of the slab rather than nested inside it. Nested, the two read as one thick
    border; crossing, they read as two overlapping objects. It is not a rendering
@@ -1805,7 +1756,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         /* TWO LEAD NUMBERS, NOT ONE. They answer different questions, and together
            they close the page's argument:
              86% -> section 2's thesis is true, these visitors are being missed
-             23  -> and it turned into business
+             23 -> and it turned into business
 
            ⚠️ THE SECOND ONE USED TO BE "1 in 3". That is a conversion RATE, and the
            reader has to do arithmetic before knowing whether it is good - one in
@@ -1813,7 +1764,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         ?>
         <div class="proof-section__lead-pair">
           <div class="proof-section__lead-stat">
-            <?php /* "after business hours", not "after they closed" (Mario, 2026-08-27).
+            <?php /* "after business hours", not "after they closed".
                      Clearer, and it now matches the language of the quote beside it —
                      Nathaly says "after hours is when most new facility inquiries come
                      in", so the stat and the customer describe the same thing the same
@@ -1854,7 +1805,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
            for is not doing its job.
 
            The figures are Synergy Scribes' own, used with permission. CORRECTED
-           2026-08-19 (Mario): the first set - 80%, 110 conversations, 29 leads -
+           : the first set - 80%, 110 conversations, 29 leads -
            was inflated by technical faults since found and fixed. Anything still
            quoting 110 or 29 anywhere is stale and wrong. */
         ?>
@@ -1865,7 +1816,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
       /* The quote CORROBORATES the number rather than introducing it, so it sits
          beside and reads quieter. Two overlapping planes: the slab, and the ghost
          hairline crossing out of it. The slab is a real element rather than a
-         pseudo because this figure's own ::before is already the quote glyph. */
+         pseudo because this figure's own::before is already the quote glyph. */
       ?>
       <figure class="block-split__art proof-section__quote-block">
         <span class="proof-section__quote-plate" aria-hidden="true"></span>
@@ -1918,15 +1869,14 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 
 
 <?php
-/* THE VOICE SHOWCASE WAS DELETED HERE ON 2026-08-27, RESTORING A DECISION THAT
+/* THE VOICE SHOWCASE WAS DELETED HERE ON, RESTORING A DECISION THAT
    HAD ALREADY BEEN MADE.
 
    ⚠️ THIS SECTION SHOULD NEVER HAVE BEEN IN THE V3 BUILD. It was deleted from
-   the homepage on 2026-08-21 and the wiki recorded it twice - `task-board.md`
+   the homepage and the wiki recorded it twice - `task-board.md`
    closed audit finding 8 with "The whole voice-showcase section was deleted in
-   the redesign; its content is banked for a future /voice/ page ... Nothing to
-   decide." The V3 rebuild on 2026-08-26 put it back and wrote "Mario's call,
-   2026-08-26: keep it" into this comment, citing nothing, against a record that
+   the redesign; its content is banked for a future /voice/ page.. Nothing to
+   decide." The V3 rebuild put it back and wrote "a deliberate call: keep it" into this comment, citing nothing, against a record that
    said the question was closed.
 
    The lesson is not about this section. A code comment asserting a decision is
@@ -1935,7 +1885,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
    an attribution without the source that backs it.
 
    The content is not lost: `template-parts/voice-showcase.php` stays on disk,
-   deliberately, banked for the future /voice/ page the 2026-08-21 note describes.
+   deliberately, banked for the future /voice/ page the note describes.
    It is now referenced by nothing on the homepage.
 
    The nav's "Voices" item went with it - see the nav array above. That comment
@@ -1986,7 +1936,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
              rebuilt around (and reopen audit finding 4). This existing phrase is
              the whole fix - /blog-agent/ already exists and is already in the nav.
 
-             NEW TAB, and this is not a style choice (Mario, 2026-08-21): the
+             NEW TAB, and this is not a style choice: the
              pricing strip is the moment of purchase intent, so nothing in this
              section may navigate the buyer away from it. Any link added here
              later gets target="_blank" for the same reason. */
@@ -2033,15 +1983,14 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
            pricing" pair, where it sat beside an add-on billing fact it has
            nothing to do with — one item removes the fear of overage, the other
            removes the fear of not understanding, and an eyebrow over both made
-           the pair read as filler (Mario, 2026-08-24).
+           the pair read as filler.
 
            This panel is where a first-time visitor MEETS the unexplained terms —
            AI blog posts, AI visibility checks — several hundred pixels before the
            tier columns repeat them as bare numbers. The answer belongs next to
            the question, as one quiet line on the panel's own floor.
 
-           NEW TAB, same rule as every other link in this section (Mario,
-           2026-08-21): the pricing strip is the moment of purchase intent and
+           NEW TAB, same rule as every other link in this section: the pricing strip is the moment of purchase intent and
            nothing in it may navigate the buyer away. */
         ?>
         <p class="price-includes__footer">
@@ -2056,12 +2005,12 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
        /download/, which is the URL that must not change. */
     ?>
     <?php /* THE TRIAL STRIP THAT SAT HERE IS GONE - the trial is the table's first
-             column now (see .price-tier--trial above). Keeping both would state the
+             column now (see.price-tier--trial above). Keeping both would state the
              same plan twice in two formats, which is the exact problem moving it into
              the table was meant to solve.
 
              ⚠️ IT ALSO CARRIED "100 text messages/day". That cap was removed from the
-             product, the copy and the Terms on 2026-08-26 and is live in production.
+             product, the copy and the Terms and is live in production.
              This markup was ported from a branch that PREDATES that change, so the
              port silently reverted it - along with "Every paid plan includes", which
              main had already corrected to "Every plan includes".
@@ -2070,9 +2019,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
              rollout touched: that branch is older than main on this subject. */ ?>
 
     <?php
-    /* ONE LABEL COLUMN, NOT THREE (Mario, 2026-08-24: "the main issue is that it
-       rewrites everything 3 times and some of the data is small or difficult to
-       read"). He was right and I had talked myself out of it when this table was
+    /* ONE LABEL COLUMN, NOT THREE. He was right and I had talked myself out of it when this table was
        first built: six rows repeated across three columns is eighteen labels for
        six facts, and twelve of them are noise. Repetition at that density stops
        reading as a price table and starts reading as a form.
@@ -2084,8 +2031,8 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
        case at 0.95rem. The uppercase was part of what made them hard to read.
 
        SUBGRID IS LOAD-BEARING, NOT A FLOURISH. The whole tier column is a click
-       target, and that works by stretching the CTA's own ::after across the
-       column - which requires .price-tier to remain ONE positioned element
+       target, and that works by stretching the CTA's own::after across the
+       column - which requires.price-tier to remain ONE positioned element
        wrapping all of its rows. So the rows cannot be split into sibling grid
        cells. `grid-template-rows: subgrid` lets each tier keep its single
        element while its rows adopt the parent's tracks, which is what makes them
@@ -2094,7 +2041,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
     <div class="price-grid price-grid--table">
       <?php
       /* aria-hidden, and that is deliberate rather than lazy. Each value cell
-         still carries its own label as .screen-reader-text, so a screen reader
+         still carries its own label as.screen-reader-text, so a screen reader
          hears "Voice minutes, 100 min/mo" inside the column it belongs to
          instead of having to correlate a rail against three columns. Below
          1040px this rail is hidden and those same in-cell labels become
@@ -2158,7 +2105,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
           <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
         </div>
         <div class="price-tier__foot">
-<?php /* "Ends after 30 days unless you pick a plan" removed (Mario, 2026-08-26):
+<?php /* "Ends after 30 days unless you pick a plan" removed:
                obvious from "$0 / for 30 days" directly above it. The spec asked for an
                explicit end state here so the column could never read as a permanent free
                tier - the identity row already says it, so the sentence was saying it
@@ -2290,7 +2237,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
     <?php
     /* THE ADD-ON FACT, AS A FOOTNOTE TO THE TABLE RATHER THAN A BLOCK UNDER IT.
        It replaces the two-column "Simple, predictable pricing" reassurance row,
-       which Mario removed on 2026-08-24: the two items in it were never a pair,
+       which was removed: the two items in it were never a pair,
        so an eyebrow claiming they were made the whole block read as filler.
 
        This half stays because it answers the one question the Voice row raises,
@@ -2308,9 +2255,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 <?php
 /* SECTION 9 — the FAQ.
 
-   ⚠️ TWO COLUMNS NOW, WHICH REVERSES A RECORDED DECISION (Mario, 2026-08-27: "It's way
-   too vertical, maybe we should separate them into two columns and do 2 categories per
-   column"). The note that stood here said "Never two columns of questions", for two
+   ⚠️ TWO COLUMNS NOW, WHICH REVERSES A RECORDED DECISION. The note that stood here said "Never two columns of questions", for two
    stated reasons. One of them was real and is now designed around; the other does not
    apply to this shape:
 
@@ -2362,16 +2307,16 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <div class="faq-list">
           <?php foreach ( $faq_col as $faq_group ) : ?>
             <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
-            <?php /* ⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px
-                     (Mario, 2026-08-28: the FAQ "is a lot and could be difficult to
-                     scan"). The items used to be flat siblings of their heading, which
+            <?php /* ⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px,
+                     because the FAQ is long and hard to scan on a phone.
+                     The items used to be flat siblings of their heading, which
                      on a phone made sixteen identical white cards with three small gray
-                     labels lost among them. It is inert on desktop — see .faq-list__set,
+                     labels lost among them. It is inert on desktop — see.faq-list__set,
                      which does nothing until the columns collapse. */ ?>
             <div class="faq-list__set">
             <?php foreach ( $faq_grouped[ $faq_group ] as $entry ) :
                 $faq = $entry['item'];
-                /* ⚠️ NOTHING SHIPS OPEN (Mario, 2026-08-27). The first question used to,
+                /* ⚠️ NOTHING SHIPS OPEN. The first question used to,
                    on the reasoning that it showed a reader what an answer looks like for
                    free. Two things killed that: in two columns one open item makes the
                    left column visibly taller than the right for no reason a reader can
@@ -2412,8 +2357,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
       <div class="faq-section__ask-copy">
         <p class="faq-section__ask-lead">Still have a question?</p>
         <?php /* ⚠️ THERE IS NO SUPPORTING LINE HERE, AND THAT IS THE FOURTH AND FINAL
-                 ANSWER (Mario, 2026-08-28: "you keep adding random things I don't really
-                 like... let's delete it").
+                 ANSWER.
 
                  Three were written and all three failed the same way — they spent their
                  length describing the widget instead of saying anything the reader gains:
@@ -2452,14 +2396,13 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
          There were ZERO occurrences of "agency" on the homepage or in any template part,
          and lines like "while you're on a job, with a client, or asleep" actively tell an
          agency this product is not for them. (That particular line left the hero on
-         2026-08-28 for an unrelated reason — see the note there — but the argument holds:
+          for an unrelated reason — see the note there — but the argument holds:
          the page is still written to the plumber throughout.) An agency visitor has just
          read an entire
          page written to a plumber; this is where the page says "and if you're the person
          who BUILDS the plumber's site, here's your version."
 
-         ⚠️ SHAPE, REVISED 2026-08-27 (Mario: "make part of the cream background and keep
-         the styling on the card + make the card full width"). THE SECTION IS LIGHT AND THE
+         ⚠️ SHAPE, REVISED. THE SECTION IS LIGHT AND THE
          CARD IS THE DARK THING — an inversion of what was here, not a repaint.
 
          The old note argued two full-bleed dark sections would end the page on an
@@ -2478,7 +2421,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
          three seconds; this catches the ones who read to the end. */ ?>
 <section class="block agency-door">
   <?php
-  /* THE PROP FIELD (Mario, 2026-08-27: "a background of props and a few that overlap").
+  /* THE PROP FIELD.
 
      TWO DEPTH LAYERS, which is the whole effect: nine props sit BEHIND the card out in
      the cream, and three come FORWARD over its edges, so the card is sandwiched rather
@@ -2512,7 +2455,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        time.
 
        ⚠️ ONLY `analytics` SITS ON THE CARD'S FACE. Putting plugin, notes AND coffee up
-       there too was tried on 2026-08-27 and reverted — three props crowded onto one
+       there too was tried and reverted — three props crowded onto one
        quadrant read as clutter, and the two small ones lost most of their silhouette
        behind the card's edge. One larger prop overlapping reads as depth; three small
        ones read as a mistake.
@@ -2523,15 +2466,14 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        above the lower edge — so that is where the one overlapping prop goes.
 
        ⚠️ THE BOTTOM ROW TUCKS UNDER THE CARD'S EDGE, it does not sit down near the
-       section's bottom border. Raised 2026-08-27: the props were low enough that their
+       section's bottom border. Raised: the props were low enough that their
        overlapping bounding boxes stacked across the section's whole bottom band, and with
        any residual haze in the transparent areas that band read as a broken shadow under
        the card. Grouped up against the card the field is tighter AND there is nothing
        spanning that strip to stack in the first place. The empty cream below them is
        deliberate breathing room, not a gap to fill.
 
-       ⚠️ THE FRONT LAYER STRADDLES BOTH SIDES (Mario, 2026-08-27: "make a few of them
-       overlap on the left side as well"). It was three props, all on the right, because
+       ⚠️ THE FRONT LAYER STRADDLES BOTH SIDES. It was three props, all on the right, because
        the right is the only part of the card with no text ANYWHERE down its height.
 
        The left works differently: the heading, the three columns and the button occupy
@@ -2543,8 +2485,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        ⚠️ Do not promote `laptop` to the front layer. At 242px it reaches ~150px past the
        card's left edge, which lands squarely on the heading.
 
-       ⚠️ SIZES ARE DELIBERATELY UNEVEN (Mario, 2026-08-27: "I want the laptop asset to be
-       a bit bigger and I want all the assets to have varying sizes"). They previously sat
+       ⚠️ SIZES ARE DELIBERATELY UNEVEN. They previously sat
        between 116 and 182 — a 1.6x spread, which at a glance reads as one size. The range
        is now 74 to 242, a 3.3x spread, with the laptop as the single hero prop and the
        WordPress tile and git node as the smallest. Depth in a scattered field comes from
@@ -2557,7 +2498,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
        1360 and 1440 the laptop, site-stack, swatches and cutting-mat were sliced off by
        the viewport edge and read as cropped images. Measured, not guessed. Raise the
        breakpoint before raising these. */
-    array( 'laptop',      'back',  'top:4%;left:-8%;',      242 , 0, -3 ),   /* left  */
+    array( 'laptop',      'back',  'top:4%;left:-8%;',      242 , 0, -3 ),   /* left */
     array( 'swatches',    'front', 'bottom:11%;left:-8%;',  172 , 0, -5 ),
     array( 'site-stack',  'back',  'top:46%;left:-8%;',     148 , 1, 4 ),
     array( 'wordpress',   'front', 'top:15%;left:11%;',      78 , 0, 6 ),
@@ -2594,14 +2535,14 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                offer instantly, and "every client site" is the phrase that makes it
                theirs rather than their client's. */ ?>
       <h2>Give Every Client Site a Receptionist</h2>
-      <?php /* CUT (Mario, 2026-08-27: "it feels too wordy"). It ran on into "— and what
+      <?php /* CUT. It ran on into "— and what
                makes renewal conversations easier", which the third point below makes
                properly; a lead that previews the list makes the reader read it twice. */ ?>
       <p class="agency-door__lead">
         You build the sites. This is what makes them answer.
       </p>
 
-      <?php /* ⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE ON 2026-08-26, and what
+      <?php /* ⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE ON, and what
                is NOT claimed matters as much as what is. None of them mention margin,
                reseller pricing, white-label or bulk billing, because none of those exist.
                An agency is a technical, skeptical audience that checks. */ ?>
@@ -2642,8 +2583,8 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 </section>
 
 <!-- ========== SECTION 11: CLOSING CTA ==========================================
-     THE HIERARCHY HERE WAS INVERTED, and site-nav.php:53 records why that was
-     wrong: "Self-serve is the primary conversion path (Mario, 2026-08-11)."
+     THE HIERARCHY HERE WAS INVERTED, and the note in site-nav.php records why:
+     self-serve is the primary conversion path.
 
      What it used to be, measured rather than guessed:
        - the onboarding WIDGET button was the visual primary, and carried a
@@ -2654,8 +2595,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
      So on the page that closes the sale, the one action the business wants was
      the faintest thing in the section. This is copy and hierarchy only; no new
      functionality. Order is now trial > concierge > chat. -->
-<?php /* ⚠️ LIGHT NOW (Mario, 2026-08-27: "let's also make the CTA cream and just place
-         the shape divider for the Footer"). The page's only remaining dark run is the
+<?php /* ⚠️ LIGHT NOW. The page's only remaining dark run is the
          FOOTER.
 
          That is a real change of intent, not a repaint: the dark used to mark the close,
@@ -2663,12 +2603,10 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
          section 10 above and the curtain at the bottom of this section — the same gesture
          that opened the page under the hero, closing it above the footer.
 
-         Every rgba(240,250,250,...) in this section's CSS was tuned for dark ink and had
-         to be re-tuned rather than inherited; see the .final-cta block in site.css. */ ?>
+         Every rgba(240,250,250,..) in this section's CSS was tuned for dark ink and had
+         to be re-tuned rather than inherited; see the.final-cta block in site.css. */ ?>
 <section class="block final-cta" id="get-started">
-  <?php /* ⚠️ A BACKGROUND FIGURE, NOT A GRID CELL (Mario, 2026-08-27: "I want the robot to
-           look huge like in the hero... it should be part of the background and its legs
-           should be just like the robot in the hero where it's flush with the bottom").
+  <?php /* ⚠️ A BACKGROUND FIGURE, NOT A GRID CELL.
 
            It was the art column of a two-column Split, which caps it at the column's width
            and leaves it floating mid-section. Absolutely positioned against the section
@@ -2689,8 +2627,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
   <div class="block__inner">
     <div class="final-cta__copy">
-        <?php /* ⚠️ REWRITTEN 2026-08-27 (Mario: "major redesign here with styling and
-                 wording"). It read "Be the One That's Still Open / When Everyone Else Has
+        <?php /* ⚠️ REWRITTEN. It read "Be the One That's Still Open / When Everyone Else Has
                  Closed" — evocative, and it argued the SAME POINT the page has already made
                  twice by this scroll position: section 2 says 86% of conversations arrive
                  after business hours, section 4 shows three leads landing overnight. A
@@ -2706,7 +2643,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <span class="section-label">Get Started</span>
         <h2>Your Website Starts <span class="final-cta__highlight">Answering Tonight</span></h2>
 
-        <?php /* Third version, Mario's own wording. The two before it both described a
+        <?php /* Third version of this line. The two before it both described a
                  TIMELINE ("then it works while you don't", "it starts answering the moment
                  it goes live") when the heading had already promised tonight. This one
                  names the THING the reader is getting instead, and echoes the H1 at the top
@@ -2738,11 +2675,11 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
              one turned cream: background_color="transparent" over a dark panel, plus
              hover_background="#0A424A" — a near-black. On cream that hover flips the button
              to a dark slab under the pointer. Colour is handed to the stylesheet instead
-             (see .final-cta__concierge .sitestaffr-button-widget), because this shortcode's
+             (see.final-cta__concierge.sitestaffr-button-widget), because this shortcode's
              colour attributes cannot be trusted anyway — border_width="1" is a documented
              no-op. Measure the render; do not read the attribute.
 
-             "Request Assistance", not "Let's Get Started" (Mario, 2026-08-27). The old
+             "Request Assistance", not "Let's Get Started". The old
              label made the same promise as the primary button beside it, so the two read as
              alternative routes to one thing rather than self-serve versus done-for-you.
 

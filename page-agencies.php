@@ -7,29 +7,20 @@ Template Name: Agencies
  * /for/agencies/ — the second audience.
  *
  * SiteStaffr has two audiences: small businesses and the WordPress agencies that build
- * their sites. Until 2026-08-26 the site addressed one — there were zero occurrences of
- * "agency" anywhere in the theme.
+ * their sites. They are deliberately not blended into one page. The homepage stays
+ * written to the business owner, which is what user testing rewarded; agencies get a nav
+ * item, one band on the homepage, and this page, where the whole argument is theirs.
  *
- * The decision (Mario, 2026-08-26) was deliberately NOT to blend both audiences into one
- * page. The homepage stays written to the business owner, which is what user testing
- * rewarded; agencies get a nav item, one band at homepage section 10, and this page,
- * where the whole argument is theirs.
+ * Its own template, not page-industry.php. Agencies are an audience, not an industry, and
+ * must not be added to sitestaffr_industry_registry — that would file them in the
+ * homepage industry list and the Industries dropdown.
  *
- * ⚠️ ITS OWN TEMPLATE, NOT page-industry.php. Agencies are an AUDIENCE, not an industry.
- * They are not in sitestaffr_industry_registry() and must not be added to it — that would
- * place them in homepage section 6's list of sixteen businesses, alongside dental
- * practices and salons, which is the wrong shelf. They are also not in the Industries
- * dropdown; "Agencies" is a top-level nav item.
+ * Tone differs from the homepage on purpose: shorter sentences, more specifics, numbers
+ * over adjectives, no softening.
  *
- * TONE DIFFERS FROM THE HOMEPAGE ON PURPOSE. Agencies are technical and allergic to
- * marketing language: shorter sentences, more specifics, numbers over adjectives, no
- * softening. Where the homepage says "while you're on a job", this page says "one plugin,
- * one connect step, about five minutes."
- *
- * ⚠️ EVERY CLAIM ON THIS PAGE WAS VERIFIED AGAINST THE CODE ON 2026-08-26, and the FALSE
- * ones are named as false rather than omitted. See section 6 and the FAQ: there is no
- * reseller pricing, no white-label, no bulk billing, and no cross-client lead view. This
- * is the audience that checks, and a page that implied any of them would be disqualifying.
+ * ⚠️ Every claim here is verified against the code, and the false ones are named as false
+ * rather than omitted. There is no reseller pricing, no white-label, no bulk billing and
+ * no cross-client lead view. This is the audience that checks.
  *
  * Yoast owns title and meta, as everywhere else on this site. No hardcoded meta here.
  */

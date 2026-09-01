@@ -3,7 +3,7 @@
  * Shared site navigation.
  *
  * Accepts $args:
- *   'secondary' => array of [ 'label' => string, 'href' => string ] — page-specific links (e.g. anchor links on homepage)
+ * 'secondary' => array of [ 'label' => string, 'href' => string ] — page-specific links (e.g. anchor links on homepage)
  */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
@@ -31,9 +31,8 @@ $primary_menu = array(
                 return array(
                     'heading' => $group['heading'],
                     // ⚠️ THE HEADING IS A LINK, AND WITHOUT THIS THE FIVE CATEGORY
-                    // HUBS HAD NO PATH FROM THE NAV AT ALL (Mario, 2026-08-30:
-                    // "I'm unable to access the /for or the /health-medical from
-                    // the nav"). They were plain <span>s, so /for/health-medical/
+                    // HUBS HAVE NO PATH FROM THE NAV AT ALL.
+                    // They were plain <span>s, so /for/health-medical/
                     // and its four siblings existed, were provisioned, were
                     // indexed and were linked from the footer — and the one menu
                     // that lists every industry could not reach them. The heading
@@ -56,7 +55,7 @@ $primary_menu = array(
     ),
     // Agencies is a TOP-LEVEL item, deliberately not inside the Industries
     // dropdown. Agencies are an audience, not an industry: they are not in
-    // sitestaffr_industry_registry(), and putting them there would drop them
+    // sitestaffr_industry_registry, and putting them there would drop them
     // into section 6's list of sixteen businesses alongside dental practices
     // and salons, which is the wrong shelf.
     //
@@ -70,10 +69,9 @@ $primary_menu = array(
 
 $secondary_menu = isset( $args['secondary'] ) ? $args['secondary'] : array();
 
-// Self-serve is the primary conversion path (Mario, 2026-08-11). The trial starts
-// when the plugin's Setup Wizard registers the site, so /download/ IS the trial —
-// there is no separate signup. This previously pointed at #get-started, the
-// white-glove form, which answers "Start Free Trial" with "our team will reach out".
+// Self-serve is the primary conversion path. The trial starts when the plugin's
+// Setup Wizard registers the site, so /download/ is the trial: there is no separate
+// signup, and this must not point at the white-glove form.
 $cta = array(
     'label' => 'Start Free Trial',
     'href'  => home_url( '/download/' ),
@@ -121,9 +119,9 @@ $cta = array(
             </li>
             <?php endforeach; ?>
             <?php /* The arrow is not decoration: this row sits below sixteen
-                     industry names and read as a seventeenth one. Mario could not
-                     find /for/ from the nav even though this link has always been
-                     here. An arrow is the one mark that says "this goes somewhere
+                     industry names and read as a seventeenth one, so /for/ was
+                     effectively unreachable from the nav even though this link has
+                     always been here. An arrow is the one mark that says "this goes somewhere
                      else", which is what separates it from the list above it. */ ?>
             <li class="nav__mega-all"><a class="nav__dropdown-link" href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all industries <span aria-hidden="true">&rarr;</span></a></li>
           </ul>

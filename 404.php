@@ -2,19 +2,14 @@
 /**
  * 404 — page not found.
  *
- * Without this file WordPress falls back to index.php, which renders a 404 as
- * though it were an empty blog archive: an <h1> reading "Blog" above the words
- * "No content found." That is what sitestaffr.com served on every bad URL until
- * 2026-08-30, and it was unstyled as well, because the stylesheet was gated on a
- * list of contexts a 404 satisfies none of (see the note in functions.php).
+ * Without this file WordPress falls back to index.php, which renders a 404 as an
+ * empty blog archive: an <h1> reading "Blog" above "No content found."
  *
- * No hardcoded meta tags here: Yoast owns the site's metadata, and the 404 HTTP
- * status is what actually keeps this out of search results.
+ * No hardcoded meta tags: Yoast owns the site's metadata, and the 404 HTTP status
+ * is what keeps this out of search results.
  *
- * The nav and footer carry their own inline JS, and nothing on this page uses
- * .reveal, so site.css alone renders it fully. Do not add .reveal markup without
- * also enqueueing site.js for this template — those elements sit at opacity 0
- * forever otherwise.
+ * Nothing here uses.reveal, so site.css alone renders the page. Do not add
+ *.reveal markup without also enqueueing site.js for this template.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

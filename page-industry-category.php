@@ -45,7 +45,7 @@ $cta_url               = home_url( '/#get-started' );
 	         Same reasoning as `/for/`: no isometric on a hub, so no second column.
 	         ⚠️ `.block.ind-hero` — TWO CLASSES. The padding is owned by
 	         `.block:not(.block--dark)` at (0,2,0) and a bare `.ind-hero` at (0,1,0)
-	         loses to it whatever the source order; `:not()` contributes its
+	         loses to it whatever the source order; `:not` contributes its
 	         argument's specificity. Written as one class this changes nothing and
 	         looks correct in the diff. */ ?>
 	<!-- Hero -->
@@ -137,7 +137,7 @@ $cta_url               = home_url( '/#get-started' );
 	<?php /* Closing CTA is a V3 dark block running into the footer, same as
 	         page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
 	         .ind-cta is shared across all three ind-* templates, so moving its
-	         background onto .block--dark would have left whichever template still
+	         background onto.block--dark would have left whichever template still
 	         carried the old markup with no background at all. */ ?>
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
