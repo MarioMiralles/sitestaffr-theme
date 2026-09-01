@@ -957,15 +957,7 @@ if (voiceShowcase) {
   });
 }
 
-/* ========== FAQ ACCORDION ==========
-   ONE OPEN AT A TIME, AND ALL OF THEM CAN BE CLOSED. The logic here
-   was already correct; what was broken was the CLASS NAME. This toggled a bare `open`
-   while the PHP rendered `faq-item--open` on the first question and the stylesheet
-   carried rules for BOTH — so the first answer was pinned open by a class this code
-   never looked at, and clicking another question left two open at once.
-
-   Everything now agrees on `faq-item--open`. Nothing ships open; `aria-expanded` moves
-   with the class so the state is announced, not just drawn. */
+/* FAQ ACCORDION ========== ONE OPEN AT A TIME, AND ALL OF THEM CAN BE CLOSED. → docs/implementation-notes.md#faq-accordion-one-open-at-a-time-and-all-of-th */
 document.querySelectorAll('.faq-item__question').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
@@ -997,13 +989,7 @@ if (langExpandBtn) {
 
 
 
-/* ===================================================================
-   SECTION 3 — "See it answer": the live-fill demo.
-
-   THE ONE RULE THIS FILE MUST NOT BREAK: the panels are rendered FULLY
-   POPULATED by PHP. This script only empties them when it is certain it is
-   going to refill them. If the script never runs, throws, or the visitor
-   prefers reduced motion, the section stays complete and readable. */
+/* SECTION 3 — "See it answer": the live-fill demo. → docs/implementation-notes.md#section-3-see-it-answer-the-live-fill-demo */
 (function () {
   var DEMO = window.SITESTAFFR_DEMO;
   var root = document.querySelector('.see-it');
@@ -1137,17 +1123,7 @@ if (langExpandBtn) {
     if (timeEl)  timeEl.textContent = '0:00 / ' + fmt(d.duration);
   }
 
-  /* THE OPEN CHIME. assets/audio/open.mp3 is the widget's own open sound, so pressing
-     the stage button sounds like the widget opening on a real site — which is exactly
-     what the panels then show. It is the ONE audio cue here: text mode has `src: null`
-     because a typed thread drives itself off a clock, so without this the section is
-     silent.
-
-     ⚠️ IT IS PLAYED ONLY FROM A CLICK, and that is not a style choice. Browsers block
-     audio that is not user-initiated; firing this anywhere else produces a rejected
-     promise and, in some browsers, a console error on a page that looks fine. The
-     .catch is not optional either — a blocked or missing file must not take the
-     animation down with it, because the sound is the garnish and the demo is the point. */
+  /* THE OPEN CHIME. → docs/implementation-notes.md#chime */
   function chime() {
     if (!stage) return;
     var src = stage.getAttribute('data-see-it-open-sound');
@@ -1229,19 +1205,7 @@ if (langExpandBtn) {
   resetProgress();
 })();
 
-/* ===================================================================
-   SECTION 4 — the overnight inbox opens its recap documents.
-
-   ⚠️ `.is-interactive` IS ADDED LAST, AFTER EVERYTHING IS WIRED, and the CSS
-   hangs the entire affordance off it — pointer cursor, hover, the "View recap"
-   hint. If <dialog> is unsupported or anything here throws, the class is never
-   added and the rows read as the plain inbox they were before. A button that
-   looks clickable and does nothing is worse than one that never offered.
-
-   showModal, never show: the focus trap, Esc-to-close, the ::backdrop and
-   the top layer are all things the modal mode provides and the non-modal mode
-   does not.
-   =================================================================== */
+/* SECTION 4 — the overnight inbox opens its recap documents. → docs/implementation-notes.md#section-4-the-overnight-inbox-opens-its-recap */
 (function () {
   var root = document.querySelector('.what-you-get');
   if (!root) return;
@@ -1285,17 +1249,7 @@ if (langExpandBtn) {
   root.classList.add('is-interactive');
 })();
 
-/* ===================================================================
-   SECTION 5 — the language orbit has NO SCRIPT, deliberately.
-
-   The `lang` and `dir` attributes that handler had to maintain by hand are now
-   rendered once per greeting straight from $lang_greetings. That was the
-   fiddliest part of the removed code and the part most likely to go wrong; it
-   is now impossible to get out of sync, because nothing mutates it.
-
-   Do not re-add a script to animate the chips. The float is a CSS keyframe
-   with a per-item delay and it already respects prefers-reduced-motion.
-   =================================================================== */
+/* SECTION 5 — the language orbit has NO SCRIPT, deliberately. → docs/implementation-notes.md#section-5-the-language-orbit-has-no-script-del */
 
 /* ===================================================================
    SECTION 6 — the industry directory. */
@@ -1350,16 +1304,7 @@ if (langExpandBtn) {
     });
   });
 
-  /* ⚠️ ONE ROW STARTS OPEN ON A PHONE, AND IT IS THE FIRST ONE, NOT THE FEATURED ONE.
-     Closed, this section is sixteen bare names: the picture and the one-line answer that
-     are its entire payload sit behind a tap nobody has a reason to make. Desktop
-     preselects an industry for exactly that reason, and this is the same decision.
-
-     $ind_first's random pick (see page-landing.php) stays the desktop behavior and is
-     deliberate. Honoring it here would open a row twelve deep and leave the top of the
-     section bare, which is the problem this is solving. On a phone every name is on
-     screen as text anyway, so the section never reads as being "about" whichever
-     industry happens to be open. */
+  /* ⚠️ ONE ROW STARTS OPEN ON A PHONE, AND IT IS THE FIRST ONE, NOT THE FEATURED ONE. → docs/implementation-notes.md#openFirstOnMobile */
   function openFirstOnMobile() {
     names.forEach(function (b) { b.classList.remove('is-open'); });
     if (mobile.matches) names[0].classList.add('is-open');

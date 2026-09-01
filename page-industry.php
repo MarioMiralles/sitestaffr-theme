@@ -3,27 +3,7 @@
 Template Name: Industry
 */
 
-/* ⚠️ THE PHONE RULE, AND IT APPLIES TO EVERY INDUSTRY BLOCK IN THIS FILE.
-   SiteStaffr HAS NO PHONE LINE. The readme leads with "No phone lines"; a visitor
-   talks or types on the website and there is no number to dial. With
-   "receptionist" now in the homepage H1, any phrasing that sounds like telephony
-   reads as "this answers my phone" - a crowded, more expensive, different
-   category that we do not sell.
-
-   NEVER, in copy: "answers calls", "handles calls", "the caller", "on hold",
-   "switchboard", "answering service", "voicemail" as something WE provide.
-
-   ALWAYS FINE, and load-bearing - this is the argument of the whole page:
-   the CUSTOMER calling ("they call the next practice on Google", "drivers call
-   whoever answers first"), the OWNER calling back ("you call them on the drive
-   home"), and the MISSED call as the problem ("Missed calls from the field").
-   Do not sweep those; a blanket find-and-replace on "call" would delete the
-   product's reason to exist.
-
-   The test is simple: is SiteStaffr the thing doing the calling or answering? If
-   yes, rewrite it. If the human is, leave it. Swept; before that this
-   file's dental H1 read "Your Front Desk Can't Answer Every Call. Your AI Agent
-   Can." on sixteen pages. */
+/* ⚠️ THE PHONE RULE, AND IT APPLIES TO EVERY INDUSTRY BLOCK IN THIS FILE. → docs/implementation-notes.md#page-slug */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -37,16 +17,7 @@ $industries = array(
 		'hero_icon' => '🦷',
 		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI receptionist answering a visitor on the practice website',
 		'label'    => 'For Dental Practices',
-		/* ⚠️ WAS "Your Front Desk Can't Answer Every Call. Your AI Agent Can." Two problems
-		   and the first is the serious one: it claims the product answers CALLS. SiteStaffr
-		   has no phone line - the readme leads with "No phone lines" - so this promised the
-		   one thing it does not do, in an H1, on sixteen pages. It also used "every" as an
-		   absolute. Both are standing rules.
-
-		   It was additionally the only headline of the fifteen that was a product CLAIM
-		   rather than a situational scene, so replacing it also puts dental back in the
-		   house pattern. The front-desk contrast is what made the original work, so it is
-		   kept - it just no longer implies a switchboard. */
+		/* ⚠️ WAS "Your Front Desk Can't Answer Every Call. → docs/implementation-notes.md#was-your-front-desk-can-t-answer-every-call */
 		'headline' => 'A Cracked Tooth at 8&nbsp;PM. Your Front Desk Went Home at&nbsp;Five.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7, answering questions about services, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'Dentistry',
@@ -85,15 +56,7 @@ $industries = array(
 		),
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Tuesday, 9:14 PM',
-		// The exchange shown in the mockup must not show the agent doing more than
-		// the product does. It answers from site content, captures name, number and
-		// reason, and says a human will follow up. It never books, diagnoses, quotes
-		// an unquoted price, or gives clinical, legal or financial advice.
-		//
-		// It also never promises a callback time. There is no scheduling system and
-		// no view of who is on shift, so a time is a commitment the business never
-		// made. The prose beside the mockup may say when the business called back;
-		// the constraint is only on what the agent itself promises.
+		// The exchange shown in the mockup must not show the agent doing more than the product does. → docs/implementation-notes.md#chat
 		'chat' => array(
 			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the practice or pass a message to the team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'I chipped a tooth at dinner. Can someone see me tomorrow?' ),
@@ -929,12 +892,7 @@ $industries = array(
 				'a' => 'No. SiteStaffr doesn&rsquo;t diagnose HVAC or plumbing issues or estimate repair costs &mdash; that stays with your technicians. It answers from what your website publishes, collects the details of the emergency, and gets them to you so your team can call back and dispatch.',
 			),
 			array(
-			/* ⚠️ BOTH OF THESE ASKED ABOUT "CALLS", which on a page selling an AI reads as
-			   "does it answer my phone" - the exact misunderstanding the positioning has to
-			   avoid, and worse in an FAQ because an answer engine can lift the question on
-			   its own with no page around it to correct the impression.
-			   "makes the call" went too: it is only an idiom, but it is an idiom about
-			   phone calls sitting two lines under a question about phone calls. */
+			/* ⚠️ BOTH OF THESE ASKED ABOUT "CALLS", which on a page selling an AI reads as "does it answer my phone"… → docs/implementation-notes.md#both-of-these-asked-about-calls-which-on-a-pa */
 				'q' => 'Can it tell how urgent a request is?',
 				'a' => 'SiteStaffr captures exactly what the visitor describes &mdash; no heat, a leaking pipe, a flooded basement &mdash; and flags it in your recap the way they described it. Your team decides how urgently to respond.',
 			),
@@ -1275,30 +1233,7 @@ $industries = array(
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
 
-	/* ⚠️ THIS ENTRY EXISTED NOWHERE AND /for/medical-staffing/ 404ed IN PRODUCTION.
-	   Medical Staffing was added to the registry in functions.php — so it has a Yoast
-	   title and description, it is in the Industries dropdown, it is in the homepage
-	   picker, and it is on the /for/ hub — but nothing was ever written here, and the
-	   guard below sends an unknown slug to the 404 template. Four links to nowhere.
-
-	   Verified against production, not inferred: /for/medical-staffing/ returns 404 on
-	   sitestaffr.com AND on staging, and `git log ..origin/main` is empty, so this is not
-	   something another session had already fixed.
-
-	   ⚠️ IT IS THE ONLY B2B PAGE IN THE FILE, and that changes the shape of the copy
-	   rather than just its nouns. The other fifteen have ONE visitor — a patient, an
-	   owner, a client. A staffing agency's site is read by two people with opposite
-	   needs: a facility that has a hole in tomorrow's schedule, and a clinician looking
-	   for placement. The page has to be legible to both without picking one, which is
-	   why the chat, the recap and the FAQs all name both sides explicitly.
-
-	   ⚠️ IT IS ALSO THE INDUSTRY OUR ONE REAL TESTIMONIAL COMES FROM. Synergy Scribes is
-	   medical staffing and it is quoted on the homepage, so this page 404ing meant the
-	   only named customer on the site pointed at a category with no page.
-
-	   The category noun here is deliberately SiteStaffr rather than "AI agent": the term
-	   ladder is still open with, and writing this one neutrally means it does not
-	   need rewriting whichever way that lands. */
+	/* ⚠️ THIS ENTRY EXISTED NOWHERE AND /for/medical-staffing/ 404ed IN PRODUCTION. → docs/implementation-notes.md#this-entry-existed-nowhere-and-for-medical-st */
 	'medical-staffing' => array(
 		'hero_icon' => '🩺',
 		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI receptionist answering a facility scheduler on the agency website',
@@ -1402,28 +1337,7 @@ $ind       = $industries[ $page_slug ];
 $site_name = get_bloginfo( 'name' );
 $cta_url   = home_url( '/#get-started' );
 
-/* ---- THE ONE SHARED FAQ, APPENDED TO ALL SIXTEEN ---------------------------: Search Console shows more impressions for "virtual assistant"
-   than for "AI receptionist", and he chose to keep receptionist as the primary term
-   and carry virtual assistant as a supporting one rather than repositioning on
-   impression counts alone.
-
-   ⚠️ IMPRESSIONS ARE NOT THE SAME BID. Production has never said "receptionist" —
-   the V3 homepage is staging-only — so that comparison scores a bid we never placed.
-   This entry is the cheap half of the response: it earns the adjacent term without
-   moving the H1, and it is trivial to re-weight if the click and position data later
-   says virtual assistant deserves the lead.
-
-   ⚠️ IT ANSWERS THE QUESTION HONESTLY RATHER THAN CLAIMING THE TERM. "Virtual
-   assistant" mostly means hiring a PERSON, so a page that simply asserts the phrase
-   would pull traffic that bounces. Saying plainly which one we are is what makes the
-   answer useful to the reader who meant the other thing — and a genuinely useful
-   answer is the only kind worth ranking.
-
-   Appended HERE, before both consumers, because the schema block and the visible
-   accordion each iterate $ind['faqs'] separately. Added in one place it appears in
-   both; added in the markup it would have shipped without its schema entry.
-
-   ⚠️ NO PHONE LANGUAGE, same rule as every other string in this file. */
+/* THE ONE SHARED FAQ, APPENDED TO ALL SIXTEEN ---------------------------: Search Console shows more… → docs/implementation-notes.md#the-one-shared-faq-appended-to-all-sixteen-sea */
 $ind['faqs'][] = array(
 	'q' => 'Is SiteStaffr an AI receptionist or a virtual assistant?',
 	'a' => 'Both descriptions fit, and the difference worth knowing is that SiteStaffr is software rather than a person. A virtual assistant you hire is someone who works set hours and needs briefing; SiteStaffr is an AI receptionist that lives on your website, answers every visitor instantly from your own published pages 24/7, captures their details, and emails you a recap. There is nobody to onboard, no hours to cover, and no per-hour cost.',
@@ -1506,31 +1420,7 @@ get_template_part( 'template-parts/site-nav' );
 
 <main class="ind-page">
 
-	<?php /* ---- HERO: now a V3 Split block ------------------------------------------
-	         First section of the ind-* conversion. Three things changed and none of
-	         them is the copy:
-
-	         1. `.block .block-split` + `.block__inner` + `.block-split__grid` replace
-	            the bespoke `.ind-hero` padding, `.container` and `.ind-hero__grid`.
-	            That is the whole point — the page had a THIRD spacing system
-	            (`.ind-page > section`, `--section-padding`, and this hero's own
-	            clamp) where V3 has one token per context.
-
-	         2. `.ind-hero__accent` and `.ind-hero__glow` are DELETED, not hidden. Two
-	            absolutely-positioned radial gradients in teal at 5% and 7% alpha,
-	            which is decoration doing no work — V3 carries emphasis with a dark
-	            block, not with a wash.
-
-	         3. The `::before` gradient that faded the hero's last 120px into the
-	            cream is gone with them. It was a SEAM, and V3 has exactly one seam on
-	            the whole site (the homepage hero curtain) because a seam is a colour
-	            contract between neighbours that fails silently at widths nobody
-	            sampled. Whitespace has no contract.
-
-	         ⚠️ `.ind-hero__grid` STAYS on the element alongside `.block-split__grid`.
-	         It is not redundant: it overrides the 1fr 1fr to 1.35fr, which was
-	         measured for headlines of 60-79 characters. Dropping it would give the
-	         isometric half the page and break the H1 over five lines again. */ ?>
+	<?php /* HERO: now a V3 Split block ------------------------------------------ First section of the ind-*… → docs/implementation-notes.md#block */ ?>
 	<section class="block block-split ind-hero">
 		<div class="block__inner">
 			<div class="block-split__grid ind-hero__grid">
@@ -1567,19 +1457,7 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<?php /* ---- PAIN POINTS: a V3 Cards block, UNBOXED --------------------------
-	         ⚠️ NEW CLASSES (.ind-problem) RATHER THAN RESTYLING .ind-problem-card,
-	         and that is deliberate. The same class name is used for two different
-	         components: three STATIC statements here, and the clickable directory
-	         tiles on /for/ and the five category hubs. Unboxing a link removes its
-	         affordance, so a shared restyle would have fixed this section and
-	         quietly broken twenty-one tiles on six other pages. One class name was
-	         hiding the fact that these were never the same thing.
-
-	         The box goes because that is the V3 rule the pricing table already
-	         proved: "the moment a border or a panel appears they become three
-	         offers standing side by side". Three problems the reader is supposed to
-	         recognise are not three offers. */ ?>
+	<?php /* PAIN POINTS: a V3 Cards block, UNBOXED -------------------------- ⚠️ NEW CLASSES (.ind-problem)… → docs/implementation-notes.md#block-2 */ ?>
 	<!-- Pain Points -->
 	<section class="block block-cards ind-problems">
 		<div class="block__inner">
@@ -1597,25 +1475,11 @@ get_template_part( 'template-parts/site-nav' );
 				<?php endforeach; ?>
 			</div>
 		</div>
-		<?php /* OPEN: the dark run rises out of the cream. Bottom of section 2, over it,
-		         because an overlay sits on the LIGHT side of a boundary — the light section
-		         is its background, so the two cannot disagree on colour.
-
-		         ⚠️ DIRECT CHILD OF THE SECTION, not of .block__inner. .block__inner is
-		         width-capped and gutter-padded; positioned inside it the curtain would be
-		         1140px wide on a full-bleed boundary, leaving the shape short of both edges
-		         at every width above the cap. */ ?>
+		<?php /* OPEN: the dark run rises out of the cream. → docs/implementation-notes.md#open-the-dark-run-rises-out-of-the-cream */ ?>
 		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 	</section>
 
-	<?php /* ---- SOLUTIONS: the first half of the dark run ----------------------
-	         Was #0a2e33, a SECOND dark tone three uses deep. V3's dark is V1's deep
-	         teal --block-dark (#00323A) specifically, because testers rejected the
-	         night world's near-black and drifting back toward it reintroduces the
-	         exact tone the redesign exists to drop.
-
-	         .ind-solutions__bg is deleted with the same reasoning as the hero's two
-	         glows: decoration that existed to soften a background V3 states once. */ ?>
+	<?php /* SOLUTIONS: the first half of the dark run ---------------------- Was #0a2e33, a SECOND dark tone… → docs/implementation-notes.md#block-3 */ ?>
 	<!-- Solutions -->
 	<section class="block block--dark ind-solutions">
 		<div class="block__inner">
@@ -1647,23 +1511,7 @@ get_template_part( 'template-parts/site-nav' );
 		$ind_recap_stamp = $ind_tm[1] . gmdate( 'g:i A', $ind_ts );
 	}
 	?>
-	<?php /* ---- SCENARIO: the second half of the dark run ---------------------
-	         Was a pale-blue gradient (#eef8fa -> #e4f3f7), a fourth background with
-	         no place in a three-tone palette. Its own comment said it was tinted
-	         "so it reads as a distinct panel between the dark band above and the
-	         cream FAQ below" — i.e. it existed to solve a problem created by having
-	         five backgrounds in the first place.
-
-	         It becomes the SECOND dark block instead, so this and Solutions read as
-	         one continuous dark run exactly like homepage sections 2-3. .block--dark
-	         + .block--dark already handles the join with --block-pad-run; there is
-	         nothing to align by hand.
-
-	         ⚠️ THE CHAT AND RECAP MOCKUPS NOW SIT ON DARK. They are the most
-	         detailed things on the page and they are real product surfaces, so this
-	         is the one part of the conversion worth looking at rather than reasoning
-	         about. If it fails, the fix is this section going cream and Solutions
-	         standing alone as a single dark block. */ ?>
+	<?php /* SCENARIO: the second half of the dark run --------------------- Was a pale-blue gradient (#eef8fa ->… → docs/implementation-notes.md#block-4 */ ?>
 	<section class="block block--dark ind-scenario">
 		<div class="block__inner">
 			<div class="ind-scenario__story reveal">
@@ -1717,21 +1565,7 @@ get_template_part( 'template-parts/site-nav' );
 						</ul>
 						<p class="ind-recap__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ind['recap']['followup'] ); ?></p>
 					</div>
-					<?php /* ⚠️ INDICATES THE TRANSCRIPT, DOES NOT REPRODUCE IT. The real recap email carries the full
-					         transcript, and the mockup said nothing about it, so the
-					         email looked shorter than the product's.
-
-					         Deliberately NOT the real exchange: the visitor thread is
-					         already shown in full in the card immediately to the left, and
-					         repeating it here would double the tallest element on the page
-					         to say something the reader has just read. A collapsed row is
-					         the honest shape — it is what the email actually looks like
-					         before you open it.
-
-					         Turn count is COUNTED from the same array that renders the
-					         thread, so it cannot drift from it. Not interactive: this is a
-					         picture of an email, and a control that does nothing is worse
-					         than a label that says what is there. */ ?>
+					<?php /* ⚠️ INDICATES THE TRANSCRIPT, DOES NOT REPRODUCE IT. → docs/implementation-notes.md#ind-recap-section */ ?>
 					<?php if ( ! empty( $ind['chat'] ) ) : ?>
 					<div class="ind-recap__section ind-recap__transcript">
 						<div class="ind-recap__section-head">
@@ -1760,25 +1594,7 @@ get_template_part( 'template-parts/site-nav' );
 			<div class="ind-section__head reveal">
 				<span class="section-label">FAQ</span>
 				<?php
-				// Keyphrase-bearing subheading: no H2 carried the page's own target
-				// phrase, so it never appeared in the page's structure.
-				//
-				// ⚠️ THIS DELIBERATELY NO LONGER MATCHES THE seo_title, AND THAT IS THE
-				// POINT. It used to say "keep this in step with the seo_title pattern in
-				// functions.php"; the Yoast titles moved to "AI
-				// Receptionist for <vertical>" and this H2 stayed on "AI Chat & Voice
-				// Agents for <vertical>".
-				//
-				// Retitling 22 indexed pages is the one edit in the positioning sweep
-				// that can LOSE rankings rather than just fail to gain them — these
-				// pages currently earn their traffic on the chat/voice-agent phrasing.
-				// Keeping that phrase in an on-page H2 means the new term takes the
-				// title tag, which is the strongest signal, while the proven one stays
-				// on the page instead of being deleted from the site in a single day.
-				//
-				// If the receptionist bet is confirmed by real click and position data,
-				// this H2 is the next thing to move. If it is not, the phrase is still
-				// here to fall back to.
+				// Keyphrase-bearing subheading: no H2 carried the page's own target phrase, so it never appeared… → docs/implementation-notes.md#faq-vertical
 				$faq_vertical = preg_replace( '/^For\s+/', '', html_entity_decode( $ind['label'], ENT_QUOTES, 'UTF-8' ) );
 				?>
 				<h2><?php echo esc_html( sprintf( 'AI Chat & Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
@@ -1802,29 +1618,7 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<?php
-	/* ---- "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------: "I don't like the Explore More." It was fifteen industry
-	   names plus a blog post title in one centred flex-wrap with no separators,
-	   which at 390 read as a ragged word cloud — the same failure homepage section
-	   6 was rebuilt to fix.
-
-	   Re-decided rather than restyled, starting from what a cross-link block at the
-	   bottom of an industry page is FOR. Two jobs, and the old one did neither
-	   well: a reader who has scrolled a dental page either recognises they are in
-	   the wrong trade and wants a near neighbour, or they are done. Fifteen exits
-	   serve the first badly and the second not at all.
-
-	   So: the SIBLINGS IN THIS CATEGORY ONLY, as rows with their own blurbs, plus
-	   one link to /for/. A dentist sees Medical, Chiropractic, Veterinary and
-	   Medical Staffing — the four pages a mis-landed visitor plausibly wanted —
-	   and everything else stays one click away on the hub that already lists all
-	   sixteen. Nothing loses a crawl path.
-
-	   ⚠️ ROWS, LEFT-ALIGNED, NOT CENTRED. Each carries a name and a blurb, which
-	   is a list, and the design system's rule is that lists keep their left edge.
-	   Centring these is how the word cloud happened in the first place.
-
-	   Derived from the registry, so a seventeenth industry appears here by itself.
-	   The block renders only when the category actually has siblings. */
+	/* "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------: "I don't like the Explore… → docs/implementation-notes.md#ind-siblings */
 	$ind_siblings = array();
 	$ind_group    = null;
 	foreach ( sitestaffr_industry_registry() as $ind_reg_group ) {
@@ -1869,15 +1663,7 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 	<?php endif; ?>
 
-	<?php /* ---- CLOSING CTA: a dark block into the footer ---------------------
-	         Was a bordered card floating on cream, inside a section carrying a teal
-	         gradient and a dotted SVG pattern the card then covered up. V3 ends on
-	         a dark block that runs into the footer as one continuous run, which is
-	         what the homepage and /for/agencies/ both do.
-
-	         .ind-cta__pattern and .cta-spotlight are both gone: the pattern was
-	         painting under an opaque card, and the card is the "bordered CTA card"
-	         the subpage audit lists as its fifth system break. */ ?>
+	<?php /* CLOSING CTA: a dark block into the footer --------------------- Was a bordered card floating on… → docs/implementation-notes.md#block-5 */ ?>
 	<!-- CTA -->
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">

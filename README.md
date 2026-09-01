@@ -25,7 +25,7 @@ index.php  page.php  single.php  404.php
 page-{slug}.php        15 hand written page templates
 template-parts/        nav, footer, hero, seam, showcases
 assets/css/site.css    the whole design system
-docs/design-system.md  why the CSS is the way it is
+docs/                  why the code is the way it is
 assets/js/             site behavior and the customer account area
 ```
 
@@ -51,9 +51,12 @@ for assets, which are busted with a `filemtime` query string.
 `/for/{industry}/` pages and their SEO metadata from a single array, so adding an industry is one
 registry entry and a version bump rather than a new template.
 
-**The reasoning lives in `docs/design-system.md`.** Long rationale used to sit in the stylesheet
-as block comments. It was moved out so the CSS reads as tokens and selectors; each rule that has a
-non-obvious constraint carries a one line summary and a link to the full note.
+**The reasoning lives in `docs/`.** Long rationale used to sit inline as block comments, which made
+the source hard to read. It was moved out so the code reads as code:
+[`docs/design-system.md`](docs/design-system.md) covers the CSS,
+[`docs/implementation-notes.md`](docs/implementation-notes.md) covers the PHP and JavaScript. Every
+rule with a non-obvious constraint keeps a one line summary and a link to the full note, so a
+warning is still visible where it matters.
 
 **Accessibility was measured, not assumed.** Colour tokens are set by their worst background
 rather than their most common one, which is why `--teal-text` exists separately from the brand

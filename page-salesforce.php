@@ -201,15 +201,7 @@ $sf_faqs = array(
     justify-content: space-between;
     gap: 12px;
     padding: 14px 20px;
-    /* ⚠️ FLAT, WAS A GRADIENT, AND THIS IS A CONTRAST FIX RATHER THAN A STYLE ONE.
-       `linear-gradient(120deg, --teal-deep, --teal-mid)` put white 14.7px and 11.2px
-       text on a background that changed underneath it: sampled from the rendered bar,
-       #00838F at the dark end is 4.52:1 and #00909F at the light end is 3.83:1. The
-       same two labels passed on the left of the bar and failed on the right, which no
-       computed-style check can see — `backgroundColor` is `transparent` on an element
-       painted by `background-image`, so an auditor walks straight past it to the cream
-       and reports 1.02:1 on the wrong background entirely. Only the pixels showed it.
-       Flat --teal-deep is 4.52:1 across the whole bar. */
+    /* ⚠️ FLAT, WAS A GRADIENT, AND THIS IS A CONTRAST FIX RATHER THAN A STYLE ONE. → docs/implementation-notes.md#flat-was-a-gradient-and-this-is-a-contrast-fi */
     background: var(--teal-deep);
     color: #fff;
 }
@@ -224,15 +216,7 @@ $sf_faqs = array(
     font-weight: 700;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    /* ⚠️ A DARK SCRIM, NOT A WHITE ONE, AND ONLY THE FLAT BAR MADE THIS VISIBLE.
-       rgba(255,255,255,0.22) over the bar composites to #389EA8, so white text on
-       this pill measured 3.16:1 while the same white on the bar beside it measured
-       4.52:1 — the pill was lightening its own background out from under its own
-       label. No white alpha can fix it: every value lightens, and even 0.14 only
-       reaches 3.62. rgba(0,0,0,0.18) gives 6.17:1 and reads as the same quiet badge.
-
-       It only surfaced AFTER the gradient was flattened, because the gradient's own
-       failure was larger and masked it. Fixing one layer reveals the next. */
+    /* ⚠️ A DARK SCRIM, NOT A WHITE ONE, AND ONLY THE FLAT BAR MADE THIS VISIBLE. → docs/implementation-notes.md#a-dark-scrim-not-a-white-one-and-only-the-fla */
     background: rgba(0,0,0,0.18);
     border-radius: 999px;
     padding: 5px 11px;
@@ -272,14 +256,7 @@ $sf_faqs = array(
 .sf-card__foot svg { width: 17px; height: 17px; flex: 0 0 auto; }
 
 /* Shared section furniture */
-/* ⚠️ NO `padding` HERE ANY MORE. `.block` owns it, and a `padding` SHORTHAND
-   written on `.sf-section` would beat `.block`'s `padding-block` from anywhere.
-   This page had a THIRD spacing system (--section-padding) where V3 has one token
-   per context.
-   ⚠️ `.sf-section--alt` IS GONE WITH ITS MARKUP. It was --cream-dark, a FIFTH
-   background tone on a site whose whole redesign was five tones down to three. The
-   section it painted is now the page's one dark run, which is the V3 way of saying
-   "this part matters" — a slightly different beige is not. */
+/* ⚠️ NO `padding` HERE ANY MORE. → docs/implementation-notes.md#no-padding-here-any-more */
 .sf-section { background: var(--cream); }
 .sf-section__head { text-align: center; max-width: 720px; margin: 0 auto clamp(38px, 5vw, 58px); }
 .sf-section__title {
@@ -300,18 +277,7 @@ $sf_faqs = array(
 .block--dark .sf-section__lead { color: rgba(240,250,250,0.8); }
 .block--dark .section-label { color: var(--teal-light); }
 
-/* ---- Steps: a V3 Cards block, UNBOXED ----------------------------------
-   Same rule the industry page's pain points moved onto. The white card, the
-   border, the shadow and the hover lift all go: four steps in a sequence are not
-   four offers standing side by side, and the box was the only thing saying they
-   were. The pale icon tile goes with them — an icon on a coloured square is
-   chrome around chrome once the card is gone.
-
-   ⚠️ `.sf-step__num` IS DELETED, MARKUP AND CSS. A 2.4rem numeral at 14% alpha
-   pinned to the top-right corner of a card only reads as a step number while the
-   corner exists. Unboxed it is a grey smudge floating beside the icon. The order
-   is carried by the grid and by the heading above it, which is how the industry
-   page's three problems do it. */
+/* Steps: a V3 Cards block, UNBOXED ---------------------------------- Same rule the industry page's… → docs/implementation-notes.md#steps-a-v3-cards-block-unboxed-same-rule-the-i */
 .sf-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -380,26 +346,11 @@ $sf_faqs = array(
     color: var(--text-secondary);
 }
 
-/* ---- Final CTA: a dark block into the footer ---------------------------
-   Was a bordered `.cta-spotlight` card floating on cream — the "bordered CTA card"
-   the subpage audit lists as a system break, and the same one deleted from
-   page-industry.php. The page now ends on the dark the footer sits under, so the
-   CTA and the footer read as one closing run. `.block--dark` + `.block-statement`
-   supply the background, the white type and the centring; nothing local is left. */
+/* Final CTA: a dark block into the footer --------------------------- Was a bordered `.cta-spotlight`… → docs/implementation-notes.md#final-cta-a-dark-block-into-the-footer-was-a-b */
 .sf-cta__title { color: #fff; margin: 0 0 14px; font-size: clamp(1.8rem, 4vw, 2.6rem); }
 .sf-cta__text { color: rgba(240,250,250,0.8); font-size: 1.08rem; line-height: 1.7; margin: 0 0 32px; }
 
-/* ---- The curtain bracket, on the feature pages -------------------------
-   ⚠️ SCOPED TO `.feature-page` RATHER THAN GENERALISED TO `main`. The homepage's
-   two curtained sections (.block.what-you-get, .block.final-cta) already add the
-   seam's height in their own rules, so a `main > section:has(...)` selector would
-   put a second helping on them — and whether it landed would come down to
-   comparing (0,1,2) against (0,2,0), which is exactly the specificity coin-flip
-   that has already shipped two silent bugs on this branch.
-
-   Same calculation as `.ind-page`'s copy: the peak is 114/120 of the seam's height
-   clamp, so the section must give it that much room or the shape lands on the last
-   line of copy. */
+/* The curtain bracket, on the feature pages ------------------------- ⚠️ SCOPED TO `.feature-page`… → docs/implementation-notes.md#the-curtain-bracket-on-the-feature-pages-scope */
 .feature-page > section:has(> .seam-curtain) { position: relative; }
 .feature-page > section:has(> .seam-curtain--open) {
     padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
@@ -412,25 +363,11 @@ $sf_faqs = array(
     .sf-hero__grid { grid-template-columns: 1fr; }
     .sf-hero__sub { max-width: none; }
 }
-/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT.
-   Checked at 390 across the whole converted set: the homepage and all six ind-*
-   pages centre their hero copy once the two columns become one; `/salesforce/` and
-   `/blog-agent/` were the only two still `start`, because the centring lives in
-   `.ind-hero__content`'s own 768 media query and these pages never had one.
-
-   768, matching `.ind-hero__content`'s breakpoint rather than the 900 above, so the
-   two pages change at the same width as the six they now match. Between 769 and 900
-   the grid is already stacked and stays left — that is deliberate, it is the same
-   band where the ind-* pages are also still left. */
+/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. → docs/implementation-notes.md#the-stacked-hero-centres-and-this-page-was-th */
 @media (max-width: 768px) {
     .sf-hero__content { text-align: center; }
     .sf-hero__actions { justify-content: center; }
-    /* ⚠️ `align-self`, NOT `justify-content`, and `text-align: center` does not reach
-       it either. Below 560 the actions row becomes `flex-direction: column` with
-       `align-items: stretch`; the link is `inline-flex`, so it shrinks to its content
-       and parks at the start of a full-width track while the button above it fills
-       the track and the copy above that centres. It was the one element left at the
-       gutter — visible in the pixels, invisible in the alignment property. */
+    /* ⚠️ `align-self`, NOT `justify-content`, and `text-align: center` does not reach it either. → docs/implementation-notes.md#align-self-not-justify-content-and-text-align */
     .sf-hero__seclink { align-self: center; }
 }
 @media (max-width: 560px) {

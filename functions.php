@@ -43,19 +43,7 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 	}
 }
 
-/**
- * Purge cached HTML once per theme version.
- *
- * The site sits behind LiteSpeed. An FTP deploy changes templates but nothing
- * WordPress calls "content", so no invalidation fires and visitors keep the old
- * markup. Assets escape this via the filemtime query string; markup does not.
- * Bumping style.css "Version:" is therefore what publishes a template change.
- *
- * Uses the X-LiteSpeed-Purge response header, which the web server acts on
- * directly; the plugin action alone does not clear the cache from here and is
- * fired only as a second path. The version is recorded after the header goes
- * out, so a failed purge retries on the next request.
- */
+/* Purge cached HTML once per theme version. → docs/implementation-notes.md#hook-send-headers */
 add_action( 'send_headers', function () {
 	if ( is_admin() || headers_sent() ) {
 		return;
@@ -79,27 +67,7 @@ add_action( 'send_headers', function () {
 if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	/**
 	 * Set a page's post_title from the registry and force Yoast to re-derive its metadata.
-	 *
-	 * Two separate problems, one call.
-	 *
-	 * 1. Provisioners set post_title only inside wp_insert_post, so a page created before the
-	 *    registry existed keeps its original title forever while every other managed field is
-	 *    rewritten on each version bump.
-	 *
-	 * 2. Yoast does not read post meta at render time. It caches a derived row per post in its
-	 *    own indexable table — breadcrumb title, SEO title, social titles — and only rebuilds
-	 *    it when the post is saved. So writing `_yoast_wpseo_*` meta or deleting an override
-	 *    updates the source of truth while the served output keeps coming from the stale row.
-	 *
-	 * That second point is why this call is deliberately unconditional. An earlier version
-	 * skipped the update when post_title already matched, which looked like a sensible
-	 * optimization and was in fact the bug: on three pages post_title was already correct, the
-	 * update was skipped, save_post never fired, and the BreadcrumbList kept serving
-	 * "AI Voice Agent for Dental Practices" through two further fixes that each looked like
-	 * they had failed. Nothing here runs per-request — the caller is version-gated and returns
-	 * early unless the provision version changed — so this is a handful of saves once per bump.
-	 *
-	 * Only post_title is passed, so post_name (and the live URL) is untouched.
+	 * See docs/implementation-notes.md#sitestaffr-heal-post-title
 	 *
 	 * @param int    $page_id Post ID.
 	 * @param string $title   Title the registry says it should have.
@@ -122,13 +90,7 @@ if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 	/**
 	 * Drop stored Yoast social/breadcrumb overrides so they fall back to the
 	 * SEO title and description the provisioner manages.
-	 *
-	 * Yoast keeps Open Graph, Twitter and breadcrumb titles in meta keys separate
-	 * from `_yoast_wpseo_title`. Writing the SEO title alone leaves those overrides
-	 * serving old copy, so the tab and Google update while a social share does not.
-	 *
-	 * Deleting rather than rewriting keeps one source of truth. Safe on every page:
-	 * only overrides that exist are touched.
+	 * See docs/implementation-notes.md#sitestaffr-clear-yoast-title-overrides
 	 *
 	 * @param int $page_id Post ID to clear.
 	 */
@@ -153,11 +115,7 @@ if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	/**
 	 * Live plugin metadata from our own release manifest, cached 12 hours.
-	 *
-	 * The zip served here is the direct-download build, which self-updates from
-	 * sitestaffr.com; the WordPress.org build cannot, since directory guideline 8
-	 * forbids it. Reading our own manifest rather than api.wordpress.org keeps the
-	 * download page working even if the .org listing goes away.
+	 * See docs/implementation-notes.md#sitestaffr-plugin-info
 	 *
 	 * @return array{version:string,download_url:string,requires:string,requires_php:string,size_mb:string,listing_url:string}
 	 */
@@ -244,17 +202,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
 
-	/**
-	 * site.css is the theme's stylesheet, so every front-end view gets it.
-	 *
-	 * Deliberately ungated. An earlier allowlist of conditionals meant any view it
-	 * did not anticipate rendered with no CSS at all, which fails silently: the page
-	 * returns 200 and simply looks broken. wp_enqueue_scripts only fires on the front
-	 * end, so the guard protected nothing.
-	 *
-	 * The per-template flags below are a genuine allowlist; they add assets to
-	 * specific pages rather than subtracting the baseline.
-	 */
+	/* site.css is the theme's stylesheet, so every front-end view gets it. → docs/implementation-notes.md#is-about */
 	wp_enqueue_style(
 		'sitestaffr-website-style',
 		sitestaffr_asset_url( 'assets/css/site.css' ),
@@ -279,12 +227,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_agencies   = is_page_template( 'page-agencies.php' );
 
 	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat || $is_agencies ) {
-		/* Section 3's demo script and timings. Landing page only — no other template has
-		   the panels, and loading the timings elsewhere would be dead weight.
-
-		   Kept separate from site.js on purpose: the demo timings change whenever a new
-		   recording lands, and that change should never touch the file driving the nav,
-		   the FAQ and the accordion. */
+		/* Section 3's demo script and timings. → docs/implementation-notes.md#section-3-s-demo-script-and-timings */
 		if ( $is_landing ) {
 			wp_enqueue_script(
 				'sitestaffr-demo-timings',
@@ -334,15 +277,7 @@ add_action( 'after_setup_theme', function () {
 	add_theme_support( 'post-thumbnails' );
 } );
 
-/**
- * Provision the homepage's search title and description.
- *
- * Kept in code rather than wp-admin so the homepage's search listing is reviewable
- * in git like every other page. Title tags carry search vocabulary rather than brand
- * vocabulary, which is why they use words the hero deliberately avoids.
- *
- * Bump $provision_version to re-apply after an edit.
- */
+/* Provision the homepage's search title and description. → docs/implementation-notes.md#hook-init */
 add_action( 'init', function () {
 	$provision_version = '2';
 	if ( get_option( 'sitestaffr_home_seo_v' ) === $provision_version ) {
@@ -368,12 +303,7 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_home_seo_v', $provision_version );
 } );
 
-/**
- * Provision the /blog-agent marketing page and its SEO metadata.
- *
- * Guarded by a versioned option so it runs once per bump; bumping the version
- * re-runs it to heal an existing page. The page never has to be created by hand.
- */
+/* Provision the /blog-agent marketing page and its SEO metadata. → docs/implementation-notes.md#hook-init-2 */
 add_action( 'init', function () {
 	$provision_version = '2';
 	if ( get_option( 'sitestaffr_blog_agent_page_v' ) === $provision_version ) {
@@ -443,20 +373,7 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_salesforce_page_v', $provision_version );
 } );
 
-/**
- * Provision /for/agencies/ — the second-audience page.
- *
- * Same versioned-option pattern as the Salesforce and industry pages; a bump re-heals
- * the page if someone edits it by hand.
- *
- * Must stay a CHILD of the "for" parent so the URL is /for/agencies/, which is what the
- * nav item and the section 10 CTA link to. A top-level /agencies/ page renders fine at
- * the wrong URL and leaves both of those links 404.
- *
- * Agencies are deliberately NOT in sitestaffr_industry_registry: they are an audience,
- * not an industry, and adding them there would file them in the homepage industry list
- * and the Industries dropdown.
- */
+/* Provision /for/agencies/ — the second-audience page. → docs/implementation-notes.md#hook-init-3 */
 add_action( 'init', function () {
 	$provision_version = '1';
 	if ( get_option( 'sitestaffr_agencies_page_v' ) === $provision_version ) {
@@ -515,19 +432,7 @@ add_action( 'init', function () {
  * The industry registry: one source of truth for which /for/ pages exist and how
  * they present themselves. The nav, footer, /for/ index, llms.txt output and the
  * page provisioner all read from here.
- *
- * To add an industry: add an entry here, add its content to the $industries array
- * in page-industry.php under the same slug, and bump $provision_version. Its
- * category hub picks it up automatically.
- *
- * To add a category: add a group here and bump $provision_version. The hub page,
- * footer link and /for/ index section all come from that one entry.
- *
- * Industry fields: slug, title, label (defaults to title), icon, blurb, llms,
- * seo_title, metadesc.
- * Group fields: heading, slug, icon, seo_title, metadesc, intro.
- *
- * Category and industry slugs share the /for/ namespace and must not collide.
+ * See docs/implementation-notes.md#sitestaffr-industry-registry
  *
  * @return array<int,array<string,mixed>> Ordered groups, each with a heading and its industries.
  */
@@ -579,13 +484,7 @@ function sitestaffr_industry_registry() {
 					'seo_title' => 'AI Receptionist for Veterinary Clinics | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
-				/* Filed under Health & Medical even though it is B2B: the five groups are
-				   a browse aid rather than a taxonomy, so it belongs under the word people
-				   would look for.
-
-				   Note the homepage's industry count is derived from this registry, so
-				   adding an entry moves that number on its own. The plugin's "Great For"
-				   list lives in a separate repo and is not updated from here. */
+				/* Filed under Health & Medical even though it is B2B: the five groups are a browse aid rather than a… → docs/implementation-notes.md#filed-under-health-medical-even-though-it-is-b */
 				array(
 					'slug'      => 'medical-staffing',
 					'title'     => 'Medical Staffing',
@@ -748,17 +647,10 @@ function sitestaffr_industry_registry() {
 	);
 }
 
-/**
- * Flat industry list for the consumers that don't care about grouping
- * (footer, llms.txt, page provisioning). Each entry gains a resolved 'label'.
- *
- * @return array<int,array<string,mixed>>
- */
+/* Flat industry list for the consumers that don't care about grouping (footer, llms.txt, page… → docs/implementation-notes.md#sitestaffr-industry-category */
 /**
  * The registry group whose hub slug matches, or null.
- *
- * Used by the category hub template to work out which group it is rendering
- * from the page it was assigned to, so one template serves all categories.
+ * See docs/implementation-notes.md#sitestaffr-industry-category-2
  *
  * @param string $slug Category slug.
  * @return array<string,mixed>|null
@@ -774,9 +666,7 @@ function sitestaffr_industry_category( $slug ) {
 
 /**
  * Flat list of the category groups, without their industries.
- *
- * For the footer and any other nav that wants the five categories rather than
- * all fifteen industries.
+ * See docs/implementation-notes.md#sitestaffr-industry-categories
  *
  * @return array<int,array<string,mixed>>
  */
@@ -798,12 +688,7 @@ function sitestaffr_industry_categories() {
 
 /**
  * Card-sized thumbnail for an industry's isometric art, or '' when there is none.
- *
- * The full 1024px hero art in assets/images/industries/ is what page-industry.php
- * puts at the top of each landing page; thumbs/ holds the trimmed-and-shrunk
- * version the card grids use, so the /for/ index isn't fifteen full heroes.
- * Optional by design: an industry added to the registry before its art is drawn
- * falls back to its emoji rather than rendering a broken image.
+ * See docs/implementation-notes.md#sitestaffr-industry-art-thumb-url
  *
  * @param string $slug Industry slug.
  * @return string Cache-busted URL, or '' if no thumbnail exists.
@@ -818,15 +703,7 @@ function sitestaffr_industry_art_thumb_url( $slug ) {
 
 /**
  * Full-size industry isometric, for the homepage's section 6 panel.
- *
- * The 1024x1024 originals rather than the thumbs: section 6 renders them at ~440px on
- * desktop and ~200px inside the mobile accordion, and the thumb set is sized for the
- * small card grids on /for/.
- *
- * Returns '' when the file is absent, exactly like the thumb helper, and callers are
- * expected to branch on that. An industry can be added to the registry before its art
- * exists, so empty is a real state: degrade to something deliberate, never to a
- * broken-image box.
+ * See docs/implementation-notes.md#sitestaffr-industry-art-url
  *
  * @param string $slug Industry slug.
  * @return string URL, or '' if there is no render for this industry yet.
@@ -850,31 +727,9 @@ function sitestaffr_industry_list() {
 	return $flat;
 }
 
-/**
- * Provision the /for/<slug> industry landing pages and their SEO metadata from
- * the registry above.
- *
- * Same versioned-option pattern as the Blog Agent and Salesforce pages: ensures
- * the parent "For" index page exists, then creates or heals each child. Bump
- * $provision_version to re-run against existing pages.
- */
+/* Provision the /for/<slug> industry landing pages and their SEO metadata from the registry above. → docs/implementation-notes.md#hook-init-4 */
 add_action( 'init', function () {
-	/* ⚠️ BUMPED 11 -> 12 TO CREATE /for/medical-staffing/, WHICH 404ed ON PRODUCTION.
-	   Medical Staffing was added to the registry above without bumping this, so the
-	   guard below returned early on every request and the page was never inserted. The
-	   industry still appeared everywhere the registry drives — the Industries dropdown,
-	   the homepage picker, the /for/ hub, its own Yoast title and description — all
-	   pointing at a URL that did not exist.
-
-	   ⚠️ THIS IS THE SECOND HALF OF THE FIX AND NEITHER HALF WORKS ALONE. The other is
-	   the missing content array in page-industry.php: with the array and no page you get
-	   a 404 from WordPress, and with the page and no array you get one from the template
-	   guard. Adding an industry is therefore always three edits — registry, array,
-	   version — and only the first two are anywhere near each other in the code.
-
-	   ⚠️ ADDING AN INDUSTRY IS NOT THE ONLY THING THIS GATE CATCHES. It also gates the
-	   SEO healing for all sixteen pages, so any registry edit to a seo_title or metadesc
-	   is equally inert until this number moves. */
+	/* ⚠️ BUMPED 11 -> 12 TO CREATE /for/medical-staffing/, WHICH 404ed ON PRODUCTION. → docs/implementation-notes.md#provision-version */
 	$provision_version = '13';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
@@ -1099,9 +954,7 @@ add_action( 'template_redirect', function () {
 
 /**
  * Estimated reading time in whole minutes.
- *
- * Shown in the blog hero and on every index card. 225 wpm is the usual figure
- * for online prose.
+ * See docs/implementation-notes.md#sitestaffr-read-time
  */
 function sitestaffr_read_time( $content ) {
 	$words = preg_match_all( '/\S+/', wp_strip_all_tags( $content ) );
@@ -1112,11 +965,7 @@ function sitestaffr_read_time( $content ) {
  * Give every <h2> in post content a stable id and return the list, so the
  * single-post template can build a Contents rail without a second pass over
  * the HTML.
- *
- * Returns array( 'content' => string, 'items' => array of id/text ).
- *
- * Headings that already carry an id keep it — post HTML is hand-pasted from
- * docs/blog-posts/ and some of it is already anchored.
+ * See docs/implementation-notes.md#sitestaffr-blog-toc
  */
 function sitestaffr_blog_toc( $content ) {
 	$items = array();
@@ -1166,42 +1015,7 @@ function sitestaffr_blog_toc( $content ) {
 	);
 }
 
-/**
- * 16:9 crops of the blog featured images.
- *
- * Every featured image published here is 1024x1024 and the blog templates are 16:9
- * throughout, so the existing images are cropped rather than regenerated; the ratio
- * is fixed upstream in the Blog Agent's image settings for everything after that.
- *
- * A centre crop was checked against the whole set first: none loses its subject, and
- * several improve, because what it removes is garbled generated text along the top.
- *
- * `true` = hard crop, centred.
- *
- * ⚠️ THE DIMENSIONS MUST FIT INSIDE THE SOURCE OR THE RATIO IS SILENTLY WRONG.
- * WordPress does NOT return a smaller correct crop when the target is bigger than
- * the source — it clamps the width and KEEPS the requested height. Probed against
- * `image_resize_dimensions` with a 1024x1024 source:
- *
- *     target 1600x900 -> 1024x900  (ratio 1.138)  <-- not 16:9 at all
- *     target 1200x675 -> 1024x675  (ratio 1.517)  <-- not 16:9
- *     target 1024x576 -> 1024x576  (ratio 1.778)  correct
- *     target  800x450 ->  800x450  (ratio 1.778)  correct
- *
- * 1600x900 was the obvious first choice and it shipped a 1.14 crop that the CSS
- * then cropped AGAIN, losing twice as much of the picture. Both values below fit
- * inside 1024x1024, which is why they are the sizes they are.
- *
- * 👉 When the Blog Agent starts emitting 1920x1080, raise the hero to 1600x900 —
- * it becomes valid at that point and the hero renders at 1100 CSS px, so 1024 is
- * currently just under 1x.
- *
- * ⚠️ These sizes only exist for images uploaded AFTER this ships. Existing posts
- * need `wp media regenerate --only-missing`. Until that runs the templates fall
- * back to the full square and `.blog-post__figure`'s own `aspect-ratio: 16/9`
- * still crops it visually — so the page looks correct either way, and
- * regeneration is a payload/quality win rather than a prerequisite.
- */
+/* 16:9 crops of the blog featured images. → docs/implementation-notes.md#hook-after-setup-theme */
 add_action( 'after_setup_theme', function () {
 	add_image_size( 'sitestaffr-hero-wide', 1024, 576, true );
 	add_image_size( 'sitestaffr-card-wide', 800, 450, true );

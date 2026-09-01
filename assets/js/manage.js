@@ -1,15 +1,4 @@
-/**
- * SiteStaffr Billing Hub — /manage page logic.
- *
- * State machine:
- *   loading → check URL params / sessionStorage
- *     → has token param?    → verify magic link → authenticated
- *     → has session in storage? → fetch account state → authenticated
- *     → neither?            → unauthenticated
- *
- * Views (toggled via data-view on #hub):
- *   loading | site-picker | unauthenticated | authenticated | error
- */
+/* SiteStaffr Billing Hub — /manage page logic. → docs/implementation-notes.md#setView */
 (function () {
   'use strict';
 
@@ -316,12 +305,7 @@
       banner.className = 'hub__banner hub__banner--success';
       banner.textContent = 'Payment successful! Your account has been updated.';
       banner.hidden = false;
-    /* ⚠️ 'cancelled', DOUBLE-L, AND IT IS NOT A SPELLING MISTAKE. This compares against
-       a query parameter the MIDDLEWARE builds: routes/hub.js sets
-       `${manageBaseUrl}?checkout=cancelled` on the Stripe cancel_url. It is a wire value
-       in another repo, not prose — Americanising it here silently kills the cancel
-       banner, because the redirect still arrives spelled the other way. The visible
-       TEXT below is American; the value it matches on cannot be. */
+    /* ⚠️ 'cancelled', DOUBLE-L, AND IT IS NOT A SPELLING MISTAKE. → docs/implementation-notes.md#verifyMagicLink */
     } else if (checkout === 'cancelled') {
       banner.className = 'hub__banner hub__banner--canceled';
       banner.textContent = 'Checkout was canceled. No charges were made.';

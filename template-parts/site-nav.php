@@ -1,10 +1,5 @@
 <?php
-/**
- * Shared site navigation.
- *
- * Accepts $args:
- *   'secondary' => array of [ 'label' => string, 'href' => string ] — page-specific links (e.g. anchor links on homepage)
- */
+/* Shared site navigation. → docs/implementation-notes.md#primary-menu */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -30,15 +25,7 @@ $primary_menu = array(
             function ( $group ) {
                 return array(
                     'heading' => $group['heading'],
-                    // ⚠️ THE HEADING IS A LINK, AND WITHOUT THIS THE FIVE CATEGORY
-                    // HUBS HAD NO PATH FROM THE NAV AT ALL
-                    // "I'm unable to access the /for or the /health-medical from
-                    // the nav"). They were plain <span>s, so /for/health-medical/
-                    // and its four siblings existed, were provisioned, were
-                    // indexed and were linked from the footer — and the one menu
-                    // that lists every industry could not reach them. The heading
-                    // is the only element in the panel that names a category, so
-                    // it is the only place the link belongs.
+                    // ⚠️ THE HEADING IS A LINK, AND WITHOUT THIS THE FIVE CATEGORY HUBS HAD NO PATH FROM THE NAV AT ALL… → docs/implementation-notes.md#href
                     'href'    => ! empty( $group['slug'] ) ? home_url( '/for/' . $group['slug'] . '/' ) : '',
                     'items'   => array_map(
                         function ( $industry ) {
@@ -54,15 +41,7 @@ $primary_menu = array(
             sitestaffr_industry_registry()
         ),
     ),
-    // Agencies is a TOP-LEVEL item, deliberately not inside the Industries
-    // dropdown. Agencies are an audience, not an industry: they are not in
-    // sitestaffr_industry_registry, and putting them there would drop them
-    // into section 6's list of sixteen businesses alongside dental practices
-    // and salons, which is the wrong shelf.
-    //
-    // It sits before Blog and About because it is the only nav item addressing
-    // the second audience, and the ones who self-classify do it in the first
-    // few seconds — after that they are reading a page written to a plumber.
+    // Agencies is a TOP-LEVEL item, deliberately not inside the Industries dropdown. → docs/implementation-notes.md#label
     array( 'label' => 'Agencies', 'href' => home_url( '/for/agencies/' ) ),
     array( 'label' => 'Blog',  'href' => home_url( '/blog/' ) ),
     array( 'label' => 'About', 'href' => home_url( '/about/' ) ),

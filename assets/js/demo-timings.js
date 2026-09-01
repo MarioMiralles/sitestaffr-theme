@@ -1,37 +1,4 @@
-/**
- * SECTION 3 DEMO — SINGLE SOURCE OF TRUTH FOR TIMING AND SCRIPT.
- *
- * ─────────────────────────────────────────────────────────────────────────────
- * WHEN THE AUTO-REPAIR RECORDING ARRIVES, THIS IS THE ONLY FILE THAT CHANGES.
- * ─────────────────────────────────────────────────────────────────────────────
- *
- *is recording it LAST, after the rest of the redesign is built.
- * It needs a sandbox tenant first, and the sandbox needs config export/restore before
- * "shelve the beauty clinic and build auto repair" is a real workflow rather than a
- * delete-and-rebuild. That is the longest pole on the page and it is not website work.
- *
- * So nothing in site.js hardcodes a timestamp, a speaker or a line of script. To land
- * the recording: drop the file in, re-time `voice.turns[].t` against it, set
- * `voice.src` and `voice.duration`, flip `voice.enabled` to true, and change
- * DEFAULT_MODE to 'voice'. No markup or CSS changes, no mechanism changes.
- *
- * WHY TEXT SHIPS FIRST. The spec says voice leads, and it should: section 3's currency
- * is credibility, a chat transcript is trivially fakeable, and almost nobody has heard a
- * website answer out loud. But the text thread drives the IDENTICAL live-fill mechanism,
- * so shipping it first means the section argues completely on day one instead of sitting
- * behind a blocker. `voice` below is scaffolding, deliberately marked disabled.
- *
- * ⚠️ THERE IS NO FIXED RECAP SCHEMA. Each turn's optional `fill` carries a label AND a
- * value, and they materialise together as a pair. The product builds each recap
- * intelligently — sometimes a name only, sometimes a name and an email, sometimes a name
- * and a phone. A pre-drawn skeleton of grayed labels would be a picture of a form the
- * product does not have. Note the two threads below capture DIFFERENT fields, and that
- * difference is load-bearing, not incidental.
- *
- * ⚠️ BOTH THREADS END WITH DETAILS CAPTURED AND A HUMAN FOLLOWING UP — no appointment is
- * confirmed. SiteStaffr gathers leads; it does not hold a calendar. A demo that books
- * something is a demo of a product we do not sell.
- */
+/* SECTION 3 DEMO — SINGLE SOURCE OF TRUTH FOR TIMING AND SCRIPT. → docs/implementation-notes.md#section-3-demo-single-source-of-truth-for-timi */
 window.SITESTAFFR_DEMO = {
 
   /* Which tab is active on load. 'voice' once the recording exists. */

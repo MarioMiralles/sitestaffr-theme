@@ -3,40 +3,13 @@
 Template Name: Agencies
 */
 
-/**
- * /for/agencies/ — the second audience.
- *
- * SiteStaffr has two audiences: small businesses and the WordPress agencies that build
- * their sites. They are deliberately not blended into one page. The homepage stays
- * written to the business owner, which is what user testing rewarded; agencies get a nav
- * item, one band on the homepage, and this page, where the whole argument is theirs.
- *
- * Its own template, not page-industry.php. Agencies are an audience, not an industry, and
- * must not be added to sitestaffr_industry_registry — that would file them in the
- * homepage industry list and the Industries dropdown.
- *
- * Tone differs from the homepage on purpose: shorter sentences, more specifics, numbers
- * over adjectives, no softening.
- *
- * ⚠️ Every claim here is verified against the code, and the false ones are named as false
- * rather than omitted. There is no reseller pricing, no white-label, no bulk billing and
- * no cross-client lead view. This is the audience that checks.
- *
- * Yoast owns title and meta, as everywhere else on this site. No hardcoded meta here.
- */
+/* /for/agencies/ — the second audience. → docs/implementation-notes.md#for-agencies-the-second-audience */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/* Its own FAQPage schema, and ⚠️ NOT ONE QUESTION IS SHARED WITH THE HOMEPAGE. Duplicate
-   Q&A across two URLs makes the two URLs compete with each other, and Google requires
-   schema to match visible content — which the generate-from-one-array pattern satisfies.
-
-   Questions 4, 5 and 6 have "no" answers and they STAY. They are what this audience
-   searches for. A truthful "not yet, here is what exists, tell us what you need" ranks and
-   converts better than silence, and it prevents the bounce that follows a page which
-   dodged the question. */
+/* Its own FAQPage schema, and ⚠️ NOT ONE QUESTION IS SHARED WITH THE HOMEPAGE. → docs/implementation-notes.md#agency-faq */
 $agency_faq = array(
 	array(
 		'question' => 'Can I install SiteStaffr on client sites I manage?',
@@ -183,15 +156,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* ===== 3. WHAT IT TAKES PER SITE ====================================
-         Dark panel — the mid-page emphasis. This is the concrete answer to "how much of
-         my time does this cost", which is the question that actually decides adoption.
-
-         ⚠️ DO NOT CLAIM ZERO CONFIGURATION. The business profile is real work, and an
-         agency that expects five minutes and finds thirty will say so publicly. Five
-         minutes is the INSTALL; configuration is the billable part, and section 2 already
-         framed it that way. Consistency between those two sections is what makes this
-         page trustworthy to a technical reader. */ ?>
+<?php /* 3. → docs/implementation-notes.md#block */ ?>
 <section class="block block--dark block--tight agency-steps">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -219,12 +184,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* ===== 4. WHO PAYS, AND HOW BILLING WORKS ===========================
-         THIS IS THE AGENCY QUESTION and no page on the site answered it.
-
-         ⚠️ SCOPE EVERY "ONE PLACE" PHRASE TO BILLING. The lead dashboard is per-site,
-         inside each client's own wp-admin. If this page implies a cross-client inbox, the
-         first agency to sign up finds out in ten minutes. */ ?>
+<?php /* 4. → docs/implementation-notes.md#block-2 */ ?>
 <section class="block block--tight block-cards agency-billing">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -247,14 +207,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* ===== 5. WHAT YOU CAN SHOW AT RENEWAL ==============================
-         Reuses the homepage's recap surface, framed for a different reader. On the
-         homepage it is "what lands in YOUR inbox"; here it is "what you put in front of
-         your client".
-
-         ⚠️ A STATIC RECAP IS CORRECT HERE. The homepage's live-fill is not needed and
-         would be the wrong argument: there the point is the MECHANISM (you hear him say
-         the number and the number appears), here the point is the ARTIFACT. */ ?>
+<?php /* 5. → docs/implementation-notes.md#block-3 */ ?>
 <section class="block block--tight agency-renewal">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -284,16 +237,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* ===== 6. PRICING, AND THE PARTNER QUESTION =========================
-         The homepage's own table would be reused verbatim here in a later pass; for now
-         one line scopes it and links to it, because duplicating a 300-line table across
-         two templates is how they drift apart.
-
-         THE PART MOST VENDORS WOULD HIDE IS THE POINT OF THE SECTION. Three reasons, in
-         order of value: it IS the demand-validation mechanism, so if this form generates
-         volume that is the signal to build reseller pricing; a technical audience looks
-         for a partner program within thirty seconds, and finding a page that IMPLIED one
-         is disqualifying; and it converts a gap into an invitation. */ ?>
+<?php /* 6. → docs/implementation-notes.md#block-4 */ ?>
 <section class="block block--tight agency-pricing" id="partner">
 	<div class="block__inner">
 		<div class="agency-section__head">

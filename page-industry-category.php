@@ -1,17 +1,5 @@
 <?php
-/**
- * Template Name: Industry Category Hub
- *
- * One template for every category hub at /for/<category-slug>/. The group is
- * resolved from the page's own slug, so adding a category is a registry entry
- * plus a provision bump — no new template, no new file.
- *
- * These sit between the /for/ index and the fifteen industry pages: a shorter
- * list for a visitor who knows roughly what they do, and a stable home for
- * industries added later.
- *
- * @package SiteStaffr
- */
+/* Template Name: Industry Category Hub One template for every category hub at /for/<category-slug>/. → docs/implementation-notes.md#sitestaffr-category */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -41,38 +29,14 @@ $cta_url               = home_url( '/#get-started' );
 
 <main class="ind-page">
 
-	<?php /* ---- HERO: a V3 block, not a Split -----------------------------------
-	         Same reasoning as `/for/`: no isometric on a hub, so no second column.
-	         ⚠️ `.block.ind-hero` — TWO CLASSES. The padding is owned by
-	         `.block:not(.block--dark)` at (0,2,0) and a bare `.ind-hero` at (0,1,0)
-	         loses to it whatever the source order; `:not()` contributes its
-	         argument's specificity. Written as one class this changes nothing and
-	         looks correct in the diff. */ ?>
+	<?php /* HERO: a V3 block, not a Split ----------------------------------- Same reasoning as `/for/`: no… → docs/implementation-notes.md#block */ ?>
 	<!-- Hero -->
 	<section class="block ind-hero">
 		<div class="block__inner">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label"><?php echo esc_html( $sitestaffr_category['heading'] ); ?></span>
 				<?php
-				/* ⚠️ THE H1 IS REGISTRY COPY NOW, NOT A TEMPLATE PATTERN.
-
-				   It read "AI Voice and Text Agents for <heading>" on all five hubs. Two
-				   problems. The term is the one the V3 positioning superseded — the
-				   homepage H1 is "Put an AI Receptionist on Your Website" and these five
-				   pages were still naming the product the old way. And a pattern
-				   concatenated onto the group heading cannot read well for five different
-				   headings: "for Health & Medical" and "for Property & Auto" are category
-				   labels from a browse menu, not the words anyone would call their own
-				   business.
-
-				   Per-group copy fixes both — "Healthcare Practices", "Home Service
-				   Businesses", "Real Estate and Auto Businesses". The fallback keeps the
-				   old behaviour if a sixth group is ever added without an 'h1', so a
-				   missing field degrades to a heading rather than to a blank H1.
-
-				   ⚠️ 'h1' RENDERS FROM THE REGISTRY AT REQUEST TIME, so unlike seo_title
-				   and metadesc it is NOT behind $provision_version and needs no bump.
-				   Those two still are — see the note on that gate. */
+				/* ⚠️ THE H1 IS REGISTRY COPY NOW, NOT A TEMPLATE PATTERN. → docs/implementation-notes.md#ind-hero-subtitle */
 				$sitestaffr_cat_h1 = ! empty( $sitestaffr_category['h1'] )
 					? $sitestaffr_category['h1']
 					: 'AI Voice and Text Agents for ' . $sitestaffr_category['heading'];
@@ -92,16 +56,7 @@ $cta_url               = home_url( '/#get-started' );
 		</div>
 	</section>
 
-	<?php /* ---- THE CATEGORY'S INDUSTRIES: a V3 Cards block --------------------
-	         ⚠️ `.ind-problems__grid` HAD NO RULE LEFT. It was deleted from site.css
-	         when the industry page's pain points moved onto `.block-cards__grid`,
-	         and these tiles kept the dead class — so the grid on all five hubs had
-	         silently collapsed to a full-width stack.
-
-	         ⚠️ THE TILES KEEP THEIR BOX. `.ind-problem-card` is two components: the
-	         three unboxed statements on `page-industry.php` (now `.ind-problem`) and
-	         these, which are LINKS. The box is the affordance; unboxing the shared
-	         class would have stripped it from twenty-one tiles across six pages. */ ?>
+	<?php /* THE CATEGORY'S INDUSTRIES: a V3 Cards block -------------------- ⚠️ `.ind-problems__grid` HAD NO… → docs/implementation-notes.md#block-2 */ ?>
 	<!-- Industries in this category -->
 	<section class="block block-cards ind-problems">
 		<div class="block__inner">

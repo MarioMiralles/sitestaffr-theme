@@ -244,15 +244,7 @@ $ba_faqs = array(
     line-height: 1.6; color: var(--text-secondary); margin: 16px auto 0; max-width: 60ch;
 }
 
-/* ---- Pipeline: a V3 Cards block, UNBOXED -------------------------------
-   ⚠️ `.ba-flow`'S OWN --warm-white IS GONE. That white was section 1 of the
-   HOMEPAGE's tone, borrowed here to separate two sections; V3 separates with a dark
-   block or with whitespace, and one cream run is what the industry page converted to.
-
-   Card, border, shadow and hover-lift removed for the same reason as everywhere else
-   in this conversion: four steps in a sequence are not four offers side by side.
-   ⚠️ `.ba-step__num` IS DELETED, MARKUP AND CSS — a 2.4rem numeral in --teal-pale
-   pinned to a card's top-right corner is legible only while the corner exists. */
+/* Pipeline: a V3 Cards block, UNBOXED ------------------------------- ⚠️ `.ba-flow`'S OWN --warm-white… → docs/implementation-notes.md#pipeline-a-v3-cards-block-unboxed-ba-flow-s-ow */
 .ba-flow__grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(18px, 2.4vw, 28px);
 }
@@ -276,16 +268,7 @@ $ba_faqs = array(
 .ba-card__title { font-family: var(--font-display); font-size: 1.24rem; color: var(--text-primary); margin: 2px 0 8px; }
 .ba-card__desc { font-family: var(--font-body); font-size: 0.97rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
 
-/* ---- Autopilot: the page's one dark run --------------------------------
-   ⚠️ THE DARK ROUNDED PANEL BECOMES THE BLOCK ITSELF. It was a card floating on
-   warm-white, painted in a THREE-STOP GRADIENT (#074651 -> #0a5a66 -> #064450) that
-   matched nothing else on the site — a fourth and fifth dark tone next to
-   --block-dark and --footer-dark. Full-bleed, bracketed by the curtain pair, it says
-   "this part matters" in the vocabulary the rest of the site already uses, and the
-   two retired tones go with it.
-
-   The panel keeps only its GRID. Background, radius, padding, shadow and the
-   text colour are `.block--dark`'s job now. */
+/* Autopilot: the page's one dark run -------------------------------- ⚠️ THE DARK ROUNDED PANEL… → docs/implementation-notes.md#autopilot-the-page-s-one-dark-run-the-dark-rou */
 .ba-pilot__panel {
     display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     gap: clamp(32px, 5vw, 64px); align-items: center;
@@ -335,14 +318,7 @@ $ba_faqs = array(
 .ba-sched__toggle { width: 42px; height: 24px; border-radius: 999px; background: #8fe8f2; position: relative; }
 .ba-sched__toggle::after { content: ''; position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--block-dark); }
 
-/* ---- Plans row: unboxed figures --------------------------------------
-   ⚠️ THIS IS NOT THE PRICING TABLE AND MUST NOT BECOME ONE. It is four figures
-   answering "how many posts", not four offers to compare — the plan comparison lives
-   on the homepage. Boxing them is exactly what the pricing pass removed: "the moment
-   a border or a panel appears they become three offers standing side by side".
-
-   `.ba-plan--pilot`'s tinted border goes with the box. The `+ Autopilot` pill already
-   says which plans have it, and says it in words. */
+/* Plans row: unboxed figures -------------------------------------- ⚠️ THIS IS NOT THE PRICING TABLE… → docs/implementation-notes.md#plans-row-unboxed-figures-this-is-not-the-pric */
 .ba-plans__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 2.6vw, 32px); }
 .ba-plan { text-align: center; }
 .ba-plan__name { font-family: var(--font-body); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--text-muted); }
@@ -356,12 +332,7 @@ $ba_faqs = array(
 }
 .ba-plans__foot { text-align: center; margin-top: 26px; font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); }
 
-/* ---- Final CTA: a dark block into the footer ---------------------------
-   Was a bordered warm-white card with its own radial teal wash, floating on cream —
-   the "bordered CTA card" the subpage audit lists as a system break, and the third
-   copy of it after page-industry.php and page-salesforce.php. The page now ends on
-   the dark the footer sits under. `.block--dark` + `.block-statement` do the
-   background, the white type and the centring. */
+/* Final CTA: a dark block into the footer --------------------------- Was a bordered warm-white card… → docs/implementation-notes.md#final-cta-a-dark-block-into-the-footer-was-a-b */
 .ba-cta__title { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.1; margin: 0 0 14px; color: #fff; }
 .ba-cta__text { font-family: var(--font-body); font-size: 1.1rem; color: rgba(240,250,250,0.8); margin: 0 auto 30px; max-width: 52ch; }
 
@@ -391,14 +362,7 @@ $ba_faqs = array(
     .ba-sched__days { width: 100%; justify-content: space-between; }
     .ba-sched__day { flex: 1 1 0; max-width: 40px; }
 }
-/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. Checked at 390
-   across the whole converted set: the homepage and all six ind-* pages centre their
-   hero copy once the two columns become one; `/salesforce/` and `/blog-agent/` were
-   the only two still `start`, because the centring lives in `.ind-hero__content`'s
-   own 768 media query and these pages never had one. 768 to match that breakpoint.
-   ⚠️ `.ba-hero__sub` needs `margin-inline: auto` as well as centred text — it is
-   capped at 38ch, so centring the text alone leaves the BOX hard against the left
-   gutter and the block reads as centred-inside-a-left-column. */
+/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. → docs/implementation-notes.md#the-stacked-hero-centres-and-this-page-was-th */
 @media (max-width: 768px) {
     .ba-hero__content { text-align: center; }
     .ba-hero__sub { margin-inline: auto; }
