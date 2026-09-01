@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <?php /* THE SHAPE DIVIDER BELONGS TO THE FOOTER.
 
          It used to be the closing section's: page-landing.php rendered it as the last
-         child of.final-cta, and the ind-* conversion had briefly copied that idea onto
+         child of .final-cta, and the ind-* conversion had briefly copied that idea onto
          each CTA. That meant every template that wanted the gesture had to remember to
          add it, and three of them did not have it at all. Here it is rendered once and
          appears on every page that uses the footer.
@@ -22,7 +22,9 @@ if ( ! defined( 'ABSPATH' ) ) {
          above the footer's top edge. `.footer` carries `overflow: hidden`, so an
          absolutely-positioned child hanging ABOVE the box is clipped away entirely.
          Nothing about that shows up in a diff, and elementFromPoint cannot detect it
-         either because the seam is pointer-events:none.footer-seam is height:0 and position:relative, so it sits exactly on the
+         either because the seam is pointer-events:none.
+
+         .footer-seam is height:0 and position:relative, so it sits exactly on the
          footer's top edge and the curtain's own `bottom: -1px` hangs it upward over
          the section above. Not clipped, because this wrapper has no overflow of its
          own — and the footer's overflow:hidden is left alone rather than removed,
@@ -44,7 +46,7 @@ if ( ! defined( 'ABSPATH' ) ) {
               class="footer__logo-image"
             >
           </a>
-          <?php /* Positioning realigned with the V3 H1. Was "AI voice and text agents
+          <?php /* Positioning realigned  with the V3 H1. Was "AI voice and text agents
          for service businesses on WordPress" - the superseded framing. This tagline is
          the most-repeated sentence on the site: it renders under EVERY page, so leaving
          it on the old term would have the site contradicting its own headline site-wide.

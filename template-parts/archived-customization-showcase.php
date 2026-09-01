@@ -2,7 +2,7 @@
 /**
  * Archived homepage customization showcase.
  *
- * Removed from the main landing page during the relief-first pass.
+ * Removed from the main landing page during the  relief-first pass.
  * Keep this partial available for a future /features page or dedicated CTA/button
  * customization showcase without having to reconstruct the original markup.
  */

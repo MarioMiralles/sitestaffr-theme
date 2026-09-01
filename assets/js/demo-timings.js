@@ -5,7 +5,7 @@
  * WHEN THE AUTO-REPAIR RECORDING ARRIVES, THIS IS THE ONLY FILE THAT CHANGES.
  * ─────────────────────────────────────────────────────────────────────────────
  *
- * Mario is recording it LAST, after the rest of the redesign is built (2026-08-26).
+ *is recording it LAST, after the rest of the redesign is built.
  * It needs a sandbox tenant first, and the sandbox needs config export/restore before
  * "shelve the beauty clinic and build auto repair" is a real workflow rather than a
  * delete-and-rebuild. That is the longest pole on the page and it is not website work.

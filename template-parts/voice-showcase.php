@@ -8,11 +8,11 @@
  * Voice Showcase Carousel — shared between homepage and features page.
  *
  * Accepts $args:
- * 'id' => string HTML id for the container (default: 'voiceShowcase')
- * 'extra_classes' => string Additional CSS classes (default: '')
- * 'show_header' => bool Whether to show the header (default: true)
- * 'header_title' => string Override header title
- * 'header_subtitle' => string Override header subtitle
+ *   'id'              => string  HTML id for the container (default: 'voiceShowcase')
+ *   'extra_classes'   => string  Additional CSS classes (default: '')
+ *   'show_header'     => bool    Whether to show the header (default: true)
+ *   'header_title'    => string  Override header title
+ *   'header_subtitle' => string  Override header subtitle
  */
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

@@ -8,8 +8,8 @@
  * No hardcoded meta tags: Yoast owns the site's metadata, and the 404 HTTP status
  * is what keeps this out of search results.
  *
- * Nothing here uses.reveal, so site.css alone renders the page. Do not add
- *.reveal markup without also enqueueing site.js for this template.
+ * Nothing here uses .reveal, so site.css alone renders the page. Do not add
+ * .reveal markup without also enqueueing site.js for this template.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {

@@ -83,13 +83,13 @@ if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	 * Two separate problems, one call.
 	 *
 	 * 1. Provisioners set post_title only inside wp_insert_post, so a page created before the
-	 * registry existed keeps its original title forever while every other managed field is
-	 * rewritten on each version bump.
+	 *    registry existed keeps its original title forever while every other managed field is
+	 *    rewritten on each version bump.
 	 *
 	 * 2. Yoast does not read post meta at render time. It caches a derived row per post in its
-	 * own indexable table — breadcrumb title, SEO title, social titles — and only rebuilds
-	 * it when the post is saved. So writing `_yoast_wpseo_*` meta or deleting an override
-	 * updates the source of truth while the served output keeps coming from the stale row.
+	 *    own indexable table — breadcrumb title, SEO title, social titles — and only rebuilds
+	 *    it when the post is saved. So writing `_yoast_wpseo_*` meta or deleting an override
+	 *    updates the source of truth while the served output keeps coming from the stale row.
 	 *
 	 * That second point is why this call is deliberately unconditional. An earlier version
 	 * skipped the update when post_title already matched, which looked like a sensible
@@ -101,8 +101,8 @@ if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	 *
 	 * Only post_title is passed, so post_name (and the live URL) is untouched.
 	 *
-	 * @param int $page_id Post ID.
-	 * @param string $title Title the registry says it should have.
+	 * @param int    $page_id Post ID.
+	 * @param string $title   Title the registry says it should have.
 	 */
 	function sitestaffr_heal_post_title( $page_id, $title ) {
 		$page_id = (int) $page_id;
@@ -157,7 +157,7 @@ if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	 * The zip served here is the direct-download build, which self-updates from
 	 * sitestaffr.com; the WordPress.org build cannot, since directory guideline 8
 	 * forbids it. Reading our own manifest rather than api.wordpress.org keeps the
-	 * download page working even if the.org listing goes away.
+	 * download page working even if the .org listing goes away.
 	 *
 	 * @return array{version:string,download_url:string,requires:string,requires_php:string,size_mb:string,listing_url:string}
 	 */
@@ -267,7 +267,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_download   = is_page_template( 'page-download.php' );
 	$is_blog_agent = is_page_template( 'page-blog-agent.php' );
 	$is_salesforce = is_page_template( 'page-salesforce.php' );
-	// Any template using.reveal must be listed here. Without site.js those
+	// Any template using .reveal must be listed here. Without site.js those
 	// elements stay at opacity 0 forever and the content is simply invisible.
 	$is_for_index  = is_page_template( 'page-for.php' ) || is_page( 'for' );
 	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
@@ -643,7 +643,7 @@ function sitestaffr_industry_registry() {
 			/* ⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the
 			   /for/home-services/ industry page below it are two different URLs, and the
 			   old titles told them apart only by the plural in "Agents"/"Agent". Moving
-			   both to "AI Receptionist for.." collapsed that distinction into two
+			   both to "AI Receptionist for ..." collapsed that distinction into two
 			   identical title tags. Matches this group's h1. */
 			'seo_title'  => 'AI Receptionist for Home Service Businesses | SiteStaffr',
 			'metadesc'   => 'Capture urgent home service jobs around the clock, for HVAC, plumbing, pest control and general contracting. Every lead in your inbox. Free 30-day trial.',
@@ -1183,10 +1183,10 @@ function sitestaffr_blog_toc( $content ) {
  * the source — it clamps the width and KEEPS the requested height. Probed against
  * `image_resize_dimensions` with a 1024x1024 source:
  *
- * target 1600x900 -> 1024x900 (ratio 1.138) <-- not 16:9 at all
- * target 1200x675 -> 1024x675 (ratio 1.517) <-- not 16:9
- * target 1024x576 -> 1024x576 (ratio 1.778) correct
- * target 800x450 -> 800x450 (ratio 1.778) correct
+ *     target 1600x900 -> 1024x900  (ratio 1.138)  <-- not 16:9 at all
+ *     target 1200x675 -> 1024x675  (ratio 1.517)  <-- not 16:9
+ *     target 1024x576 -> 1024x576  (ratio 1.778)  correct
+ *     target  800x450 ->  800x450  (ratio 1.778)  correct
  *
  * 1600x900 was the obvious first choice and it shipped a 1.14 crop that the CSS
  * then cropped AGAIN, losing twice as much of the picture. Both values below fit

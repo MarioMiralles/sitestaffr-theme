@@ -99,7 +99,7 @@ $ba_faqs = array(
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?php wp_head(); ?>
     <style>
-/* ===== Blog Agent landing page (scoped.ba-) ===== */
+/* ===== Blog Agent landing page (scoped .ba-) ===== */
 .ba-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
@@ -112,7 +112,7 @@ $ba_faqs = array(
    whatever the source order. Same first-section-under-the-nav value as the other
    converted heroes. */
 .block.ba-hero { padding-block-start: clamp(120px, 15vw, 140px); }
-/* Kept next to.block-split__grid, whose 1fr 1fr this overrides. */
+/* Kept next to .block-split__grid, whose 1fr 1fr this overrides. */
 .ba-hero__grid {
     grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
     gap: clamp(32px, 5vw, 72px);
@@ -166,7 +166,7 @@ $ba_faqs = array(
     letter-spacing: 0.03em; text-transform: uppercase;
     /* ⚠️ #0f6848, NOT --emerald. --emerald (#10b981) on --emerald-light measured
        2.24:1 at 11.5px bold — the worst contrast anywhere on the converted set. The
-       colour is not new: it is what.sf-card__foot already uses for exactly this
+       colour is not new: it is what .sf-card__foot already uses for exactly this
        pairing on the Salesforce mockup, so the two product mockups now agree. 5.9:1. */
     color: #0f6848; background: var(--emerald-light);
     padding: 4px 10px; border-radius: 999px;
@@ -532,7 +532,7 @@ $ba_faqs = array(
             </div>
         </div>
         <?php /* OPEN: the dark run rises out of the cream. Direct child of the SECTION,
-                 not of.block__inner — the inner is width-capped, so inside it the
+                 not of .block__inner — the inner is width-capped, so inside it the
                  curtain would stop short of both edges on a full-bleed boundary. */ ?>
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>

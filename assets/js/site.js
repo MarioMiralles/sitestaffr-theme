@@ -221,7 +221,7 @@
   raf = requestAnimationFrame(animate);
 })();
 
-// The scroll-reveal IntersectionObserver was deleted 2026-08-26. Content
+// The scroll-reveal IntersectionObserver was deleted. Content
 // visibility must never depend on decorative JS running successfully.
 
 // ========== AUDIO PLAYER ==========
@@ -958,7 +958,7 @@ if (voiceShowcase) {
 }
 
 /* ========== FAQ ACCORDION ==========
-   ONE OPEN AT A TIME, AND ALL OF THEM CAN BE CLOSED (Mario, 2026-08-27). The logic here
+   ONE OPEN AT A TIME, AND ALL OF THEM CAN BE CLOSED. The logic here
    was already correct; what was broken was the CLASS NAME. This toggled a bare `open`
    while the PHP rendered `faq-item--open` on the first question and the stylesheet
    carried rules for BOTH — so the first answer was pinned open by a class this code
@@ -1003,16 +1003,7 @@ if (langExpandBtn) {
    THE ONE RULE THIS FILE MUST NOT BREAK: the panels are rendered FULLY
    POPULATED by PHP. This script only empties them when it is certain it is
    going to refill them. If the script never runs, throws, or the visitor
-   prefers reduced motion, the section stays complete and readable.
-
-   That is not defensiveness for its own sake — the reveal system deleted
-   earlier in this redesign failed in production for exactly this reason:
-   content defaulted to invisible and depended on decorative JS to restore it.
-
-   All script, timing and copy come from demo-timings.js. Nothing here
-   hardcodes a timestamp or a line of dialogue, so landing the real recording
-   is a change to that file alone.
-   =================================================================== */
+   prefers reduced motion, the section stays complete and readable. */
 (function () {
   var DEMO = window.SITESTAFFR_DEMO;
   var root = document.querySelector('.see-it');
@@ -1170,7 +1161,7 @@ if (langExpandBtn) {
   }
 
   /* Retire the stage. ONE WAY ONLY — once the panels are up they stay up, including
-     after the demo finishes. Reverting to the stage on stop() would take the assembled
+     after the demo finishes. Reverting to the stage on stop would take the assembled
      recap away at the exact moment it has finished assembling, which is the payoff the
      whole section is built around. Replay is the transport's job, not the stage's. */
   function revealPanels() {
@@ -1216,7 +1207,7 @@ if (langExpandBtn) {
   });
   playBtn.addEventListener('click', play);
 
-  /* The stage button and the transport button both call play(); the stage's press adds
+  /* The stage button and the transport button both call play; the stage's press adds
      the chime because that press is the one that "opens the widget". Focus moves to the
      transport afterwards so a keyboard user is not left on a button that has just
      removed itself from the page. */
@@ -1241,16 +1232,13 @@ if (langExpandBtn) {
 /* ===================================================================
    SECTION 4 — the overnight inbox opens its recap documents.
 
-   Each row is a real <button> rendered by PHP; each document is a <dialog>
-   rendered by PHP alongside it. This script only connects the two.
-
    ⚠️ `.is-interactive` IS ADDED LAST, AFTER EVERYTHING IS WIRED, and the CSS
    hangs the entire affordance off it — pointer cursor, hover, the "View recap"
    hint. If <dialog> is unsupported or anything here throws, the class is never
    added and the rows read as the plain inbox they were before. A button that
    looks clickable and does nothing is worse than one that never offered.
 
-   showModal(), never show(): the focus trap, Esc-to-close, the ::backdrop and
+   showModal, never show: the focus trap, Esc-to-close, the ::backdrop and
    the top layer are all things the modal mode provides and the non-modal mode
    does not.
    =================================================================== */
@@ -1287,7 +1275,7 @@ if (langExpandBtn) {
     if (closeBtn) closeBtn.addEventListener('click', function () { dlg.close(); });
 
     /* Focus returns to the row that opened it. Browsers restore focus to the opener
-       for showModal(), but not after a programmatic close() in every engine, and
+       for showModal, but not after a programmatic close in every engine, and
        landing back at the top of the document loses a keyboard reader their place. */
     dlg.addEventListener('close', function () {
       if (typeof row.focus === 'function') row.focus();
@@ -1300,11 +1288,6 @@ if (langExpandBtn) {
 /* ===================================================================
    SECTION 5 — the language orbit has NO SCRIPT, deliberately.
 
-   It used to: clickable pills swapped a single greeting bubble, and this is
-   where that handler lived. The 2026-08-27 redesign shows twelve greetings at
-   once instead, so there is nothing left to swap — the section is now entirely
-   PHP and CSS, and it is complete the moment the HTML arrives.
-
    The `lang` and `dir` attributes that handler had to maintain by hand are now
    rendered once per greeting straight from $lang_greetings. That was the
    fiddliest part of the removed code and the part most likely to go wrong; it
@@ -1315,17 +1298,7 @@ if (langExpandBtn) {
    =================================================================== */
 
 /* ===================================================================
-   SECTION 6 — the industry directory.
-
-   CLICK, NOT HOVER. Hover does not exist on touch and most SMB traffic is
-   phones; hover flickers, because crossing the list swaps a 440px image four
-   times on the way past; and the excerpt needs persistence, since you cannot
-   move the pointer onto a link that vanishes when you leave the name.
-
-   Desktop and mobile are the SAME buttons doing two different jobs: on desktop
-   a click swaps the big panel, on mobile it opens that industry's own detail.
-   One handler, because two would drift.
-   =================================================================== */
+   SECTION 6 — the industry directory. */
 (function () {
   var root = document.querySelector('.industries');
   if (!root) return;
@@ -1386,10 +1359,7 @@ if (langExpandBtn) {
      deliberate. Honoring it here would open a row twelve deep and leave the top of the
      section bare, which is the problem this is solving. On a phone every name is on
      screen as text anyway, so the section never reads as being "about" whichever
-     industry happens to be open.
-
-     Also handles crossing the breakpoint, where a mobile item left open would otherwise
-     leave a stray .is-open on desktop, where it means nothing. */
+     industry happens to be open. */
   function openFirstOnMobile() {
     names.forEach(function (b) { b.classList.remove('is-open'); });
     if (mobile.matches) names[0].classList.add('is-open');

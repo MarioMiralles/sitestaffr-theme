@@ -21,7 +21,9 @@ Template Name: Industry
    product's reason to exist.
 
    The test is simple: is SiteStaffr the thing doing the calling or answering? If
-   yes, rewrite it. If the human is, leave it. */
+   yes, rewrite it. If the human is, leave it. Swept; before that this
+   file's dental H1 read "Your Front Desk Can't Answer Every Call. Your AI Agent
+   Can." on sixteen pages. */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -1280,7 +1282,7 @@ $industries = array(
 	   guard below sends an unknown slug to the 404 template. Four links to nowhere.
 
 	   Verified against production, not inferred: /for/medical-staffing/ returns 404 on
-	   sitestaffr.com AND on staging, and `git log.origin/main` is empty, so this is not
+	   sitestaffr.com AND on staging, and `git log ..origin/main` is empty, so this is not
 	   something another session had already fixed.
 
 	   ⚠️ IT IS THE ONLY B2B PAGE IN THE FILE, and that changes the shape of the copy
@@ -1290,12 +1292,13 @@ $industries = array(
 	   for placement. The page has to be legible to both without picking one, which is
 	   why the chat, the recap and the FAQs all name both sides explicitly.
 
-	   It is also the industry the homepage testimonial comes from, so this page 404ing
-	   meant the only named customer on the site pointed at a category with no page.
+	   ⚠️ IT IS ALSO THE INDUSTRY OUR ONE REAL TESTIMONIAL COMES FROM. Synergy Scribes is
+	   medical staffing and it is quoted on the homepage, so this page 404ing meant the
+	   only named customer on the site pointed at a category with no page.
 
-	   The category noun here is deliberately "SiteStaffr" rather than "AI agent": the
-	   term is still unsettled, and writing it neutrally means it does not need
-	   rewriting whichever way that lands. */
+	   The category noun here is deliberately SiteStaffr rather than "AI agent": the term
+	   ladder is still open with, and writing this one neutrally means it does not
+	   need rewriting whichever way that lands. */
 	'medical-staffing' => array(
 		'hero_icon' => '🩺',
 		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI receptionist answering a facility scheduler on the agency website',
@@ -1399,18 +1402,26 @@ $ind       = $industries[ $page_slug ];
 $site_name = get_bloginfo( 'name' );
 $cta_url   = home_url( '/#get-started' );
 
-/* ---- The one shared FAQ, appended to every industry ------------------------
-   "AI receptionist" stays the primary term and "virtual assistant" is carried as a
-   supporting one. This entry earns the adjacent term without moving the H1, and is
-   trivial to re-weight if click and position data later says otherwise.
+/* ---- THE ONE SHARED FAQ, APPENDED TO ALL SIXTEEN ---------------------------: Search Console shows more impressions for "virtual assistant"
+   than for "AI receptionist", and he chose to keep receptionist as the primary term
+   and carry virtual assistant as a supporting one rather than repositioning on
+   impression counts alone.
 
-   It answers the question honestly rather than claiming the term. "Virtual assistant"
-   mostly means hiring a person, so a page that simply asserted the phrase would pull
-   traffic that bounces.
+   ⚠️ IMPRESSIONS ARE NOT THE SAME BID. Production has never said "receptionist" —
+   the V3 homepage is staging-only — so that comparison scores a bid we never placed.
+   This entry is the cheap half of the response: it earns the adjacent term without
+   moving the H1, and it is trivial to re-weight if the click and position data later
+   says virtual assistant deserves the lead.
+
+   ⚠️ IT ANSWERS THE QUESTION HONESTLY RATHER THAN CLAIMING THE TERM. "Virtual
+   assistant" mostly means hiring a PERSON, so a page that simply asserts the phrase
+   would pull traffic that bounces. Saying plainly which one we are is what makes the
+   answer useful to the reader who meant the other thing — and a genuinely useful
+   answer is the only kind worth ranking.
 
    Appended HERE, before both consumers, because the schema block and the visible
    accordion each iterate $ind['faqs'] separately. Added in one place it appears in
-   both; added in the markup it would ship without its schema entry.
+   both; added in the markup it would have shipped without its schema entry.
 
    ⚠️ NO PHONE LANGUAGE, same rule as every other string in this file. */
 $ind['faqs'][] = array(
@@ -1499,7 +1510,7 @@ get_template_part( 'template-parts/site-nav' );
 	         First section of the ind-* conversion. Three things changed and none of
 	         them is the copy:
 
-	         1. `.block.block-split` + `.block__inner` + `.block-split__grid` replace
+	         1. `.block .block-split` + `.block__inner` + `.block-split__grid` replace
 	            the bespoke `.ind-hero` padding, `.container` and `.ind-hero__grid`.
 	            That is the whole point — the page had a THIRD spacing system
 	            (`.ind-page > section`, `--section-padding`, and this hero's own
@@ -1557,7 +1568,7 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<?php /* ---- PAIN POINTS: a V3 Cards block, UNBOXED --------------------------
-	         ⚠️ NEW CLASSES (.ind-problem) RATHER THAN RESTYLING.ind-problem-card,
+	         ⚠️ NEW CLASSES (.ind-problem) RATHER THAN RESTYLING .ind-problem-card,
 	         and that is deliberate. The same class name is used for two different
 	         components: three STATIC statements here, and the clickable directory
 	         tiles on /for/ and the five category hubs. Unboxing a link removes its
@@ -1590,7 +1601,7 @@ get_template_part( 'template-parts/site-nav' );
 		         because an overlay sits on the LIGHT side of a boundary — the light section
 		         is its background, so the two cannot disagree on colour.
 
-		         ⚠️ DIRECT CHILD OF THE SECTION, not of.block__inner.block__inner is
+		         ⚠️ DIRECT CHILD OF THE SECTION, not of .block__inner. .block__inner is
 		         width-capped and gutter-padded; positioned inside it the curtain would be
 		         1140px wide on a full-bleed boundary, leaving the shape short of both edges
 		         at every width above the cap. */ ?>
@@ -1601,7 +1612,9 @@ get_template_part( 'template-parts/site-nav' );
 	         Was #0a2e33, a SECOND dark tone three uses deep. V3's dark is V1's deep
 	         teal --block-dark (#00323A) specifically, because testers rejected the
 	         night world's near-black and drifting back toward it reintroduces the
-	         exact tone the redesign exists to drop.ind-solutions__bg is deleted with the same reasoning as the hero's two
+	         exact tone the redesign exists to drop.
+
+	         .ind-solutions__bg is deleted with the same reasoning as the hero's two
 	         glows: decoration that existed to soften a background V3 states once. */ ?>
 	<!-- Solutions -->
 	<section class="block block--dark ind-solutions">
@@ -1642,8 +1655,8 @@ get_template_part( 'template-parts/site-nav' );
 	         five backgrounds in the first place.
 
 	         It becomes the SECOND dark block instead, so this and Solutions read as
-	         one continuous dark run exactly like homepage sections 2-3.block--dark
-	         +.block--dark already handles the join with --block-pad-run; there is
+	         one continuous dark run exactly like homepage sections 2-3. .block--dark
+	         + .block--dark already handles the join with --block-pad-run; there is
 	         nothing to align by hand.
 
 	         ⚠️ THE CHAT AND RECAP MOCKUPS NOW SIT ON DARK. They are the most
@@ -1704,19 +1717,21 @@ get_template_part( 'template-parts/site-nav' );
 						</ul>
 						<p class="ind-recap__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ind['recap']['followup'] ); ?></p>
 					</div>
-					<?php /* ⚠️ Indicates the transcript, does not reproduce it. The real
-					         recap email carries the full transcript, so omitting it made
-					         the mockup look shorter than the product.
+					<?php /* ⚠️ INDICATES THE TRANSCRIPT, DOES NOT REPRODUCE IT. The real recap email carries the full
+					         transcript, and the mockup said nothing about it, so the
+					         email looked shorter than the product's.
 
-					         Not the real exchange: the visitor thread is shown in full in
-					         the card to the left, and repeating it would double the tallest
-					         element on the page. A collapsed row is what the email actually
-					         looks like before you open it.
+					         Deliberately NOT the real exchange: the visitor thread is
+					         already shown in full in the card immediately to the left, and
+					         repeating it here would double the tallest element on the page
+					         to say something the reader has just read. A collapsed row is
+					         the honest shape — it is what the email actually looks like
+					         before you open it.
 
-					         Turn count is counted from the same array that renders the
-					         thread, so it cannot drift. Not interactive: this is a picture
-					         of an email, and a control that does nothing is worse than a
-					         label. */ ?>
+					         Turn count is COUNTED from the same array that renders the
+					         thread, so it cannot drift from it. Not interactive: this is a
+					         picture of an email, and a control that does nothing is worse
+					         than a label that says what is there. */ ?>
 					<?php if ( ! empty( $ind['chat'] ) ) : ?>
 					<div class="ind-recap__section ind-recap__transcript">
 						<div class="ind-recap__section-head">
@@ -1787,9 +1802,8 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<?php
-	/* ---- "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------
-	   It was fifteen industry names plus a blog post title in one centred
-	   flex-wrap with no separators,
+	/* ---- "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------: "I don't like the Explore More." It was fifteen industry
+	   names plus a blog post title in one centred flex-wrap with no separators,
 	   which at 390 read as a ragged word cloud — the same failure homepage section
 	   6 was rebuilt to fix.
 
@@ -1859,7 +1873,9 @@ get_template_part( 'template-parts/site-nav' );
 	         Was a bordered card floating on cream, inside a section carrying a teal
 	         gradient and a dotted SVG pattern the card then covered up. V3 ends on
 	         a dark block that runs into the footer as one continuous run, which is
-	         what the homepage and /for/agencies/ both do.ind-cta__pattern and.cta-spotlight are both gone: the pattern was
+	         what the homepage and /for/agencies/ both do.
+
+	         .ind-cta__pattern and .cta-spotlight are both gone: the pattern was
 	         painting under an opaque card, and the card is the "bordered CTA card"
 	         the subpage audit lists as its fifth system break. */ ?>
 	<!-- CTA -->

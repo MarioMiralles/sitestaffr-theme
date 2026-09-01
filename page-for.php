@@ -8,7 +8,7 @@
  * Fifteen industry pages are otherwise reachable only from a dropdown and the
  * footer; this is their hub — one indexed page that links every one of them.
  *
- * Industries come from sitestaffr_industry_registry in functions.php — the one
+ * Industries come from sitestaffr_industry_registry() in functions.php — the one
  * source of truth shared with the nav, footer, llms.txt and page provisioning.
  *
  * @package SiteStaffr
@@ -128,7 +128,7 @@ $cta_url = home_url( '/#get-started' );
 	<?php /* Closing CTA is a V3 dark block running into the footer, same as
 	         page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
 	         .ind-cta is shared across all three ind-* templates, so moving its
-	         background onto.block--dark would have left whichever template still
+	         background onto .block--dark would have left whichever template still
 	         carried the old markup with no background at all. */ ?>
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
