@@ -39,9 +39,7 @@ window.SITESTAFFR_DEMO = {
     label: 'There are ants all over my kitchen',
     business: 'Copperleaf Pest Control',
     stamp: '11:18 PM',
-    /* Pest control on purpose. Section 2's grid has no pest-control card, so this is the
-       better contrasting second example — section 2 says what one job is worth, section 3
-       lets you watch a different one arrive. */
+    /* Pest control on purpose. → docs/implementation-notes.md#pest-control-on-purpose-section-2-s-grid-has-n */
     duration: 54,
     turns: [
       { t: 0,  who: 'ai',      text: 'Copperleaf Pest Control — what are you seeing?' },
@@ -58,9 +56,7 @@ window.SITESTAFFR_DEMO = {
       { t: 45, who: 'ai',      text: 'Got it. Someone will follow up to arrange a visit.',
                 fill: { label: 'Email', value: 'priya.raman@example.com' } }
     ],
-    /* The summary and the follow-up genuinely ARE generated after the conversation ends,
-       so they arrive last and after a brief shimmer. That is not decoration; it is the
-       one part of the sequence that mirrors how the product actually works. */
+    /* The summary and the follow-up genuinely ARE generated after the conversation ends, so they… → docs/implementation-notes.md#the-summary-and-the-follow-up-genuinely-are-ge */
     summary:  { t: 49, text: 'Ant trail in the kitchen of a single-story house. Wants someone to come out.' },
     followUp: { t: 51, text: 'Email Priya to arrange a visit.' },
     toast:    { t: 53, text: 'Recap emailed to you' }

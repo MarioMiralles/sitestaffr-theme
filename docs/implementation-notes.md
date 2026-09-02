@@ -2984,3 +2984,869 @@ crawl trust. A dead or empty sameAs is worse than none.
 
 ---
 
+
+# `404.php` (additional notes)
+
+## `$nf_links`
+<a id="nf-links"></a>
+
+Where a lost visitor is most likely to be headed. Ordered by commercial
+intent, not by nav order: someone who mistyped a URL is further along than
+someone reading About.
+
+---
+
+
+# `assets/js/demo-timings.js` (additional notes)
+
+## `Pest control on purpose. Section 2's grid has no pest-co`
+<a id="pest-control-on-purpose-section-2-s-grid-has-n"></a>
+
+Pest control on purpose. Section 2's grid has no pest-control card, so this is the
+better contrasting second example — section 2 says what one job is worth, section 3
+lets you watch a different one arrive.
+
+---
+
+## `The summary and the follow-up genuinely ARE generated af`
+<a id="the-summary-and-the-follow-up-genuinely-are-ge"></a>
+
+The summary and the follow-up genuinely ARE generated after the conversation ends,
+so they arrive last and after a brief shimmer. That is not decoration; it is the
+one part of the sequence that mirrors how the product actually works.
+
+---
+
+
+# `assets/js/manage.js` (additional notes)
+
+## `BOTH SPELLINGS ON PURPOSE. Stripe reports canceled; ot`
+<a id="both-spellings-on-purpose-stripe-reports-cance"></a>
+
+⚠️ BOTH SPELLINGS ON PURPOSE. Stripe reports `canceled`; other paths have sent
+`cancelled`. This line checked both, and a spelling sweep collapsed it into the
+same test twice — which reads as a harmless duplicate and quietly stops matching
+half the statuses it was written to catch.
+
+---
+
+
+# `assets/js/site.js` (additional notes)
+
+## `reveal()`
+<a id="reveal"></a>
+
+THE FLASH IS WHAT MAKES THIS AN ARGUMENT RATHER THAN AN ANIMATION. Without
+linking the filled field back to the line that produced it, the right panel
+just looks like it is moving for decoration.
+
+---
+
+## `revealPanels()`
+<a id="revealPanels"></a>
+
+Retire the stage. ONE WAY ONLY — once the panels are up they stay up, including
+after the demo finishes. Reverting to the stage on stop would take the assembled
+recap away at the exact moment it has finished assembling, which is the payoff the
+whole section is built around. Replay is the transport's job, not the stage's.
+
+---
+
+## `The stage button and the transport button both call play`
+<a id="the-stage-button-and-the-transport-button-both"></a>
+
+The stage button and the transport button both call play; the stage's press adds
+the chime because that press is the one that "opens the widget". Focus moves to the
+transport afterwards so a keyboard user is not left on a button that has just
+removed itself from the page.
+
+---
+
+## `Everything above is wired. Only NOW is it safe to swap t`
+<a id="everything-above-is-wired-only-now-is-it-safe"></a>
+
+Everything above is wired. Only NOW is it safe to swap the fully-rendered
+panels for the empty, playable version — so a throw anywhere earlier leaves
+the reader with a complete section rather than two empty boxes.
+
+---
+
+## `Feature-detect the METHOD, not the element. A <dialog> t`
+<a id="feature-detect-the-method-not-the-element-a-di"></a>
+
+Feature-detect the METHOD, not the element. A <dialog> tag parses everywhere;
+older browsers simply render it inert with no showModal, which would throw on
+the first click and leave the reader with a dead row.
+
+---
+
+## `Click-outside-to-close. The dialog element fills the top`
+<a id="click-outside-to-close-the-dialog-element-fill"></a>
+
+Click-outside-to-close. The dialog element fills the top layer, so a click
+landing on the DIALOG itself rather than on the sheet inside it is a click on
+the backdrop. Comparing against the sheet is what makes this reliable —
+event.target === dlg is true only outside .recap-doc__sheet.
+
+---
+
+## `Focus returns to the row that opened it. Browsers restor`
+<a id="focus-returns-to-the-row-that-opened-it-browse"></a>
+
+Focus returns to the row that opened it. Browsers restore focus to the opener
+for showModal, but not after a programmatic close in every engine, and
+landing back at the top of the document loses a keyboard reader their place.
+
+---
+
+
+# `functions.php` (additional notes)
+
+## `sitestaffr_asset_url()`
+<a id="sitestaffr-asset-url"></a>
+
+Build a theme asset URL with file modification time for cache busting.
+
+---
+
+## `$is_agencies`
+<a id="is-agencies"></a>
+
+The agencies page uses the FAQ accordion and the shared nav, both of which are
+driven by site.js. Adding the template here rather than relying on the landing
+page's enqueue - a template that renders interactive components and is not in
+this list ships them dead, which is how the /for/ index once shipped with its
+entire directory invisible.
+
+---
+
+## `$provision_version`
+<a id="provision-version-2"></a>
+
+Provision the /salesforce marketing page and its SEO metadata.
+
+Same versioned-option pattern as the Blog Agent page above.
+
+---
+
+## `Yoast owns title and meta, as everywhere else. ⚠️ DELIBE`
+<a id="yoast-owns-title-and-meta-as-everywhere-else-d"></a>
+
+Yoast owns title and meta, as everywhere else. ⚠️ DELIBERATELY NOT TARGETING
+"white label ai chatbot wordpress" — high-intent, and the product cannot satisfy
+it today, so ranking for it buys bounces and a reputation for overclaiming.
+Revisit only if white-label is ever built.
+
+---
+
+## `"Home Service BUSINESSES", not "Home Services" — this hu`
+<a id="home-service-businesses-not-home-services-thi"></a>
+
+⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the
+/for/home-services/ industry page below it are two different URLs, and the
+old titles told them apart only by the plural in "Agents"/"Agent". Moving
+both to "AI Receptionist for ..." collapsed that distinction into two
+identical title tags. Matches this group's h1.
+
+---
+
+## `sitestaffr_read_time()`
+<a id="sitestaffr-read-time-2"></a>
+
+Estimated reading time in whole minutes.
+See docs/implementation-notes.md#sitestaffr-read-time
+
+---
+
+
+# `page-agencies.php` (additional notes)
+
+## `.block-split__art`
+<a id="block-split-art"></a>
+
+⚠️ NO NEW RENDER AND NO ROBOT. The robot's three appearances belong to
+     the homepage. This is a grid of browser-window cards built in HTML,
+     reusing the browser-and-speech-bubble motif that already ties the
+     sixteen industry isometrics together.
+
+---
+
+## `THIS FORM NEEDS ITS OWN DESTINATION. The homepage concie`
+<a id="this-form-needs-its-own-destination-the-homepa"></a>
+
+⚠️ THIS FORM NEEDS ITS OWN DESTINATION. The homepage concierge form
+     routes to onboarding with a 3-business-day reply; an agency asking
+     about reseller terms landing in that queue gets answered as if they
+     were a small business wanting setup help. Logged in the backlog.
+
+---
+
+## `.block`
+<a id="block-9"></a>
+
+Closing CTA: dark, echoing the homepage's structure with the agency ask. PRIMARY
+  IS THE FREE TRIAL because trying it on their own site first is the natural agency
+  motion — it is FAQ #10 and the honest recommendation. Secondary is the partner
+  conversation.
+
+---
+
+
+# `page-blog-agent.php` (additional notes)
+
+## `.ba-hero`
+<a id="ba-hero"></a>
+
+⚠️ FLAT CREAM. The radial teal wash and the warm-white-to-cream vertical gradient
+are both DELETED, same call as the industry and Salesforce heroes: decoration doing
+no work, and a hero that fades into the section below replaces a decision with a
+smudge. It also stops this being the only cream on the site that is not flat.
+
+---
+
+## `.block.ba-hero`
+<a id="block-ba-hero"></a>
+
+⚠️ TWO CLASSES. `.block:not(.block--dark)` is (0,2,0) and beats a bare `.ba-hero`
+whatever the source order. Same first-section-under-the-nav value as the other
+converted heroes.
+
+---
+
+## `#0f6848, NOT --emerald. --emerald (#10b981) on --emerald`
+<a id="0f6848-not-emerald-emerald-10b981-on-emerald"></a>
+
+⚠️ #0f6848, NOT --emerald. --emerald (#10b981) on --emerald-light measured
+2.24:1 at 11.5px bold — the worst contrast anywhere on the converted set. The
+colour is not new: it is what .sf-card__foot already uses for exactly this
+pairing on the Salesforce mockup, so the two product mockups now agree. 5.9:1.
+
+---
+
+## `.ba-section`
+<a id="ba-section"></a>
+
+⚠️ NO `padding` HERE. `.block` owns it, and a `padding` SHORTHAND on `.ba-section`
+beats `.block`'s `padding-block` from anywhere in the file. --section-padding was
+this page's third spacing system.
+
+---
+
+## `0.55 MEASURED 3.86:1 ON THE CARD, NOT ON THE BLOCK. The `
+<a id="0-55-measured-3-86-1-on-the-card-not-on-the-bl"></a>
+
+⚠️ 0.55 MEASURED 3.86:1 ON THE CARD, NOT ON THE BLOCK. The day chip sits on
+rgba(255,255,255,0.08) over rgba(255,255,255,0.06) over --block-dark, which
+composites to #224E55 — lighter than the section, so reading the section's
+colour understates the problem. 0.68 is 4.89:1 and the off days stay clearly
+quieter than the two lit ones.
+
+---
+
+## `.ba-hero__seclink`
+<a id="ba-hero-seclink"></a>
+
+⚠️ `align-self`, NOT `justify-content` — and `text-align: center` does not reach
+it. Below 560 the actions row is `flex-direction: column` + `align-items:
+stretch`; the link is `inline-flex`, so it shrinks to its content and parks at
+the start of a full-width track while everything around it centres.
+
+---
+
+## `OPEN: the dark run rises out of the cream. Direct child `
+<a id="open-the-dark-run-rises-out-of-the-cream-direc"></a>
+
+OPEN: the dark run rises out of the cream. Direct child of the SECTION,
+          not of .block__inner — the inner is width-capped, so inside it the
+          curtain would stop short of both edges on a full-bleed boundary.
+
+---
+
+
+# `page-for.php` (additional notes)
+
+## `.block`
+<a id="block-10"></a>
+
+Closing CTA is a V3 dark block running into the footer, same as
+   page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
+   .ind-cta is shared across all three ind-* templates, so moving its
+   background onto .block--dark would have left whichever template still
+   carried the old markup with no background at all.
+
+---
+
+
+# `page-get-started.php` (additional notes)
+
+## `.form-success__text`
+<a id="form-success-text"></a>
+
+Three business days, matching the homepage closing CTA. These two are the
+          only places the response-time commitment is stated, and they
+          disagreed - this said "one business day" while the current promise is three.
+          A commitment stated in two places drifts; if it changes again, grep for
+          "business day" and change both.
+
+---
+
+
+# `page-industry-category.php` (additional notes)
+
+## `.block`
+<a id="block-11"></a>
+
+Closing CTA is a V3 dark block running into the footer, same as
+   page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
+   .ind-cta is shared across all three ind-* templates, so moving its
+   background onto .block--dark would have left whichever template still
+   carried the old markup with no background at all.
+
+---
+
+
+# `page-industry.php` (additional notes)
+
+## `House pattern: a situational scene, not a product claim,`
+<a id="house-pattern-a-situational-scene-not-a-produc"></a>
+
+House pattern: a situational scene, not a product claim, and the second
+sentence is the one that stings. No telephony — the recruiters going home is
+the problem, not an unanswered switchboard.
+
+---
+
+## `schema.org EmploymentAgency. ⚠️ NOT a Medical* type — th`
+<a id="schema-org-employmentagency-not-a-medical-type"></a>
+
+schema.org EmploymentAgency. ⚠️ NOT a Medical* type — the agency places
+clinicians, it does not treat anyone, and typing it as a medical business
+would misdescribe it. (This field is currently set on all sixteen entries and
+read by nothing; kept for consistency, flagged separately.)
+
+---
+
+## `Same rules as every other chat in this file: answers fro`
+<a id="same-rules-as-every-other-chat-in-this-file-an"></a>
+
+Same rules as every other chat in this file: answers from site content,
+captures name + number + reason, says a human will follow up, and PROMISES NO
+TIME. Note what it refuses to do — it confirms the coverage AREA, which the
+site publishes, and says nothing about whether anyone is actually free, which
+only the bench can answer. That restraint is the FAQ below made visible.
+
+---
+
+## `.block__inner`
+<a id="block-inner-2"></a>
+
+CLOSE: the dark run comes back down into the cream. Top of section 5,
+    over it. Same curve as the open one, mirrored — the pair brackets the
+    dark run as ONE gesture rather than decorating it with two shapes.
+    ⚠️ If either path is ever edited, mirror the other in the same commit.
+
+---
+
+
+# `page-landing.php` (additional notes)
+
+## `Per year, for the same reason as the dental card above. `
+<a id="per-year-for-the-same-reason-as-the-dental-car"></a>
+
+Per year, for the same reason as the dental card above. Same AVMA source
+        and same edition as before — only the metric moved from "last visit" to the
+        annual figure. ⚠️ It is VETERINARY spend specifically, not total pet spend:
+        AVMA reports ~$1,700 a year on pets overall, of which veterinary care is
+        32.4%. Quoting the $1,700 here would be a different and much weaker claim.
+
+---
+
+## `ABSORBS THE SALESFORCE BAND removed from section 4. "Doe`
+<a id="absorbs-the-salesforce-band-removed-from-secti"></a>
+
+ABSORBS THE SALESFORCE BAND removed from section 4. "Does it fit my stack"
+        is a buying question and belongs here, not under a story about a bakery
+        owner asleep at 2 AM.
+
+---
+
+## `.hero`
+<a id="hero-2"></a>
+
+"Voices" -> #voices went with the voice showcase. A nav item is
+the one kind of link that cannot survive its target: it is present on every
+scroll position, so a dead anchor here scrolls nowhere and looks like a broken
+page rather than a missing section. Nothing replaces it - the secondary nav is
+short on purpose, and Pricing is the item that serves the conversion path.
+
+---
+
+## `.block__inner`
+<a id="block-inner-3"></a>
+
+⚠️ THE HERO'S CURTAIN LIVES HERE, not in the hero — see the note at the end of
+    the hero for why. It hangs upward out of this section by its own height minus
+    3px, so the shape reads exactly as before and the last 3px of it sit INSIDE
+    this section, covering the boundary row at every device pixel ratio.
+
+---
+
+## `.section-label`
+<a id="section-label-3"></a>
+
+Eyebrow was "The Hidden Cost of Lost Website Visitors", and on the V2 branch
+          "What One Job Is Worth". Both described the RIGHT column while the heading
+          described the left — two arguments stacked, and the reader had to work out
+          which one the section was about. This one describes the section.
+
+---
+
+## `.cost-section__text`
+<a id="cost-section-text-2"></a>
+
+SETS UP THE AUDIT, and does not restate the hero. It also does not attack
+          "we'll get back to you" — that would be a self-own,
+          since SiteStaffr's own conversations end with details captured and a human
+          following up. The difference is WHEN the visitor gets their answer.
+
+---
+
+## `.cost-section__text`
+<a id="cost-section-text-3"></a>
+
+The best copy on the site — do not rewrite it. "no missed call" is correct
+          here and must survive the "call" sweep: it is describing the ABSENCE of a
+          phone signal, which is the point, not claiming the product answers phones.
+
+---
+
+## `.block-split__art`
+<a id="block-split-art-2"></a>
+
+2x2, AND THE GRID SHAPE IS PART OF WHY THIS WORKS. A previous pass replaced
+        these with a single time-ordered column and it read as overwhelming despite
+        running FEWER words — four boxes are four glances, four stacked rows are a
+        paragraph with rules between them. Scannability is not word count.
+
+---
+
+## `.see-it__stage-play`
+<a id="see-it-stage-play"></a>
+
+A real <button> with a real accessible name. The label says what it plays,
+        not "play" — this is the only control in the section at rest, so it is the
+        one thing a screen-reader user has to understand from its name alone.
+
+---
+
+## `.see-it__col`
+<a id="see-it-col"></a>
+
+LEFT: the conversation. The two column labels do the arguing — "On your
+        website" / "In your inbox" states the value exchange in four words and
+        kills the phone-line ambiguity for free.
+
+---
+
+## `.see-it__line`
+<a id="see-it-line"></a>
+
+RENDERED FULLY POPULATED IN PHP. JS empties it on load only when it
+              is actually going to animate it. An empty panel that fills only when
+              a script runs re-creates exactly the failure the reveal system caused
+              in production. With JS off, or under prefers-reduced-motion, the
+              whole conversation and the whole recap are simply here.
+
+---
+
+## `.see-it__col`
+<a id="see-it-col-2"></a>
+
+RIGHT: the recap. the strongest idea and the best one in the session — it
+        assembles as the conversation plays, which makes the causal link visible:
+        you watch the visitor give their email, and the email appears.
+
+---
+
+## `.see-it__gen`
+<a id="see-it-gen"></a>
+
+The summary and follow-up genuinely ARE generated after the conversation
+            ends, so they arrive last, after a brief shimmer. That is the one part
+            of the sequence that mirrors how the product actually works.
+
+---
+
+## `.what-you-get__subtitle`
+<a id="what-you-get-subtitle"></a>
+
+THE SUBTITLE IS LOAD-BEARING and was cut once before for looking like
+        filler. It actively guards against the reading that leads queue up and
+        get handled at opening time — "answered within seconds and sent to you
+        the moment it ended" is the whole product claim, and without it an inbox
+        labeled "Overnight" implies exactly the opposite.
+
+---
+
+## `.morning-inbox__row`
+<a id="morning-inbox-row-3"></a>
+
+A REAL <button>, not a click handler on the <li>. It is the row's whole
+            surface, so the row stays one target, but it takes focus, fires on
+            Enter and Space for free, and announces as a control. The row was a
+            plain <li> before, so nothing about the no-JS rendering regresses if
+            the script never runs — see the CSS note on .is-interactive.
+
+---
+
+## `.recap-doc`
+<a id="recap-doc-2"></a>
+
+No "View recap →" span here any more. The row's
+              affordance is a chevron drawn as `.morning-inbox__row::after`, at
+              every width and on every device. Do not add a label back: it only
+              ever appeared on hover, which is a state most of this page's traffic
+              cannot produce.
+
+---
+
+## `.recap-doc__print`
+<a id="recap-doc-print"></a>
+
+V1's teal "Print / Download PDF" pill. It is a <span> there and a <span>
+            here: the real button lives in the emailed recap, and a control on this
+            page that looked live but printed nothing would be a lie about the
+            product. It is part of the picture of the document, not a feature of
+            the marketing site.
+
+---
+
+## `.what-you-get__callout`
+<a id="what-you-get-callout-2"></a>
+
+KEEP THIS ONE INTACT. Nothing else on the page says that conversations
+        which did NOT turn into a lead are still reported, and that is the
+        difference between a lead tool and a record of everything that happened.
+
+---
+
+## `.lang-section__english`
+<a id="lang-section-english-2"></a>
+
+KEPT, and moved under the stage where it closes the section. It answers the
+      owner's immediate objection — "great, but I can't read Mandarin" — and it is
+      the one line here that is about THEM rather than about the visitor. Deleting
+      it with the old layout would have thrown away the reassurance and kept only
+      the spectacle.
+
+---
+
+## `.industries__stage`
+<a id="industries-stage-2"></a>
+
+ROW 1 — the isometric and its excerpt, side by side. The excerpt used to sit
+      UNDER the image inside the art column; beside it, the pair reads as one card
+      and the row stays short.
+
+---
+
+## `$ind_is_open`
+<a id="ind-is-open-2"></a>
+
+⚠️ A MISSING RENDER MUST NOT PRODUCE A BROKEN IMAGE. Medical Staffing is
+        the sixteenth industry and its isometric is generated but not yet keyed,
+        so the file genuinely is absent right now. sitestaffr_industry_art_url
+        returns '' when the file does not exist, and the panel falls back to the
+        industry's emoji at display size rather than an alt-text box.
+
+---
+
+## `.industries__excerpt`
+<a id="industries-excerpt-2"></a>
+
+The excerpt is now a SIBLING of the art, not a child of it — that is what
+        puts it beside the isometric instead of under it. It is still rendered
+        twice in total (once here for the pointer layout, once inside each mobile
+        accordion item below), and both still come from the same registry field.
+
+---
+
+## `.industries__link`
+<a id="industries-link-2"></a>
+
+ONE link, at the end, NEW TAB, with per-industry text rather than
+                a generic "learn more" — per the happy-path rule, this is a
+                deliberate exit and it should say where it goes.
+
+---
+
+## `.industries__mobile-detail`
+<a id="industries-mobile-detail"></a>
+
+THE MOBILE EXPANSION. Rendered for every industry and hidden by
+                    CSS at desktop widths, so with no JS at all a phone visitor
+                    still gets every blurb and every link — the accordion is a
+                    progressive enhancement over a plain list, not a requirement
+                    for reading it. Image is ~200px here, not 440.
+
+---
+
+## `.proof-section__lead-number`
+<a id="proof-section-lead-number-2"></a>
+
+"after business hours", not "after they closed".
+              Clearer, and it now matches the language of the quote beside it —
+              Nathaly says "after hours is when most new facility inquiries come
+              in", so the stat and the customer describe the same thing the same
+              way instead of two ways.
+
+---
+
+## `.block-split__art`
+<a id="block-split-art-3"></a>
+
+The quote CORROBORATES the number rather than introducing it, so it sits
+  beside and reads quieter. Two overlapping planes: the slab, and the ghost
+  hairline crossing out of it. The slab is a real element rather than a
+  pseudo because this figure's own ::before is already the quote glyph.
+
+---
+
+## `.pricing-section__subtitle`
+<a id="pricing-section-subtitle"></a>
+
+⚠️ THE MIDDLE SENTENCE RESTATED THE HEADING. It read "After that a busy
+        month costs the same as a quiet one" — which is exactly what "One Flat Price"
+        says two lines above, in more words and less plainly. Cut. What is left is
+        the two things the heading does NOT cover: the trial terms, and the single
+        axis that actually varies between plans.
+
+---
+
+## `The paid ladder is three tiers, so the grid is three col`
+<a id="the-paid-ladder-is-three-tiers-so-the-grid-is"></a>
+
+The paid ladder is three tiers, so the grid is three columns and the free
+trial is not a fourth card competing with them. Nothing is lost: every
+allowance the trial card listed is still here, and so is its link to
+/download/, which is the URL that must not change.
+
+---
+
+## `.price-tier__best-for`
+<a id="price-tier-best-for"></a>
+
+"Ends after 30 days unless you pick a plan" removed:
+        obvious from "$0 / for 30 days" directly above it. The spec asked for an
+        explicit end state here so the column could never read as a permanent free
+        tier - the identity row already says it, so the sentence was saying it
+        twice in the narrowest column on the page.
+
+---
+
+## `.block`
+<a id="block-12"></a>
+
+Group the flat list, then deal the groups into two columns. The JSON-LD above stays a
+FLAT mainEntity list regardless — FAQPage has no grouping concept, and the schema must
+not learn about this presentation.
+
+---
+
+## `.faq-list__set`
+<a id="faq-list-set-3"></a>
+
+⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px. The items used to be flat siblings of their heading, which
+              on a phone made sixteen identical white cards with three small gray
+              labels lost among them. It is inert on desktop — see .faq-list__set,
+              which does nothing until the columns collapse.
+
+---
+
+## `.faq-section__ask`
+<a id="faq-section-ask-2"></a>
+
+AFTER the questions, not before them. It was in the header for one release
+      and read as an interruption on the way to the list. See the CSS note for the
+      full history of this element's position — it has moved three times.
+
+---
+
+## `.faq-section__ask-robot`
+<a id="faq-section-ask-robot-2"></a>
+
+The texting robot, not the language one or the hero one: this card is about
+        asking a question in a chat, and robot-text.webp is the render of exactly
+        that — typing, with message bubbles. Decorative, so aria-hidden; the card's
+        own copy and the button carry the meaning.
+
+---
+
+## `Back layer — out in the cream, several bleeding off the `
+<a id="back-layer-out-in-the-cream-several-bleeding-o"></a>
+
+Back layer — out in the cream, several bleeding off the viewport edges.
+⚠️ Keep every `top`/`bottom` clear of 0-4%: the section clips its overflow, so a
+prop nearer the edge than that gets sliced off flat and reads as a broken image
+rather than as a prop peeking in. Bleeding off the LEFT and RIGHT is fine and
+intended — that is horizontal, and there is nothing above or below to bleed into.
+
+---
+
+## `.agency-door__props`
+<a id="agency-door-props-2"></a>
+
+Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
+the only part of the card with no text: the heading, the three columns and the
+button all sit left of it. All three are also light-bodied, so they read against
+#00323A — the dark props stay in the back layer on cream.
+
+---
+
+## `The H1, pluralised. An agency who scrolled past the hero`
+<a id="the-h1-pluralised-an-agency-who-scrolled-past"></a>
+
+The H1, pluralised. An agency who scrolled past the hero recognizes the
+        offer instantly, and "every client site" is the phrase that makes it
+        theirs rather than their client's.
+
+---
+
+## `.agency-door__lead`
+<a id="agency-door-lead"></a>
+
+CUT. It ran on into "— and what
+        makes renewal conversations easier", which the third point below makes
+        properly; a lead that previews the list makes the reader read it twice.
+
+---
+
+## `.agency-door__points`
+<a id="agency-door-points"></a>
+
+⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE, and what
+        is NOT claimed matters as much as what is. None of them mention margin,
+        reseller pricing, white-label or bulk billing, because none of those exist.
+        An agency is a technical, skeptical audience that checks.
+
+---
+
+## `.btn`
+<a id="btn-2"></a>
+
+"See SiteStaffr for Agencies", NOT "See agency plans". The second would
+        promise a pricing page that would then have to be invented. If the agency
+        page's contact form generates real demand, that is the signal to build
+        reseller pricing — the page is the demand-validation mechanism.
+
+---
+
+## `.btn`
+<a id="btn-3"></a>
+
+PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded
+          link: the target funnel is pricing -> checkout modal -> purchase, with
+          /download/ becoming post-purchase instructions. When checkout exists this
+          is a one-line change at four call sites.
+
+---
+
+## `.final-cta__concierge`
+<a id="final-cta-concierge"></a>
+
+SECONDARY. Still the real onboarding widget - the shortcode is the working
+          mechanism and is not worth reimplementing - but demoted to an outline
+          treatment and stripped of the shimmer.
+
+---
+
+
+# `page-salesforce.php` (additional notes)
+
+## `.sf-hero`
+<a id="sf-hero"></a>
+
+⚠️ THE TWO RADIAL GRADIENTS ARE DELETED, NOT HIDDEN — same call as the industry
+hero's __accent and __glow. Teal washes at 14% and 10% are decoration doing no
+work; V3 carries emphasis with a dark block. They also made this the only cream
+on the site that was not flat, so the boundary into section 2 was a fade rather
+than a decision.
+
+---
+
+## `.block.sf-hero`
+<a id="block-sf-hero"></a>
+
+⚠️ `.block.sf-hero`, TWO CLASSES. The padding is owned by
+`.block:not(.block--dark)` at (0,2,0) and a bare `.sf-hero` at (0,1,0) loses to
+it whatever the source order — `:not()` contributes its argument's specificity.
+The extra top is the same first-section-under-the-nav exception the industry
+hero carries, and the same value, so the two open identically.
+
+---
+
+## `.sf-setup`
+<a id="sf-setup"></a>
+
+Unboxed like the steps. ⚠️ THE NUMBERED DISC STAYS: it is a FILL, not a box, and
+it is the only thing that makes three parallel instructions read as an ordered
+sequence — which is the section's entire claim ("connected in about a minute").
+
+---
+
+## `OPEN: the dark run rises out of the cream. Direct child `
+<a id="open-the-dark-run-rises-out-of-the-cream-direc-2"></a>
+
+OPEN: the dark run rises out of the cream. Direct child of the
+          SECTION, not of .block__inner — the inner is width-capped and
+          gutter-padded, so inside it the curtain would be 1140px wide on a
+          full-bleed boundary and stop short of both edges above the cap.
+
+---
+
+## `.block__inner`
+<a id="block-inner-4"></a>
+
+CLOSE: the dark run comes back down into the cream. Same curve
+          mirrored, so the pair brackets the run as ONE gesture. ⚠️ If either
+          path is edited, mirror the other in the same commit.
+
+---
+
+## `.block`
+<a id="block-13"></a>
+
+⚠️ `.faq-section__head`, NOT `__header`. The `__header` spelling has no
+      rule anywhere in site.css — another class that outlived its rule, so
+      this header was rendering unstyled and left-aligned.
+
+---
+
+
+# `template-parts/site-nav.php` (additional notes)
+
+## `.nav__mega-all`
+<a id="nav-mega-all"></a>
+
+The arrow is not decoration: this row sits below sixteen
+              industry names and read as a seventeenth one. it was not possible to
+              find /for/ from the nav even though this link has always been
+              here. An arrow is the one mark that says "this goes somewhere
+              else", which is what separates it from the list above it.
+
+---
+
+
+# `template-parts/voice-showcase.php` (additional notes)
+
+## `NEVER "callers" IN THESE DESCRIPTIONS. SiteStaffr has no`
+<a id="never-callers-in-these-descriptions-sitestaffr"></a>
+
+⚠️ NEVER "callers" IN THESE DESCRIPTIONS. SiteStaffr has no phone line - the
+  readme leads with "No phone lines" - and with "AI Receptionist" in the homepage
+  H1, the word puts the product in the phone-answering category, which is crowded,
+  different and more expensive. These are voices a VISITOR hears on a website.
+  Swept.
+
+---
+

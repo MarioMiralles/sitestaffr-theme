@@ -119,17 +119,9 @@ $sf_faqs = array(
 .sf-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
-/* ⚠️ THE TWO RADIAL GRADIENTS ARE DELETED, NOT HIDDEN — same call as the industry
-   hero's __accent and __glow. Teal washes at 14% and 10% are decoration doing no
-   work; V3 carries emphasis with a dark block. They also made this the only cream
-   on the site that was not flat, so the boundary into section 2 was a fade rather
-   than a decision. */
+/* ⚠️ THE TWO RADIAL GRADIENTS ARE DELETED, NOT HIDDEN — same call as the industry hero's __accent and… → docs/implementation-notes.md#sf-hero */
 .sf-hero { background: var(--cream); }
-/* ⚠️ `.block.sf-hero`, TWO CLASSES. The padding is owned by
-   `.block:not(.block--dark)` at (0,2,0) and a bare `.sf-hero` at (0,1,0) loses to
-   it whatever the source order — `:not()` contributes its argument's specificity.
-   The extra top is the same first-section-under-the-nav exception the industry
-   hero carries, and the same value, so the two open identically. */
+/* ⚠️ `.block.sf-hero`, TWO CLASSES. The padding is owned by `.block:not(.block--dark)` at (0,2,0) and a bare… → docs/implementation-notes.md#block-sf-hero */
 .block.sf-hero { padding-block-start: clamp(120px, 15vw, 140px); }
 /* Kept next to .block-split__grid, which it overrides: the Lead card is a tall
    artifact and needs more than the 1fr the generic Split gives it. */
@@ -144,8 +136,6 @@ $sf_faqs = array(
     font-weight: 700;
     letter-spacing: 0.09em;
     text-transform: uppercase;
-    /* --teal-text, not --teal-deep: 4.06:1 on the pale-teal pill at 0.78rem
-       failed AA. Same swap already made on .ind-recap__section-head span. */
     color: var(--teal-text);
     background: var(--teal-pale);
     border-radius: 999px;
@@ -181,7 +171,6 @@ $sf_faqs = array(
     align-items: center;
     gap: 7px;
     font-weight: 600;
-    /* --teal-text: #00838F on cream is 4.03:1 at body size. */
     color: var(--teal-text);
     text-decoration: none;
 }
@@ -201,7 +190,6 @@ $sf_faqs = array(
     justify-content: space-between;
     gap: 12px;
     padding: 14px 20px;
-    /* ⚠️ FLAT, WAS A GRADIENT, AND THIS IS A CONTRAST FIX RATHER THAN A STYLE ONE. → docs/implementation-notes.md#flat-was-a-gradient-and-this-is-a-contrast-fi */
     background: var(--teal-deep);
     color: #fff;
 }
@@ -216,7 +204,6 @@ $sf_faqs = array(
     font-weight: 700;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    /* ⚠️ A DARK SCRIM, NOT A WHITE ONE, AND ONLY THE FLAT BAR MADE THIS VISIBLE. → docs/implementation-notes.md#a-dark-scrim-not-a-white-one-and-only-the-fla */
     background: rgba(0,0,0,0.18);
     border-radius: 999px;
     padding: 5px 11px;
@@ -312,9 +299,7 @@ $sf_faqs = array(
 .sf-feature__desc { font-size: 0.94rem; line-height: 1.6; color: rgba(240,250,250,0.8); margin: 0; }
 
 /* Setup strip */
-/* Unboxed like the steps. ⚠️ THE NUMBERED DISC STAYS: it is a FILL, not a box, and
-   it is the only thing that makes three parallel instructions read as an ordered
-   sequence — which is the section's entire claim ("connected in about a minute"). */
+/* Unboxed like the steps. → docs/implementation-notes.md#sf-setup */
 .sf-setup {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -367,7 +352,6 @@ $sf_faqs = array(
 @media (max-width: 768px) {
     .sf-hero__content { text-align: center; }
     .sf-hero__actions { justify-content: center; }
-    /* ⚠️ `align-self`, NOT `justify-content`, and `text-align: center` does not reach it either. → docs/implementation-notes.md#align-self-not-justify-content-and-text-align */
     .sf-hero__seclink { align-self: center; }
 }
 @media (max-width: 560px) {
@@ -446,10 +430,7 @@ $sf_faqs = array(
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php /* OPEN: the dark run rises out of the cream. Direct child of the
-                 SECTION, not of .block__inner — the inner is width-capped and
-                 gutter-padded, so inside it the curtain would be 1140px wide on a
-                 full-bleed boundary and stop short of both edges above the cap. */ ?>
+        <?php /* OPEN: the dark run rises out of the cream. → docs/implementation-notes.md#open-the-dark-run-rises-out-of-the-cream-direc-2 */ ?>
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
@@ -482,9 +463,7 @@ $sf_faqs = array(
 
     <!-- Setup -->
     <section class="block block-cards sf-section">
-        <?php /* CLOSE: the dark run comes back down into the cream. Same curve
-                 mirrored, so the pair brackets the run as ONE gesture. ⚠️ If either
-                 path is edited, mirror the other in the same commit. */ ?>
+        <?php /* CLOSE: the dark run comes back down into the cream. → docs/implementation-notes.md#block-inner-4 */ ?>
         <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
         <div class="block__inner">
             <div class="sf-section__head reveal">
@@ -511,9 +490,7 @@ $sf_faqs = array(
     </section>
 
     <!-- FAQ -->
-    <?php /* ⚠️ `.faq-section__head`, NOT `__header`. The `__header` spelling has no
-             rule anywhere in site.css — another class that outlived its rule, so
-             this header was rendering unstyled and left-aligned. */ ?>
+    <?php /* ⚠️ `.faq-section__head`, NOT `__header`. → docs/implementation-notes.md#block-13 */ ?>
     <section class="block faq-section" id="faq">
         <div class="block__inner">
             <div class="faq-section__head reveal">

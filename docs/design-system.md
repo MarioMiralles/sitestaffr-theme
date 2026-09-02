@@ -1758,3 +1758,1389 @@ at website/wiki/concepts/homepage-design-system.md.
 
 ---
 
+
+# `assets/css/site.css` (additional notes)
+
+## `.block--dark .section-label`
+<a id="block-dark-section-label"></a>
+
+⚠️ ON A DARK BLOCK THE LABEL HAS TO GO LIGHTER, NOT DARKER. --teal-text is tuned
+against cream; on #00323A the same colour measures 3.06:1, the worst contrast failure
+on the page. --teal-light is 5.68 there. One label, two directions, because the
+requirement is a relationship with the background and not a property of the label.
+
+---
+
+## `The scroll-reveal system was deleted. It defaulted every`
+<a id="the-scroll-reveal-system-was-deleted-it-defaul"></a>
+
+The scroll-reveal system was deleted. It defaulted every element to
+opacity:0 and depended on decorative JS to restore it, so a single throw
+anywhere earlier in site.js left the whole page below the fold permanently
+invisible. That happened in production. Testers complained about the effect
+independently. Nothing replaces it — sections are simply visible.
+
+---
+
+## `--block-max`
+<a id="block-max"></a>
+
+Matches .container so the restored container is one number site-wide.
+V2 broke hero content to 40px from the raw viewport edge; V1 sits at ~150px
+at 1440, which is the measure testers read comfortably.
+
+---
+
+## `--footer-dark`
+<a id="footer-dark"></a>
+
+The footer, one step darker than any section — see the .footer rule. It is a token
+because TWO things have to agree on it: the footer's own background and the fill of
+the curtain that meets it.
+
+---
+
+## `.block--tight`
+<a id="block-tight"></a>
+
+`.block--tight` NO LONGER CHANGES ANYTHING. The rule is kept, pointing at the same
+single value, so the class still resolves everywhere it appears in the markup rather
+than sitting there as a dead attribute that looks like it does something. If a second
+padding value is ever genuinely needed, this is the hook — but adding one reopens the
+inconsistency this collapse was asked for.
+
+---
+
+## `.hero + .block--dark`
+<a id="hero-block-dark"></a>
+
+⚠️ `position: relative` IS LOAD-BEARING TWICE. It is the containing block for the
+opening curtain, which now lives inside this section — remove it and the curtain
+positions itself against the viewport. It also puts this section's background in the
+positioned-descendants paint phase, so the 2px overlap lands ON TOP of the hero's
+rounded-off bottom edge rather than under it.
+
+---
+
+## `.block-split--reverse .block-split__art`
+<a id="block-split-reverse-block-split-art"></a>
+
+The artifact returns to DOM order on one column: a reversed Split stacks
+image-then-text on desktop, but on mobile the heading must come first or
+the reader meets a picture with no idea what it is.
+
+---
+
+## `WAS 0.45 ALPHA, WHICH IS 2.74:1 ON WHITE. Tolerable-ish `
+<a id="was-0-45-alpha-which-is-2-74-1-on-white-tolera"></a>
+
+⚠️ WAS 0.45 ALPHA, WHICH IS 2.74:1 ON WHITE. Tolerable-ish on a label; not
+on a control. This is 10.56px, so 4.5:1 is the bar, not the large-text 3:1 —
+bold does not make 10px large. 0.62 measures 4.55:1 and is still clearly
+subordinate to the near-black industry links under it, which is the whole
+job of the heading.
+
+---
+
+## `.nav__mega-all .nav__dropdown-link`
+<a id="nav-mega-all-nav-dropdown-link"></a>
+
+--teal-text, not --teal-deep: #00838F on white is 4.03:1 and this is 0.9rem
+text, so it failed AA. Part of the same teal-deep-as-text sweep the ind-*
+conversion is carrying.
+
+---
+
+## `Bottom padding CLEARS THE CURTAIN, which is absolutely p`
+<a id="bottom-padding-clears-the-curtain-which-is-abs"></a>
+
+Bottom padding CLEARS THE CURTAIN, which is absolutely positioned and
+therefore costs no height of its own. Decoration goes behind content and
+never adds height — the same rule the dark blocks follow. Set below the
+curtain's own max height and the copy's last line sits in the dark.
+
+---
+
+## `40px, was 60px. NOTE: this rule is DUPLICATED verbatim f`
+<a id="40px-was-60px-note-this-rule-is-duplicated-ver"></a>
+
+40px, was 60px. NOTE: this rule is DUPLICATED verbatim
+further down the file and the later copy wins. Both were changed together;
+edit one alone and the value you read is not the value that renders.
+
+---
+
+## `NO OPACITY. It was 0.85, which is a contrast reduction d`
+<a id="no-opacity-it-was-0-85-which-is-a-contrast-red"></a>
+
+⚠️ NO OPACITY. It was 0.85, which is a contrast reduction dressed as a style: the
+colour passes at full strength and fails at 85%. Hover raises it back to 1, so the
+"quieter than the primary" job was being done by the one property that also degrades
+legibility. Weight and size already carry that job.
+
+---
+
+## `Sized against the ROBOT, not the stage. At min(460px,84%`
+<a id="sized-against-the-robot-not-the-stage-at-min-4"></a>
+
+Sized against the ROBOT, not the stage. At min(460px,84%) the bloom died out ~200px
+from center while the figure is 240px wide and 300px tall, so the silhouette's own
+edges — the part that has to read — were sitting back on flat section color. Wider
+and a touch stronger puts the whole figure inside the lit area. Sampled at 1440:
+section is (0,50,58) and the center of the bloom lifts to about (9,91,115).
+
+---
+
+## `.see-it__stage-robot`
+<a id="see-it-stage-robot"></a>
+
+Decoration, and deliberately quiet: the hero has this same character two sections up
+at a far larger size, and the only thing stopping this reading as a repeat is that the
+button is the subject here. Low opacity + behind the button is that decision in CSS.
+
+---
+
+## `.see-it__stage-play svg`
+<a id="see-it-stage-play-svg"></a>
+
+NO margin-left. The centering lives in the polygon's coordinates (see page-landing.php);
+a CSS nudge here would stack on top of that offset and is what put the glyph off-center
+in the first place. `display: block` so the svg does not sit on a text baseline, which
+adds a few px of descender space under it and pushes the glyph optically high.
+
+---
+
+## `The panels arrive when the stage leaves. Two beats, left`
+<a id="the-panels-arrive-when-the-stage-leaves-two-be"></a>
+
+The panels arrive when the stage leaves. Two beats, left then right, so the eye reads
+"a conversation happened" before "and here is what it produced" — the same causal
+order the demo itself plays in. Decoration only: the panels are already in the DOM and
+already populated, so a dropped animation costs nothing but the flourish.
+
+---
+
+## `.see-it__transport[hidden]`
+<a id="see-it-transport-hidden"></a>
+
+`display:flex` on a class selector BEATS the user-agent's `[hidden]{display:none}`,
+so the PHP `hidden` attribute silently did nothing and a dead play button rendered
+for anyone without JS. Any element that is both `hidden` in markup and given a
+display value in CSS needs this; it is not specific to this component.
+
+---
+
+## `The duplicate .lang-section__text that sat here is DELET`
+<a id="the-duplicate-lang-section-text-that-sat-here"></a>
+
+⚠️ The duplicate .lang-section__text that sat here is DELETED, not left. It was
+byte-identical to the one below and therefore invisible in a diff, but the later copy
+won — so an edit made here would have done nothing at all and looked correct doing it.
+That is the "dead CSS later in the file wins" trap the design system already lists
+twice; the fix is to remove the loser, never to override it.
+
+---
+
+## `.lang-section__text`
+<a id="lang-section-text-2"></a>
+
+`balance` because this is a two-sentence subtitle in a 46rem centered column, which is
+exactly the case it exists for: at 1440 the plain-English rewrite landed one word past
+the line and left "up." alone on row two. Balancing the wrap rather than trimming the
+copy to fit keeps it clean at every width instead of just at the one I screenshotted.
+Already used in three other places in this file.
+
+---
+
+## `@media (max-width: 900px)`
+<a id="media-max-width-900px-4"></a>
+
+⚠️ THE HAZE IS DESKTOP-ONLY. Below 900px the chips leave their orbit and become an
+in-flow wrap under the robot, so the stage stops being a fixed field for anything to
+be scattered across — percentage coordinates there would land words on top of the
+readable chips.
+
+---
+
+## `A MASK HIDES PIXELS, IT DOES NOT SHRINK THE BOX. The ima`
+<a id="a-mask-hides-pixels-it-does-not-shrink-the-box"></a>
+
+⚠️ A MASK HIDES PIXELS, IT DOES NOT SHRINK THE BOX. The image still occupies its
+full height after the crop, so the bottom 22% is now blank space the layout still
+reserves — which is the gap that opened between the robot and the recap line the
+moment the end stop moved to 78%. Pulling the following content up by exactly that
+22% closes it. Keep this multiplier and the mask's end stop in step: 100% - 78%.
+
+---
+
+## `.lang-orbit__item--1`
+<a id="lang-orbit-item-1"></a>
+
+TWO SIDE BANDS, SIX EACH, and the numbers are the point: every `left` keeps the chip's
+own box under 30% of the stage and every `right` does the same from the other edge, so
+the middle 40% — where the figure is — stays clear at every width. Stagger the tops,
+never the bands.
+
+---
+
+## `@media (max-width: 900px)`
+<a id="media-max-width-900px-5"></a>
+
+⚠️ BELOW 900px THE GREETINGS STOP BEING POSITIONED AT ALL. This is the safety net the
+crowd version never had: rather than shrinking twelve absolute chips until they
+collide or fall off, the whole set drops into an in-flow centered wrap under the robot.
+Twelve chips that wrap are always twelve chips; twelve that are positioned are only as
+good as the narrowest viewport anybody checked.
+
+---
+
+## `.lang-section__english`
+<a id="lang-section-english"></a>
+
+Promoted from body text to its own element: it answers "great, but I can't
+read Mandarin", which is the owner's immediate objection to this whole
+section, and buried in a paragraph it did none of that work.
+
+---
+
+## `.lang-section__english svg`
+<a id="lang-section-english-svg"></a>
+
+Pins the check to the FIRST line instead of the middle of the wrapped block. 3px is
+(21.6px line box - 16px icon) / 2 at this font size, so the single-line desktop
+rendering is pixel-identical to the `align-items: center` it replaces.
+
+---
+
+## `.industries__link`
+<a id="industries-link"></a>
+
+⚠️ --teal-light ON DARK, NOT --teal-text. --teal-text (#00747E) exists to clear the
+CREAM and is 1.6:1 here; --teal-light is 5.7:1 on #00323A. Same swap the design
+system already mandates for .block--dark .section-label — contrast is a relationship,
+so this link goes lighter for exactly the reason it went darker on cream.
+
+---
+
+## `.industries__name.is-active:hover`
+<a id="industries-name-is-active-hover"></a>
+
+Hover must not repaint the SELECTED row back to pale — it comes later in the file and
+would otherwise win on equal specificity, so pointing at the open industry would make
+it look unselected.
+
+---
+
+## `ONE-LEVEL ACCORDION. Category headings stay visible as s`
+<a id="one-level-accordion-category-headings-stay-vis"></a>
+
+ONE-LEVEL ACCORDION. Category headings stay visible as static labels and only
+the industries expand — closed state is 5 headings + 16 names, about one and a
+bit screens, so someone scanning for their trade sees everything at once.
+Two stacked columns would mean tapping a name changes an image scrolled off
+screen; a two-level accordion would be three taps deep.
+
+---
+
+## `.industries__art`
+<a id="industries-art"></a>
+
+⚠️ THE EXCERPT MUST BE HIDDEN EXPLICITLY NOW. It used to be a CHILD of
+.industries__art, so this one line hid both; the restructure made it a
+sibling so it could sit beside the isometric, and a sibling does not inherit its
+old parent's display. Left out, the desktop excerpt renders on phones directly
+above the accordion that repeats the same blurb.
+
+---
+
+## `.industries__name.is-active`
+<a id="industries-name-is-active-2"></a>
+
+⚠️ ON A PHONE ONLY `is-open` PAINTS, AND `is-active` MUST BE NEUTRALIZED.
+`is-active` is the DESKTOP selection — the randomly featured industry, whose panel
+and excerpt are both hidden at this width. Left styled it put a solid teal row into
+a list where nothing was expanded, and then a SECOND teal row the moment the visitor
+opened a different one. Two selected-looking rows, neither of them the open one.
+
+---
+
+## `.industries__mobile-detail img`
+<a id="industries-mobile-detail-img"></a>
+
+Centered, not left-aligned. At 200px hard left in a 348px column the isometric read
+as a stray thumbnail with a hole beside it; the paragraph under it is full width, so
+nothing was holding the right half. The % keeps it in proportion on a wide tablet.
+
+---
+
+## `.industries.is-interactive .industries__mobile-detail`
+<a id="industries-is-interactive-industries-mobile-detail"></a>
+
+Collapsed only once JS confirms it can reopen them. Without JS every detail
+stays open, so a phone visitor with no script still gets every blurb and
+every link rather than a list of dead buttons.
+
+---
+
+## `.price-includes--homepage .price-includes__item--lead`
+<a id="price-includes-homepage-price-includes-item-lead"></a>
+
+The flat-rate promise is the reason the pricing works at all, so it stays a
+full-width row above the other inclusions rather than one chip of six. It is
+the one place in this strip allowed display type.
+
+---
+
+## `.price-includes__footer`
+<a id="price-includes-footer-2"></a>
+
+No second rule here. One divider in the strip, under the lead row, because
+that is the only real division: a promise, then the list it introduces. The
+footer is a footnote to the list and sits on the same axis as it.
+
+---
+
+## `ROWS ARE DEFINED ON THE OUTER GRID AND INHERITED BY EVER`
+<a id="rows-are-defined-on-the-outer-grid-and-inherit"></a>
+
+ROWS ARE DEFINED ON THE OUTER GRID AND INHERITED BY EVERY COLUMN VIA SUBGRID.
+Without this each tier is an independent nested grid whose rows only line up
+by coincidence — and they did not: the rail's labels drifted against the
+values they name, which in a comparison table means the reader is looking at
+the wrong number. Subgrid makes the alignment structural rather than lucky.
+
+---
+
+## `@media (min-width: 1041px)`
+<a id="media-min-width-1041px"></a>
+
+⚠️ MIN-WIDTH, and it has to be. Below 1040px these stop being columns of one
+panel and become separate cards that round on all four corners. Left
+unscoped, the end-column radii out-specify the card rule and the Pro card
+renders with two square corners on a phone.
+
+---
+
+## `.price-grid--table`
+<a id="price-grid-table"></a>
+
+⚠️ ONE HAIRLINE VALUE FOR THE WHOLE TABLE. Every internal rule is this
+color. The light version had three (--border-light, cream-dark edges, the
+popular column's own border) and they read as one line only because they were
+all pale. On dark, a rule that is 2% brighter than its neighbour is visible as
+a mistake, so there is exactly one.
+
+---
+
+## `.price-tier__identity`
+<a id="price-tier-identity"></a>
+
+The identity row is the only cell in the table that is allowed to breathe.
+Everything below it is a data row on a 10px rhythm, so the prices need the
+contrast of space to read as the header of the column rather than its first
+value.
+
+---
+
+## `.price-grid--table .price-tier__row-value--yes`
+<a id="price-grid-table-price-tier-row-value-yes"></a>
+
+⚠️ THE CHECKMARK STAYS WHITE. Emerald on this page means two things only:
+a capture/success state, and the recommended tier. A green tick in the
+Autopilot row would put emerald in six cells across three columns and the
+Business signal would stop being a signal.
+
+---
+
+## `.price-grid--table .price-tier .btn--outline`
+<a id="price-grid-table-price-tier-btn-outline"></a>
+
+⚠️ BOTH BUTTON VARIANTS ARE INVISIBLE ON THIS PANEL AS SHIPPED. --outline is
+teal-deep text on a 2px teal-deep border, which on #00323A is dark-on-dark;
+--primary is a teal-deep fill, only marginally lighter than the panel behind
+it. Neither is a contrast tweak - the whole point of the panel is that the
+CTAs in it are the most clickable things in the section.
+
+---
+
+## `.price-grid--table .price-tier .btn--primary`
+<a id="price-grid-table-price-tier-btn-primary"></a>
+
+The recommended tier's CTA is the one action this section is built to get, so
+it is the only filled button on the panel. Teal-light rather than teal-deep:
+the accent stays teal, and a light fill on a dark panel is the strongest
+contrast available without introducing a color. Dark ink on it, not white -
+white on #1FB6CC is about 2:1.
+
+---
+
+## `.price-grid--table .price-tier--popular`
+<a id="price-grid-table-price-tier-popular"></a>
+
+Business is the recommended tier, and EMERALD IS THE SIGNAL. Cyan is the
+ambient color of this whole page, so a cyan price could not distinguish
+anything - that is the documented reason this rule exists.
+
+---
+
+## `The emerald tint that made this column the recommended o`
+<a id="the-emerald-tint-that-made-this-column-the-rec"></a>
+
+The emerald tint that made this column the recommended one on white was
+#F5FBF8 - a 4% wash. The same idea at the same strength is invisible on
+dark, so it is carried as a translucent emerald over the panel instead.
+
+---
+
+## `The card rule scales this 1.03. In a subgrid table that `
+<a id="the-card-rule-scales-this-1-03-in-a-subgrid-ta"></a>
+
+The card rule scales this 1.03. In a subgrid table that shifts the whole
+column off the label rail it is supposed to be read against, which in a
+comparison table means the reader lines a value up with the wrong label.
+
+---
+
+## `.price-grid--table .price-tier--popular .price-tier__price`
+<a id="price-grid-table-price-tier-popular-price-tier-price"></a>
+
+⚠️ EMERALD IS THE RECOMMENDED-TIER SIGNAL AND IT HAS TO SURVIVE THE INVERSION.
+#10b981 was chosen against white; on #00323A it dulls toward the background
+and stops reading as "the one to pick". Lightened to the 400 step, which is
+the same hue at the contrast the dark panel needs. Still emerald, still only
+here and on the badge.
+
+---
+
+## `.price-grid--table .price-tier__badge`
+<a id="price-grid-table-price-tier-badge"></a>
+
+A LABEL ON THE BORDER, not a chip inside the box. It
+straddles the panel's top edge over the Business column, the way a fieldset
+legend sits on its frame.
+
+---
+
+## `THE BADGE'S COLOUR IS DECIDED HERE, NOT ON .price-tier_`
+<a id="the-badge-s-colour-is-decided-here-not-on-pric"></a>
+
+⚠️ THE BADGE'S COLOUR IS DECIDED HERE, NOT ON `.price-tier__badge`. That rule sets
+white on a teal gradient; this one repaints it emerald and won on source order, so a
+fix applied up there did nothing and shipped still failing. Dark text on the emerald
+is 5.46:1; white was 2.54. If the two ever disagree again, this is the one that
+renders.
+
+---
+
+## `Visible for the same reason the panel is: the badge stra`
+<a id="visible-for-the-same-reason-the-panel-is-the-b"></a>
+
+Visible for the same reason the panel is: the badge straddles this card's
+top edge here too. Nothing inside needs clipping - the rows carry a
+border-top and no background, so there is nothing to spill past the
+radius.
+
+---
+
+## `.price-grid--table .price-tier--popular`
+<a id="price-grid-table-price-tier-popular-2"></a>
+
+Each card is its own surface now, so the recommended tier has to re-state
+its tint over the card rather than over the panel. The trial is the same
+color as the other cards here, same as on desktop.
+
+---
+
+## `.price-tier__identity`
+<a id="price-tier-identity-2"></a>
+
+The one rule that survives: it separates the price from the spec list. With the
+per-row hairlines gone this is the card's only internal division, which is what
+stops the numbers reading as a continuation of the price.
+
+---
+
+## `.price-footnote`
+<a id="price-footnote-2"></a>
+
+The add-on fact, as a footnote to the table rather than a block under it. It
+had no rule of its own at all, so it inherited the 1140px container and sat
+flush against the panel - wider than the thing it annotates and touching it.
+Same 1080px measure as the table and the strip; all three edges line up.
+
+---
+
+## `.faq-section__columns`
+<a id="faq-section-columns"></a>
+
+TWO COLUMNS OF CATEGORIES. `align-items: start` matters: without it the columns
+stretch to equal height and the shorter one grows a tail of empty cream that tracks
+whichever answers happen to be open.
+
+---
+
+## `.faq-section__ask-robot`
+<a id="faq-section-ask-robot"></a>
+
+⚠️ THE SAME BOTTOM-FADE PROBLEM AS THE OTHER TWO ROBOTS. These renders were made for a
+dark background and their alpha runs to the frame edge, so on white the torso ends on
+a hard cut. Masked here for the same reason and re-measured for this crop: the hands
+are on the keyboard low in the frame, so the fade cannot start as high as the language
+one's — 82% keeps the hands whole and still lands the figure before the edge.
+
+---
+
+## `16px, INHERITED FROM AN ELEMENT THAT NO LONGER EXISTS. T`
+<a id="16px-inherited-from-an-element-that-no-longer"></a>
+
+⚠️ 16px, INHERITED FROM AN ELEMENT THAT NO LONGER EXISTS. This was 6px, which was the
+gap to the supporting line under it; the 16px that separated the copy from the BUTTON
+lived on `.faq-section__ask-note`. That line was deleted and its spacing
+had to come with it, or the button sits 6px under the heading. Removing an element is
+property-by-property, never just a deletion.
+
+---
+
+## `.faq-section__ask-copy`
+<a id="faq-section-ask-copy"></a>
+
+The copy column: heading, then the button under it. `min-width: 0` so the heading may
+wrap on a phone instead of forcing the card past `max-width: 100%` and pushing the
+robot off its left edge.
+
+---
+
+## `.faq-section__ask-lead`
+<a id="faq-section-ask-lead"></a>
+
+The 14px gap above owns the space to the button now. This margin has been 6px, then
+16px, then 0 across three shapes of this card in two days — if the button ever looks
+glued to the heading again, it is the gap that moved, not this.
+
+---
+
+## `.faq-list__set .faq-item--open`
+<a id="faq-list-set-faq-item-open"></a>
+
+The open item still has to read as selected, but it cannot do it by lifting off the
+page any more — it is a row inside a card, not a card. A teal edge and a tinted head
+say the same thing without breaking the card's outline. The tint is on the QUESTION
+only: the answer runs several lines and body text on --teal-pale is a wash.
+
+---
+
+## `.faq-list__set .faq-item--open .faq-item__question`
+<a id="faq-list-set-faq-item-open-faq-item-question"></a>
+
+⚠️ THE TINT COVERS THE ANSWER TOO. Held to the question alone it
+drew a pale band across the top of a white block and the two read as separate things,
+when the whole point of the highlight is that the question and its answer are ONE
+open item. The earlier worry — body text on --teal-pale being a wash — measured fine:
+--text-secondary on #E0F7FA is well past 4.5:1.
+
+---
+
+## `ROOMIER THAN THE RUN, ON PURPOSE. This is the one light `
+<a id="roomier-than-the-run-on-purpose-this-is-the-on"></a>
+
+⚠️ ROOMIER THAN THE RUN, ON PURPOSE. This is the one light section with decoration
+ABOVE and BELOW its content, and at the standard 96px the props had nowhere to live
+but on top of the card. `.block.agency-door` because `.block:not(.block--dark)` is
+0,2,0 and beats a bare class regardless of order — see .block.what-you-get.
+
+---
+
+## `THE LAYER IS THE CARD'S WIDTH, NOT THE SECTION'S — this `
+<a id="the-layer-is-the-card-s-width-not-the-section"></a>
+
+⚠️ THE LAYER IS THE CARD'S WIDTH, NOT THE SECTION'S — this is the whole reason the
+props stay glued to the card. It was `inset: 0`, i.e. the full-bleed section, so every
+percentage resolved against the VIEWPORT: at 1440 the props hugged the card and by
+2000 they had drifted far out into the cream, because the box they were measured
+against had grown by 560px while the card had not.
+
+---
+
+## `.agency-door__prop--front`
+<a id="agency-door-prop-front"></a>
+
+IN FRONT of the card, which sits at z-index auto inside .block__inner. A deeper, harder
+shadow because these are the props actually casting onto a surface rather than lying on
+the page behind everything.
+
+---
+
+## `Full width. The 860px cap made it a contained aside INSI`
+<a id="full-width-the-860px-cap-made-it-a-contained-a"></a>
+
+Full width. The 860px cap made it a contained aside INSIDE the dark run; on cream
+the inversion already does that, and the cap only made it look like a narrow
+interruption.
+
+---
+
+## `WHITE, NOT --teal-light. The disc's own translucent teal`
+<a id="white-not-teal-light-the-disc-s-own-translucen"></a>
+
+⚠️ WHITE, NOT --teal-light. The disc's own translucent teal fill lightens the dark
+panel underneath it, so the numeral measured 4.09:1 against its own background —
+the same self-lightening shape as the Salesforce Lead Source pill. White also
+matches `.ind-step__number`, which is the other numbered step on the site.
+
+---
+
+## `-1px on BOTH, for the same reason in both directions: su`
+<a id="1px-on-both-for-the-same-reason-in-both-direc"></a>
+
+-1px on BOTH, for the same reason in both directions: sub-pixel rounding otherwise
+leaves a hairline of the light section's background between the seam and the dark
+block it meets — a pale line across the full width, which is the exact edge these
+elements exist to remove.
+
+---
+
+## `.footer-seam`
+<a id="footer-seam-2"></a>
+
+⚠️ A ZERO-HEIGHT WRAPPER OUTSIDE <footer>, NOT A CHILD OF IT. As the footer's
+first child the curtain was invisible while measuring perfectly — correct size,
+correct fill, offsetParent correct, rect exactly 98px above the footer's top
+edge. `.footer` sets `overflow: hidden`, which clips an absolutely-positioned
+child hanging above the box out of existence.
+
+---
+
+## `Room for the peak in whatever section ends the page, on `
+<a id="room-for-the-peak-in-whatever-section-ends-the"></a>
+
+Room for the peak in whatever section ends the page, on every template. Two
+rules because the dark and light padding scales differ, and the last section is
+dark on the industry pages and cream on the homepage.
+
+---
+
+## `.job-value:hover .job-value__mark::after`
+<a id="job-value-hover-job-value-mark-after"></a>
+
+The watermark comes up with the card. It stays FAR below legibility — this is 0.055
+to 0.09, not a reveal.'s brief was that it is "not meant to be imposing"; a
+hover that turns it into a readable word makes it the loudest thing on the card.
+
+---
+
+## `.job-value__icon`
+<a id="job-value-icon-2"></a>
+
+EVERY CARD CHILD HAS TO BE RAISED ABOVE THE WATERMARK. The watermark is z-index 0 and
+the rest of the card's children are static, so without this they paint in source order
+underneath it — the amount would sit *behind* the stamp rather than on it.
+
+---
+
+## `Padding comes from .block. ONE LIGHT TONE FOR THE WHOLE `
+<a id="padding-comes-from-block-one-light-tone-for-th"></a>
+
+Padding comes from .block. ONE LIGHT TONE FOR THE WHOLE RUN — see the note on
+.what-you-get. This rule used to say --warm-white and reasoned that a "third tone"
+would read as a band; the actual problem was that there were TWO.
+
+---
+
+## `.proof-section__grid`
+<a id="proof-section-grid"></a>
+
+STRETCH, so the quote panel is as tall as the evidence column beside it. This
+is the other half of moving the header into the column: the header supplies the
+height and `stretch` hands it to the panel. At `start` the panel is only ever as
+tall as its own text, which is what made it read small.
+
+---
+
+## `Roomier. This gap is the only spacing between the header`
+<a id="roomier-this-gap-is-the-only-spacing-between-t"></a>
+
+Roomier.
+This gap is the only spacing between the header, the stat pair and the source
+line -- .proof-section__evidence is a flex column, so one value moves all three.
+
+---
+
+## `.proof-section__lead-sub`
+<a id="proof-section-lead-sub"></a>
+
+⚠️ INLINE WITH THE LABEL, NOT STACKED UNDER IT. It is a child of
+.proof-section__lead-label now, so it flows as part of the same sentence — "23 qualified
+leads out of 72 conversations" — rather than reading as a third line under a two-line
+stat. `display: inline` is what keeps that true when the phrase wraps: as a block it
+would break onto its own line again at any narrow width and silently undo this.
+
+---
+
+## `.proof-section__quote-block`
+<a id="proof-section-quote-block"></a>
+
+Stacked, the quote panel no longer has a column to be as tall as, so the
+centering and the stretch both stop applying. The two planes stay - they are
+the section's one piece of treatment and they read the same at any width.
+
+---
+
+## `.proof-section__divider`
+<a id="proof-section-divider"></a>
+
+⚠️ The role drops to its own line here. Inline after a "|" on a phone it
+wrapped mid-attribution and left the divider dangling at a line end - the
+same dangling-separator bug section 6 was rebuilt to fix.
+
+---
+
+## `The top/bottom hairlines are gone: this section now foll`
+<a id="the-top-bottom-hairlines-are-gone-this-section"></a>
+
+The top/bottom hairlines are gone: this section now follows the dark block, and a
+border between a dark section and a cream one is a line drawn on a boundary that is
+already unmistakable. The closing curtain does that job properly instead.
+
+---
+
+## `.morning-inbox__row`
+<a id="morning-inbox-row-2"></a>
+
+The row is a BUTTON now, so it has to be un-styled back to a row: browsers give
+buttons their own font, a centered text-align and a background, none of which a table
+row wants. `font: inherit` is the one that matters — without it the whole inbox
+silently drops to the UA's 13px system font.
+
+---
+
+## `.what-you-get.is-interactive .morning-inbox__row`
+<a id="what-you-get-is-interactive-morning-inbox-row"></a>
+
+⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOR IT. `.is-interactive` is added by
+the script after the dialogs are wired, so with no JS these read as plain rows — no
+pointer cursor, no chevron. A button that looks clickable and does nothing is worse
+than a row that never claimed to be one.
+
+---
+
+## `margin: auto IS RESTORED DELIBERATELY. A modal <dialog`
+<a id="margin-auto-is-restored-deliberately-a-modal"></a>
+
+⚠️ `margin: auto` IS RESTORED DELIBERATELY. A modal <dialog> is centered by the UA
+stylesheet's own `margin: auto`, and line 38 of this file resets margin to 0 on
+`*` — which beats it and pins the sheet to the top-left corner. Nothing about the
+dialog looks wrong in the markup; it just sits in the corner.
+
+---
+
+## `.what-you-get__callouts`
+<a id="what-you-get-callouts"></a>
+
+⚠️ 820, NARROWED WITH THE 2x2. At 980 across two columns each cell
+is ~480px wide holding a centered icon-and-heading cluster of about 240 — the pair
+floated in the middle of a lot of nothing, and only the longest description ever
+reached the edges. Narrowing the grid is the fix rather than widening the type.
+
+---
+
+## `@media (prefers-reduced-motion: no-preference)`
+<a id="media-prefers-reduced-motion-no-preference"></a>
+
+Double-pulse on the recap when the call completes — guides the eye to the payoff.
+Must live on the aside, not .conversation-recap: the aside's overflow: hidden
+clips any outward shadow painted by its children.
+
+---
+
+## `No padding here: .block owns it. A padding SHORTHAND d`
+<a id="no-padding-here-block-owns-it-a-padding-shorth"></a>
+
+No padding here: .block owns it. A `padding` SHORTHAND declared later in this
+file beats .block's `padding-block`, so a section can carry the class and still
+sit off the scale - which is exactly what these two were doing.
+
+---
+
+## `THE LEGACY FAQ RULES WERE DELETED HERE. .faq-section__gr`
+<a id="the-legacy-faq-rules-were-deleted-here-faq-sec"></a>
+
+THE LEGACY FAQ RULES WERE DELETED HERE.
+.faq-section__grid / __item / __question / __answer styled an OLDER FAQ markup that no
+template renders any more — grepped all PHP before removing. The __grid copy was
+actively harmful: declared later than the real layout rules above, it won on equal
+specificity, so the section's true column definition was the dead one.
+
+---
+
+## `auto-fit + centered so the row stays balanced whatever t`
+<a id="auto-fit-centered-so-the-row-stays-balanced-wh"></a>
+
+auto-fit + centered so the row stays balanced whatever the item count. Was a
+hard 1fr 1fr, which stranded the survivor in the left column when the
+flat-rate text-chat item was removed.
+
+---
+
+## `.faq-list__set`
+<a id="faq-list-set-2"></a>
+
+⚠️ THIS CARRIES THE 12px THAT .faq-list USED TO GIVE THE ITEMS DIRECTLY. The items are
+inside a per-group wrapper now, so .faq-list's gap separates HEADINGS from SETS and no
+longer reaches the questions. Same value, so desktop renders exactly as before — the
+wrapper exists for the phone treatment below and must be invisible above it.
+
+---
+
+## `.faq-item--open .faq-item__answer`
+<a id="faq-item-open-faq-item-answer"></a>
+
+⚠️ 300px HAD TO GO UP. The longest answer here runs past it, and a max-height that
+clips mid-sentence looks like a rendering fault rather than a truncation. It is a
+transition ceiling, not a layout constraint — overshooting only makes the open
+animation slightly faster over the unused portion.
+
+---
+
+## `.faq-item--open`
+<a id="faq-item-open"></a>
+
+THE OPEN ONE IS HIGHLIGHTED. With everything collapsed by default, the open card is the only thing on
+screen with any state, and it needs to read as selected rather than as merely taller.
+Teal border + tinted head, matching the industry list's selected pill — same idea,
+same palette, so the page has one language for "this is the one you chose".
+
+---
+
+## `The light scale plus the closing curtain's peak height, `
+<a id="the-light-scale-plus-the-closing-curtain-s-pea"></a>
+
+The light scale plus the closing curtain's peak height, so the gap below the last
+line matches every other section. 0.95 is 114/120 of the seam's own height clamp.
+The var is load-bearing: the scale steps down at 1024 and 620.
+
+---
+
+## `The shortcode renders its own widget button and its attr`
+<a id="the-shortcode-renders-its-own-widget-button-an"></a>
+
+The shortcode renders its own widget button and its attributes are not
+trustworthy - border_width="1" is a documented no-op, so the border is set
+here rather than passed in. Measure the render; do not read the attribute.
+
+---
+
+## `--btn-text-color`
+<a id="btn-text-color"></a>
+
+--teal-text, not --teal-deep: this button is outlined on the cream, so its label is
+teal TEXT on a light background and lands in the same 4.38:1 failure as every other
+teal text on the page. The icon follows it so the two do not drift apart.
+
+---
+
+## `.final-cta__robot img`
+<a id="final-cta-robot-img"></a>
+
+Full section height rather than a fixed clamp. Driving it off the wrapper's
+top/bottom means the figure scales with whatever the copy makes the section, instead of
+a number that has to be re-tuned every time a line of copy is added or removed.
+
+---
+
+## `.final-cta__copy`
+<a id="final-cta-copy"></a>
+
+⚠️ NARROWED WHEN THE ROBOT GREW. At 34rem the copy box and the full-height figure
+overlapped at every width — measured 8px at 1440 and worse below. The figure is now
+~604px wide, so the container has to hold copy + gap + figure: 1140 - 480 - 40 = 620,
+which clears it. Re-check this if either the robot's height or --block-max changes.
+
+---
+
+## `.final-cta__robot`
+<a id="final-cta-robot-2"></a>
+
+Below this the copy column and the figure compete for the same space and the figure
+gives way. 1240 rather than 1100: the robot is full-section-height now and therefore
+much wider than the fixed-clamp version this breakpoint was set for.
+
+---
+
+## `.footer`
+<a id="footer-2"></a>
+
+⚠️ DARKER THAN --block-dark, DELIBERATELY. #00232A against the page's #00323A.
+
+The old #0a2e33 was a slightly blue-green off-tone that matched nothing in the palette.
+
+---
+
+## `.footer__main::before`
+<a id="footer-main-before"></a>
+
+⚠️ THE EMERALD WASH IS GONE. This carried two radial gradients, one teal and one
+rgba(16,185,129) — emerald. Emerald is reserved on this site for capture/success states
+and the recommended pricing tier; a decorative wash in it spends the signal that makes
+"Lead captured" mean something. The teal one goes too: the point of the new footer
+colour is a flat, settled floor, and a gradient works against that.
+
+---
+
+## `Body sets line-height 1.65, which made every row ~32px t`
+<a id="body-sets-line-height-1-65-which-made-every-ro"></a>
+
+Body sets line-height 1.65, which made every row ~32px tall and left the
+lists sprawling. Set it here rather than on the anchor: the <a> is inline,
+so its line-height never governed the row.
+
+---
+
+## `.footer__col a`
+<a id="footer-col-a"></a>
+
+⚠️ THE PADDING IS THE TAP TARGET (Lighthouse best-practices: "Touch
+targets do not have sufficient size or spacing", flagging the Support mailto). An
+inline <a> is only as tall as its text — about 19px here — and the requirement is 24.
+Inline-block plus vertical padding gets there without moving anything visually, because
+the row spacing below absorbs it.
+
+---
+
+## `.footer__all-industries`
+<a id="footer-all-industries"></a>
+
+The footer lists the five industry CATEGORIES, not all fifteen industries.
+Fifteen links made the footer read as a wall of text whichever way they were
+arranged; the categories are the durable navigation and each one is a hub
+page that absorbs new industries without the footer changing at all.
+
+---
+
+## `@media (max-width: 480px)`
+<a id="media-max-width-480px"></a>
+
+The two phone blocks that used to sit here moved up into the section 8 block
+with the rest of the strip's rules. They existed to chase a positioned notch
+label that no longer exists.
+
+---
+
+## `40px, was 60px. NOTE: this rule is DUPLICATED verbatim f`
+<a id="40px-was-60px-note-this-rule-is-duplicated-ver-2"></a>
+
+40px, was 60px. NOTE: this rule is DUPLICATED verbatim
+further down the file and the later copy wins. Both were changed together;
+edit one alone and the value you read is not the value that renders.
+
+---
+
+## `.hero`
+<a id="hero"></a>
+
+Capped at ~720px so section 2's dark block is on screen at 1440x900 without
+scrolling. The old 800px ceiling pushed it below the fold on a laptop, which
+cost the page its first contrast moment.
+
+---
+
+## `0 so the robot's own bottom edge IS the hero's bottom ed`
+<a id="0-so-the-robot-s-own-bottom-edge-is-the-hero-s"></a>
+
+0 so the robot's own bottom edge IS the hero's bottom edge. The old value here
+was clamp(76px, 10vw, 104px), sized to keep the cards clear of the seam apex
+back when the cards were last; nothing is last but the robot now, and he is
+meant to be cropped.
+
+---
+
+## `.hero__canvas`
+<a id="hero-canvas"></a>
+
+The soundwave is masked to fade in from 30% to 65% of the width — a device for a
+two-column composition, where it sits behind the robot on the right. Centered and
+stacked it reads as a stray band of texture off to one side. Already hidden below
+768px for the same reason; this only moves that decision up to where the layout
+actually changes.
+
+---
+
+## `Deliberately smaller than the global --hero-title-size. `
+<a id="deliberately-smaller-than-the-global-hero-titl"></a>
+
+Deliberately smaller than the global --hero-title-size. These headlines are
+full narrative sentences of 60-79 characters, not the short phrases the
+global size was set for, so 51px broke them over five lines. Scoped to this
+page type and applied to all fifteen.
+
+---
+
+## `.ind-problems`
+<a id="ind-problems"></a>
+
+⚠️ NO `padding` HERE. `.block` owns it — a shorthand written here beats
+`.block`'s `padding-block` from anywhere later in the file. Same for every
+converted ind-* section below.
+
+---
+
+## `.ind-problem-card__icon--art`
+<a id="ind-problem-card-icon-art"></a>
+
+Industries with isometric art use it in place of the emoji tile. The art is
+transparent and already carries the brand teal, so it drops the pale square
+and takes the room it needs to stay legible.
+
+---
+
+## `.ind-directory__group h2 a`
+<a id="ind-directory-group-h2-a"></a>
+
+Group headings link through to their category hub. `--teal-text`, not
+`--teal-deep`: the hover state is display type on cream, where --teal-deep
+measures 4.38:1. Part of the same teal-deep-as-text sweep the conversion
+carries.
+
+---
+
+## `The page's one dark band. Seven sections alternated betw`
+<a id="the-page-s-one-dark-band-seven-sections-altern"></a>
+
+The page's one dark band. Seven sections alternated between #FFFDF9 and
+#FDFBF7 — a two-point difference nobody can see — so 5,000px of page read as
+one uninterrupted cream scroll with no signal that a new idea had started.
+Reuses the footer's surface rather than introducing another color.
+
+---
+
+## `.ind-solutions`
+<a id="ind-solutions"></a>
+
+⚠️ WAS #0a2e33 — A SECOND DARK TONE. V3's dark is V1's deep teal --block-dark
+(#00323A) specifically: testers rejected the night world's near-black, and
+drifting back toward it quietly reintroduces the tone the redesign exists to
+drop. `.block--dark` supplies both the background and the text colour now, so
+this rule only survives to hold what is genuinely local.
+
+---
+
+## `.ind-solutions__steps`
+<a id="ind-solutions-steps"></a>
+
+DELETED with their markup: .ind-solutions__bg (two 3-4% radial gradients over
+a flat dark background) and .ind-solutions__header (superseded by the shared
+.ind-section__head). Removed rather than left, so the next person does not have
+to work out which of two header rules is the live one.
+
+---
+
+## `.ind-scenario`
+<a id="ind-scenario"></a>
+
+⚠️ THE PALE-BLUE GRADIENT IS GONE. Its own comment said it was tinted "so it
+reads as a distinct panel between the dark band above and the cream FAQ below"
+— a fourth background solving a problem that only existed because the page had
+five. It is the second half of the dark run now; `.block--dark` paints it.
+
+---
+
+## `--teal-light, and NO opacity. --teal-deep measured 3.06:`
+<a id="teal-light-and-no-opacity-teal-deep-measured"></a>
+
+⚠️ --teal-light, and NO opacity. --teal-deep measured 3.06:1 on the dark
+block; opacity: 0.75 then reduced whatever it was by another quarter, which
+is a contrast cut dressed as a style — the caption is already quieter than
+its neighbours by size, weight and letter-spacing. 5.7:1 now.
+
+---
+
+## `.ind-recap__section-head span`
+<a id="ind-recap-section-head-span"></a>
+
+⚠️ --teal-text, not --teal-deep: 4.06:1 on the pale-teal pill, so it failed AA
+at 0.64rem. PRE-EXISTING and nothing to do with the dark conversion — it is on
+a white card either way — but it surfaced in the contrast pass over these
+sections and it is one word of the same ~144-declaration teal-deep-as-text
+sweep this conversion is carrying. 5.0:1 now.
+
+---
+
+## `.ind-recap__transcript`
+<a id="ind-recap-transcript"></a>
+
+The transcript stub. Quieter than the recap section above it: no badge colour,
+a muted count, one line of explanatory text. It is a signpost, not a second
+block of content competing with the summary.
+
+---
+
+## `.ind-recap__section-head .ind-recap__count`
+<a id="ind-recap-section-head-ind-recap-count"></a>
+
+⚠️ TWO CLASSES, because `.ind-recap__section-head span` (0,1,1) out-specifies a
+bare `.ind-recap__count` (0,1,0) regardless of source order, and would have
+rendered the message count as the teal "New lead" pill.
+
+---
+
+## `.ind-scenario__story > p`
+<a id="ind-scenario-story-p"></a>
+
+⚠️ INHERIT, NOT --text-secondary. That token (#4A5568) is a light-background
+colour and measured 1.84:1 once this section became dark. Inheriting picks up
+`.block--dark`'s --text-on-dark, so the paragraph follows the section it is in
+instead of naming a colour that is only right on one of them.
+
+---
+
+## `.ind-faq`
+<a id="ind-faq"></a>
+
+Cream, not --warm-white: the FAQ and the siblings block are one light run
+between two dark ones, and two near-identical off-whites two units apart read
+as a rendering artefact rather than as a decision.
+
+---
+
+## `EVERYTHING THIS RULE USED TO DO IS NOW .block--dark's JO`
+<a id="everything-this-rule-used-to-do-is-now-block-d"></a>
+
+⚠️ EVERYTHING THIS RULE USED TO DO IS NOW .block--dark's JOB. It carried its
+own padding clamp (a third spacing system), a two-stop teal gradient (a fifth
+background), and `text-align: center` (now .block-statement). The section ends
+on the same dark the footer sits under, so the CTA and the footer read as one
+closing run rather than a card floating above a boundary.
+
+---
+
+## `@media (max-width: 768px)`
+<a id="media-max-width-768px-2"></a>
+
+The `.ind-problems__grid` collapse that lived here is gone with the class.
+`.block-cards__grid` carries the whole responsive story now: 3 -> 2 at 900,
+2 -> 1 at 560.
+
+---
+
+## `Stacked, the desktop gap becomes the space between the`
+<a id="stacked-the-desktop-gap-becomes-the-space-betw"></a>
+
+Stacked, the desktop `gap` becomes the space between the art and the copy
+beneath it, and clamp(40px, 6vw, 80px) is far too generous for that job —
+it was sized to separate two side-by-side columns. Measured on a 390px
+phone before this: 88px of visible space under the dental artwork.
+
+---
+
+## `NOTE: currently inert. .ind-hero__visual img (0,1,1) o`
+<a id="note-currently-inert-ind-hero-visual-img-0-1-1"></a>
+
+NOTE: currently inert. `.ind-hero__visual img` (0,1,1) outranks
+`.ind-hero__image` (0,1,0), so max-width: 100% wins and the art renders at
+full column width. Left in place deliberately — making it bite would
+shrink the approved artwork. Raise specificity here to revive it.
+
+---
+
+## `The hero runs the FULL container; the body runs a readin`
+<a id="the-hero-runs-the-full-container-the-body-runs"></a>
+
+The hero runs the FULL container; the body runs a reading measure under it.
+
+Revision history matters here, because two earlier shapes were rejected and
+the reasons are not obvious from the result:
+
+---
+
+## `.blog-post__label`
+<a id="blog-post-label"></a>
+
+The article body runs the FULL container, same as every other section of the
+site — a deliberate call. It was briefly 860px for an ~85-character
+measure; at 1140 the lines run ~118 characters. Type is bumped a step to take
+some of that back.
+
+---
+
+## `72px at 1440. Do NOT chase Figma's 90px: their face is a`
+<a id="72px-at-1440-do-not-chase-figma-s-90px-their-f"></a>
+
+72px at 1440. Do NOT chase Figma's 90px: their face is a 400-weight sans
+and Fraunces at 700 is far heavier per pixel — past ~72px it reads as a
+brick rather than a headline.
+
+---
+
+## `72px. The hero is the full 1140px container again, so th`
+<a id="72px-the-hero-is-the-full-1140px-container-aga"></a>
+
+72px. The hero is the full 1140px container again, so the headline has the
+room for it. Still do NOT chase Figma's 90px — Fraunces at 700 is far
+heavier per pixel and reads as a brick.
+
+---
+
+## `Stated on the FRAME, not left to the file, so the hero's`
+<a id="stated-on-the-frame-not-left-to-the-file-so-th"></a>
+
+Stated on the FRAME, not left to the file, so the hero's height is the same
+on every post and does not jump while the backfill to 16:9 is in progress.
+⚠️ Legacy 1024x1024 posts are centre-cropped by this until they are
+regenerated — that is the transitional cost, and it is smaller than a
+1140px-tall square.
+
+---
+
+## `The curtain is an ABSOLUTE OVERLAY (see template-parts/s`
+<a id="the-curtain-is-an-absolute-overlay-see-templat"></a>
+
+The curtain is an ABSOLUTE OVERLAY (see template-parts/seam-curtain.php), so
+its host needs position and must not clip it. The seam's own height is added
+ON TOP of the 96px block padding, exactly as the homepage does it, so the
+visible gap below the divider is still 96px rather than 96 minus the curve.
+
+---
+
+## `.blog-post__layout`
+<a id="blog-post-layout"></a>
+
+One column. The sticky Contents rail that used to sit at 210px on the left was
+removed on a deliberate call — a element that moves in the margin competes with
+the sentence you are reading. Heading ids are still injected by
+sitestaffr_blog_toc so in-page anchors and search-result jump links keep
+working; only the rail is gone.
+
+---
+
+## `Matches .blog-post__body p. It was 1.02rem against a 1.1`
+<a id="matches-blog-post-body-p-it-was-1-02rem-agains"></a>
+
+Matches .blog-post__body p. It was 1.02rem against a 1.1875rem paragraph,
+which only became obvious once the paragraph went to 1.25rem for the full
+-width measure — a list is body copy and should not read as a footnote.
+
+---
+
+## `Industry (/for/) links inside post paragraphs render as `
+<a id="industry-for-links-inside-post-paragraphs-rend"></a>
+
+Industry (/for/) links inside post paragraphs render as normal inline
+links. The arrow CTA treatment lives only in .industry-card, where links
+are genuinely standalone — applying it to every in-paragraph /for/ link
+bolted arrows onto links the Blog Agent weaves into sentences.
+
+---
+
+## `The nav is FIXED, so it does not consume flow and the he`
+<a id="the-nav-is-fixed-so-it-does-not-consume-flow-a"></a>
+
+The nav is FIXED, so it does not consume flow and the hero's top padding
+is the only thing holding the eyebrow off it. 56px put the eyebrow within
+a few pixels of the nav's bottom edge at 768 and 390 — visible in a
+screenshot, invisible in the CSS, because at 1440 the 96px desktop value
+hid it.
+
+---
+
+## `This is a padding SHORTHAND and it sits later in the f`
+<a id="this-is-a-padding-shorthand-and-it-sits-later"></a>
+
+⚠️ This is a `padding` SHORTHAND and it sits later in the file, so it beats
+the desktop rule outright — including the seam allowance baked into it.
+Written as 56px flat, the curtain overlaid the first heading's air and the
+article opened tight under the spike. The seam height has to be re-added
+at every breakpoint that restates this padding.
+
+---
+
+## `.blog-index__hero`
+<a id="blog-index-hero"></a>
+
+Deliberately short. It was 449px tall with its right half empty, which reads
+as unfinished rather than as restraint. The answer was height, not
+decoration — the lead card immediately below is the visual event, and the
+curtain now gives the bottom edge its gesture. 140px of top padding was also
+clearing a 72px fixed nav twice over.
+
+---
+
+## `.blog-card__image`
+<a id="blog-card-image"></a>
+
+16 / 9, matching the hero and the featured-image backfill. This was 1/1 for
+one build, when every published image was 1024x1024 and cropping a square to
+a wide box threw away the subjects at its edges. Regenerating the artwork at
+16/9 is the upstream fix, so the card follows the artwork rather than the
+other way round.
+
+---
+
+## `.blog-card__image--placeholder`
+<a id="blog-card-image-placeholder"></a>
+
+Fallback only — every published post currently has a featured image. A flat
+colored box with an emoji in it reads as a broken image, so when one really
+is missing the card falls back to type rather than to a void.
+
+---
+
+## `.blog-card__readtime::before`
+<a id="blog-card-readtime-before"></a>
+
+Read time replaced the category badge. Every published post is filed under
+the same single category, so the badge rendered the identical label on all
+twelve cards — twelve repetitions of nothing. Reinstate it only once a
+second category has real posts in it.
+
+---
+
+## `.blog-post__related`
+<a id="blog-post-related"></a>
+
+--cream, matching the body, NOT --cream-dark. The point of the two curtains is
+that everything between them is ONE light run; a second cream tone here put a
+hard horizontal edge in the middle of it, which is the kind of seam the
+curtains were added to replace. The dark CTA panel already separates Keep
+Reading from the article.
+
+---
+
+## `.blog-post__related .seam-curtain path`
+<a id="blog-post-related-seam-curtain-path"></a>
+
+⚠️ This curtain pours the FOOTER in, not a section, so it fills --footer-dark.
+Filling it with --block-dark would paint #00323A directly above a #00232A
+footer: a 16-point step across the full viewport width, which is the exact
+hairline the seam exists to remove. Same reasoning as .final-cta on the
+homepage; scoped by parent because the seam cannot know what sits below it.
+
+---
+
+## `Dark on purpose: /download/ is an almost entirely white `
+<a id="dark-on-purpose-download-is-an-almost-entirely"></a>
+
+Dark on purpose: /download/ is an almost entirely white page, so the one thing
+we want read first has to carry weight.
+This used to say "same gradient as .proof-section__backdrop-panel, keeps it
+in-system" — that element was deleted with the V1 proof design,
+so the gradient is now local to this page and nothing else shares it.
+
+---
+
+## `.cta-spotlight .btn--primary`
+<a id="cta-spotlight-btn-primary"></a>
+
+Solid primary buttons keep white text on the card. `.cta-spotlight a` is more
+specific than `.btn--primary`, so without this the label goes teal-on-teal and
+disappears against the button's own background. Same for the hover state.
+
+---
+
+## `.cta-spotlight .ind-cta__btn`
+<a id="cta-spotlight-ind-cta-btn"></a>
+
+Industry pages' primary CTA — same trap as .btn--primary above. `.ind-cta__btn`
+is one class, `.cta-spotlight a` is two, so the label was losing to teal-deep
+and rendering dark on the button's own teal background.
+
+---
+

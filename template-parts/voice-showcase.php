@@ -1,8 +1,4 @@
-<?php /* ⚠️ NEVER "callers" IN THESE DESCRIPTIONS. SiteStaffr has no phone line - the
-         readme leads with "No phone lines" - and with "AI Receptionist" in the homepage
-         H1, the word puts the product in the phone-answering category, which is crowded,
-         different and more expensive. These are voices a VISITOR hears on a website.
-         Swept. */ ?>
+<?php /* ⚠️ NEVER "callers" IN THESE DESCRIPTIONS. → docs/implementation-notes.md#never-callers-in-these-descriptions-sitestaffr */ ?>
 <?php
 /**
  * Voice Showcase Carousel — shared between homepage and features page.

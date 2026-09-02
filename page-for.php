@@ -72,11 +72,7 @@ $cta_url = home_url( '/#get-started' );
 	</section>
 
 	<!-- CTA -->
-	<?php /* Closing CTA is a V3 dark block running into the footer, same as
-	         page-industry.php. ⚠️ CONVERTED IN THE SAME COMMIT ON PURPOSE:
-	         .ind-cta is shared across all three ind-* templates, so moving its
-	         background onto .block--dark would have left whichever template still
-	         carried the old markup with no background at all. */ ?>
+	<?php /* Closing CTA is a V3 dark block running into the footer, same as page-industry.php. → docs/implementation-notes.md#block-10 */ ?>
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">

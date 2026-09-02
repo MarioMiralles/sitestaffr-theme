@@ -18,11 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $site_name = get_bloginfo( 'name' );
 
-/*
- * Where a lost visitor is most likely to be headed. Ordered by commercial
- * intent, not by nav order: someone who mistyped a URL is further along than
- * someone reading About.
- */
+/* Where a lost visitor is most likely to be headed. → docs/implementation-notes.md#nf-links */
 $nf_links = array(
 	array(
 		'label' => 'Pricing',

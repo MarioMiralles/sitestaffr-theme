@@ -27,9 +27,7 @@ if ( ! defined( 'SITESTAFFR_MIDDLEWARE_URL' ) ) {
 }
 
 if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
-	/**
-	 * Build a theme asset URL with file modification time for cache busting.
-	 */
+	/* Build a theme asset URL with file modification time for cache busting. → docs/implementation-notes.md#sitestaffr-asset-url */
 	function sitestaffr_asset_url( $relative_path ) {
 		$relative_path = ltrim( $relative_path, '/' );
 		$asset_uri     = get_stylesheet_directory_uri() . '/' . $relative_path;
@@ -219,11 +217,7 @@ add_action( 'wp_enqueue_scripts', function () {
 	// elements stay at opacity 0 forever and the content is simply invisible.
 	$is_for_index  = is_page_template( 'page-for.php' ) || is_page( 'for' );
 	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
-	/* The agencies page uses the FAQ accordion and the shared nav, both of which are
-	   driven by site.js. Adding the template here rather than relying on the landing
-	   page's enqueue - a template that renders interactive components and is not in
-	   this list ships them dead, which is how the /for/ index once shipped with its
-	   entire directory invisible. */
+	/* The agencies page uses the FAQ accordion and the shared nav, both of which are driven by site.js. → docs/implementation-notes.md#is-agencies */
 	$is_agencies   = is_page_template( 'page-agencies.php' );
 
 	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat || $is_agencies ) {
@@ -269,7 +263,6 @@ add_action( 'wp_enqueue_scripts', function () {
 		wp_dequeue_style( 'global-styles' );
 	}
 } , 100 );
-
 
 
 add_action( 'after_setup_theme', function () {
@@ -336,11 +329,7 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_blog_agent_page_v', $provision_version );
 } );
 
-/**
- * Provision the /salesforce marketing page and its SEO metadata.
- *
- * Same versioned-option pattern as the Blog Agent page above.
- */
+/* Provision the /salesforce marketing page and its SEO metadata. → docs/implementation-notes.md#provision-version-2 */
 add_action( 'init', function () {
 	$provision_version = '1';
 	if ( get_option( 'sitestaffr_salesforce_page_v' ) === $provision_version ) {
@@ -416,10 +405,7 @@ add_action( 'init', function () {
 	if ( $page_id ) {
 		update_post_meta( $page_id, '_wp_page_template', 'page-agencies.php' );
 
-		/* Yoast owns title and meta, as everywhere else. ⚠️ DELIBERATELY NOT TARGETING
-		   "white label ai chatbot wordpress" — high-intent, and the product cannot satisfy
-		   it today, so ranking for it buys bounces and a reputation for overclaiming.
-		   Revisit only if white-label is ever built. */
+		/* Yoast owns title and meta, as everywhere else. → docs/implementation-notes.md#yoast-owns-title-and-meta-as-everywhere-else-d */
 		update_post_meta( $page_id, '_yoast_wpseo_title', 'AI Chat for WordPress Agencies — Add It to Every Client Site | SiteStaffr' );
 		update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Add an AI receptionist to the client sites you build. About five minutes per site, no code, and one login for billing across every client. Free 30-day trial on any site.' );
 		sitestaffr_clear_yoast_title_overrides( $page_id );
@@ -539,11 +525,7 @@ function sitestaffr_industry_registry() {
 			'h1'         => 'An AI Receptionist for Home Service Businesses',
 			'slug'       => 'home-trades',
 			'icon'       => '🔧',
-			/* ⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the
-			   /for/home-services/ industry page below it are two different URLs, and the
-			   old titles told them apart only by the plural in "Agents"/"Agent". Moving
-			   both to "AI Receptionist for ..." collapsed that distinction into two
-			   identical title tags. Matches this group's h1. */
+			/* ⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the /for/home-services/ industry… → docs/implementation-notes.md#home-service-businesses-not-home-services-thi */
 			'seo_title'  => 'AI Receptionist for Home Service Businesses | SiteStaffr',
 			'metadesc'   => 'Capture urgent home service jobs around the clock, for HVAC, plumbing, pest control and general contracting. Every lead in your inbox. Free 30-day trial.',
 			'intro'      => 'Home service work is urgent and competitive: whoever answers first usually wins the job. SiteStaffr responds on your website at any hour and gets the name, number and problem to you right away.',
@@ -952,10 +934,7 @@ add_action( 'template_redirect', function () {
 }, -10 );
 
 
-/**
- * Estimated reading time in whole minutes.
- * See docs/implementation-notes.md#sitestaffr-read-time
- */
+/* Estimated reading time in whole minutes. → docs/implementation-notes.md#sitestaffr-read-time-2 */
 function sitestaffr_read_time( $content ) {
 	$words = preg_match_all( '/\S+/', wp_strip_all_tags( $content ) );
 	return max( 1, (int) round( $words / 225 ) );

@@ -1,5 +1,5 @@
 <?php
-/* Shared site navigation. → docs/implementation-notes.md#primary-menu */
+/* Shared site navigation. Accepts $args: 'secondary' => array of [ 'label' => string, 'href' => string ] —… → docs/implementation-notes.md#primary-menu */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -98,11 +98,7 @@ $cta = array(
               </ul>
             </li>
             <?php endforeach; ?>
-            <?php /* The arrow is not decoration: this row sits below sixteen
-                     industry names and read as a seventeenth one. it was not possible to
-                     find /for/ from the nav even though this link has always been
-                     here. An arrow is the one mark that says "this goes somewhere
-                     else", which is what separates it from the list above it. */ ?>
+            <?php /* The arrow is not decoration: this row sits below sixteen industry names and read as a… → docs/implementation-notes.md#nav-mega-all */ ?>
             <li class="nav__mega-all"><a class="nav__dropdown-link" href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all industries <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </li>

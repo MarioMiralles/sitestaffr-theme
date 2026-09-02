@@ -522,10 +522,7 @@
     var isTrial = status === 'trialing' || status === 'trial' || status === 'trial_active';
     var isActive = status === 'active';
     var isPastDue = status === 'past_due';
-    /* ⚠️ BOTH SPELLINGS ON PURPOSE. Stripe reports `canceled`; other paths have sent
-       `cancelled`. This line checked both, and a spelling sweep collapsed it into the
-       same test twice — which reads as a harmless duplicate and quietly stops matching
-       half the statuses it was written to catch. */
+    /* ⚠️ BOTH SPELLINGS ON PURPOSE. → docs/implementation-notes.md#both-spellings-on-purpose-stripe-reports-cance */
     var isCancelled = status === 'canceled' || status === 'cancelled';
 
     /* Determine if trial is expired */

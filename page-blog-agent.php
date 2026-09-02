@@ -103,14 +103,9 @@ $ba_faqs = array(
 .ba-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
-/* ⚠️ FLAT CREAM. The radial teal wash and the warm-white-to-cream vertical gradient
-   are both DELETED, same call as the industry and Salesforce heroes: decoration doing
-   no work, and a hero that fades into the section below replaces a decision with a
-   smudge. It also stops this being the only cream on the site that is not flat. */
+/* ⚠️ FLAT CREAM. → docs/implementation-notes.md#ba-hero */
 .ba-hero { background: var(--cream); }
-/* ⚠️ TWO CLASSES. `.block:not(.block--dark)` is (0,2,0) and beats a bare `.ba-hero`
-   whatever the source order. Same first-section-under-the-nav value as the other
-   converted heroes. */
+/* ⚠️ TWO CLASSES. `.block:not(.block--dark)` is (0,2,0) and beats a bare `.ba-hero` whatever the source order. → docs/implementation-notes.md#block-ba-hero */
 .block.ba-hero { padding-block-start: clamp(120px, 15vw, 140px); }
 /* Kept next to .block-split__grid, whose 1fr 1fr this overrides. */
 .ba-hero__grid {
@@ -120,7 +115,6 @@ $ba_faqs = array(
 .ba-hero__eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 6px 14px; border-radius: 999px;
-    /* --teal-text: 4.06:1 on the pale-teal pill at 0.78rem failed AA. */
     background: var(--teal-pale); color: var(--teal-text);
     font-family: var(--font-body); font-weight: 700;
     font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase;
@@ -138,7 +132,6 @@ $ba_faqs = array(
 }
 .ba-hero__actions { display: flex; flex-wrap: wrap; gap: 14px 18px; align-items: center; margin-top: 32px; }
 .ba-hero__seclink {
-    /* --teal-text: #00838F on cream is 4.03:1 at body size. */
     font-family: var(--font-body); font-weight: 600; color: var(--teal-text);
     text-decoration: none; display: inline-flex; align-items: center; gap: 7px;
 }
@@ -164,10 +157,6 @@ $ba_faqs = array(
 .ba-draft__chip-status {
     margin-left: auto; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
     letter-spacing: 0.03em; text-transform: uppercase;
-    /* ⚠️ #0f6848, NOT --emerald. --emerald (#10b981) on --emerald-light measured
-       2.24:1 at 11.5px bold — the worst contrast anywhere on the converted set. The
-       colour is not new: it is what .sf-card__foot already uses for exactly this
-       pairing on the Salesforce mockup, so the two product mockups now agree. 5.9:1. */
     color: #0f6848; background: var(--emerald-light);
     padding: 4px 10px; border-radius: 999px;
 }
@@ -184,7 +173,6 @@ $ba_faqs = array(
 .ba-draft__pill {
     font-family: var(--font-body); font-size: 0.7rem; font-weight: 700;
     letter-spacing: 0.03em; text-transform: uppercase;
-    /* --teal-text: 4.06:1 on the pale-teal pill. Same swap as every other pill. */
     color: var(--teal-text); background: var(--teal-pale);
     padding: 4px 10px; border-radius: 999px;
 }
@@ -203,7 +191,6 @@ $ba_faqs = array(
 }
 .ba-draft__tag {
     font-family: var(--font-body); font-size: 0.74rem; font-weight: 600;
-    /* --teal-text: 4.28:1 on #f3faf9 at 11.8px. */
     color: var(--teal-text); background: #f3faf9;
     border: 1px solid rgba(0,131,143,0.14);
     padding: 5px 11px; border-radius: 8px;
@@ -227,9 +214,7 @@ $ba_faqs = array(
 @media (prefers-reduced-motion: reduce) { .ba-float { animation: none; } }
 
 /* Section shell */
-/* ⚠️ NO `padding` HERE. `.block` owns it, and a `padding` SHORTHAND on `.ba-section`
-   beats `.block`'s `padding-block` from anywhere in the file. --section-padding was
-   this page's third spacing system. */
+/* ⚠️ NO `padding` HERE. → docs/implementation-notes.md#ba-section */
 .ba-section { background: var(--cream); }
 .ba-section__head { text-align: center; max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); }
 /* The dark run: `.block--dark h2` already whitens the title; the deck and eyebrow
@@ -276,8 +261,6 @@ $ba_faqs = array(
 .ba-pilot__eyebrow {
     display: inline-block; font-family: var(--font-body); font-weight: 700;
     font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase;
-    /* --teal-light, the token every other eyebrow on a dark block uses (5.68:1).
-       #8fe8f2 was a one-off tuned to the retired panel gradient. */
     color: var(--teal-light); margin-bottom: 14px;
 }
 .ba-pilot__title {
@@ -306,12 +289,7 @@ $ba_faqs = array(
 .ba-sched__day {
     width: 30px; height: 30px; border-radius: 8px; display: flex; align-items: center; justify-content: center;
     font-family: var(--font-body); font-size: 0.74rem; font-weight: 700;
-    background: rgba(255,255,255,0.08); 
-    /* ⚠️ 0.55 MEASURED 3.86:1 ON THE CARD, NOT ON THE BLOCK. The day chip sits on
-       rgba(255,255,255,0.08) over rgba(255,255,255,0.06) over --block-dark, which
-       composites to #224E55 — lighter than the section, so reading the section's
-       colour understates the problem. 0.68 is 4.89:1 and the off days stay clearly
-       quieter than the two lit ones. */
+    background: rgba(255,255,255,0.08);
     color: rgba(240,250,250,0.68);
 }
 .ba-sched__day.is-on { background: #8fe8f2; color: var(--block-dark); }
@@ -326,7 +304,6 @@ $ba_faqs = array(
 .ba-plan__unit { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-secondary); }
 .ba-plan__pilot {
     display: inline-block; margin-top: 14px; font-family: var(--font-body); font-size: 0.72rem; font-weight: 700;
-    /* --teal-text: 4.06:1 on the pale-teal pill at 0.72rem failed AA. */
     letter-spacing: 0.03em; text-transform: uppercase; color: var(--teal-text);
     background: var(--teal-pale); padding: 4px 10px; border-radius: 999px;
 }
@@ -355,7 +332,6 @@ $ba_faqs = array(
     .ba-features__grid { grid-template-columns: 1fr; }
     .ba-pilot__panel { grid-template-columns: 1fr; }
     .ba-plans__grid { grid-template-columns: repeat(2, 1fr); }
-    /* Autopilot schedule card: give the days room once the panel stacks. */
     .ba-sched { width: 100%; }
     .ba-sched__row { flex-wrap: wrap; gap: 4px 12px; }
     .ba-sched__row--days { flex-direction: column; align-items: stretch; gap: 12px; }
@@ -367,10 +343,6 @@ $ba_faqs = array(
     .ba-hero__content { text-align: center; }
     .ba-hero__sub { margin-inline: auto; }
     .ba-hero__actions { justify-content: center; }
-    /* ⚠️ `align-self`, NOT `justify-content` — and `text-align: center` does not reach
-       it. Below 560 the actions row is `flex-direction: column` + `align-items:
-       stretch`; the link is `inline-flex`, so it shrinks to its content and parks at
-       the start of a full-width track while everything around it centres. */
     .ba-hero__seclink { align-self: center; }
 }
 @media (max-width: 560px) {
@@ -495,9 +467,7 @@ $ba_faqs = array(
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php /* OPEN: the dark run rises out of the cream. Direct child of the SECTION,
-                 not of .block__inner — the inner is width-capped, so inside it the
-                 curtain would stop short of both edges on a full-bleed boundary. */ ?>
+        <?php /* OPEN: the dark run rises out of the cream. → docs/implementation-notes.md#open-the-dark-run-rises-out-of-the-cream-direc */ ?>
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 

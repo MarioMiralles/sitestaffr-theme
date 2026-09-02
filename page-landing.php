@@ -181,16 +181,12 @@ $get_started_url = home_url( '/#get-started' );
             'mark'   => 'VET',
             'amount' => '$598',
             'note'   => 'Average yearly vet spend per dog owner',
-            /* Per year, for the same reason as the dental card above. Same AVMA source
-               and same edition as before — only the metric moved from "last visit" to the
-               annual figure. ⚠️ It is VETERINARY spend specifically, not total pet spend:
-               AVMA reports ~$1,700 a year on pets overall, of which veterinary care is
-               32.4%. Quoting the $1,700 here would be a different and much weaker claim. */
+            /* Per year, for the same reason as the dental card above. → docs/implementation-notes.md#per-year-for-the-same-reason-as-the-dental-car */
             'source' => 'AVMA, 2025 Pet Ownership and Demographics Sourcebook. Mean annual veterinary expenditure per dog-owning household; excludes food, grooming and other non-veterinary pet spending.',
         ),
     );
 
-    /* SECTION 9 — the FAQ. → docs/implementation-notes.md#faq-items */
+    /* SECTION 9 — the FAQ. Seventeen questions in four groups, reordered OBJECTION-FIRST. → docs/implementation-notes.md#faq-items */
     $faq_items = array(
 
         /* ---- Installing it ---- */
@@ -282,9 +278,7 @@ $get_started_url = home_url( '/#get-started' );
         ),
         array(
             'group'    => 'What it does',
-            /* ABSORBS THE SALESFORCE BAND removed from section 4. "Does it fit my stack"
-               is a buying question and belongs here, not under a story about a bakery
-               owner asleep at 2 AM. */
+            /* ABSORBS THE SALESFORCE BAND removed from section 4. → docs/implementation-notes.md#absorbs-the-salesforce-band-removed-from-secti */
             'question' => 'Does SiteStaffr connect to my CRM?',
             'answer'   => 'SiteStaffr connects to Salesforce, so captured leads can flow straight into your existing pipeline. Every plan also emails you a full recap of each conversation, which is enough for most businesses without a CRM. If you use a different system, tell SiteStaffr which one and it will help you work out the options.',
         ),
@@ -337,11 +331,7 @@ $get_started_url = home_url( '/#get-started' );
 
 <!-- ========== NAVIGATION ========== -->
 <?php
-/* "Voices" -> #voices went with the voice showcase. A nav item is
-   the one kind of link that cannot survive its target: it is present on every
-   scroll position, so a dead anchor here scrolls nowhere and looks like a broken
-   page rather than a missing section. Nothing replaces it - the secondary nav is
-   short on purpose, and Pricing is the item that serves the conversion path. */
+/* "Voices" -> #voices went with the voice showcase. → docs/implementation-notes.md#hero-2 */
 get_template_part( 'template-parts/site-nav', null, array(
     'secondary' => array(
         array( 'label' => 'Pricing', 'href' => '#pricing' ),
@@ -421,44 +411,30 @@ get_template_part( 'template-parts/site-nav', null, array(
 <!-- ========== SECTION 2: COST OF MISSED VISITORS ========== -->
 <?php /* SECTION 2 — the first half of the dark block. → docs/implementation-notes.md#block */ ?>
 <section class="block block--dark block-split cost-section">
-  <?php /* ⚠️ THE HERO'S CURTAIN LIVES HERE, not in the hero — see the note at the end of
-           the hero for why. It hangs upward out of this section by its own height minus
-           3px, so the shape reads exactly as before and the last 3px of it sit INSIDE
-           this section, covering the boundary row at every device pixel ratio. */ ?>
+  <?php /* ⚠️ THE HERO'S CURTAIN LIVES HERE, not in the hero — see the note at the end of the hero for why. → docs/implementation-notes.md#block-inner-3 */ ?>
   <?php get_template_part( 'template-parts/seam-curtain' ); ?>
   <div class="block__inner">
     <div class="block-split__grid cost-section__grid">
       <div class="cost-section__copy">
-        <?php /* Eyebrow was "The Hidden Cost of Lost Website Visitors", and on the V2 branch
-                 "What One Job Is Worth". Both described the RIGHT column while the heading
-                 described the left — two arguments stacked, and the reader had to work out
-                 which one the section was about. This one describes the section. */ ?>
+        <?php /* Eyebrow was "The Hidden Cost of Lost Website Visitors", and on the V2 branch "What One Job Is… → docs/implementation-notes.md#section-label-3 */ ?>
         <span class="section-label">The Shift Nobody Covers</span>
         <h2>Busy Owners Miss Website Leads and Often Never Know It</h2>
 
-        <?php /* SETS UP THE AUDIT, and does not restate the hero. It also does not attack
-                 "we'll get back to you" — that would be a self-own,
-                 since SiteStaffr's own conversations end with details captured and a human
-                 following up. The difference is WHEN the visitor gets their answer. */ ?>
+        <?php /* SETS UP THE AUDIT, and does not restate the hero. → docs/implementation-notes.md#cost-section-text-2 */ ?>
         <p class="cost-section__text">
           Your website is where most customers meet your business first, and it is usually working a shift you are not there for.
         </p>
 
-        <?php /* The best copy on the site — do not rewrite it. "no missed call" is correct
-                 here and must survive the "call" sweep: it is describing the ABSENCE of a
-                 phone signal, which is the point, not claiming the product answers phones. */ ?>
+        <?php /* The best copy on the site — do not rewrite it. → docs/implementation-notes.md#cost-section-text-3 */ ?>
         <p class="cost-section__text">
           When it cannot answer, nobody tells you. There is no missed call, no voicemail, nothing in your inbox. The visitor just goes back to the search results, and the job quietly happens somewhere else.
         </p>
 
-        <?php /* CUT TO ONE LINE. → docs/implementation-notes.md#cost-section-text */ ?>
+        <?php /* CUT TO ONE LINE. This paragraph used to resolve the problem the section had just posed — "SiteStaffr is an… → docs/implementation-notes.md#cost-section-text */ ?>
         <p class="cost-section__text cost-section__handoff">That&rsquo;s the shift SiteStaffr covers.</p>
       </div>
 
-      <?php /* 2x2, AND THE GRID SHAPE IS PART OF WHY THIS WORKS. A previous pass replaced
-               these with a single time-ordered column and it read as overwhelming despite
-               running FEWER words — four boxes are four glances, four stacked rows are a
-               paragraph with rules between them. Scannability is not word count. */ ?>
+      <?php /* 2x2, AND THE GRID SHAPE IS PART OF WHY THIS WORKS. → docs/implementation-notes.md#block-split-art-2 */ ?>
       <div class="block-split__art job-values">
         <ul class="job-values__grid">
 <?php foreach ( $job_values as $jv ) : ?>
@@ -489,7 +465,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             </span>
 
             <?php
-            /* NO VISIBLE INDUSTRY LABEL. → docs/implementation-notes.md#job-value-amount */
+            /* NO VISIBLE INDUSTRY LABEL. The icon carries it, and a wrench captioned "Auto repair" is a caption telling… → docs/implementation-notes.md#job-value-amount */
             ?>
             <span class="job-value__amount"><?php echo esc_html( $jv['amount'] ); ?></span>
             <span class="job-value__note"><?php echo esc_html( $jv['note'] ); ?></span>
@@ -504,8 +480,6 @@ get_template_part( 'template-parts/site-nav', null, array(
 </section>
 
 
-
-
 <!-- ========== HEAR IT WORK: AUDIO DEMO (relocated from hero) ========== -->
 <?php /* SECTION 3 — the second half of the dark block. → docs/implementation-notes.md#block-2 */ ?>
 <section class="block block--dark block--tight see-it" id="live-demo">
@@ -517,16 +491,14 @@ get_template_part( 'template-parts/site-nav', null, array(
     </div>
 
     <?php
-    /* THE AT-REST STAGE. → docs/implementation-notes.md#see-it-stage */
+    /* THE AT-REST STAGE. WHY THE PANELS WERE BLANK IN THE FIRST PLACE, because it is not a bug and the fix must… → docs/implementation-notes.md#see-it-stage */
     ?>
     <div class="see-it__stage" data-see-it-stage hidden
          data-see-it-open-sound="<?php echo esc_url( sitestaffr_asset_url( 'assets/audio/open.mp3' ) ); ?>">
       <img class="see-it__stage-robot"
            src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-voice.webp' ) ); ?>"
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
-      <?php /* A real <button> with a real accessible name. The label says what it plays,
-               not "play" — this is the only control in the section at rest, so it is the
-               one thing a screen-reader user has to understand from its name alone. */ ?>
+      <?php /* A real <button> with a real accessible name. → docs/implementation-notes.md#see-it-stage-play */ ?>
       <button class="see-it__stage-play" type="button" data-see-it-stage-play
               aria-label="Play the conversation">
         <?php /* ⚠️ THE TRIANGLE'S OWN COORDINATES DO THE CENTERING — there is no margin nudge on this icon and there… → docs/implementation-notes.md#see-it-stage-hint */ ?>
@@ -536,9 +508,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     </div>
 
     <div class="see-it__panels">
-      <?php /* LEFT: the conversation. The two column labels do the arguing — "On your
-               website" / "In your inbox" states the value exchange in four words and
-               kills the phone-line ambiguity for free. */ ?>
+      <?php /* LEFT: the conversation. The two column labels do the arguing — "On your website" / "In your inbox" states… → docs/implementation-notes.md#see-it-col */ ?>
       <div class="see-it__col">
         <span class="see-it__col-label">On Your Website</span>
 
@@ -569,11 +539,7 @@ get_template_part( 'template-parts/site-nav', null, array(
 
           <div class="see-it__convo" id="see-it-convo" role="tabpanel"
                aria-labelledby="see-it-tab-text" data-see-it-thread>
-            <?php /* RENDERED FULLY POPULATED IN PHP. JS empties it on load only when it
-                     is actually going to animate it. An empty panel that fills only when
-                     a script runs re-creates exactly the failure the reveal system caused
-                     in production. With JS off, or under prefers-reduced-motion, the
-                     whole conversation and the whole recap are simply here. */ ?>
+            <?php /* RENDERED FULLY POPULATED IN PHP. → docs/implementation-notes.md#see-it-line */ ?>
             <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>Copperleaf Pest Control &mdash; what are you seeing?</p>
             <p class="see-it__line see-it__line--visitor"><span class="see-it__who">Visitor</span>Ants all over the kitchen counter, started today.</p>
             <p class="see-it__line see-it__line--ai"><span class="see-it__who">SiteStaffr</span>That usually means a trail in from outside. Is it a house or an apartment?</p>
@@ -604,9 +570,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <p class="see-it__dogfood">This site runs it too. Ask it anything.</p>
       </div>
 
-      <?php /* RIGHT: the recap. the strongest idea and the best one in the session — it
-               assembles as the conversation plays, which makes the causal link visible:
-               you watch the visitor give their email, and the email appears. */ ?>
+      <?php /* RIGHT: the recap. → docs/implementation-notes.md#see-it-col-2 */ ?>
       <div class="see-it__col">
         <span class="see-it__col-label">In Your Inbox</span>
 
@@ -617,16 +581,14 @@ get_template_part( 'template-parts/site-nav', null, array(
           </div>
 
           <dl class="see-it__fields" data-see-it-fields>
-            <?php /* ⚠️ NO FIXED SCHEMA. → docs/implementation-notes.md#see-it-field */ ?>
+            <?php /* ⚠️ NO FIXED SCHEMA. Label and value materialise together as a PAIR. → docs/implementation-notes.md#see-it-field */ ?>
             <div class="see-it__field"><dt>Reason for visit</dt><dd>Ants in the kitchen</dd></div>
             <div class="see-it__field"><dt>Property</dt><dd>Single-story house</dd></div>
             <div class="see-it__field"><dt>Name</dt><dd>Priya Raman</dd></div>
             <div class="see-it__field"><dt>Email</dt><dd>priya.raman@example.com</dd></div>
           </dl>
 
-          <?php /* The summary and follow-up genuinely ARE generated after the conversation
-                   ends, so they arrive last, after a brief shimmer. That is the one part
-                   of the sequence that mirrors how the product actually works. */ ?>
+          <?php /* The summary and follow-up genuinely ARE generated after the conversation ends, so they arrive… → docs/implementation-notes.md#see-it-gen */ ?>
           <div class="see-it__gen" data-see-it-summary>
             <span class="see-it__gen-label">Summary</span>
             <p>Ant trail in the kitchen of a single-story house. Wants someone to come out.</p>
@@ -645,20 +607,16 @@ get_template_part( 'template-parts/site-nav', null, array(
   </div>
 </section>
 
-<?php /* SECTION 4 — Your morning. → docs/implementation-notes.md#block-3 */ ?>
+<?php /* SECTION 4 — Your morning. Light again; → docs/implementation-notes.md#block-3 */ ?>
 <section class="block what-you-get" id="your-morning">
-  <?php /* THE CURTAIN CLOSES HERE. → docs/implementation-notes.md#block-inner */ ?>
+  <?php /* THE CURTAIN CLOSES HERE. Same path as the hero's, mirrored — the dark block that opened with a peak drawn up… → docs/implementation-notes.md#block-inner */ ?>
   <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
   <div class="block__inner">
     <div class="what-you-get__header">
       <span class="section-label">Your Morning</span>
       <?php /* The strongest heading on the page. Do not rewrite it. */ ?>
       <h2>You Were Asleep. Your Website Wasn&rsquo;t.</h2>
-      <?php /* THE SUBTITLE IS LOAD-BEARING and was cut once before for looking like
-               filler. It actively guards against the reading that leads queue up and
-               get handled at opening time — "answered within seconds and sent to you
-               the moment it ended" is the whole product claim, and without it an inbox
-               labeled "Overnight" implies exactly the opposite. */ ?>
+      <?php /* THE SUBTITLE IS LOAD-BEARING and was cut once before for looking like filler. → docs/implementation-notes.md#what-you-get-subtitle */ ?>
       <p class="what-you-get__subtitle">
         Each of these was answered within seconds and sent to you the moment it ended. Nothing waited for opening time.
       </p>
@@ -759,11 +717,7 @@ get_template_part( 'template-parts/site-nav', null, array(
       <ul class="morning-inbox__list">
         <?php foreach ( $morning_leads as $ml ) : ?>
         <li class="morning-inbox__item">
-          <?php /* A REAL <button>, not a click handler on the <li>. It is the row's whole
-                   surface, so the row stays one target, but it takes focus, fires on
-                   Enter and Space for free, and announces as a control. The row was a
-                   plain <li> before, so nothing about the no-JS rendering regresses if
-                   the script never runs — see the CSS note on .is-interactive. */ ?>
+          <?php /* A REAL <button>, not a click handler on the <li>. → docs/implementation-notes.md#morning-inbox-row-3 */ ?>
           <?php /* ⚠️ NO aria-label ON THIS BUTTON, and that is a fix rather than an omission. → docs/implementation-notes.md#morning-inbox-row */ ?>
           <button type="button" class="morning-inbox__row"
                   data-morning-open="<?php echo esc_attr( $ml['id'] ); ?>">
@@ -772,11 +726,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <span class="morning-inbox__what"><?php echo wp_kses_post( $ml['what'] ); ?></span>
             <span class="morning-inbox__tag">Lead captured</span>
             <span class="screen-reader-text">&mdash; open the recap</span>
-            <?php /* No "View recap →" span here any more. The row's
-                     affordance is a chevron drawn as `.morning-inbox__row::after`, at
-                     every width and on every device. Do not add a label back: it only
-                     ever appeared on hover, which is a state most of this page's traffic
-                     cannot produce. */ ?>
+            <?php /* No "View recap →" span here any more. → docs/implementation-notes.md#recap-doc-2 */ ?>
           </button>
         </li>
         <?php endforeach; ?>
@@ -784,7 +734,7 @@ get_template_part( 'template-parts/site-nav', null, array(
     </div>
 
     <?php
-    /* THE DOCUMENTS. → docs/implementation-notes.md#recap-doc */
+    /* THE DOCUMENTS. Rendered server-side, one <dialog> each, hidden until opened. → docs/implementation-notes.md#recap-doc */
     ?>
     <?php foreach ( $morning_leads as $ml ) : ?>
     <dialog class="recap-doc" id="recap-<?php echo esc_attr( $ml['id'] ); ?>"
@@ -794,11 +744,7 @@ get_template_part( 'template-parts/site-nav', null, array(
           <img class="recap-doc__logo"
                src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/logo-240.webp' ) ); ?>"
                alt="SiteStaffr" width="240" height="72" loading="lazy" decoding="async">
-          <?php /* V1's teal "Print / Download PDF" pill. It is a <span> there and a <span>
-                   here: the real button lives in the emailed recap, and a control on this
-                   page that looked live but printed nothing would be a lie about the
-                   product. It is part of the picture of the document, not a feature of
-                   the marketing site. */ ?>
+          <?php /* V1's teal "Print / Download PDF" pill. → docs/implementation-notes.md#recap-doc-print */ ?>
           <span class="recap-doc__print" aria-hidden="true">Print / Download PDF</span>
           <button type="button" class="recap-doc__close" data-morning-close aria-label="Close recap">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
@@ -839,7 +785,7 @@ get_template_part( 'template-parts/site-nav', null, array(
             <div class="recap-doc__messages">
               <?php foreach ( $ml['turns'] as $t ) : ?>
                 <?php if ( 'ai' === $t['who'] ) : ?>
-                  <?php /* ⚠️ "SiteStaffr", NOT "AI". → docs/implementation-notes.md#recap-doc-msg */ ?>
+                  <?php /* ⚠️ "SiteStaffr", NOT "AI". The website is deliberately AHEAD of the product here: the plugin UI and the emailed… → docs/implementation-notes.md#recap-doc-msg */ ?>
                   <div class="recap-doc__msg recap-doc__msg--ai">
                     <div class="recap-doc__msg-meta"><strong>SiteStaffr</strong> <?php echo esc_html( $t['at'] ); ?></div>
                     <p><?php echo wp_kses_post( $t['text'] ); ?></p>
@@ -872,9 +818,7 @@ get_template_part( 'template-parts/site-nav', null, array(
         <h3 class="what-you-get__callout-title">Sent in Seconds</h3>
         <p class="what-you-get__callout-desc">It reaches your inbox while the visitor is still on your site.</p>
       </div>
-      <?php /* KEEP THIS ONE INTACT. Nothing else on the page says that conversations
-               which did NOT turn into a lead are still reported, and that is the
-               difference between a lead tool and a record of everything that happened. */ ?>
+      <?php /* KEEP THIS ONE INTACT. Nothing else on the page says that conversations which did NOT turn into a lead are… → docs/implementation-notes.md#what-you-get-callout-2 */ ?>
       <div class="what-you-get__callout">
         <div class="what-you-get__callout-icon" aria-hidden="true">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
@@ -934,7 +878,7 @@ $lang_greetings = array(
     </div>
 
     <?php
-    /* THE STAGE. → docs/implementation-notes.md#the-stage */
+    /* THE STAGE. The robot is in the FLOW and the greetings are absolute around it, which is the opposite of how… → docs/implementation-notes.md#the-stage */
     ?>
     <?php
     /* THE HAZE — more languages, receding behind the robot. → docs/implementation-notes.md#lang-haze */
@@ -981,11 +925,7 @@ $lang_greetings = array(
       </ul>
     </div>
 
-    <?php /* KEPT, and moved under the stage where it closes the section. It answers the
-             owner's immediate objection — "great, but I can't read Mandarin" — and it is
-             the one line here that is about THEM rather than about the visitor. Deleting
-             it with the old layout would have thrown away the reassurance and kept only
-             the spectacle. */ ?>
+    <?php /* KEPT, and moved under the stage where it closes the section. → docs/implementation-notes.md#lang-section-english-2 */ ?>
     <p class="lang-section__english">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
       Every recap arrives in English, ready for you.
@@ -994,14 +934,14 @@ $lang_greetings = array(
 </section>
 
 <?php
-/* SECTION 6 — Who this is for. → docs/implementation-notes.md#ind-groups */
+/* SECTION 6 — Who this is for. The most-reworked section, and the one that motivated this review. → docs/implementation-notes.md#ind-groups */
 $ind_groups = sitestaffr_industry_registry();
 $ind_flat   = sitestaffr_industry_list();
 
 /* WHICH INDUSTRY OPENS THE SECTION IS RANDOM. → docs/implementation-notes.md#ind-first */
 $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null;
 ?>
-<?php /* ⚠️ NOT A block-split ANY MORE. → docs/implementation-notes.md#block-4 */ ?>
+<?php /* ⚠️ NOT A block-split ANY MORE. It was image-left / list-right. → docs/implementation-notes.md#block-4 */ ?>
 <section class="block industries" id="industries">
   <div class="block__inner">
     <div class="industries__header">
@@ -1014,18 +954,12 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
       </p>
     </div>
 
-    <?php /* ROW 1 — the isometric and its excerpt, side by side. The excerpt used to sit
-             UNDER the image inside the art column; beside it, the pair reads as one card
-             and the row stays short. */ ?>
+    <?php /* ROW 1 — the isometric and its excerpt, side by side. → docs/implementation-notes.md#industries-stage-2 */ ?>
     <div class="industries__stage">
       <div class="industries__art">
         <?php foreach ( $ind_flat as $i => $ind ) :
             $art = sitestaffr_industry_art_url( $ind['slug'] );
-            /* ⚠️ A MISSING RENDER MUST NOT PRODUCE A BROKEN IMAGE. Medical Staffing is
-               the sixteenth industry and its isometric is generated but not yet keyed,
-               so the file genuinely is absent right now. sitestaffr_industry_art_url
-               returns '' when the file does not exist, and the panel falls back to the
-               industry's emoji at display size rather than an alt-text box. */
+            /* ⚠️ A MISSING RENDER MUST NOT PRODUCE A BROKEN IMAGE. → docs/implementation-notes.md#ind-is-open-2 */
             ?>
           <?php /* ⚠️ ACTIVE IS $ind_first, NOT INDEX 0. → docs/implementation-notes.md#ind-is-open */ ?>
           <?php $ind_is_open = ( $ind_first && $ind['slug'] === $ind_first['slug'] ); ?>
@@ -1047,19 +981,14 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 
       </div>
 
-      <?php /* The excerpt is now a SIBLING of the art, not a child of it — that is what
-               puts it beside the isometric instead of under it. It is still rendered
-               twice in total (once here for the pointer layout, once inside each mobile
-               accordion item below), and both still come from the same registry field. */ ?>
+      <?php /* The excerpt is now a SIBLING of the art, not a child of it — that is what puts it beside the… → docs/implementation-notes.md#industries-excerpt-2 */ ?>
       <div class="industries__excerpt" data-ind-excerpt>
           <?php foreach ( $ind_flat as $i => $ind ) : ?>
             <div class="industries__excerpt-item<?php echo ( $ind_first && $ind['slug'] === $ind_first['slug'] ) ? ' is-active' : ''; ?>"
                  data-ind-excerpt-for="<?php echo esc_attr( $ind['slug'] ); ?>">
               <h3><?php echo esc_html( $ind['title'] ); ?></h3>
               <p><?php echo esc_html( $ind['blurb'] ); ?></p>
-              <?php /* ONE link, at the end, NEW TAB, with per-industry text rather than
-                       a generic "learn more" — per the happy-path rule, this is a
-                       deliberate exit and it should say where it goes. */ ?>
+              <?php /* ONE link, at the end, NEW TAB, with per-industry text rather than a generic "learn more" — per… → docs/implementation-notes.md#industries-link-2 */ ?>
               <a class="industries__link"
                  href="<?php echo esc_url( home_url( '/for/' . $ind['slug'] . '/' ) ); ?>"
                  target="_blank" rel="noopener">
@@ -1071,7 +1000,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
       </div>
 
-      <?php /* LIST RIGHT. → docs/implementation-notes.md#industries-list */ ?>
+      <?php /* LIST RIGHT. Group headings RETURN, and that correctly reverses a recorded decision. → docs/implementation-notes.md#industries-list */ ?>
       <div class="industries__list">
         <?php foreach ( $ind_groups as $group ) : ?>
           <div class="industries__group">
@@ -1086,11 +1015,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
                     <?php echo esc_html( $ind['title'] ); ?>
                   </button>
 
-                  <?php /* THE MOBILE EXPANSION. Rendered for every industry and hidden by
-                           CSS at desktop widths, so with no JS at all a phone visitor
-                           still gets every blurb and every link — the accordion is a
-                           progressive enhancement over a plain list, not a requirement
-                           for reading it. Image is ~200px here, not 440. */ ?>
+                  <?php /* THE MOBILE EXPANSION. Rendered for every industry and hidden by CSS at desktop widths, so with no JS at all… → docs/implementation-notes.md#industries-mobile-detail */ ?>
                   <div class="industries__mobile-detail" data-ind-detail="<?php echo esc_attr( $ind['slug'] ); ?>">
                     <?php $m_art = sitestaffr_industry_art_url( $ind['slug'] ); ?>
                     <?php if ( $m_art ) : ?>
@@ -1116,7 +1041,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 
 <!-- ========== SECTION 7: SOCIAL PROOF ========== -->
 <?php
-/* SECTION 7 — social proof. → docs/implementation-notes.md#block-5 */
+/* SECTION 7 — social proof. THE V2 ARRANGEMENT, IN V3's PALETTE. → docs/implementation-notes.md#block-5 */
 ?>
 <section class="block block-split proof-section" id="proof">
   <div class="block__inner">
@@ -1129,15 +1054,11 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
 
         <?php
-        /* TWO LEAD NUMBERS, NOT ONE. → docs/implementation-notes.md#proof-section-lead-pair */
+        /* TWO LEAD NUMBERS, NOT ONE. They answer different questions, and together they close the page's argument: 86%… → docs/implementation-notes.md#proof-section-lead-pair */
         ?>
         <div class="proof-section__lead-pair">
           <div class="proof-section__lead-stat">
-            <?php /* "after business hours", not "after they closed".
-                     Clearer, and it now matches the language of the quote beside it —
-                     Nathaly says "after hours is when most new facility inquiries come
-                     in", so the stat and the customer describe the same thing the same
-                     way instead of two ways. */ ?>
+            <?php /* "after business hours", not "after they closed". → docs/implementation-notes.md#proof-section-lead-number-2 */ ?>
             <span class="proof-section__lead-number">86%</span>
             <span class="proof-section__lead-label">of their conversations arrived <strong>after business hours</strong></span>
           </div>
@@ -1149,16 +1070,13 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         </div>
 
         <?php
-        /* ⚠️ NOT A FOOTNOTE TO MINIMIZE. → docs/implementation-notes.md#proof-section-stats-source */
+        /* ⚠️ NOT A FOOTNOTE TO MINIMIZE. "One customer's results, not an average" buys more credibility than the two… → docs/implementation-notes.md#proof-section-stats-source */
         ?>
         <p class="proof-section__stats-source">Measured at <a href="https://synergyscribes.com" target="_blank" rel="noopener noreferrer">Synergy Scribes</a>, 1 June &ndash; 1 July 2026. One customer&rsquo;s results, not an average.</p>
       </div>
 
       <?php
-      /* The quote CORROBORATES the number rather than introducing it, so it sits
-         beside and reads quieter. Two overlapping planes: the slab, and the ghost
-         hairline crossing out of it. The slab is a real element rather than a
-         pseudo because this figure's own ::before is already the quote glyph. */
+      /* The quote CORROBORATES the number rather than introducing it, so it sits beside and reads quieter. → docs/implementation-notes.md#block-split-art-3 */
       ?>
       <figure class="block-split__art proof-section__quote-block">
         <span class="proof-section__quote-plate" aria-hidden="true"></span>
@@ -1189,8 +1107,6 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 </section>
 
 
-
-
 <?php
 /* THE VOICE SHOWCASE WAS DELETED HERE, RESTORING A DECISION THAT HAD ALREADY BEEN MADE. → docs/implementation-notes.md#block-6 */
 ?>
@@ -1205,11 +1121,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
         // below this already says, so the heading was the one place still overclaiming.
         // This is a correctness fix, not a style one. ?>
       <h2>One Flat Price. Unlimited Text Chat.</h2>
-      <?php /* ⚠️ THE MIDDLE SENTENCE RESTATED THE HEADING. It read "After that a busy
-               month costs the same as a quiet one" — which is exactly what "One Flat Price"
-               says two lines above, in more words and less plainly. Cut. What is left is
-               the two things the heading does NOT cover: the trial terms, and the single
-               axis that actually varies between plans. */ ?>
+      <?php /* ⚠️ THE MIDDLE SENTENCE RESTATED THE HEADING. → docs/implementation-notes.md#pricing-section-subtitle */ ?>
       <p class="pricing-section__subtitle">Start free for 30 days, no credit card. Only voice minutes change between plans.</p>
     </div>
     <div class="price-includes price-includes--homepage">
@@ -1274,15 +1186,12 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
       </div>
     </div>
     <?php
-    /* The paid ladder is three tiers, so the grid is three columns and the free
-       trial is not a fourth card competing with them. Nothing is lost: every
-       allowance the trial card listed is still here, and so is its link to
-       /download/, which is the URL that must not change. */
+    /* The paid ladder is three tiers, so the grid is three columns and the free trial is not a fourth… → docs/implementation-notes.md#the-paid-ladder-is-three-tiers-so-the-grid-is */
     ?>
     <?php /* THE TRIAL STRIP THAT SAT HERE IS GONE - the trial is the table's first column now (see… → docs/implementation-notes.md#the-trial-strip-that-sat-here-is-gone-the-tria */ ?>
 
     <?php
-    /* ONE LABEL COLUMN, NOT THREE. → docs/implementation-notes.md#price-grid */
+    /* ONE LABEL COLUMN, NOT THREE. He was right and I had talked myself out of it when this table was first built:… → docs/implementation-notes.md#price-grid */
     ?>
     <div class="price-grid price-grid--table">
       <?php
@@ -1329,11 +1238,7 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
           <span class="price-tier__row-value price-tier__row-value--none"><span aria-hidden="true">&mdash;</span><span class="screen-reader-text">Not included</span></span>
         </div>
         <div class="price-tier__foot">
-<?php /* "Ends after 30 days unless you pick a plan" removed:
-               obvious from "$0 / for 30 days" directly above it. The spec asked for an
-               explicit end state here so the column could never read as a permanent free
-               tier - the identity row already says it, so the sentence was saying it
-               twice in the narrowest column on the page. */ ?>
+<?php /* "Ends after 30 days unless you pick a plan" removed: obvious from "$0 / for 30 days" directly… → docs/implementation-notes.md#price-tier-best-for */ ?>
           <p class="price-tier__best-for">No credit card required</p>
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--outline js-cta" data-cta="trial">Start Free Trial</a>
         </div>
@@ -1459,11 +1364,9 @@ $ind_first  = ! empty( $ind_flat ) ? $ind_flat[ array_rand( $ind_flat ) ] : null
 
 <!-- ========== SECTION 9: FAQ ========== -->
 <?php
-/* SECTION 9 — the FAQ. → docs/implementation-notes.md#faq-grouped */
+/* SECTION 9 — the FAQ. ⚠️ TWO COLUMNS NOW, WHICH REVERSES A RECORDED DECISION. → docs/implementation-notes.md#faq-grouped */
 
-/* Group the flat list, then deal the groups into two columns. The JSON-LD above stays a
-   FLAT mainEntity list regardless — FAQPage has no grouping concept, and the schema must
-   not learn about this presentation. */
+/* Group the flat list, then deal the groups into two columns. → docs/implementation-notes.md#block-12 */
 $faq_grouped = array();
 foreach ( $faq_items as $faq_i => $faq ) {
 	$faq_grouped[ $faq['group'] ][] = array( 'i' => $faq_i, 'item' => $faq );
@@ -1484,14 +1387,11 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         <div class="faq-list">
           <?php foreach ( $faq_col as $faq_group ) : ?>
             <h3 class="faq-list__group"><?php echo esc_html( $faq_group ); ?></h3>
-            <?php /* ⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px. The items used to be flat siblings of their heading, which
-                     on a phone made sixteen identical white cards with three small gray
-                     labels lost among them. It is inert on desktop — see .faq-list__set,
-                     which does nothing until the columns collapse. */ ?>
+            <?php /* ⚠️ THIS WRAPPER EXISTS ONLY SO THE GROUP CAN BE A CARD BELOW 900px. → docs/implementation-notes.md#faq-list-set-3 */ ?>
             <div class="faq-list__set">
             <?php foreach ( $faq_grouped[ $faq_group ] as $entry ) :
                 $faq = $entry['item'];
-                /* ⚠️ NOTHING SHIPS OPEN. → docs/implementation-notes.md#faq-item */
+                /* ⚠️ NOTHING SHIPS OPEN. The first question used to, on the reasoning that it showed a reader what an answer… → docs/implementation-notes.md#faq-item */
                 ?>
               <div class="faq-item">
                 <button class="faq-item__question" type="button" aria-expanded="false">
@@ -1509,14 +1409,9 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
       <?php endforeach; ?>
     </div>
 
-    <?php /* AFTER the questions, not before them. It was in the header for one release
-             and read as an interruption on the way to the list. See the CSS note for the
-             full history of this element's position — it has moved three times. */ ?>
+    <?php /* AFTER the questions, not before them. → docs/implementation-notes.md#faq-section-ask-2 */ ?>
     <div class="faq-section__ask">
-      <?php /* The texting robot, not the language one or the hero one: this card is about
-               asking a question in a chat, and robot-text.webp is the render of exactly
-               that — typing, with message bubbles. Decorative, so aria-hidden; the card's
-               own copy and the button carry the meaning. */ ?>
+      <?php /* The texting robot, not the language one or the hero one: this card is about asking a question in… → docs/implementation-notes.md#faq-section-ask-robot-2 */ ?>
       <img class="faq-section__ask-robot"
            src="<?php echo esc_url( sitestaffr_asset_url( 'assets/images/robot-text.webp' ) ); ?>"
            alt="" aria-hidden="true" width="1080" height="1350" loading="lazy" decoding="async">
@@ -1533,16 +1428,12 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
 </section>
 
-<?php /* SECTION 10 — the agency door. → docs/implementation-notes.md#block-7 */ ?>
+<?php /* SECTION 10 — the agency door. The one section that did not exist in any form. → docs/implementation-notes.md#block-7 */ ?>
 <section class="block agency-door">
   <?php
-  /* THE PROP FIELD. → docs/implementation-notes.md#agency-props */
+  /* THE PROP FIELD. TWO DEPTH LAYERS, which is the whole effect: nine props sit BEHIND the card out in the… → docs/implementation-notes.md#agency-props */
   $agency_props = array(
-    /* Back layer — out in the cream, several bleeding off the viewport edges.
-       ⚠️ Keep every `top`/`bottom` clear of 0-4%: the section clips its overflow, so a
-       prop nearer the edge than that gets sliced off flat and reads as a broken image
-       rather than as a prop peeking in. Bleeding off the LEFT and RIGHT is fine and
-       intended — that is horizontal, and there is nothing above or below to bleed into. */
+    /* Back layer — out in the cream, several bleeding off the viewport edges. → docs/implementation-notes.md#back-layer-out-in-the-cream-several-bleeding-o */
     /* ⚠️ BALANCE IS A COUNT PER SIDE, and the first arrangement failed it: six props on the right against… → docs/implementation-notes.md#balance-is-a-count-per-side-and-the-first-arr */
     array( 'laptop',      'back',  'top:4%;left:-8%;',      242 , 0, -3 ),   /* left  */
     array( 'swatches',    'front', 'bottom:11%;left:-8%;',  172 , 0, -5 ),
@@ -1554,10 +1445,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
     array( 'wireframe',   'back',  'top:2%;right:4%;',      178 , 1, -4 ),   /* right */
     array( 'plugin',      'back',  'bottom:7%;left:15%;',   104 , 0, 7 ),
     array( 'cutting-mat', 'back',  'bottom:8%;right:2%;',   196 , 1, -6 ),
-    /* Front layer — over the card. ALL THREE ARE ON ITS RIGHT-HAND SIDE, because that is
-       the only part of the card with no text: the heading, the three columns and the
-       button all sit left of it. All three are also light-bodied, so they read against
-       #00323A — the dark props stay in the back layer on cream. */
+    /* Front layer — over the card. → docs/implementation-notes.md#agency-door-props-2 */
     array( 'git',         'front', 'top:23%;right:-3%;',     82 , 0, 11 ),
     array( 'coffee',      'front', 'bottom:19%;right:-5%;', 134 , 1, -5 ),
   );
@@ -1577,21 +1465,14 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
                protects the SMB path through the rest of the page. */ ?>
       <span class="agency-door__eyebrow">For WordPress Agencies</span>
 
-      <?php /* The H1, pluralised. An agency who scrolled past the hero recognizes the
-               offer instantly, and "every client site" is the phrase that makes it
-               theirs rather than their client's. */ ?>
+      <?php /* The H1, pluralised. → docs/implementation-notes.md#the-h1-pluralised-an-agency-who-scrolled-past */ ?>
       <h2>Give Every Client Site a Receptionist</h2>
-      <?php /* CUT. It ran on into "— and what
-               makes renewal conversations easier", which the third point below makes
-               properly; a lead that previews the list makes the reader read it twice. */ ?>
+      <?php /* CUT. It ran on into "— and what makes renewal conversations easier", which the third point below makes properly; → docs/implementation-notes.md#agency-door-lead */ ?>
       <p class="agency-door__lead">
         You build the sites. This is what makes them answer.
       </p>
 
-      <?php /* ⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE, and what
-               is NOT claimed matters as much as what is. None of them mention margin,
-               reseller pricing, white-label or bulk billing, because none of those exist.
-               An agency is a technical, skeptical audience that checks. */ ?>
+      <?php /* ⚠️ ALL THREE POINTS WERE VERIFIED AGAINST THE CODE, and what is NOT claimed matters as much as what is. → docs/implementation-notes.md#agency-door-points */ ?>
       <ul class="agency-door__points">
         <li>
           <strong>Minutes per site, not hours</strong>
@@ -1608,10 +1489,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         </li>
       </ul>
 
-      <?php /* "See SiteStaffr for Agencies", NOT "See agency plans". The second would
-               promise a pricing page that would then have to be invented. If the agency
-               page's contact form generates real demand, that is the signal to build
-               reseller pricing — the page is the demand-validation mechanism. */ ?>
+      <?php /* "See SiteStaffr for Agencies", NOT "See agency plans". → docs/implementation-notes.md#btn-2 */ ?>
       <a href="<?php echo esc_url( home_url( '/for/agencies/' ) ); ?>" class="btn btn--outline agency-door__cta">
         See SiteStaffr for Agencies
         <span aria-hidden="true">&rarr;</span>
@@ -1633,7 +1511,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
      So on the page that closes the sale, the one action the business wants was
      the faintest thing in the section. This is copy and hierarchy only; no new
      functionality. Order is now trial > concierge > chat. -->
-<?php /* ⚠️ LIGHT NOW. → docs/implementation-notes.md#block-8 */ ?>
+<?php /* ⚠️ LIGHT NOW. The page's only remaining dark run is the FOOTER. → docs/implementation-notes.md#block-8 */ ?>
 <section class="block final-cta" id="get-started">
   <?php /* ⚠️ A BACKGROUND FIGURE, NOT A GRID CELL. → docs/implementation-notes.md#final-cta-robot */ ?>
   <div class="final-cta__robot" aria-hidden="true">
@@ -1643,17 +1521,14 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
   <div class="block__inner">
     <div class="final-cta__copy">
-        <?php /* ⚠️ REWRITTEN . → docs/implementation-notes.md#section-label-2 */ ?>
+        <?php /* ⚠️ REWRITTEN . It read "Be the One That's Still Open / When Everyone Else Has Closed" — evocative, and it… → docs/implementation-notes.md#section-label-2 */ ?>
         <span class="section-label">Get Started</span>
         <h2>Your Website Starts <span class="final-cta__highlight">Answering Tonight</span></h2>
 
-        <?php /* Third version, a third wording. → docs/implementation-notes.md#final-cta-subtitle */ ?>
+        <?php /* Third version, a third wording. The two before it both described a TIMELINE ("then it works while you… → docs/implementation-notes.md#final-cta-subtitle */ ?>
         <p class="final-cta__subtitle">Set up your website&rsquo;s new AI Receptionist in minutes.</p>
 
-        <?php /* PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded
-                 link: the target funnel is pricing -> checkout modal -> purchase, with
-                 /download/ becoming post-purchase instructions. When checkout exists this
-                 is a one-line change at four call sites. */ ?>
+        <?php /* PRIMARY. data-cta makes this a swappable trigger rather than a hard-coded link: the target funnel is pricing… → docs/implementation-notes.md#btn-3 */ ?>
         <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>"
            class="btn btn--primary final-cta__primary js-cta"
            data-cta="trial">
@@ -1664,9 +1539,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
 
         <p class="final-cta__or"><span>or</span></p>
 
-        <?php /* SECONDARY. Still the real onboarding widget - the shortcode is the working
-                 mechanism and is not worth reimplementing - but demoted to an outline
-                 treatment and stripped of the shimmer. */ ?>
+        <?php /* SECONDARY. Still the real onboarding widget - the shortcode is the working mechanism and is not worth… → docs/implementation-notes.md#final-cta-concierge */ ?>
         <div class="final-cta__concierge">
           <span class="final-cta__concierge-label">Rather have us set it up?</span>
           <?php
@@ -1676,7 +1549,7 @@ $faq_columns     = array_chunk( $faq_group_names, 2 );
         </div>
         <p class="final-cta__note">We reply within 3 business days.</p>
 
-        <?php /* THE TERTIARY LINE IS GONE. → docs/implementation-notes.md#final-cta-privacy */ ?>
+        <?php /* THE TERTIARY LINE IS GONE. It read "Questions? Ask our AI — it's the same one you'd install", which is now… → docs/implementation-notes.md#final-cta-privacy */ ?>
         <p class="final-cta__privacy">Details you share go to setting up your assistant. See our <a href="<?php echo esc_url( home_url( '/privacy/' ) ); ?>">Privacy Policy</a>.</p>
       </div>
 

@@ -1238,15 +1238,10 @@ $industries = array(
 		'hero_icon' => '🩺',
 		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI receptionist answering a facility scheduler on the agency website',
 		'label'    => 'For Medical Staffing Agencies',
-		/* House pattern: a situational scene, not a product claim, and the second
-		   sentence is the one that stings. No telephony — the recruiters going home is
-		   the problem, not an unanswered switchboard. */
+		/* House pattern: a situational scene, not a product claim, and the second sentence is the one that… → docs/implementation-notes.md#house-pattern-a-situational-scene-not-a-produc */
 		'headline' => 'A Unit Is Short Two Nurses for Tuesday. Your Recruiters Left at&nbsp;Six.',
 		'subtitle' => 'SiteStaffr greets facilities and candidates on your website 24/7, answering questions about your specialties, coverage areas, and credentialing, capturing the inquiry, and sending you a full recap before they leave the page.',
-		/* schema.org EmploymentAgency. ⚠️ NOT a Medical* type — the agency places
-		   clinicians, it does not treat anyone, and typing it as a medical business
-		   would misdescribe it. (This field is currently set on all sixteen entries and
-		   read by nothing; kept for consistency, flagged separately.) */
+		/* schema.org EmploymentAgency. ⚠️ NOT a Medical* type — the agency places clinicians, it does not treat… → docs/implementation-notes.md#schema-org-employmentagency-not-a-medical-type */
 		'specialty' => 'EmploymentAgency',
 		'problems_headline' => 'Staffing Agencies Lose Placements to Whoever Replies First',
 		'problems'  => array(
@@ -1283,11 +1278,7 @@ $industries = array(
 		),
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 9:40 PM',
-		/* Same rules as every other chat in this file: answers from site content,
-		   captures name + number + reason, says a human will follow up, and PROMISES NO
-		   TIME. Note what it refuses to do — it confirms the coverage AREA, which the
-		   site publishes, and says nothing about whether anyone is actually free, which
-		   only the bench can answer. That restraint is the FAQ below made visible. */
+		/* Same rules as every other chat in this file: answers from site content, captures name + number +… → docs/implementation-notes.md#same-rules-as-every-other-chat-in-this-file-an */
 		'chat' => array(
 			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the agency or pass a message to the staffing team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'We&rsquo;re short two night-shift RNs for Tuesday. Do you cover Sacramento?' ),
@@ -1585,10 +1576,7 @@ get_template_part( 'template-parts/site-nav' );
 
 	<!-- FAQ -->
 	<section class="block ind-faq">
-		<?php /* CLOSE: the dark run comes back down into the cream. Top of section 5,
-		         over it. Same curve as the open one, mirrored — the pair brackets the
-		         dark run as ONE gesture rather than decorating it with two shapes.
-		         ⚠️ If either path is ever edited, mirror the other in the same commit. */ ?>
+		<?php /* CLOSE: the dark run comes back down into the cream. → docs/implementation-notes.md#block-inner-2 */ ?>
 		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 		<div class="block__inner">
 			<div class="ind-section__head reveal">

@@ -988,7 +988,6 @@ if (langExpandBtn) {
 }
 
 
-
 /* SECTION 3 — "See it answer": the live-fill demo. → docs/implementation-notes.md#section-3-see-it-answer-the-live-fill-demo */
 (function () {
   var DEMO = window.SITESTAFFR_DEMO;
@@ -1065,9 +1064,7 @@ if (langExpandBtn) {
     wrap.appendChild(dd);
     fields.appendChild(wrap);
 
-    /* THE FLASH IS WHAT MAKES THIS AN ARGUMENT RATHER THAN AN ANIMATION. Without
-       linking the filled field back to the line that produced it, the right panel
-       just looks like it is moving for decoration. */
+    /* THE FLASH IS WHAT MAKES THIS AN ARGUMENT RATHER THAN AN ANIMATION. → docs/implementation-notes.md#reveal */
     if (sourceLine) {
       sourceLine.classList.add('is-flash');
       setTimeout(function () { sourceLine.classList.remove('is-flash'); }, 900);
@@ -1123,7 +1120,7 @@ if (langExpandBtn) {
     if (timeEl)  timeEl.textContent = '0:00 / ' + fmt(d.duration);
   }
 
-  /* THE OPEN CHIME. → docs/implementation-notes.md#chime */
+  /* THE OPEN CHIME. assets/audio/open.mp3 is the widget's own open sound, so pressing the stage button sounds… → docs/implementation-notes.md#chime */
   function chime() {
     if (!stage) return;
     var src = stage.getAttribute('data-see-it-open-sound');
@@ -1136,10 +1133,7 @@ if (langExpandBtn) {
     } catch (e) {}
   }
 
-  /* Retire the stage. ONE WAY ONLY — once the panels are up they stay up, including
-     after the demo finishes. Reverting to the stage on stop would take the assembled
-     recap away at the exact moment it has finished assembling, which is the payoff the
-     whole section is built around. Replay is the transport's job, not the stage's. */
+  /* Retire the stage. ONE WAY ONLY — once the panels are up they stay up, including after the demo finishes. → docs/implementation-notes.md#revealPanels */
   function revealPanels() {
     if (root.classList.contains('has-played')) return;
     root.classList.add('has-played');
@@ -1183,10 +1177,7 @@ if (langExpandBtn) {
   });
   playBtn.addEventListener('click', play);
 
-  /* The stage button and the transport button both call play; the stage's press adds
-     the chime because that press is the one that "opens the widget". Focus moves to the
-     transport afterwards so a keyboard user is not left on a button that has just
-     removed itself from the page. */
+  /* The stage button and the transport button both call play; → docs/implementation-notes.md#the-stage-button-and-the-transport-button-both */
   if (stagePlay) {
     stagePlay.addEventListener('click', function () {
       chime();
@@ -1195,9 +1186,7 @@ if (langExpandBtn) {
     });
   }
 
-  /* Everything above is wired. Only NOW is it safe to swap the fully-rendered
-     panels for the empty, playable version — so a throw anywhere earlier leaves
-     the reader with a complete section rather than two empty boxes. */
+  /* Everything above is wired. Only NOW is it safe to swap the fully-rendered panels for the empty, playable… → docs/implementation-notes.md#everything-above-is-wired-only-now-is-it-safe */
   transport.hidden = false;
   if (stage) stage.hidden = false;
   root.classList.add('is-interactive');
@@ -1213,9 +1202,7 @@ if (langExpandBtn) {
   var rows = Array.prototype.slice.call(root.querySelectorAll('[data-morning-open]'));
   if (!rows.length) return;
 
-  /* Feature-detect the METHOD, not the element. A <dialog> tag parses everywhere;
-     older browsers simply render it inert with no showModal, which would throw on
-     the first click and leave the reader with a dead row. */
+  /* Feature-detect the METHOD, not the element. → docs/implementation-notes.md#feature-detect-the-method-not-the-element-a-di */
   var probe = root.querySelector('dialog.recap-doc');
   if (!probe || typeof probe.showModal !== 'function') return;
 
@@ -1227,10 +1214,7 @@ if (langExpandBtn) {
       dlg.showModal();
     });
 
-    /* Click-outside-to-close. The dialog element fills the top layer, so a click
-       landing on the DIALOG itself rather than on the sheet inside it is a click on
-       the backdrop. Comparing against the sheet is what makes this reliable —
-       event.target === dlg is true only outside .recap-doc__sheet. */
+    /* Click-outside-to-close. The dialog element fills the top layer, so a click landing on the DIALOG itself… → docs/implementation-notes.md#click-outside-to-close-the-dialog-element-fill */
     dlg.addEventListener('click', function (e) {
       if (e.target === dlg) dlg.close();
     });
@@ -1238,9 +1222,7 @@ if (langExpandBtn) {
     var closeBtn = dlg.querySelector('[data-morning-close]');
     if (closeBtn) closeBtn.addEventListener('click', function () { dlg.close(); });
 
-    /* Focus returns to the row that opened it. Browsers restore focus to the opener
-       for showModal, but not after a programmatic close in every engine, and
-       landing back at the top of the document loses a keyboard reader their place. */
+    /* Focus returns to the row that opened it. → docs/implementation-notes.md#focus-returns-to-the-row-that-opened-it-browse */
     dlg.addEventListener('close', function () {
       if (typeof row.focus === 'function') row.focus();
     });

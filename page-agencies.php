@@ -113,10 +113,7 @@ foreach ( $agency_faq as $q ) {
 				<p class="agency-hero__note">Free for 30 days on any site &middot; No credit card required</p>
 			</div>
 
-			<?php /* ⚠️ NO NEW RENDER AND NO ROBOT. The robot's three appearances belong to
-			         the homepage. This is a grid of browser-window cards built in HTML,
-			         reusing the browser-and-speech-bubble motif that already ties the
-			         sixteen industry isometrics together. */ ?>
+			<?php /* ⚠️ NO NEW RENDER AND NO ROBOT. → docs/implementation-notes.md#block-split-art */ ?>
 			<div class="block-split__art agency-hero__art" aria-hidden="true">
 				<div class="agency-sites">
 					<?php foreach ( array( 'northgate-dental.com', 'ridgelineauto.com', 'copperleafpest.com', 'maggiescakes.com' ) as $site ) : ?>
@@ -184,7 +181,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* 4. → docs/implementation-notes.md#block-2 */ ?>
+<?php /* SECTION 3 — the second half of the dark block. Shares section 2's background, so there is deliberately no… → docs/implementation-notes.md#block-2 */ ?>
 <section class="block block--tight block-cards agency-billing">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -207,7 +204,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* 5. → docs/implementation-notes.md#block-3 */ ?>
+<?php /* SECTION 4 — Your morning. Light again; → docs/implementation-notes.md#block-3 */ ?>
 <section class="block block--tight agency-renewal">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -237,7 +234,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* 6. → docs/implementation-notes.md#block-4 */ ?>
+<?php /* NOT A block-split ANY MORE. It was image-left / list-right. → docs/implementation-notes.md#block-4 */ ?>
 <section class="block block--tight agency-pricing" id="partner">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -249,10 +246,7 @@ foreach ( $agency_faq as $q ) {
 		<div class="agency-partner">
 			<h3>We don&rsquo;t have agency pricing yet.</h3>
 			<p>No reseller tier, no white-label, no bulk billing. If you manage sites for clients and any of that would change your decision, tell us what you&rsquo;d need &mdash; we&rsquo;re deciding what to build.</p>
-			<?php /* ⚠️ THIS FORM NEEDS ITS OWN DESTINATION. The homepage concierge form
-			         routes to onboarding with a 3-business-day reply; an agency asking
-			         about reseller terms landing in that queue gets answered as if they
-			         were a small business wanting setup help. Logged in the backlog. */ ?>
+			<?php /* ⚠️ THIS FORM NEEDS ITS OWN DESTINATION. → docs/implementation-notes.md#this-form-needs-its-own-destination-the-homepa */ ?>
 			<?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Talk to Us About Agencies" background_color="transparent" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
 		</div>
 	</div>
@@ -280,10 +274,7 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* Closing CTA: dark, echoing the homepage's structure with the agency ask. PRIMARY
-         IS THE FREE TRIAL because trying it on their own site first is the natural agency
-         motion — it is FAQ #10 and the honest recommendation. Secondary is the partner
-         conversation. */ ?>
+<?php /* Closing CTA: dark, echoing the homepage's structure with the agency ask. → docs/implementation-notes.md#block-9 */ ?>
 <section class="block block--dark agency-cta">
 	<div class="block__inner block-statement">
 		<h2>Try It on Your Own Site First</h2>
