@@ -1,4 +1,3 @@
-/* SiteStaffr Billing Hub — /manage page logic. → docs/implementation-notes.md#setView */
 (function () {
   'use strict';
 
@@ -305,7 +304,6 @@
       banner.className = 'hub__banner hub__banner--success';
       banner.textContent = 'Payment successful! Your account has been updated.';
       banner.hidden = false;
-    /* ⚠️ 'cancelled', DOUBLE-L, AND IT IS NOT A SPELLING MISTAKE. → docs/implementation-notes.md#verifyMagicLink */
     } else if (checkout === 'cancelled') {
       banner.className = 'hub__banner hub__banner--canceled';
       banner.textContent = 'Checkout was canceled. No charges were made.';
@@ -522,7 +520,6 @@
     var isTrial = status === 'trialing' || status === 'trial' || status === 'trial_active';
     var isActive = status === 'active';
     var isPastDue = status === 'past_due';
-    /* ⚠️ BOTH SPELLINGS ON PURPOSE. → docs/implementation-notes.md#both-spellings-on-purpose-stripe-reports-cance */
     var isCancelled = status === 'canceled' || status === 'cancelled';
 
     /* Determine if trial is expired */
@@ -659,7 +656,6 @@
     var emails = Array.isArray(authorizedEmails) ? authorizedEmails : [];
     var maxEmails = 10;
 
-    // Empty state: show simple billing email display with + Add
     if (emails.length === 0 && accountEmail) {
       emails = [{ email: accountEmail, is_invoice_recipient: true, _synthetic: true }];
     }
@@ -712,7 +708,6 @@
       html += '<button type="button" class="hub__auth-emails-add-btn" data-action="add-show">+ Add email</button>';
     }
 
-    // Inline add form (hidden by default, shown on + Add click)
     html += '<div class="hub__auth-email-add" id="authEmailAddForm" hidden>';
     html += '<input type="email" id="authEmailAddInput" placeholder="email@example.com" autocomplete="email">';
     html += '<button type="button" class="hub__auth-email-add-submit" data-action="add-submit">Send Invite</button>';
@@ -865,7 +860,6 @@
       refetchSitesAndRerender();
       return;
     } else if (err.message === 'not_authorized' || err.message === 'site_not_found') {
-      // Lost access to this site — re-fetch sites, redirect to site picker
       setInstallationId('');
       apiCall('/api/hub/list-sites', {}, true)
         .then(function (data) {
@@ -1141,7 +1135,6 @@
 
     if (!modal) return;
 
-    // Email update modal is now opened via delegation from the auth emails card
 
     cancelBtn.addEventListener('click', function () {
       modal.hidden = true;

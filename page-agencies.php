@@ -3,13 +3,11 @@
 Template Name: Agencies
 */
 
-/* /for/agencies/ — the second audience. → docs/implementation-notes.md#for-agencies-the-second-audience */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/* Its own FAQPage schema, and ⚠️ NOT ONE QUESTION IS SHARED WITH THE HOMEPAGE. → docs/implementation-notes.md#agency-faq */
 $agency_faq = array(
 	array(
 		'question' => 'Can I install SiteStaffr on client sites I manage?',
@@ -90,11 +88,7 @@ foreach ( $agency_faq as $q ) {
 
 <main>
 
-<?php /* ===== 1. HERO =====================================================
-         SAME H1 AS THE HOMEPAGE BAND, ON PURPOSE. Landing on a page whose headline
-         matches the link you just clicked is what confirms you are in the right place;
-         novelty here would read as a different offer. The subhead carries the new
-         information. */ ?>
+<?php /* ===== 1. HERO ===== */ ?>
 <section class="block block-split agency-hero">
 	<div class="block__inner">
 		<div class="block-split__grid">
@@ -113,7 +107,6 @@ foreach ( $agency_faq as $q ) {
 				<p class="agency-hero__note">Free for 30 days on any site &middot; No credit card required</p>
 			</div>
 
-			<?php /* ⚠️ NO NEW RENDER AND NO ROBOT. → docs/implementation-notes.md#block-split-art */ ?>
 			<div class="block-split__art agency-hero__art" aria-hidden="true">
 				<div class="agency-sites">
 					<?php foreach ( array( 'northgate-dental.com', 'ridgelineauto.com', 'copperleafpest.com', 'maggiescakes.com' ) as $site ) : ?>
@@ -129,8 +122,6 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* ===== 2. WHY IT IS WORTH ADDING ====================================
-         The agency's real question is "what does this do for ME", not "what does it do". */ ?>
 <section class="block block--tight block-cards agency-why">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -153,7 +144,6 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* 3. → docs/implementation-notes.md#block */ ?>
 <section class="block block--dark block--tight agency-steps">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -181,7 +171,6 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* SECTION 3 — the second half of the dark block. Shares section 2's background, so there is deliberately no… → docs/implementation-notes.md#block-2 */ ?>
 <section class="block block--tight block-cards agency-billing">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -204,7 +193,6 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* SECTION 4 — Your morning. Light again; → docs/implementation-notes.md#block-3 */ ?>
 <section class="block block--tight agency-renewal">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -234,7 +222,6 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* NOT A block-split ANY MORE. It was image-left / list-right. → docs/implementation-notes.md#block-4 */ ?>
 <section class="block block--tight agency-pricing" id="partner">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -246,13 +233,11 @@ foreach ( $agency_faq as $q ) {
 		<div class="agency-partner">
 			<h3>We don&rsquo;t have agency pricing yet.</h3>
 			<p>No reseller tier, no white-label, no bulk billing. If you manage sites for clients and any of that would change your decision, tell us what you&rsquo;d need &mdash; we&rsquo;re deciding what to build.</p>
-			<?php /* ⚠️ THIS FORM NEEDS ITS OWN DESTINATION. → docs/implementation-notes.md#this-form-needs-its-own-destination-the-homepa */ ?>
 			<?php echo do_shortcode( '[sitestaffr_button persona="onboarding" text="Talk to Us About Agencies" background_color="transparent" gradient="off" icon="sitestaffr" box_shadow="off"]' ); ?>
 		</div>
 	</div>
 </section>
 
-<?php /* ===== 7. FAQ + CTA ================================================= */ ?>
 <section class="block block--tight agency-faq" id="faq">
 	<div class="block__inner">
 		<div class="agency-section__head">
@@ -274,7 +259,6 @@ foreach ( $agency_faq as $q ) {
 	</div>
 </section>
 
-<?php /* Closing CTA: dark, echoing the homepage's structure with the agency ask. → docs/implementation-notes.md#block-9 */ ?>
 <section class="block block--dark agency-cta">
 	<div class="block__inner block-statement">
 		<h2>Try It on Your Own Site First</h2>

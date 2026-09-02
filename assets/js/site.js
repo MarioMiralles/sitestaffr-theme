@@ -221,8 +221,6 @@
   raf = requestAnimationFrame(animate);
 })();
 
-// The scroll-reveal IntersectionObserver was deleted. Content
-// visibility must never depend on decorative JS running successfully.
 
 // ========== AUDIO PLAYER ==========
 const playSVG = '<svg viewBox="0 0 24 24" fill="currentColor"><polygon points="6,3 20,12 6,21"/></svg>';
@@ -274,8 +272,6 @@ function initAudioDemo(demoLayout) {
   let renderedTranscriptIndex = -1;
   let didReachAudioEnd = false;
 
-  // Playback phase for listeners outside the component (e.g. homepage step cards):
-  // 0 = idle, 1 = answering, 2 = capturing details, 3 = recap delivered.
   const recapPinned = Boolean(demoLayout.dataset.audioDemoRecapPinned);
   const capturePhaseStart = Number.parseFloat(demoLayout.dataset.audioCaptureStart || '12');
   let lastEmittedPhase = -1;
@@ -298,8 +294,6 @@ function initAudioDemo(demoLayout) {
     // This class drives the recap reveal animation in CSS.
     demoLayout.classList.toggle('demo-layout--show-recap', visible);
     if (recapCard && !recapPinned) {
-      // Pinned recaps stay visible at desktop widths, so the CSS (visibility on
-      // the collapsed state) handles assistive-tech exposure instead of aria-hidden.
       recapCard.setAttribute('aria-hidden', visible ? 'false' : 'true');
     }
   }
@@ -737,7 +731,6 @@ document.querySelectorAll('.voice-text-section__card').forEach(function(card) {
       m.classList.remove('voice-text-section__mode--active');
     });
     panel.querySelector('.voice-text-section__mode--' + mode).classList.add('voice-text-section__mode--active');
-    // Re-trigger entry animations by cloning animated elements
     var activeMode = panel.querySelector('.voice-text-section__mode--active');
     activeMode.querySelectorAll('.voice-text-section__msg, .voice-text-section__chat-row').forEach(function(el) {
       var clone = el.cloneNode(true);
@@ -815,10 +808,6 @@ if (voiceShowcase) {
     return themeUrl + '/assets/images/agents/portraits/' + voice.file.toLowerCase() + '.webp' + imgVersion;
   }
 
-  // Warm the full-size portraits once the page is idle. The thumbnail strip uses
-  // -sm.webp, so the large file for a voice had never been fetched when you clicked
-  // it — the browser went to the network mid-swap and the portrait visibly blanked
-  // and reloaded. All ten together are ~700KB, so this is cheap after first paint.
   function preloadPortraits() {
     voices.forEach(function (v) { new Image().src = portraitUrl(v); });
   }
@@ -828,8 +817,6 @@ if (voiceShowcase) {
     setTimeout(preloadPortraits, 1500);
   }
 
-  // Guards against a slow earlier request landing after a faster later one and
-  // painting the wrong face.
   let portraitSwapToken = 0;
 
   function selectVoice(index) {
@@ -838,8 +825,6 @@ if (voiceShowcase) {
     const src = portraitUrl(voice);
     const token = ++portraitSwapToken;
 
-    // Swap only once the new file has decoded, so the visible portrait never blanks
-    // mid-change. Everything else on the card updates immediately.
     const pre = new Image();
     pre.src = src;
     const applyPortrait = function () {
@@ -876,7 +861,6 @@ if (voiceShowcase) {
     showcasePlayBtn.classList.remove('playing');
     showcasePlayLabel.textContent = 'Preview Voice';
 
-    // Selection feedback is immediate — it must not wait on the image.
     showcaseThumbs.querySelectorAll('.voice-showcase__thumb').forEach(function(thumb, i) {
       thumb.classList.toggle('active', i === index);
     });
@@ -903,7 +887,6 @@ if (voiceShowcase) {
 
   selectVoice(0);
 
-  // Navigation arrows (inside showcase card — used on mobile)
   voiceShowcase.querySelector('.voice-showcase__arrow--prev').addEventListener('click', function() {
     selectVoice((activeVoiceIndex - 1 + voices.length) % voices.length);
   });
@@ -911,7 +894,6 @@ if (voiceShowcase) {
     selectVoice((activeVoiceIndex + 1) % voices.length);
   });
 
-  // Card-edge arrows (positioned at card boundaries on desktop)
   var cardPrev = voiceShowcase.querySelector('.voice-showcase__card-arrow--prev');
   var cardNext = voiceShowcase.querySelector('.voice-showcase__card-arrow--next');
   if (cardPrev) {
@@ -957,7 +939,6 @@ if (voiceShowcase) {
   });
 }
 
-/* FAQ ACCORDION ========== ONE OPEN AT A TIME, AND ALL OF THEM CAN BE CLOSED. → docs/implementation-notes.md#faq-accordion-one-open-at-a-time-and-all-of-th */
 document.querySelectorAll('.faq-item__question').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
@@ -988,7 +969,6 @@ if (langExpandBtn) {
 }
 
 
-/* SECTION 3 — "See it answer": the live-fill demo. → docs/implementation-notes.md#section-3-see-it-answer-the-live-fill-demo */
 (function () {
   var DEMO = window.SITESTAFFR_DEMO;
   var root = document.querySelector('.see-it');
@@ -1026,7 +1006,6 @@ if (langExpandBtn) {
     return m + ':' + (s < 10 ? '0' : '') + s;
   }
 
-  /* Empty the panels. Only ever called once we know we can drive them. */
   function clear() {
     thread.innerHTML = '';
     fields.innerHTML = '';
@@ -1051,8 +1030,6 @@ if (langExpandBtn) {
     return p;
   }
 
-  /* Label and value arrive TOGETHER, as a pair. There is no pre-drawn skeleton,
-     because the product has no fixed recap schema to draw. */
   function addField(fill, sourceLine) {
     var wrap = document.createElement('div');
     wrap.className = 'see-it__field is-in';
@@ -1064,7 +1041,6 @@ if (langExpandBtn) {
     wrap.appendChild(dd);
     fields.appendChild(wrap);
 
-    /* THE FLASH IS WHAT MAKES THIS AN ARGUMENT RATHER THAN AN ANIMATION. → docs/implementation-notes.md#reveal */
     if (sourceLine) {
       sourceLine.classList.add('is-flash');
       setTimeout(function () { sourceLine.classList.remove('is-flash'); }, 900);
@@ -1120,7 +1096,6 @@ if (langExpandBtn) {
     if (timeEl)  timeEl.textContent = '0:00 / ' + fmt(d.duration);
   }
 
-  /* THE OPEN CHIME. assets/audio/open.mp3 is the widget's own open sound, so pressing the stage button sounds… → docs/implementation-notes.md#chime */
   function chime() {
     if (!stage) return;
     var src = stage.getAttribute('data-see-it-open-sound');
@@ -1133,7 +1108,6 @@ if (langExpandBtn) {
     } catch (e) {}
   }
 
-  /* Retire the stage. ONE WAY ONLY — once the panels are up they stay up, including after the demo finishes. → docs/implementation-notes.md#revealPanels */
   function revealPanels() {
     if (root.classList.contains('has-played')) return;
     root.classList.add('has-played');
@@ -1145,8 +1119,6 @@ if (langExpandBtn) {
     revealPanels();
     clear();
     resetProgress();
-    /* The caption is an at-rest instruction. Leaving it up during playback means
-       the panel reads "Press play" while it is already playing. */
     if (caption) caption.hidden = true;
     playing = true;
     t0 = Date.now();
@@ -1177,7 +1149,6 @@ if (langExpandBtn) {
   });
   playBtn.addEventListener('click', play);
 
-  /* The stage button and the transport button both call play; → docs/implementation-notes.md#the-stage-button-and-the-transport-button-both */
   if (stagePlay) {
     stagePlay.addEventListener('click', function () {
       chime();
@@ -1186,7 +1157,6 @@ if (langExpandBtn) {
     });
   }
 
-  /* Everything above is wired. Only NOW is it safe to swap the fully-rendered panels for the empty, playable… → docs/implementation-notes.md#everything-above-is-wired-only-now-is-it-safe */
   transport.hidden = false;
   if (stage) stage.hidden = false;
   root.classList.add('is-interactive');
@@ -1194,7 +1164,6 @@ if (langExpandBtn) {
   resetProgress();
 })();
 
-/* SECTION 4 — the overnight inbox opens its recap documents. → docs/implementation-notes.md#section-4-the-overnight-inbox-opens-its-recap */
 (function () {
   var root = document.querySelector('.what-you-get');
   if (!root) return;
@@ -1202,7 +1171,6 @@ if (langExpandBtn) {
   var rows = Array.prototype.slice.call(root.querySelectorAll('[data-morning-open]'));
   if (!rows.length) return;
 
-  /* Feature-detect the METHOD, not the element. → docs/implementation-notes.md#feature-detect-the-method-not-the-element-a-di */
   var probe = root.querySelector('dialog.recap-doc');
   if (!probe || typeof probe.showModal !== 'function') return;
 
@@ -1214,7 +1182,6 @@ if (langExpandBtn) {
       dlg.showModal();
     });
 
-    /* Click-outside-to-close. The dialog element fills the top layer, so a click landing on the DIALOG itself… → docs/implementation-notes.md#click-outside-to-close-the-dialog-element-fill */
     dlg.addEventListener('click', function (e) {
       if (e.target === dlg) dlg.close();
     });
@@ -1222,7 +1189,6 @@ if (langExpandBtn) {
     var closeBtn = dlg.querySelector('[data-morning-close]');
     if (closeBtn) closeBtn.addEventListener('click', function () { dlg.close(); });
 
-    /* Focus returns to the row that opened it. → docs/implementation-notes.md#focus-returns-to-the-row-that-opened-it-browse */
     dlg.addEventListener('close', function () {
       if (typeof row.focus === 'function') row.focus();
     });
@@ -1231,10 +1197,8 @@ if (langExpandBtn) {
   root.classList.add('is-interactive');
 })();
 
-/* SECTION 5 — the language orbit has NO SCRIPT, deliberately. → docs/implementation-notes.md#section-5-the-language-orbit-has-no-script-del */
 
-/* ===================================================================
-   SECTION 6 — the industry directory. */
+/* =====  ===== */
 (function () {
   var root = document.querySelector('.industries');
   if (!root) return;
@@ -1277,8 +1241,6 @@ if (langExpandBtn) {
       }
     });
 
-    /* Desktop only, and only a prefetch: the next 440px render is likely to be
-       wanted, but nothing is decoded or displayed until the click happens. */
     btn.addEventListener('mouseenter', function () {
       if (mobile.matches) return;
       var panel = root.querySelector('[data-ind-panel="' + btn.dataset.indName + '"] img');
@@ -1286,7 +1248,6 @@ if (langExpandBtn) {
     });
   });
 
-  /* ⚠️ ONE ROW STARTS OPEN ON A PHONE, AND IT IS THE FIRST ONE, NOT THE FEATURED ONE. → docs/implementation-notes.md#openFirstOnMobile */
   function openFirstOnMobile() {
     names.forEach(function (b) { b.classList.remove('is-open'); });
     if (mobile.matches) names[0].classList.add('is-open');
@@ -1294,7 +1255,5 @@ if (langExpandBtn) {
   mobile.addEventListener('change', openFirstOnMobile);
   openFirstOnMobile();
 
-  /* Last, as everywhere else in this file: only now does CSS start collapsing the
-     mobile details, so a throw above leaves every blurb and link readable. */
   root.classList.add('is-interactive');
 })();

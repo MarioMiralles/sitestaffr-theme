@@ -3,7 +3,6 @@
 Template Name: Industry
 */
 
-/* ⚠️ THE PHONE RULE, AND IT APPLIES TO EVERY INDUSTRY BLOCK IN THIS FILE. → docs/implementation-notes.md#page-slug */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -17,7 +16,6 @@ $industries = array(
 		'hero_icon' => '🦷',
 		'hero_alt'  => 'Isometric illustration of a dental practice reception desk and treatment chair, with a floating browser window and speech bubble showing the AI receptionist answering a visitor on the practice website',
 		'label'    => 'For Dental Practices',
-		/* ⚠️ WAS "Your Front Desk Can't Answer Every Call. → docs/implementation-notes.md#was-your-front-desk-can-t-answer-every-call */
 		'headline' => 'A Cracked Tooth at 8&nbsp;PM. Your Front Desk Went Home at&nbsp;Five.',
 		'subtitle' => 'SiteStaffr greets patients on your website 24/7, answering questions about services, insurance, and availability, capturing new patient inquiries, and sending you a full recap before they even leave the page.',
 		'specialty' => 'Dentistry',
@@ -56,7 +54,6 @@ $industries = array(
 		),
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Tuesday, 9:14 PM',
-		// The exchange shown in the mockup must not show the agent doing more than the product does. → docs/implementation-notes.md#chat
 		'chat' => array(
 			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the practice or pass a message to the team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'I chipped a tooth at dinner. Can someone see me tomorrow?' ),
@@ -892,7 +889,6 @@ $industries = array(
 				'a' => 'No. SiteStaffr doesn&rsquo;t diagnose HVAC or plumbing issues or estimate repair costs &mdash; that stays with your technicians. It answers from what your website publishes, collects the details of the emergency, and gets them to you so your team can call back and dispatch.',
 			),
 			array(
-			/* ⚠️ BOTH OF THESE ASKED ABOUT "CALLS", which on a page selling an AI reads as "does it answer my phone"… → docs/implementation-notes.md#both-of-these-asked-about-calls-which-on-a-pa */
 				'q' => 'Can it tell how urgent a request is?',
 				'a' => 'SiteStaffr captures exactly what the visitor describes &mdash; no heat, a leaking pipe, a flooded basement &mdash; and flags it in your recap the way they described it. Your team decides how urgently to respond.',
 			),
@@ -1233,15 +1229,12 @@ $industries = array(
 		'cta_text'     => 'SiteStaffr captures leads while you&rsquo;re on the job &mdash; 24/7, in 57+ languages, with full recaps delivered to your inbox. Try it free for 30 days &mdash; no credit card required.',
 	),
 
-	/* ⚠️ THIS ENTRY EXISTED NOWHERE AND /for/medical-staffing/ 404ed IN PRODUCTION. → docs/implementation-notes.md#this-entry-existed-nowhere-and-for-medical-st */
 	'medical-staffing' => array(
 		'hero_icon' => '🩺',
 		'hero_alt'  => 'Isometric illustration of a medical staffing agency desk with a shift schedule board and clinician profiles, with a floating browser window and speech bubble showing the AI receptionist answering a facility scheduler on the agency website',
 		'label'    => 'For Medical Staffing Agencies',
-		/* House pattern: a situational scene, not a product claim, and the second sentence is the one that… → docs/implementation-notes.md#house-pattern-a-situational-scene-not-a-produc */
 		'headline' => 'A Unit Is Short Two Nurses for Tuesday. Your Recruiters Left at&nbsp;Six.',
 		'subtitle' => 'SiteStaffr greets facilities and candidates on your website 24/7, answering questions about your specialties, coverage areas, and credentialing, capturing the inquiry, and sending you a full recap before they leave the page.',
-		/* schema.org EmploymentAgency. ⚠️ NOT a Medical* type — the agency places clinicians, it does not treat… → docs/implementation-notes.md#schema-org-employmentagency-not-a-medical-type */
 		'specialty' => 'EmploymentAgency',
 		'problems_headline' => 'Staffing Agencies Lose Placements to Whoever Replies First',
 		'problems'  => array(
@@ -1278,7 +1271,6 @@ $industries = array(
 		),
 		'scenario_label' => 'See it in action',
 		'scenario_title' => 'Sunday, 9:40 PM',
-		/* Same rules as every other chat in this file: answers from site content, captures name + number +… → docs/implementation-notes.md#same-rules-as-every-other-chat-in-this-file-an */
 		'chat' => array(
 			array( 'from' => 'ai',    'text' => 'Hi! I can answer questions about the agency or pass a message to the staffing team. What do you need?' ),
 			array( 'from' => 'visitor', 'text' => 'We&rsquo;re short two night-shift RNs for Tuesday. Do you cover Sacramento?' ),
@@ -1328,20 +1320,14 @@ $ind       = $industries[ $page_slug ];
 $site_name = get_bloginfo( 'name' );
 $cta_url   = home_url( '/#get-started' );
 
-/* THE ONE SHARED FAQ, APPENDED TO ALL SIXTEEN ---------------------------: Search Console shows more… → docs/implementation-notes.md#the-one-shared-faq-appended-to-all-sixteen-sea */
 $ind['faqs'][] = array(
 	'q' => 'Is SiteStaffr an AI receptionist or a virtual assistant?',
 	'a' => 'Both descriptions fit, and the difference worth knowing is that SiteStaffr is software rather than a person. A virtual assistant you hire is someone who works set hours and needs briefing; SiteStaffr is an AI receptionist that lives on your website, answers every visitor instantly from your own published pages 24/7, captures their details, and emails you a recap. There is nobody to onboard, no hours to cover, and no per-hour cost.',
 );
 
-// Per-industry hero art lives at assets/images/industries/<slug>.webp. The file
-// is optional: until one is dropped in, the hero falls back to the emoji it has
-// always used, so a page never renders a broken image while art is in progress.
 $hero_image_path = get_template_directory() . '/assets/images/industries/' . $page_slug . '.webp';
 $hero_image_url  = '';
 if ( file_exists( $hero_image_path ) ) {
-	// Same filemtime cache-busting the theme uses for CSS/JS — LiteSpeed and the
-	// CDN both hold onto these aggressively otherwise.
 	$hero_image_url = get_template_directory_uri() . '/assets/images/industries/' . $page_slug . '.webp?v=' . filemtime( $hero_image_path );
 }
 ?><!doctype html>
@@ -1351,7 +1337,6 @@ if ( file_exists( $hero_image_path ) ) {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<?php
-	// Yoast handles WebPage, BreadcrumbList, and WebSite schema — only add Service (unique to industry pages)
 	$service_schema = array(
 		'@type'       => 'Service',
 		'name'        => 'AI Chat & Voice Agent ' . $ind['label'],
@@ -1411,7 +1396,7 @@ get_template_part( 'template-parts/site-nav' );
 
 <main class="ind-page">
 
-	<?php /* HERO: now a V3 Split block ------------------------------------------ First section of the ind-*… → docs/implementation-notes.md#block */ ?>
+	<?php ?>
 	<section class="block block-split ind-hero">
 		<div class="block__inner">
 			<div class="block-split__grid ind-hero__grid">
@@ -1448,7 +1433,6 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<?php /* PAIN POINTS: a V3 Cards block, UNBOXED -------------------------- ⚠️ NEW CLASSES (.ind-problem)… → docs/implementation-notes.md#block-2 */ ?>
 	<!-- Pain Points -->
 	<section class="block block-cards ind-problems">
 		<div class="block__inner">
@@ -1466,11 +1450,9 @@ get_template_part( 'template-parts/site-nav' );
 				<?php endforeach; ?>
 			</div>
 		</div>
-		<?php /* OPEN: the dark run rises out of the cream. → docs/implementation-notes.md#open-the-dark-run-rises-out-of-the-cream */ ?>
 		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 	</section>
 
-	<?php /* SOLUTIONS: the first half of the dark run ---------------------- Was #0a2e33, a SECOND dark tone… → docs/implementation-notes.md#block-3 */ ?>
 	<!-- Solutions -->
 	<section class="block block--dark ind-solutions">
 		<div class="block__inner">
@@ -1494,15 +1476,12 @@ get_template_part( 'template-parts/site-nav' );
 
 	<!-- Scenario -->
 	<?php
-	// The recap lands a couple of minutes after the conversation starts, so it is
-	// derived from scenario_title rather than stored twice and left to drift.
 	$ind_recap_stamp = $ind['scenario_title'];
 	if ( preg_match( '/^(.*?)(\d{1,2}):(\d{2})\s*(AM|PM)$/i', html_entity_decode( $ind['scenario_title'] ), $ind_tm ) ) {
 		$ind_ts          = strtotime( $ind_tm[2] . ':' . $ind_tm[3] . ' ' . strtoupper( $ind_tm[4] ) . ' +2 minutes' );
 		$ind_recap_stamp = $ind_tm[1] . gmdate( 'g:i A', $ind_ts );
 	}
 	?>
-	<?php /* SCENARIO: the second half of the dark run --------------------- Was a pale-blue gradient (#eef8fa ->… → docs/implementation-notes.md#block-4 */ ?>
 	<section class="block block--dark ind-scenario">
 		<div class="block__inner">
 			<div class="ind-scenario__story reveal">
@@ -1556,7 +1535,6 @@ get_template_part( 'template-parts/site-nav' );
 						</ul>
 						<p class="ind-recap__followup"><strong>Suggested follow-up:</strong> <?php echo esc_html( $ind['recap']['followup'] ); ?></p>
 					</div>
-					<?php /* ⚠️ INDICATES THE TRANSCRIPT, DOES NOT REPRODUCE IT. → docs/implementation-notes.md#ind-recap-section */ ?>
 					<?php if ( ! empty( $ind['chat'] ) ) : ?>
 					<div class="ind-recap__section ind-recap__transcript">
 						<div class="ind-recap__section-head">
@@ -1576,13 +1554,11 @@ get_template_part( 'template-parts/site-nav' );
 
 	<!-- FAQ -->
 	<section class="block ind-faq">
-		<?php /* CLOSE: the dark run comes back down into the cream. → docs/implementation-notes.md#block-inner-2 */ ?>
 		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 		<div class="block__inner">
 			<div class="ind-section__head reveal">
 				<span class="section-label">FAQ</span>
 				<?php
-				// Keyphrase-bearing subheading: no H2 carried the page's own target phrase, so it never appeared… → docs/implementation-notes.md#faq-vertical
 				$faq_vertical = preg_replace( '/^For\s+/', '', html_entity_decode( $ind['label'], ENT_QUOTES, 'UTF-8' ) );
 				?>
 				<h2><?php echo esc_html( sprintf( 'AI Chat & Voice Agents for %s: Common Questions', $faq_vertical ) ); ?></h2>
@@ -1606,7 +1582,6 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 
 	<?php
-	/* "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------: "I don't like the Explore… → docs/implementation-notes.md#ind-siblings */
 	$ind_siblings = array();
 	$ind_group    = null;
 	foreach ( sitestaffr_industry_registry() as $ind_reg_group ) {
@@ -1651,7 +1626,7 @@ get_template_part( 'template-parts/site-nav' );
 	</section>
 	<?php endif; ?>
 
-	<?php /* CLOSING CTA: a dark block into the footer --------------------- Was a bordered card floating on… → docs/implementation-notes.md#block-5 */ ?>
+	<?php ?>
 	<!-- CTA -->
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">

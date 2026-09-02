@@ -1,7 +1,5 @@
-/* SECTION 3 DEMO — SINGLE SOURCE OF TRUTH FOR TIMING AND SCRIPT. → docs/implementation-notes.md#section-3-demo-single-source-of-truth-for-timi */
 window.SITESTAFFR_DEMO = {
 
-  /* Which tab is active on load. 'voice' once the recording exists. */
   DEFAULT_MODE: 'text',
 
   voice: {
@@ -11,8 +9,6 @@ window.SITESTAFFR_DEMO = {
     business: 'Ridgeline Auto',
     stamp: '8:42 PM',
     duration: 72,
-    /* Placeholder timings. These are a plausible shape, NOT measured against audio —
-       every `t` must be re-read off the real waveform before voice goes live. */
     turns: [
       { t: 0,  who: 'ai',      text: 'Ridgeline Auto, how can I help?' },
       { t: 5,  who: 'visitor', text: 'My check engine light came on this morning.' },
@@ -39,7 +35,6 @@ window.SITESTAFFR_DEMO = {
     label: 'There are ants all over my kitchen',
     business: 'Copperleaf Pest Control',
     stamp: '11:18 PM',
-    /* Pest control on purpose. → docs/implementation-notes.md#pest-control-on-purpose-section-2-s-grid-has-n */
     duration: 54,
     turns: [
       { t: 0,  who: 'ai',      text: 'Copperleaf Pest Control — what are you seeing?' },
@@ -56,7 +51,6 @@ window.SITESTAFFR_DEMO = {
       { t: 45, who: 'ai',      text: 'Got it. Someone will follow up to arrange a visit.',
                 fill: { label: 'Email', value: 'priya.raman@example.com' } }
     ],
-    /* The summary and the follow-up genuinely ARE generated after the conversation ends, so they… → docs/implementation-notes.md#the-summary-and-the-follow-up-genuinely-are-ge */
     summary:  { t: 49, text: 'Ant trail in the kitchen of a single-story house. Wants someone to come out.' },
     followUp: { t: 51, text: 'Email Priya to arrange a visit.' },
     toast:    { t: 53, text: 'Recap emailed to you' }

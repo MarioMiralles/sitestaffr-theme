@@ -54,9 +54,9 @@ registry entry and a version bump rather than a new template.
 **The reasoning lives in `docs/`.** Long rationale used to sit inline as block comments, which made
 the source hard to read. It was moved out so the code reads as code:
 [`docs/design-system.md`](docs/design-system.md) covers the CSS,
-[`docs/implementation-notes.md`](docs/implementation-notes.md) covers the PHP and JavaScript. Every
-rule with a non-obvious constraint keeps a one line summary and a link to the full note, so a
-warning is still visible where it matters.
+[`docs/implementation-notes.md`](docs/implementation-notes.md) covers the PHP and JavaScript, both
+keyed by selector, token or function name. The source itself carries only what you need while
+reading it: section markers, WordPress template headers, and PHPDoc.
 
 **Accessibility was measured, not assumed.** Colour tokens are set by their worst background
 rather than their most common one, which is why `--teal-text` exists separately from the brand

@@ -167,7 +167,7 @@ if ( ! defined( 'ABSPATH' ) ) {
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
         <h2 class="form-success__title">We'll be in touch!</h2>
-        <?php /* Three business days, matching the homepage closing CTA. → docs/implementation-notes.md#form-success-text */ ?>
+        <?php ?>
         <p class="form-success__text">Thanks for your interest in SiteStaffr. We&rsquo;ll reach out within three business days to help get your AI receptionist ready to go live.</p>
       </div>
     </div>

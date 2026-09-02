@@ -1,15 +1,6 @@
 <?php
 /**
  * 404 — page not found.
- *
- * Without this file WordPress falls back to index.php, which renders a 404 as an
- * empty blog archive: an <h1> reading "Blog" above "No content found."
- *
- * No hardcoded meta tags: Yoast owns the site's metadata, and the 404 HTTP status
- * is what keeps this out of search results.
- *
- * Nothing here uses .reveal, so site.css alone renders the page. Do not add
- * .reveal markup without also enqueueing site.js for this template.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,7 +9,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $site_name = get_bloginfo( 'name' );
 
-/* Where a lost visitor is most likely to be headed. → docs/implementation-notes.md#nf-links */
 $nf_links = array(
 	array(
 		'label' => 'Pricing',

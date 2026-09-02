@@ -27,7 +27,6 @@ if ( ! defined( 'SITESTAFFR_MIDDLEWARE_URL' ) ) {
 }
 
 if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
-	/* Build a theme asset URL with file modification time for cache busting. → docs/implementation-notes.md#sitestaffr-asset-url */
 	function sitestaffr_asset_url( $relative_path ) {
 		$relative_path = ltrim( $relative_path, '/' );
 		$asset_uri     = get_stylesheet_directory_uri() . '/' . $relative_path;
@@ -41,7 +40,6 @@ if ( ! function_exists( 'sitestaffr_asset_url' ) ) {
 	}
 }
 
-/* Purge cached HTML once per theme version. → docs/implementation-notes.md#hook-send-headers */
 add_action( 'send_headers', function () {
 	if ( is_admin() || headers_sent() ) {
 		return;
@@ -65,7 +63,6 @@ add_action( 'send_headers', function () {
 if ( ! function_exists( 'sitestaffr_heal_post_title' ) ) {
 	/**
 	 * Set a page's post_title from the registry and force Yoast to re-derive its metadata.
-	 * See docs/implementation-notes.md#sitestaffr-heal-post-title
 	 *
 	 * @param int    $page_id Post ID.
 	 * @param string $title   Title the registry says it should have.
@@ -88,7 +85,6 @@ if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 	/**
 	 * Drop stored Yoast social/breadcrumb overrides so they fall back to the
 	 * SEO title and description the provisioner manages.
-	 * See docs/implementation-notes.md#sitestaffr-clear-yoast-title-overrides
 	 *
 	 * @param int $page_id Post ID to clear.
 	 */
@@ -113,15 +109,12 @@ if ( ! function_exists( 'sitestaffr_clear_yoast_title_overrides' ) ) {
 if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 	/**
 	 * Live plugin metadata from our own release manifest, cached 12 hours.
-	 * See docs/implementation-notes.md#sitestaffr-plugin-info
 	 *
 	 * @return array{version:string,download_url:string,requires:string,requires_php:string,size_mb:string,listing_url:string}
 	 */
 	function sitestaffr_plugin_info() {
 		$listing_url = 'https://wordpress.org/plugins/sitestaffr/';
 
-		// Only reached if every endpoint is unreachable, so it must stay a real,
-		// downloadable build rather than a placeholder.
 		$fallback = array(
 			'version'      => '1.42.7',
 			'download_url' => 'https://storage.googleapis.com/sitestaffr-releases/sitestaffr-v1.42.7-032923ba28ce.zip',
@@ -136,7 +129,6 @@ if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 			return $cached;
 		}
 
-		// Same two endpoints, in the same order, that the plugin itself checks.
 		$endpoints = array(
 			'https://updates.sitestaffr.com/api/plugin/update',
 			'https://phoneease-middleware-375589245036.us-central1.run.app/api/plugin/update',
@@ -152,8 +144,6 @@ if ( ! function_exists( 'sitestaffr_plugin_info' ) ) {
 
 			$data = json_decode( wp_remote_retrieve_body( $response ), true );
 
-			// Prefix-checked, not just non-empty: this goes straight into a public
-			// download link, so an unexpected manifest cannot redirect visitors.
 			if (
 				is_array( $data )
 				&& ! empty( $data['version'] )
@@ -200,7 +190,6 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_get_started = is_page_template( 'page-get-started.php' );
 	$is_manage      = is_page_template( 'page-manage.php' );
 
-	/* site.css is the theme's stylesheet, so every front-end view gets it. → docs/implementation-notes.md#is-about */
 	wp_enqueue_style(
 		'sitestaffr-website-style',
 		sitestaffr_asset_url( 'assets/css/site.css' ),
@@ -213,15 +202,11 @@ add_action( 'wp_enqueue_scripts', function () {
 	$is_download   = is_page_template( 'page-download.php' );
 	$is_blog_agent = is_page_template( 'page-blog-agent.php' );
 	$is_salesforce = is_page_template( 'page-salesforce.php' );
-	// Any template using .reveal must be listed here. Without site.js those
-	// elements stay at opacity 0 forever and the content is simply invisible.
 	$is_for_index  = is_page_template( 'page-for.php' ) || is_page( 'for' );
 	$is_ind_cat    = is_page_template( 'page-industry-category.php' );
-	/* The agencies page uses the FAQ accordion and the shared nav, both of which are driven by site.js. → docs/implementation-notes.md#is-agencies */
 	$is_agencies   = is_page_template( 'page-agencies.php' );
 
 	if ( $is_landing || $is_about || $is_industry || $is_download || $is_blog_agent || $is_salesforce || $is_for_index || $is_ind_cat || $is_agencies ) {
-		/* Section 3's demo script and timings. → docs/implementation-notes.md#section-3-s-demo-script-and-timings */
 		if ( $is_landing ) {
 			wp_enqueue_script(
 				'sitestaffr-demo-timings',
@@ -270,15 +255,12 @@ add_action( 'after_setup_theme', function () {
 	add_theme_support( 'post-thumbnails' );
 } );
 
-/* Provision the homepage's search title and description. → docs/implementation-notes.md#hook-init */
 add_action( 'init', function () {
 	$provision_version = '2';
 	if ( get_option( 'sitestaffr_home_seo_v' ) === $provision_version ) {
 		return;
 	}
 
-	// Only meaningful with a static front page; otherwise Yoast reads its own
-	// Search Appearance settings and post meta would be ignored.
 	if ( 'page' !== get_option( 'show_on_front' ) ) {
 		return;
 	}
@@ -296,7 +278,6 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_home_seo_v', $provision_version );
 } );
 
-/* Provision the /blog-agent marketing page and its SEO metadata. → docs/implementation-notes.md#hook-init-2 */
 add_action( 'init', function () {
 	$provision_version = '2';
 	if ( get_option( 'sitestaffr_blog_agent_page_v' ) === $provision_version ) {
@@ -321,7 +302,6 @@ add_action( 'init', function () {
 
 	if ( $page_id ) {
 		update_post_meta( $page_id, '_wp_page_template', 'page-blog-agent.php' );
-		// Yoast SEO fields (site runs Yoast) — set the search title + description.
 		update_post_meta( $page_id, '_yoast_wpseo_title', 'Blog Agent — AI SEO Blog Writing for WordPress | SiteStaffr' );
 		update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Blog Agent writes SEO-optimized blog posts grounded in your own business, with internal links, FAQs, and a featured image — saved as drafts for your review. Included in every SiteStaffr plan.' );
 	}
@@ -329,7 +309,6 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_blog_agent_page_v', $provision_version );
 } );
 
-/* Provision the /salesforce marketing page and its SEO metadata. → docs/implementation-notes.md#provision-version-2 */
 add_action( 'init', function () {
 	$provision_version = '1';
 	if ( get_option( 'sitestaffr_salesforce_page_v' ) === $provision_version ) {
@@ -354,7 +333,6 @@ add_action( 'init', function () {
 
 	if ( $page_id ) {
 		update_post_meta( $page_id, '_wp_page_template', 'page-salesforce.php' );
-		// Yoast SEO fields (site runs Yoast) — set the search title + description.
 		update_post_meta( $page_id, '_yoast_wpseo_title', 'Salesforce Integration — Send Website Leads Straight to Salesforce | SiteStaffr' );
 		update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'SiteStaffr answers your visitors by voice and text, qualifies them, and creates the Lead in your Salesforce automatically. Connect with your Salesforce login in about a minute. No API keys, no Zapier.' );
 	}
@@ -362,15 +340,12 @@ add_action( 'init', function () {
 	update_option( 'sitestaffr_salesforce_page_v', $provision_version );
 } );
 
-/* Provision /for/agencies/ — the second-audience page. → docs/implementation-notes.md#hook-init-3 */
 add_action( 'init', function () {
 	$provision_version = '1';
 	if ( get_option( 'sitestaffr_agencies_page_v' ) === $provision_version ) {
 		return;
 	}
 
-	/* The "for" parent must exist first; the industry provisioner creates it, but this
-	   must not depend on the order the two run in. */
 	$parent    = get_page_by_path( 'for' );
 	$parent_id = $parent ? (int) $parent->ID : 0;
 	if ( ! $parent_id ) {
@@ -405,7 +380,6 @@ add_action( 'init', function () {
 	if ( $page_id ) {
 		update_post_meta( $page_id, '_wp_page_template', 'page-agencies.php' );
 
-		/* Yoast owns title and meta, as everywhere else. → docs/implementation-notes.md#yoast-owns-title-and-meta-as-everywhere-else-d */
 		update_post_meta( $page_id, '_yoast_wpseo_title', 'AI Chat for WordPress Agencies — Add It to Every Client Site | SiteStaffr' );
 		update_post_meta( $page_id, '_yoast_wpseo_metadesc', 'Add an AI receptionist to the client sites you build. About five minutes per site, no code, and one login for billing across every client. Free 30-day trial on any site.' );
 		sitestaffr_clear_yoast_title_overrides( $page_id );
@@ -418,7 +392,6 @@ add_action( 'init', function () {
  * The industry registry: one source of truth for which /for/ pages exist and how
  * they present themselves. The nav, footer, /for/ index, llms.txt output and the
  * page provisioner all read from here.
- * See docs/implementation-notes.md#sitestaffr-industry-registry
  *
  * @return array<int,array<string,mixed>> Ordered groups, each with a heading and its industries.
  */
@@ -470,7 +443,6 @@ function sitestaffr_industry_registry() {
 					'seo_title' => 'AI Receptionist for Veterinary Clinics | SiteStaffr',
 					'metadesc'  => 'SiteStaffr answers veterinary clinic website visitors 24/7, captures urgent pet owner inquiries, and emails a full recap instantly. Free 30-day trial.',
 				),
-				/* Filed under Health & Medical even though it is B2B: the five groups are a browse aid rather than a… → docs/implementation-notes.md#filed-under-health-medical-even-though-it-is-b */
 				array(
 					'slug'      => 'medical-staffing',
 					'title'     => 'Medical Staffing',
@@ -525,7 +497,6 @@ function sitestaffr_industry_registry() {
 			'h1'         => 'An AI Receptionist for Home Service Businesses',
 			'slug'       => 'home-trades',
 			'icon'       => '🔧',
-			/* ⚠️ "Home Service BUSINESSES", not "Home Services" — this hub and the /for/home-services/ industry… → docs/implementation-notes.md#home-service-businesses-not-home-services-thi */
 			'seo_title'  => 'AI Receptionist for Home Service Businesses | SiteStaffr',
 			'metadesc'   => 'Capture urgent home service jobs around the clock, for HVAC, plumbing, pest control and general contracting. Every lead in your inbox. Free 30-day trial.',
 			'intro'      => 'Home service work is urgent and competitive: whoever answers first usually wins the job. SiteStaffr responds on your website at any hour and gets the name, number and problem to you right away.',
@@ -629,10 +600,8 @@ function sitestaffr_industry_registry() {
 	);
 }
 
-/* Flat industry list for the consumers that don't care about grouping (footer, llms.txt, page… → docs/implementation-notes.md#sitestaffr-industry-category */
 /**
  * The registry group whose hub slug matches, or null.
- * See docs/implementation-notes.md#sitestaffr-industry-category-2
  *
  * @param string $slug Category slug.
  * @return array<string,mixed>|null
@@ -648,7 +617,6 @@ function sitestaffr_industry_category( $slug ) {
 
 /**
  * Flat list of the category groups, without their industries.
- * See docs/implementation-notes.md#sitestaffr-industry-categories
  *
  * @return array<int,array<string,mixed>>
  */
@@ -670,7 +638,6 @@ function sitestaffr_industry_categories() {
 
 /**
  * Card-sized thumbnail for an industry's isometric art, or '' when there is none.
- * See docs/implementation-notes.md#sitestaffr-industry-art-thumb-url
  *
  * @param string $slug Industry slug.
  * @return string Cache-busted URL, or '' if no thumbnail exists.
@@ -685,7 +652,6 @@ function sitestaffr_industry_art_thumb_url( $slug ) {
 
 /**
  * Full-size industry isometric, for the homepage's section 6 panel.
- * See docs/implementation-notes.md#sitestaffr-industry-art-url
  *
  * @param string $slug Industry slug.
  * @return string URL, or '' if there is no render for this industry yet.
@@ -709,17 +675,12 @@ function sitestaffr_industry_list() {
 	return $flat;
 }
 
-/* Provision the /for/<slug> industry landing pages and their SEO metadata from the registry above. → docs/implementation-notes.md#hook-init-4 */
 add_action( 'init', function () {
-	/* ⚠️ BUMPED 11 -> 12 TO CREATE /for/medical-staffing/, WHICH 404ed ON PRODUCTION. → docs/implementation-notes.md#provision-version */
 	$provision_version = '13';
 	if ( get_option( 'sitestaffr_industry_pages_v' ) === $provision_version ) {
 		return;
 	}
 
-	// Pages touched by this run, purged from LiteSpeed at the end. Provisioning
-	// writes post meta rather than saving the post, so none of LiteSpeed's own
-	// invalidation hooks fire and the stale HTML would otherwise survive.
 	$provisioned_ids = array();
 
 	$parent    = get_page_by_path( 'for' );
@@ -738,8 +699,6 @@ add_action( 'init', function () {
 		}
 	}
 
-	// The parent is a real index page, so it needs its own title, description and
-	// a cleared noindex left over from when it was only a URL container.
 	if ( $parent_id ) {
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-noindex' );
 		delete_post_meta( $parent_id, '_yoast_wpseo_meta-robots-nofollow' );
@@ -749,8 +708,6 @@ add_action( 'init', function () {
 		$provisioned_ids[] = $parent_id;
 	}
 
-	// Category hubs at /for/<category>/ are siblings of the industry pages, not
-	// parents: reparenting would rewrite URLs that are already live and indexed.
 	foreach ( sitestaffr_industry_registry() as $group ) {
 		if ( empty( $group['slug'] ) ) {
 			continue;
@@ -782,8 +739,6 @@ add_action( 'init', function () {
 				update_post_meta( $cat_id, '_yoast_wpseo_metadesc', $group['metadesc'] );
 			}
 			sitestaffr_clear_yoast_title_overrides( $cat_id );
-			// Last: the save is what rebuilds Yoast's cached row, so it must follow
-			// the meta writes.
 			sitestaffr_heal_post_title( $cat_id, $group['heading'] );
 			$provisioned_ids[] = $cat_id;
 		}
@@ -812,21 +767,16 @@ add_action( 'init', function () {
 
 		if ( $page_id ) {
 			update_post_meta( $page_id, '_wp_page_template', 'page-industry.php' );
-			// Yoast SEO fields (site runs Yoast) — set the search title + description.
 			update_post_meta( $page_id, '_yoast_wpseo_title', $data['seo_title'] );
 			update_post_meta( $page_id, '_yoast_wpseo_metadesc', $data['metadesc'] );
 			sitestaffr_clear_yoast_title_overrides( $page_id );
 
-			// Last, and the order matters: this saves the post, which rebuilds Yoast's
-			// cached row. Run it before the meta writes and it would read stale values.
 			sitestaffr_heal_post_title( $page_id, $data['title'] );
 
 			$provisioned_ids[] = $page_id;
 		}
 	}
 
-	// Drop the cached HTML for everything just provisioned. No-ops without
-	// LiteSpeed, and runs once per version bump.
 	foreach ( array_unique( $provisioned_ids ) as $purge_id ) {
 		do_action( 'litespeed_purge_post', $purge_id );
 	}
@@ -934,7 +884,6 @@ add_action( 'template_redirect', function () {
 }, -10 );
 
 
-/* Estimated reading time in whole minutes. → docs/implementation-notes.md#sitestaffr-read-time-2 */
 function sitestaffr_read_time( $content ) {
 	$words = preg_match_all( '/\S+/', wp_strip_all_tags( $content ) );
 	return max( 1, (int) round( $words / 225 ) );
@@ -944,7 +893,6 @@ function sitestaffr_read_time( $content ) {
  * Give every <h2> in post content a stable id and return the list, so the
  * single-post template can build a Contents rail without a second pass over
  * the HTML.
- * See docs/implementation-notes.md#sitestaffr-blog-toc
  */
 function sitestaffr_blog_toc( $content ) {
 	$items = array();
@@ -966,9 +914,6 @@ function sitestaffr_blog_toc( $content ) {
 				if ( '' === $id ) {
 					$id = 'section';
 				}
-				// sanitize_title collapses punctuation, so two headings can
-				// land on the same slug and the rail would scroll to the wrong
-				// one. Suffix duplicates.
 				if ( isset( $seen[ $id ] ) ) {
 					$seen[ $id ]++;
 					$id .= '-' . $seen[ $id ];
@@ -994,7 +939,6 @@ function sitestaffr_blog_toc( $content ) {
 	);
 }
 
-/* 16:9 crops of the blog featured images. → docs/implementation-notes.md#hook-after-setup-theme */
 add_action( 'after_setup_theme', function () {
 	add_image_size( 'sitestaffr-hero-wide', 1024, 576, true );
 	add_image_size( 'sitestaffr-card-wide', 800, 450, true );

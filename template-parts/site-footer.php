@@ -3,8 +3,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 ?>
-<?php /* THE SHAPE DIVIDER BELONGS TO THE FOOTER. → docs/implementation-notes.md#footer */ ?>
-<?php /* ⚠️ THE CURTAIN SITS OUTSIDE <footer>, IN A ZERO-HEIGHT WRAPPER, AND IT HAS TO. → docs/implementation-notes.md#footer-seam */ ?>
 <div class="footer-seam" aria-hidden="true">
   <?php get_template_part( 'template-parts/seam-curtain' ); ?>
 </div>
@@ -22,7 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
               class="footer__logo-image"
             >
           </a>
-          <?php /* Positioning realigned with the V3 H1. → docs/implementation-notes.md#footer-tagline */ ?>
           <p class="footer__tagline">An AI receptionist for your website &mdash; answering visitors, capturing leads and writing your blog.</p>
         </div>
 

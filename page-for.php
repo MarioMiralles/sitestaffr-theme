@@ -22,20 +22,18 @@ $cta_url = home_url( '/#get-started' );
 
 <main class="ind-page">
 
-	<?php /* HERO: a V3 block, not a Split --------------------------------- `page-industry.php` uses… → docs/implementation-notes.md#block */ ?>
+	<?php ?>
 	<!-- Hero -->
 	<section class="block ind-hero">
 		<div class="block__inner">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label">Industries</span>
-				<?php /* ⚠️ THIS H1 WAS THE HOMEPAGE'S SECTION 6 H2, WORD FOR WORD. → docs/implementation-notes.md#ind-hero-subtitle */ ?>
 				<h1>An AI Receptionist for Your Line of&nbsp;Work</h1>
 				<p class="ind-hero__subtitle">SiteStaffr answers your website visitors by voice and text 24/7, captures who they are and what they need, and emails you a full recap. Here&rsquo;s what that looks like in your line of work.</p>
 			</div>
 		</div>
 	</section>
 
-	<?php /* DIRECTORY: ONE section holding five groups, not five sections ---- ⚠️ THIS FIXES A LIVE REGRESSION,… → docs/implementation-notes.md#block-2 */ ?>
 	<!-- Industry directory -->
 	<section class="block block-cards ind-problems ind-directory">
 		<div class="block__inner">
@@ -72,7 +70,6 @@ $cta_url = home_url( '/#get-started' );
 	</section>
 
 	<!-- CTA -->
-	<?php /* Closing CTA is a V3 dark block running into the footer, same as page-industry.php. → docs/implementation-notes.md#block-10 */ ?>
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">

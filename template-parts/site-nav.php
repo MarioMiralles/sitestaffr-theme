@@ -1,5 +1,4 @@
 <?php
-/* Shared site navigation. Accepts $args: 'secondary' => array of [ 'label' => string, 'href' => string ] —… → docs/implementation-notes.md#primary-menu */
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -17,15 +16,10 @@ $primary_menu = array(
         'label'      => 'Industries',
         'href'       => '#',
         'menu_class' => 'nav__dropdown-menu--mega',
-        // Grouped panel on desktop, stacked list with the same headings on
-        // mobile — same dropdown component, same open/close JS. The industries
-        // themselves come from the registry in functions.php (one source of
-        // truth for nav, footer, /for/ index, llms.txt and page provisioning).
         'groups'     => array_map(
             function ( $group ) {
                 return array(
                     'heading' => $group['heading'],
-                    // ⚠️ THE HEADING IS A LINK, AND WITHOUT THIS THE FIVE CATEGORY HUBS HAD NO PATH FROM THE NAV AT ALL… → docs/implementation-notes.md#href
                     'href'    => ! empty( $group['slug'] ) ? home_url( '/for/' . $group['slug'] . '/' ) : '',
                     'items'   => array_map(
                         function ( $industry ) {
@@ -41,7 +35,6 @@ $primary_menu = array(
             sitestaffr_industry_registry()
         ),
     ),
-    // Agencies is a TOP-LEVEL item, deliberately not inside the Industries dropdown. → docs/implementation-notes.md#label
     array( 'label' => 'Agencies', 'href' => home_url( '/for/agencies/' ) ),
     array( 'label' => 'Blog',  'href' => home_url( '/blog/' ) ),
     array( 'label' => 'About', 'href' => home_url( '/about/' ) ),
@@ -49,9 +42,6 @@ $primary_menu = array(
 
 $secondary_menu = isset( $args['secondary'] ) ? $args['secondary'] : array();
 
-// Self-serve is the primary conversion path. The trial starts when the plugin's
-// Setup Wizard registers the site, so /download/ is the trial: there is no separate
-// signup, and this must not point at the white-glove form.
 $cta = array(
     'label' => 'Start Free Trial',
     'href'  => home_url( '/download/' ),
@@ -98,7 +88,7 @@ $cta = array(
               </ul>
             </li>
             <?php endforeach; ?>
-            <?php /* The arrow is not decoration: this row sits below sixteen industry names and read as a… → docs/implementation-notes.md#nav-mega-all */ ?>
+            <?php ?>
             <li class="nav__mega-all"><a class="nav__dropdown-link" href="<?php echo esc_url( home_url( '/for/' ) ); ?>">See all industries <span aria-hidden="true">&rarr;</span></a></li>
           </ul>
         </li>

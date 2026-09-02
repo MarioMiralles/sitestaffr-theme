@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $get_started_url = home_url( '/#get-started' );
 
-// Page data — kept in arrays so the markup stays readable.
 $ba_pipeline = array(
     array(
         'num'   => '1',
@@ -103,11 +102,8 @@ $ba_faqs = array(
 .ba-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
-/* ⚠️ FLAT CREAM. → docs/implementation-notes.md#ba-hero */
 .ba-hero { background: var(--cream); }
-/* ⚠️ TWO CLASSES. `.block:not(.block--dark)` is (0,2,0) and beats a bare `.ba-hero` whatever the source order. → docs/implementation-notes.md#block-ba-hero */
 .block.ba-hero { padding-block-start: clamp(120px, 15vw, 140px); }
-/* Kept next to .block-split__grid, whose 1fr 1fr this overrides. */
 .ba-hero__grid {
     grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
     gap: clamp(32px, 5vw, 72px);
@@ -214,11 +210,8 @@ $ba_faqs = array(
 @media (prefers-reduced-motion: reduce) { .ba-float { animation: none; } }
 
 /* Section shell */
-/* ⚠️ NO `padding` HERE. → docs/implementation-notes.md#ba-section */
 .ba-section { background: var(--cream); }
 .ba-section__head { text-align: center; max-width: 720px; margin: 0 auto clamp(40px, 5vw, 64px); }
-/* The dark run: `.block--dark h2` already whitens the title; the deck and eyebrow
-   have to be told. */
 .block--dark .ba-section__lead { color: rgba(240,250,250,0.8); }
 .ba-section__title {
     font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem);
@@ -229,7 +222,6 @@ $ba_faqs = array(
     line-height: 1.6; color: var(--text-secondary); margin: 16px auto 0; max-width: 60ch;
 }
 
-/* Pipeline: a V3 Cards block, UNBOXED ------------------------------- ⚠️ `.ba-flow`'S OWN --warm-white… → docs/implementation-notes.md#pipeline-a-v3-cards-block-unboxed-ba-flow-s-ow */
 .ba-flow__grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(18px, 2.4vw, 28px);
 }
@@ -253,7 +245,6 @@ $ba_faqs = array(
 .ba-card__title { font-family: var(--font-display); font-size: 1.24rem; color: var(--text-primary); margin: 2px 0 8px; }
 .ba-card__desc { font-family: var(--font-body); font-size: 0.97rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
 
-/* Autopilot: the page's one dark run -------------------------------- ⚠️ THE DARK ROUNDED PANEL… → docs/implementation-notes.md#autopilot-the-page-s-one-dark-run-the-dark-rou */
 .ba-pilot__panel {
     display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
     gap: clamp(32px, 5vw, 64px); align-items: center;
@@ -296,7 +287,6 @@ $ba_faqs = array(
 .ba-sched__toggle { width: 42px; height: 24px; border-radius: 999px; background: #8fe8f2; position: relative; }
 .ba-sched__toggle::after { content: ''; position: absolute; top: 3px; right: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--block-dark); }
 
-/* Plans row: unboxed figures -------------------------------------- ⚠️ THIS IS NOT THE PRICING TABLE… → docs/implementation-notes.md#plans-row-unboxed-figures-this-is-not-the-pric */
 .ba-plans__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(20px, 2.6vw, 32px); }
 .ba-plan { text-align: center; }
 .ba-plan__name { font-family: var(--font-body); font-weight: 700; font-size: 0.92rem; letter-spacing: 0.02em; text-transform: uppercase; color: var(--text-muted); }
@@ -309,13 +299,10 @@ $ba_faqs = array(
 }
 .ba-plans__foot { text-align: center; margin-top: 26px; font-family: var(--font-body); font-size: 0.95rem; color: var(--text-muted); }
 
-/* Final CTA: a dark block into the footer --------------------------- Was a bordered warm-white card… → docs/implementation-notes.md#final-cta-a-dark-block-into-the-footer-was-a-b */
 .ba-cta__title { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.1; margin: 0 0 14px; color: #fff; }
 .ba-cta__text { font-family: var(--font-body); font-size: 1.1rem; color: rgba(240,250,250,0.8); margin: 0 auto 30px; max-width: 52ch; }
 
-/* ---- The curtain bracket. Scoped `.feature-page`, NOT generalised to `main`:
-   the homepage's two curtained sections add the seam's height in their own rules,
-   so a general selector would double it, decided by (0,1,2) vs (0,2,0). */
+/* ===== The curtain bracket. Scoped `.feature-page`, NOT generalised to `main`: ===== */
 .feature-page > section:has(> .seam-curtain) { position: relative; }
 .feature-page > section:has(> .seam-curtain--open) {
     padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
@@ -338,7 +325,6 @@ $ba_faqs = array(
     .ba-sched__days { width: 100%; justify-content: space-between; }
     .ba-sched__day { flex: 1 1 0; max-width: 40px; }
 }
-/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. → docs/implementation-notes.md#the-stacked-hero-centres-and-this-page-was-th */
 @media (max-width: 768px) {
     .ba-hero__content { text-align: center; }
     .ba-hero__sub { margin-inline: auto; }
@@ -467,14 +453,10 @@ $ba_faqs = array(
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php /* OPEN: the dark run rises out of the cream. → docs/implementation-notes.md#open-the-dark-run-rises-out-of-the-cream-direc */ ?>
+        <?php ?>
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
-    <?php /* ---- AUTOPILOT: the page's one dark run ------------------------
-             Was a dark rounded card floating on warm-white, in a three-stop gradient
-             matching nothing else on the site. Full-bleed now, bracketed by the
-             curtain pair. */ ?>
     <!-- Autopilot -->
     <section class="block block--dark block-split ba-pilot">
         <div class="block__inner">
@@ -521,8 +503,6 @@ $ba_faqs = array(
 
     <!-- Plans -->
     <section class="block block-cards ba-section ba-plans">
-        <?php /* CLOSE: the same curve mirrored, so the pair brackets the dark run as
-                 ONE gesture. ⚠️ If either path is edited, mirror the other. */ ?>
         <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
         <div class="block__inner">
             <div class="ba-section__head reveal">
@@ -547,8 +527,6 @@ $ba_faqs = array(
     </section>
 
     <!-- FAQ -->
-    <?php /* ⚠️ `.faq-section__head`, NOT `__header` — the `__header` spelling has no
-             rule anywhere in site.css, so this header was rendering unstyled. */ ?>
     <section class="block faq-section" id="faq">
         <div class="block__inner">
             <div class="faq-section__head reveal">

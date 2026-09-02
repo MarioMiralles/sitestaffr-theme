@@ -39,7 +39,6 @@ $post_index    = 0;
 	</header>
 
 	<section class="blog-index__posts">
-		<?php // dark hero above -> 'close'; dark footer below -> 'open'. ?>
 		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 		<div class="container">
@@ -48,9 +47,6 @@ $post_index    = 0;
 				<div class="blog-grid">
 					<?php while ( $blog_query->have_posts() ) : $blog_query->the_post();
 						$post_index++;
-						// On page one the newest post runs as a wide lead card —
-						// square image left, title and deck right — mirroring the
-						// post hero so the index and the article read as one system.
 						$is_lead  = ( $is_first_page && 1 === $post_index );
 						$eager    = ( $is_first_page && $post_index <= 3 ) ? array( 'loading' => 'eager' ) : array();
 						$read     = sitestaffr_read_time( get_the_content() );

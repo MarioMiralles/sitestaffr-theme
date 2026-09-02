@@ -119,7 +119,6 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   margin-bottom: 16px;
   display: block;
 }
-/* ⚠️ ON A DARK BLOCK THE LABEL HAS TO GO LIGHTER, NOT DARKER. → docs/design-system.md#block-dark-section-label */
 .block--dark .section-label { color: var(--teal-light); }
 
 /* ========== BUTTONS ========== */
@@ -170,11 +169,8 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   box-shadow: var(--shadow-lg);
 }
 
-/* The scroll-reveal system was deleted. → docs/design-system.md#the-scroll-reveal-system-was-deleted-it-defaul */
 
-/* ========== BLOCK SYSTEM ==========================================
-   V3. Every section is exactly one of four blocks:
-   Statement, Split, Cards, Panel. That is the whole vocabulary. */
+/* ===== BLOCK SYSTEM ===== */
 :root {
   --block-pad: 64px;
   --block-pad-light: 96px;
@@ -190,12 +186,9 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 
 .block { padding-block: var(--block-pad); }
 
-/* ⚠️ THE LIGHT RUN GETS MORE AIR THAN THE DARK, AND THAT IS NOT AN INCONSISTENCY. → docs/design-system.md#block-not-block-dark */
 .block:not(.block--dark) { padding-block: var(--block-pad-light); }
-/* `.block--tight` NO LONGER CHANGES ANYTHING. → docs/design-system.md#block-tight */
 .block--tight { padding-block: var(--block-pad); }
 
-/* ⚠️ THE SCALE STEPS DOWN TWICE BELOW THE DESKTOP LAYOUT. → docs/design-system.md#media-max-width-1024px */
 @media (max-width: 1024px) {
   :root { --block-pad: 44px; --block-pad-light: 60px; --block-pad-run: 24px; }
 }
@@ -215,11 +208,8 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   color: var(--text-on-dark);
 }
 .block--dark h1, .block--dark h2, .block--dark h3, .block--dark h4 { color: #FFFFFF; }
-/* Adjacent dark blocks must not draw a line between themselves — they are one dark run visually, two… → docs/design-system.md#block-dark-block-dark */
 .block--dark + .block--dark { padding-block-start: var(--block-pad-run); }
 
-/* ⚠️ EVERY DARK BLOCK OVERLAPS WHAT IS ABOVE IT BY 2px, AND THIS IS A RENDERING FIX, NOT A SPACING ONE. → docs/design-system.md#position-relative-is-load-bearing-twice-it-i */
-/* ⚠️ `position: relative` IS LOAD-BEARING TWICE. → docs/design-system.md#hero-block-dark */
 .hero + .block--dark {
   position: relative;
   margin-block-start: -2px;
@@ -229,8 +219,6 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   margin-block-start: -2px;
   padding-block-start: calc(var(--block-pad-run) + 2px);
 }
-/* The footer is the same shape of problem as the hero: a light section with `overflow:
-   hidden` and a closing curtain, meeting a dark box below it. */
 .footer { margin-block-start: -2px; }
 
 /* ---- Statement: centered eyebrow + heading + one paragraph. Type only. ---- */
@@ -244,8 +232,6 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
 }
-/* Puts the artifact first in visual order without touching DOM order, so the
-   reading sequence and the tab order stay correct. */
 .block-split--reverse .block-split__art { order: -1; }
 
 /* ---- Cards: a row of 2-4 equal cards. ---- */
@@ -449,8 +435,6 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   transition: background 0.15s ease, color 0.15s ease;
   white-space: nowrap;
 }
-/* Industries mega panel: grouped columns on desktop, plain stacked list on
-   mobile (the grid rules are desktop-only, so the mobile nav is untouched). */
 .nav__mega-list {
   list-style: none;
   margin: 0;
@@ -465,7 +449,6 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
   text-transform: uppercase;
   color: rgba(26,35,50,0.62);
 }
-/* The category heading is now a LINK to its hub ---------------------- ⚠️ IT STAYS LOOKING LIKE A HEADING… → docs/design-system.md#nav-mega-heading-link */
 .nav__mega-heading--link {
   text-decoration: none;
   transition: color 0.15s ease;
@@ -474,7 +457,6 @@ h3 { font-size: clamp(1.3rem, 2.5vw, 1.6rem); }
 .nav__mega-heading--link:focus-visible {
   color: var(--teal-text);
 }
-/* teal-text, not --teal-deep: #00838F on white is 4.03:1 and this is 0.9rem text, so it failed AA. → docs/design-system.md#nav-mega-all-nav-dropdown-link */
 .nav__mega-all .nav__dropdown-link {
   color: var(--teal-text);
   font-weight: 600;
@@ -558,7 +540,6 @@ body.sitestaffr-landing-page .hero {
   background: #fffefc;
   padding-bottom: clamp(112px, 13vw, 168px);
 }
-/* ⚠️ THE FADE IS OFF ON THIS PAGE, AND THAT IS THE POINT the robot "has a fade and you can tell that it's… → docs/design-system.md#body-sitestaffr-landing-page-hero-after-disp */
 body.sitestaffr-landing-page .hero::after { display: none; }
 .hero__canvas {
   position: absolute;
@@ -880,7 +861,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   width: 44px;
   opacity: 0.5;
 }
-/* Step card lit up in sync with audio playback (mirrors the hover treatment) */
 .lead-demo__step-card--active {
   transform: translateY(-8px);
   box-shadow: var(--shadow-xl);
@@ -1664,11 +1644,9 @@ body.sitestaffr-landing-page .hero__visual > * {
 
 
 /* ========== SECTION 3: COST OF MISSED CALLS ========== */
-/* Section 3: see it answer ----------------------------------------- Second half of the dark block, so no… → docs/design-system.md#see-it-header */
 .see-it__header { text-align: center; margin-bottom: 40px; }
 .see-it__subtitle { color: rgba(240,250,250,0.7); margin-top: 8px; }
 
-/* The at-rest stage ------------------------------------------------: "the two blank panels looks bad so… → docs/design-system.md#see-it-is-interactive-not-has-played-see-it-panels */
 .see-it.is-interactive:not(.has-played) .see-it__panels { display: none; }
 .see-it.has-played .see-it__stage { display: none; }
 
@@ -1680,7 +1658,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: clamp(20px, 4vw, 40px) 20px clamp(24px, 4vw, 44px);
   text-align: center;
 }
-/* ⚠️ THE GLOW IS WHAT MAKES THE ROBOT VISIBLE, and raising opacity is not a substitute — that was tried first… → docs/design-system.md#see-it-stage-before */
 .see-it__stage::before {
   content: '';
   position: absolute;
@@ -1696,7 +1673,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   z-index: 0;
 }
 .see-it__stage > * { position: relative; z-index: 1; }
-/* Decoration, and deliberately quiet: the hero has this same character two sections up at a far… → docs/design-system.md#see-it-stage-robot */
 .see-it__stage-robot {
   width: auto;
   height: clamp(190px, 26vw, 300px);
@@ -1705,8 +1681,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   filter: drop-shadow(0 20px 44px rgba(0,0,0,0.45));
 }
-/* HUGE, as asked. It overlaps the robot rather than sitting under it, so the two read as
-   one object instead of a picture with a control beneath it. */
 .see-it__stage-play {
   position: relative;
   z-index: 1;
@@ -1723,7 +1697,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: 0 0 0 10px rgba(31,182,204,0.16), 0 18px 40px rgba(0,0,0,0.42);
   transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
 }
-/* NO margin-left. → docs/design-system.md#see-it-stage-play-svg */
 .see-it__stage-play svg { display: block; width: 42%; height: 42%; }
 .see-it__stage-play:hover,
 .see-it__stage-play:focus-visible {
@@ -1740,7 +1713,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: rgba(240,250,250,0.72);
 }
 
-/* The panels arrive when the stage leaves. → docs/design-system.md#the-panels-arrive-when-the-stage-leaves-two-be */
 @keyframes seeItPanelIn {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
@@ -1777,7 +1749,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   overflow: hidden;
 }
 
-/* The toggle sits ON the panel's top edge, because it controls the panel. */
 .see-it__tabs {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1841,7 +1812,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   max-height: 268px;
   overflow-y: auto;
 }
-/* ⚠️ THE CAP EXISTS ONLY BECAUSE PLAYBACK REVEALS LINES ONE AT A TIME. → docs/design-system.md#media-scripting-none */
 @media (scripting: none) {
   .see-it__convo { min-height: 0; max-height: none; overflow-y: visible; }
 }
@@ -1872,8 +1842,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: rgba(240,250,250,0.58);
   margin-bottom: 3px;
 }
-/* The link between the two panels: the line that produced a field flashes at
-   the instant the field lands. Without it the recap looks decorative. */
 .see-it__line.is-flash {
   background: rgba(31,182,204,0.28);
   box-shadow: 0 0 0 1px var(--teal-light);
@@ -1886,9 +1854,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   padding: 14px 18px;
   border-top: 1px solid rgba(240,250,250,0.10);
 }
-/* `display:flex` on a class selector BEATS the user-agent's `[hidden]{display:none}`, so the PHP… → docs/design-system.md#see-it-transport-hidden */
 .see-it__transport[hidden] { display: none; }
-/* The largest interactive element in the section, deliberately. */
 .see-it__play {
   width: 52px; height: 52px;
   flex: 0 0 52px;
@@ -1905,7 +1871,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 .see-it.is-playing .see-it__play-icon { display: none; }
 .see-it.is-playing .see-it__pause-icon { display: block; }
 
-/* The scrubber is the hero's soundwave motif reused as a progress bar. */
 .see-it__scrub {
   flex: 1;
   height: 6px;
@@ -1958,7 +1923,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.9rem;
   color: var(--text-on-dark);
 }
-/* Label and value arrive together as a pair, so the pair animates as a unit. */
 .see-it__field.is-in { animation: seeItFieldIn 0.35s ease both; }
 @keyframes seeItFieldIn {
   from { opacity: 0; transform: translateY(6px); }
@@ -1995,9 +1959,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: rgba(240,250,250,0.5);
 }
 
-/* ---- States that apply ONLY once the script has wired itself ----
-   .is-interactive is added last. Everything the script hides is hidden here and
-   nowhere else, so a failure before that point leaves the section complete. */
+/* ===== States that apply ONLY once the script has wired itself ===== */
 .see-it.is-interactive .see-it__gen,
 .see-it.is-interactive .see-it__toast { opacity: 0; }
 .see-it.is-interactive .see-it__gen.is-in,
@@ -2005,8 +1967,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   opacity: 1;
   animation: seeItFieldIn 0.4s ease both;
 }
-/* The ~1s shimmer before the summary and follow-up, because they genuinely are
-   generated after the conversation ends. */
 .see-it.is-interactive .see-it__gen.is-shimmer {
   opacity: 1;
   background: linear-gradient(90deg,
@@ -2030,17 +1990,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   .see-it__tab-q { font-size: 0.78rem; }
 }
 
-/* ---- Section 5: speaks their language ---------------------------------
-   The crowd render and its twelve hand-measured --x/--y coordinate variables
-   are gone. Those coordinates were the maintenance trap this review was called
-   to fix: they positioned bubbles over artwork, so swapping the image silently
-   invalidated all twelve, and they had already been re-measured twice. */
+/* ===== Section 5: speaks their language ===== */
 .lang-section { background: var(--cream); }
-/* ⚠️ The duplicate .lang-section__text that sat here is DELETED, not left. → docs/design-system.md#the-duplicate-lang-section-text-that-sat-here */
 
-/* Section 5: the language orbit ------------------------------------: "I'd rather see the robot super big… → docs/design-system.md#lang-section-header */
 .lang-section__header { text-align: center; max-width: 46rem; margin: 0 auto; }
-/* `balance` because this is a two-sentence subtitle in a 46rem centered column, which is exactly… → docs/design-system.md#lang-section-text-2 */
 .lang-section__text { color: var(--text-secondary); margin-top: 14px; text-wrap: balance; }
 
 .lang-orbit {
@@ -2050,7 +2003,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   display: flex;
   justify-content: center;
 }
-/* ⚠️ THE SAME BLOOM AS THE VOICE DEMO'S ROBOT. → docs/design-system.md#lang-orbit-before */
 .lang-orbit::before {
   content: '';
   position: absolute;
@@ -2065,7 +2017,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   pointer-events: none;
   z-index: 0;
 }
-/* The haze: more languages, receding behind the robot --------------- Texture, not content — the twelve… → docs/design-system.md#lang-orbit-haze */
 .lang-orbit__haze {
   position: absolute;
   inset: 0;
@@ -2083,16 +2034,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--teal-deep);
   letter-spacing: -0.01em;
 }
-/* The robot has to sit ON the haze, so it needs a stacking position of its own — it is
-   an in-flow flex child and would otherwise paint underneath a positioned sibling. */
 .lang-orbit__robot { position: relative; z-index: 1; }
 
-/* ⚠️ THE HAZE IS DESKTOP-ONLY. → docs/design-system.md#media-max-width-900px-4 */
 @media (max-width: 900px) {
   .lang-orbit__haze { display: none; }
 }
 
-/* SUPER BIG, as asked — this is the largest the robot appears anywhere except the hero. */
 .lang-orbit__robot {
   --robot-h: clamp(320px, 42vw, 560px);
   width: auto;
@@ -2125,7 +2072,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .lang-orbit__hello { line-height: 1.2; }
 
-/* TWO SIDE BANDS, SIX EACH, and the numbers are the point: every `left` keeps the chip's own box… → docs/design-system.md#lang-orbit-item-1 */
 .lang-orbit__item--1  { top:  4%; left:  4%; animation-delay: 0s; }
 .lang-orbit__item--2  { top: 19%; left: 12%; animation-delay: 0.4s; }
 .lang-orbit__item--3  { top: 35%; left:  1%; animation-delay: 0.8s; }
@@ -2147,7 +2093,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   .lang-orbit__item { animation: none; }
 }
 
-/* ⚠️ BELOW 900px THE GREETINGS STOP BEING POSITIONED AT ALL. → docs/design-system.md#media-max-width-900px-5 */
 @media (max-width: 900px) {
   .lang-orbit { flex-direction: column; align-items: center; }
   .lang-orbit__robot { --robot-h: clamp(260px, 54vw, 380px); }
@@ -2166,7 +2111,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   }
 }
 
-/* Promoted from body text to its own element: it answers "great, but I can't read Mandarin", which… → docs/design-system.md#lang-section-english */
 .lang-section__english {
   display: inline-flex;
   align-items: flex-start;
@@ -2180,18 +2124,14 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-weight: 500;
   text-align: left;
 }
-/* Pins the check to the FIRST line instead of the middle of the wrapped block. → docs/design-system.md#lang-section-english-svg */
 .lang-section__english svg { flex: none; margin-top: 3px; }
-/* The wrapper is centered, not the text: an inline-flex pill cannot center itself. */
 .lang-section .block__inner { text-align: center; }
 .lang-orbit, .lang-orbit__item { text-align: left; }
 
-/* Section 6: who this is for -------------------------------------- Split, image LEFT… → docs/design-system.md#industries */
 .industries { background: var(--cream); }
 /* Tightened from 40px. */
 .industries__header { text-align: center; margin-bottom: 24px; }
 .industries__subtitle { color: var(--text-secondary); margin-top: 8px; }
-/* Two stacked rows, not a Split ------------------------------------: the Split "looks weird because the… → docs/design-system.md#industries-stage */
 .industries__stage {
   display: grid;
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
@@ -2208,8 +2148,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   height: auto;
   margin-inline: auto;
 }
-/* A missing render degrades to the industry's own emoji at display size, not to
-   an alt-text box. Medical Staffing is in this state today. */
 .industries__panel-fallback {
   display: grid;
   place-items: center;
@@ -2222,7 +2160,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-xl);
 }
 
-/* LEFT-ALIGNED NOW, not centered. → docs/design-system.md#industries-excerpt */
 .industries__excerpt {
   display: grid;
   background: var(--block-dark-raised);
@@ -2243,7 +2180,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.65;
   max-width: 42ch;
 }
-/* ⚠️ teal-light ON DARK, NOT --teal-text. → docs/design-system.md#industries-link */
 .industries__link {
   display: inline-block;
   margin-top: 10px;
@@ -2254,7 +2190,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .industries__link:hover { border-bottom-color: var(--teal-light); }
 
-/* ⚠️ THE LIST IS FIVE COLUMNS, ONE PER GROUP — this is what actually fixes the complaint. → docs/design-system.md#industries-list */
 .industries__list {
   margin-top: clamp(18px, 3vw, 34px);
   display: grid;
@@ -2262,8 +2197,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   gap: clamp(18px, 2.5vw, 34px);
   align-items: start;
 }
-/* The stacked-column spacing belonged to the one-column Split. In a grid the gap owns
-   it, and leaving this in adds a phantom offset to every group after the first. */
 .industries__group + .industries__group { margin-top: 0; }
 .industries__group-heading {
   font-family: var(--font-body);
@@ -2288,14 +2221,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   transition: background 0.16s ease, color 0.16s ease;
 }
 .industries__name:hover { background: var(--teal-pale); color: var(--teal-deep); }
-/* ACTIVE IS A FILLED PILL. → docs/design-system.md#industries-name-is-active */
 .industries__name.is-active {
   background: var(--teal-deep);
   color: #fff;
   font-weight: 600;
   box-shadow: none;
 }
-/* Hover must not repaint the SELECTED row back to pale — it comes later in the file and would… → docs/design-system.md#industries-name-is-active-hover */
 .industries__name.is-active:hover {
   background: var(--teal-deep);
   color: #fff;
@@ -2359,7 +2290,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   .industries.is-interactive .industries__name.is-open + .industries__mobile-detail { display: block; }
 }
 
-/* .screen-reader-text ---------------------------------------------- WordPress convention class, used 11… → docs/design-system.md#screen-reader-text */
 .screen-reader-text {
   position: absolute !important;
   width: 1px;
@@ -2372,7 +2302,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   border: 0;
 }
 
-/* Section 8: the pricing table ------------------------------------- ONE SHARED LABEL RAIL plus four columns. → docs/design-system.md#pricing-section */
 .pricing-section { background: var(--cream); }
 .pricing-section__header { text-align: center; margin-bottom: 28px; }
 .pricing-section__subtitle {
@@ -2382,14 +2311,11 @@ body.sitestaffr-landing-page .hero__visual > * {
   margin-top: 8px;
 }
 
-/* THE INCLUSIONS STRIP: PLAIN ON THE CREAM, no border and no tab. → docs/design-system.md#one-left-axis-nothing-in-this-strip-is-cente */
-/* ⚠️ ONE LEFT AXIS. NOTHING IN THIS STRIP IS CENTERED. → docs/design-system.md#price-includes-homepage */
 .price-includes--homepage {
   padding: 0;
   max-width: 1080px;
   margin: 0 auto 44px;
 }
-/* THE BOX IS BACK, AS A QUIET SURFACE RATHER THAN A FILLED PANEL. → docs/design-system.md#price-includes-homepage-price-includes-grid */
 .price-includes--homepage .price-includes__grid {
   position: relative;
   background: #fff;
@@ -2401,7 +2327,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   gap: 14px 28px;
   text-align: left;
 }
-/* The label survives as type. It is the sentence the strip completes - the items below it are the predicate -… → docs/design-system.md#price-includes-homepage-price-includes-grid-before */
 .price-includes--homepage .price-includes__grid::before {
   content: attr(data-label);
   grid-column: 1 / -1;
@@ -2433,7 +2358,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--teal-deep);
 }
 .price-includes--homepage .price-includes__icon svg { width: 19px; height: 19px; }
-/* ⚠️ ALL SIX ITEMS CARRY THE SAME WEIGHT AND THE SAME COLOR, and that is a correctness rule rather than a… → docs/design-system.md#price-includes-homepage-price-includes-label */
 .price-includes--homepage .price-includes__label {
   font-size: 0.92rem;
   font-weight: 600;
@@ -2451,7 +2375,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   text-decoration-color: var(--teal-deep);
 }
 
-/* The flat-rate promise is the reason the pricing works at all, so it stays a full-width row above… → docs/design-system.md#price-includes-homepage-price-includes-item-lead */
 .price-includes--homepage .price-includes__item--lead {
   grid-column: 1 / -1;
   justify-content: flex-start;
@@ -2491,7 +2414,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   line-height: 1.45;
   color: var(--text-secondary);
 }
-/* No second rule here. One divider in the strip, under the lead row, because that is the only real division: a… → docs/design-system.md#price-includes-footer-2 */
 .price-includes__footer {
   grid-column: 1 / -1;
   margin-top: 16px;
@@ -2523,13 +2445,10 @@ body.sitestaffr-landing-page .hero__visual > * {
   }
   .price-includes__note { font-size: 0.85rem; }
 }
-/* Two columns leave ~110px for a label on a phone, which shreds the longer
-   inclusions into three and four lines. One column for every portrait phone. */
 @media (max-width: 460px) {
   .price-includes--homepage .price-includes__grid { grid-template-columns: 1fr; }
 }
 
-/* ⚠️ SELECTOR SPECIFICITY IS DELIBERATE HERE. → docs/design-system.md#pricing-section-price-grid-price-grid-table */
 .pricing-section .price-grid.price-grid--table {
   display: grid;
   grid-template-columns: 132px 0.88fr 1fr 1fr 1fr;
@@ -2545,7 +2464,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: 0 20px 54px rgba(0,50,58,0.26), 0 4px 12px rgba(0,50,58,0.14);
   overflow: visible;
 }
-/* ⚠️ MIN-WIDTH, and it has to be. Below 1040px these stop being columns of one panel and become separate cards… → docs/design-system.md#media-min-width-1041px */
 @media (min-width: 1041px) {
   .price-grid--table > .price-grid__labels {
     border-radius: var(--radius-lg) 0 0 var(--radius-lg);
@@ -2555,11 +2473,8 @@ body.sitestaffr-landing-page .hero__visual > * {
   }
 }
 
-/* ⚠️ ONE HAIRLINE VALUE FOR THE WHOLE TABLE. → docs/design-system.md#price-grid-table */
 .price-grid--table { --table-rule: rgba(240,250,250,0.13); }
 
-/* The rail: one set of labels for four columns. Deeper than the panel, so it
-   reads as the surface the columns sit ON rather than a fifth column. */
 .price-grid__labels {
   display: grid;
   grid-row: 1 / -1;
@@ -2586,7 +2501,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   align-self: end;
 }
 
-/* ⚠️ THIS RESET IS LOAD-BEARING, AND ITS ABSENCE IS WHAT MADE THE V1 BLOCK LOOK NECESSARY. → docs/design-system.md#price-grid-table-price-tier */
 .price-grid--table .price-tier {
   background: none;
   padding: 0;
@@ -2601,7 +2515,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   box-shadow: none;
 }
 
-/* COLUMN HOVER. A comparison table is read by tracking one column down against a label rail, and a lit column… → docs/design-system.md#price-grid-table-price-tier-2 */
 .price-grid--table .price-tier { isolation: isolate; }
 .price-grid--table .price-tier::before {
   content: '';
@@ -2625,7 +2538,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-right: 1px solid var(--table-rule);
 }
 .price-tier:last-child { border-right: 0; }
-/* The identity row is the only cell in the table that is allowed to breathe. → docs/design-system.md#price-tier-identity */
 .price-tier__identity {
   display: flex;
   flex-direction: column;
@@ -2667,7 +2579,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .price-tier__row-label { display: none; }   /* the rail speaks for all four columns */
 .price-tier__row-value small { color: rgba(240,250,250,0.55); font-size: 0.78em; }
-/* ⚠️ THE CHECKMARK STAYS WHITE. → docs/design-system.md#price-grid-table-price-tier-row-value-yes */
 .price-grid--table .price-tier__row-value--yes { color: #fff; }
 .price-grid--table .price-tier__row-value--none { color: rgba(240,250,250,0.32); }
 
@@ -2686,8 +2597,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-style: normal;
   margin-bottom: 0;
 }
-/* The column is ~150px wide. The site button's 36px side padding leaves room for
-   about six characters, which turned "Start Free Trial" into three stacked lines. */
 .price-grid--table .price-tier .btn {
   width: 100%;
   padding: 12px 14px;
@@ -2696,7 +2605,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   justify-content: center;
   text-align: center;
 }
-/* ⚠️ BOTH BUTTON VARIANTS ARE INVISIBLE ON THIS PANEL AS SHIPPED. → docs/design-system.md#price-grid-table-price-tier-btn-outline */
 .price-grid--table .price-tier .btn--outline {
   background: transparent;
   border-color: rgba(240,250,250,0.4);
@@ -2706,7 +2614,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: rgba(240,250,250,0.1);
   border-color: var(--text-on-dark);
 }
-/* The recommended tier's CTA is the one action this section is built to get, so it is the only… → docs/design-system.md#price-grid-table-price-tier-btn-primary */
 .price-grid--table .price-tier .btn--primary {
   background: var(--teal-light);
   color: var(--block-dark);
@@ -2718,11 +2625,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   transform: none;
 }
 
-/* THE ON-RAMP TREATMENT, NOW CARRIED BY TYPE AND WIDTH RATHER THAN BY FILL.: every column the same color… → docs/design-system.md#price-grid-table-price-tier-trial-price-tier-price */
 .price-grid--table .price-tier--trial .price-tier__price { color: rgba(240,250,250,0.82); }
 .price-grid--table .price-tier--trial .price-tier__name { color: rgba(240,250,250,0.66); }
 
-/* Business is the recommended tier, and EMERALD IS THE SIGNAL. → docs/design-system.md#price-grid-table-price-tier-popular */
 .price-grid--table .price-tier--popular {
   background: rgba(16,185,129,0.13);
   transform: none;
@@ -2730,11 +2635,9 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-right: 1px solid var(--table-rule);
   box-shadow: none;
 }
-/* ⚠️ EMERALD IS THE RECOMMENDED-TIER SIGNAL AND IT HAS TO SURVIVE THE INVERSION. → docs/design-system.md#price-grid-table-price-tier-popular-price-tier-price */
 .price-grid--table .price-tier--popular .price-tier__price { color: #34D399; }
 .price-grid--table .price-tier--popular .price-tier__name { color: #fff; }
 
-/* A LABEL ON THE BORDER, not a chip inside the box. → docs/design-system.md#price-grid-table-price-tier-badge */
 .price-grid--table .price-tier__badge {
   position: absolute;
   top: -11px;
@@ -2810,7 +2713,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   .pricing-section .price-grid.price-grid--table { grid-template-columns: 1fr; }
 }
 
-/* The add-on fact, as a footnote to the table rather than a block under it. → docs/design-system.md#price-footnote-2 */
 .price-footnote {
   max-width: 1080px;
   margin: 22px auto 0;
@@ -2821,9 +2723,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .price-footnote strong { color: var(--text-primary); font-weight: 600; }
 
-/* Section 9: the FAQ ------------------------------------------------ ⚠️ TWO COLUMNS, WHICH REVERSES THE… → docs/design-system.md#no-seam-here-any-more-it-moved-down-to-secti */
-/* No seam here any more — it moved down to section 11, so this is a plain cream
-   section again and takes the light run's padding untouched. */
 .faq-section { background: var(--cream); }
 .faq-section__head {
   text-align: center;
@@ -2832,7 +2731,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .faq-section__subtitle { color: var(--text-secondary); margin-top: 8px; }
 
-/* TWO COLUMNS OF CATEGORIES. → docs/design-system.md#faq-section-columns */
 .faq-section__columns {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2840,8 +2738,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   align-items: start;
 }
 
-/* ⚠️ IT CLOSES THE SECTION NOW, and that is a third position for this element — worth knowing the history… → docs/design-system.md#robot-on-the-left-at-every-width-button-unde */
-/* ⚠️ ROBOT ON THE LEFT AT EVERY WIDTH, BUTTON UNDER THE HEADING. → docs/design-system.md#faq-section-ask */
 .faq-section__ask {
   display: flex;
   flex-wrap: nowrap;
@@ -2856,7 +2752,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   background: #fff;
   box-shadow: var(--shadow-sm);
 }
-/* ⚠️ THE SAME BOTTOM-FADE PROBLEM AS THE OTHER TWO ROBOTS. → docs/design-system.md#faq-section-ask-robot */
 .faq-section__ask-robot {
   flex: none;
   width: clamp(96px, 13vw, 128px);
@@ -2864,8 +2759,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
           mask-image: linear-gradient(to bottom, #000 0%, #000 82%, transparent 97%);
 }
-/* ⚠️ 16px, INHERITED FROM AN ELEMENT THAT NO LONGER EXISTS. → docs/design-system.md#16px-inherited-from-an-element-that-no-longer */
-/* The copy column: heading, then the button under it. → docs/design-system.md#faq-section-ask-copy */
 .faq-section__ask-copy {
   display: flex;
   flex-direction: column;
@@ -2873,14 +2766,12 @@ body.sitestaffr-landing-page .hero__visual > * {
   gap: 14px;
   min-width: 0;
 }
-/* The 14px gap above owns the space to the button now. → docs/design-system.md#faq-section-ask-lead */
 .faq-section__ask-lead {
   font-family: var(--font-display);
   font-size: clamp(1.15rem, 1.8vw, 1.4rem);
   font-weight: 600;
   margin-bottom: 0;
 }
-/* ⚠️ THE BUTTON MUST NOT EXCEED ITS COLUMN, and it takes THREE selectors because the shortcode emits three… → docs/design-system.md#faq-section-ask-sitestaffr-button-container */
 .faq-section__ask .sitestaffr-button-container { max-width: 100%; }
 .faq-section__ask .sitestaffr-button-widget {
   max-width: 100% !important;
@@ -2888,7 +2779,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .faq-section__ask .sitestaffr-button-text { white-space: normal !important; }
 
-/* ⚠️ NOTHING STACKS HERE, IT ONLY GETS SMALLER. → docs/design-system.md#media-max-width-560px */
 @media (max-width: 560px) {
   .faq-section__ask { padding: 18px 16px; gap: 12px; }
   .faq-section__ask-robot { width: 76px; }
@@ -2911,9 +2801,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .faq-list__group:first-child { margin-top: 0; }
 
-/* The first item ships open: every answer is already in the DOM for the schema,
-   so it costs nothing and shows the reader what an answer looks like. */
-/* ⚠️ ONE OPEN CLASS, AND IT IS `faq-item--open`. → docs/design-system.md#media-max-width-900px */
 
 @media (max-width: 900px) {
   .faq-section__columns { grid-template-columns: minmax(0, 1fr); gap: 0; }
@@ -2941,7 +2828,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   .faq-list__set .faq-item--open .faq-item__answer { background: var(--teal-pale); }
 }
 
-/* Section 10: the agency door -------------------------------------- A DARK CARD ON A LIGHT SECTION — the… → docs/design-system.md#agency-door */
 .agency-door {
   background: var(--cream);
   position: relative;
@@ -2949,12 +2835,7 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .block.agency-door { padding-block: 150px; }
 
-/* ---- The prop field ----------------------------------------------------
-   See page-landing.php for why these are twelve separate images rather than one scene.
-   The layer is inert and decorative; the props carry empty alt and the wrapper is
-   aria-hidden, so none of this reaches the accessibility tree. */
-/* ⚠️ THE LAYER IS THE CARD'S WIDTH, NOT THE SECTION'S — this is the whole reason the props stay glued… → docs/design-system.md#the-layer-is-the-card-s-width-not-the-section */
-/* ⚠️ CENTERED WITH AUTO MARGINS, NOT `left:50% + translateX(-50%)`. → docs/design-system.md#agency-door-props */
+/* ===== The prop field ===== */
 .agency-door__props {
   position: absolute;
   top: 0;
@@ -2970,17 +2851,13 @@ body.sitestaffr-landing-page .hero__visual > * {
   height: auto;
   filter: drop-shadow(0 10px 18px rgba(0,50,58,0.14));
 }
-/* BEHIND the card. `.block__inner` is not positioned, so it would paint over these
-   anyway — stating z-index makes the intent survive someone adding a position later. */
 .agency-door__prop--back { z-index: 0; }
-/* IN FRONT of the card, which sits at z-index auto inside .block__inner. → docs/design-system.md#agency-door-prop-front */
 .agency-door__prop--front {
   z-index: 3;
   filter: drop-shadow(0 16px 26px rgba(0,0,0,0.34));
 }
 .agency-door .block__inner { position: relative; z-index: 1; }
 
-/* ⚠️ THE WHOLE FIELD GOES BELOW 1320px, AND THE NUMBER WAS MEASURED, NOT GUESSED. → docs/design-system.md#media-max-width-1320px */
 @media (max-width: 1320px) {
   .agency-door__props { display: none; }
   .block.agency-door { padding-block: var(--block-pad-light); }
@@ -2993,10 +2870,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   border-radius: var(--radius-xl);
   box-shadow: 0 18px 44px rgba(0,50,58,0.16);
 }
-/* The card is dark inside a light section, so its type no longer inherits light ink from
-   .block--dark and has to be stated. */
 .agency-door h2 { color: var(--text-on-dark); }
-/* Load-bearing: it tells a plumber to skip this, which protects the SMB path. */
 .agency-door__eyebrow {
   display: block;
   font-size: 0.7rem;
@@ -3006,7 +2880,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   color: var(--teal-light);
   margin-bottom: 10px;
 }
-/* ⚠️ ONE CLASS, TWO SKINS — DO NOT "FIX" THE RULE ABOVE. → docs/design-system.md#agency-hero-agency-door-eyebrow */
 .agency-hero .agency-door__eyebrow { color: var(--teal-text); }
 .agency-door h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
 .agency-door__lead {
@@ -3047,10 +2920,7 @@ body.sitestaffr-landing-page .hero__visual > * {
   .agency-door__points { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* ---- /for/agencies/ ----------------------------------------------------
-   Reuses the block system, the recap surface, the FAQ accordion, the nav and the
-   footer. New CSS is deliberately close to zero - what is here is the browser-card
-   motif and a handful of spacing rules. */
+/* ===== /for/agencies/ ===== */
 .agency-hero h1 { font-size: clamp(2rem, 4vw, 2.9rem); }
 .agency-hero__lead {
   margin-top: 14px;
@@ -3072,8 +2942,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 .agency-hero__note { margin-top: 12px; font-size: 0.85rem; color: var(--text-muted); }
 
-/* The artifact: client sites as browser windows. No new render, and no robot -
-   his three appearances belong to the homepage. */
 .agency-sites {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -3148,7 +3016,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   font-size: 0.78rem;
   font-weight: 600;
 }
-/* The honest qualifier: five minutes is the INSTALL, not the configuration. */
 .agency-steps__then {
   margin-top: 20px;
   font-size: 0.9rem;
@@ -3159,8 +3026,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 }
 
 .agency-renewal__lead { color: var(--text-secondary); margin-top: 8px; }
-/* The recap surface is the homepage component, so it arrives dark. On this light
-   section it needs the light treatment rather than a second copy of the markup. */
 .agency-renewal__recap {
   max-width: 460px;
   background: #fff;
@@ -3183,7 +3048,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 .agency-pricing__lead { color: var(--text-secondary); margin-top: 8px; }
 /* --teal-text: --teal-deep on warm-white is 4.45:1 at 17px. */
 .agency-pricing__lead a { color: var(--teal-text); border-bottom: 1px solid rgba(0,131,143,0.35); }
-/* The gap, stated out loud. This box IS the demand-validation mechanism. */
 .agency-partner {
   margin-top: 22px;
   padding: 24px;
@@ -3205,7 +3069,6 @@ body.sitestaffr-landing-page .hero__visual > * {
 .agency-cta__note { margin-top: 16px; font-size: 0.88rem; color: rgba(240,250,250,0.6); }
 .agency-cta__note a { color: var(--teal-light); border-bottom: 1px solid rgba(31,182,204,0.4); }
 
-/* The curtain seam ------------------------------------------------- An absolute overlay pinned to the… → docs/design-system.md#seam-curtain */
 .seam-curtain {
   position: absolute;
   left: 0;
@@ -3216,8 +3079,6 @@ body.sitestaffr-landing-page .hero__visual > * {
   z-index: 1;
   pointer-events: none;
 }
-/* 1px on BOTH, for the same reason in both directions: sub-pixel rounding otherwise leaves a… → docs/design-system.md#1px-on-both-for-the-same-reason-in-both-direc */
-/* ⚠️ THE OPENING CURTAIN HANGS UPWARD OUT OF THE DARK SECTION. → docs/design-system.md#seam-curtain-open */
 .seam-curtain--open { bottom: -1px; }
 .block--dark > .seam-curtain--open {
   bottom: auto;
@@ -3227,17 +3088,12 @@ body.sitestaffr-landing-page .hero__visual > * {
 .seam-curtain svg { display: block; width: 100%; height: 100%; }
 .seam-curtain path { fill: var(--block-dark); }
 
-/* ⚠️ THE CLOSING CURTAIN FILLS WITH THE FOOTER'S COLOR, NOT THE BLOCK COLOR. → docs/design-system.md#the-closing-curtain-is-the-footer-s-now-so-t */
-/* ⚠️ THE CLOSING CURTAIN IS THE FOOTER'S NOW, so this is scoped to .footer rather than to one section on one… → docs/design-system.md#a-zero-height-wrapper-outside-footer-not-a-c */
-/* ⚠️ A ZERO-HEIGHT WRAPPER OUTSIDE <footer>, NOT A CHILD OF IT. → docs/design-system.md#footer-seam-2 */
 .footer-seam { position: relative; height: 0; }
 .footer-seam .seam-curtain path { fill: var(--footer-dark); }
 
-/* Room for the peak in whatever section ends the page, on every template. → docs/design-system.md#room-for-the-peak-in-whatever-section-ends-the */
 main > section:last-child { padding-bottom: calc(var(--block-pad) + clamp(53px, 6.65vw, 114px)); }
 main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px)); }
 
-/* Section 2: the job-value grid ------------------------------------ Padding, background and color come… → docs/design-system.md#root-amber-f4b860 */
 :root { --amber: #F4B860; }
 
 .cost-section__grid { align-items: center; }
@@ -3271,7 +3127,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
               border-color 0.3s ease, background-color 0.3s ease;
 }
 
-/* Card hover ------------------------------------------------------- V1's card gesture: `translateY(-4px)`… → docs/design-system.md#job-value-hover */
 .job-value:hover,
 .job-value:focus-within {
   transform: translateY(-4px);
@@ -3279,7 +3134,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   border-color: rgba(240,250,250,0.22);
   background-color: #0D4E58;
 }
-/* The watermark comes up with the card. → docs/design-system.md#job-value-hover-job-value-mark-after */
 .job-value:hover .job-value__mark::after,
 .job-value:focus-within .job-value__mark::after {
   color: rgba(240,250,250,0.065);
@@ -3290,7 +3144,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   .job-value:focus-within { transform: none; }
 }
 
-/* The industry watermark ------------------------------------------- Big, bold, and almost transparent —… → docs/design-system.md#job-value-mark */
 .job-value__mark {
   position: absolute;
   inset: 0;
@@ -3299,7 +3152,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   pointer-events: none;
   z-index: 0;
 }
-/* ⚠️ `top: 10px; right: 14px` IS THE POSITION AND IT IS NOT TO BE MOVED (, after two attempts to relocate it: "I… → docs/design-system.md#job-value-mark-after */
 .job-value__mark::after {
   content: attr(data-mark);
   position: absolute;
@@ -3315,7 +3167,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   transition: color 0.3s ease;
 }
 
-/* ⚠️ EXACT PHONE VALUES. 2.6rem here is the same 41.6px the desktop clamp caps at, so the stamp is one size… → docs/design-system.md#media-max-width-768px */
 @media (max-width: 768px) {
   .job-value__mark::after {
     top: 12px;
@@ -3324,7 +3175,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   }
 }
 
-/* EVERY CARD CHILD HAS TO BE RAISED ABOVE THE WATERMARK. → docs/design-system.md#job-value-icon-2 */
 .job-value__icon,
 .job-value__amount,
 .job-value__note {
@@ -3352,8 +3202,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   line-height: 1.45;
 }
 
-/* The source affordance: small, top-right, and a real button so it is reachable
-   by keyboard and by touch. */
 .job-value__src {
   position: absolute;
   top: 12px;
@@ -3410,12 +3258,10 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   .job-value__icon { width: 38px; height: 38px; }
 }
 
-/* Section 7: social proof ------------------------------------------ THE V2 ARRANGEMENT IN V3's PALETTE. → docs/design-system.md#proof-section */
 .proof-section {
   background: var(--cream);
 }
 
-/* STRETCH, so the quote panel is as tall as the evidence column beside it. → docs/design-system.md#proof-section-grid */
 .proof-section__grid {
   align-items: stretch;
   gap: clamp(32px, 5vw, 76px);
@@ -3437,8 +3283,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   color: var(--teal-deep);
 }
 
-/* The pair sits on one row and splits evenly. Below 520px it stacks - two
-   columns of a 3.4rem number on a phone is two numbers nobody can read. */
 .proof-section__lead-pair {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -3468,8 +3312,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   font-weight: 600;
 }
 
-/* THE DENOMINATOR, NOW ATTACHED TO THE NUMBER IT BELONGS TO. → docs/design-system.md#inline-with-the-label-not-stacked-under-it-i */
-/* ⚠️ INLINE WITH THE LABEL, NOT STACKED UNDER IT. → docs/design-system.md#proof-section-lead-sub */
 .proof-section__lead-sub {
   display: inline;
   font-size: 0.85rem;
@@ -3498,10 +3340,7 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 .proof-section__stats-source a:hover { text-decoration-color: var(--teal-deep); }
 
-/* ---- The quote panel: two overlapping planes ----
-   `isolation: isolate` for the same reason .price-tier needs it - the planes sit
-   at z-index -1, and without a stacking context here that is behind the SECTION's
-   background rather than behind this figure's content, i.e. invisible. */
+/* ===== The quote panel: two overlapping planes ===== */
 .proof-section__quote-block {
   position: relative;
   isolation: isolate;
@@ -3515,7 +3354,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   padding-top: clamp(34px, 3.4vw, 46px);
 }
 
-/* PLANE ONE, the surface. → docs/design-system.md#proof-section-quote-plate */
 .proof-section__quote-plate {
   position: absolute;
   z-index: -1;
@@ -3527,7 +3365,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   transform: rotate(-1.2deg);
   pointer-events: none;
 }
-/* PLANE TWO — THE OFFSET GHOST BORDER. → docs/design-system.md#proof-section-quote-plate-after */
 .proof-section__quote-plate::after {
   content: '';
   position: absolute;
@@ -3538,7 +3375,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   pointer-events: none;
 }
 
-/* Punctuation, not ornament. ⚠️ ANCHORED TO THE INNER WRAPPER, not the figure. → docs/design-system.md#proof-section-quote-inner-before */
 .proof-section__quote-inner::before {
   content: '\201C';
   position: absolute;
@@ -3551,7 +3387,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   pointer-events: none;
 }
 
-/* ⚠️ THE QUOTE IS SIZED SO THE EVIDENCE COLUMN SETS THE ROW HEIGHT, not the panel. → docs/design-system.md#proof-section-quote-p */
 .proof-section__quote p {
   font-family: var(--font-display);
   font-size: clamp(1.02rem, 1.25vw, 1.18rem);
@@ -3561,8 +3396,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 .proof-section__quote p strong { font-weight: 600; color: var(--teal-text); }
 
-/* Portrait, name and role on one row, so the face lands at the moment you read
-   who said it. */
 .proof-section__cite {
   display: flex;
   flex-direction: row;
@@ -3620,10 +3453,7 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 
 /* ========== LANGUAGE SECTION (condensed) ========== */
-/* The old language-section CSS was deleted here (~403 lines): the dark gradient band, the floating… → docs/design-system.md#what-you-get-section */
 /* ========== WHAT YOU GET SECTION ========== */
-/* ⚠️ ONE LIGHT TONE FOR THE ENTIRE LIGHT RUN. → docs/design-system.md#block-what-you-get-not-what-you-get-the-sele */
-/* ⚠️ `.block.what-you-get`, NOT `.what-you-get` — THE SELECTOR IS LOAD-BEARING. → docs/design-system.md#block-what-you-get */
 .block.what-you-get {
   background: var(--cream);
   position: relative;
@@ -3668,7 +3498,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 .morning-inbox__item { border-bottom: 1px solid var(--border-light); }
 .morning-inbox__item:last-child { border-bottom: 0; }
 
-/* The row is a BUTTON now, so it has to be un-styled back to a row: browsers give buttons their… → docs/design-system.md#morning-inbox-row-2 */
 .morning-inbox__row {
   display: grid;
   grid-template-columns: 84px 150px 1fr auto auto;
@@ -3685,14 +3514,12 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   transition: background-color 0.16s ease;
 }
 
-/* ⚠️ THE AFFORDANCE ONLY APPEARS ONCE JS CAN HONOR IT. → docs/design-system.md#what-you-get-is-interactive-morning-inbox-row */
 .what-you-get.is-interactive .morning-inbox__row { cursor: pointer; }
 .what-you-get.is-interactive .morning-inbox__row:hover,
 .what-you-get.is-interactive .morning-inbox__row:focus-visible {
   background: var(--teal-pale);
 }
 
-/* ⚠️ THE CHEVRON IS THE WHOLE AFFORDANCE, AT EVERY WIDTH, ON EVERY DEVICE. → docs/design-system.md#what-you-get-is-interactive-morning-inbox-row-after */
 .what-you-get.is-interactive .morning-inbox__row::after {
   content: '\203A';
   content: '\203A' / '';
@@ -3703,7 +3530,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   color: var(--text-muted);
 }
 
-/* The recap document ---------------------------------------------- V1's artifact, ported rather than… → docs/design-system.md#recap-doc */
 .recap-doc {
   width: min(680px, calc(100vw - 32px));
   max-height: calc(100vh - 40px);
@@ -3778,8 +3604,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   padding: 18px 0 6px;
 }
 
-/* Each block is its own bordered card — this is the part that makes it read as a
-   document rather than as a modal with headings in it. */
 .recap-doc__section {
   margin-top: 16px;
   border: 1px solid var(--border-light);
@@ -3797,7 +3621,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 .recap-doc__section-head span { color: var(--text-muted); font-size: 0.78rem; }
 .recap-doc__section > p { margin: 0 0 10px; color: var(--text-secondary); font-size: 0.92rem; }
 .recap-doc__section > p strong { color: var(--text-primary); }
-/* A real bulleted list, as in V1 — not a styled panel. The document is a printout. */
 .recap-doc__fields {
   margin: 0 0 12px 18px;
   padding: 0;
@@ -3892,10 +3715,7 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 
 /* ---- The four callouts, now a Cards row rather than annotations ---- */
-/* ⚠️ 820, NARROWED WITH THE 2x2. → docs/design-system.md#what-you-get-callouts */
 .what-you-get__callouts { max-width: 820px; margin-inline: auto; row-gap: clamp(22px, 3vw, 32px); }
-/* ⚠️ V1's DOCUMENT ICONS, WHICH ARE THE PRICING PANEL'S ICONS. → docs/design-system.md#centered-with-the-icon-beside-the-heading-th */
-/* ⚠️ CENTERED, WITH THE ICON BESIDE THE HEADING. → docs/design-system.md#what-you-get-callout */
 .what-you-get__callout {
   display: flex;
   flex-wrap: wrap;
@@ -3920,7 +3740,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   line-height: 1.55;
 }
 
-/* A @media (max-width: 760px) block sat here and was deleted. → docs/design-system.md#what-you-get-header */
 .what-you-get__header {
   text-align: center;
   margin-bottom: 56px;
@@ -3948,8 +3767,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   margin: 0 auto;
 }
 
-/* The flanking callout-column rules were deleted with the document they flanked. → docs/design-system.md#salesforce-hand-off-a-slim-strip-under-the-d */
-/* Salesforce hand-off. A slim strip UNDER the document, not a card beside it. → docs/design-system.md#what-you-get-crm */
 .what-you-get__crm {
   display: flex;
   align-items: center;
@@ -3987,8 +3804,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   font-size: 0.92rem;
   line-height: 1.5;
 }
-/* Only the title takes the link treatment. Underlining three lines of body copy on hover
-   reads as a broken paragraph rather than a link. */
 .what-you-get__crm:hover .what-you-get__crm-title,
 .what-you-get__crm:focus-visible .what-you-get__crm-title {
   color: var(--teal-deep);
@@ -4374,8 +4189,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   box-shadow: var(--shadow-md);
 }
 
-/* Pinned recap (homepage lead demo): the payoff stays visible beside the player
-   at desktop widths instead of waiting for playback to finish. */
 @media (min-width: 1024px) {
   .demo-layout--recap-pinned.demo-layout--stacked {
     max-width: none;
@@ -4397,7 +4210,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
     height: 100%;
   }
 }
-/* Double-pulse on the recap when the call completes — guides the eye to the payoff. → docs/design-system.md#media-prefers-reduced-motion-no-preference */
 @media (prefers-reduced-motion: no-preference) {
   .demo-layout--show-recap .demo-layout__right {
     animation: recap-delivered 2s ease-out;
@@ -5410,9 +5222,7 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 .faq-section h2 {
   margin-bottom: 0;
 }
-/* THE LEGACY FAQ RULES WERE DELETED HERE. → docs/design-system.md#the-legacy-faq-rules-were-deleted-here-faq-sec */
 
-/* SECTION 8: PRICING ========== The V1 homepage-pricing rules that lived here were DELETED. → docs/design-system.md#pricing-includes */
 .pricing-includes {
   background: white;
   border: 1.5px solid var(--border-light);
@@ -6044,7 +5854,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   margin: 0 auto 48px;
 }
 
-/* Plan cards — reuse existing .pricing-card styles with hub grid modifier */
 .pricing-grid--hub {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   max-width: 900px;
@@ -6657,7 +6466,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   flex-direction: column;
   gap: 12px;
 }
-/* ⚠️ THIS CARRIES THE 12px THAT .faq-list USED TO GIVE THE ITEMS DIRECTLY. → docs/design-system.md#faq-list-set-2 */
 .faq-list__set {
   display: flex;
   flex-direction: column;
@@ -6723,12 +6531,10 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   overflow: hidden;
   transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
-/* ⚠️ 300px HAD TO GO UP. The longest answer here runs past it, and a max-height that clips mid-sentence looks… → docs/design-system.md#faq-item-open-faq-item-answer */
 .faq-item--open .faq-item__answer {
   max-height: 46rem;
 }
 
-/* THE OPEN ONE IS HIGHLIGHTED. With everything collapsed by default, the open card is the only thing on screen… → docs/design-system.md#faq-item-open */
 .faq-item--open {
   border-color: var(--teal-deep);
   box-shadow: 0 6px 20px rgba(0,131,143,0.10);
@@ -6742,8 +6548,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 
 /* ========== SECTION 10: FINAL CTA ========== */
-/* ⚠️ `.block.final-cta` FOR THE PADDING — `.block:not(.block--dark)` is 0,2,0 and beats
-   a bare class regardless of source order. Same trap documented on .block.what-you-get. */
 .block.final-cta {
   background: var(--cream);
   position: relative;
@@ -6765,11 +6569,7 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 .final-cta .section-label { display: block; margin-bottom: 14px; }
 
-/* ---- Section 11 ink, re-tuned for cream  ---------------------
-   Every color below was an rgba(240,250,250,…) written for the dark block, where it was
-   light ink at low alpha. On cream those are all but invisible, so each is re-stated
-   against light rather than left to inherit. Grep this section for 240,250,250 before
-   assuming any of the old values still apply. */
+/* ===== Section 11 ink, re-tuned for cream ===== */
 .final-cta__subtitle {
   font-size: 1.15rem;
   color: var(--text-secondary);
@@ -6789,7 +6589,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   font-size: 0.85rem;
   color: var(--text-muted);
 }
-/* Section 11 hierarchy, corrected ------------------------- The trial is the primary conversion path… → docs/design-system.md#final-cta-grid */
 .final-cta__grid { align-items: center; }
 .final-cta__copy { text-align: left; }
 
@@ -6806,8 +6605,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   color: var(--text-secondary);
 }
 
-/* The rule that keeps the demotion honest: the concierge action must not be
-   able to out-weigh the trial button again. Outline on the dark, no fill. */
 .final-cta__or {
   display: flex;
   align-items: center;
@@ -6834,8 +6631,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   font-size: 0.95rem;
   color: var(--text-secondary);
 }
-/* The shortcode renders its own widget button and its attributes are not trustworthy -… → docs/design-system.md#the-shortcode-renders-its-own-widget-button-an */
-/* ⚠️ THE WIDGET IS THEMED THROUGH ITS OWN CUSTOM PROPERTIES, NOT THROUGH `color`. → docs/design-system.md#final-cta-concierge-sitestaffr-button-widget */
 .final-cta__concierge .sitestaffr-button-widget {
   display: inline-flex;
   border: 1px solid var(--border-light) !important;
@@ -6865,8 +6660,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   color: var(--text-secondary);
 }
 
-/* The closing robot ------------------------------------------------- ⚠️ A BACKGROUND FIGURE, NOT A COLUMN. → docs/design-system.md#confined-to-the-container-like-the-hero-s-ro */
-/* ⚠️ CONFINED TO THE CONTAINER, LIKE THE HERO'S ROBOT. → docs/design-system.md#final-cta-robot */
 .final-cta__robot {
   position: absolute;
   top: 0;
@@ -6880,15 +6673,11 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   z-index: 0;
   pointer-events: none;
 }
-/* Full section height rather than a fixed clamp. → docs/design-system.md#final-cta-robot-img */
 .final-cta__robot img {
   display: block;
   width: auto;
   height: 100%;
 }
-/* The copy is a column in its own right now that the grid is gone. Capped so it can never
-   run under the figure as the viewport widens. */
-/* ⚠️ NARROWED WHEN THE ROBOT GREW. → docs/design-system.md#final-cta-copy */
 .final-cta__copy { max-width: 30rem; }
 
 @media (max-width: 1240px) {
@@ -6979,7 +6768,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
 }
 
 /* ========== FOOTER ========== */
-/* ⚠️ DARKER THAN --block-dark, DELIBERATELY. → docs/design-system.md#footer-2 */
 .footer {
   background: var(--footer-dark);
   color: rgba(240,250,250,0.75);
@@ -6999,7 +6787,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   position: relative;
   padding: 48px 0 36px;
 }
-/* ⚠️ THE EMERALD WASH IS GONE. → docs/design-system.md#footer-main-before */
 .footer__main::before { content: none; }
 .footer__grid {
   display: grid;
@@ -7055,7 +6842,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   line-height: 1.35;
   margin-bottom: 7px;
 }
-/* ⚠️ THE PADDING IS THE TAP TARGET (Lighthouse best-practices: "Touch targets do not have sufficient… → docs/design-system.md#footer-col-a */
 .footer__col a {
   font-size: 0.875rem;
   display: inline-block;
@@ -7066,7 +6852,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   display: none;
 }
 
-/* The footer lists the five industry CATEGORIES, not all fifteen industries. → docs/design-system.md#footer-all-industries */
 .footer__all-industries {
   color: rgba(240, 250, 250, 0.55);
   white-space: nowrap;
@@ -7110,7 +6895,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   background: linear-gradient(90deg, transparent 0%, rgba(31,182,204,0.2) 30%, rgba(31,182,204,0.2) 70%, transparent 100%);
 }
 
-/* Footer responsive --- ⚠️ THE `1fr 1fr` STEP AT 900 IS DELETED. → docs/design-system.md#media-max-width-900px-2 */
 @media (max-width: 900px) {
   .footer__grid {
     grid-template-columns: 1fr;
@@ -7388,7 +7172,6 @@ main > section:last-child:not(.block--dark) { padding-bottom: calc(var(--block-p
   .widget-bubble__voice-bars span { width: 3px; }
 }
 
-/* The two phone blocks that used to sit here moved up into the section 8 block with the rest of… → docs/design-system.md#media-max-width-480px */
 
 @media (max-width: 480px) {
   .container { padding: 0 20px; }
@@ -7667,10 +7450,8 @@ body.sitestaffr-landing-page .hero__actions {
 }
 
 /* ========== HOMEPAGE: HERO AI-HIRE ROBOT STAGE ========== */
-/* Capped at ~720px so section 2's dark block is on screen at 1440x900 without scrolling. → docs/design-system.md#hero */
 .hero { min-height: clamp(560px, 76vh, 720px); }
 
-/* The industry line: type, one link, anchors down the page to section 6. */
 .hero__industries {
   margin-top: 26px;
   font-size: 0.9rem;
@@ -7687,7 +7468,6 @@ body.sitestaffr-landing-page .hero__actions {
 }
 .hero__industries-arrow { margin-left: 2px; }
 body.sitestaffr-landing-page .hero__content { max-width: none; }
-/* Robot column stretches to full row height; content column drives that height */
 .hero__robot-stage {
   position: relative;
   pointer-events: none;
@@ -7705,7 +7485,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   filter: blur(24px);
   border-radius: 50%;
 }
-/* ⚠️ THE HEIGHT IS SET SO THE CURTAIN CROPS HIM, not so he fits: the robot's waist should read as flush with… → docs/design-system.md#hero-robot-img */
 .hero__robot-img {
   position: absolute;
   left: 50%;
@@ -7741,7 +7520,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   animation: heroCardFloat 5.5s ease-in-out infinite;
 }
 .hero__float-emoji { font-size: 1.05rem; line-height: 1; }
-/* Text leads: chat takes the top slot and the first beat of the stagger. */
 .hero__float-card--chat  { top: 18%; left: 0;   animation-delay: 0s; }
 .hero__float-card--voice { top: 24%; right: 0;  animation-delay: 0.6s; }
 .hero__float-card--lead  { top: 40%; left: -2%; animation-delay: 1.2s; }
@@ -7754,7 +7532,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 @media (prefers-reduced-motion: reduce) {
   .hero__float-card { animation: none; }
 }
-/* THE HERO BELOW 1025px: ONE COLUMN, CARDS FIRST, ROBOT LAST --------- This replaces a 900px block and a… → docs/design-system.md#media-max-width-1024px-2 */
 @media (max-width: 1024px) {
   .hero { min-height: 0; }
   body.sitestaffr-landing-page .hero {
@@ -8388,7 +8165,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   .voice-section__bg-portrait { display: none; }
 }
 
-/* Hide small portrait area on desktop — large background portrait replaces it */
 @media (min-width: 1141px) {
   .voice-showcase__portrait-area {
     display: none !important;
@@ -8742,7 +8518,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   position: relative;
   z-index: 1;
 }
-/* Was #b9e991, a lime green. → docs/design-system.md#final-cta-highlight */
 .final-cta__highlight {
   color: var(--teal-deep);
 }
@@ -9192,14 +8967,10 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 /* ========== INDUSTRY PAGES ========== */
 
 /* --- Hero --- */
-/* HERO: a V3 Split block ------------------------- ⚠️ NO `padding` HERE ANY MORE, AND THAT IS THE POINT. → docs/design-system.md#cream-not-warm-white-the-white-hero-is-secti */
-/* ⚠️ CREAM, NOT --warm-white. The white hero is section 1 of the HOMEPAGE specifically — the brightest thing on… → docs/design-system.md#ind-hero */
 .ind-hero { background: var(--cream); }
-/* ⚠️ `.block.ind-hero`, NOT `.ind-hero` — TWO CLASSES, AND THAT IS THE WHOLE RULE. → docs/design-system.md#block-ind-hero */
 .block.ind-hero {
   padding-block-start: clamp(120px, 15vw, 140px);
 }
-/* ⚠️ KEPT, AND NOT REDUNDANT NEXT TO .block-split__grid. → docs/design-system.md#ind-hero-grid */
 .ind-hero__grid {
   grid-template-columns: 1.35fr minmax(0, 1fr);
   gap: clamp(40px, 6vw, 80px);
@@ -9266,7 +9037,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   line-height: 1;
   animation: ind-float 4s ease-in-out infinite;
 }
-/* Per-industry isometric art. → docs/design-system.md#ind-hero-image */
 .ind-hero__image {
   width: 100%;
   max-width: 440px;
@@ -9284,10 +9054,8 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
 }
 
 /* --- Pain Points --- */
-/* ⚠️ NO `padding` HERE. → docs/design-system.md#ind-problems */
 .ind-problems { background: var(--cream); }
 
-/* The shared section header for every converted ind-* section -------- ⚠️ THE H2 IS NEAR-BLACK, NOT… → docs/design-system.md#ind-section-head */
 .ind-section__head {
   text-align: center;
   margin-bottom: clamp(32px, 5vw, 52px);
@@ -9299,7 +9067,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   text-wrap: balance;
 }
 .block--dark .ind-section__head h2 { color: #FFFFFF; }
-/* .ind-problem: the UNBOXED V3 statement card ------------------------ Three static statements on the… → docs/design-system.md#ind-problem-icon */
 .ind-problem__icon {
   color: var(--teal-text);
   margin-bottom: 14px;
@@ -9362,7 +9129,6 @@ body.sitestaffr-landing-page .hero__content { max-width: none; }
   margin-bottom: 12px;
   color: var(--text-primary);
 }
-/* The /for/ index reuses this card as a link to each industry page. */
 a.ind-problem-card {
   display: block;
   color: inherit;
@@ -9372,7 +9138,6 @@ a.ind-problem-card .ind-problem-card__icon {
   font-size: 1.5rem;
   line-height: 1;
 }
-/* Industries with isometric art use it in place of the emoji tile. → docs/design-system.md#ind-problem-card-icon-art */
 .ind-problem-card__icon--art,
 a.ind-problem-card .ind-problem-card__icon--art {
   width: 104px;
@@ -9391,15 +9156,10 @@ a.ind-problem-card .ind-problem-card__icon--art {
   line-height: 1.7;
   color: var(--text-secondary);
 }
-/* ---- /for/: five groups inside ONE section ------------------------------
-   ⚠️ THIS REPLACES `.ind-problems__header` AND `.ind-problems__grid`, both of
-   which were deleted when `page-industry.php` converted — while `/for/` and the
-   five category hubs still carried them. The grid class outliving its rule is
-   why twenty-one directory tiles were rendering as a full-width stack. */
+/* ===== /for/: five groups inside ONE section ===== */
 .ind-directory__group + .ind-directory__group {
   margin-top: clamp(56px, 7vw, 88px);
 }
-/* Group headings link through to their category hub. → docs/design-system.md#ind-directory-group-h2-a */
 .ind-directory__group h2 a {
   color: inherit;
   text-decoration: none;
@@ -9408,7 +9168,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--teal-text);
 }
 
-/* Category hubs: the "not listed above?" line under the card grid. */
 .ind-problems__footnote {
   margin: 32px auto 0;
   max-width: 640px;
@@ -9424,8 +9183,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Solutions --- */
-/* The page's one dark band. → docs/design-system.md#the-page-s-one-dark-band-seven-sections-altern */
-/* ⚠️ WAS #0a2e33 — A SECOND DARK TONE. V3's dark is V1's deep teal --block-dark (#00323A) specifically: testers… → docs/design-system.md#ind-solutions */
 .ind-solutions {
   color: rgba(240, 250, 250, 0.8);
 }
@@ -9441,7 +9198,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .ind-solutions .ind-step:not(:last-child)::after {
   background: linear-gradient(to bottom, var(--teal-light), rgba(31, 182, 204, 0.12));
 }
-/* DELETED with their markup: .ind-solutions__bg (two 3-4% radial gradients over a flat dark… → docs/design-system.md#ind-solutions-steps */
 .ind-solutions__steps {
   max-width: 680px;
   margin: 0 auto;
@@ -9496,7 +9252,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Scenario --- */
-/* ⚠️ THE PALE-BLUE GRADIENT IS GONE. → docs/design-system.md#ind-scenario */
 .ind-scenario {
   position: relative;
 }
@@ -9520,7 +9275,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--teal-light);
 }
 
-/* Recap document --- Deliberately the same artifact as the home page's what-you-get document: same logo… → docs/design-system.md#ind-recap */
 .ind-recap {
   background: #ffffff;
   border: 1px solid var(--border-light);
@@ -9560,7 +9314,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-size: 0.82rem;
   color: var(--text-primary);
 }
-/* ⚠️ teal-text, not --teal-deep: 4.06:1 on the pale-teal pill, so it failed AA at 0.64rem. → docs/design-system.md#ind-recap-section-head-span */
 .ind-recap__section-head span {
   font-size: 0.64rem;
   font-weight: 700;
@@ -9571,9 +9324,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   padding: 3px 9px;
   border-radius: 50px;
 }
-/* The transcript stub. Quieter than the recap section above it: no badge colour, a muted count, one line of… → docs/design-system.md#ind-recap-transcript */
 .ind-recap__transcript { margin-top: 10px; }
-/* ⚠️ TWO CLASSES, because `.ind-recap__section-head span` (0,1,1) out-specifies a bare… → docs/design-system.md#ind-recap-section-head-ind-recap-count */
 .ind-recap__section-head .ind-recap__count {
   font-size: 0.64rem;
   font-weight: 600;
@@ -9609,7 +9360,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   border-top: 1px solid var(--border-light);
   margin-bottom: 0 !important;
 }
-/* The narrative now introduces both mockups rather than sitting beside one. */
 .ind-scenario__story {
   max-width: 720px;
   margin: 0 auto clamp(32px, 4vw, 48px);
@@ -9693,7 +9443,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   font-weight: 600;
   margin-bottom: 24px;
 }
-/* ⚠️ INHERIT, NOT --text-secondary. → docs/design-system.md#ind-scenario-story-p */
 .ind-scenario__story > p {
   font-size: 1.02rem;
   line-height: 1.8;
@@ -9702,7 +9451,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   text-align: left;
 }
 
-/* `.ind-page > section:not(.block)` IS DELETED ----------- It was the scaffold that made the ind-*… → docs/design-system.md#media-max-width-900px-3 */
 
 @media (max-width: 900px) {
   .ind-scenario__grid {
@@ -9712,11 +9460,8 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- FAQ --- */
-/* Cream, not --warm-white: the FAQ and the siblings block are one light run between two dark ones,… → docs/design-system.md#ind-faq */
 .ind-faq { background: var(--cream); }
-/* `.container--narrow` went with `.container`; the measure moves onto the inner. */
 .ind-faq .block__inner { max-width: 820px; }
-/* More in this category ------------------------------------------------ Replaced "Explore More"… → docs/design-system.md#ind-siblings */
 .ind-siblings { background: var(--cream); }
 .ind-siblings .block__inner { max-width: 820px; }
 .ind-siblings__list {
@@ -9760,8 +9505,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .ind-siblings__all a { color: var(--teal-text); font-weight: 600; }
 
 /* --- CTA --- */
-/* ⚠️ EVERYTHING THIS RULE USED TO DO IS NOW .block--dark's JOB. → docs/design-system.md#everything-this-rule-used-to-do-is-now-block-d */
-/* Any section that carries a curtain, on every ind-* template --------- ⚠️ SELF-SCOPING BY `:has` RATHER… → docs/design-system.md#ind-page-section-has-seam-curtain */
 .ind-page > section:has(> .seam-curtain) { position: relative; }
 .ind-page > section:has(> .seam-curtain--open) {
   padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
@@ -9781,8 +9524,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   max-width: 560px;
   margin: 0 auto 36px;
 }
-/* ⚠️ `color: white` ON --teal-light IS 1.9:1 AND HAD TO GO. → docs/design-system.md#the-feature-pages-share-this-rule-rather-tha */
-/* ⚠️ THE FEATURE PAGES SHARE THIS RULE RATHER THAN COPYING IT. → docs/design-system.md#ind-cta-btn */
 .ind-cta__btn,
 .sf-cta__btn,
 .ba-cta__btn {
@@ -9798,7 +9539,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   box-shadow: 0 6px 24px rgba(0,0,0,0.25);
   transform: translateY(-2px);
 }
-/* ⚠️ THE SHIMMER ::before IS DELETED. It was a white gradient sweeping the button on a 3s infinite loop — not a… → docs/design-system.md#ind-cta-actions */
 
 .ind-cta__actions {
   display: flex;
@@ -9818,7 +9558,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Industry responsive --- */
-/* The `.ind-problems__grid` collapse that lived here is gone with the class. → docs/design-system.md#media-max-width-768px-2 */
 @media (max-width: 768px) {
   .ind-hero__grid {
     grid-template-columns: 1fr;
@@ -9903,15 +9642,12 @@ a.ind-problem-card .ind-problem-card__icon--art {
   flex: 1 0 auto;
 }
 
-/* Header --- The featured image used to be `position:absolute; → docs/design-system.md#blog-post-header */
 .blog-post__header {
   background: var(--block-dark, #00323A);
   padding: 96px 0 64px;
   color: var(--text-on-dark);
 }
 
-/* The hero runs the FULL container; the body runs a reading measure under it. → docs/design-system.md#the-hero-runs-the-full-container-the-body-runs */
-/* The article body runs the FULL container, same as every other section of the site — a deliberate… → docs/design-system.md#blog-post-label */
 .blog-post__label {
   display: inline-block;
   font-size: 0.72rem;
@@ -10002,7 +9738,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   padding: calc(96px + clamp(56px, 7vw, 120px)) 0 96px;
   background: var(--cream);
 }
-/* One column. The sticky Contents rail that used to sit at 210px on the left was removed on a deliberate call… → docs/design-system.md#blog-post-layout */
 .blog-post__layout {
   display: block;
 }
@@ -10033,8 +9768,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   border-radius: 2px;
   margin-bottom: 18px;
 }
-/* The first block's own top margin stacks on the body's 96px padding, which put
-   ~180px between the dark hero and the first line of the article. */
 .blog-post__prose > :first-child {
   margin-top: 0;
   padding-top: 0;
@@ -10453,7 +10186,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   text-decoration: none;
 }
 
-/* Industry (/for/) links inside post paragraphs render as normal inline links. → docs/design-system.md#industry-for-links-inside-post-paragraphs-rend */
 
 /* --- FAQ accordion --- */
 .blog-post__body .blog-faq {
@@ -10526,8 +10258,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   margin-top: 36px;
 }
 
-/* No tablet breakpoint: the article is one 720px column at every width above
-   mobile, so there is nothing to collapse. */
 
 /* --- Mobile responsive --- */
 @media (max-width: 768px) {
@@ -10652,12 +10382,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   flex: 1 0 auto;
 }
 
-/* --- Hero ---
-   Same --block-dark block as the post hero, left-aligned, so the index and the
-   article read as one section of the site. The animated radial gradients that
-   used to live here were night-world atmosphere; V3 has no equivalent and a
-   block is finished when its one background declaration is written. */
-/* Deliberately short. → docs/design-system.md#blog-index-hero */
+/* ===== Hero ===== */
 .blog-index__hero {
   background: var(--block-dark, #00323A);
   padding: 112px 0 48px;
@@ -10670,8 +10395,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   text-transform: uppercase;
   color: #22D3EE;
 }
-/* An index headline is a label, not the page's argument — it does not need the
-   article title's 72px. Dropping it a step is most of what shortens the band. */
 .blog-index__title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 3.4vw, 2.9rem);
@@ -10720,7 +10443,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
-/* 16 / 9, matching the hero and the featured-image backfill. → docs/design-system.md#blog-card-image */
 .blog-card__image {
   aspect-ratio: 16 / 9;
   overflow: hidden;
@@ -10735,7 +10457,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .blog-card:hover .blog-card__image img {
   transform: scale(1.04);
 }
-/* Fallback only — every published post currently has a featured image. → docs/design-system.md#blog-card-image-placeholder */
 .blog-card__image--placeholder {
   display: flex;
   align-items: center;
@@ -10818,7 +10539,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   color: var(--text-muted);
   border-top: 1px solid var(--border-light);
 }
-/* Read time replaced the category badge. → docs/design-system.md#blog-card-readtime-before */
 .blog-card__readtime::before {
   content: "\00b7";
   margin-right: 8px;
@@ -10827,7 +10547,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Single post: CTA banner --- */
-/* A dark PANEL on the cream, not a full-width dark band. → docs/design-system.md#blog-post-cta-banner */
 .blog-post__cta-banner {
   margin: 0;
   padding: 0 0 96px;
@@ -10871,19 +10590,15 @@ a.ind-problem-card .ind-problem-card__icon--art {
 }
 
 /* --- Single post: Keep Reading + pager --- */
-/* cream, matching the body, NOT --cream-dark. → docs/design-system.md#blog-post-related */
 .blog-post__related {
   position: relative;
   padding: 96px 0 calc(96px + clamp(56px, 7vw, 120px));
   background: var(--cream);
 }
-/* ⚠️ This curtain pours the FOOTER in, not a section, so it fills --footer-dark. → docs/design-system.md#blog-post-related-seam-curtain-path */
 .blog-post__related .seam-curtain path,
 .blog-index__posts .seam-curtain--open path {
   fill: var(--footer-dark);
 }
-/* Was centred teal at up to 1.8rem, which was the only heading on the page
-   still following the old blog styling once the body h2s went dark and left. */
 .blog-post__related-title {
   font-family: var(--font-display);
   font-size: 2.05rem;
@@ -11093,11 +10808,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   max-width: var(--subtext-measure);
   margin: 0 auto;
 }
-/* --- Install route: the /download/ hero's primary element ---------------------
-   Not a button, because the action happens in the visitor's own wp-admin. Reuses
-   the pill vocabulary from .dl-hero__label and the arrow motif from
-   .dl-steps__connector so it reads as part of the existing system. <ol> is
-   deliberate: this is a real sequence, so the order carries information. */
+/* ===== Install route: the /download/ hero's primary element ===== */
 .dl-route {
   margin: 36px auto 0;
   max-width: 660px;
@@ -11154,7 +10865,6 @@ a.ind-problem-card .ind-problem-card__icon--art {
   white-space: nowrap;
 }
 
-/* The search term is the one thing to carry into wp-admin — brighten it. */
 .dl-route__path li span strong {
   color: #fff;
   font-weight: 700;
@@ -11640,10 +11350,7 @@ a.ind-problem-card .ind-problem-card__icon--art {
   }
 }
 
-/* ========== SHARED CTA SPOTLIGHT ==========
-   Warm-white card with a soft teal glow — the closing CTA on every page.
-   Adopting sections drop their old dark gradient + dot texture (below).
-   Appended last so its colors win over the legacy dark-bg CTA rules. */
+/* ===== SHARED CTA SPOTLIGHT ===== */
 .cta-spotlight {
   position: relative;
   z-index: 1;
@@ -11673,11 +11380,9 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .cta-spotlight a:hover {
   color: var(--teal-mid);
 }
-/* Highlighted heading span → brand teal (was light green for the dark bg) */
 .cta-spotlight [class$="__highlight"] {
   color: var(--teal-deep);
 }
-/* Outline buttons were white-on-dark; recolor them for the light card */
 .cta-spotlight .btn--outline {
   color: var(--teal-deep);
   border-color: rgba(0,131,143,0.32);
@@ -11687,12 +11392,10 @@ a.ind-problem-card .ind-problem-card__icon--art {
   border-color: var(--teal-deep);
   color: var(--teal-deep);
 }
-/* Solid primary buttons keep white text on the card. → docs/design-system.md#cta-spotlight-btn-primary */
 .cta-spotlight .btn--primary,
 .cta-spotlight .btn--primary:hover {
   color: #fff;
 }
-/* Download page's primary button was white-on-dark; make it teal on the card */
 .cta-spotlight .dl-cta__btn {
   background: var(--teal-light);
   color: #fff;
@@ -11700,14 +11403,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
 .cta-spotlight .dl-cta__btn:hover {
   background: #15a3b8;
 }
-/* Industry pages' primary CTA — same trap as .btn--primary above. → docs/design-system.md#cta-spotlight-ind-cta-btn */
 .cta-spotlight .ind-cta__btn,
 .cta-spotlight .ind-cta__btn:hover {
   color: #fff;
 }
 
-/* Sections adopting the spotlight: drop the dark gradient + texture. → docs/design-system.md#ind-cta-is-deliberately-out-of-this-list-and */
-/* ⚠️ .ind-cta IS DELIBERATELY OUT OF THIS LIST, AND REMOVING IT IS THE FIX FOR AN INVISIBLE SECTION. → docs/design-system.md#about-cta */
 .about-cta,
 .dl-cta {
   background: var(--cream);
@@ -11720,16 +11420,11 @@ a.ind-problem-card .ind-problem-card__icon--art {
   display: none;
 }
 
-/* ========== SITESTAFFR WIDGET — kill stray container border ==========
-   The floating launcher's #sitestaffr-widget container picks up a 3px border
-   on pages where the button-widget stylesheet isn't loaded (e.g. blog/single,
-   which have no [sitestaffr_button] shortcode). The launcher button keeps its
-   own configured border; only the container outline is removed. */
+/* ===== SITESTAFFR WIDGET — kill stray container border ===== */
 #sitestaffr-widget {
   border: 0 !important;
 }
 
-/* 404 — PAGE NOT FOUND ========== Paired with 404.php. → docs/design-system.md#nf */
 .nf {
   padding: clamp(120px, 15vw, 160px) 0 clamp(60px, 8vw, 100px);
   text-align: center;
@@ -11820,17 +11515,13 @@ a.ind-problem-card .ind-problem-card__icon--art {
   }
 }
 
-/* LAST BLOCK IN THE FILE, ON PURPOSE. → docs/design-system.md#the-price-card-s-spec-rows-center-nothing-el */
 
-/* THE PRICE CARD'S SPEC ROWS CENTER. → docs/design-system.md#media-max-width-1040px */
 @media (max-width: 1040px) {
   .pricing-section .price-tier__row { justify-content: center; }
 }
 
-/* ⚠️ AND THE CLOSING CTA, WHICH ASKED FOR SEPARATELY after the blanket pass was reverted ("we should probably… → docs/design-system.md#media-max-width-1024px-3 */
 @media (max-width: 1024px) {
   .final-cta__copy { text-align: center; margin-inline: auto; }
   .final-cta__concierge { justify-content: center; }
 }
 
-/* THE REVIEW RAN, AND IT ADDED NOTHING HERE. → docs/design-system.md#note */

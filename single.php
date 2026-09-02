@@ -64,10 +64,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$cat_name   = ! empty( $categories ) ? esc_html( $categories[0]->name ) : 'Blog';
 		$has_thumb  = has_post_thumbnail();
 
-		// One pass over the rendered content: it gives every h2 a stable id, so
-		// in-page anchors and Google's jump-to-section links keep working, and
-		// it gives us the word count for the read time. (The Contents rail this
-		// originally fed was removed; the ids are worth keeping on their own.)
 		$rendered  = apply_filters( 'the_content', get_the_content() );
 		$toc       = sitestaffr_blog_toc( $rendered );
 		$read_time = sitestaffr_read_time( $rendered );
@@ -89,7 +85,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<div class="blog-post__lede-side">
 						<div class="blog-post__meta">
-							<?php // An author with no display_name rendered a bare "By ·". ?>
 							<?php if ( '' !== trim( (string) $display_author_name ) ) : ?>
 								<span class="blog-post__author">By <a href="<?php echo esc_url( $display_author_url ); ?>"><?php echo esc_html( $display_author_name ); ?></a></span>
 							<?php endif; ?>
@@ -111,7 +106,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</header>
 
 		<div class="blog-post__body">
-			<?php // dark hero pours DOWN into the cream body -> 'close'. ?>
 			<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 			<div class="container">
 				<div class="blog-post__layout">
@@ -134,7 +128,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	</article>
 
 	<?php
-	// Keep Reading: same-category posts first, padded with recent posts.
 	$current_id   = get_the_ID();
 	$primary_cats = wp_get_post_categories( $current_id );
 	$related_ids  = array();
@@ -166,7 +159,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	?>
 	<?php if ( ! empty( $related_ids ) || $prev_post || $next_post ) : ?>
 	<section class="blog-post__related" aria-label="More from the blog">
-		<?php // cream run gives way to the dark footer below -> 'open'. ?>
 		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 		<div class="container">
 			<h2 class="blog-post__related-title"><?php esc_html_e( 'Keep Reading', 'sitestaffr' ); ?></h2>
@@ -189,10 +181,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<div class="blog-card__content">
 						<h3 class="blog-card__title"><?php echo esc_html( get_the_title( $related_id ) ); ?></h3>
 						<?php
-						// Without this the card has nothing between title and meta, and
-						// `margin-top: auto` on the meta opens a hole the height of the
-						// tallest sibling. The index cards never showed it because they
-						// all carry an excerpt.
 						$rel_excerpt = get_the_excerpt( $related_id );
 						if ( '' !== trim( (string) $rel_excerpt ) ) :
 						?>

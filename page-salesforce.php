@@ -8,7 +8,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $get_started_url = home_url( '/#get-started' );
 
-// Page data — kept in arrays so the markup stays readable.
 $sf_steps = array(
     array(
         'num'   => '1',
@@ -119,12 +118,8 @@ $sf_faqs = array(
 .sf-page { background: var(--cream); color: var(--text-primary); overflow-x: hidden; }
 
 /* Hero */
-/* ⚠️ THE TWO RADIAL GRADIENTS ARE DELETED, NOT HIDDEN — same call as the industry hero's __accent and… → docs/implementation-notes.md#sf-hero */
 .sf-hero { background: var(--cream); }
-/* ⚠️ `.block.sf-hero`, TWO CLASSES. The padding is owned by `.block:not(.block--dark)` at (0,2,0) and a bare… → docs/implementation-notes.md#block-sf-hero */
 .block.sf-hero { padding-block-start: clamp(120px, 15vw, 140px); }
-/* Kept next to .block-split__grid, which it overrides: the Lead card is a tall
-   artifact and needs more than the 1fr the generic Split gives it. */
 .sf-hero__grid {
     grid-template-columns: 1.05fr 0.95fr;
     gap: clamp(32px, 5vw, 64px);
@@ -243,7 +238,6 @@ $sf_faqs = array(
 .sf-card__foot svg { width: 17px; height: 17px; flex: 0 0 auto; }
 
 /* Shared section furniture */
-/* ⚠️ NO `padding` HERE ANY MORE. → docs/implementation-notes.md#no-padding-here-any-more */
 .sf-section { background: var(--cream); }
 .sf-section__head { text-align: center; max-width: 720px; margin: 0 auto clamp(38px, 5vw, 58px); }
 .sf-section__title {
@@ -259,12 +253,9 @@ $sf_faqs = array(
     color: var(--text-secondary);
     margin: 0;
 }
-/* The dark run. `.block--dark h2` already whitens the title; the deck and the
-   eyebrow have to be told. */
 .block--dark .sf-section__lead { color: rgba(240,250,250,0.8); }
 .block--dark .section-label { color: var(--teal-light); }
 
-/* Steps: a V3 Cards block, UNBOXED ---------------------------------- Same rule the industry page's… → docs/implementation-notes.md#steps-a-v3-cards-block-unboxed-same-rule-the-i */
 .sf-steps {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -299,7 +290,6 @@ $sf_faqs = array(
 .sf-feature__desc { font-size: 0.94rem; line-height: 1.6; color: rgba(240,250,250,0.8); margin: 0; }
 
 /* Setup strip */
-/* Unboxed like the steps. → docs/implementation-notes.md#sf-setup */
 .sf-setup {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
@@ -331,11 +321,9 @@ $sf_faqs = array(
     color: var(--text-secondary);
 }
 
-/* Final CTA: a dark block into the footer --------------------------- Was a bordered `.cta-spotlight`… → docs/implementation-notes.md#final-cta-a-dark-block-into-the-footer-was-a-b */
 .sf-cta__title { color: #fff; margin: 0 0 14px; font-size: clamp(1.8rem, 4vw, 2.6rem); }
 .sf-cta__text { color: rgba(240,250,250,0.8); font-size: 1.08rem; line-height: 1.7; margin: 0 0 32px; }
 
-/* The curtain bracket, on the feature pages ------------------------- ⚠️ SCOPED TO `.feature-page`… → docs/implementation-notes.md#the-curtain-bracket-on-the-feature-pages-scope */
 .feature-page > section:has(> .seam-curtain) { position: relative; }
 .feature-page > section:has(> .seam-curtain--open) {
     padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));
@@ -348,7 +336,6 @@ $sf_faqs = array(
     .sf-hero__grid { grid-template-columns: 1fr; }
     .sf-hero__sub { max-width: none; }
 }
-/* ⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. → docs/implementation-notes.md#the-stacked-hero-centres-and-this-page-was-th */
 @media (max-width: 768px) {
     .sf-hero__content { text-align: center; }
     .sf-hero__actions { justify-content: center; }
@@ -430,15 +417,10 @@ $sf_faqs = array(
                 <?php endforeach; ?>
             </div>
         </div>
-        <?php /* OPEN: the dark run rises out of the cream. → docs/implementation-notes.md#open-the-dark-run-rises-out-of-the-cream-direc-2 */ ?>
+        <?php ?>
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
-    <?php /* ---- WHY IT IS DIFFERENT: the page's one dark run ------------------
-             Was `.sf-section--alt`, i.e. --cream-dark, a FIFTH background tone on a
-             site whose redesign was five tones down to three. It is also the page's
-             argument — "native, not bolted on" — so it is the right place for the
-             emphasis the dark block exists to give. */ ?>
     <!-- Why it is different -->
     <section class="block block--dark sf-features">
         <div class="block__inner">
@@ -463,7 +445,6 @@ $sf_faqs = array(
 
     <!-- Setup -->
     <section class="block block-cards sf-section">
-        <?php /* CLOSE: the dark run comes back down into the cream. → docs/implementation-notes.md#block-inner-4 */ ?>
         <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
         <div class="block__inner">
             <div class="sf-section__head reveal">
@@ -490,7 +471,6 @@ $sf_faqs = array(
     </section>
 
     <!-- FAQ -->
-    <?php /* ⚠️ `.faq-section__head`, NOT `__header`. → docs/implementation-notes.md#block-13 */ ?>
     <section class="block faq-section" id="faq">
         <div class="block__inner">
             <div class="faq-section__head reveal">

@@ -7,7 +7,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 $sitestaffr_category = sitestaffr_industry_category( get_post_field( 'post_name', get_queried_object_id() ) );
 
-// A hub whose registry entry has been removed should not render an empty shell.
 if ( ! $sitestaffr_category ) {
 	wp_safe_redirect( home_url( '/for/' ), 302 );
 	exit;
@@ -29,14 +28,13 @@ $cta_url               = home_url( '/#get-started' );
 
 <main class="ind-page">
 
-	<?php /* HERO: a V3 block, not a Split ----------------------------------- Same reasoning as `/for/`: no… → docs/implementation-notes.md#block */ ?>
+	<?php ?>
 	<!-- Hero -->
 	<section class="block ind-hero">
 		<div class="block__inner">
 			<div class="ind-hero__content reveal">
 				<span class="ind-hero__label"><?php echo esc_html( $sitestaffr_category['heading'] ); ?></span>
 				<?php
-				/* ⚠️ THE H1 IS REGISTRY COPY NOW, NOT A TEMPLATE PATTERN. → docs/implementation-notes.md#ind-hero-subtitle */
 				$sitestaffr_cat_h1 = ! empty( $sitestaffr_category['h1'] )
 					? $sitestaffr_category['h1']
 					: 'AI Voice and Text Agents for ' . $sitestaffr_category['heading'];
@@ -56,7 +54,7 @@ $cta_url               = home_url( '/#get-started' );
 		</div>
 	</section>
 
-	<?php /* THE CATEGORY'S INDUSTRIES: a V3 Cards block -------------------- ⚠️ `.ind-problems__grid` HAD NO… → docs/implementation-notes.md#block-2 */ ?>
+	<?php ?>
 	<!-- Industries in this category -->
 	<section class="block block-cards ind-problems">
 		<div class="block__inner">
@@ -89,7 +87,6 @@ $cta_url               = home_url( '/#get-started' );
 	</section>
 
 	<!-- CTA -->
-	<?php /* Closing CTA is a V3 dark block running into the footer, same as page-industry.php. → docs/implementation-notes.md#block-11 */ ?>
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">
