@@ -33,7 +33,7 @@ assets/js/             site behavior and the customer account area
 
 **The block system.** Every section on the redesigned pages is one of four block types
 (`Statement`, `Split`, `Cards`, `Panel`) with exactly two padding values. This replaced a set of
-colour "seams" between neighbouring sections, each of which was a contract that failed silently at
+color "seams" between neighboring sections, each of which was a contract that failed silently at
 some viewport widths. Whitespace has no such contract, so most of the sweep work went away.
 
 **Security headers ship with the theme.** `functions.php` sends `X-Content-Type-Options`,
@@ -58,7 +58,7 @@ the source hard to read. It was moved out so the code reads as code:
 keyed by selector, token or function name. The source itself carries only what you need while
 reading it: section markers, WordPress template headers, and PHPDoc.
 
-**Accessibility was measured, not assumed.** Colour tokens are set by their worst background
+**Accessibility was measured, not assumed.** Color tokens are set by their worst background
 rather than their most common one, which is why `--teal-text` exists separately from the brand
 fill `--teal-deep`. Contrast was sampled from rendered pixels, because a `background-color` walk
 silently misreads gradients and translucent fills.

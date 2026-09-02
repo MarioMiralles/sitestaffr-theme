@@ -302,7 +302,7 @@ $ba_faqs = array(
 .ba-cta__title { font-family: var(--font-display); font-size: clamp(2rem, 3.6vw, 2.9rem); line-height: 1.1; margin: 0 0 14px; color: #fff; }
 .ba-cta__text { font-family: var(--font-body); font-size: 1.1rem; color: rgba(240,250,250,0.8); margin: 0 auto 30px; max-width: 52ch; }
 
-/* ===== The curtain bracket. Scoped `.feature-page`, NOT generalised to `main`: ===== */
+/* ===== The curtain bracket. Scoped `.feature-page`, NOT generalized to `main`: ===== */
 .feature-page > section:has(> .seam-curtain) { position: relative; }
 .feature-page > section:has(> .seam-curtain--open) {
     padding-bottom: calc(var(--block-pad-light) + clamp(53px, 6.65vw, 114px));

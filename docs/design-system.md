@@ -45,7 +45,7 @@ lighter fails the cream, which is the harder of the two backgrounds.
 ⚠️ TEAL AS TEXT ON A LIGHT BACKGROUND, and it is deliberately NOT --teal-deep.
 #00838F is the brand fill and it stays exactly that — buttons, pills, the seam. As
 TEXT it measures 4.38:1 on the cream, which fails. Rather than darken the brand
-colour everywhere a fill uses it, this is a separate token for the text case only.
+color everywhere a fill uses it, this is a separate token for the text case only.
 ⚠️ #00747E, NOT #007A85, AND THE REASON IS THE INBOX. #007A85 cleared the cream at
 4.93 but landed on 4.49 for `.morning-inbox__count` — one hundredth short, because
 that one sits on the inbox card's beige chrome rather than on the section. The token
@@ -105,7 +105,7 @@ Adjacent dark blocks must not draw a line between themselves — they are one
 dark run visually, two blocks structurally.
 
 ⚠️ ZERO WAS TOO LITTLE. At `0` the whole gap between the two was the FIRST block's 64px bottom
-padding, and 64px is what separates a section from a section it has a colour change
+padding, and 64px is what separates a section from a section it has a color change
 against. These two share one dark background, so — exactly as with the cream run — the
 spacing is doing the entire job of separating them and has to be larger, not smaller.
 
@@ -140,7 +140,7 @@ stays as the general defense for every dark boundary that has no curtain over it
 problem. Making it read as a link would put a sixth entry at the top of every
 column and turn a grouped menu into a flat list of twenty-one — the grouping
 is what makes sixteen industries scannable. So: same size, same weight, same
-muted colour, and the affordance arrives on hover.
+muted color, and the affordance arrives on hover.
 
 `text-decoration: none` is written here rather than inherited: the mega
 heading is the only <a> in the panel that is not a `.nav__dropdown-link`, so
@@ -315,7 +315,7 @@ system already rejects for a centered row with a chevron pinned right, only
 mirrored. Sampled at 390: confirmed in the pixels, not inferred from the CSS.
 
 Section-by-section review. One element, looked at on its own terms.
-This does NOT generalise to the rest of the page — see the last block of this file.
+This does NOT generalize to the rest of the page — see the last block of this file.
 
 ---
 
@@ -755,9 +755,9 @@ this defect coming back.
 ⚠️ ONE CARD PER GROUP. In one column this is sixteen identical white cards with three small gray
 labels lost among them — the same failure the industries list had, and this is the
 same fix, deliberately: three bordered sets of three to six questions, heading
-outside.'s first idea was a colour per group; that would have put a second and
+outside.'s first idea was a color per group; that would have put a second and
 third accent on a page whose whole system is one teal with emerald reserved for
-capture states, and he chose this instead. If colour-coding is ever revisited, the
+capture states, and he chose this instead. If color-coding is ever revisited, the
 rule it breaks is the thing to decide, not this component.
 
 Kept to this breakpoint on purpose. Desktop is two columns of free-standing cards and
@@ -1278,7 +1278,7 @@ shortcode writes them INLINE on the button — `--btn-icon-color: #ffffff`,
 `--btn-text-color: #ffffff`, `--btn-background: #1FB6CC` — and its stylesheet reads
 those. So setting `color` here recoloured the label (which happens to inherit) and left
 the ICON white, because the icon's SVG is `fill="currentColor"` inside an element whose
-colour comes from `--btn-icon-color`. On this outline button that is a white mark on a
+color comes from `--btn-icon-color`. On this outline button that is a white mark on a
 white surface: invisible.
 
 The custom properties need `!important` because they are set inline; a plain
@@ -1310,7 +1310,7 @@ the VIEWPORT's right edge, so on a wide screen it drifted away from the content 
 read as a sticker on the browser rather than part of the layout — the same defect the
 agency props had, from the same cause.
 
-Centred to --block-max with auto margins and flushed right inside that, so it sits
+Centered to --block-max with auto margins and flushed right inside that, so it sits
 against the content column at every width. Auto margins rather than a transform, since
 a transform here would create a stacking context and lift the figure over the copy.
 
@@ -1391,8 +1391,8 @@ build already hit on three homepage sections that passed a class-list audit.
 
 DELETED, not overridden, and each for its own reason:
 - `::before`, a 120px gradient fading the hero into the cream below. It was a
-SEAM. V3 has one seam on the entire site because a seam is a colour contract
-between two neighbours that fails silently at widths nobody sampled.
+SEAM. V3 has one seam on the entire site because a seam is a color contract
+between two neighbors that fails silently at widths nobody sampled.
 - `.ind-hero__accent` and `.ind-hero__glow`, two absolutely-positioned teal
 radial gradients at 7% and 5% alpha. Decoration doing no work; V3 carries
 emphasis with a dark block, not a wash. Their markup is deleted too — a
@@ -1469,8 +1469,8 @@ buttons, pills, the seam — and teal display type was the single most visible
 thing marking these pages as pre-V3. It also sat right on the contrast problem
 --teal-text was created for: --teal-deep as TEXT measures 4.38 on cream.
 
-Centred, and that IS the rule rather than an exception: a section header
-centres when the section is full-width and stays left when it is the top of a
+Centered, and that IS the rule rather than an exception: a section header
+centers when the section is full-width and stays left when it is the top of a
 copy column. Every converted section here is full-width.
 
 ---
@@ -1540,10 +1540,10 @@ be added without inheriting a spacing system that no longer exists.
 
 --- More in this category ------------------------------------------------
 Replaced "Explore More" (.ind-related), whose rules are deleted with it: a
-centred flex-wrap of 17 links with no separators. ROWS, LEFT-ALIGNED — each
+centered flex-wrap of 17 links with no separators. ROWS, LEFT-ALIGNED — each
 carries a name and a blurb, which makes it a list, and lists keep their left
 edge. The arrow is a right-edge affordance, which is the other half of the
-same rule: a centred row with an arrow pinned right is not centred, it is
+same rule: a centered row with an arrow pinned right is not centered, it is
 lopsided.
 
 ---
@@ -1588,7 +1588,7 @@ property anywhere in devtools.
 ⚠️ THE FEATURE PAGES SHARE THIS RULE RATHER THAN COPYING IT. `.sf-cta__btn` and
 `.ba-cta__btn` are listed here, not redefined in each page's inline <style>, because
 two definitions of one treatment is how a "primary button on dark" ends up meaning
-three different colours. They arrived carrying plain `.btn--primary`, which is
+three different colors. They arrived carrying plain `.btn--primary`, which is
 --teal-deep — #00838F on #00323A is 3.06:1, scraping the UI-component floor and
 reading as a hole in the block rather than as the page's one action.
 
@@ -1765,7 +1765,7 @@ at website/wiki/concepts/homepage-design-system.md.
 <a id="block-dark-section-label"></a>
 
 ⚠️ ON A DARK BLOCK THE LABEL HAS TO GO LIGHTER, NOT DARKER. --teal-text is tuned
-against cream; on #00323A the same colour measures 3.06:1, the worst contrast failure
+against cream; on #00323A the same color measures 3.06:1, the worst contrast failure
 on the page. --teal-light is 5.68 there. One label, two directions, because the
 requirement is a relationship with the background and not a property of the label.
 
@@ -1874,7 +1874,7 @@ edit one alone and the value you read is not the value that renders.
 <a id="no-opacity-it-was-0-85-which-is-a-contrast-red"></a>
 
 ⚠️ NO OPACITY. It was 0.85, which is a contrast reduction dressed as a style: the
-colour passes at full strength and fails at 85%. Hover raises it back to 1, so the
+color passes at full strength and fails at 85%. Hover raises it back to 1, so the
 "quieter than the primary" job was being done by the one property that also degrades
 legibility. Weight and size already carry that job.
 
@@ -2127,7 +2127,7 @@ renders with two square corners on a phone.
 ⚠️ ONE HAIRLINE VALUE FOR THE WHOLE TABLE. Every internal rule is this
 color. The light version had three (--border-light, cream-dark edges, the
 popular column's own border) and they read as one line only because they were
-all pale. On dark, a rule that is 2% brighter than its neighbour is visible as
+all pale. On dark, a rule that is 2% brighter than its neighbor is visible as
 a mistake, so there is exactly one.
 
 ---
@@ -2221,10 +2221,10 @@ legend sits on its frame.
 
 ---
 
-## `THE BADGE'S COLOUR IS DECIDED HERE, NOT ON .price-tier_`
-<a id="the-badge-s-colour-is-decided-here-not-on-pric"></a>
+## `THE BADGE'S COLOR IS DECIDED HERE, NOT ON .price-tier_`
+<a id="the-badge-s-color-is-decided-here-not-on-pric"></a>
 
-⚠️ THE BADGE'S COLOUR IS DECIDED HERE, NOT ON `.price-tier__badge`. That rule sets
+⚠️ THE BADGE'S COLOR IS DECIDED HERE, NOT ON `.price-tier__badge`. That rule sets
 white on a teal gradient; this one repaints it emerald and won on source order, so a
 fix applied up there did nothing and shipped still failing. Dark text on the emerald
 is 5.46:1; white was 2.54. If the two ever disagree again, this is the one that
@@ -2682,7 +2682,7 @@ The old #0a2e33 was a slightly blue-green off-tone that matched nothing in the p
 rgba(16,185,129) — emerald. Emerald is reserved on this site for capture/success states
 and the recommended pricing tier; a decorative wash in it spends the signal that makes
 "Lead captured" mean something. The teal one goes too: the point of the new footer
-colour is a flat, settled floor, and a gradient works against that.
+color is a flat, settled floor, and a gradient works against that.
 
 ---
 
@@ -2818,7 +2818,7 @@ Reuses the footer's surface rather than introducing another color.
 ⚠️ WAS #0a2e33 — A SECOND DARK TONE. V3's dark is V1's deep teal --block-dark
 (#00323A) specifically: testers rejected the night world's near-black, and
 drifting back toward it quietly reintroduces the tone the redesign exists to
-drop. `.block--dark` supplies both the background and the text colour now, so
+drop. `.block--dark` supplies both the background and the text color now, so
 this rule only survives to hold what is genuinely local.
 
 ---
@@ -2849,7 +2849,7 @@ five. It is the second half of the dark run now; `.block--dark` paints it.
 ⚠️ --teal-light, and NO opacity. --teal-deep measured 3.06:1 on the dark
 block; opacity: 0.75 then reduced whatever it was by another quarter, which
 is a contrast cut dressed as a style — the caption is already quieter than
-its neighbours by size, weight and letter-spacing. 5.7:1 now.
+its neighbors by size, weight and letter-spacing. 5.7:1 now.
 
 ---
 
@@ -2867,7 +2867,7 @@ sweep this conversion is carrying. 5.0:1 now.
 ## `.ind-recap__transcript`
 <a id="ind-recap-transcript"></a>
 
-The transcript stub. Quieter than the recap section above it: no badge colour,
+The transcript stub. Quieter than the recap section above it: no badge color,
 a muted count, one line of explanatory text. It is a signpost, not a second
 block of content competing with the summary.
 
@@ -2886,9 +2886,9 @@ rendered the message count as the teal "New lead" pill.
 <a id="ind-scenario-story-p"></a>
 
 ⚠️ INHERIT, NOT --text-secondary. That token (#4A5568) is a light-background
-colour and measured 1.84:1 once this section became dark. Inheriting picks up
+color and measured 1.84:1 once this section became dark. Inheriting picks up
 `.block--dark`'s --text-on-dark, so the paragraph follows the section it is in
-instead of naming a colour that is only right on one of them.
+instead of naming a color that is only right on one of them.
 
 ---
 
@@ -2984,7 +2984,7 @@ heavier per pixel and reads as a brick.
 
 Stated on the FRAME, not left to the file, so the hero's height is the same
 on every post and does not jump while the backfill to 16:9 is in progress.
-⚠️ Legacy 1024x1024 posts are centre-cropped by this until they are
+⚠️ Legacy 1024x1024 posts are center-cropped by this until they are
 regenerated — that is the transitional cost, and it is smaller than a
 1140px-tall square.
 

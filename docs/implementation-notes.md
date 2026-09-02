@@ -447,10 +447,10 @@ Every featured image published here is 1024x1024 and the blog templates are 16:9
 throughout, so the existing images are cropped rather than regenerated; the ratio
 is fixed upstream in the Blog Agent's image settings for everything after that.
 
-A centre crop was checked against the whole set first: none loses its subject, and
+A center crop was checked against the whole set first: none loses its subject, and
 several improve, because what it removes is garbled generated text along the top.
 
-`true` = hard crop, centred.
+`true` = hard crop, centered.
 
 ⚠️ THE DIMENSIONS MUST FIT INSIDE THE SOURCE OR THE RATIO IS SILENTLY WRONG.
 WordPress does NOT return a smaller correct crop when the target is bigger than
@@ -605,7 +605,7 @@ matched nothing else on the site — a fourth and fifth dark tone next to
 two retired tones go with it.
 
 The panel keeps only its GRID. Background, radius, padding, shadow and the
-text colour are `.block--dark`'s job now.
+text color are `.block--dark`'s job now.
 
 ---
 
@@ -635,17 +635,17 @@ background, the white type and the centring.
 
 ---
 
-## `⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE O`
-<a id="the-stacked-hero-centres-and-this-page-was-th"></a>
+## `⚠️ THE STACKED HERO CENTERS, AND THIS PAGE WAS THE ODD ONE O`
+<a id="the-stacked-hero-centers-and-this-page-was-th"></a>
 
-⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT. Checked at 390
-across the whole converted set: the homepage and all six ind-* pages centre their
+⚠️ THE STACKED HERO CENTERS, AND THIS PAGE WAS THE ODD ONE OUT. Checked at 390
+across the whole converted set: the homepage and all six ind-* pages center their
 hero copy once the two columns become one; `/salesforce/` and `/blog-agent/` were
 the only two still `start`, because the centring lives in `.ind-hero__content`'s
 own 768 media query and these pages never had one. 768 to match that breakpoint.
-⚠️ `.ba-hero__sub` needs `margin-inline: auto` as well as centred text — it is
+⚠️ `.ba-hero__sub` needs `margin-inline: auto` as well as centered text — it is
 capped at 38ch, so centring the text alone leaves the BOX hard against the left
-gutter and the block reads as centred-inside-a-left-column.
+gutter and the block reads as centered-inside-a-left-column.
 
 ---
 
@@ -778,7 +778,7 @@ industries added later.
 
  Per-group copy fixes both — "Healthcare Practices", "Home Service
  Businesses", "Real Estate and Auto Businesses". The fallback keeps the
- old behaviour if a sixth group is ever added without an 'h1', so a
+ old behavior if a sixth group is ever added without an 'h1', so a
  missing field degrades to a heading rather than to a blank H1.
 
  ⚠️ 'h1' RENDERS FROM THE REGISTRY AT REQUEST TIME, so unlike seo_title
@@ -938,8 +938,8 @@ both; added in the markup it would have shipped without its schema entry.
 
     3. The `::before` gradient that faded the hero's last 120px into the
        cream is gone with them. It was a SEAM, and V3 has exactly one seam on
-       the whole site (the homepage hero curtain) because a seam is a colour
-       contract between neighbours that fails silently at widths nobody
+       the whole site (the homepage hero curtain) because a seam is a color
+       contract between neighbors that fails silently at widths nobody
        sampled. Whitespace has no contract.
 
     ⚠️ `.ind-hero__grid` STAYS on the element alongside `.block-split__grid`.
@@ -964,7 +964,7 @@ both; added in the markup it would have shipped without its schema entry.
     The box goes because that is the V3 rule the pricing table already
     proved: "the moment a border or a panel appears they become three
     offers standing side by side". Three problems the reader is supposed to
-    recognise are not three offers.
+    recognize are not three offers.
 
 ---
 
@@ -973,7 +973,7 @@ both; added in the markup it would have shipped without its schema entry.
 
 OPEN: the dark run rises out of the cream. Bottom of section 2, over it,
      because an overlay sits on the LIGHT side of a boundary — the light section
-     is its background, so the two cannot disagree on colour.
+     is its background, so the two cannot disagree on color.
 
      ⚠️ DIRECT CHILD OF THE SECTION, not of .block__inner. .block__inner is
      width-capped and gutter-padded; positioned inside it the curtain would be
@@ -1044,14 +1044,14 @@ OPEN: the dark run rises out of the cream. Bottom of section 2, over it,
 <a id="ind-siblings"></a>
 
 ---- "EXPLORE MORE" IS GONE, AND THIS IS NOT A PATCH OF IT ---------------: "I don't like the Explore More." It was fifteen industry
-names plus a blog post title in one centred flex-wrap with no separators,
+names plus a blog post title in one centered flex-wrap with no separators,
 which at 390 read as a ragged word cloud — the same failure homepage section
 6 was rebuilt to fix.
 
 Re-decided rather than restyled, starting from what a cross-link block at the
 bottom of an industry page is FOR. Two jobs, and the old one did neither
-well: a reader who has scrolled a dental page either recognises they are in
-the wrong trade and wants a near neighbour, or they are done. Fifteen exits
+well: a reader who has scrolled a dental page either recognizes they are in
+the wrong trade and wants a near neighbor, or they are done. Fifteen exits
 serve the first badly and the second not at all.
 
 So: the SIBLINGS IN THIS CATEGORY ONLY, as rows with their own blurbs, plus
@@ -1060,7 +1060,7 @@ Medical Staffing — the four pages a mis-landed visitor plausibly wanted —
 and everything else stays one click away on the hub that already lists all
 sixteen. Nothing loses a crawl path.
 
-⚠️ ROWS, LEFT-ALIGNED, NOT CENTRED. Each carries a name and a blurb, which
+⚠️ ROWS, LEFT-ALIGNED, NOT CENTERED. Each carries a name and a blurb, which
 is a list, and the design system's rule is that lists keep their left edge.
 Centring these is how the word cloud happened in the first place.
 
@@ -2606,9 +2606,9 @@ Third version, a third wording. The two before it both described a
 ⚠️ THE ATTRIBUTES WERE WRITTEN FOR A DARK SECTION and stayed behind when this
        one turned cream: background_color="transparent" over a dark panel, plus
        hover_background="#0A424A" — a near-black. On cream that hover flips the button
-       to a dark slab under the pointer. Colour is handed to the stylesheet instead
+       to a dark slab under the pointer. Color is handed to the stylesheet instead
        (see .final-cta__concierge .sitestaffr-button-widget), because this shortcode's
-       colour attributes cannot be trusted anyway — border_width="1" is a documented
+       color attributes cannot be trusted anyway — border_width="1" is a documented
        no-op. Measure the render; do not read the attribute.
 
        "Request Assistance", not "Let's Get Started". The old
@@ -2629,7 +2629,7 @@ THE TERTIARY LINE IS GONE. It read "Questions? Ask our AI — it's the same
            one you'd install", which is now word-for-word the job of the ask card at
            the end of the FAQ directly above this section — same claim, same widget,
            two screens apart. The FAQ card does it better: it has the robot and a real
-           branded button, where this was a grey sentence. Removing it also takes the
+           branded button, where this was a gray sentence. Removing it also takes the
            closing stack from nine stacked blocks down to six.
 
 ---
@@ -2687,12 +2687,12 @@ section it painted is now the page's one dark run, which is the V3 way of saying
 Same rule the industry page's pain points moved onto. The white card, the
 border, the shadow and the hover lift all go: four steps in a sequence are not
 four offers standing side by side, and the box was the only thing saying they
-were. The pale icon tile goes with them — an icon on a coloured square is
+were. The pale icon tile goes with them — an icon on a colored square is
 chrome around chrome once the card is gone.
 
 ⚠️ `.sf-step__num` IS DELETED, MARKUP AND CSS. A 2.4rem numeral at 14% alpha
 pinned to the top-right corner of a card only reads as a step number while the
-corner exists. Unboxed it is a grey smudge floating beside the icon. The order
+corner exists. Unboxed it is a gray smudge floating beside the icon. The order
 is carried by the grid and by the heading above it, which is how the industry
 page's three problems do it.
 
@@ -2714,7 +2714,7 @@ supply the background, the white type and the centring; nothing local is left.
 <a id="the-curtain-bracket-on-the-feature-pages-scope"></a>
 
 ---- The curtain bracket, on the feature pages -------------------------
-⚠️ SCOPED TO `.feature-page` RATHER THAN GENERALISED TO `main`. The homepage's
+⚠️ SCOPED TO `.feature-page` RATHER THAN GENERALIZED TO `main`. The homepage's
 two curtained sections (.block.what-you-get, .block.final-cta) already add the
 seam's height in their own rules, so a `main > section:has(...)` selector would
 put a second helping on them — and whether it landed would come down to
@@ -2727,12 +2727,12 @@ line of copy.
 
 ---
 
-## `⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE O`
-<a id="the-stacked-hero-centres-and-this-page-was-th"></a>
+## `⚠️ THE STACKED HERO CENTERS, AND THIS PAGE WAS THE ODD ONE O`
+<a id="the-stacked-hero-centers-and-this-page-was-th"></a>
 
-⚠️ THE STACKED HERO CENTRES, AND THIS PAGE WAS THE ODD ONE OUT.
+⚠️ THE STACKED HERO CENTERS, AND THIS PAGE WAS THE ODD ONE OUT.
 Checked at 390 across the whole converted set: the homepage and all six ind-*
-pages centre their hero copy once the two columns become one; `/salesforce/` and
+pages center their hero copy once the two columns become one; `/salesforce/` and
 `/blog-agent/` were the only two still `start`, because the centring lives in
 `.ind-hero__content`'s own 768 media query and these pages never had one.
 
@@ -2750,7 +2750,7 @@ band where the ind-* pages are also still left.
  it either. Below 560 the actions row becomes `flex-direction: column` with
  `align-items: stretch`; the link is `inline-flex`, so it shrinks to its content
  and parks at the start of a full-width track while the button above it fills
- the track and the copy above that centres. It was the one element left at the
+ the track and the copy above that centers. It was the one element left at the
  gutter — visible in the pixels, invisible in the alignment property.
 
 ---
@@ -3218,7 +3218,7 @@ converted heroes.
 
 ⚠️ #0f6848, NOT --emerald. --emerald (#10b981) on --emerald-light measured
 2.24:1 at 11.5px bold — the worst contrast anywhere on the converted set. The
-colour is not new: it is what .sf-card__foot already uses for exactly this
+color is not new: it is what .sf-card__foot already uses for exactly this
 pairing on the Salesforce mockup, so the two product mockups now agree. 5.9:1.
 
 ---
@@ -3238,7 +3238,7 @@ this page's third spacing system.
 ⚠️ 0.55 MEASURED 3.86:1 ON THE CARD, NOT ON THE BLOCK. The day chip sits on
 rgba(255,255,255,0.08) over rgba(255,255,255,0.06) over --block-dark, which
 composites to #224E55 — lighter than the section, so reading the section's
-colour understates the problem. 0.68 is 4.89:1 and the off days stay clearly
+color understates the problem. 0.68 is 4.89:1 and the off days stay clearly
 quieter than the two lit ones.
 
 ---
@@ -3249,7 +3249,7 @@ quieter than the two lit ones.
 ⚠️ `align-self`, NOT `justify-content` — and `text-align: center` does not reach
 it. Below 560 the actions row is `flex-direction: column` + `align-items:
 stretch`; the link is `inline-flex`, so it shrinks to its content and parks at
-the start of a full-width track while everything around it centres.
+the start of a full-width track while everything around it centers.
 
 ---
 
