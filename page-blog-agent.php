@@ -347,7 +347,6 @@ $ba_faqs = array(
 
 <main class="feature-page">
 
-    <!-- Hero -->
     <section class="block block-split ba-hero">
         <div class="block__inner">
             <div class="block-split__grid ba-hero__grid">
@@ -413,7 +412,6 @@ $ba_faqs = array(
         </div>
     </section>
 
-    <!-- How it works -->
     <section class="block block-cards ba-section ba-flow" id="ba-how">
         <div class="block__inner">
             <div class="ba-section__head reveal">
@@ -433,7 +431,6 @@ $ba_faqs = array(
         </div>
     </section>
 
-    <!-- Why it's different -->
     <section class="block block-cards ba-section ba-features">
         <div class="block__inner">
             <div class="ba-section__head reveal">
@@ -457,7 +454,6 @@ $ba_faqs = array(
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
-    <!-- Autopilot -->
     <section class="block block--dark block-split ba-pilot">
         <div class="block__inner">
             <div class="ba-pilot__panel reveal">
@@ -501,7 +497,6 @@ $ba_faqs = array(
         </div>
     </section>
 
-    <!-- Plans -->
     <section class="block block-cards ba-section ba-plans">
         <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
         <div class="block__inner">
@@ -526,7 +521,6 @@ $ba_faqs = array(
         </div>
     </section>
 
-    <!-- FAQ -->
     <section class="block faq-section" id="faq">
         <div class="block__inner">
             <div class="faq-section__head reveal">
@@ -549,7 +543,6 @@ $ba_faqs = array(
         </div>
     </section>
 
-    <!-- Final CTA -->
     <section class="block block--dark ba-cta">
         <div class="block__inner block-statement">
             <div class="ba-cta__inner reveal">

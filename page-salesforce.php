@@ -355,7 +355,6 @@ $sf_faqs = array(
 
 <main class="feature-page">
 
-    <!-- Hero -->
     <section class="block block-split sf-hero">
         <div class="block__inner">
             <div class="block-split__grid sf-hero__grid">
@@ -399,7 +398,6 @@ $sf_faqs = array(
         </div>
     </section>
 
-    <!-- How it works -->
     <section class="block block-cards sf-section" id="sf-how">
         <div class="block__inner">
             <div class="sf-section__head reveal">
@@ -421,7 +419,6 @@ $sf_faqs = array(
         <?php get_template_part( 'template-parts/seam-curtain' ); ?>
     </section>
 
-    <!-- Why it is different -->
     <section class="block block--dark sf-features">
         <div class="block__inner">
             <div class="sf-section__head reveal">
@@ -443,7 +440,6 @@ $sf_faqs = array(
         </div>
     </section>
 
-    <!-- Setup -->
     <section class="block block-cards sf-section">
         <?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
         <div class="block__inner">
@@ -470,7 +466,6 @@ $sf_faqs = array(
         </div>
     </section>
 
-    <!-- FAQ -->
     <section class="block faq-section" id="faq">
         <div class="block__inner">
             <div class="faq-section__head reveal">
@@ -493,7 +488,6 @@ $sf_faqs = array(
         </div>
     </section>
 
-    <!-- Final CTA -->
     <section class="block block--dark sf-cta">
         <div class="block__inner block-statement">
             <div class="sf-cta__inner reveal">

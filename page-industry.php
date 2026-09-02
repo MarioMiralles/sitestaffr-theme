@@ -1433,7 +1433,6 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<!-- Pain Points -->
 	<section class="block block-cards ind-problems">
 		<div class="block__inner">
 			<div class="ind-section__head reveal">
@@ -1453,7 +1452,6 @@ get_template_part( 'template-parts/site-nav' );
 		<?php get_template_part( 'template-parts/seam-curtain' ); ?>
 	</section>
 
-	<!-- Solutions -->
 	<section class="block block--dark ind-solutions">
 		<div class="block__inner">
 			<div class="ind-section__head reveal">
@@ -1474,7 +1472,6 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<!-- Scenario -->
 	<?php
 	$ind_recap_stamp = $ind['scenario_title'];
 	if ( preg_match( '/^(.*?)(\d{1,2}):(\d{2})\s*(AM|PM)$/i', html_entity_decode( $ind['scenario_title'] ), $ind_tm ) ) {
@@ -1490,8 +1487,6 @@ get_template_part( 'template-parts/site-nav' );
 			</div>
 			<div class="ind-scenario__grid reveal">
 				<?php if ( ! empty( $ind['chat'] ) ) : ?>
-				<!-- The conversation itself. This section used to describe a chat in a
-				     paragraph; showing the exchange is the whole point of the page. -->
 				<figure class="ind-scenario__item">
 				<div class="ind-chat" role="img" aria-label="Example conversation between a website visitor and the SiteStaffr agent">
 					<div class="ind-chat__bar">
@@ -1513,9 +1508,6 @@ get_template_part( 'template-parts/site-nav' );
 				<?php endif; ?>
 
 				<?php if ( ! empty( $ind['recap'] ) ) : ?>
-				<!-- The other half of the story: what lands in the owner's inbox.
-				     Mirrors the recap document on the home page so the same artifact
-				     looks the same everywhere it appears. -->
 				<figure class="ind-scenario__item">
 				<div class="ind-recap">
 					<div class="ind-recap__head">
@@ -1552,7 +1544,6 @@ get_template_part( 'template-parts/site-nav' );
 		</div>
 	</section>
 
-	<!-- FAQ -->
 	<section class="block ind-faq">
 		<?php get_template_part( 'template-parts/seam-curtain', null, array( 'variant' => 'close' ) ); ?>
 		<div class="block__inner">
@@ -1601,7 +1592,6 @@ get_template_part( 'template-parts/site-nav' );
 	}
 	?>
 	<?php if ( $ind_siblings ) : ?>
-	<!-- More in this category -->
 	<section class="block ind-siblings">
 		<div class="block__inner">
 			<div class="ind-section__head reveal">
@@ -1627,7 +1617,6 @@ get_template_part( 'template-parts/site-nav' );
 	<?php endif; ?>
 
 	<?php ?>
-	<!-- CTA -->
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">

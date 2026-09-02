@@ -331,9 +331,6 @@ get_template_part( 'template-parts/site-nav', null, array(
           SiteStaffr answers your visitors 24/7 from your own pages. Set up in minutes, with nothing to write and nothing to train.
         </p>
         <span class="hero__no-cc">Free for 30 days &bull; No code required</span>
-        <!-- Primary action is the self-serve trial, secondary is the white-glove form.
-             .hero__download-link is a style hook only and no longer points at /download/;
-             rename it when the CSS is next touched. -->
         <div class="hero__actions">
           <a href="<?php echo esc_url( home_url( '/download/' ) ); ?>" class="btn btn--primary btn--large">
             Start Free Trial

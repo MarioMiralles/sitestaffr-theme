@@ -11,7 +11,6 @@ add_action( 'wp_head', function () {
 		return;
 	}
 	?>
-	<!-- Google tag (gtag.js) -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=G-4ESZ2PEYMX"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];

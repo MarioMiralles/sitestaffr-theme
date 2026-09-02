@@ -29,7 +29,6 @@ $cta_url               = home_url( '/#get-started' );
 <main class="ind-page">
 
 	<?php ?>
-	<!-- Hero -->
 	<section class="block ind-hero">
 		<div class="block__inner">
 			<div class="ind-hero__content reveal">
@@ -55,7 +54,6 @@ $cta_url               = home_url( '/#get-started' );
 	</section>
 
 	<?php ?>
-	<!-- Industries in this category -->
 	<section class="block block-cards ind-problems">
 		<div class="block__inner">
 			<div class="ind-section__head reveal">
@@ -86,7 +84,6 @@ $cta_url               = home_url( '/#get-started' );
 		</div>
 	</section>
 
-	<!-- CTA -->
 	<section class="block block--dark ind-cta">
 		<div class="block__inner block-statement">
 			<div class="ind-cta__content reveal">

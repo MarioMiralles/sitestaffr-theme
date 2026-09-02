@@ -25,10 +25,8 @@ if ( ! defined( 'ABSPATH' ) ) {
       <p id="hubSubtitle">No WordPress login required. Loading your billing access...</p>
     </div>
 
-    <!-- Banner (checkout result, session expired) -->
     <div class="hub__banner" id="hubBanner" hidden></div>
 
-    <!-- VIEW: Loading -->
     <div class="hub__view hub__view--loading">
       <div class="hub__loading">
         <div class="hub__spinner"></div>
@@ -36,12 +34,10 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
 
-    <!-- VIEW: Site Picker (multi-site users) -->
     <div class="hub__view hub__view--site-picker">
       <div class="hub__sites-list" id="hubSitesList"></div>
     </div>
 
-    <!-- VIEW: Unauthenticated -->
     <div class="hub__view hub__view--unauthenticated">
       <div class="form-card">
         <form id="magicLinkForm" novalidate>
@@ -77,12 +73,10 @@ if ( ! defined( 'ABSPATH' ) ) {
       </div>
     </div>
 
-    <!-- VIEW: Authenticated -->
     <div class="hub__view hub__view--authenticated">
       <div class="hub__sign-out-row">
         <button type="button" class="hub__sign-out-btn" id="hubSignOut">Sign out</button>
       </div>
-      <!-- Site switcher (multi-site only, populated by JS) -->
       <div class="hub__site-switcher" id="hubSiteSwitcher" hidden>
         <button type="button" class="hub__site-switcher-btn" id="hubSiteSwitcherBtn">
           <span class="hub__site-switcher-url" id="hubSiteSwitcherUrl"></span>
@@ -91,13 +85,10 @@ if ( ! defined( 'ABSPATH' ) ) {
         <div class="hub__site-switcher-dropdown" id="hubSiteSwitcherDropdown" hidden></div>
       </div>
 
-      <!-- Status card (populated by JS) -->
       <div class="hub__status-card" id="hubStatusCard"></div>
 
-      <!-- Actions (populated by JS based on subscription state) -->
       <div class="hub__actions" id="hubActions"></div>
 
-      <!-- Plan selection cards (shown for trial / canceled users) -->
       <div id="hubPlans" hidden>
         <div class="hub__plans-header">
           <h2>Choose a plan</h2>
@@ -150,11 +141,9 @@ if ( ! defined( 'ABSPATH' ) ) {
         </div>
       </div>
 
-      <!-- Authorized emails section (rendered by JS) -->
       <div class="hub__auth-emails" id="hub-auth-emails"></div>
     </div>
 
-    <!-- VIEW: Error -->
     <div class="hub__view hub__view--error">
       <div class="form-card" style="text-align: center;">
         <h2 style="color: var(--teal-deep); margin-bottom: 12px;">Something went wrong</h2>
@@ -166,7 +155,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   </div>
 </main>
 
-<!-- Buy More Minutes modal -->
 <div class="hub__modal-backdrop" id="hubBuyModal" hidden>
   <div class="hub__modal hub__buy-modal">
     <div class="hub__buy-header">
@@ -198,7 +186,6 @@ if ( ! defined( 'ABSPATH' ) ) {
   </div>
 </div>
 
-<!-- Email update modal -->
 <div class="hub__modal-backdrop" id="hubEmailModal" hidden>
   <div class="hub__modal">
     <h3>Update billing email</h3>

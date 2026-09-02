@@ -39,17 +39,8 @@ $download_url = home_url( '/download/' );
 				<h1>Install SiteStaffr on Your WordPress&nbsp;Site</h1>
 				<p class="dl-hero__subtitle">The fastest way in is from your own WordPress dashboard &mdash; nothing to download, and the setup wizard starts your free trial when it&nbsp;finishes.</p>
 
-				<!-- The primary action is deliberately NOT a link. Installing happens inside the
-				     visitor's own wp-admin, so the honest hero leads with the path rather than a
-				     button that navigates away. The zip is the slowest route (extra steps, some
-				     hosts disable plugin upload, impossible on mobile) and is demoted to a text
-				     link. This inverts the previous hierarchy, which gave the big button to the zip
-				     while burying the easy route in step 1's body copy. -->
 				<div class="dl-route">
 					<p class="dl-route__lead">In your WordPress dashboard</p>
-					<!-- Four steps, not five: at five the last pill orphaned onto its own row with a
-					     dangling arrow. Merging the final two is also more accurate — WordPress
-					     turns the "Install Now" button into "Activate" in place, same screen. -->
 					<ol class="dl-route__path">
 						<li><span>Plugins</span></li>
 						<li><span>Add New</span></li>
